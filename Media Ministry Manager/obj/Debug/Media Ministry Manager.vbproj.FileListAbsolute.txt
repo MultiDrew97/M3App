@@ -92,23 +92,12 @@ E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\D
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXmlFormats.dll
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Buffers.dll
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Auth.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Auth.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Core.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Core.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Drive.v3.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Drive.v3.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Gmail.v1.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Gmail.v1.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\ICSharpCode.SharpZipLib.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\ICSharpCode.SharpZipLib.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MimeKit.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MimeKit.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Newtonsoft.Json.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OOXML.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXml4Net.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.g.resources
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MediaMinistrySplash.resources
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileSelectionDialog.resources
@@ -141,15 +130,10 @@ E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\D
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ChangePasswordDialog.resources
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.NewUserDialog.resources
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.AdminInfoDialog.resources
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.CodeAnalysisLog.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.lastcodeanalysissucceeded
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SendEmailsDialog.resources
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileLocationField.resources
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbprojAssemblyReference.cache
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Logging.dll
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Tokens.dll
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Logging.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Tokens.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.RecieptTypeDialog.resources
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Protobuf.dll
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Compression.LZ4.dll
@@ -160,11 +144,12 @@ E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\D
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Numerics.Vectors.dll
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Protobuf.pdb
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Protobuf.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Compression.LZ4.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Compression.LZ4.Streams.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Hash.xxHash.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Renci.SshNet.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Memory.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Numerics.Vectors.xml
-E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.AssemblyReference.cache
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OOXML.pdb
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXml4Net.pdb
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXmlFormats.pdb
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.pdb
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.dll
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.pdb
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.xml
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.dll.config

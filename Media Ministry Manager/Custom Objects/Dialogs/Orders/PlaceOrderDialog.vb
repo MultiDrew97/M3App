@@ -1,14 +1,15 @@
 ﻿Option Strict On
 
 Imports System.Data.SqlClient
+Imports SPPBC.M3Tools.Types
 
 Public Class PlaceOrderDialog
     Private CustomersTable As DataTable
-    Private Customers As ObjectModel.Collection(Of Types.Customer)
-    Private ProductsTable As DataTable
-    Private Products As ObjectModel.Collection(Of Types.Product)
+	Private Customers As ObjectModel.Collection(Of Customer)
+	Private ProductsTable As DataTable
+	Private Products As ObjectModel.Collection(Of Product)
 
-    Private Sub Frm_PlaceOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+	Private Sub Frm_PlaceOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadData()
 
         bsCustomers.DataSource = CustomersTable
@@ -62,21 +63,21 @@ Public Class PlaceOrderDialog
     Private Sub FillTables()
         Dim row As DataRow
 
-        For Each customer As Types.Customer In Customers
-            row = CustomersTable.NewRow
-            row("CustomerID") = customer.Id
-            row("Name") = customer.Name
-            CustomersTable.Rows.Add(row)
-        Next
+		For Each customer As Customer In Customers
+			row = CustomersTable.NewRow
+			row("CustomerID") = customer.Id
+			row("Name") = customer.Name
+			CustomersTable.Rows.Add(row)
+		Next
 
-        For Each product As Types.Product In Products
-            row = ProductsTable.NewRow
-            row("ProductID") = product.Id
-            row("Name") = product.Name
-            row("Available") = product.Available
-            ProductsTable.Rows.Add(row)
-        Next
-    End Sub
+		For Each product As Product In Products
+			row = ProductsTable.NewRow
+			row("ProductID") = product.Id
+			row("Name") = product.Name
+			row("Available") = product.Available
+			ProductsTable.Rows.Add(row)
+		Next
+	End Sub
 
     'Private Sub cbx_Name_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_Name.SelectedIndexChanged
     '    Using db As New Database
