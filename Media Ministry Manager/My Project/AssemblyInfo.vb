@@ -31,6 +31,11 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
+<<<<<<< HEAD
 <Assembly: AssemblyVersion("3.0.717.10")>
 <Assembly: AssemblyFileVersion("3.0.717.10")>
+=======
+<Assembly: AssemblyVersion("3.0.813.2201")>
+<Assembly: AssemblyFileVersion("3.0.813.2201")>
+>>>>>>> Created some custom forms and components/controls in a custom library
 <Assembly: NeutralResourcesLanguage("en-US")>

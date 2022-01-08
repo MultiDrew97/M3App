@@ -2,7 +2,7 @@
 
 Imports System.Collections.ObjectModel
 Imports System.ComponentModel
-Imports MediaMinistry.Types
+Imports SPPBC.M3Tools.Types
 
 Public Class ListenerSelectionDialog
     Shared Property Listeners As New Collection(Of Listener)

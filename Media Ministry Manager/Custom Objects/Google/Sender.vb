@@ -31,8 +31,8 @@ Namespace GoogleAPI
         Sub New(Optional ct As CancellationToken = Nothing)
             Dim credPath As String = "Gmail Token"
             Using stream As New MemoryStream(My.Resources.credentials)
-                Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CType(IIf(IsNothing(ct), CancellationToken.None, ct), CancellationToken), New FileDataStore(credPath, True)).Result
-            End Using
+				Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStreamAsync(stream).Result.Secrets, Scopes, "user", CType(IIf(IsNothing(ct), CancellationToken.None, ct), CancellationToken), New FileDataStore(credPath, True)).Result
+			End Using
 
             Service = New GmailService(New BaseClientService.Initializer() With {
                 .HttpClientInitializer = Credential,
@@ -65,8 +65,8 @@ Namespace GoogleAPI
         End Function
 
         Function CreateWithEmail(emailContent As MimeMessage) As Message
-            Dim buffer As ByteArrayOutputStream = New ByteArrayOutputStream()
-            emailContent.WriteTo(buffer)
+			Dim buffer As New ByteArrayOutputStream()
+			emailContent.WriteTo(buffer)
             Dim bytes As Byte() = buffer.ToByteArray()
             Dim encodedEmail As String = Base64UrlEncoder.Encode(bytes)
             Dim message As New Message With {

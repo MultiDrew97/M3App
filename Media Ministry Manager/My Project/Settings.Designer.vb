@@ -11,9 +11,9 @@
 Option Strict On
 Option Explicit On
 
-
-
+'Namespace My
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+<<<<<<< HEAD
  Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0"),  _
  Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
 Partial Friend NotInheritable Class MySettings
@@ -21,12 +21,21 @@ Partial Friend NotInheritable Class MySettings
     
     Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
     
+=======
+	 Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
+	Partial Friend NotInheritable Class MySettings
+		Inherits Global.System.Configuration.ApplicationSettingsBase
+
+	Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
+>>>>>>> Created some custom forms and components/controls in a custom library
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
-    Private Shared addedHandler As Boolean
+	Private Shared addedHandler As Boolean
 
-    Private Shared addedHandlerLockObject As New Object
+		Private Shared addedHandlerLockObject As New Object
 
+<<<<<<< HEAD
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
     Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
         If My.Application.SaveMySettingsOnExit Then
@@ -148,6 +157,149 @@ Partial Friend NotInheritable Class MySettings
         End Get
     End Property
 End Class
+=======
+		<Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
+		Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
+			If My.Application.SaveMySettingsOnExit Then
+				My.Settings.Save()
+			End If
+		End Sub
+	#End If
+	#End Region
+		
+		Public Shared ReadOnly Property [Default]() As MySettings
+			Get
+				
+	#If _MyType = "WindowsForms" Then
+				   If Not addedHandler Then
+						SyncLock addedHandlerLockObject
+							If Not addedHandler Then
+								AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
+								addedHandler = True
+							End If
+						End SyncLock
+					End If
+	#End If
+				Return defaultInstance
+			End Get
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
+		Public Property Username() As String
+			Get
+				Return CType(Me("Username"),String)
+			End Get
+			Set
+				Me("Username") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697")>  _
+		Public Property Password() As String
+			Get
+				Return CType(Me("Password"),String)
+			End Get
+			Set
+				Me("Password") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+		Public Property KeepLoggedIn() As Boolean
+			Get
+				Return CType(Me("KeepLoggedIn"),Boolean)
+			End Get
+			Set
+				Me("KeepLoggedIn") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
+		Public Property CurrentFont() As Global.System.Drawing.Font
+			Get
+				Return CType(Me("CurrentFont"),Global.System.Drawing.Font)
+			End Get
+			Set
+				Me("CurrentFont") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
+		Public Property DefaultFont() As Global.System.Drawing.Font
+			Get
+				Return CType(Me("DefaultFont"),Global.System.Drawing.Font)
+			End Get
+			Set
+				Me("DefaultFont") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry"";Connect Timeou"& _ 
+			"t=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+		Public Property releaseConnection() As String
+			Get
+				Return CType(Me("releaseConnection"),String)
+			End Get
+			Set
+				Me("releaseConnection") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry Test"";Connect T"& _ 
+			"imeout=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True"& _ 
+			";")>  _
+		Public Property debugConnection() As String
+			Get
+				Return CType(Me("debugConnection"),String)
+			End Get
+			Set
+				Me("debugConnection") = value
+			End Set
+		End Property
+		
+		<Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+		Public ReadOnly Property DefaultCatalog() As String
+			Get
+				Return CType(Me("DefaultCatalog"),String)
+			End Get
+		End Property
+		
+		<Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("M3AppPassword2499")>  _
+		Public ReadOnly Property DefaultPassword() As String
+			Get
+				Return CType(Me("DefaultPassword"),String)
+			End Get
+		End Property
+		
+		<Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+		 Global.System.Configuration.DefaultSettingValueAttribute("M3App")>  _
+		Public ReadOnly Property DefaultUsername() As String
+			Get
+				Return CType(Me("DefaultUsername"),String)
+			End Get
+		End Property
+	End Class
+'End Namespace
+>>>>>>> Created some custom forms and components/controls in a custom library
 
 Namespace My
     
@@ -155,12 +307,12 @@ Namespace My
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
-        
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.MediaMinistry.MySettings
-            Get
-                Return Global.MediaMinistry.MySettings.Default
-            End Get
-        End Property
-    End Module
+
+		<Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>
+		Friend ReadOnly Property Settings() As Global.MediaMinistry.MySettings
+			Get
+				Return Global.MediaMinistry.MySettings.Default
+			End Get
+		End Property
+	End Module
 End Namespace

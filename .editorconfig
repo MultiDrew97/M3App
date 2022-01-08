@@ -1,0 +1,12 @@
+﻿[*.vb]
+
+# BC42105: Function doesn't return a value on all code paths
+dotnet_diagnostic.BC42105.severity = silent
+
+# BC42353: Function doesn't return a value on all code paths
+dotnet_diagnostic.BC42353.severity = silent
+
+[*.{cs,vb}]
+indent_style=tab
+[*.cs]
+insert_final_newline=true

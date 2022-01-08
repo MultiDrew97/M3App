@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports MediaMinistry.Types
+Imports SPPBC.M3Tools.Types
 Imports MimeKit
 Imports System.Collections.ObjectModel
 

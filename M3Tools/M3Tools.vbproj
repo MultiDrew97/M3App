@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{91021C75-B313-4487-BE80-19CCE8C79F57}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SPPBC.M3Tools</RootNamespace>
+    <AssemblyName>SPPBC.M3Tools</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>SPPBC.M3Tools.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SPPBC.M3Tools.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>M3Tools.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.55.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.55.0.2502, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Drive.v3.1.55.0.2502\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Gmail.v1, Version=1.55.0.2510, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Gmail.v1.1.55.0.2510\lib\net45\Google.Apis.Gmail.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.15.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.15.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.3.0.0\lib\net48\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\Database\CustomerDatabase.Designer.vb">
+      <DependentUpon>CustomerDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\CustomerDatabase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\Database.Designer.vb">
+      <DependentUpon>Database.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\Database.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\ListenerDatabase.Designer.vb">
+      <DependentUpon>ListenerDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\ListenerDatabase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\OrdersDatabase.Designer.vb">
+      <DependentUpon>OrdersDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\OrdersDatabase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\ProductDatabase.Designer.vb">
+      <DependentUpon>ProductDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\ProductDatabase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\UserDatabase.Designer.vb">
+      <DependentUpon>UserDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\UserDatabase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MainMenuStrip.Designer.vb">
+      <DependentUpon>MainMenuStrip.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainMenuStrip.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Customer\AddCustomerDialog.Designer.vb">
+      <DependentUpon>AddCustomerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Customer\AddCustomerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Emails\ReciepientSelectionDialog.designer.vb">
+      <DependentUpon>ReciepientSelectionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Emails\ReciepientSelectionDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\SelectReceipient.Designer.vb">
+      <DependentUpon>SelectReceipient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SelectReceipient.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Emails\CustomEmailDialog.Designer.vb">
+      <DependentUpon>CustomEmailDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Emails\CustomEmailDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Google\CreateFolderDialog.Designer.vb">
+      <DependentUpon>CreateFolderDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Google\CreateFolderDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Emails\SendEmailsDialog.Designer.vb">
+      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Emails\SendEmailsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Google\PermissionsDialog.Designer.vb">
+      <DependentUpon>PermissionsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Google\PermissionsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Google\UploadFileDialog.Designer.vb">
+      <DependentUpon>UploadFileDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Google\UploadFileDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Listeners\AddListenerDialog.Designer.vb">
+      <DependentUpon>AddListenerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Listeners\AddListenerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Products\AddProductDialog.Designer.vb">
+      <DependentUpon>AddProductDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Products\AddProductDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\User\ChangePasswordDialog.Designer.vb">
+      <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\User\ChangePasswordDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\User\CreateAccountDialog.Designer.vb">
+      <DependentUpon>CreateAccountDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\User\CreateAccountDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Google\GoogleDriveTool.Designer.vb">
+      <DependentUpon>GoogleDriveTool.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Google\GoogleDriveTool.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Google\GmailTool.Designer.vb">
+      <DependentUpon>GmailTool.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Google\GmailTool.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\People\AddressField.Designer.vb">
+      <DependentUpon>AddressField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\AddressField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Google\Drive\DriveTree.Designer.vb">
+      <DependentUpon>DriveTree.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Google\Drive\DriveTree.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Google\Emails\CustomEmail.Designer.vb">
+      <DependentUpon>CustomEmail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Google\Emails\CustomEmail.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Google\Drive\FileUpload.Designer.vb">
+      <DependentUpon>FileUpload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Google\Drive\FileUpload.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GenericInputPair.Designer.vb">
+      <DependentUpon>GenericInputPair.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GenericInputPair.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\ListenerViewPanel.Designer.vb">
+      <DependentUpon>ListenerViewPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\ListenerViewPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\Users\LoginFields.Designer.vb">
+      <DependentUpon>LoginFields.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Users\LoginFields.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\Users\ConfirmPasswordField.Designer.vb">
+      <DependentUpon>ConfirmPasswordField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Users\ConfirmPasswordField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\PhoneNumberField.Designer.vb">
+      <DependentUpon>PhoneNumberField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\PhoneNumberField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\StateSelectorField.Designer.vb">
+      <DependentUpon>StateSelectorField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\StateSelectorField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\Users\UsernameField.designer.vb">
+      <DependentUpon>UsernameField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Users\UsernameField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Database\Data Tables\Events\CustomersRowChangeEvent.vb" />
+    <Compile Include="Components\Database\Data Tables\Events\InventoryRowChangeEvent.vb" />
+    <Compile Include="Components\Database\Data Tables\Events\ListenersRowChangeEvent.vb" />
+    <Compile Include="Components\Database\Data Tables\Events\OrdersRowChangeEvent.vb" />
+    <Compile Include="Components\Database\Data Tables\Rows\CustomersDataRow.vb" />
+    <Compile Include="Components\Database\Data Tables\Rows\InventoryDataRow.vb" />
+    <Compile Include="Components\Database\Data Tables\Rows\ListenersDataRow.vb" />
+    <Compile Include="Components\Database\Data Tables\Rows\OrdersDataRow.vb" />
+    <Compile Include="Components\Database\Data Tables\Tables\CustomersDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\Data Tables\Tables\InventoryDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\Data Tables\Tables\ListenersDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Database\Data Tables\Tables\OrdersDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data Tables\Events\CustomersRowChangeEvent.vb" />
+    <Compile Include="Data Tables\Events\InventoryRowChangeEvent.vb" />
+    <Compile Include="Data Tables\Events\ListenersRowChangeEvent.vb" />
+    <Compile Include="Data Tables\Events\OrdersRowChangeEvent.vb" />
+    <Compile Include="Data Tables\Rows\CustomersDataRow.vb" />
+    <Compile Include="Data Tables\Rows\InventoryDataRow.vb" />
+    <Compile Include="Data Tables\Rows\ListenersDataRow.vb" />
+    <Compile Include="Data Tables\Rows\OrdersDataRow.vb" />
+    <Compile Include="Data Tables\Tables\CustomersDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data Tables\Tables\InventoryDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data Tables\Tables\ListenersDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data Tables\Tables\OrdersDataTable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\User\LoginDialog.Designer.vb">
+      <DependentUpon>LoginDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\User\LoginDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Exceptions\Customers\CustomerNotFoundException.vb" />
+    <Compile Include="Exceptions\Database\CreationException.vb" />
+    <Compile Include="Exceptions\Database\ConnectionException.vb" />
+    <Compile Include="Exceptions\Database\DatabaseException.vb" />
+    <Compile Include="Exceptions\Database\ExecutionException.vb" />
+    <Compile Include="Exceptions\Database\InvalidIdException.vb" />
+    <Compile Include="Exceptions\Google\FileException.vb" />
+    <Compile Include="Exceptions\Google\FolderException.vb" />
+    <Compile Include="Exceptions\Google\UploadException.vb" />
+    <Compile Include="Exceptions\Listeners\ListenerNotFoundException.vb" />
+    <Compile Include="Exceptions\Users\LoginException.vb" />
+    <Compile Include="Exceptions\Users\MissingInfoException.vb" />
+    <Compile Include="Exceptions\Users\PasswordException.vb" />
+    <Compile Include="Exceptions\Users\PasswordMisMatchException.vb" />
+    <Compile Include="Exceptions\Users\RoleException.vb" />
+    <Compile Include="Exceptions\Users\UserException.vb" />
+    <Compile Include="Exceptions\Users\UsernameException.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Types\BodyType.vb" />
+    <Compile Include="Types\Google\Drive\File.vb" />
+    <Compile Include="Types\Google\Drive\Folder.vb" />
+    <Compile Include="Types\Google\Drive\FileCollection.vb" />
+    <Compile Include="Types\Inventory\Item.vb" />
+    <Compile Include="Types\Inventory\Product.vb" />
+    <Compile Include="Types\Orders\CompletedOrder.vb" />
+    <Compile Include="Types\Orders\CurrentOrder.vb" />
+    <Compile Include="Types\People\AccountRole.vb" />
+    <Compile Include="Types\People\Address.vb" />
+    <Compile Include="Types\People\Customer.vb" />
+    <Compile Include="Types\People\Listener.vb" />
+    <Compile Include="Types\People\ListenerCollection.vb" />
+    <Compile Include="Types\People\Person.vb" />
+    <Compile Include="Types\People\User.vb" />
+    <Compile Include="Types\Service.vb" />
+    <Compile Include="Types\TabPages.vb" />
+    <Compile Include="Utils.vb" />
+    <Compile Include="Controls\FileLocationField.Designer.vb">
+      <DependentUpon>FileLocationField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FileLocationField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\People\Users\PasswordField.Designer.vb">
+      <DependentUpon>PasswordField.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Users\PasswordField.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Components\Database\CustomerDatabase.resx">
+      <DependentUpon>CustomerDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Database\Database.resx">
+      <DependentUpon>Database.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Database\ListenerDatabase.resx">
+      <DependentUpon>ListenerDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Database\OrdersDatabase.resx">
+      <DependentUpon>OrdersDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Database\ProductDatabase.resx">
+      <DependentUpon>ProductDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Database\UserDatabase.resx">
+      <DependentUpon>UserDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainMenuStrip.resx">
+      <DependentUpon>MainMenuStrip.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Customer\AddCustomerDialog.resx">
+      <DependentUpon>AddCustomerDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Emails\CustomEmailDialog.resx">
+      <DependentUpon>CustomEmailDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Emails\ReciepientSelectionDialog.resx">
+      <DependentUpon>ReciepientSelectionDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\SelectReceipient.resx">
+      <DependentUpon>SelectReceipient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Google\CreateFolderDialog.resx">
+      <DependentUpon>CreateFolderDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Emails\SendEmailsDialog.resx">
+      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Google\PermissionsDialog.resx">
+      <DependentUpon>PermissionsDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Google\UploadFileDialog.resx">
+      <DependentUpon>UploadFileDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\User\ChangePasswordDialog.resx">
+      <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\User\CreateAccountDialog.resx">
+      <DependentUpon>CreateAccountDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\AddressField.resx">
+      <DependentUpon>AddressField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Google\Drive\DriveTree.resx">
+      <DependentUpon>DriveTree.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Google\Emails\CustomEmail.resx">
+      <DependentUpon>CustomEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FileLocationField.resx">
+      <DependentUpon>FileLocationField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Google\Drive\FileUpload.resx">
+      <DependentUpon>FileUpload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GenericInputPair.resx">
+      <DependentUpon>GenericInputPair.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\ListenerViewPanel.resx">
+      <DependentUpon>ListenerViewPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Users\LoginFields.resx">
+      <DependentUpon>LoginFields.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Users\ConfirmPasswordField.resx">
+      <DependentUpon>ConfirmPasswordField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Users\PasswordField.resx">
+      <DependentUpon>PasswordField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\PhoneNumberField.resx">
+      <DependentUpon>PhoneNumberField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\StateSelectorField.resx">
+      <DependentUpon>StateSelectorField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Users\UsernameField.resx">
+      <DependentUpon>UsernameField.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\User\LoginDialog.resx">
+      <DependentUpon>LoginDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="M3Tools.pfx" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\Google.Apis.Drive.v3.Data.Permission.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Resources\configs\credentials.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\dove.png" />
+    <Content Include="Resources\Images\faith.png" />
+    <Content Include="Resources\Images\font.png" />
+    <Content Include="Resources\Images\italics.png" />
+    <Resource Include="Resources\Images\Logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Resources\Images\new-document.png" />
+    <Content Include="Resources\Images\strikethrough-text-interface-sign.png" />
+    <Content Include="Resources\Images\underline.png" />
+    <None Include="Resources\Images\BannerImage.JPG" />
+    <Content Include="Resources\Images\bold-text-option.png" />
+    <Content Include="Resources\Images\HidePasswordIcon.png" />
+    <Content Include="Resources\Images\ShowPasswordIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
