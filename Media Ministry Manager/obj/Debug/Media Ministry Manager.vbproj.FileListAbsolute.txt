@@ -153,3 +153,4 @@ E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\D
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.pdb
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.dll.config
+E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.TrustInfo.xml

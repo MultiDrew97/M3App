@@ -32,5 +32,8 @@
     <Setting Name="DefaultUsername" Type="System.String" Scope="Application">
       <Value Profile="(Default)">M3App</Value>
     </Setting>
+    <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

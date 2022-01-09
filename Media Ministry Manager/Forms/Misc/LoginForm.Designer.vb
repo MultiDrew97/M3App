@@ -58,7 +58,7 @@ Partial Class Frm_Login
 		Me.chk_KeepLoggedIn.BackColor = System.Drawing.Color.Transparent
 		Me.chk_KeepLoggedIn.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.chk_KeepLoggedIn.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.chk_KeepLoggedIn.Location = New System.Drawing.Point(47, 150)
+		Me.chk_KeepLoggedIn.Location = New System.Drawing.Point(44, 155)
 		Me.chk_KeepLoggedIn.Name = "chk_KeepLoggedIn"
 		Me.chk_KeepLoggedIn.Size = New System.Drawing.Size(119, 23)
 		Me.chk_KeepLoggedIn.TabIndex = 1
@@ -139,11 +139,11 @@ Partial Class Frm_Login
 		Me.lf_UserPass.AutoSize = True
 		Me.lf_UserPass.BackColor = System.Drawing.Color.Transparent
 		Me.lf_UserPass.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.lf_UserPass.Location = New System.Drawing.Point(38, 14)
+		Me.lf_UserPass.Location = New System.Drawing.Point(33, 12)
 		Me.lf_UserPass.Name = "lf_UserPass"
 		Me.lf_UserPass.Padding = New System.Windows.Forms.Padding(10)
 		Me.lf_UserPass.Password = ""
-		Me.lf_UserPass.Size = New System.Drawing.Size(237, 159)
+		Me.lf_UserPass.Size = New System.Drawing.Size(237, 152)
 		Me.lf_UserPass.TabIndex = 0
 		Me.lf_UserPass.Username = ""
 		'
