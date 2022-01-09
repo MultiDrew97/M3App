@@ -1,5 +1,6 @@
 ﻿Option Strict On
 Imports System.Collections.ObjectModel
+Imports System.Windows.Forms
 Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Types
 

@@ -96,15 +96,24 @@ Namespace Database
 				_cmd.CommandText = "sp_ChangePassword"
 				_cmd.CommandType = CommandType.StoredProcedure
 
-				_cmd.ExecuteNonQuery()
+				_cmd.ExecuteNonQueryAsync()
 
 				Return CBool(_cmd.Parameters("Success").Value)
 			End Using
 		End Function
 
-		Public Sub DeleteUser(username As String)
-			'TODO: Implement removing logins
-			Throw New NotImplementedException("Add User deletion functionality")
+		Public Sub CloseAccount(username As String)
+			CloseAccount(New SqlParameter("Username", username))
+		End Sub
+
+		Private Sub CloseAccount(param As SqlParameter)
+			Using _cmd = db_Connection.Connect
+				_cmd.Parameters.Add(param)
+				_cmd.CommandText = "sp_DeactivateAccount"
+				_cmd.CommandType = CommandType.StoredProcedure
+
+				_cmd.ExecuteNonQueryAsync()
+			End Using
 		End Sub
 
 		Public Function Login(username As String, password As String) As User

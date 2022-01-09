@@ -11,6 +11,7 @@
 Option Strict On
 Option Explicit On
 
+<<<<<<< HEAD
 'Namespace My
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
 <<<<<<< HEAD
@@ -29,13 +30,28 @@ Partial Friend NotInheritable Class MySettings
 
 	Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
 >>>>>>> Created some custom forms and components/controls in a custom library
+=======
+
+
+<Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+ Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
+Partial Friend NotInheritable Class MySettings
+    Inherits Global.System.Configuration.ApplicationSettingsBase
+    
+    Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
+    
+>>>>>>> Cleaned references
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
-	Private Shared addedHandler As Boolean
+    Private Shared addedHandler As Boolean
 
-		Private Shared addedHandlerLockObject As New Object
+    Private Shared addedHandlerLockObject As New Object
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Cleaned references
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
     Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
         If My.Application.SaveMySettingsOnExit Then
@@ -64,7 +80,11 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
+>>>>>>> Cleaned references
     Public Property Username() As String
         Get
             Return CType(Me("Username"),String)
@@ -76,7 +96,11 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697")>  _
+>>>>>>> Cleaned references
     Public Property Password() As String
         Get
             Return CType(Me("Password"),String)
@@ -88,7 +112,11 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+>>>>>>> Cleaned references
     Public Property KeepLoggedIn() As Boolean
         Get
             Return CType(Me("KeepLoggedIn"),Boolean)
@@ -124,8 +152,13 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E"& _ 
         "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry"";Connect Timeou"& _ 
+        "t=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+>>>>>>> Cleaned references
     Public Property releaseConnection() As String
         Get
             Return CType(Me("releaseConnection"),String)
@@ -137,8 +170,14 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout"& _ 
         "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry Test"";Connect T"& _ 
+        "imeout=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True"& _ 
+        ";")>  _
+>>>>>>> Cleaned references
     Public Property debugConnection() As String
         Get
             Return CType(Me("debugConnection"),String)
@@ -150,6 +189,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
      Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString)>  _
     Public ReadOnly Property Setting() As String
         Get
@@ -300,6 +340,45 @@ End Class
 	End Class
 'End Namespace
 >>>>>>> Created some custom forms and components/controls in a custom library
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+    Public ReadOnly Property DefaultCatalog() As String
+        Get
+            Return CType(Me("DefaultCatalog"),String)
+        End Get
+    End Property
+    
+    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("M3AppPassword2499")>  _
+    Public ReadOnly Property DefaultPassword() As String
+        Get
+            Return CType(Me("DefaultPassword"),String)
+        End Get
+    End Property
+    
+    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("M3App")>  _
+    Public ReadOnly Property DefaultUsername() As String
+        Get
+            Return CType(Me("DefaultUsername"),String)
+        End Get
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property UpgradeRequired() As Boolean
+        Get
+            Return CType(Me("UpgradeRequired"),Boolean)
+        End Get
+        Set
+            Me("UpgradeRequired") = value
+        End Set
+    End Property
+End Class
+>>>>>>> Cleaned references
 
 Namespace My
     
@@ -307,12 +386,12 @@ Namespace My
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
-
-		<Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>
-		Friend ReadOnly Property Settings() As Global.MediaMinistry.MySettings
-			Get
-				Return Global.MediaMinistry.MySettings.Default
-			End Get
-		End Property
-	End Module
+        
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
+        Friend ReadOnly Property Settings() As Global.MediaMinistry.MySettings
+            Get
+                Return Global.MediaMinistry.MySettings.Default
+            End Get
+        End Property
+    End Module
 End Namespace
