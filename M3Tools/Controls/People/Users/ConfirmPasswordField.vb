@@ -35,7 +35,7 @@ Public Class ConfirmPasswordField
     End Property
 
 
-	Private Sub Btn_Show_Click(sender As Object, e As EventArgs) Handles btn_Show.Click
+	Private Sub Btn_Show_Click(sender As Object, e As EventArgs)
 		'Switch between password icon image for the button
 		btn_Show.Image = If(txt_ConfirmPassword.UseSystemPasswordChar, My.Resources.HidePasswordIcon, My.Resources.ShowPasswordIcon)
 
@@ -72,11 +72,11 @@ Public Class ConfirmPasswordField
 		Return txt_ConfirmPassword.Focus()
 	End Function
 
-	Private Sub Txt_ConfirmPassword_LostFocus(sender As Object, e As EventArgs) Handles txt_ConfirmPassword.LostFocus
+	Private Sub Txt_ConfirmPassword_LostFocus(sender As Object, e As EventArgs)
 		RaiseEvent ConfirmLostFocus(Me, e)
 	End Sub
 
-	Private Sub Txt_ConfirmPassword_TextChanged(sender As Object, e As EventArgs) Handles txt_ConfirmPassword.TextChanged
+	Private Sub Txt_ConfirmPassword_TextChanged(sender As Object, e As EventArgs)
 		RaiseEvent ConfirmTextChanged(Me, e)
 	End Sub
 End Class

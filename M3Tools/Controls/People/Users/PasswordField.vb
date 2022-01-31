@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class PasswordField
+	Public Event PasswordGotFocus As EventHandler
 	Public Event PasswordLostFocus As EventHandler
 	Public Event PasswordTextChanged As EventHandler
 
@@ -49,11 +50,10 @@ Public Class PasswordField
 	End Property
 
 	Private Sub Btn_Show_Click(sender As Object, e As EventArgs) Handles btn_Show.Click
-		'Switch between password icon image for the button
-		btn_Show.Image = If(txt_Password.UseSystemPasswordChar, My.Resources.HidePasswordIcon, My.Resources.ShowPasswordIcon)
-
 		'Invert the use system password char property
 		txt_Password.UseSystemPasswordChar = Not txt_Password.UseSystemPasswordChar
+		'Switch between password icon image for the button
+		btn_Show.Image = If(txt_Password.UseSystemPasswordChar, My.Resources.ShowPasswordIcon, My.Resources.HidePasswordIcon)
 	End Sub
 
 	''' <summary>
@@ -77,8 +77,8 @@ Public Class PasswordField
 	''' Selects all text in the text box.
 	''' </summary>
 	Public Shadows Sub SelectAll()
-		txt_Password.SelectAll()
-		'txtPassword.Select(0, TextLength)
+		'txt_Password.SelectAll()
+		[Select](0, TextLength)
 	End Sub
 
 	Public Overloads Function Focus() As Boolean
@@ -93,9 +93,7 @@ Public Class PasswordField
 		RaiseEvent PasswordTextChanged(Me, e)
 	End Sub
 
-	Private Sub ValidatePassword(sender As Object, e As CancelEventArgs) Handles txt_Password.Validating
-		If String.IsNullOrWhiteSpace(txt_Password.Text) Then
-			e.Cancel = True
-		End If
+	Private Sub PasswordFocused(sender As Object, e As EventArgs) Handles txt_Password.GotFocus
+		RaiseEvent PasswordGotFocus(Me, New EventArgs)
 	End Sub
 End Class

@@ -55,7 +55,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
     Public Property Username() As String
         Get
             Return CType(Me("Username"),String)
@@ -67,25 +67,13 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
     Public Property Password() As String
         Get
             Return CType(Me("Password"),String)
         End Get
         Set
             Me("Password") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-    Public Property KeepLoggedIn() As Boolean
-        Get
-            Return CType(Me("KeepLoggedIn"),Boolean)
-        End Get
-        Set
-            Me("KeepLoggedIn") = value
         End Set
     End Property
     
@@ -168,6 +156,17 @@ Partial Friend NotInheritable Class MySettings
     End Property
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Public Property KeepLoggedIn() As Boolean
+        Get
+            Return CType(Me("KeepLoggedIn"),Boolean)
+        End Get
+        Set
+            Me("KeepLoggedIn") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
     Public Property UpgradeRequired() As Boolean
@@ -176,6 +175,18 @@ Partial Friend NotInheritable Class MySettings
         End Get
         Set
             Me("UpgradeRequired") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("-1;JohnDoe123;User")>  _
+    Public Property User() As Global.SPPBC.M3Tools.Types.User
+        Get
+            Return CType(Me("User"),Global.SPPBC.M3Tools.Types.User)
+        End Get
+        Set
+            Me("User") = value
         End Set
     End Property
 End Class

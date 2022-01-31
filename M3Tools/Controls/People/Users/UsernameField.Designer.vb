@@ -56,18 +56,20 @@ Partial Class UsernameField
         '
         Me.spc_LabelInputs.Panel2.Controls.Add(Me.spc_InputButton)
         Me.spc_LabelInputs.Panel2.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
-        Me.spc_LabelInputs.Size = New System.Drawing.Size(304, 52)
-        Me.spc_LabelInputs.SplitterDistance = 26
+        Me.spc_LabelInputs.Size = New System.Drawing.Size(300, 50)
+        Me.spc_LabelInputs.SplitterDistance = 24
         Me.spc_LabelInputs.SplitterWidth = 1
         Me.spc_LabelInputs.TabIndex = 3
+        Me.spc_LabelInputs.TabStop = False
         '
         'lbl_Username
         '
-        Me.lbl_Username.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbl_Username.AutoSize = True
+        Me.lbl_Username.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lbl_Username.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Username.Location = New System.Drawing.Point(0, 0)
+        Me.lbl_Username.Location = New System.Drawing.Point(0, 4)
         Me.lbl_Username.Name = "lbl_Username"
-        Me.lbl_Username.Size = New System.Drawing.Size(304, 26)
+        Me.lbl_Username.Size = New System.Drawing.Size(83, 20)
         Me.lbl_Username.TabIndex = 0
         Me.lbl_Username.Text = "Username"
         Me.lbl_Username.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -77,6 +79,7 @@ Partial Class UsernameField
         Me.spc_InputButton.BackColor = System.Drawing.Color.Transparent
         Me.spc_InputButton.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spc_InputButton.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
+        Me.spc_InputButton.IsSplitterFixed = True
         Me.spc_InputButton.Location = New System.Drawing.Point(0, 0)
         Me.spc_InputButton.Name = "spc_InputButton"
         '
@@ -88,8 +91,8 @@ Partial Class UsernameField
         '
         Me.spc_InputButton.Panel2.Controls.Add(Me.btn_Show)
         Me.spc_InputButton.Panel2MinSize = 40
-        Me.spc_InputButton.Size = New System.Drawing.Size(304, 20)
-        Me.spc_InputButton.SplitterDistance = 259
+        Me.spc_InputButton.Size = New System.Drawing.Size(300, 20)
+        Me.spc_InputButton.SplitterDistance = 255
         Me.spc_InputButton.TabIndex = 0
         Me.spc_InputButton.TabStop = False
         '
@@ -99,13 +102,14 @@ Partial Class UsernameField
         Me.txt_Username.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt_Username.Location = New System.Drawing.Point(0, 0)
         Me.txt_Username.Name = "txt_Username"
-        Me.txt_Username.Size = New System.Drawing.Size(259, 20)
+        Me.txt_Username.Size = New System.Drawing.Size(255, 20)
         Me.txt_Username.TabIndex = 0
         '
         'btn_Show
         '
         Me.btn_Show.BackColor = System.Drawing.Color.Transparent
         Me.btn_Show.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btn_Show.Enabled = False
         Me.btn_Show.Image = Global.SPPBC.M3Tools.My.Resources.Resources.ShowPasswordIcon
         Me.btn_Show.Location = New System.Drawing.Point(0, 0)
         Me.btn_Show.Name = "btn_Show"
@@ -120,11 +124,13 @@ Partial Class UsernameField
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.BackColor = System.Drawing.Color.Transparent
         Me.Controls.Add(Me.spc_LabelInputs)
+        Me.MinimumSize = New System.Drawing.Size(300, 50)
         Me.Name = "UsernameField"
-        Me.Size = New System.Drawing.Size(304, 52)
+        Me.Size = New System.Drawing.Size(300, 50)
         Me.spc_LabelInputs.Panel1.ResumeLayout(False)
+        Me.spc_LabelInputs.Panel1.PerformLayout()
         Me.spc_LabelInputs.Panel2.ResumeLayout(False)
         CType(Me.spc_LabelInputs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.spc_LabelInputs.ResumeLayout(False)

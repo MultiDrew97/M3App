@@ -133,7 +133,7 @@ Namespace Database
 						If reader.GetInt32(reader.GetOrdinal("UserID")) > -1 Then
 							Dim user = GetUser(reader.GetInt32(reader.GetOrdinal("UserID")))
 
-							If Not user.AccountRole = AccountRole.Admin Then
+							If Not user.IsAdmin Then
 								' User's account is not an admin account
 								Throw New Exceptions.RoleException("Unathorized Account Type")
 							End If

@@ -91,7 +91,27 @@ Media Ministry Manager
   Looks up a localized string similar to Data Source=sppbc.hopto.org,14339;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
 </summary>
 </member>
+<member name="P:MediaMinistry.My.Resources.Resources.ErrorImage">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:MediaMinistry.My.Resources.Resources.HidePasswordIcon">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:MediaMinistry.My.Resources.Resources.Loading_Loop">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:MediaMinistry.My.Resources.Resources.Loading_Loop_2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:MediaMinistry.My.Resources.Resources.Loading_Loop_3">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

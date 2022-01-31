@@ -5,7 +5,6 @@
 'https://support.microsoft.com/en-us/help/308656/how-to-open-a-sql-server-database-by-using-the-sql-server-net-data-pro
 Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports System.Security
 
 Namespace Database
     Friend Class Database
