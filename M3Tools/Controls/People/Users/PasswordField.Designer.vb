@@ -41,11 +41,12 @@ Partial Class PasswordField
         '
         'lbl_Password
         '
-        Me.lbl_Password.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbl_Password.AutoSize = True
+        Me.lbl_Password.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lbl_Password.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Password.Location = New System.Drawing.Point(0, 0)
+        Me.lbl_Password.Location = New System.Drawing.Point(0, 4)
         Me.lbl_Password.Name = "lbl_Password"
-        Me.lbl_Password.Size = New System.Drawing.Size(304, 42)
+        Me.lbl_Password.Size = New System.Drawing.Size(78, 20)
         Me.lbl_Password.TabIndex = 0
         Me.lbl_Password.Text = "Password"
         Me.lbl_Password.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -56,7 +57,7 @@ Partial Class PasswordField
         Me.txt_Password.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
         Me.txt_Password.Location = New System.Drawing.Point(0, 0)
         Me.txt_Password.Name = "txt_Password"
-        Me.txt_Password.Size = New System.Drawing.Size(253, 20)
+        Me.txt_Password.Size = New System.Drawing.Size(255, 20)
         Me.txt_Password.TabIndex = 0
         Me.txt_Password.UseSystemPasswordChar = True
         '
@@ -67,7 +68,7 @@ Partial Class PasswordField
         Me.btn_Show.Image = Global.SPPBC.M3Tools.My.Resources.Resources.ShowPasswordIcon
         Me.btn_Show.Location = New System.Drawing.Point(0, 0)
         Me.btn_Show.Name = "btn_Show"
-        Me.btn_Show.Size = New System.Drawing.Size(47, 20)
+        Me.btn_Show.Size = New System.Drawing.Size(41, 20)
         Me.btn_Show.TabIndex = 0
         Me.btn_Show.TabStop = False
         Me.btn_Show.UseVisualStyleBackColor = True
@@ -85,14 +86,14 @@ Partial Class PasswordField
         'spc_LabelInputs.Panel1
         '
         Me.spc_LabelInputs.Panel1.Controls.Add(Me.lbl_Password)
-        Me.spc_LabelInputs.Panel1MinSize = 30
+        Me.spc_LabelInputs.Panel1MinSize = 15
         '
         'spc_LabelInputs.Panel2
         '
         Me.spc_LabelInputs.Panel2.Controls.Add(Me.spc_InputButton)
         Me.spc_LabelInputs.Panel2.Padding = New System.Windows.Forms.Padding(0, 0, 0, 5)
-        Me.spc_LabelInputs.Size = New System.Drawing.Size(304, 68)
-        Me.spc_LabelInputs.SplitterDistance = 42
+        Me.spc_LabelInputs.Size = New System.Drawing.Size(300, 50)
+        Me.spc_LabelInputs.SplitterDistance = 24
         Me.spc_LabelInputs.SplitterWidth = 1
         Me.spc_LabelInputs.TabIndex = 2
         Me.spc_LabelInputs.TabStop = False
@@ -113,8 +114,8 @@ Partial Class PasswordField
         '
         Me.spc_InputButton.Panel2.Controls.Add(Me.btn_Show)
         Me.spc_InputButton.Panel2MinSize = 40
-        Me.spc_InputButton.Size = New System.Drawing.Size(304, 20)
-        Me.spc_InputButton.SplitterDistance = 253
+        Me.spc_InputButton.Size = New System.Drawing.Size(300, 20)
+        Me.spc_InputButton.SplitterDistance = 255
         Me.spc_InputButton.TabIndex = 0
         Me.spc_InputButton.TabStop = False
         '
@@ -123,11 +124,13 @@ Partial Class PasswordField
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.BackColor = System.Drawing.Color.Transparent
         Me.Controls.Add(Me.spc_LabelInputs)
+        Me.MinimumSize = New System.Drawing.Size(300, 50)
         Me.Name = "PasswordField"
-        Me.Size = New System.Drawing.Size(304, 68)
+        Me.Size = New System.Drawing.Size(300, 50)
         Me.spc_LabelInputs.Panel1.ResumeLayout(False)
+        Me.spc_LabelInputs.Panel1.PerformLayout()
         Me.spc_LabelInputs.Panel2.ResumeLayout(False)
         CType(Me.spc_LabelInputs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.spc_LabelInputs.ResumeLayout(False)

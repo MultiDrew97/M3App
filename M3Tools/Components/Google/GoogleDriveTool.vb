@@ -10,6 +10,7 @@ Namespace GoogleAPI
 
 		Private ReadOnly Scopes As String() = {DriveService.Scope.Drive}
 		Private ReadOnly ApplicationName As String = "Media Ministry Manager"
+		Private ReadOnly __credPath As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\{0}\Tokens")
 		Private __credential As UserCredential
 		Private __service As DriveService
 		Private ReadOnly __defaultPermissions As New Data.Permission With {
@@ -36,7 +37,7 @@ Namespace GoogleAPI
 			Dim credPath = String.Format("SPPBC\{0}\Tokens", username)
 
 			Using stream As New IO.MemoryStream(My.Resources.credentials)
-				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", If(IsNothing(ct), Threading.CancellationToken.None, ct), New FileDataStore(credPath))
+				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", If(IsNothing(ct), Threading.CancellationToken.None, ct), New FileDataStore(String.Format(__credPath, username), True))
 			End Using
 
 			'Create Drive API service.

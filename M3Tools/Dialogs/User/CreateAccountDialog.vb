@@ -75,15 +75,15 @@ Namespace Dialogs
             End If
         End Sub
 
-        Private Sub Pf_Password_PasswordLostFocus(sender As Object, e As EventArgs) Handles pf_Password.PasswordLostFocus
-            If Not ValidPassword() Then
-                ep_FieldError.SetError(pf_Password, __passwordPatternError)
-            Else
-                ep_FieldError.SetError(pf_Password, "")
-            End If
-        End Sub
+		Private Sub Pf_Password_PasswordLostFocus(sender As Object, e As EventArgs) Handles pf_Password.PasswordLostFocus
+			If Not ValidPassword() Then
+				ep_FieldError.SetError(pf_Password, __passwordPatternError)
+			Else
+				ep_FieldError.SetError(pf_Password, "")
+			End If
+		End Sub
 
-        Private Sub Cpf_Confirm_ConfirmLostFocus(sender As Object, e As EventArgs) Handles cpf_Confirm.ConfirmLostFocus
+		Private Sub Cpf_Confirm_ConfirmLostFocus(sender As Object, e As EventArgs) Handles cpf_Confirm.ConfirmLostFocus
             If Not PasswordMatch() Then
                 ep_FieldError.SetError(cpf_Confirm, __passwordMisMatchError)
             Else

@@ -115,8 +115,12 @@
     <ManifestCertificateThumbprint>4CCBBE18B23306A98C1AD072286D465463B6FBD9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
+<<<<<<< HEAD
     <ManifestKeyFile>
     </ManifestKeyFile>
+=======
+    <ManifestKeyFile>M3App.pfx</ManifestKeyFile>
+>>>>>>> Managing the login form behaviour
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -131,7 +135,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>MediaMinistryManager.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>M3App.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -495,7 +499,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\MediaMinistrySplash.resx">
@@ -586,6 +589,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="M3App.pfx" />
     <None Include="MediaMinistryManager.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
@@ -633,7 +637,11 @@
   <ItemGroup>
     <None Include="Resources\NewToolStripMenuItem.Image.png" />
     <None Include="Resources\BannerImage.JPG" />
+    <Content Include="Resources\ErrorImage.png" />
     <Content Include="Resources\HidePasswordIcon.png" />
+    <Content Include="Resources\Loading-Loop-2.gif" />
+    <Content Include="Resources\Loading-Loop-3.gif" />
+    <Content Include="Resources\Loading-Loop.gif" />
     <Content Include="Resources\ShowPasswordIcon.png" />
     <Content Include="Resources\version.txt" />
   </ItemGroup>

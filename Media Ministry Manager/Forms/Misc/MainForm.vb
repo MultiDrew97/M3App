@@ -120,17 +120,17 @@ Public Class Frm_Main
 		Helpers.Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs)
+	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
 		Frm_DisplayCustomers.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs)
+	Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
 		Frm_DisplayInventory.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub OrdersToolStripMenuItem_Click(sender As Object, e As EventArgs)
+	Private Sub OrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
 		Frm_DisplayOrders.Show()
 		Me.Close()
 	End Sub

@@ -66,7 +66,7 @@ Public Class UsernameField
         txt_Username.SelectAll()
     End Sub
 
-    Private Sub Txt_Username_LostFocus(sender As Object, e As EventArgs) Handles txt_Username.LostFocus
+    Private Sub Txt_UsernameLostFocus(sender As Object, e As EventArgs) Handles txt_Username.LostFocus
         RaiseEvent UsernameLostFocus(Me, e)
     End Sub
 

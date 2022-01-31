@@ -22,26 +22,24 @@ Partial Class Frm_Main
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_Main))
-		Me.btn_placeOrder = New System.Windows.Forms.Button()
-		Me.btn_ShowOrders = New System.Windows.Forms.Button()
-		Me.btn_ProductManagement = New System.Windows.Forms.Button()
-		Me.btn_CustomerManagement = New System.Windows.Forms.Button()
-		Me.ss_Queries = New System.Windows.Forms.StatusStrip()
-		Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
-		Me.bw_ChangedSizes = New System.ComponentModel.BackgroundWorker()
-		Me.btn_EmailMinistry = New System.Windows.Forms.Button()
-		Me.pnl_Controls = New System.Windows.Forms.Panel()
-		Me.wb_Updater = New System.Windows.Forms.WebBrowser()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_Main))
+        Me.btn_placeOrder = New System.Windows.Forms.Button()
+        Me.btn_ShowOrders = New System.Windows.Forms.Button()
+        Me.btn_ProductManagement = New System.Windows.Forms.Button()
+        Me.btn_CustomerManagement = New System.Windows.Forms.Button()
+        Me.ss_Queries = New System.Windows.Forms.StatusStrip()
+        Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.bw_ChangedSizes = New System.ComponentModel.BackgroundWorker()
+        Me.btn_EmailMinistry = New System.Windows.Forms.Button()
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
+		Me.wb_Updater = New System.Windows.Forms.WebBrowser()
 		Me.ss_Queries.SuspendLayout()
-		Me.pnl_Controls.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'btn_placeOrder
 		'
 		Me.btn_placeOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_placeOrder.Location = New System.Drawing.Point(85, 113)
+		Me.btn_placeOrder.Location = New System.Drawing.Point(77, 102)
 		Me.btn_placeOrder.Name = "btn_placeOrder"
 		Me.btn_placeOrder.Size = New System.Drawing.Size(226, 43)
 		Me.btn_placeOrder.TabIndex = 2
@@ -51,7 +49,7 @@ Partial Class Frm_Main
 		'btn_ShowOrders
 		'
 		Me.btn_ShowOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_ShowOrders.Location = New System.Drawing.Point(85, 188)
+		Me.btn_ShowOrders.Location = New System.Drawing.Point(77, 177)
 		Me.btn_ShowOrders.Name = "btn_ShowOrders"
 		Me.btn_ShowOrders.Size = New System.Drawing.Size(226, 43)
 		Me.btn_ShowOrders.TabIndex = 3
@@ -61,7 +59,7 @@ Partial Class Frm_Main
 		'btn_ProductManagement
 		'
 		Me.btn_ProductManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_ProductManagement.Location = New System.Drawing.Point(85, 263)
+		Me.btn_ProductManagement.Location = New System.Drawing.Point(77, 252)
 		Me.btn_ProductManagement.Name = "btn_ProductManagement"
 		Me.btn_ProductManagement.Size = New System.Drawing.Size(226, 43)
 		Me.btn_ProductManagement.TabIndex = 4
@@ -71,7 +69,7 @@ Partial Class Frm_Main
 		'btn_CustomerManagement
 		'
 		Me.btn_CustomerManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_CustomerManagement.Location = New System.Drawing.Point(85, 38)
+		Me.btn_CustomerManagement.Location = New System.Drawing.Point(77, 27)
 		Me.btn_CustomerManagement.Name = "btn_CustomerManagement"
 		Me.btn_CustomerManagement.Size = New System.Drawing.Size(226, 43)
 		Me.btn_CustomerManagement.TabIndex = 1
@@ -98,38 +96,12 @@ Partial Class Frm_Main
 		'btn_EmailMinistry
 		'
 		Me.btn_EmailMinistry.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
-		Me.btn_EmailMinistry.Location = New System.Drawing.Point(85, 338)
+		Me.btn_EmailMinistry.Location = New System.Drawing.Point(77, 327)
 		Me.btn_EmailMinistry.Name = "btn_EmailMinistry"
 		Me.btn_EmailMinistry.Size = New System.Drawing.Size(226, 43)
 		Me.btn_EmailMinistry.TabIndex = 5
 		Me.btn_EmailMinistry.Text = "Email Ministry"
 		Me.btn_EmailMinistry.UseVisualStyleBackColor = True
-		'
-		'pnl_Controls
-		'
-		Me.pnl_Controls.BackColor = System.Drawing.Color.Transparent
-		Me.pnl_Controls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.pnl_Controls.Controls.Add(Me.mms_Main)
-		Me.pnl_Controls.Controls.Add(Me.wb_Updater)
-		Me.pnl_Controls.Controls.Add(Me.btn_EmailMinistry)
-		Me.pnl_Controls.Controls.Add(Me.btn_CustomerManagement)
-		Me.pnl_Controls.Controls.Add(Me.btn_ShowOrders)
-		Me.pnl_Controls.Controls.Add(Me.btn_placeOrder)
-		Me.pnl_Controls.Controls.Add(Me.btn_ProductManagement)
-		Me.pnl_Controls.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.pnl_Controls.Location = New System.Drawing.Point(0, 0)
-		Me.pnl_Controls.Name = "pnl_Controls"
-		Me.pnl_Controls.Size = New System.Drawing.Size(397, 413)
-		Me.pnl_Controls.TabIndex = 0
-		'
-		'wb_Updater
-		'
-		Me.wb_Updater.Location = New System.Drawing.Point(340, 335)
-		Me.wb_Updater.MinimumSize = New System.Drawing.Size(20, 20)
-		Me.wb_Updater.Name = "wb_Updater"
-		Me.wb_Updater.Size = New System.Drawing.Size(45, 36)
-		Me.wb_Updater.TabIndex = 6
-		Me.wb_Updater.Visible = False
 		'
 		'mms_Main
 		'
@@ -139,14 +111,29 @@ Partial Class Frm_Main
 		Me.mms_Main.TabIndex = 7
 		Me.mms_Main.Text = "Tools"
 		'
+		'wb_Updater
+		'
+		Me.wb_Updater.Location = New System.Drawing.Point(332, 324)
+		Me.wb_Updater.MinimumSize = New System.Drawing.Size(20, 20)
+		Me.wb_Updater.Name = "wb_Updater"
+		Me.wb_Updater.Size = New System.Drawing.Size(45, 36)
+		Me.wb_Updater.TabIndex = 6
+		Me.wb_Updater.Visible = False
+		'
 		'Frm_Main
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
 		Me.ClientSize = New System.Drawing.Size(397, 413)
+		Me.Controls.Add(Me.wb_Updater)
+		Me.Controls.Add(Me.mms_Main)
+		Me.Controls.Add(Me.btn_EmailMinistry)
 		Me.Controls.Add(Me.ss_Queries)
-		Me.Controls.Add(Me.pnl_Controls)
+		Me.Controls.Add(Me.btn_CustomerManagement)
+		Me.Controls.Add(Me.btn_ShowOrders)
+		Me.Controls.Add(Me.btn_placeOrder)
+		Me.Controls.Add(Me.btn_ProductManagement)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MainMenuStrip = Me.mms_Main
@@ -156,8 +143,6 @@ Partial Class Frm_Main
 		Me.Text = "Media Ministry Manager"
 		Me.ss_Queries.ResumeLayout(False)
 		Me.ss_Queries.PerformLayout()
-		Me.pnl_Controls.ResumeLayout(False)
-		Me.pnl_Controls.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -170,7 +155,6 @@ Partial Class Frm_Main
 	Friend WithEvents tss_Feedback As ToolStripStatusLabel
 	Friend WithEvents bw_ChangedSizes As System.ComponentModel.BackgroundWorker
 	Friend WithEvents btn_EmailMinistry As Button
-	Friend WithEvents pnl_Controls As Panel
 	Friend WithEvents wb_Updater As WebBrowser
 	Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
 End Class

@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Resources\App Icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="639B03656C07EE60" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="E198E3547A7C28A0" language="neutral" processorArchitecture="msil" />
     <commandLine file="Media Ministry Manager.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -199,14 +199,23 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+<<<<<<< HEAD
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1292872">
       <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="639B03656C07EE60" language="neutral" processorArchitecture="msil" />
+=======
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1888840">
+      <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="E198E3547A7C28A0" language="neutral" processorArchitecture="msil" />
+>>>>>>> Managing the login form behaviour
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>sUAmxnQsy2ZWgCZh8bH0BZJ2JvVBO3itnbj9HXuVuTA=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>nsfqn+BYl8R2LMN0JxvLyfNkyDieTJQ3nhYaaC+akSs=</dsig:DigestValue>
+>>>>>>> Managing the login form behaviour
       </hash>
     </dependentAssembly>
   </dependency>
@@ -319,14 +328,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="358912">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="893440">
       <assemblyIdentity name="SPPBC.M3Tools" version="1.0.410.2201" publicKeyToken="4F5539A43069F3F0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dch6tozOY3rFpLQfRTDgc3o0XCt9Jj0+um/GSb0ljeo=</dsig:DigestValue>
+        <dsig:DigestValue>97+bLpdok31O46nTmlW7HfLSovQXNagYfmKDKiw/3UU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -378,13 +387,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Media Ministry Manager.exe.config" size="4684">
+  <file name="Media Ministry Manager.exe.config" size="6258">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>E11we3+rCP0xOdZHy/xdQM5AhkudL5aEda5uCJ1pqB4=</dsig:DigestValue>
+      <dsig:DigestValue>kptdzUz799sishMTw4fo8w9/pl2NWyb+sDUHPnnAfzs=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\App Icon.ico" size="45451">
@@ -396,6 +405,15 @@
       <dsig:DigestValue>uMM3k72HzQ/z7rG9/ZFchMxoFk8JiiekXne5taFHfyk=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Resources\ErrorImage.png" size="19685">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>J6tVlbQVz7rCKjxRnrIiKc4pegi7Nylgojjp4PZ6ydY=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Resources\HidePasswordIcon.png" size="329">
     <hash>
       <dsig:Transforms>
@@ -403,6 +421,33 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>xix57Jp6SXEUwxT8ehWtkVCYsv8oa+U9vW6TH49Z7Ic=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\Loading-Loop.gif" size="417260">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>y7l91jAPeyz1AgaTCgUyAgWO51kqCp7MaHbPSoot1vI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\Loading-Loop-2.gif" size="36006">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>5TyUC5fvjVmtxGVA/7NFK8TAc7rWB+F1/iPWnTOcFiA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\Loading-Loop-3.gif" size="32701">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>E6CBcOdcx7fpzuxYSGIA3ynwNFqeMHK3mjzbJDCV5+4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\ShowPasswordIcon.png" size="298">

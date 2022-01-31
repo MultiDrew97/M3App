@@ -6,7 +6,6 @@ Imports Google.Apis.Util.Store
 Imports Microsoft.IdentityModel.Tokens
 Imports MimeKit
 Imports NPOI.Util
-Imports System.IO
 Imports System.Threading
 
 Namespace GoogleAPI
@@ -14,6 +13,7 @@ Namespace GoogleAPI
 		Implements IDisposable, IGoogleService(Of Profile)
 		Private ReadOnly __scopes As String() = {GmailService.Scope.GmailCompose}
 		Private ReadOnly __appName As String = "Media Ministry Manager"
+		Private ReadOnly __credPath As String = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\{0}\Tokens")
 		Private __credential As UserCredential
 		Private __service As GmailService
 
@@ -33,10 +33,10 @@ Namespace GoogleAPI
 		''' <param name="username">The username of the currently logged in user</param>
 		''' <param name="ct">The cancellation token that may be used during authorization</param>
 		Async Function Authorize(username As String, Optional ct As CancellationToken = Nothing) As Task
-			Dim credPath As String = String.Format("SPPBC\{0}\Tokens", username)
 
-			Using stream As New MemoryStream(My.Resources.credentials)
-				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, "me", If(IsNothing(ct), CancellationToken.None, ct), New FileDataStore(credPath))
+
+			Using stream As New System.IO.MemoryStream(My.Resources.credentials)
+				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, "me", If(IsNothing(ct), CancellationToken.None, ct), New FileDataStore(String.Format(__credPath, username), True))
 			End Using
 
 			__service = New GmailService(New BaseClientService.Initializer() With {
@@ -127,8 +127,7 @@ Namespace GoogleAPI
 		Function CreateWithEmail(emailContent As MimeMessage) As Message
 			Dim buffer As New ByteArrayOutputStream()
 			emailContent.WriteTo(buffer)
-			Dim bytes As Byte() = buffer.ToByteArray()
-			Dim encodedEmail As String = Base64UrlEncoder.Encode(bytes)
+			Dim encodedEmail As String = Base64UrlEncoder.Encode(buffer.ToByteArray())
 			Dim message As New Message With {
 				.Raw = encodedEmail
 			}

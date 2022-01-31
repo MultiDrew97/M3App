@@ -81,10 +81,14 @@ Partial Friend NotInheritable Class MySettings
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
 <<<<<<< HEAD
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("")>  _
 =======
      Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
 >>>>>>> Cleaned references
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+>>>>>>> Managing the login form behaviour
     Public Property Username() As String
         Get
             Return CType(Me("Username"),String)
@@ -97,10 +101,14 @@ Partial Friend NotInheritable Class MySettings
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
 <<<<<<< HEAD
+<<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("")>  _
 =======
      Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697")>  _
 >>>>>>> Cleaned references
+=======
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+>>>>>>> Managing the login form behaviour
     Public Property Password() As String
         Get
             Return CType(Me("Password"),String)
@@ -112,6 +120,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+<<<<<<< HEAD
 <<<<<<< HEAD
      Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
 =======
@@ -128,6 +137,8 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+=======
+>>>>>>> Managing the login form behaviour
      Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
     Public Property CurrentFont() As Global.System.Drawing.Font
         Get
@@ -367,6 +378,17 @@ End Class
     End Property
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Public Property KeepLoggedIn() As Boolean
+        Get
+            Return CType(Me("KeepLoggedIn"),Boolean)
+        End Get
+        Set
+            Me("KeepLoggedIn") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
     Public Property UpgradeRequired() As Boolean
@@ -375,6 +397,18 @@ End Class
         End Get
         Set
             Me("UpgradeRequired") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("-1;JohnDoe123;User")>  _
+    Public Property User() As Global.SPPBC.M3Tools.Types.User
+        Get
+            Return CType(Me("User"),Global.SPPBC.M3Tools.Types.User)
+        End Get
+        Set
+            Me("User") = value
         End Set
     End Property
 End Class

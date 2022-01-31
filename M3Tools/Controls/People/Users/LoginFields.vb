@@ -5,8 +5,8 @@
     ''' <returns></returns>
     Property Username As String
         Get
-            Return uf_Username.Username
-        End Get
+			Return If(String.IsNullOrWhiteSpace(uf_Username.Username), Nothing, uf_Username.Username)
+		End Get
         Set(value As String)
             uf_Username.Username = value
         End Set
@@ -18,8 +18,8 @@
     ''' <returns></returns>
     Property Password As String
         Get
-            Return pf_Password.Password
-        End Get
+			Return If(String.IsNullOrWhiteSpace(pf_Password.Password), Nothing, pf_Password.Password)
+		End Get
         Set(value As String)
             pf_Password.Password = value
         End Set
@@ -31,26 +31,30 @@
         End Get
     End Property
 
-    ReadOnly Property PasswordField As PasswordField
-        Get
-            Return pf_Password
-        End Get
-    End Property
+	ReadOnly Property PasswordField As PasswordField
+		Get
+			Return pf_Password
+		End Get
+	End Property
 
-    ''' <summary>
-    ''' Clears all text from username and password fields
-    ''' </summary>
-    Public Sub Clear()
+	''' <summary>
+	''' Clears all text from username and password fields
+	''' </summary>
+	Public Sub Clear()
         uf_Username.Clear()
         pf_Password.Clear()
     End Sub
 
-    Public Shadows Function Focus(field As String) As Boolean
-        Select Case field
-            Case "u"
-                Return UsernameField.Focus()
-            Case "p"
-                Return PasswordField.Focus()
-        End Select
-    End Function
+	Public Shadows Function Focus(field As String) As Boolean
+		Select Case field
+			Case "u"
+				Return UsernameField.Focus()
+			Case "p"
+				Return PasswordField.Focus()
+		End Select
+	End Function
+
+	Private Sub PasswordGotFocus(sender As Object, e As EventArgs) Handles pf_Password.PasswordGotFocus
+		PasswordField.SelectAll()
+	End Sub
 End Class
