@@ -239,3 +239,5 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.pdb
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.CodeAnalysisLog.xml
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.lastcodeanalysissucceeded

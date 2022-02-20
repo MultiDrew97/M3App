@@ -206,7 +206,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nsfqn+BYl8R2LMN0JxvLyfNkyDieTJQ3nhYaaC+akSs=</dsig:DigestValue>
+        <dsig:DigestValue>NmaGsfgG37O95yZZRGKUdclkMRErU1dm0QGoCUcfAy8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -319,14 +319,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="893440">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="905216">
       <assemblyIdentity name="SPPBC.M3Tools" version="1.0.410.2201" publicKeyToken="4F5539A43069F3F0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>97+bLpdok31O46nTmlW7HfLSovQXNagYfmKDKiw/3UU=</dsig:DigestValue>
+        <dsig:DigestValue>jYeGmkiok++Y5/DKSYmz5Bt+DCvC18B4G6DmAditslc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -448,15 +448,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>8eFNpBJamgrSoO+Vni25MYGQ9SucWONpQ6ByvzqoPW0=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Resources\version.txt" size="6">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LgjR9gAK71QXl9AIwFrDb02+v7NsusVhV4jm/MWzAKc=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
