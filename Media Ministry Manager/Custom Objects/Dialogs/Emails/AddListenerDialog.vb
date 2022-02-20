@@ -79,8 +79,13 @@ Public Class AddListenerDialog
     End Sub
 
     Private Sub Btn_Add_Click(sender As Object, e As EventArgs) Handles btn_Add.Click
-        bw_AddListeners.RunWorkerAsync()
-        Me.Hide()
+        'bw_AddListeners.RunWorkerAsync()
+        If rdo_Single.Checked Then
+            AddSingle()
+        Else
+            AddMultiple()
+        End If
+        'Me.Hide()
     End Sub
 
     Private Sub Btn_Search_Click(sender As Object, e As EventArgs) Handles btn_Browse.Click
@@ -118,11 +123,7 @@ Public Class AddListenerDialog
     Private Sub Bw_AddListeners_DoWork(sender As Object, e As DoWorkEventArgs) Handles bw_AddListeners.DoWork
         Invoke(
             Sub()
-                If rdo_Single.Checked Then
-                    AddSingle()
-                Else
-                    AddMultiple()
-                End If
+
             End Sub
             )
     End Sub
