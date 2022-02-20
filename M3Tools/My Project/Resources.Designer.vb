@@ -61,6 +61,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to https://sppbc.hopto.org/manager/setup.exe.
+        '''</summary>
+        Friend ReadOnly Property AppUpdateUri() As String
+            Get
+                Return ResourceManager.GetString("AppUpdateUri", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property BannerImage() As System.Drawing.Bitmap
@@ -247,6 +256,15 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("ItalicOption", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to https://sppbc.hopto.org/manager/version.
+        '''</summary>
+        Friend ReadOnly Property LatestAppVersionUri() As String
+            Get
+                Return ResourceManager.GetString("LatestAppVersionUri", resourceCulture)
             End Get
         End Property
         

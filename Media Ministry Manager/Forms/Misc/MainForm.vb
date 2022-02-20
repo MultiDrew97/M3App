@@ -116,7 +116,7 @@ Public Class Frm_Main
 		Me.Close()
 	End Sub
 
-	Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mms_Main.Exit
+	Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mms_Main.ExitApplication
 		Helpers.Utils.CloseOpenForms()
 	End Sub
 
@@ -159,5 +159,22 @@ Public Class Frm_Main
 					End Sub
 				)
 		End Select
+	End Sub
+
+	Private Sub UpdateApp(sender As Object, e As EventArgs) Handles mms_Main.UpdateAvailable
+		Helpers.Utils.CloseOpenForms()
+		'ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13
+		'Dim latestVersion As String = ""
+
+		'While String.IsNullOrEmpty(latestVersion) Or (latestVersion.Split("."c).Length) > 4
+		'	wb_Browser.Url = New Uri("https://sppbc.hopto.org/manager/version")
+		'	Console.WriteLine(wb_Browser.DocumentText)
+
+		'	latestVersion = wb_Browser.DocumentText.Replace("Version ", String.Empty)
+		'	latestVersion = latestVersion.Replace(vbCrLf, String.Empty)
+		'	latestVersion = latestVersion.Trim
+
+		'	Console.WriteLine(latestVersion)
+		'End While
 	End Sub
 End Class
