@@ -88,25 +88,22 @@ Partial Class Frm_Main
         '
         Me.tss_Feedback.Name = "tss_Feedback"
         Me.tss_Feedback.Size = New System.Drawing.Size(151, 17)
-        Me.tss_Feedback.Text = "What would you like to do?"
-        '
-        'bw_ChangedSizes
-        '
-        '
-        'btn_EmailMinistry
-        '
-        Me.btn_EmailMinistry.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
+		Me.tss_Feedback.Text = "What would you like to do?"
+		'
+		'btn_EmailMinistry
+		'
+		Me.btn_EmailMinistry.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.btn_EmailMinistry.Location = New System.Drawing.Point(77, 327)
         Me.btn_EmailMinistry.Name = "btn_EmailMinistry"
         Me.btn_EmailMinistry.Size = New System.Drawing.Size(226, 43)
         Me.btn_EmailMinistry.TabIndex = 5
         Me.btn_EmailMinistry.Text = "Email Ministry"
         Me.btn_EmailMinistry.UseVisualStyleBackColor = True
-        '
-        'mms_Main
-        '
-        Me.mms_Main.Location = New System.Drawing.Point(0, 0)
-        Me.mms_Main.Name = "mms_Main"
+		'
+		'mms_Main
+		'
+		Me.mms_Main.Location = New System.Drawing.Point(0, 0)
+		Me.mms_Main.Name = "mms_Main"
         Me.mms_Main.Size = New System.Drawing.Size(397, 24)
         Me.mms_Main.TabIndex = 7
         Me.mms_Main.Text = "Tools"
@@ -128,8 +125,8 @@ Partial Class Frm_Main
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(397, 413)
         Me.Controls.Add(Me.wb_Browser)
-        Me.Controls.Add(Me.mms_Main)
-        Me.Controls.Add(Me.btn_EmailMinistry)
+		Me.Controls.Add(Me.mms_Main)
+		Me.Controls.Add(Me.btn_EmailMinistry)
         Me.Controls.Add(Me.ss_Queries)
         Me.Controls.Add(Me.btn_CustomerManagement)
         Me.Controls.Add(Me.btn_ShowOrders)
