@@ -3,64 +3,64 @@
 Public Class LoadScreenDialog
 	Private Event DataChanging As EventHandler
 
-	Private WithEvents __loadScreen As LoadingScreen
+	Private WithEvents LoadScreen As LoadingScreen
 
-	ReadOnly Property LoadScreen As LoadingScreen
+	ReadOnly Property LoadingScreen As LoadingScreen
 		Get
-			If __loadScreen Is Nothing Then
-				__loadScreen = New LoadingScreen
-			ElseIf __loadScreen.IsDisposed Then
-				__loadScreen = New LoadingScreen
+			If LoadScreen Is Nothing Or LoadScreen.IsDisposed Then
+				LoadScreen = New LoadingScreen
+				'ElseIf _loadScreen.IsDisposed Then
+				'	_loadScreen = New LoadingScreen
 			End If
 
-			Return __loadScreen
+			Return LoadScreen
 		End Get
 	End Property
 
 	Public Property LoadText As String
 		Get
-			Return LoadScreen.LoadText
+			Return LoadingScreen.LoadText
 		End Get
 		Set(value As String)
-			LoadScreen.LoadText = value
+			LoadingScreen.LoadText = value
 		End Set
 	End Property
 
 	Public Property Image As Drawing.Bitmap
 		Get
-			Return LoadScreen.Image
+			Return LoadingScreen.Image
 		End Get
 		Set(value As Drawing.Bitmap)
-			LoadScreen.Image = value
+			LoadingScreen.Image = value
 		End Set
 	End Property
 
 	Public Property Closable As Boolean
 		Get
-			Return LoadScreen.Closable
+			Return LoadingScreen.Closable
 		End Get
 		Set(value As Boolean)
-			LoadScreen.Closable = value
+			LoadingScreen.Closable = value
 		End Set
 	End Property
 
-	Private Sub DialogClosed(sender As Object, e As EventArgs) Handles __loadScreen.DialogClosing
-		__loadScreen.Close()
+	Private Sub DialogClosed(sender As Object, e As EventArgs) Handles LoadScreen.DialogClosing
+		LoadScreen.Close()
 		'__loadScreen = Nothing
 	End Sub
 
 	Public Function ShowDialog() As DialogResult
-		LoadScreen.Show()
+		LoadingScreen.Show()
 	End Function
 
 	Private Sub LoadingScreen_Closing(sender As Object, e As EventArgs) Handles Me.Disposed
-		If __loadScreen IsNot Nothing Then
-			LoadScreen.Close()
-			LoadScreen.Dispose()
+		If LoadScreen IsNot Nothing Then
+			LoadingScreen.Close()
+			LoadingScreen.Dispose()
 		End If
 	End Sub
 
-	Private Sub LoadScreen_Disposed(sender As Object, e As EventArgs) Handles __loadScreen.Disposed
+	Private Sub LoadScreen_Disposed(sender As Object, e As EventArgs) Handles LoadScreen.Disposed
 
 	End Sub
 

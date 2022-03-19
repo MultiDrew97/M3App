@@ -51,6 +51,7 @@ Public Class MainMenuStrip
 
 	Private ReadOnly _VersionUri As New Uri(My.Resources.LatestAppVersionUri)
 	Private ReadOnly _UpdateUri As New Uri(My.Resources.AppUpdateUri)
+
 	Public Sub New()
 		MyBase.New()
 		' This call is required by the designer.
@@ -68,7 +69,7 @@ Public Class MainMenuStrip
 	End Sub
 
 	Private Sub CreateCustomer(sender As Object, e As EventArgs) Handles tsmi_NewCustomer.Click
-		Using newCustomer As New AddCustomerDialog
+		Using newCustomer As New Dialogs.AddCustomerDialog
 			newCustomer.ShowDialog()
 		End Using
 	End Sub

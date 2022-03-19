@@ -40,8 +40,10 @@ Public Class Frm_Main
 	Private Sub Btn_CustomerManagement_Click(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click
 		'Dim displayCustomers = New Frm_DisplayCustomers
 		'displayCustomers.Show()
-		Frm_DisplayCustomers.Show()
-		Me.Close()
+		Using customers As New Frm_DisplayCustomers(Me)
+			customers.Show()
+			Me.Close()
+		End Using
 	End Sub
 
 	Private Sub Reset()
@@ -121,8 +123,10 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
-		Frm_DisplayCustomers.Show()
-		Me.Close()
+		Using customers As New Frm_DisplayCustomers(Me)
+			customers.Show()
+			Me.Close()
+		End Using
 	End Sub
 
 	Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
