@@ -336,11 +336,11 @@
     <comment>custom message template with drive link formatting</comment>
   </data>
   <data name="debugConnection" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org,14339;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</value>
+    <value>Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</value>
     <comment>Debugging Database Connection</comment>
   </data>
   <data name="releaseConnection" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org,14339;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password"</value>
+    <value>Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password"</value>
     <comment>SQL Database Connection using personal Server</comment>
   </data>
 </root>

@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -138,7 +138,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org,14339;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
+        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
         '''</summary>
         Friend ReadOnly Property debugConnection() As String
             Get
@@ -243,7 +243,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org,14339;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
+        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
         '''</summary>
         Friend ReadOnly Property releaseConnection() As String
             Get
