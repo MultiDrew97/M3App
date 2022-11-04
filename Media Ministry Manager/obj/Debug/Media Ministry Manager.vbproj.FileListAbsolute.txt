@@ -251,3 +251,4 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe.manifest
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.application
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.CopyComplete
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.SuggestedBindingRedirects.cache

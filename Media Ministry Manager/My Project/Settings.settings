@@ -18,10 +18,10 @@
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="releaseConnection" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=sppbc.hopto.org,14339;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
+      <Value Profile="(Default)">Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
     </Setting>
     <Setting Name="debugConnection" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=sppbc.hopto.org,14339;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
+      <Value Profile="(Default)">Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
     </Setting>
     <Setting Name="Setting" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)" />

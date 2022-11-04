@@ -14,7 +14,7 @@ Option Explicit On
 
 
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0"),  _
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0"),  _
  Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
 Partial Friend NotInheritable Class MySettings
     Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -115,8 +115,8 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry"";Connect Timeou"& _ 
-        "t=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E"& _ 
+        "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
     Public Property releaseConnection() As String
         Get
             Return CType(Me("releaseConnection"),String)
@@ -128,9 +128,8 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry Test"";Connect T"& _ 
-        "imeout=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True"& _ 
-        ";")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout"& _ 
+        "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
     Public Property debugConnection() As String
         Get
             Return CType(Me("debugConnection"),String)
