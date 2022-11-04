@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -74,22 +74,22 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org,14339;Initial Catalog=""Media Ministry"";Persist Securi"& _ 
-            "ty Info=True;User ID=M3App;Connect Timeout=30;Encrypt=True;TrustServerCertificat"& _ 
-            "e=True;Authentication=""Sql Password""")>  _
-        Public ReadOnly Property DefaultConnectionString() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+        Public ReadOnly Property DefaultCatalog() As String
             Get
-                Return CType(Me("DefaultConnectionString"),String)
+                Return CType(Me("DefaultCatalog"),String)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
-        Public ReadOnly Property DefaultCatalog() As String
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Persist Security Inf"& _ 
+            "o=True;User ID=M3App;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True"& _ 
+            ";Authentication=""Sql Password""")>  _
+        Public ReadOnly Property DefaultConnectionString() As String
             Get
-                Return CType(Me("DefaultCatalog"),String)
+                Return CType(Me("DefaultConnectionString"),String)
             End Get
         End Property
     End Class

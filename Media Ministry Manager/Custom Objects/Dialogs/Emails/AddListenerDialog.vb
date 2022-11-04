@@ -171,40 +171,40 @@ Public Class AddListenerDialog
             Dim failCount As Integer = 0
             Dim currentLine As String()
 
-			Using fin As New TextFieldParser(ofd_ListenerList.FileName)
-				fin.TextFieldType = FieldType.Delimited
-				fin.SetDelimiters(",")
+            Using fin As New TextFieldParser(ofd_ListenerList.FileName)
+                fin.TextFieldType = FieldType.Delimited
+                fin.SetDelimiters(",")
 
-				Using fout As New StreamWriter(ofd_ListenerList.FileName & "\..\Failed Additions.csv")
-					Dim parts As String()
-					While (Not fin.EndOfData)
-						currentLine = fin.ReadFields()
-						For i = 0 To 1
-							fields(i) = currentLine(i)
-						Next
+                Using fout As New StreamWriter(ofd_ListenerList.FileName & "\..\Failed Additions.csv")
+                    Dim parts As String()
+                    While (Not fin.EndOfData)
+                        currentLine = fin.ReadFields()
+                        For i = 0 To 1
+                            fields(i) = currentLine(i)
+                        Next
 
-						If IsMatch(fields(1), emailPattern) Then
-							Try
-								parts = Listener.ParseName(fields(0))
+                        If IsMatch(fields(1), emailPattern) Then
+                            Try
+                                parts = Listener.ParseName(fields(0))
 
-								Using db As New Database
-									db.AddListener(New Listener(0, parts(0), parts(1), fields(1)))
-								End Using
+                                Using db As New Database
+                                    db.AddListener(New Listener(0, parts(0), parts(1), fields(1)))
+                                End Using
 
-								successCount += 1
-							Catch ex As SqlException
-								fout.WriteLineAsync(String.Format("{0},{1} #{2}", fields(0), fields(1), ex.Message))
-								failCount += 1
-							End Try
-						Else
-							fout.WriteLineAsync(String.Format("{0},{1} # Email does not match email pattern (johndoe@domain.ext)", fields(0), fields(1)))
-							failCount += 1
-						End If
-					End While
-				End Using
-			End Using
+                                successCount += 1
+                            Catch ex As SqlException
+                                fout.WriteLineAsync(String.Format("{0},{1} #{2}", fields(0), fields(1), ex.Message))
+                                failCount += 1
+                            End Try
+                        Else
+                            fout.WriteLineAsync(String.Format("{0},{1} # Email does not match email pattern (johndoe@domain.ext)", fields(0), fields(1)))
+                            failCount += 1
+                        End If
+                    End While
+                End Using
+            End Using
 
-			tss_Feedback.Text = String.Format("{0} listeners were added successfully...", successCount)
+            tss_Feedback.Text = String.Format("{0} listeners were added successfully...", successCount)
 
             Utils.Wait(2)
 

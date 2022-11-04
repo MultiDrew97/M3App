@@ -227,10 +227,6 @@
 &lt;/html&gt;</value>
     <comment>The html format of the email for a new sermon</comment>
   </data>
-  <data name="releaseConnectionAzure" xml:space="preserve">
-    <value>Data Source=mediaministry.database.windows.net;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password"</value>
-    <comment>SQL Database Connection using Azure Database</comment>
-  </data>
   <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -330,11 +326,11 @@
     <comment>custom message template with drive link formatting</comment>
   </data>
   <data name="debugConnection" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org,14339;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</value>
+    <value>Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</value>
     <comment>Debugging Database Connection</comment>
   </data>
   <data name="releaseConnection" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org,14339;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password"</value>
+    <value>Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password"</value>
     <comment>SQL Database Connection using personal Server</comment>
   </data>
   <data name="BannerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">

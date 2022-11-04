@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -109,7 +109,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org,14339;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;.
+        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;.
         '''</summary>
         Friend ReadOnly Property DefaultConnectionString() As String
             Get
