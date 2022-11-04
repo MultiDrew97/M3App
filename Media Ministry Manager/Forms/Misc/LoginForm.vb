@@ -1,6 +1,7 @@
 ﻿Option Strict On
 
 Imports System.ComponentModel
+Imports System.Data.SqlClient
 Imports SPPBC.M3Tools.Exceptions
 
 Public Class Frm_Login
@@ -120,6 +121,80 @@ Public Class Frm_Login
 		My.Settings.Password = If(lf_Login.Password, My.Settings.Password)
 
 		My.Settings.Save()
+	End Sub
+
+	Private Sub Bw_SaveSettings_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SaveSettings.RunWorkerCompleted
+		UseWaitCursor = False
+		Me.Close()
+	End Sub
+
+	Private Sub Btn_CreateUser_Click(sender As Object, e As EventArgs)
+		If NewUserDialog.ShowDialog = DialogResult.OK Then
+			Reset()
+		End If
+	End Sub
+
+	Private Sub Btn_ChangePassword_Click(sender As Object, e As EventArgs)
+		If ChangePasswordDialog.ShowDialog = DialogResult.OK Then
+			Reset()
+		End If
+	End Sub
+
+	Private Sub TryLogin(username As String, password As String)
+		Try
+			db_Users.Login(username, password)
+		Catch ex As Exception
+			Select Case ex.GetType()
+				Case GetType(RoleException)
+					Throw New RoleException("Only admins can use this application. If this is an error, please contact support", ex)
+				Case GetType(UsernameException)
+					Throw New UserException("We couldn't find an account with that username", ex)
+				Case GetType(PasswordException)
+					Throw New PasswordException("Incorrect password. Please try again or reset your password")
+				Case GetType(DatabaseException)
+					Throw New DatabaseException("Unknown Error", ex)
+				Case GetType(ArgumentException), GetType(SqlException)
+					Throw New ConnectionException(ex.Message, ex)
+				Case Else
+					Throw New Exception(ex.Message, ex)
+			End Select
+		End Try
+		'Try
+		'    Dim user = db_Users.Login(username, password)
+
+		'    If Not user.AccountType = AccountType.Admin Then
+		'        Throw New UserException("Only admins can use this application. If this is an error, please contact support")
+		'    End If
+
+		'    Return user IsNot Nothing
+		'Catch e As SqlException
+		'    tss_UserFeedback.Text = "Username/Password was inccorect. Please try again."
+		'    tss_UserFeedback.ForeColor = Color.Red
+		'    Console.WriteLine(e.Message)
+		'    lf_UserPass.PasswordField.Clear()
+		'    lf_UserPass.PasswordField.Focus()
+		'    Return False
+		'Catch e As UserException
+		'    tss_UserFeedback.Text = e.Message
+		'    tss_UserFeedback.ForeColor = Color.Red
+		'    lf_UserPass.PasswordField.Clear()
+		'    lf_UserPass.PasswordField.Focus()
+		'    Return False
+		'End Try
+	End Sub
+
+	Private Sub Llb_ForgotPassword_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_ForgotPassword.LinkClicked
+		If ChangePasswordDialog.ShowDialog = DialogResult.OK Then
+			Reset()
+		End If
+	End Sub
+
+	Private Sub Llb_SignUp_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_SignUp.LinkClicked
+		Using create = New SPPBC.M3Tools.Dialogs.CreateAccountDialog()
+			If create.ShowDialog = DialogResult.OK Then
+				Reset()
+			End If
+		End Using
 	End Sub
 
 	Private Sub SaveSettingsDone(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SaveSettings.RunWorkerCompleted

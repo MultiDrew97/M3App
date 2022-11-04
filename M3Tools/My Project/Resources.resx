@@ -135,7 +135,7 @@
     <comment>The default deployment catalog for the database</comment>
   </data>
   <data name="DefaultConnectionString" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org,14339;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication="Sql Password"</value>
+    <value>Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication="Sql Password"</value>
     <comment>The default connection string to access the database</comment>
   </data>
   <data name="DefaultPassword" xml:space="preserve">

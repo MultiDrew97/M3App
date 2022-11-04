@@ -3,7 +3,7 @@
 Imports System.Data.SqlClient
 
 Public Class ChangePasswordDialog
-    ReadOnly _connection As SqlConnectionStringBuilder = New SqlConnectionStringBuilder(My.Settings.releaseConnection)
+    ReadOnly _connection As New SqlConnectionStringBuilder(My.Settings.releaseConnection)
 
     Private Sub Btn_ChangePassword_Click(sender As Object, e As EventArgs) Handles btn_ChangePassword.Click
         Try

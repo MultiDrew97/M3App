@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28922.388
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32929.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaMinistryManagerMobile.Android", "Media Ministry Manager Mobile\Media Ministry Manager Mobile.Android\MediaMinistryManagerMobile.Android.csproj", "{C3238A6A-75C2-4AAA-801A-1096AF06FA04}"
 EndProject
@@ -246,11 +246,11 @@ Global
 		{91021C75-B313-4487-BE80-19CCE8C79F57} = {DF82F6E8-4C7D-4A09-BA78-AAA75A1F7D4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UseGlobalSettings = True
-		SolutionGuid = {95A49186-3F3E-4EA7-B4F3-D35023EDF0C2}
-		BuildVersion_StartDate = 2019/5/8
-		BuildVersion_BuildVersioningStyle = None.None.Increment.None
-		BuildVersion_UpdateAssemblyVersion = True
 		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_BuildVersioningStyle = None.None.Increment.None
+		BuildVersion_StartDate = 2019/5/8
+		SolutionGuid = {95A49186-3F3E-4EA7-B4F3-D35023EDF0C2}
+		BuildVersion_UseGlobalSettings = True
 	EndGlobalSection
 EndGlobal

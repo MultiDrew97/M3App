@@ -199,14 +199,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1844808">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1853512">
       <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="E198E3547A7C28A0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yYDqMQaDYOb6OJVZcmekBn+TbBhC7PwlLFxQG/M3eco=</dsig:DigestValue>
+        <dsig:DigestValue>4KdlLgQmkbYVC5h2X0DaNxaV3fH8L+zvf0KlAvKIFlo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -326,7 +326,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2uk1mvKLHmKqWppQzyoZgDQzFPitBf9sbB+xrDWNHM8=</dsig:DigestValue>
+        <dsig:DigestValue>M6EwtiLN4Byq6+r9BFH/qwJGuvNheSS4EN7Qc1dTbaQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -378,13 +378,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Media Ministry Manager.exe.config" size="4684">
+  <file name="Media Ministry Manager.exe.config" size="4672">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Jz1k9AfyEJq153dHFfvQTuxnged9f60QK58Xh05PZq8=</dsig:DigestValue>
+      <dsig:DigestValue>KNWBUeUd1ymrlx+jNyKq8pzKDSQJiSyOz96HLPC6lAk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\App Icon.ico" size="45451">

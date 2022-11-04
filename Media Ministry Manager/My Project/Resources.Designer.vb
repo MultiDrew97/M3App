@@ -292,15 +292,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Data Source=mediaministry.database.windows.net;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
-        '''</summary>
-        Friend ReadOnly Property releaseConnectionAzure() As String
-            Get
-                Return ResourceManager.GetString("releaseConnectionAzure", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property ShowPasswordIcon() As System.Drawing.Bitmap

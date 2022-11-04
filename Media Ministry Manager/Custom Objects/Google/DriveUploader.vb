@@ -35,12 +35,12 @@ Namespace GoogleAPI
 
             Dim credPath = "Drive Token"
 
-            Using stream As New MemoryStream(My.Resources.credentials)
-				Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStreamAsync(stream).Result.Secrets, Scopes, "user", ct, New FileDataStore(credPath, True)).Result
+			Using stream As New MemoryStream(My.Resources.credentials)
+				Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", ct, New FileDataStore(credPath, True)).Result
 			End Using
 
-            'Create Drive API service.
-            Service = New DriveService(New BaseClientService.Initializer() With {
+			'Create Drive API service.
+			Service = New DriveService(New BaseClientService.Initializer() With {
                 .HttpClientInitializer = Credential,
                 .ApplicationName = ApplicationName
             })

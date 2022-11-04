@@ -7,7 +7,7 @@ Public Class LoadScreenDialog
 
 	ReadOnly Property LoadingScreen As LoadingScreen
 		Get
-			If LoadScreen Is Nothing Or LoadScreen.IsDisposed Then
+			If LoadScreen Is Nothing Then 'Or LoadScreen.IsDisposed Then
 				LoadScreen = New LoadingScreen
 				'ElseIf _loadScreen.IsDisposed Then
 				'	_loadScreen = New LoadingScreen

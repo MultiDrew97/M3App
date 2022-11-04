@@ -5,7 +5,6 @@ Imports SPPBC.M3Tools.Types
 Public Class Frm_DisplayInventory
 	Private ReadOnly ProductsTable As New CustomData.InventoryDataTable
 	Private Products As ObjectModel.Collection(Of Product)
-
 	Private Tooled As Boolean = False
 
 	Private Sub ViewInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load

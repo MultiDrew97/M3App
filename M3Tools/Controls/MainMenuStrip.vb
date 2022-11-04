@@ -52,14 +52,6 @@ Public Class MainMenuStrip
 	Private ReadOnly _VersionUri As New Uri(My.Resources.LatestAppVersionUri)
 	Private ReadOnly _UpdateUri As New Uri(My.Resources.AppUpdateUri)
 
-	Public Sub New()
-		MyBase.New()
-		' This call is required by the designer.
-		InitializeComponent()
-
-		' Add any initialization after the InitializeComponent() call.
-	End Sub
-
 	Private Sub LogoutApplication(sender As Object, e As EventArgs) Handles tsmi_Logout.Click
 		RaiseEvent Logout(Me, e)
 	End Sub
@@ -197,4 +189,11 @@ Public Class MainMenuStrip
 
 		Return False
 	End Function
+
+	Public Sub ToggleViewItem(itemName As String)
+		Dim viewCol = Me.Items("tsmi_View")
+
+		' TODO: Determine how to find the view button child here
+		viewCol
+	End Sub
 End Class

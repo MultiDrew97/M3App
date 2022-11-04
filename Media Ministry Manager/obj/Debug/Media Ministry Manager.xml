@@ -88,7 +88,7 @@ Media Ministry Manager
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.debugConnection">
 <summary>
-  Looks up a localized string similar to Data Source=sppbc.hopto.org,14339;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
+  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
 </summary>
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.HidePasswordIcon">
@@ -157,12 +157,7 @@ Media Ministry Manager
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.releaseConnection">
 <summary>
-  Looks up a localized string similar to Data Source=sppbc.hopto.org,14339;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
-</summary>
-</member>
-<member name="P:MediaMinistry.My.Resources.Resources.releaseConnectionAzure">
-<summary>
-  Looks up a localized string similar to Data Source=mediaministry.database.windows.net;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
+  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
 </summary>
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.ShowPasswordIcon">

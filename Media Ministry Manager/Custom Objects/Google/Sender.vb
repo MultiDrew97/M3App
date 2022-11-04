@@ -30,11 +30,11 @@ Namespace GoogleAPI
 
         Sub New(Optional ct As CancellationToken = Nothing)
             Dim credPath As String = "Gmail Token"
-            Using stream As New MemoryStream(My.Resources.credentials)
-				Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStreamAsync(stream).Result.Secrets, Scopes, "user", CType(IIf(IsNothing(ct), CancellationToken.None, ct), CancellationToken), New FileDataStore(credPath, True)).Result
+			Using stream As New MemoryStream(My.Resources.credentials)
+				Credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", CType(IIf(IsNothing(ct), CancellationToken.None, ct), CancellationToken), New FileDataStore(credPath, True)).Result
 			End Using
 
-            Service = New GmailService(New BaseClientService.Initializer() With {
+			Service = New GmailService(New BaseClientService.Initializer() With {
                 .HttpClientInitializer = Credential,
                 .ApplicationName = ApplicationName
             })
