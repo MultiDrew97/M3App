@@ -14,15 +14,16 @@ Option Explicit On
 
 
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0"),  _
  Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
 Partial Friend NotInheritable Class MySettings
     Inherits Global.System.Configuration.ApplicationSettingsBase
-
-	Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
+    
+    Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
+    
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
-	Private Shared addedHandler As Boolean
+    Private Shared addedHandler As Boolean
 
     Private Shared addedHandlerLockObject As New Object
 
@@ -54,53 +55,29 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
-    Public Property Username() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property KeepLoggedIn() As Boolean
         Get
-            Return CType(Me("Username"),String)
+            Return CType(Me("KeepLoggedIn"),Boolean)
         End Get
         Set
-            Me("Username") = value
+            Me("KeepLoggedIn") = value
         End Set
     End Property
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697")>  _
-    Public Property Password() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
+    Public Property CurrentFont() As Global.System.Drawing.Font
         Get
-            Return CType(Me("Password"),String)
+            Return CType(Me("CurrentFont"),Global.System.Drawing.Font)
         End Get
         Set
-            Me("Password") = value
+            Me("CurrentFont") = value
         End Set
     End Property
-
-	<Global.System.Configuration.UserScopedSettingAttribute(),
-	 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-	 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-	Public Property KeepLoggedIn() As Boolean
-		Get
-			Return CType(Me("KeepLoggedIn"), Boolean)
-		End Get
-		Set
-			Me("KeepLoggedIn") = Value
-		End Set
-	End Property
-
-	<Global.System.Configuration.UserScopedSettingAttribute(),
-	 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-	 Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>
-	Public Property CurrentFont() As Global.System.Drawing.Font
-		Get
-			Return CType(Me("CurrentFont"), Global.System.Drawing.Font)
-		End Get
-		Set
-			Me("CurrentFont") = Value
-		End Set
-	End Property
-
-	<Global.System.Configuration.UserScopedSettingAttribute(),  _
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
     Public Property DefaultFont() As Global.System.Drawing.Font
@@ -138,17 +115,17 @@ Partial Friend NotInheritable Class MySettings
             Me("debugConnection") = value
         End Set
     End Property
-
-	<Global.System.Configuration.ApplicationScopedSettingAttribute(),
-	 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-	 Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>
-	Public ReadOnly Property DefaultCatalog() As String
-		Get
-			Return CType(Me("DefaultCatalog"), String)
-		End Get
-	End Property
-
-	<Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+    
+    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+    Public ReadOnly Property DefaultCatalog() As String
+        Get
+            Return CType(Me("DefaultCatalog"),String)
+        End Get
+    End Property
+    
+    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("M3AppPassword2499")>  _
     Public ReadOnly Property DefaultPassword() As String
@@ -156,17 +133,17 @@ Partial Friend NotInheritable Class MySettings
             Return CType(Me("DefaultPassword"),String)
         End Get
     End Property
-
-	<Global.System.Configuration.ApplicationScopedSettingAttribute(),
-	 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-	 Global.System.Configuration.DefaultSettingValueAttribute("M3App")>
-	Public ReadOnly Property DefaultUsername() As String
-		Get
-			Return CType(Me("DefaultUsername"), String)
-		End Get
-	End Property
-
-	<Global.System.Configuration.UserScopedSettingAttribute(),  _
+    
+    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("M3App")>  _
+    Public ReadOnly Property DefaultUsername() As String
+        Get
+            Return CType(Me("DefaultUsername"),String)
+        End Get
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
     Public Property UpgradeRequired() As Boolean
@@ -187,6 +164,30 @@ Partial Friend NotInheritable Class MySettings
         End Get
         Set
             Me("User") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property Username() As String
+        Get
+            Return CType(Me("Username"),String)
+        End Get
+        Set
+            Me("Username") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property Password() As String
+        Get
+            Return CType(Me("Password"),String)
+        End Get
+        Set
+            Me("Password") = value
         End Set
     End Property
 End Class

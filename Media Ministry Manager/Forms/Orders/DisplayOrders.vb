@@ -7,20 +7,20 @@ Public Class Frm_DisplayOrders
 	Private Orders As ObjectModel.Collection(Of CurrentOrder)
 	Private Tooled As Boolean = False
 	'TODO: Implement a way to change between current and completed orders
-	Private Sub Frm_DisplayOrders_Load(sender As Object, e As EventArgs) Handles Me.Load
+	Private Sub FormLoading(sender As Object, e As EventArgs) Handles Me.Load
 		bsOrders.DataSource = OrdersTable
 		LoadData()
 		lbl_NoOrders.Visible = OrdersTable.Rows.Count = 0
 	End Sub
 
-	Private Sub Frm_DisplayOrders_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+	Private Sub OrdersClosed(sender As Object, e As EventArgs) Handles Me.Closed
 		If Not Tooled Then
 			Dim frm As New Frm_Main
 			frm.Show()
 		End If
 	End Sub
 
-	Private Sub Btn_Cancel_Click(sender As Object, e As EventArgs)
+	Private Sub Cancel(sender As Object, e As EventArgs)
 		Me.Close()
 	End Sub
 
@@ -40,14 +40,12 @@ Public Class Frm_DisplayOrders
 		End If
 	End Sub
 
-	Private Sub Btn_ShowCompleted_Click(sender As Object, e As EventArgs) Handles btn_ShowCompleted.Click
+	Private Sub ShowCompleted(sender As Object, e As EventArgs) Handles btn_ShowCompleted.Click
 		'TODO: Create a new form or dialog box to show completed orders
 	End Sub
 
 	Private Sub LoadData()
-		Using db As New Database
-			Orders = db.GetCurrentOrders
-		End Using
+		Orders = db_Orders.GetCurrentOrders
 
 		FillTable()
 	End Sub

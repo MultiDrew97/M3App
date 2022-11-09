@@ -19,7 +19,7 @@ Public Class Frm_DisplayCustomers
 
 	Private Sub Display_Customers_Load(sender As Object, e As EventArgs) Handles Me.Load
 		Refresh()
-		mms_Main.ToggleViewItem("ViewCustomers")
+		mms_Main.ToggleViewItem("Customers")
 		'For Each toolItem As ToolStripItem In mms_Main.Items
 		'	If toolItem.Name = "ts_ViewCustomers" Then
 		'		toolItem.Enabled = True
@@ -30,49 +30,51 @@ Public Class Frm_DisplayCustomers
 	Private Sub Frm_DisplayCustomers_Closed(sender As Object, e As EventArgs) Handles Me.Closed
 		If Not Tooled Then
 			Frm_Main.Show()
+			mms_Main.ToggleViewItem("Customers")
 		End If
 	End Sub
 	'Private Sub Dgv_Customers_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
- '       If MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
- '           Dim id As Integer = CInt(CType(dgv_Customers.Rows(e.Row.Index).DataBoundItem, DataRowView)("CustomerID"))
- '           Console.WriteLine(id)
- '           db_Customers.RemoveCustomer(id)
- '       Else
- '           e.Cancel = True
- '       End If
- '   End Sub
+	'       If MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+	'           Dim id As Integer = CInt(CType(dgv_Customers.Rows(e.Row.Index).DataBoundItem, DataRowView)("CustomerID"))
+	'           Console.WriteLine(id)
+	'           db_Customers.RemoveCustomer(id)
+	'       Else
+	'           e.Cancel = True
+	'       End If
+	'   End Sub
 
-	'Public Overrides Sub Refresh() Handles tsm_Refresh.Click
-	'	__customers = db_Customers.GetCustomers()
+	Public Overrides Sub Refresh() Handles tsm_Refresh.Click
+		Dim row As DataRow
+		__customers = db_Customers.GetCustomers()
 
-	'	Select Case column
-	'		Case "FirstName", "LastName", "PhoneNumber"
-	'			If Not String.IsNullOrWhiteSpace(value) Then
-	'				db_Customers.UpdateCustomer(customerID, column, value)
-	'			Else
-	'				MessageBox.Show("You must enter AddressOf value for this field", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
-	'			End If
-	'		Case Else
-	'			db_Customers.UpdateCustomer(customerID, column, value)
-	'	End Select
+		'Select Case column
+		'	Case "FirstName", "LastName", "PhoneNumber"
+		'		If Not String.IsNullOrWhiteSpace(value) Then
+		'			db_Customers.UpdateCustomer(customerID, column, value)
+		'		Else
+		'			MessageBox.Show("You must enter AddressOf value for this field", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		'		End If
+		'	Case Else
+		'		db_Customers.UpdateCustomer(customerID, column, value)
+		'End Select
 
-	'	If __customers IsNot Nothing Then
-	'		For Each customer As Customer In __customers
-	'			row = CustomersTable.NewRow
-	'			row("CustomerID") = customer.Id
-	'			row("FirstName") = customer.FirstName
-	'			row("LastName") = customer.LastName
-	'			row("Street") = customer.Address.Street
-	'			row("City") = customer.Address.City
-	'			row("State") = customer.Address.State
-	'			row("ZipCode") = customer.Address.ZipCode
-	'			row("PhoneNumber") = customer.PhoneNumber
-	'			row("EmailAddress") = customer.EmailAddress
-	'			row("JoinDate") = customer.JoinDate
-	'			CustomersTable.Rows.Add(row)
-	'		Next
-	'	End If
-	'End Sub
+		If __customers IsNot Nothing Then
+			For Each customer As Customer In __customers
+				row = CustomersTable.NewRow
+				row("CustomerID") = customer.Id
+				row("FirstName") = customer.FirstName
+				row("LastName") = customer.LastName
+				row("Street") = customer.Address.Street
+				row("City") = customer.Address.City
+				row("State") = customer.Address.State
+				row("ZipCode") = customer.Address.ZipCode
+				row("PhoneNumber") = customer.PhoneNumber
+				row("EmailAddress") = customer.EmailAddress
+				row("JoinDate") = customer.JoinDate
+				CustomersTable.Rows.Add(row)
+			Next
+		End If
+	End Sub
 
 	Private Sub Btn_AddNewCustomer_Click(sender As Object, e As EventArgs)
 		Using dialog As New SPPBC.M3Tools.Dialogs.AddCustomerDialog()
