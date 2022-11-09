@@ -4,6 +4,8 @@ Imports System.Net
 Imports System.Windows.Forms
 
 Public Class MainMenuStrip
+	Private ReadOnly toolStripPrefix As String = "tsmi_"
+
 	''' <summary>
 	''' Occurs when the Logout menu item is clicked
 	''' </summary>
@@ -109,6 +111,10 @@ Public Class MainMenuStrip
 
 	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles tsmi_ViewCustomers.Click
 		RaiseEvent OpenCustomers(Me, e)
+		For Each item As ToolStripItem In Items
+			Console.WriteLine(item.Name)
+		Next
+		'ToggleViewItem("ViewCustomers")
 	End Sub
 
 	Private Sub ViewProducts(sender As Object, e As EventArgs) Handles tsmi_ViewProducts.Click
@@ -191,9 +197,15 @@ Public Class MainMenuStrip
 	End Function
 
 	Public Sub ToggleViewItem(itemName As String)
-		Dim viewCol = Me.Items("tsmi_View")
+		Dim viewName As String = String.Concat(toolStripPrefix, "View")
+		Dim viewCol As ToolStripMenuItem = CType(Me.Items(viewName), ToolStripMenuItem)
 
-		' TODO: Determine how to find the view button child here
-		viewCol
+		' TODO: Get child items from ToolStripItem
+		For Each item As ToolStripItem In viewCol.DropDownItems
+			If item.Name.Contains(itemName) Then
+				item.Available = (Not item.Available)
+				Exit For
+			End If
+		Next
 	End Sub
 End Class

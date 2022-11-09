@@ -9,10 +9,10 @@ Namespace Database
         <Description("The username to use for the database connection")>
         <SettingsBindable(True)>
         Public Property Username As String
-            Get
-                Return db_Connection.Username
-            End Get
-            Set(value As String)
+			Get
+				Return db_Connection.Username
+			End Get
+			Set(value As String)
                 db_Connection.Username = value
             End Set
         End Property
@@ -23,16 +23,12 @@ Namespace Database
         <Description("The password to use for the database connection")>
         Public Property Password As String
             Get
-                Return db_Connection.Password
-                'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
-            End Get
-            Set(value As String)
-                'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
-                'Console.WriteLine(temp)
-                '__connectionString.Password = temp
-                db_Connection.Password = value
-            End Set
-        End Property
+				Return db_Connection.Password
+			End Get
+			Set(value As String)
+				db_Connection.Password = value
+			End Set
+		End Property
 
         'The initial catalog to use for the database connection
         <Bindable(True)>

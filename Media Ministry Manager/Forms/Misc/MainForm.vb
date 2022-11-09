@@ -11,7 +11,7 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	Private Sub MediaMinistry_Close(sender As Object, e As EventArgs) Handles MyBase.Closing
+	Private Sub FormClose(sender As Object, e As EventArgs) Handles MyBase.Closing
 		If My.Application.OpenForms.Count = 1 And Not My.Settings.KeepLoggedIn Then
 			Frm_Login.Show()
 			'Dim login As New Frm_Login()
@@ -19,31 +19,30 @@ Public Class Frm_Main
 		End If
 	End Sub
 
-	Private Sub Btn_placeOrder_Click(sender As Object, e As EventArgs) Handles btn_placeOrder.Click
+	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles btn_placeOrder.Click
 		PlaceOrderDialog.ShowDialog(Me)
 	End Sub
 
-	Private Sub Btn_ProductManagement_Click(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click
+	Private Sub DisplayProductMgmt(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.OpenProducts
 		Frm_DisplayInventory.Show(Me)
 		'Dim inventory As New Frm_DisplayInventory
 		'inventory.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub Btn_ShowOrders_Click(sender As Object, e As EventArgs) Handles btn_ShowOrders.Click
-		Frm_DisplayOrders.Show(Me)
+	Private Sub DisplayOrders(sender As Object, e As EventArgs) Handles btn_ShowOrders.Click, mms_Main.OpenOrders
+		Dim orders = New Frm_DisplayOrders()
 		'Dim ordersView = New Frm_DisplayOrders
-		'ordersView.Show()
+		orders.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub Btn_CustomerManagement_Click(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click
+	Private Sub DisplayCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.OpenCustomers
 		'Dim displayCustomers = New Frm_DisplayCustomers
 		'displayCustomers.Show()
-		Using customers As New Frm_DisplayCustomers(Me)
-			customers.Show()
-			Me.Close()
-		End Using
+		Dim customers As New Frm_DisplayCustomers(Me)
+		customers.Show()
+		Me.Close()
 	End Sub
 
 	Private Sub Reset()
@@ -51,7 +50,7 @@ Public Class Frm_Main
 		tss_Feedback.ForeColor = SystemColors.WindowText
 	End Sub
 
-	Private Sub Btn_EmailMinistry_Click(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click
+	Private Sub EmailMinistry(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.OpenListeners
 		If EmailMinistryDialog.ShowDialog = DialogResult.OK Then
 			Dim form As Form
 			Select Case EmailMinistryDialog.SelectedItem
@@ -67,7 +66,7 @@ Public Class Frm_Main
 		End If
 	End Sub
 
-	Private Sub Frm_Main_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+	Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
 		Dim size As String
 
 		If Me.Size = WindowSizes.max Then
@@ -110,7 +109,7 @@ Public Class Frm_Main
 		'tctl_MaxOption.Hide()
 	End Sub
 
-	Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.Logout
+	Private Sub Logout(sender As Object, e As EventArgs) Handles mms_Main.Logout
 		My.Settings.Username = ""
 		My.Settings.Password = ""
 		My.Settings.KeepLoggedIn = False
@@ -118,37 +117,15 @@ Public Class Frm_Main
 		Me.Close()
 	End Sub
 
-	Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mms_Main.ExitApplication
+	Private Sub ExitApp(sender As Object, e As EventArgs) Handles mms_Main.ExitApplication
 		Helpers.Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
-		Using customers As New Frm_DisplayCustomers(Me)
-			customers.Show()
-			Me.Close()
-		End Using
-	End Sub
-
-	Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
-		Frm_DisplayInventory.Show()
-		Me.Close()
-	End Sub
-
-	Private Sub OrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
-		Frm_DisplayOrders.Show()
-		Me.Close()
-	End Sub
-
-	Private Sub ListenersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
-		Frm_ViewListeners.Show()
-		Me.Close()
-	End Sub
-
-	Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mms_Main.OpenSettings
+	Private Sub DisplaySettings(sender As Object, e As EventArgs) Handles mms_Main.OpenSettings
 		Frm_Settings.Show()
 	End Sub
 
-	Private Sub Bw_ChangedSizes_DoWork(sender As Object, e As DoWorkEventArgs) Handles bw_ChangedSizes.DoWork
+	Private Sub UpdateSizes(sender As Object, e As DoWorkEventArgs) Handles bw_ChangedSizes.DoWork
 		Select Case CStr(e.Argument)
 			Case "b"
 				Invoke(
