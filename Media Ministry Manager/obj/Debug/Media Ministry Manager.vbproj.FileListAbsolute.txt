@@ -240,3 +240,10 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.SuggestedBindingRedirects.cache
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe.config
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Encodings.Web.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Json.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.ValueTuple.dll

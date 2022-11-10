@@ -11,13 +11,13 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	Private Sub FormClose(sender As Object, e As EventArgs) Handles MyBase.Closing
-		If My.Application.OpenForms.Count = 1 And Not My.Settings.KeepLoggedIn Then
-			Frm_Login.Show()
-			'Dim login As New Frm_Login()
-			'login.Show()
-		End If
-	End Sub
+	'Private Sub FormClose(sender As Object, e As EventArgs) Handles MyBase.Closing
+	'	If My.Application.OpenForms.Count = 1 And Not My.Settings.KeepLoggedIn Then
+	'		Frm_Login.Show()
+	'		'Dim login As New Frm_Login()
+	'		'login.Show()
+	'	End If
+	'End Sub
 
 	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles btn_placeOrder.Click
 		PlaceOrderDialog.ShowDialog(Me)
