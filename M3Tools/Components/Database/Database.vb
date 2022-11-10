@@ -72,10 +72,10 @@ Namespace Database
 
 			__connection.Close()
 			__connection.Dispose()
-			__connection = Nothing
 		End Sub
 
 		Public Sub Close() Handles Me.Disposed
+			'close connection
 			Disconnect()
 
 			Dispose(True)
