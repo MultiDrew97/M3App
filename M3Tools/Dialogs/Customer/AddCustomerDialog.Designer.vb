@@ -31,14 +31,20 @@
 			Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
 			Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
 			Me.af_Address = New SPPBC.M3Tools.AddressField()
-			Me.if_EmailAddress = New SPPBC.M3Tools.GenericInputPair()
-			Me.pnf_PhoneNumber = New SPPBC.M3Tools.PhoneNumberField()
-			Me.if_LastName = New SPPBC.M3Tools.GenericInputPair()
-			Me.if_FirstName = New SPPBC.M3Tools.GenericInputPair()
 			Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
+			Me.gi_FirstName = New SPPBC.M3Tools.GenericInputPair()
+			Me.gi_LastName = New SPPBC.M3Tools.GenericInputPair()
+			Me.pn_PhoneNumber = New SPPBC.M3Tools.PhoneNumberField()
+			Me.gi_EmailAddress = New SPPBC.M3Tools.GenericInputPair()
+			Me.tc_Creation = New System.Windows.Forms.TabControl()
+			Me.tp_Basic = New System.Windows.Forms.TabPage()
+			Me.tp_Address = New System.Windows.Forms.TabPage()
 			Me.TableLayoutPanel1.SuspendLayout()
 			CType(Me.ep_InputError, System.ComponentModel.ISupportInitialize).BeginInit()
 			Me.StatusStrip1.SuspendLayout()
+			Me.tc_Creation.SuspendLayout()
+			Me.tp_Basic.SuspendLayout()
+			Me.tp_Address.SuspendLayout()
 			Me.SuspendLayout()
 			'
 			'TableLayoutPanel1
@@ -74,7 +80,7 @@
 			Me.btn_Create.Name = "btn_Create"
 			Me.btn_Create.Size = New System.Drawing.Size(67, 23)
 			Me.btn_Create.TabIndex = 1
-			Me.btn_Create.Text = "Create"
+			Me.btn_Create.Text = "Next"
 			'
 			'ep_InputError
 			'
@@ -98,65 +104,105 @@
 			'af_Address
 			'
 			Me.af_Address.AutoSize = True
+			Me.af_Address.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
 			Me.af_Address.City = ""
-			Me.af_Address.Location = New System.Drawing.Point(26, 139)
+			Me.af_Address.Dock = System.Windows.Forms.DockStyle.Fill
+			Me.af_Address.Location = New System.Drawing.Point(3, 3)
 			Me.af_Address.Name = "af_Address"
-			Me.af_Address.Size = New System.Drawing.Size(611, 141)
+			Me.af_Address.Size = New System.Drawing.Size(555, 220)
 			Me.af_Address.State = ""
 			Me.af_Address.Street = ","
 			Me.af_Address.TabIndex = 5
 			Me.af_Address.ZipCode = ""
-			'
-			'if_EmailAddress
-			'
-			Me.if_EmailAddress.AutoSize = True
-			Me.if_EmailAddress.LabelText = "* Email Address"
-			Me.if_EmailAddress.Location = New System.Drawing.Point(344, 82)
-			Me.if_EmailAddress.Mask = ""
-			Me.if_EmailAddress.Name = "if_EmailAddress"
-			Me.if_EmailAddress.Size = New System.Drawing.Size(258, 40)
-			Me.if_EmailAddress.TabIndex = 4
-			Me.if_EmailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-			Me.if_EmailAddress.UseSystemPasswordChar = False
-			'
-			'pnf_PhoneNumber
-			'
-			Me.pnf_PhoneNumber.AutoSize = True
-			Me.pnf_PhoneNumber.Location = New System.Drawing.Point(124, 78)
-			Me.pnf_PhoneNumber.Name = "pnf_PhoneNumber"
-			Me.pnf_PhoneNumber.PhoneNumber = "(   )    -"
-			Me.pnf_PhoneNumber.Size = New System.Drawing.Size(107, 55)
-			Me.pnf_PhoneNumber.TabIndex = 3
-			'
-			'if_LastName
-			'
-			Me.if_LastName.AutoSize = True
-			Me.if_LastName.LabelText = "Last Name"
-			Me.if_LastName.Location = New System.Drawing.Point(344, 14)
-			Me.if_LastName.Mask = ""
-			Me.if_LastName.Name = "if_LastName"
-			Me.if_LastName.Size = New System.Drawing.Size(244, 62)
-			Me.if_LastName.TabIndex = 2
-			Me.if_LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-			Me.if_LastName.UseSystemPasswordChar = False
-			'
-			'if_FirstName
-			'
-			Me.if_FirstName.AutoSize = True
-			Me.if_FirstName.LabelText = "* First Name"
-			Me.if_FirstName.Location = New System.Drawing.Point(28, 14)
-			Me.if_FirstName.Mask = ""
-			Me.if_FirstName.Name = "if_FirstName"
-			Me.if_FirstName.Size = New System.Drawing.Size(244, 62)
-			Me.if_FirstName.TabIndex = 1
-			Me.if_FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-			Me.if_FirstName.UseSystemPasswordChar = False
 			'
 			'db_Customers
 			'
 			Me.db_Customers.InitialCatalog = "Media Ministry"
 			Me.db_Customers.Password = "M3AppPassword2499"
 			Me.db_Customers.Username = "M3App"
+			'
+			'gi_FirstName
+			'
+			Me.gi_FirstName.AutoSize = True
+			Me.gi_FirstName.LabelText = "* First Name"
+			Me.gi_FirstName.Location = New System.Drawing.Point(20, 16)
+			Me.gi_FirstName.Mask = ""
+			Me.gi_FirstName.Name = "gi_FirstName"
+			Me.gi_FirstName.Size = New System.Drawing.Size(244, 62)
+			Me.gi_FirstName.TabIndex = 1
+			Me.gi_FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+			Me.gi_FirstName.UseSystemPasswordChar = False
+			'
+			'gi_LastName
+			'
+			Me.gi_LastName.AutoSize = True
+			Me.gi_LastName.LabelText = "Last Name"
+			Me.gi_LastName.Location = New System.Drawing.Point(281, 16)
+			Me.gi_LastName.Mask = ""
+			Me.gi_LastName.Name = "gi_LastName"
+			Me.gi_LastName.Size = New System.Drawing.Size(244, 62)
+			Me.gi_LastName.TabIndex = 2
+			Me.gi_LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+			Me.gi_LastName.UseSystemPasswordChar = False
+			'
+			'pn_PhoneNumber
+			'
+			Me.pn_PhoneNumber.AutoSize = True
+			Me.pn_PhoneNumber.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+			Me.pn_PhoneNumber.Location = New System.Drawing.Point(58, 84)
+			Me.pn_PhoneNumber.Name = "pn_PhoneNumber"
+			Me.pn_PhoneNumber.PhoneNumber = "(   )    -"
+			Me.pn_PhoneNumber.Size = New System.Drawing.Size(107, 55)
+			Me.pn_PhoneNumber.TabIndex = 3
+			'
+			'gi_EmailAddress
+			'
+			Me.gi_EmailAddress.AutoSize = True
+			Me.gi_EmailAddress.LabelText = "* Email Address"
+			Me.gi_EmailAddress.Location = New System.Drawing.Point(202, 84)
+			Me.gi_EmailAddress.Mask = ""
+			Me.gi_EmailAddress.Name = "gi_EmailAddress"
+			Me.gi_EmailAddress.Size = New System.Drawing.Size(258, 40)
+			Me.gi_EmailAddress.TabIndex = 4
+			Me.gi_EmailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+			Me.gi_EmailAddress.UseSystemPasswordChar = False
+			'
+			'tc_Creation
+			'
+			Me.tc_Creation.Controls.Add(Me.tp_Basic)
+			Me.tc_Creation.Controls.Add(Me.tp_Address)
+			Me.tc_Creation.Dock = System.Windows.Forms.DockStyle.Top
+			Me.tc_Creation.Enabled = False
+			Me.tc_Creation.Location = New System.Drawing.Point(0, 0)
+			Me.tc_Creation.Name = "tc_Creation"
+			Me.tc_Creation.SelectedIndex = 0
+			Me.tc_Creation.Size = New System.Drawing.Size(652, 277)
+			Me.tc_Creation.TabIndex = 7
+			'
+			'tp_Basic
+			'
+			Me.tp_Basic.Controls.Add(Me.gi_FirstName)
+			Me.tp_Basic.Controls.Add(Me.gi_LastName)
+			Me.tp_Basic.Controls.Add(Me.pn_PhoneNumber)
+			Me.tp_Basic.Controls.Add(Me.gi_EmailAddress)
+			Me.tp_Basic.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Basic.Name = "tp_Basic"
+			Me.tp_Basic.Padding = New System.Windows.Forms.Padding(3)
+			Me.tp_Basic.Size = New System.Drawing.Size(644, 251)
+			Me.tp_Basic.TabIndex = 0
+			Me.tp_Basic.Text = "Basics"
+			Me.tp_Basic.UseVisualStyleBackColor = True
+			'
+			'tp_Address
+			'
+			Me.tp_Address.Controls.Add(Me.af_Address)
+			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Address.Name = "tp_Address"
+			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
+			Me.tp_Address.Size = New System.Drawing.Size(561, 226)
+			Me.tp_Address.TabIndex = 1
+			Me.tp_Address.Text = "Address"
+			Me.tp_Address.UseVisualStyleBackColor = True
 			'
 			'AddCustomerDialog
 			'
@@ -165,12 +211,8 @@
 			Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 			Me.CancelButton = Me.btn_Cancel
 			Me.ClientSize = New System.Drawing.Size(652, 337)
+			Me.Controls.Add(Me.tc_Creation)
 			Me.Controls.Add(Me.StatusStrip1)
-			Me.Controls.Add(Me.af_Address)
-			Me.Controls.Add(Me.if_EmailAddress)
-			Me.Controls.Add(Me.pnf_PhoneNumber)
-			Me.Controls.Add(Me.if_LastName)
-			Me.Controls.Add(Me.if_FirstName)
 			Me.Controls.Add(Me.TableLayoutPanel1)
 			Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 			Me.MaximizeBox = False
@@ -178,11 +220,16 @@
 			Me.Name = "AddCustomerDialog"
 			Me.ShowInTaskbar = False
 			Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-			Me.Text = "New Customer Info"
+			Me.Text = "New Customer"
 			Me.TableLayoutPanel1.ResumeLayout(False)
 			CType(Me.ep_InputError, System.ComponentModel.ISupportInitialize).EndInit()
 			Me.StatusStrip1.ResumeLayout(False)
 			Me.StatusStrip1.PerformLayout()
+			Me.tc_Creation.ResumeLayout(False)
+			Me.tp_Basic.ResumeLayout(False)
+			Me.tp_Basic.PerformLayout()
+			Me.tp_Address.ResumeLayout(False)
+			Me.tp_Address.PerformLayout()
 			Me.ResumeLayout(False)
 			Me.PerformLayout()
 
@@ -190,14 +237,17 @@
 		Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 		Friend WithEvents btn_Cancel As System.Windows.Forms.Button
 		Friend WithEvents btn_Create As System.Windows.Forms.Button
-		Friend WithEvents if_FirstName As GenericInputPair
-		Friend WithEvents if_LastName As GenericInputPair
-		Friend WithEvents pnf_PhoneNumber As PhoneNumberField
-		Friend WithEvents if_EmailAddress As GenericInputPair
 		Friend WithEvents ep_InputError As Windows.Forms.ErrorProvider
 		Friend WithEvents af_Address As AddressField
 		Friend WithEvents db_Customers As Database.CustomerDatabase
 		Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
 		Friend WithEvents tss_Feedback As Windows.Forms.ToolStripStatusLabel
+		Friend WithEvents tc_Creation As Windows.Forms.TabControl
+		Friend WithEvents tp_Basic As Windows.Forms.TabPage
+		Friend WithEvents gi_FirstName As GenericInputPair
+		Friend WithEvents gi_LastName As GenericInputPair
+		Friend WithEvents pn_PhoneNumber As PhoneNumberField
+		Friend WithEvents gi_EmailAddress As GenericInputPair
+		Friend WithEvents tp_Address As Windows.Forms.TabPage
 	End Class
 End Namespace

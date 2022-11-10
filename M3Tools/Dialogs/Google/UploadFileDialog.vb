@@ -1,17 +1,16 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports SPPBC.M3Tools.Types.GoogleAPI
 
 Public Class UploadFileDialog
 	Private ReadOnly __username As String
-	Private ReadOnly __files As New FileCollection
+	Private ReadOnly __files As New GoogleAPI.Types.FileCollection
 	Private __permission As Google.Apis.Drive.v3.Data.Permission
-	Public Property Files As FileCollection
+	Public Property Files As GoogleAPI.Types.FileCollection
 		Get
 			Return __files
 		End Get
-		Set(value As FileCollection)
+		Set(value As GoogleAPI.Types.FileCollection)
 			__files.Clear()
 			__files.AddRange(value)
 		End Set
@@ -73,7 +72,7 @@ Public Class UploadFileDialog
 		For Each file In fu_FileUpload.Files
 			fileParts = file.Name.Split("."c)
 			fileExt = fileParts(fileParts.Length - 1)
-			Files.Add(New File("", file.Name, fileExt))
+			Files.Add(New GoogleAPI.Types.File("", file.Name, fileExt))
 		Next
 	End Sub
 
