@@ -1,19 +1,13 @@
 ﻿Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Gmail.v1
-Imports Google.Apis.Gmail.v1.Data
-Imports Google.Apis.Services
-Imports Google.Apis.Util.Store
-Imports Microsoft.IdentityModel.Tokens
 Imports MimeKit
-Imports NPOI.Util
-Imports System.Threading
 
 Namespace GoogleAPI
 	Public Class GmailTool
-		Implements IDisposable, IGoogleService(Of Profile)
+		Implements IDisposable, IGoogleService(Of Data.Profile)
 		Private ReadOnly __scopes As String() = {GmailService.Scope.GmailCompose}
 		Private ReadOnly __appName As String = "Media Ministry Manager"
-		Private ReadOnly __credPath As String = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\{0}\Tokens")
+		Private ReadOnly __credPath As String = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\Tokens")
 		Private __credential As UserCredential
 		Private __service As GmailService
 
@@ -21,7 +15,7 @@ Namespace GoogleAPI
 		''' The user account for the current user
 		''' </summary>
 		''' <returns>The Profile object for the current user</returns>
-		ReadOnly Property UserAccount As Profile Implements IGoogleService(Of Profile).UserAccount
+		ReadOnly Property UserAccount As Data.Profile Implements IGoogleService(Of Data.Profile).UserAccount
 			Get
 				Return __service.Users.GetProfile("me").Execute()
 			End Get
@@ -32,14 +26,16 @@ Namespace GoogleAPI
 		''' </summary>
 		''' <param name="username">The username of the currently logged in user</param>
 		''' <param name="ct">The cancellation token that may be used during authorization</param>
-		Async Function Authorize(username As String, Optional ct As CancellationToken = Nothing) As Task
+		Async Function Authorize(username As String, Optional ct As Threading.CancellationToken = Nothing) As Task
 
 
 			Using stream As New System.IO.MemoryStream(My.Resources.credentials)
-				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, "me", If(IsNothing(ct), CancellationToken.None, ct), New FileDataStore(String.Format(__credPath, username), True))
+				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(
+					GoogleClientSecrets.FromStream(stream).Secrets, __scopes,
+					"me", If(IsNothing(ct), Threading.CancellationToken.None, ct), New Google.Apis.Util.Store.FileDataStore(__credPath, True))
 			End Using
 
-			__service = New GmailService(New BaseClientService.Initializer() With {
+			__service = New GmailService(New Google.Apis.Services.BaseClientService.Initializer() With {
 				.HttpClientInitializer = __credential,
 				.ApplicationName = __appName
 			})
@@ -124,11 +120,11 @@ Namespace GoogleAPI
 		''' </summary>
 		''' <param name="emailContent">The email to be created</param>
 		''' <returns>Returns a message to be sent</returns>
-		Function CreateWithEmail(emailContent As MimeMessage) As Message
-			Dim buffer As New ByteArrayOutputStream()
+		Function CreateWithEmail(emailContent As MimeMessage) As Data.Message
+			Dim buffer As New NPOI.Util.ByteArrayOutputStream()
 			emailContent.WriteTo(buffer)
-			Dim encodedEmail As String = Base64UrlEncoder.Encode(buffer.ToByteArray())
-			Dim message As New Message With {
+			Dim encodedEmail As String = Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Encode(buffer.ToByteArray())
+			Dim message As New Data.Message With {
 				.Raw = encodedEmail
 			}
 
@@ -141,7 +137,7 @@ Namespace GoogleAPI
 		''' <param name="emailContent">The email to be sent</param>
 		''' <param name="sender">The account the email will be sent from. me is default</param>
 		''' <returns>The message itself after being sent</returns>
-		Function Send(emailContent As MimeMessage, Optional sender As String = "me") As Message
+		Function Send(emailContent As MimeMessage, Optional sender As String = "me") As Data.Message
 			Return __service.Users().Messages().Send(CreateWithEmail(emailContent), sender).Execute()
 		End Function
 	End Class

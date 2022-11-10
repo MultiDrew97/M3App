@@ -1,8 +1,5 @@
 ﻿Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Drive.v3
-Imports Google.Apis.Services
-Imports Google.Apis.Util.Store
-Imports SPPBC.M3Tools.Types.GoogleAPI
 
 Namespace GoogleAPI
 	Public Class GoogleDriveTool
@@ -10,7 +7,7 @@ Namespace GoogleAPI
 
 		Private ReadOnly Scopes As String() = {DriveService.Scope.Drive}
 		Private ReadOnly ApplicationName As String = "Media Ministry Manager"
-		Private ReadOnly __credPath As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\{0}\Tokens")
+		Private ReadOnly __credPath As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\Tokens")
 		Private __credential As UserCredential
 		Private __service As DriveService
 		Private ReadOnly __defaultPermissions As New Data.Permission With {
@@ -34,14 +31,14 @@ Namespace GoogleAPI
 		''' <param name="username">Username of the currently logged in user</param>
 		''' <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
 		Public Async Function Authorize(username As String, Optional ct As Threading.CancellationToken = Nothing) As Task
-			Dim credPath = String.Format("SPPBC\{0}\Tokens", username)
-
 			Using stream As New IO.MemoryStream(My.Resources.credentials)
-				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, Scopes, "user", If(IsNothing(ct), Threading.CancellationToken.None, ct), New FileDataStore(String.Format(__credPath, username), True))
+				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(
+					GoogleClientSecrets.FromStream(stream).Secrets, Scopes,
+					"user", If(IsNothing(ct), Threading.CancellationToken.None, ct), New Google.Apis.Util.Store.FileDataStore(__credPath, True))
 			End Using
 
 			'Create Drive API service.
-			__service = New DriveService(New BaseClientService.Initializer() With {
+			__service = New DriveService(New Google.Apis.Services.BaseClientService.Initializer() With {
 				.HttpClientInitializer = __credential,
 				.ApplicationName = ApplicationName
 			})
@@ -51,6 +48,7 @@ Namespace GoogleAPI
 		''' Closes the connection to Google Drive
 		''' </summary>
 		Sub Close() Implements IDisposable.Dispose
+			Dispose(True)
 			GC.SuppressFinalize(Me)
 		End Sub
 
@@ -60,7 +58,7 @@ Namespace GoogleAPI
 		''' <param name="file">The file to be uploaded. Contains folder information</param>
 		''' <param name="uploadName">The desired name to name the file when uploaded</param>
 		''' <exception cref="Exceptions.UploadException"></exception>
-		Function UploadFile(file As File, uploadName As String, Optional permissions As Data.Permission = Nothing) As Task
+		Function UploadFile(file As Types.File, uploadName As String, Optional permissions As Data.Permission = Nothing) As Task
 			Dim fileMetadata As New Data.File() With {
 				.Name = uploadName, 'If(uploadName, Utils.DefaultFileName(file.Name)),
 				.Parents = file.Parents
@@ -106,6 +104,7 @@ Namespace GoogleAPI
 				request.Fields = "id, parents"
 				Dim result = request.Execute()
 				Console.WriteLine(result.Parents)
+				' TODO: Verify this is desired functionality
 				Return Task.FromResult(Of Object)(Nothing)
 			Catch ex As Exceptions.FolderException
 				Throw New Exceptions.FolderException(String.Format("Folder with the name {0} already exists.", folderName), ex)
@@ -237,10 +236,10 @@ Namespace GoogleAPI
 		''' <param name="folderName">The name of the folder to pull the files from</param>
 		''' <returns>A collection of all files contained in the given folder</returns>
 		''' <exception cref="Exceptions.FolderException"></exception>
-		Public Function GetFiles(folderName As String) As Task(Of FileCollection)
+		Public Function GetFiles(folderName As String) As Task(Of Types.FileCollection)
 			Dim request As FilesResource.ListRequest = __service.Files.List()
 			Dim pageToken As String = Nothing
-			Dim files As New FileCollection()
+			Dim files As New Types.FileCollection()
 			Dim folderID As String = GetFolderID(folderName).Result
 
 			Do
@@ -254,7 +253,7 @@ Namespace GoogleAPI
 				For Each file As Data.File In results.Files
 					Console.WriteLine(file.FileExtension)
 					Console.WriteLine(file.FullFileExtension)
-					files.Add(New File(file.Id) With {
+					files.Add(New Types.File(file.Id) With {
 								.Name = file.Name,
 								.FileType = file.MimeType,
 								.Parents = New ObjectModel.Collection(Of String)(file.Parents)
@@ -271,8 +270,8 @@ Namespace GoogleAPI
 		''' Gets all folders in the users drive folder
 		''' </summary>
 		''' <returns>A collection of folders</returns>
-		Public Function GetFolders() As Task(Of FileCollection)
-			Dim folders As New FileCollection
+		Public Function GetFolders() As Task(Of Types.FileCollection)
+			Dim folders As New Types.FileCollection
 			Dim pageToken As String = Nothing
 			Dim request As FilesResource.ListRequest = __service.Files.List()
 
@@ -285,7 +284,7 @@ Namespace GoogleAPI
 				Dim result As Data.FileList = request.Execute()
 
 				For Each folder As Data.File In result.Files
-					folders.Add(New Folder(folder.Id) With {
+					folders.Add(New Types.Folder(folder.Id) With {
 									.Name = folder.Name,
 									.FileType = folder.MimeType,
 									.Parents = If(folder.Parents Is Nothing, Nothing, New ObjectModel.Collection(Of String)(folder.Parents))
@@ -302,9 +301,9 @@ Namespace GoogleAPI
 		''' Gets all folders and the children folders and files under them
 		''' </summary>
 		''' <returns>A collection of folders that contains their child files and folders</returns>
-		Function GetFoldersWithChildren() As Task(Of FileCollection)
+		Function GetFoldersWithChildren() As Task(Of Types.FileCollection)
 			Dim folders = GetFolders()
-			For Each folder As Folder In folders.Result
+			For Each folder As Types.Folder In folders.Result
 				folder.Children.AddRange(GetChildren(folder.Id).Result)
 			Next
 
@@ -316,10 +315,10 @@ Namespace GoogleAPI
 		''' </summary>
 		''' <param name="parentID">The ID of the folder to get the children from</param>
 		''' <returns>A collection of files that are contained in the specified folder</returns>
-		Public Function GetChildren(parentID As String) As Task(Of FileCollection)
+		Public Function GetChildren(parentID As String) As Task(Of Types.FileCollection)
 			Dim request As FilesResource.ListRequest = __service.Files.List()
 			Dim pageToken As String = Nothing
-			Dim files As New FileCollection
+			Dim files As New Types.FileCollection
 
 			Do
 				request.Q = String.Format("'{0}' in parents", parentID)
@@ -332,13 +331,13 @@ Namespace GoogleAPI
 				For Each file As Data.File In results.Files
 					Select Case file.MimeType
 						Case "application/vnd.google-apps.folder"
-							files.Add(New Folder(file.Id) With {
+							files.Add(New Types.Folder(file.Id) With {
 								.Name = file.Name,
 								.FileType = file.MimeType,
 								.Parents = New ObjectModel.Collection(Of String)(file.Parents)
 							  })
 						Case Else
-							files.Add(New Types.GoogleAPI.File(file.Id) With {
+							files.Add(New Types.File(file.Id) With {
 								.Name = file.Name,
 								.FileType = file.MimeType,
 								.Parents = New ObjectModel.Collection(Of String)(file.Parents)

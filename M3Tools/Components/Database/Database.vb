@@ -5,7 +5,7 @@
 'https://support.microsoft.com/en-us/help/308656/how-to-open-a-sql-server-database-by-using-the-sql-server-net-data-pro
 Imports System.ComponentModel
 Imports System.Data.SqlClient
-' TODO: Add EventHandlers to each action
+
 Namespace Database
 	Friend Class Database
 		Implements IDisposable
@@ -65,12 +65,18 @@ Namespace Database
 			Return __connection.CreateCommand()
 		End Function
 
-		Public Sub Close() Handles Me.Disposed
-			'close connection
-			If __connection IsNot Nothing Then
-				__connection.Close()
-				__connection.Dispose()
+		Public Sub Disconnect()
+			If __connection Is Nothing Then
+				Exit Sub
 			End If
+
+			__connection.Close()
+			__connection.Dispose()
+			__connection = Nothing
+		End Sub
+
+		Public Sub Close() Handles Me.Disposed
+			Disconnect()
 
 			Dispose(True)
 		End Sub

@@ -1,9 +1,8 @@
 ﻿Imports System.ComponentModel
-Imports SPPBC.M3Tools.Types.GoogleAPI
 
 Public Class FileUpload
-	Private ReadOnly __files As New FileCollection()
-	Public ReadOnly Property Files As FileCollection
+	Private ReadOnly __files As New GoogleAPI.Types.FileCollection()
+	Public ReadOnly Property Files As GoogleAPI.Types.FileCollection
 		Get
 			Return __files
 		End Get
@@ -30,7 +29,7 @@ Public Class FileUpload
 	Private Sub LoadFiles()
 		Files.Clear()
 		For Each file In ofd_FileDialog.FileNames
-			Files.Add(New File("", file, file.Split("."c)(1)))
+			Files.Add(New GoogleAPI.Types.File("", file, file.Split("."c)(1)))
 		Next
 	End Sub
 End Class

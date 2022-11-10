@@ -16,9 +16,6 @@ Public Class Frm_Login
 				Try
 					If MessageBox.Show(reason, "Login Failed", MessageBoxButtons.RetryCancel) = DialogResult.Retry Then
 						PerformLogin()
-						Exit While
-					Else
-						Exit While
 					End If
 				Catch
 					Continue While
@@ -68,7 +65,6 @@ Public Class Frm_Login
 
 	Private Sub Login(sender As Object, e As EventArgs) Handles btn_Login.Click
 		Try
-			RaiseEvent BeginLogin(sender, e)
 			PerformLogin(If(lf_Login.Username, ""), If(lf_Login.Password, ""))
 		Catch ex As Exception
 			tss_UserFeedback.ForeColor = Color.Red
@@ -195,10 +191,6 @@ Public Class Frm_Login
 				Reset()
 			End If
 		End Using
-	End Sub
-
-	Private Sub SaveSettingsDone(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SaveSettings.RunWorkerCompleted
-		Me.Close()
 	End Sub
 
 	Private Sub PerformLogin(Optional username As String = Nothing, Optional password As String = Nothing)
