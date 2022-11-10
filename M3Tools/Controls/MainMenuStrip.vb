@@ -111,9 +111,6 @@ Public Class MainMenuStrip
 
 	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles tsmi_ViewCustomers.Click
 		RaiseEvent OpenCustomers(Me, e)
-		For Each item As ToolStripItem In Items
-			Console.WriteLine(item.Name)
-		Next
 		'ToggleViewItem("ViewCustomers")
 	End Sub
 

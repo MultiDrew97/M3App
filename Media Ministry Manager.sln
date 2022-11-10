@@ -18,6 +18,9 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Media Ministry Manager", "Media Ministry Manager\Media Ministry Manager.vbproj", "{F19EA4B2-87F9-4520-9C59-8B87DDD59B05}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Media Ministry Manager Setup", "Media Ministry Manager Setup\Media Ministry Manager Setup.vdproj", "{F8E78AA6-5C5A-4CBD-A46D-367815D9B7CC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F19EA4B2-87F9-4520-9C59-8B87DDD59B05} = {F19EA4B2-87F9-4520-9C59-8B87DDD59B05}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "M3Tools", "M3Tools\M3Tools.vbproj", "{91021C75-B313-4487-BE80-19CCE8C79F57}"
 EndProject
@@ -246,11 +249,11 @@ Global
 		{91021C75-B313-4487-BE80-19CCE8C79F57} = {DF82F6E8-4C7D-4A09-BA78-AAA75A1F7D4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UpdateFileVersion = True
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_BuildVersioningStyle = None.None.Increment.None
-		BuildVersion_StartDate = 2019/5/8
-		SolutionGuid = {95A49186-3F3E-4EA7-B4F3-D35023EDF0C2}
 		BuildVersion_UseGlobalSettings = True
+		SolutionGuid = {95A49186-3F3E-4EA7-B4F3-D35023EDF0C2}
+		BuildVersion_StartDate = 2019/5/8
+		BuildVersion_BuildVersioningStyle = None.None.Increment.None
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_UpdateFileVersion = True
 	EndGlobalSection
 EndGlobal

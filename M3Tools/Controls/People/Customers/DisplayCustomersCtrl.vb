@@ -1,8 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
 
-Public Class DisplayCustomers
-	Private ReadOnly _customers As DataTables.CustomersDataTable
+Public Class DisplayCustomersCtrl
+	Private ReadOnly _customers As New DataTables.CustomersDataTable()
 
 	''' <summary>
 	'''		Allow the user to add new customers from the datagrid view
@@ -82,7 +82,7 @@ Public Class DisplayCustomers
 				MessageBox.Show("Failed to remove customer", "Couldn't Remove", MessageBoxButtons.OK, MessageBoxIcon.Error)
 			End Try
 		Else
-				e.Cancel = True
+			e.Cancel = True
 		End If
 	End Sub
 
@@ -116,22 +116,35 @@ Public Class DisplayCustomers
 	Private Sub DoneLoadingCustomers(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
 		UseWaitCursor = False
 	End Sub
-	Private Sub Dgv_Customers_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_CustomerTable.MouseClick
-		ClearSelectedRows()
+	'Private Sub Dgv_Customers_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_CustomerTable.MouseClick
+	'	ClearSelectedRows()
 
-		If e.Button = MouseButtons.Right Then
-			Dim info As DataGridView.HitTestInfo = dgv_CustomerTable.HitTest(e.X, e.Y)
-			ts_Remove.Enabled = info.RowIndex > -1
+	'	If e.Button = MouseButtons.Right Then
+	'		Dim info As DataGridView.HitTestInfo = dgv_CustomerTable.HitTest(e.X, e.Y)
+	'		ts_Remove.Enabled = info.RowIndex > -1
 
-			If info.RowIndex > -1 Then
-				dgv_CustomerTable.Rows(info.RowIndex).Selected = True
-			End If
-		End If
-	End Sub
+	'		If info.RowIndex > -1 Then
+	'			dgv_CustomerTable.Rows(info.RowIndex).Selected = True
+	'		End If
+	'	End If
+	'End Sub
 
 	Private Sub ClearSelectedRows()
 		For Each cell As DataGridViewCell In dgv_CustomerTable.SelectedCells
 			cell.Selected = False
 		Next
+	End Sub
+
+	Private Sub DisplayCustomers_Load(sender As Object, e As EventArgs) Handles Me.Load
+		bs_Customers.DataSource = _customers
+		Reload()
+	End Sub
+
+	Private Sub dgv_CustomerTable_DataMemberChanged(sender As Object, e As EventArgs) Handles dgv_CustomerTable.DataMemberChanged
+		Console.WriteLine("Data Member Changed")
+	End Sub
+
+	Private Sub dgv_CustomerTable_DataSourceChanged(sender As Object, e As EventArgs) Handles dgv_CustomerTable.DataSourceChanged
+		Console.WriteLine("Data Source Changed")
 	End Sub
 End Class

@@ -18,7 +18,7 @@ Public Class Frm_DisplayCustomers
 	End Sub
 
 	Private Sub Display_Customers_Load(sender As Object, e As EventArgs) Handles Me.Load
-		Refresh()
+		'Refresh()
 		mms_Main.ToggleViewItem("Customers")
 		'For Each toolItem As ToolStripItem In mms_Main.Items
 		'	If toolItem.Name = "ts_ViewCustomers" Then
@@ -30,7 +30,9 @@ Public Class Frm_DisplayCustomers
 	Private Sub Frm_DisplayCustomers_Closed(sender As Object, e As EventArgs) Handles Me.Closed
 		If Not Tooled Then
 			Frm_Main.Show()
-			mms_Main.ToggleViewItem("Customers")
+			'mms_Main.ToggleViewItem("Customers")
+		Else
+			_parent.Show()
 		End If
 	End Sub
 	'Private Sub Dgv_Customers_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
@@ -43,10 +45,10 @@ Public Class Frm_DisplayCustomers
 	'       End If
 	'   End Sub
 
-	Public Overrides Sub Refresh() Handles tsm_Refresh.Click
+	Public Overrides Sub Refresh() 'Handles tsm_Refresh.Click
 		Dim row As DataRow
 		__customers = db_Customers.GetCustomers()
-
+		CustomersTable.Clear()
 		'Select Case column
 		'	Case "FirstName", "LastName", "PhoneNumber"
 		'		If Not String.IsNullOrWhiteSpace(value) Then

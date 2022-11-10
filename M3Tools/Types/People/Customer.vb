@@ -26,10 +26,13 @@ Namespace Types
             Get
                 Return __email.Address
             End Get
-            Set(value As String)
-                __email = New MimeKit.MailboxAddress(Name, If(ValidEmail(value), value, __email.Address))
-            End Set
-        End Property
+			Set(value As String)
+				If value Is Nothing Then
+					Exit Property
+				End If
+				__email = New MimeKit.MailboxAddress(Name, If(ValidEmail(value), value, __email.Address))
+			End Set
+		End Property
         Public Property JoinDate As String
             Get
                 Return __joinDate.ToShortDateString()

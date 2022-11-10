@@ -151,10 +151,10 @@
     <Compile Include="Controls\MainMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\People\Customers\DisplayCustomers.Designer.vb">
-      <DependentUpon>DisplayCustomers.vb</DependentUpon>
+    <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.Designer.vb">
+      <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\People\Customers\DisplayCustomers.vb">
+    <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogs\Customer\AddCustomerDialog.Designer.vb">
@@ -458,8 +458,8 @@
     <EmbeddedResource Include="Controls\MainMenuStrip.resx">
       <DependentUpon>MainMenuStrip.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\People\Customers\DisplayCustomers.resx">
-      <DependentUpon>DisplayCustomers.vb</DependentUpon>
+    <EmbeddedResource Include="Controls\People\Customers\DisplayCustomersCtrl.resx">
+      <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Customer\AddCustomerDialog.resx">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>
@@ -619,7 +619,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
