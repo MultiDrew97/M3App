@@ -44,7 +44,7 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub Bw_SendEmails_DoWork(sender As Object, e As DoWorkEventArgs) Handles bw_SendEmails.DoWork
-		Dim content As MimeMessage
+		'Dim content As MimeMessage
 
 		e.Cancel = Not PrepSubject()
 

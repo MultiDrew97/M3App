@@ -22,13 +22,13 @@ Partial Class Frm_DisplayCustomers
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_DisplayCustomers))
-        Me.ss_CustomerView = New System.Windows.Forms.StatusStrip()
+		Me.components = New System.ComponentModel.Container()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_DisplayCustomers))
+		Me.ss_CustomerView = New System.Windows.Forms.StatusStrip()
 		Me.tss_CustomersView = New System.Windows.Forms.ToolStripStatusLabel()
 		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
-		Me.dc_Customers = New SPPBC.M3Tools.DisplayCustomers()
+		Me.dc_Customers = New SPPBC.M3Tools.DisplayCustomersCtrl()
 		Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.mnstr_Strip = New System.Windows.Forms.MenuStrip()
 		Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,11 +55,8 @@ Partial Class Frm_DisplayCustomers
 		Me.PhoneNumberColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.EmailAddressColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.JoinDateColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.tsm_Refresh = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ss_CustomerView.SuspendLayout()
 		Me.mnstr_Strip.SuspendLayout()
-		Me.cms_Tools.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'ss_CustomerView
@@ -132,7 +129,7 @@ Partial Class Frm_DisplayCustomers
 		Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"), System.Drawing.Image)
 		Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-		Me.NewToolStripMenuItem.Size = New System.Drawing.Size(132, 38)
+		Me.NewToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
 		Me.NewToolStripMenuItem.Text = "&New..."
 		'
 		'NewCustomerToolStripMenuItem
@@ -156,25 +153,25 @@ Partial Class Frm_DisplayCustomers
 		'SettingsToolStripMenuItem
 		'
 		Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-		Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(132, 38)
+		Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
 		Me.SettingsToolStripMenuItem.Text = "Settings"
 		'
 		'toolStripSeparator1
 		'
 		Me.toolStripSeparator1.Name = "toolStripSeparator1"
-		Me.toolStripSeparator1.Size = New System.Drawing.Size(129, 6)
+		Me.toolStripSeparator1.Size = New System.Drawing.Size(113, 6)
 		'
 		'LogoutToolStripMenuItem
 		'
 		Me.LogoutToolStripMenuItem.Image = Global.MediaMinistry.My.Resources.Resources.Logout
 		Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
-		Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(132, 38)
+		Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
 		Me.LogoutToolStripMenuItem.Text = "&Logout"
 		'
 		'ExitToolStripMenuItem
 		'
 		Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-		Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(132, 38)
+		Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
 		Me.ExitToolStripMenuItem.Text = "E&xit"
 		'
 		'ToolsToolStripMenuItem
@@ -279,27 +276,11 @@ Partial Class Frm_DisplayCustomers
 		Me.JoinDateColumn.Name = "JoinDateColumn"
 		Me.JoinDateColumn.ReadOnly = True
 		'
-		'cms_Tools
-		'
-		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsm_Refresh})
-		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(155, 26)
-		Me.cms_Tools.Text = "Tools"
-		'
-		'tsm_Refresh
-		'
-		Me.tsm_Refresh.Name = "tsm_Refresh"
-		Me.tsm_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-		Me.tsm_Refresh.Size = New System.Drawing.Size(154, 22)
-		Me.tsm_Refresh.Text = "Refresh"
-		'
 		'Frm_DisplayCustomers
 		'
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
 		Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
 		Me.ClientSize = New System.Drawing.Size(888, 540)
-		Me.ContextMenuStrip = Me.cms_Tools
 		Me.Controls.Add(Me.dc_Customers)
 		Me.Controls.Add(Me.ss_CustomerView)
 		Me.Controls.Add(Me.mms_Main)
@@ -314,48 +295,45 @@ Partial Class Frm_DisplayCustomers
 		Me.ss_CustomerView.PerformLayout()
 		Me.mnstr_Strip.ResumeLayout(False)
 		Me.mnstr_Strip.PerformLayout()
-		Me.cms_Tools.ResumeLayout(False)
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
 	End Sub
 	Friend WithEvents ss_CustomerView As StatusStrip
 	Friend WithEvents tss_CustomersView As ToolStripStatusLabel
-    Friend WithEvents PREFERREDPAYMENTDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+	Friend WithEvents PREFERREDPAYMENTDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 	Friend WithEvents First_Name As DataGridViewTextBoxColumn
 	Friend WithEvents Last_Name As DataGridViewTextBoxColumn
 	Friend WithEvents Phone_Number As DataGridViewTextBoxColumn
 	Friend WithEvents EmailAddress As DataGridViewTextBoxColumn
 	Friend WithEvents JoinDate As DataGridViewTextBoxColumn
-    Friend WithEvents db_Customers As SPPBC.M3Tools.Database.CustomerDatabase
-    Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
-	Friend WithEvents dc_Customers As SPPBC.M3Tools.DisplayCustomers
+	Friend WithEvents db_Customers As SPPBC.M3Tools.Database.CustomerDatabase
+	Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
+	Friend WithEvents dc_Customers As SPPBC.M3Tools.DisplayCustomersCtrl
 	Friend WithEvents mnstr_Strip As MenuStrip
-    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewCustomerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewProductToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewListenerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents toolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewOrdersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewProductsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewListenersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewCustomerToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewProductToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewListenerToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents toolStripSeparator1 As ToolStripSeparator
+	Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewOrdersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewProductsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewListenersToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents FirstNameColumn As DataGridViewTextBoxColumn
-    Friend WithEvents LastNameColumn As DataGridViewTextBoxColumn
-    Friend WithEvents Street As DataGridViewTextBoxColumn
-    Friend WithEvents City As DataGridViewTextBoxColumn
-    Friend WithEvents State As DataGridViewTextBoxColumn
-    Friend WithEvents ZipCode As DataGridViewTextBoxColumn
-    Friend WithEvents PhoneNumberColumn As DataGridViewTextBoxColumn
-    Friend WithEvents EmailAddressColumn As DataGridViewTextBoxColumn
+	Friend WithEvents LastNameColumn As DataGridViewTextBoxColumn
+	Friend WithEvents Street As DataGridViewTextBoxColumn
+	Friend WithEvents City As DataGridViewTextBoxColumn
+	Friend WithEvents State As DataGridViewTextBoxColumn
+	Friend WithEvents ZipCode As DataGridViewTextBoxColumn
+	Friend WithEvents PhoneNumberColumn As DataGridViewTextBoxColumn
+	Friend WithEvents EmailAddressColumn As DataGridViewTextBoxColumn
 	Friend WithEvents JoinDateColumn As DataGridViewTextBoxColumn
-	Friend WithEvents cms_Tools As ContextMenuStrip
-	Friend WithEvents tsm_Refresh As ToolStripMenuItem
 End Class
