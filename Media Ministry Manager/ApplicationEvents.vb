@@ -27,6 +27,8 @@ Namespace My
 				Console.WriteLine("No upgrade required")
 			End If
 
+			' TODO: May have to figure out a way to transfer Google API tokens
+
 			Return MyBase.OnInitialize(commandLineArgs)
 		End Function
 	End Class

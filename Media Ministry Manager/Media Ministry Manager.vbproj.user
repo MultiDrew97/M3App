@@ -1,22 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <PublishUrlHistory>ftp://miller-sppbc/var/www/sppbc/manager/|ftp://miller-sppbc:22/../../var/www/sppbc/manager/|ftp://miller-sppbc:22/var/www/sppbc/manager/|sftp://sysadmin%40192.168.0.15/../../var/www/sppbc/manager/|sftp://sysadmin%40192.168.1.15/../../var/www/sppbc/manager/</PublishUrlHistory>
-    <InstallUrlHistory>https://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/|http://sppbc.hopto.org/Media Ministry Manager/</InstallUrlHistory>
-=======
-    <PublishUrlHistory>C:\Users\Andrew Randle-Warren\OneDrive\Desktop\Manager\|ftp://192.168.0.13:22/var/www/sppbc/manager/|ftp://192.168.0.13:22/var/www/sppbc/Manager/|ftp://sppbc.hopto.org:22/var/www/sppbc/Manager/|ftp://sysadmin%40192.168.1.13/../../var/www/sppbc/Manager/</PublishUrlHistory>
-=======
-    <PublishUrlHistory>ftp://192.168.0.13/var/www/sppbc/manager/|C:\Users\Andrew Randle-Warren\OneDrive\Desktop\Manager\|ftp://192.168.0.13:22/var/www/sppbc/manager/|ftp://192.168.0.13:22/var/www/sppbc/Manager/|ftp://sppbc.hopto.org:22/var/www/sppbc/Manager/</PublishUrlHistory>
->>>>>>> Cleaned references
-    <InstallUrlHistory>http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/</InstallUrlHistory>
->>>>>>> Created some custom forms and components/controls in a custom library
-=======
     <PublishUrlHistory>ftp://miller-sppbc/var/www/sppbc/manager/|sftp://miller-sppbc/var/www/sppbc/manager/|ftp://miller-sppbc:22/var/www/sppbc/manager/|ftp://1.1.1.1/var/www/sppbc/manager/|ftp://192.168.0.13/var/www/sppbc/manager/</PublishUrlHistory>
-    <InstallUrlHistory>https://sppbc.hopto.org/manager/|http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/</InstallUrlHistory>
->>>>>>> Tinkering with updating programatically
+    <InstallUrlHistory>http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory>http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://192.168.1.62/Media Ministry Manager/</UpdateUrlHistory>
     <BootstrapperUrlHistory />

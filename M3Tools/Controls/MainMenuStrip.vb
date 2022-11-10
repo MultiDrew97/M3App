@@ -198,11 +198,12 @@ Public Class MainMenuStrip
 
 	Public Sub ToggleViewItem(itemName As String)
 		Dim viewName As String = String.Concat(toolStripPrefix, "View")
-		Dim viewCol As ToolStripMenuItem = CType(Me.Items(viewName), ToolStripMenuItem)
+		Dim viewCol As ToolStripMenuItem = CType(Items(viewName), ToolStripMenuItem)
 
-		' TODO: Get child items from ToolStripItem
+		' Iterates through the View tool strip item's children to try to find the specified name
 		For Each item As ToolStripItem In viewCol.DropDownItems
 			If item.Name.Contains(itemName) Then
+				' The current child has the name that is being looked for
 				item.Available = (Not item.Available)
 				Exit For
 			End If
