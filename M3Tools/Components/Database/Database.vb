@@ -65,20 +65,18 @@ Namespace Database
             Return __connection.CreateCommand()
         End Function
 
-        Public Sub Disconnect()
-            If __connection Is Nothing Then
-                Exit Sub
-            End If
+		Public Sub Disconnect() Implements IDisposable.Dispose
+			If __connection Is Nothing Then
+				Exit Sub
+			End If
 
-            __connection.Close()
-            __connection.Dispose()
-            __connection = Nothing
-        End Sub
+			__connection.Close()
+			__connection.Dispose()
+		End Sub
 
-        Public Sub Close() Handles Me.Disposed
-            Disconnect()
-
-            Dispose(True)
-        End Sub
-    End Class
+		Public Sub Close()
+			Disconnect()
+			Dispose(True)
+		End Sub
+	End Class
 End Namespace

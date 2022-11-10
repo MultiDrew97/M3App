@@ -2,6 +2,8 @@
 
 Imports MediaMinistry.GoogleAPI
 
+' TODO: Add Gmail and GDrive Tools
+
 Public Class FileSelectionDialog
     Shared Property FileName As String
     Shared Property FileID As String
@@ -10,12 +12,12 @@ Public Class FileSelectionDialog
         If tcl_Options.SelectedIndex = 0 Then
             If cbx_File.SelectedIndex > -1 Then
 
-                Using uploader As New DriveUploader
-                    Dim file = uploader.GetFileInfo(CType(cbx_File.SelectedItem, String), CType(cbx_Folder.SelectedItem, String))
-                    FileID = file.Id
-                End Using
+				'Using uploader As New DriveUploader
+				'    Dim file = uploader.GetFileInfo(CType(cbx_File.SelectedItem, String), CType(cbx_Folder.SelectedItem, String))
+				'    FileID = file.Id
+				'End Using
 
-                Me.DialogResult = DialogResult.OK
+				Me.DialogResult = DialogResult.OK
                 Me.Close()
             Else
                 MessageBox.Show("A file must be selected. Please try again.", "File Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -39,16 +41,16 @@ Public Class FileSelectionDialog
     End Sub
 
     Private Sub Cbx_Folder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_Folder.SelectedIndexChanged
-        Using uploader As New DriveUploader()
-            cbx_File.DataSource = uploader.GetFiles(CType(cbx_Folder.SelectedItem, String))
-        End Using
-    End Sub
+		'Using uploader As New DriveUploader()
+		'    cbx_File.DataSource = uploader.GetFiles(CType(cbx_Folder.SelectedItem, String))
+		'End Using
+	End Sub
 
     Private Sub FileSelectionDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FileName = Nothing
         FileID = Nothing
-        Using uploader As New DriveUploader()
-            cbx_Folder.DataSource = uploader.GetFolders
-        End Using
-    End Sub
+		'Using uploader As New DriveUploader()
+		'    cbx_Folder.DataSource = uploader.GetFolders
+		'End Using
+	End Sub
 End Class

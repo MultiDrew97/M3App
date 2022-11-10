@@ -3,6 +3,7 @@ Imports SPPBC.M3Tools.Types
 Imports MimeKit
 Imports System.Collections.ObjectModel
 
+' TODO: Add Gmail tool
 Public Class SendEmailsDialog
 	Private ReadOnly shareLink As String = "https://drive.google.com/file/d/{0}/view?usp=sharing"
 	Private fileID As String = Nothing
@@ -48,26 +49,26 @@ Public Class SendEmailsDialog
 		e.Cancel = Not PrepSubject()
 
 		If Not bw_SendEmails.CancellationPending Then
-			Using emailer As New GoogleAPI.Sender()
-				For Each listener As Listener In ListenerSelectionDialog.Listeners
-					If PrepBody(listener.Name) Then
-						If tcl_EmailOptions.SelectedIndex < 2 Then
-							If tcl_EmailOptions.SelectedIndex = 1 Then
-								content = emailer.CreateWithAttachment(listener.EmailAddress, subject, body, flf_LocalReciept.ofdFileSelection.FileName)
-							Else
-								content = emailer.Create(listener.EmailAddress, subject, body)
-							End If
-						Else
-							If FileSelectionDialog.FileName <> Nothing Then
-								content = emailer.CreateWithAttachment(listener.EmailAddress, subject, body, FileSelectionDialog.FileName)
-							Else
-								content = emailer.Create(listener.EmailAddress, subject, body)
-							End If
-						End If
-						emailer.Send(content)
-					End If
-				Next
-			End Using
+			'Using emailer As New GoogleAPI.Sender()
+			'	For Each listener As Listener In ListenerSelectionDialog.Listeners
+			'		If PrepBody(listener.Name) Then
+			'			If tcl_EmailOptions.SelectedIndex < 2 Then
+			'				If tcl_EmailOptions.SelectedIndex = 1 Then
+			'					content = emailer.CreateWithAttachment(listener.EmailAddress, subject, body, flf_LocalReciept.ofdFileSelection.FileName)
+			'				Else
+			'					content = emailer.Create(listener.EmailAddress, subject, body)
+			'				End If
+			'			Else
+			'				If FileSelectionDialog.FileName <> Nothing Then
+			'					content = emailer.CreateWithAttachment(listener.EmailAddress, subject, body, FileSelectionDialog.FileName)
+			'				Else
+			'					content = emailer.Create(listener.EmailAddress, subject, body)
+			'				End If
+			'			End If
+			'			emailer.Send(content)
+			'		End If
+			'	Next
+			'End Using
 		Else
 			MessageBox.Show("If you are using a custom message, you must set one in the custom message tab", "Custom Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
