@@ -116,22 +116,14 @@ Public Class DisplayCustomersCtrl
 	Private Sub DoneLoadingCustomers(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
 		UseWaitCursor = False
 	End Sub
-	'Private Sub Dgv_Customers_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_CustomerTable.MouseClick
-	'	ClearSelectedRows()
 
-	'	If e.Button = MouseButtons.Right Then
-	'		Dim info As DataGridView.HitTestInfo = dgv_CustomerTable.HitTest(e.X, e.Y)
-	'		ts_Remove.Enabled = info.RowIndex > -1
-
-	'		If info.RowIndex > -1 Then
-	'			dgv_CustomerTable.Rows(info.RowIndex).Selected = True
-	'		End If
-	'	End If
-	'End Sub
+	Private Sub Dgv_Customers_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_CustomerTable.MouseClick
+		ClearSelectedRows()
+	End Sub
 
 	Private Sub ClearSelectedRows()
-		For Each cell As DataGridViewCell In dgv_CustomerTable.SelectedCells
-			cell.Selected = False
+		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
+			row.Selected = False
 		Next
 	End Sub
 
@@ -140,11 +132,15 @@ Public Class DisplayCustomersCtrl
 		Reload()
 	End Sub
 
-	Private Sub dgv_CustomerTable_DataMemberChanged(sender As Object, e As EventArgs) Handles dgv_CustomerTable.DataMemberChanged
-		Console.WriteLine("Data Member Changed")
-	End Sub
+	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
+		Console.WriteLine(MousePosition)
 
-	Private Sub dgv_CustomerTable_DataSourceChanged(sender As Object, e As EventArgs) Handles dgv_CustomerTable.DataSourceChanged
-		Console.WriteLine("Data Source Changed")
+		Dim info As DataGridView.HitTestInfo = dgv_CustomerTable.HitTest(MousePosition.X, MousePosition.Y)
+		ts_Remove.Enabled = info.RowIndex > -1
+
+		If info.RowIndex > -1 Then
+			Dim row = dgv_CustomerTable.Rows(info.RowIndex)
+			row.Selected = True
+		End If
 	End Sub
 End Class
