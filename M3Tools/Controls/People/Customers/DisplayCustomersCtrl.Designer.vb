@@ -34,11 +34,11 @@ Partial Class DisplayCustomersCtrl
 		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
-		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		Me.bw_LoadCustomers = New System.ComponentModel.BackgroundWorker()
 		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
 		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
 		Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
@@ -124,12 +124,6 @@ Partial Class DisplayCustomersCtrl
 		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
 		Me.ts_Remove.Text = "Remove"
 		'
-		'db_Customers
-		'
-		Me.db_Customers.InitialCatalog = "Media Ministry"
-		Me.db_Customers.Password = "M3AppPassword2499"
-		Me.db_Customers.Username = "M3App"
-		'
 		'bw_LoadCustomers
 		'
 		'
@@ -170,13 +164,19 @@ Partial Class DisplayCustomersCtrl
 		Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
 		Me.ToolStripButton1.Text = "New Customer"
 		'
-		'DisplayCustomers
+		'db_Customers
+		'
+		Me.db_Customers.InitialCatalog = "Media Ministry"
+		Me.db_Customers.Password = "M3AppPassword2499"
+		Me.db_Customers.Username = "M3App"
+		'
+		'DisplayCustomersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ContextMenuStrip = Me.cms_Tools
 		Me.Controls.Add(Me.ToolStripContainer1)
-		Me.Name = "DisplayCustomers"
+		Me.Name = "DisplayCustomersCtrl"
 		Me.Size = New System.Drawing.Size(791, 471)
 		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).EndInit()
@@ -202,10 +202,10 @@ Partial Class DisplayCustomersCtrl
 	Friend WithEvents JoinDate As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents cms_Tools As Windows.Forms.ContextMenuStrip
 	Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
-	Friend WithEvents db_Customers As Database.CustomerDatabase
 	Friend WithEvents bw_LoadCustomers As ComponentModel.BackgroundWorker
 	Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
 	Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
 	Friend WithEvents ToolStripButton1 As Windows.Forms.ToolStripButton
+	Private WithEvents db_Customers As Database.CustomerDatabase
 End Class
