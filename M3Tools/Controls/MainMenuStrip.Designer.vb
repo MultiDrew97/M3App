@@ -56,6 +56,7 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_New
 		'
+		Me.tsmi_New.AccessibleName = "New"
 		Me.tsmi_New.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_NewCustomer, Me.tsmi_NewProduct, Me.tsmi_NewListeners})
 		Me.tsmi_New.Image = CType(resources.GetObject("tsmi_New.Image"), System.Drawing.Image)
 		Me.tsmi_New.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -83,17 +84,21 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_Settings
 		'
+		Me.tsmi_Settings.AccessibleName = "Settings"
 		Me.tsmi_Settings.Name = "tsmi_Settings"
 		Me.tsmi_Settings.Size = New System.Drawing.Size(116, 22)
 		Me.tsmi_Settings.Text = "Settings"
 		'
 		'toolStripSeparator1
 		'
+		Me.toolStripSeparator1.AccessibleName = "Separator"
+		Me.toolStripSeparator1.AccessibleRole = System.Windows.Forms.AccessibleRole.Separator
 		Me.toolStripSeparator1.Name = "toolStripSeparator1"
 		Me.toolStripSeparator1.Size = New System.Drawing.Size(113, 6)
 		'
 		'tsmi_Logout
 		'
+		Me.tsmi_Logout.AccessibleName = "Logout"
 		Me.tsmi_Logout.Image = Global.SPPBC.M3Tools.My.Resources.Resources.Logout
 		Me.tsmi_Logout.Name = "tsmi_Logout"
 		Me.tsmi_Logout.Size = New System.Drawing.Size(116, 22)
@@ -101,6 +106,7 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_Exit
 		'
+		Me.tsmi_Exit.AccessibleName = "Exit"
 		Me.tsmi_Exit.Name = "tsmi_Exit"
 		Me.tsmi_Exit.Size = New System.Drawing.Size(116, 22)
 		Me.tsmi_Exit.Text = "E&xit"
@@ -117,24 +123,32 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_ViewCustomers
 		'
+		Me.tsmi_ViewCustomers.AccessibleDescription = "Display all customers"
+		Me.tsmi_ViewCustomers.AccessibleName = "Customers"
 		Me.tsmi_ViewCustomers.Name = "tsmi_ViewCustomers"
 		Me.tsmi_ViewCustomers.Size = New System.Drawing.Size(131, 22)
 		Me.tsmi_ViewCustomers.Text = "Customers"
 		'
 		'tsmi_ViewOrders
 		'
+		Me.tsmi_ViewOrders.AccessibleDescription = "View all in progress and completed orders"
+		Me.tsmi_ViewOrders.AccessibleName = "Orders"
 		Me.tsmi_ViewOrders.Name = "tsmi_ViewOrders"
 		Me.tsmi_ViewOrders.Size = New System.Drawing.Size(131, 22)
 		Me.tsmi_ViewOrders.Text = "Orders"
 		'
 		'tsmi_ViewProducts
 		'
+		Me.tsmi_ViewProducts.AccessibleDescription = "View all inventory"
+		Me.tsmi_ViewProducts.AccessibleName = "Products"
 		Me.tsmi_ViewProducts.Name = "tsmi_ViewProducts"
 		Me.tsmi_ViewProducts.Size = New System.Drawing.Size(131, 22)
 		Me.tsmi_ViewProducts.Text = "Products"
 		'
 		'tsmi_ViewListeners
 		'
+		Me.tsmi_ViewListeners.AccessibleDescription = "Manage email ministry listeners"
+		Me.tsmi_ViewListeners.AccessibleName = "Listeners"
 		Me.tsmi_ViewListeners.Name = "tsmi_ViewListeners"
 		Me.tsmi_ViewListeners.Size = New System.Drawing.Size(131, 22)
 		Me.tsmi_ViewListeners.Text = "Listeners"
@@ -151,9 +165,11 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_Update
 		'
+		Me.tsmi_Update.AccessibleDescription = "Check for updates"
+		Me.tsmi_Update.AccessibleName = "Update"
 		Me.tsmi_Update.Name = "tsmi_Update"
-		Me.tsmi_Update.Size = New System.Drawing.Size(112, 22)
-		Me.tsmi_Update.Text = "Update"
+		Me.tsmi_Update.Size = New System.Drawing.Size(166, 22)
+		Me.tsmi_Update.Text = "Check for Update"
 		'
 		'bw_Update
 		'

@@ -193,13 +193,12 @@ Public Class MainMenuStrip
 		Return False
 	End Function
 
-	' TODO: Test that these 3 functions work properly
-	Private Sub ToggleItem(parent As String, ParamArray path As String())
-		Dim parentItemName = If(parent.Contains(toolStripPrefix), parent, String.Concat(toolStripPrefix, parent))
+	Private Sub ToggleItem(ParamArray path As String())
+		Dim parentItemName = If(path(0).Contains(toolStripPrefix), path(0), String.Concat(toolStripPrefix, Parent))
 		Dim parentItem As ToolStripMenuItem = CType(Items(parentItemName), ToolStripMenuItem)
 
 		If parentItem Is Nothing Then
-			Throw New Exceptions.MenuException(String.Format("Menu item with name {0} not found", parent))
+			Throw New Exceptions.MenuException(String.Format("Menu item with name {0} not found", Parent))
 		End If
 
 		ToggleItem(parentItem, path)
