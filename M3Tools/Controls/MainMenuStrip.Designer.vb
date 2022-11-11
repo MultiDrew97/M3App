@@ -46,6 +46,9 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_File
 		'
+		Me.tsmi_File.AccessibleDescription = "File Menu Item"
+		Me.tsmi_File.AccessibleName = "File"
+		Me.tsmi_File.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuItem
 		Me.tsmi_File.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_New, Me.tsmi_Settings, Me.toolStripSeparator1, Me.tsmi_Logout, Me.tsmi_Exit})
 		Me.tsmi_File.Name = "tsmi_File"
 		Me.tsmi_File.Size = New System.Drawing.Size(37, 20)
@@ -104,6 +107,9 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_View
 		'
+		Me.tsmi_View.AccessibleDescription = "View Menu Item"
+		Me.tsmi_View.AccessibleName = "View"
+		Me.tsmi_View.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuItem
 		Me.tsmi_View.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_ViewCustomers, Me.tsmi_ViewOrders, Me.tsmi_ViewProducts, Me.tsmi_ViewListeners})
 		Me.tsmi_View.Name = "tsmi_View"
 		Me.tsmi_View.Size = New System.Drawing.Size(44, 20)
@@ -135,6 +141,9 @@ Partial Class MainMenuStrip
 		'
 		'tsmi_Tools
 		'
+		Me.tsmi_Tools.AccessibleDescription = "Tools Menu Item"
+		Me.tsmi_Tools.AccessibleName = "Tools"
+		Me.tsmi_Tools.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuItem
 		Me.tsmi_Tools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_Update})
 		Me.tsmi_Tools.Name = "tsmi_Tools"
 		Me.tsmi_Tools.Size = New System.Drawing.Size(46, 20)
