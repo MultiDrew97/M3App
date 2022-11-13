@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
+	' TODO: Revamp this area as well
 	Public NotInheritable Class ListenerDatabase
 
 		<EditorBrowsable()>
@@ -42,7 +43,7 @@ Namespace Database
 			End Set
 		End Property
 		Public Sub AddListener(listener As Listener)
-			AddListener(listener.Name, listener.EmailAddress.Address)
+			AddListener(listener.Name, listener.EmailAddress)
 		End Sub
 
 		Public Sub AddListener(name As String, email As String)
@@ -81,10 +82,10 @@ Namespace Database
 
 		Private Sub UpdateListener(param As SqlParameter, column As String, value As String)
 			Using _cmd = db_Connection.Connect()
-				Dim command As String = String.Format("{0} = '{1}'", column, value)
+				Dim command As String = $"{column} = '{value}'"
 				_cmd.Parameters.Add(param)
 
-				_cmd.CommandText = String.Format("UPDATE EmailListeners SET {0} WHERE ListenerID = @ListenerID", command)
+				_cmd.CommandText = $"UPDATE EmailListeners SET {command} WHERE ListenerID = @ListenerID"
 
 				_cmd.ExecuteNonQuery()
 			End Using
@@ -101,7 +102,7 @@ Namespace Database
 						listeners.Add(New Listener() With {
 							.Id = reader.GetInt32(0),
 							.Name = reader.GetString(1),
-							.EmailAddress = New MimeKit.MailboxAddress(.Name, reader.GetString(2))
+							.EmailAddress = reader.GetString(2)
 						})
 					Loop
 				End Using
@@ -130,14 +131,14 @@ Namespace Database
 						cmdText = "WHERE ListenerID = @ListenerID"
 				End Select
 
-				_cmd.CommandText = String.Format("SELECT * FROM EmailListeners {0}", cmdText)
+				_cmd.CommandText = $"SELECT * FROM EmailListeners {cmdText}"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
 						Return New Listener() With {
 							.Id = reader.GetInt32(0),
 							.Name = reader.GetString(1),
-							.EmailAddress = New MimeKit.MailboxAddress(.Name, reader.GetString(2))
+							.EmailAddress = reader.GetString(2)
 						}
 					Loop
 				End Using

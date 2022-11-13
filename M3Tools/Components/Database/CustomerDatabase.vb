@@ -79,12 +79,12 @@ Namespace Database
 
         Private Sub AddCustomer(parameters As SqlParameter())
             Using _conn = db_Connection.Connect()
-                _conn.Parameters.AddRange(parameters)
+				_conn.CommandType = CommandType.StoredProcedure
+				_conn.CommandText = "AddCustomer"
 
-                _conn.CommandType = CommandType.StoredProcedure
-                _conn.CommandText = "AddCustomer"
+				_conn.Parameters.AddRange(parameters)
 
-                _conn.ExecuteNonQuery()
+				_conn.ExecuteNonQuery()
             End Using
         End Sub
 
@@ -152,18 +152,18 @@ Namespace Database
 				' If using an empty string, set the database value to null
 				'TODO: Figure out if N/A counts as null or empty
 				If Not (String.IsNullOrEmpty(value) Or value.Equals("N/A")) Then
-					command = String.Format("{0} = '{1}'", column, value)
+					command = $"{column} = '{value}'"
 				Else
-					command = String.Format("{0} = NULL", column)
-                End If
+					command = $"{column} = NULL"
+				End If
 
                 _conn.Parameters.AddWithValue("CustomerID", customerID)
 
-                _conn.CommandText = String.Format("UPDATE CUSTOMERS
-                                            SET {0}
-                                            WHERE CustomerID = @CustomerID", command)
+				_conn.CommandText = $"UPDATE CUSTOMERS
+                                            SET {command}
+                                            WHERE CustomerID = @CustomerID"
 
-                _conn.ExecuteNonQuery()
+				_conn.ExecuteNonQuery()
             End Using
         End Sub
 

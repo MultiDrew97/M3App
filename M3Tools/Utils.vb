@@ -147,4 +147,12 @@ Public Structure Utils
 				Throw New Exceptions.InvalidStateCodeException("The provided state code is invalid.")
 		End Select
 	End Function
+
+	Shared Function ValidEmail(email As String) As Boolean
+		Try
+			Return Text.RegularExpressions.Regex.IsMatch(email, My.Resources.EmailRegex2)
+		Catch ex As ArgumentNullException
+			Return False
+		End Try
+	End Function
 End Structure

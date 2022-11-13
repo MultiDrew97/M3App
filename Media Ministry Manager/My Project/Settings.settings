@@ -2,13 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="KeepLoggedIn" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="CurrentFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
-    <Setting Name="DefaultFont" Type="System.Drawing.Font" Scope="User">
+    <Setting Name="DefaultFont" Type="System.Drawing.Font" Scope="Application">
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="DefaultCatalog" Type="System.String" Scope="Application">
@@ -37,6 +34,9 @@
     </Setting>
     <Setting Name="debugConnection" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
+    </Setting>
+    <Setting Name="KeepLoggedIn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
