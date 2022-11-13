@@ -90,7 +90,7 @@ Partial Class Frm_DisplayCustomers
 		Me.mms_Main.Name = "mms_Main"
 		Me.mms_Main.Size = New System.Drawing.Size(888, 24)
 		Me.mms_Main.TabIndex = 6
-		Me.mms_Main.Text = "MainMenuStrip1"
+		Me.mms_Main.Text = "Menu"
 		'
 		'dc_Customers
 		'

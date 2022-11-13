@@ -96,7 +96,7 @@ Public Class UploadFileDialog
 		Dim fileName As String
 		Try
 			For Each file In Files
-				fileName = InputBox(String.Format("What would you like to call this file? (default: {0})", Utils.DefaultFileName(file.Name)), "File Name", Utils.DefaultFileName(file.Name))
+				fileName = InputBox($"What would you like to call this file? (default: {Utils.DefaultFileName(file.Name)})", "File Name", Utils.DefaultFileName(file.Name))
 				gdt_GDrive.UploadFile(file, fileName, __permission)
 			Next
 

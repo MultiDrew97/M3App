@@ -139,7 +139,12 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Import Include="ICSharpCode.SharpZipLib" />
+    <Import Include="K4os.Hash.xxHash" />
+    <Import Include="MediaMinistry" />
+    <Import Include="MediaMinistry.My.Resources" />
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="SPPBC.M3Tools.Exceptions" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -157,9 +162,9 @@
     <Compile Include="Assets\MediaMinistrySplash.Designer.vb">
       <DependentUpon>MediaMinistrySplash.vb</DependentUpon>
     </Compile>
-    <Compile Include="Assets\MediaMinistrySplash.vb">
+    <SplashScreen Include="Assets\MediaMinistrySplash.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </SplashScreen>
     <Compile Include="Custom Objects\Controls\FileLocationField.Designer.vb">
       <DependentUpon>FileLocationField.vb</DependentUpon>
     </Compile>
@@ -573,7 +578,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
+      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

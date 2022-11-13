@@ -157,7 +157,7 @@ Public Class Frm_ViewListeners
 			row = ListenersTable.NewRow
 			row("ListenerID") = listener.Id
 			row("Name") = listener.Name
-			row("EmailAddress") = listener.EmailAddress.Address
+			row("EmailAddress") = listener.EmailAddress
 			ListenersTable.Rows.Add(row)
 		Next
 
@@ -246,7 +246,7 @@ Public Class Frm_ViewListeners
 	End Sub
 
 	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewCustomersToolStripMenuItem.Click
-		Dim customers As New Frm_DisplayCustomers(Me)
+		Dim customers As New Frm_DisplayCustomers
 		customers.Show()
 		Tooled = True
 		Me.Close()

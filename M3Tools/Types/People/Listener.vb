@@ -2,17 +2,28 @@
 
 Namespace Types
     Public Class Listener
-        Inherits Person
-        Public Property EmailAddress As MimeKit.MailboxAddress
+		Inherits Person
+		Private __email As MimeKit.MailboxAddress
+		Public Property EmailAddress As String
+			Get
+				Return __email.Address
+			End Get
+			Set(value As String)
+				If value Is Nothing Then
+					Exit Property
+				End If
+				__email = New MimeKit.MailboxAddress(Name, If(Utils.ValidEmail(value), value, __email.Address))
+			End Set
+		End Property
 
-        Public Sub New()
+		Public Sub New()
             Me.New(-1, "John", "Doe")
         End Sub
 
         Public Sub New(listenerID As Integer, firstName As String, lastName As String, Optional email As String = "")
             MyBase.New(listenerID, firstName, lastName)
-            Me.EmailAddress = New MimeKit.MailboxAddress(Me.Name, email)
-        End Sub
+			Me.EmailAddress = email
+		End Sub
 
         Shared Function ParseName(name As String) As String()
             'Parse the name given into seperate first and last name parts and return the string array with supplied name
@@ -31,7 +42,7 @@ Namespace Types
         End Function
 
 		Public Overrides Function ToString() As String
-			Return String.Format("{0}) {1} <{2}>", Id, Name, EmailAddress.Address)
+			Return $"{Id}) {Name} <{EmailAddress}>"
 		End Function
 		Shared Function Parse(arr As Object()) As Listener
 			Dim parts As String() = ParseName(CStr(arr(1)))

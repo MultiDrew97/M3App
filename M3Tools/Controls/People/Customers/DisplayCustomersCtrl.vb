@@ -46,21 +46,14 @@ Public Class DisplayCustomersCtrl
 		End Set
 	End Property
 
-	'Sub New()
-	'	' This call is required by the designer.
-	'	InitializeComponent()
-
-	'	' Add any initialization after the InitializeComponent() call.
-
-	'End Sub
-
-	Sub Reload()
-		UseWaitCursor = True
-		bw_LoadCustomers.RunWorkerAsync()
+	Private Sub DisplayCustomers_Load(sender As Object, e As EventArgs) Handles Me.Load
+		bs_Customers.DataSource = _customers
+		Reload()
 	End Sub
 
-	Private Sub RefreshToolClicked(sender As Object, e As EventArgs) Handles ts_Refresh.Click
-		Reload()
+	Public Sub Reload() Handles ts_Refresh.Click
+		UseWaitCursor = True
+		bw_LoadCustomers.RunWorkerAsync()
 	End Sub
 
 	Private Sub LoadCustomers(sender As Object, e As DoWorkEventArgs) Handles bw_LoadCustomers.DoWork
@@ -97,7 +90,7 @@ Public Class DisplayCustomersCtrl
 				If Not String.IsNullOrWhiteSpace(value) Then
 					db_Customers.UpdateCustomer(customerID, column, value)
 				Else
-					MessageBox.Show("You must enter AddressOf value for this field", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
+					MessageBox.Show($"You must enter a value for {column}", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
 				End If
 			Case Else
 				db_Customers.UpdateCustomer(customerID, column, value)
@@ -115,21 +108,19 @@ Public Class DisplayCustomersCtrl
 
 	Private Sub DoneLoadingCustomers(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
 		UseWaitCursor = False
+		dgv_CustomerTable.Refresh()
 	End Sub
 
 	Private Sub Dgv_Customers_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_CustomerTable.MouseClick
-		ClearSelectedRows()
+		If e.Button = MouseButtons.Right Then
+			ClearSelectedRows()
+		End If
 	End Sub
 
 	Private Sub ClearSelectedRows()
 		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
 			row.Selected = False
 		Next
-	End Sub
-
-	Private Sub DisplayCustomers_Load(sender As Object, e As EventArgs) Handles Me.Load
-		bs_Customers.DataSource = _customers
-		Reload()
 	End Sub
 
 	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened

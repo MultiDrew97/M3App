@@ -82,7 +82,7 @@ Public Class ListenerViewPanel
 		ListenerTable.ClearRows()
 		Dim listenersArgument = CType(e.Argument, Types.ListenerCollection)
 		For Each listener In If(listenersArgument, Listeners)
-			ListenerTable.AddEmailListenersRow(listener.Id, listener.Name, listener.EmailAddress.Address)
+			ListenerTable.AddEmailListenersRow(listener.Id, listener.Name, listener.EmailAddress)
 			'row = ListenerTable.NewListenersDataRow
 
 			'row("ListenerID") = listener.Id

@@ -125,14 +125,14 @@ Namespace Database
                 _cmd.Parameters.AddWithValue("ItemID", itemID)
 
                 If column <> "Stock" And column <> "Price" Then
-                    command = String.Format("{0} = '{1}'", column, value)
-                Else
-                    command = String.Format("{0} = {1}", column, value)
-                End If
+					command = $"{column} = '{value}'"
+				Else
+					command = $"{column} = {value}"
+				End If
 
-                _cmd.CommandText = String.Format("UPDATE Inventory SET {0} WHERE ItemID = @ItemID", command)
+				_cmd.CommandText = $"UPDATE Inventory SET {command} WHERE ItemID = @ItemID"
 
-                _cmd.ExecuteNonQueryAsync()
+				_cmd.ExecuteNonQueryAsync()
             End Using
             'myCmd.Parameters.AddWithValue("ItemID", itemID)
             'If Not (column.Equals("Stock") Or column.Equals("Price")) Then
