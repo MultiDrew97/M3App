@@ -133,7 +133,7 @@ Public Class Database
 	End Sub
 
 	Public Sub AddListener(listener As Listener)
-		AddListener(listener.Name, listener.EmailAddress.Address)
+		AddListener(listener.Name, listener.EmailAddress)
 	End Sub
 
 	Public Sub AddListener(name As String, email As String)

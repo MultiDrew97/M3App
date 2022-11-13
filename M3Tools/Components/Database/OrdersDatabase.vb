@@ -30,104 +30,129 @@ Namespace Database
 			End Set
 		End Property
 
-        'The initial catalog to use for the database connection
-        <Bindable(True)>
-        <Description("The initial catalog to use for the database connection")>
-        <SettingsBindable(True)>
-        Public Property InitialCatalog As String
-            Get
-                Return db_Connection.InitialCatalog
-            End Get
-            Set(value As String)
-                db_Connection.InitialCatalog = value
-            End Set
-        End Property
-        Public Function GetCurrentOrders() As Collection(Of CurrentOrder)
-            Dim orders As New Collection(Of CurrentOrder)
+		'The initial catalog to use for the database connection
+		<Bindable(True)>
+		<Description("The initial catalog to use for the database connection")>
+		<SettingsBindable(True)>
+		Public Property InitialCatalog As String
+			Get
+				Return db_Connection.InitialCatalog
+			End Get
+			Set(value As String)
+				db_Connection.InitialCatalog = value
+			End Set
+		End Property
 
-            'create view to use with
-            'myCmd.CommandText = "GetOrders"
-            'myCmd.CommandType = CommandType.StoredProcedure
+		Public Function GetCurrentOrders() As Collection(Of CurrentOrder)
+			Dim orders As New Collection(Of CurrentOrder)
 
-            'Using myReader = myCmd.ExecuteReader()
-            '    Do While myReader.Read()
-            '        orders.Add(New CurrentOrder() With {
-            '                   .Id = myReader.GetInt32(0),
-            '                   .Customer = New Customer() With {
-            '                        .Id = myReader.GetInt32(1),
-            '                        .FirstName = myReader.GetString(2),
-            '                        .LastName = myReader.GetString(3)
-            '                   },
-            '                   .Item = New Product() With {
-            '                        .Id = myReader.GetInt32(4),
-            '                        .Name = myReader.GetString(5)
-            '                   },
-            '                   .Quantity = myReader.GetInt32(6),
-            '                   .OrderTotal = CDec(myReader.GetSqlMoney(7)),
-            '                   .OrderDate = myReader.GetDateTime(8)
-            '               })
-            '    Loop
-            'End Using
+			' TODO: Investigate how to make this async easier
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = "sp_GetOrders"
+				cmd.CommandType = CommandType.StoredProcedure
 
-            Return orders
-        End Function
+				Using reader = cmd.ExecuteReader
+					Do While reader.Read()
+						orders.Add(New CurrentOrder() With {
+							.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
+							.Customer = New Customer() With {
+								.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
+								.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+								.LastName = reader.GetString(reader.GetOrdinal("LastName"))
+							},
+							.Item = New Item() With {
+								.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+								.Name = reader.GetString(reader.GetOrdinal("ItemName"))
+							},
+							.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+							.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
+							.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
+						})
+					Loop
+				End Using
+			End Using
 
-        Public Function GetCompletedOrders() As Collection(Of CompletedOrder)
-            Dim orders As New Collection(Of CompletedOrder)
+			Return orders
+		End Function
 
-            'create view to use with
-            'myCmd.CommandText = "GetCompletedOrders"
-            'myCmd.CommandType = CommandType.StoredProcedure
+		Public Function GetCompletedOrders() As Collection(Of CompletedOrder)
+			Dim orders As New Collection(Of CompletedOrder)
 
-            'Using myReader = myCmd.ExecuteReader()
-            '    Do While myReader.Read()
-            '        orders.Add(New CompletedOrder(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
-            '    Loop
-            'End Using
+			Using cmd = db_Connection.Connect
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.CommandText = "sp_GetCompletedOrders"
 
-            Return orders
-        End Function
+				Using reader = cmd.ExecuteReader
+					Do While reader.Read
+						orders.Add(New CompletedOrder() With {
+							.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
+							.Customer = New Customer() With {
+								.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
+								.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+								.LastName = reader.GetString(reader.GetOrdinal("LastName"))
+							},
+							.Item = New Item() With {
+								.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+								.Name = reader.GetString(reader.GetOrdinal("ItemName"))
+							},
+							.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+							.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
+							.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate")),
+							.CompletedDate = reader.GetDateTime(reader.GetOrdinal("CompletedDate"))
+						})
+					Loop
+				End Using
+			End Using
 
+			Return orders
+		End Function
 
-
-        Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
+		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
             'insert the order into the ORDERS table
             AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
         End Sub
 
         Public Sub AddOrder(parameters As SqlParameter())
-            'myCmd.CommandText = "AddOrder"
-            'myCmd.CommandType = CommandType.StoredProcedure
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = "sp_AddOrder"
+				cmd.CommandType = CommandType.StoredProcedure
 
-            'myCmd.Parameters.AddRange(parameters)
-            'myCmd.ExecuteNonQuery()
-        End Sub
+				cmd.Parameters.AddRange(parameters)
 
-        Public Sub UpdateOrder(orderID As Integer, quantity As Integer)
-            'myCmd.Parameters.AddWithValue("OrderID", orderID)
-            'myCmd.Parameters.AddWithValue("Quantity", quantity)
+				' TODO: Verify if a return should happen
+				cmd.ExecuteNonQueryAsync()
+			End Using
+		End Sub
 
-            'myCmd.CommandText = "UPDATE Orders SET QUANTITY = @Quantity WHERE OrderID = @OrderID"
+		Public Sub UpdateOrder(orderID As Integer, quantity As Integer)
+			Throw New Exceptions.DatabaseException("Update Order not implemented yet")
+			'myCmd.Parameters.AddWithValue("OrderID", orderID)
+			'myCmd.Parameters.AddWithValue("Quantity", quantity)
 
-            'myCmd.ExecuteNonQuery()
-        End Sub
+			'myCmd.CommandText = "UPDATE Orders SET QUANTITY = @Quantity WHERE OrderID = @OrderID"
 
-        Public Sub CancelOrder(orderID As Integer)
-            'myCmd.CommandText = "CancelOrder"
-            'myCmd.CommandType = CommandType.StoredProcedure
+			'myCmd.ExecuteNonQuery()
+		End Sub
 
-            'myCmd.Parameters.AddWithValue("OrderID", orderID)
+		Public Sub CancelOrder(orderID As Integer)
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = "sp_CancelOrder"
+				cmd.CommandType = CommandType.StoredProcedure
 
-            'myCmd.ExecuteNonQuery()
-        End Sub
+				cmd.Parameters.AddWithValue("OrderID", orderID)
+
+				cmd.ExecuteNonQueryAsync()
+			End Using
+		End Sub
 
         Public Sub CompleteOrder(orderID As Integer)
-            'myCmd.CommandType = CommandType.StoredProcedure
-            'myCmd.CommandText = "CompleteOrder"
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = "sp_CompleteOrder"
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddWithValue("OrderID", orderID)
 
-            'myCmd.Parameters.AddWithValue("OrderID", orderID)
-
-            'myCmd.ExecuteNonQuery()
-        End Sub
+				cmd.ExecuteNonQueryAsync()
+			End Using
+		End Sub
     End Class
 End Namespace

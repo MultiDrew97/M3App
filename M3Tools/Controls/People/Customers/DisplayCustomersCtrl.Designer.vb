@@ -23,6 +23,9 @@ Partial Class DisplayCustomersCtrl
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
+		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Me.dgv_CustomerTable = New System.Windows.Forms.DataGridView()
 		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,13 +54,39 @@ Partial Class DisplayCustomersCtrl
 		'dgv_CustomerTable
 		'
 		Me.dgv_CustomerTable.AutoGenerateColumns = False
+		DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+		DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+		DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.dgv_CustomerTable.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
 		Me.dgv_CustomerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
 		Me.dgv_CustomerTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FirstName, Me.LastName, Me.EmailAddress, Me.PhoneNumber, Me.Address, Me.JoinDate})
 		Me.dgv_CustomerTable.DataSource = Me.bs_Customers
+		DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+		DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+		DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.dgv_CustomerTable.DefaultCellStyle = DataGridViewCellStyle2
 		Me.dgv_CustomerTable.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.dgv_CustomerTable.Location = New System.Drawing.Point(0, 0)
+		Me.dgv_CustomerTable.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 		Me.dgv_CustomerTable.Name = "dgv_CustomerTable"
-		Me.dgv_CustomerTable.Size = New System.Drawing.Size(791, 446)
+		DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+		DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+		DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.dgv_CustomerTable.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+		Me.dgv_CustomerTable.RowHeadersWidth = 82
+		Me.dgv_CustomerTable.Size = New System.Drawing.Size(1582, 856)
 		Me.dgv_CustomerTable.TabIndex = 0
 		'
 		'FirstName
@@ -65,6 +94,7 @@ Partial Class DisplayCustomersCtrl
 		Me.FirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.FirstName.DataPropertyName = "FirstName"
 		Me.FirstName.HeaderText = "First Name"
+		Me.FirstName.MinimumWidth = 10
 		Me.FirstName.Name = "FirstName"
 		'
 		'LastName
@@ -72,6 +102,7 @@ Partial Class DisplayCustomersCtrl
 		Me.LastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.LastName.DataPropertyName = "LastName"
 		Me.LastName.HeaderText = "Last Name"
+		Me.LastName.MinimumWidth = 10
 		Me.LastName.Name = "LastName"
 		'
 		'EmailAddress
@@ -79,6 +110,7 @@ Partial Class DisplayCustomersCtrl
 		Me.EmailAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.EmailAddress.DataPropertyName = "EmailAddress"
 		Me.EmailAddress.HeaderText = "Email"
+		Me.EmailAddress.MinimumWidth = 10
 		Me.EmailAddress.Name = "EmailAddress"
 		'
 		'PhoneNumber
@@ -86,6 +118,7 @@ Partial Class DisplayCustomersCtrl
 		Me.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.PhoneNumber.DataPropertyName = "PhoneNumber"
 		Me.PhoneNumber.HeaderText = "Phone"
+		Me.PhoneNumber.MinimumWidth = 10
 		Me.PhoneNumber.Name = "PhoneNumber"
 		'
 		'Address
@@ -93,6 +126,7 @@ Partial Class DisplayCustomersCtrl
 		Me.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.Address.DataPropertyName = "Address"
 		Me.Address.HeaderText = "Address"
+		Me.Address.MinimumWidth = 10
 		Me.Address.Name = "Address"
 		'
 		'JoinDate
@@ -100,28 +134,30 @@ Partial Class DisplayCustomersCtrl
 		Me.JoinDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.JoinDate.DataPropertyName = "JoinDate"
 		Me.JoinDate.HeaderText = "Join Date"
+		Me.JoinDate.MinimumWidth = 10
 		Me.JoinDate.Name = "JoinDate"
 		Me.JoinDate.ReadOnly = True
 		'
 		'cms_Tools
 		'
+		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
 		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
+		Me.cms_Tools.Size = New System.Drawing.Size(249, 80)
 		Me.cms_Tools.Text = "Tools"
 		'
 		'ts_Refresh
 		'
 		Me.ts_Refresh.Name = "ts_Refresh"
 		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-		Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
+		Me.ts_Refresh.Size = New System.Drawing.Size(248, 38)
 		Me.ts_Refresh.Text = "Refresh"
 		'
 		'ts_Remove
 		'
 		Me.ts_Remove.Name = "ts_Remove"
 		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
+		Me.ts_Remove.Size = New System.Drawing.Size(248, 38)
 		Me.ts_Remove.Text = "Remove"
 		'
 		'bw_LoadCustomers
@@ -133,11 +169,13 @@ Partial Class DisplayCustomersCtrl
 		'ToolStripContainer1.ContentPanel
 		'
 		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_CustomerTable)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(791, 446)
+		Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1582, 856)
 		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+		Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 		Me.ToolStripContainer1.Name = "ToolStripContainer1"
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(791, 471)
+		Me.ToolStripContainer1.Size = New System.Drawing.Size(1582, 906)
 		Me.ToolStripContainer1.TabIndex = 9
 		Me.ToolStripContainer1.Text = "ToolStripContainer1"
 		'
@@ -148,10 +186,11 @@ Partial Class DisplayCustomersCtrl
 		'ToolStrip1
 		'
 		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1})
-		Me.ToolStrip1.Location = New System.Drawing.Point(4, 0)
+		Me.ToolStrip1.Location = New System.Drawing.Point(6, 0)
 		Me.ToolStrip1.Name = "ToolStrip1"
-		Me.ToolStrip1.Size = New System.Drawing.Size(35, 25)
+		Me.ToolStrip1.Size = New System.Drawing.Size(68, 50)
 		Me.ToolStrip1.TabIndex = 6
 		Me.ToolStrip1.Text = "ToolStrip1"
 		'
@@ -161,7 +200,7 @@ Partial Class DisplayCustomersCtrl
 		Me.ToolStripButton1.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
 		Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.ToolStripButton1.Name = "ToolStripButton1"
-		Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+		Me.ToolStripButton1.Size = New System.Drawing.Size(46, 44)
 		Me.ToolStripButton1.Text = "New Customer"
 		'
 		'db_Customers
@@ -172,12 +211,13 @@ Partial Class DisplayCustomersCtrl
 		'
 		'DisplayCustomersCtrl
 		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ContextMenuStrip = Me.cms_Tools
 		Me.Controls.Add(Me.ToolStripContainer1)
+		Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 		Me.Name = "DisplayCustomersCtrl"
-		Me.Size = New System.Drawing.Size(791, 471)
+		Me.Size = New System.Drawing.Size(1582, 906)
 		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.cms_Tools.ResumeLayout(False)

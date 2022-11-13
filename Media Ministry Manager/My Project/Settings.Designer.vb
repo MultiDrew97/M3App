@@ -55,18 +55,6 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-    Public Property KeepLoggedIn() As Boolean
-        Get
-            Return CType(Me("KeepLoggedIn"),Boolean)
-        End Get
-        Set
-            Me("KeepLoggedIn") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
     Public Property CurrentFont() As Global.System.Drawing.Font
         Get
@@ -77,16 +65,13 @@ Partial Friend NotInheritable Class MySettings
         End Set
     End Property
     
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
-    Public Property DefaultFont() As Global.System.Drawing.Font
+    Public ReadOnly Property DefaultFont() As Global.System.Drawing.Font
         Get
             Return CType(Me("DefaultFont"),Global.System.Drawing.Font)
         End Get
-        Set
-            Me("DefaultFont") = value
-        End Set
     End Property
     
     <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
@@ -187,6 +172,18 @@ Partial Friend NotInheritable Class MySettings
         End Get
         Set
             Me("debugConnection") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property KeepLoggedIn() As Boolean
+        Get
+            Return CType(Me("KeepLoggedIn"),Boolean)
+        End Get
+        Set
+            Me("KeepLoggedIn") = value
         End Set
     End Property
 End Class

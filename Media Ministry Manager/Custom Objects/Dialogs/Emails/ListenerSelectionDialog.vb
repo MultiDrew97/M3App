@@ -65,8 +65,8 @@ Public Class ListenerSelectionDialog
                 row = ListenersTable.NewRow
                 row("ListenerID") = listener.Id
                 row("Name") = listener.Name
-                row("EmailAddress") = listener.EmailAddress.Address
-                ListenersTable.Rows.Add(row)
+				row("EmailAddress") = listener.EmailAddress
+				ListenersTable.Rows.Add(row)
             Next
         Catch ex As ConstraintException
 

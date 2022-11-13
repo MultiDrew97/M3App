@@ -17,11 +17,12 @@ Namespace Types
         End Sub
 
         Public Overrides Function ToString() As String
-            'If there was not an address supplied, it doesn't apply the formating
-            Return If(
-                (String.IsNullOrEmpty(Street) Or String.IsNullOrEmpty(City) Or String.IsNullOrEmpty(State) Or String.IsNullOrEmpty(ZipCode)),
-                "",
-                String.Format("{0}{4}{1}, {2} {3}", Street, City, State, ZipCode, vbCrLf))
-        End Function
+			'If there was not an address supplied, it doesn't apply the formating
+			Return If(
+				(String.IsNullOrEmpty(Street) Or String.IsNullOrEmpty(City) Or String.IsNullOrEmpty(State) Or String.IsNullOrEmpty(ZipCode)),
+				"",
+				$"{Street}{vbCrLf}
+				{City}, {State} {ZipCode}")
+		End Function
     End Class
 End Namespace

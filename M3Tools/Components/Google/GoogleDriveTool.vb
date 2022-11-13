@@ -107,7 +107,7 @@ Namespace GoogleAPI
 				' TODO: Verify this is desired functionality
 				Return Task.FromResult(Of Object)(Nothing)
 			Catch ex As Exceptions.FolderException
-				Throw New Exceptions.FolderException(String.Format("Folder with the name {0} already exists.", folderName), ex)
+				Throw New Exceptions.FolderException($"Folder with the name {folderName} already exists.", ex)
 			End Try
 		End Function
 
@@ -184,7 +184,7 @@ Namespace GoogleAPI
 				pageToken = results.NextPageToken
 			Loop While pageToken IsNot Nothing
 
-			Throw New Exceptions.FileException(String.Format("File with file name {0} could not be found.", fileName))
+			Throw New Exceptions.FileException($"File with file name {fileName} could not be found.")
 		End Function
 
 		''' <summary>
@@ -208,10 +208,9 @@ Namespace GoogleAPI
 			Do
 				request.Q = "mimeType!='application/vnd.google-apps.folder'"
 				If folderID IsNot Nothing Then
-					request.Q &= String.Format(" and '{0}' in parents", folderID)
+					request.Q &= $" and '{folderID}' in parents"
 				End If
 
-				'request.Q = If(folderID Is Nothing, "mimeType!='application/vnd.google-apps.folder'", String.Format("mimeType!='application/vnd.google-apps.folder' and '{0}' in parents", folderID))
 				request.Spaces = "drive"
 				request.Fields = "nextPageToken, files(id, name, parents)"
 				request.PageToken = pageToken
@@ -227,7 +226,7 @@ Namespace GoogleAPI
 				pageToken = results.NextPageToken
 			Loop While pageToken IsNot Nothing
 
-			Throw New Exceptions.FileException(String.Format("File with name {0} could not be found.", fileName))
+			Throw New Exceptions.FileException($"File with name {fileName} could not be found.")
 		End Function
 
 		''' <summary>
@@ -243,7 +242,7 @@ Namespace GoogleAPI
 			Dim folderID As String = GetFolderID(folderName).Result
 
 			Do
-				request.Q = String.Format("mimeType!='application/vnd.google-apps.folder' and '{0}' in parents", folderID)
+				request.Q = $"mimeType!='application/vnd.google-apps.folder' and '{folderID}' in parents"
 				request.Spaces = "drive"
 				request.Fields = "nextPageToken, files(id, name, mimeType, parents, fileExtension, fullFileExtension)"
 				request.PageToken = pageToken
@@ -321,7 +320,7 @@ Namespace GoogleAPI
 			Dim files As New Types.FileCollection
 
 			Do
-				request.Q = String.Format("'{0}' in parents", parentID)
+				request.Q = $"'{parentID}' in parents"
 				request.Spaces = "drive"
 				request.Fields = "nextPageToken, files(id, name, mimeType, parents)"
 				request.PageToken = pageToken

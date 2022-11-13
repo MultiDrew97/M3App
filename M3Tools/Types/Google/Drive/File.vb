@@ -9,7 +9,7 @@ Namespace GoogleAPI.Types
 
 		Shadows ReadOnly Property ToString As String
 			Get
-				Return String.Format("Name: {1} ({0}): FileType: {2} > Parent Count: {3}", Id, Name, FileType, Parents.Count)
+				Return $"Name: {Name} ({Id}): FileType: {FileType} > Parent Count: {Parents.Count}"
 			End Get
 		End Property
 
