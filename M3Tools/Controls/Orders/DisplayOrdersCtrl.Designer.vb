@@ -93,48 +93,58 @@ Partial Class DisplayOrdersCtrl
 		'
 		'OrderID
 		'
-		Me.OrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.OrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.OrderID.DataPropertyName = "OrderID"
+		Me.OrderID.Frozen = True
 		Me.OrderID.HeaderText = "Order Number"
 		Me.OrderID.MinimumWidth = 10
 		Me.OrderID.Name = "OrderID"
 		Me.OrderID.ReadOnly = True
+		Me.OrderID.Width = 104
 		'
 		'Customer
 		'
-		Me.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.Customer.DataPropertyName = "CustomerName"
+		Me.Customer.Frozen = True
 		Me.Customer.HeaderText = "Buyer"
 		Me.Customer.MinimumWidth = 10
 		Me.Customer.Name = "Customer"
 		Me.Customer.ReadOnly = True
+		Me.Customer.Width = 104
 		'
 		'Product
 		'
-		Me.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.Product.DataPropertyName = "ItemName"
+		Me.Product.Frozen = True
 		Me.Product.HeaderText = "Product"
 		Me.Product.MinimumWidth = 10
 		Me.Product.Name = "Product"
 		Me.Product.ReadOnly = True
+		Me.Product.Width = 103
 		'
 		'Total
 		'
-		Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.Total.DataPropertyName = "OrderTotal"
+		Me.Total.Frozen = True
 		Me.Total.HeaderText = "Total"
 		Me.Total.MinimumWidth = 10
 		Me.Total.Name = "Total"
 		Me.Total.ReadOnly = True
+		Me.Total.Width = 104
 		'
 		'OrderDate
 		'
-		Me.OrderDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.OrderDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.OrderDate.DataPropertyName = "OrderDate"
+		Me.OrderDate.Frozen = True
 		Me.OrderDate.HeaderText = "Date Placed"
 		Me.OrderDate.MinimumWidth = 10
 		Me.OrderDate.Name = "OrderDate"
 		Me.OrderDate.ReadOnly = True
+		Me.OrderDate.Width = 104
 		'
 		'btn_Edit
 		'
@@ -143,9 +153,10 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Edit.HeaderText = ""
 		Me.btn_Edit.MinimumWidth = 25
 		Me.btn_Edit.Name = "btn_Edit"
-		Me.btn_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.btn_Edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+		Me.btn_Edit.ReadOnly = True
+		Me.btn_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
 		Me.btn_Edit.Text = "Edit"
+		Me.btn_Edit.ToolTipText = "Edit Order"
 		Me.btn_Edit.UseColumnTextForButtonValue = True
 		Me.btn_Edit.Width = 25
 		'
@@ -156,7 +167,10 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Complete.HeaderText = ""
 		Me.btn_Complete.MinimumWidth = 25
 		Me.btn_Complete.Name = "btn_Complete"
+		Me.btn_Complete.ReadOnly = True
+		Me.btn_Complete.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
 		Me.btn_Complete.Text = "Complete"
+		Me.btn_Complete.ToolTipText = "Fulfil Order"
 		Me.btn_Complete.Width = 25
 		'
 		'btn_Cancel
@@ -166,7 +180,10 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Cancel.HeaderText = ""
 		Me.btn_Cancel.MinimumWidth = 25
 		Me.btn_Cancel.Name = "btn_Cancel"
+		Me.btn_Cancel.ReadOnly = True
+		Me.btn_Cancel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
 		Me.btn_Cancel.Text = "Cancel"
+		Me.btn_Cancel.ToolTipText = "Cancel Order"
 		Me.btn_Cancel.Width = 25
 		'
 		'DisplayOrdersCtrl
