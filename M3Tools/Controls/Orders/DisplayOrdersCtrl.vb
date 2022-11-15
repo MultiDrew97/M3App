@@ -105,6 +105,10 @@ Public Class DisplayOrdersCtrl
 				' Edit Order
 				Console.WriteLine("Edit Clicked")
 				Console.WriteLine(orderID)
+				' TODO: Create a order editing dialog for this
+				Using edit As New EditOrderDialog With {.OrderID = orderID}
+					edit.ShowDialog(Me)
+				End Using
 		End Select
 	End Sub
 

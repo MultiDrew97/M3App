@@ -108,11 +108,19 @@ Namespace Database
 		End Function
 
 		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
-            'insert the order into the ORDERS table
-            AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
-        End Sub
+			If customerID < 0 Or itemID < 0 Then
+				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			End If
 
-        Public Sub AddOrder(parameters As SqlParameter())
+			If quantity < 0 Then
+				Throw New ArgumentException("Quantity values must be greater than or equal to 0")
+			End If
+
+			'insert the order into the ORDERS table
+			AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
+		End Sub
+
+		Public Sub AddOrder(parameters As SqlParameter())
 			Using cmd = db_Connection.Connect
 				cmd.CommandText = "sp_AddOrder"
 				cmd.CommandType = CommandType.StoredProcedure
@@ -125,6 +133,14 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateOrder(orderID As Integer, quantity As Integer)
+			If orderID < 0 Then
+				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			End If
+
+			If quantity < 0 Then
+				Throw New ArgumentException("Quantity values must be greater than or equal to 0")
+			End If
+
 			Throw New Exceptions.DatabaseException("Update Order not implemented yet")
 			'myCmd.Parameters.AddWithValue("OrderID", orderID)
 			'myCmd.Parameters.AddWithValue("Quantity", quantity)
@@ -135,6 +151,9 @@ Namespace Database
 		End Sub
 
 		Public Sub CancelOrder(orderID As Integer)
+			If orderID < 0 Then
+				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			End If
 			Using cmd = db_Connection.Connect
 				cmd.CommandText = "sp_CancelOrder"
 				cmd.CommandType = CommandType.StoredProcedure
@@ -145,7 +164,10 @@ Namespace Database
 			End Using
 		End Sub
 
-        Public Sub CompleteOrder(orderID As Integer)
+		Public Sub CompleteOrder(orderID As Integer)
+			If orderID < 0 Then
+				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			End If
 			Using cmd = db_Connection.Connect
 				cmd.CommandText = "sp_CompleteOrder"
 				cmd.CommandType = CommandType.StoredProcedure
@@ -154,5 +176,26 @@ Namespace Database
 				cmd.ExecuteNonQueryAsync()
 			End Using
 		End Sub
-    End Class
+
+		Public Function GetOrder(orderID As Integer) As CurrentOrder
+			If orderID < 0 Then
+				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			End If
+
+			Using cmd = db_Connection.Connect()
+				cmd.CommandText = "sp_GetOrder"
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddWithValue("OrderID", orderID)
+
+				Using reader = cmd.ExecuteReader()
+					If Not reader.Read() Then
+						Throw New Exceptions.DatabaseException($"No order with OrderID={orderID} was found")
+					End If
+
+					' TODO: Explore this later
+					Console.WriteLine(reader("CompletedDate"))
+				End Using
+			End Using
+		End Function
+	End Class
 End Namespace
