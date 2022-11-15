@@ -13,16 +13,16 @@ Namespace Database
 				Return db_Connection.Username
 			End Get
 			Set(value As String)
-                db_Connection.Username = value
-            End Set
-        End Property
+				db_Connection.Username = value
+			End Set
+		End Property
 
-        'The password to use for the database connection
-        <PasswordPropertyText(True)>
-        <SettingsBindable(True)>
-        <Description("The password to use for the database connection")>
-        Public Property Password As String
-            Get
+		'The password to use for the database connection
+		<PasswordPropertyText(True)>
+		<SettingsBindable(True)>
+		<Description("The password to use for the database connection")>
+		Public Property Password As String
+			Get
 				Return db_Connection.Password
 			End Get
 			Set(value As String)
