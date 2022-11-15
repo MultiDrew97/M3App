@@ -1,8 +1,5 @@
 ﻿Option Strict On
-Imports System.Collections.ObjectModel
-Imports System.Windows.Forms
 Imports MediaMinistry.Helpers
-Imports SPPBC.M3Tools.Types
 
 Public Class Frm_DisplayCustomers
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
