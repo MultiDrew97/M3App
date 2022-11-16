@@ -496,6 +496,9 @@
     <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
       <DependentUpon>ProductsComboBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
+      <DependentUpon>ProductsComboBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Customer\AddCustomerDialog.resx">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>
     </EmbeddedResource>

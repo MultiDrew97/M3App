@@ -50,132 +50,118 @@ Namespace Database
             Return GetProduct(New SqlParameter("ItemID", itemID))
         End Function
 
-		Public Function GetProduct(ParamArray param As SqlParameter()) As Product
-			Using _cmd = db_Connection.Connect()
-				_cmd.Parameters.AddRange(param)
-				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
+        Public Function GetProduct(ParamArray param As SqlParameter()) As Product
+            Using _cmd = db_Connection.Connect()
+                _cmd.Parameters.AddRange(param)
+                _cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
 
-				Using reader = _cmd.ExecuteReaderAsync().Result
-					Do While reader.Read()
-						Return New Product(CInt(reader("ItemID")), CStr(reader("ItemName")),
-												 CInt(reader("Stock")), CDec(reader("Price")),
-												 CBool(reader("Available")))
-					Loop
-				End Using
-			End Using
+                Using reader = _cmd.ExecuteReaderAsync().Result
+                    Do While reader.Read()
+                        Return New Product(CInt(reader("ItemID")), CStr(reader("ItemName")),
+                                                 CInt(reader("Stock")), CDec(reader("Price")),
+                                                 CBool(reader("Available")))
+                    Loop
+                End Using
+            End Using
 
-			Return Nothing
-		End Function
+            Return Nothing
+        End Function
 
-		Public Function GetProducts() As Collection(Of Product)
-			Dim products As New Collection(Of Product)
+        Public Function GetProducts() As Collection(Of Product)
+            Dim products As New Collection(Of Product)
 
-			Using _cmd = db_Connection.Connect
-				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Items]"
+            Using _cmd = db_Connection.Connect
+                _cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Items]"
 
-				Using reader = _cmd.ExecuteReaderAsync().Result
-					Do While reader.Read
-						products.Add(New Product(CInt(reader("ItemID")), CStr(reader("ItemName")),
-												 CInt(reader("Stock")), CDec(reader("Price")),
-												 CBool(reader("Available"))))
-					Loop
-				End Using
-			End Using
+                Using reader = _cmd.ExecuteReaderAsync().Result
+                    Do While reader.Read
+                        products.Add(New Product(CInt(reader("ItemID")), CStr(reader("ItemName")),
+                                                 CInt(reader("Stock")), CDec(reader("Price")),
+                                                 CBool(reader("Available"))))
+                    Loop
+                End Using
+            End Using
 
-			Return products
-		End Function
+            Return products
+        End Function
 
-		Public Sub AddNewProduct(product As Product)
+        Public Sub AddNewProduct(product As Product)
             AddNewProduct(product.Name, product.Stock, product.Price)
         End Sub
 
         Public Sub AddNewProduct(itemName As String, stock As Integer, price As Double)
-			AddNewProduct(
-				New SqlParameter("ItemName", itemName),
-				New SqlParameter("Stock", stock),
-				New SqlParameter("Price", price)
-			)
-		End Sub
+            AddNewProduct(
+                New SqlParameter("ItemName", itemName),
+                New SqlParameter("Stock", stock),
+                New SqlParameter("Price", price)
+            )
+        End Sub
 
-		Private Sub AddNewProduct(ParamArray params As SqlParameter())
-			Using _cmd = db_Connection.Connect
-				_cmd.Parameters.AddRange(params)
+        Private Sub AddNewProduct(ParamArray params As SqlParameter())
+            Using _cmd = db_Connection.Connect
+                _cmd.Parameters.AddRange(params)
 
-				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddProduct]"
-				_cmd.CommandType = CommandType.StoredProcedure
+                _cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddProduct]"
+                _cmd.CommandType = CommandType.StoredProcedure
 
-				_cmd.ExecuteNonQueryAsync()
-			End Using
-		End Sub
+                _cmd.ExecuteNonQueryAsync()
+            End Using
+        End Sub
 
-		Public Sub UpdateInventory(itemID As Integer, column As String, value As String)
-			' TODO: Figure out a better way to perform row updates
-			If Not Utils.ValidID(itemID) Then
-				Throw New ArgumentException($"ID values must greater than or equal to {My.Settings.MinID}")
-			End If
+        Public Sub UpdateInventory(itemID As Integer, column As String, value As String)
+            Dim command As String
 
-			Dim command As String
+            Using _cmd = db_Connection.Connect
+                _cmd.Parameters.AddWithValue("ItemID", itemID)
 
-			If column <> "Stock" And column <> "Price" Then
-				command = $"{column} = '{value}'"
-			Else
-				command = $"{column} = {value}"
-			End If
+                If column <> "Stock" And column <> "Price" Then
+                    command = $"{column} = '{value}'"
+                Else
+                    command = $"{column} = {value}"
+                End If
 
-			Me.UpdateInventory(command, New SqlParameter("ItemID", itemID))
-			'myCmd.Parameters.AddWithValue("ItemID", itemID)
-			'If Not (column.Equals("Stock") Or column.Equals("Price")) Then
-			'    command = String.Format("{0} = '{1}'", column, value)
-			'Else
-			'    command = String.Format("{0} = {1}", column, value)
-			'End If
+                _cmd.CommandText = $"UPDATE Inventory SET {command} WHERE ItemID = @ItemID"
 
-			'myCmd.CommandText = String.Format("UPDATE INVENTORY SET {0} WHERE ItemID = @ItemID", command)
+                _cmd.ExecuteNonQueryAsync()
+            End Using
+            'myCmd.Parameters.AddWithValue("ItemID", itemID)
+            'If Not (column.Equals("Stock") Or column.Equals("Price")) Then
+            '    command = String.Format("{0} = '{1}'", column, value)
+            'Else
+            '    command = String.Format("{0} = {1}", column, value)
+            'End If
 
-			'myCmd.ExecuteNonQuery()
-		End Sub
+            'myCmd.CommandText = String.Format("UPDATE INVENTORY SET {0} WHERE ItemID = @ItemID", command)
 
-		Private Sub UpdateInventory(command As String, ParamArray param As SqlParameter())
-			Using cmd = db_Connection.Connect
-				cmd.Parameters.AddRange(param)
-				' TODO: Verify I can do this
-				Console.WriteLine(cmd.Parameters("Command"))
-				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Items] SET {command} WHERE ItemID=@ItemID"
+            'myCmd.ExecuteNonQuery()
+        End Sub
 
-				cmd.ExecuteNonQueryAsync()
-			End Using
-		End Sub
+        Public Sub RemoveProduct(itemID As Integer)
+            RemoveProduct(New SqlParameter("ItemID", itemID))
+        End Sub
 
-		Public Sub RemoveProduct(itemID As Integer)
-			If Not Utils.ValidID(itemID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
-			End If
+        Private Sub RemoveProduct(ParamArray param As SqlParameter())
+            ' TODO: Verify this works
+            ChangeAvailability(param.Append(New SqlParameter("Available", 0)).ToArray)
+        End Sub
 
-			RemoveProduct(New SqlParameter("ItemID", itemID))
-		End Sub
+        Public Sub ChangeAvailability(itemID As Integer, value As Boolean)
+            If Not Utils.ValidID(itemID) Then
+                Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+            End If
 
-		Private Sub RemoveProduct(ParamArray param As SqlParameter())
-			' TODO: Verify this works
-			ChangeAvailability(param.Append(New SqlParameter("Available", 0)).ToArray)
-		End Sub
+            ChangeAvailability(New SqlParameter("ItemID", itemID), New SqlParameter("Available", If(value, 1, 0)))
+        End Sub
 
-		Public Sub ChangeAvailability(itemID As Integer, value As Boolean)
-			If Not Utils.ValidID(itemID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
-			End If
+        Private Sub ChangeAvailability(ParamArray params As SqlParameter())
+            Console.WriteLine(params.Length)
+            Using _cmd = db_Connection.Connect
+                _cmd.Parameters.AddRange(params)
 
-			ChangeAvailability(New SqlParameter("ItemID", itemID), New SqlParameter("Available", If(value, 1, 0)))
-		End Sub
+                _cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Items] SET Available = @Available WHERE ItemID = @ItemID"
 
-		Private Sub ChangeAvailability(ParamArray params As SqlParameter())
-			Console.WriteLine(params.Length)
-			Using _cmd = db_Connection.Connect
-				_cmd.Parameters.AddRange(params)
-
-				_cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Items] SET Available = @Available WHERE ItemID = @ItemID"
-
-				_cmd.ExecuteNonQueryAsync()
-			End Using
-		End Sub
-	End Class
+                _cmd.ExecuteNonQueryAsync()
+            End Using
+        End Sub
+    End Class
 End Namespace
