@@ -157,10 +157,22 @@
     <Compile Include="Controls\Orders\DisplayOrdersCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\Orders\QuantityNudCtrl.Designer.vb">
+      <DependentUpon>QuantityNudCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Orders\QuantityNudCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.Designer.vb">
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
     </Compile>
     <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Products\ProductsComboBox.Designer.vb">
+      <DependentUpon>ProductsComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Products\ProductsComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogs\Customer\AddCustomerDialog.Designer.vb">
@@ -384,6 +396,7 @@
     <Compile Include="Exceptions\Google\UploadException.vb" />
     <Compile Include="Exceptions\InvalidStateCodeException.vb" />
     <Compile Include="Exceptions\Listeners\ListenerNotFoundException.vb" />
+    <Compile Include="Exceptions\Orders\OrderNotFoundException.vb" />
     <Compile Include="Exceptions\Users\LoginException.vb" />
     <Compile Include="Exceptions\Users\MissingInfoException.vb" />
     <Compile Include="Exceptions\Users\PasswordException.vb" />
@@ -410,7 +423,7 @@
     <Compile Include="Types\Inventory\Item.vb" />
     <Compile Include="Types\Inventory\Product.vb" />
     <Compile Include="Types\Orders\CompletedOrder.vb" />
-    <Compile Include="Types\Orders\CurrentOrder.vb" />
+    <Compile Include="Types\Orders\Order.vb" />
     <Compile Include="Types\People\AccountRole.vb" />
     <Compile Include="Types\People\Address.vb" />
     <Compile Include="Types\People\Customer.vb" />
@@ -474,8 +487,14 @@
     <EmbeddedResource Include="Controls\Orders\DisplayOrdersCtrl.resx">
       <DependentUpon>DisplayOrdersCtrl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Orders\QuantityNudCtrl.resx">
+      <DependentUpon>QuantityNudCtrl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Customers\DisplayCustomersCtrl.resx">
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
+      <DependentUpon>ProductsComboBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Customer\AddCustomerDialog.resx">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>

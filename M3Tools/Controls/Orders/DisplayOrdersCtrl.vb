@@ -59,7 +59,7 @@ Public Class DisplayOrdersCtrl
 
 		For Each currentOrder In currentOrders
 			_orders.AddOrdersRow(
-				currentOrder.Id, currentOrder.Customer.Name, currentOrder.Item.Name,
+				currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
 				currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate)
 		Next
 
@@ -86,38 +86,34 @@ Public Class DisplayOrdersCtrl
 		Dim orderID As Integer
 		If (e.RowIndex < 0) Then
 			Exit Sub
-		Else
-			orderID = CInt(_orders.Rows(e.RowIndex).Item("OrderID"))
 		End If
 
-		Select Case e.ColumnIndex
-			Case btn_Complete.Index
-				' Complete Order
-				Console.WriteLine("Complete Clicked")
-				Console.WriteLine(orderID)
-				'db_Orders.CompleteOrder(orderID)
-			Case btn_Cancel.Index
-				' Cancel Order
-				Console.WriteLine("Cancel Clicked")
-				Console.WriteLine(orderID)
-				'db_Orders.CancelOrder(orderID)
-			Case btn_Edit.Index
-				' Edit Order
-				Console.WriteLine("Edit Clicked")
-				Console.WriteLine(orderID)
-				' TODO: Create a order editing dialog for this
-				Using edit As New EditOrderDialog With {.OrderID = orderID}
-					edit.ShowDialog(Me)
-				End Using
-		End Select
+		orderID = CInt(_orders.Rows(e.RowIndex)("OrderID"))
+		ToolButtonsClicked(e.ColumnIndex, orderID)
 	End Sub
 
-	Private Sub Dgv_Orders_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow
+	Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow
 		If MessageBox.Show("Are you sure you want to cancel this order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 			Dim orderID As Integer = CInt(CType(e.Row.DataBoundItem, DataRowView)("OrderID"))
 			db_Orders.CancelOrder(orderID)
 		Else
 			e.Cancel = True
 		End If
+	End Sub
+
+	Private Sub ToolButtonsClicked(colIndex As Integer, orderID As Integer)
+		Select Case colIndex
+			Case btn_Complete.Index
+				' Complete Order
+				'db_Orders.CompleteOrder(orderID)
+			Case btn_Cancel.Index
+				' Cancel Order
+				'db_Orders.CancelOrder(orderID)
+			Case btn_Edit.Index
+				' Edit Order
+				Using edit As New EditOrderDialog(orderID)
+					edit.ShowDialog(Me)
+				End Using
+		End Select
 	End Sub
 End Class

@@ -50,103 +50,99 @@ Namespace Database
             Return GetProduct(New SqlParameter("ItemID", itemID))
         End Function
 
-        Public Function GetProduct(param As SqlParameter) As Product
-            Using _cmd = db_Connection.Connect()
-                _cmd.Parameters.Add(param)
-                _cmd.CommandText = "SELECT * FROM Inventory WHERE ItemID = @ItemID"
+		Public Function GetProduct(ParamArray param As SqlParameter()) As Product
+			Using _cmd = db_Connection.Connect()
+				_cmd.Parameters.AddRange(param)
+				_cmd.CommandText = "SELECT * FROM Inventory WHERE ItemID = @ItemID"
 
-                Using reader = _cmd.ExecuteReaderAsync().Result
-                    Do While reader.Read()
-                        Return New Product() With {
-                            .Id = reader.GetInt32(0),
-                            .Name = reader.GetString(1),
-                            .Stock = reader.GetInt32(2),
-                            .Price = reader.GetDecimal(3),
-                            .Available = reader.GetBoolean(4)
-                        }
-                    Loop
-                End Using
-            End Using
+				Using reader = _cmd.ExecuteReaderAsync().Result
+					Do While reader.Read()
+						Return New Product(CInt(reader("ItemID")), CStr(reader("ItemName")),
+												 CInt(reader("Stock")), CDec(reader("Price")),
+												 CBool(reader("Available")))
+					Loop
+				End Using
+			End Using
 
-            Return Nothing
-        End Function
+			Return Nothing
+		End Function
 
-        Public Function GetProducts() As Product()
-            Dim products() As Product = {}
+		Public Function GetProducts() As Collection(Of Product)
+			Dim products As New Collection(Of Product)
 
-            Using _cmd = db_Connection.Connect
-                _cmd.CommandText = "SELECT * FROM Inventory"
+			Using _cmd = db_Connection.Connect
+				_cmd.CommandText = "SELECT * FROM Inventory"
 
-                Using reader = _cmd.ExecuteReaderAsync().Result
-                    Do While reader.Read
-                        products.Append(
-                            New Product() With {
-                                .Id = reader.GetInt32(0),
-                                .Name = reader.GetString(1),
-                                .Stock = reader.GetInt32(2),
-                                .Price = reader.GetDecimal(3),
-                                .Available = reader.GetBoolean(4)
-                            }
-                        )
-                    Loop
-                End Using
-            End Using
+				Using reader = _cmd.ExecuteReaderAsync().Result
+					Do While reader.Read
+						products.Add(New Product(CInt(reader("ItemID")), CStr(reader("ItemName")),
+												 CInt(reader("Stock")), CDec(reader("Price")),
+												 CBool(reader("Available"))))
+					Loop
+				End Using
+			End Using
 
-            Return products
-        End Function
+			Return products
+		End Function
 
-        Public Sub AddNewProduct(product As Product)
+		Public Sub AddNewProduct(product As Product)
             AddNewProduct(product.Name, product.Stock, product.Price)
         End Sub
 
         Public Sub AddNewProduct(itemName As String, stock As Integer, price As Double)
-            AddNewProduct({
-                New SqlParameter("ItemName", itemName),
-                New SqlParameter("Stock", stock),
-                New SqlParameter("Price", price)
-            })
-        End Sub
+			AddNewProduct(
+				New SqlParameter("ItemName", itemName),
+				New SqlParameter("Stock", stock),
+				New SqlParameter("Price", price)
+			)
+		End Sub
 
-        Private Sub AddNewProduct(params As SqlParameter())
-            Using _cmd = db_Connection.Connect
-                _cmd.Parameters.AddRange(params)
+		Private Sub AddNewProduct(ParamArray params As SqlParameter())
+			Using _cmd = db_Connection.Connect
+				_cmd.Parameters.AddRange(params)
 
-                _cmd.CommandText = "AddProduct"
-                _cmd.CommandType = CommandType.StoredProcedure
-
-                _cmd.ExecuteNonQueryAsync()
-            End Using
-        End Sub
-
-        Public Sub UpdateInventory(itemID As Integer, column As String, value As String)
-            Dim command As String
-
-            Using _cmd = db_Connection.Connect
-                _cmd.Parameters.AddWithValue("ItemID", itemID)
-
-                If column <> "Stock" And column <> "Price" Then
-					command = $"{column} = '{value}'"
-				Else
-					command = $"{column} = {value}"
-				End If
-
-				_cmd.CommandText = $"UPDATE Inventory SET {command} WHERE ItemID = @ItemID"
+				_cmd.CommandText = "AddProduct"
+				_cmd.CommandType = CommandType.StoredProcedure
 
 				_cmd.ExecuteNonQueryAsync()
-            End Using
-            'myCmd.Parameters.AddWithValue("ItemID", itemID)
-            'If Not (column.Equals("Stock") Or column.Equals("Price")) Then
-            '    command = String.Format("{0} = '{1}'", column, value)
-            'Else
-            '    command = String.Format("{0} = {1}", column, value)
-            'End If
+			End Using
+		End Sub
 
-            'myCmd.CommandText = String.Format("UPDATE INVENTORY SET {0} WHERE ItemID = @ItemID", command)
+		Public Sub UpdateInventory(itemID As Integer, column As String, value As String)
+			' TODO: Figure out a better way to perform row updates
+			Dim command As New SqlParameter("Command", SqlDbType.VarChar)
 
-            'myCmd.ExecuteNonQuery()
-        End Sub
+			If column <> "Stock" And column <> "Price" Then
+				command.Value = $"{column} = '{value}'"
+			Else
+				command.Value = $"{column} = {value}"
+			End If
 
-        Public Sub RemoveProduct(itemID As Integer)
+			Me.UpdateInventory(New SqlParameter("ItemID", itemID), command)
+			'myCmd.Parameters.AddWithValue("ItemID", itemID)
+			'If Not (column.Equals("Stock") Or column.Equals("Price")) Then
+			'    command = String.Format("{0} = '{1}'", column, value)
+			'Else
+			'    command = String.Format("{0} = {1}", column, value)
+			'End If
+
+			'myCmd.CommandText = String.Format("UPDATE INVENTORY SET {0} WHERE ItemID = @ItemID", command)
+
+			'myCmd.ExecuteNonQuery()
+		End Sub
+
+		Private Sub UpdateInventory(ParamArray param As SqlParameter())
+			Using cmd = db_Connection.Connect
+				cmd.Parameters.AddRange(param)
+				' TODO: Verify I can do this
+				Console.WriteLine(cmd.Parameters("Command"))
+				cmd.CommandText = $"UPDATE Inventory SET {cmd.Parameters("Command")} WHERE ItemID = @ItemID"
+
+				cmd.ExecuteNonQueryAsync()
+			End Using
+		End Sub
+
+		Public Sub RemoveProduct(itemID As Integer)
             RemoveProduct(New SqlParameter("ItemID", itemID))
         End Sub
 
