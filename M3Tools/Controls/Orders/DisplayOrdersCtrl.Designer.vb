@@ -25,11 +25,6 @@ Partial Class DisplayOrdersCtrl
 		Me.components = New System.ComponentModel.Container()
 		Me.bsOrders = New System.Windows.Forms.BindingSource(Me.components)
 		Me.dgv_Orders = New System.Windows.Forms.DataGridView()
-		Me.bw_LoadOrders = New System.ComponentModel.BackgroundWorker()
-		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
-		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,6 +33,11 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Edit = New System.Windows.Forms.DataGridViewButtonColumn()
 		Me.btn_Complete = New System.Windows.Forms.DataGridViewButtonColumn()
 		Me.btn_Cancel = New System.Windows.Forms.DataGridViewButtonColumn()
+		Me.bw_LoadOrders = New System.ComponentModel.BackgroundWorker()
+		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
@@ -59,37 +59,6 @@ Partial Class DisplayOrdersCtrl
 		Me.dgv_Orders.RowHeadersWidth = 82
 		Me.dgv_Orders.Size = New System.Drawing.Size(678, 440)
 		Me.dgv_Orders.TabIndex = 1
-		'
-		'bw_LoadOrders
-		'
-		'
-		'cms_Tools
-		'
-		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
-		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
-		Me.cms_Tools.Text = "Tools"
-		'
-		'ts_Refresh
-		'
-		Me.ts_Refresh.Name = "ts_Refresh"
-		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-		Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
-		Me.ts_Refresh.Text = "Refresh"
-		'
-		'ts_Remove
-		'
-		Me.ts_Remove.Name = "ts_Remove"
-		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
-		Me.ts_Remove.Text = "Remove"
-		'
-		'db_Orders
-		'
-		Me.db_Orders.InitialCatalog = "Media Ministry"
-		Me.db_Orders.Password = "M3AppPassword2499"
-		Me.db_Orders.Username = "M3App"
 		'
 		'OrderID
 		'
@@ -186,10 +155,43 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Cancel.ToolTipText = "Cancel Order"
 		Me.btn_Cancel.Width = 25
 		'
+		'bw_LoadOrders
+		'
+		'
+		'cms_Tools
+		'
+		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
+		Me.cms_Tools.Name = "cms_Tools"
+		Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
+		Me.cms_Tools.Text = "Tools"
+		'
+		'ts_Refresh
+		'
+		Me.ts_Refresh.Name = "ts_Refresh"
+		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+		Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
+		Me.ts_Refresh.Text = "Refresh"
+		'
+		'ts_Remove
+		'
+		Me.ts_Remove.Name = "ts_Remove"
+		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
+		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
+		Me.ts_Remove.Text = "Remove"
+		'
+		'db_Orders
+		'
+		Me.db_Orders.InitialCatalog = "Media Ministry"
+		Me.db_Orders.Password = "M3AppPassword2499"
+		Me.db_Orders.Username = "M3App"
+		'
 		'DisplayOrdersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		Me.AutoSize = True
+		Me.ContextMenuStrip = Me.cms_Tools
 		Me.Controls.Add(Me.dgv_Orders)
 		Me.Margin = New System.Windows.Forms.Padding(2)
 		Me.Name = "DisplayOrdersCtrl"

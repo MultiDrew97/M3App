@@ -43,8 +43,8 @@ Namespace Database
             End Set
         End Property
 
-        Public Function GetCurrentOrders() As Collection(Of CurrentOrder)
-            Dim orders As New Collection(Of CurrentOrder)
+        Public Function GetCurrentOrders() As Collection(Of Order)
+            Dim orders As New Collection(Of Order)
 
             ' TODO: Investigate how to make this async easier
             Using cmd = db_Connection.Connect
@@ -53,21 +53,24 @@ Namespace Database
 
                 Using reader = cmd.ExecuteReader
                     Do While reader.Read()
-                        orders.Add(New CurrentOrder() With {
-                            .Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
-                            .Customer = New Customer() With {
-                                .Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
-                                .FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                .LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                            },
-                            .Item = New Item() With {
-                                .Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
-                                .Name = reader.GetString(reader.GetOrdinal("ItemName"))
-                            },
-                            .Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-                            .OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
-                            .OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
-                        })
+                        orders.Add(New Order(
+                                   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                                    CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
+                        '			With {
+                        '	.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
+                        '	.Customer = New Customer() With {
+                        '		.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
+                        '		.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                        '		.LastName = reader.GetString(reader.GetOrdinal("LastName"))
+                        '	},
+                        '	.Product = New Item() With {
+                        '		.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+                        '		.Name = reader.GetString(reader.GetOrdinal("ItemName"))
+                        '	},
+                        '	.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+                        '	.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
+                        '	.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
+                        '})
                     Loop
                 End Using
             End Using
@@ -97,7 +100,7 @@ Namespace Database
                             },
                             .Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
                             .OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
-                            .OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate")),
+                        .OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate")),
                             .CompletedDate = reader.GetDateTime(reader.GetOrdinal("CompletedDate"))
                         })
                     Loop

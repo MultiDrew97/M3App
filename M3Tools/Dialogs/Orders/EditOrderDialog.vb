@@ -2,9 +2,26 @@
 Imports System.Windows.Forms
 
 Public Class EditOrderDialog
-	Private ReadOnly _items As New DataTables.InventoryDataTable
+	Private _order As Types.Order
 
 	Property OrderID As Integer
+
+	Property CurrentOrder As Types.Order
+		Get
+			Return _order
+		End Get
+		Set(value As Types.Order)
+			_order = value
+		End Set
+	End Property
+
+	Sub New(orderID As Integer)
+		' This call is required by the designer.
+		InitializeComponent()
+
+		' Add any initialization after the InitializeComponent() call.
+		Me.OrderID = orderID
+	End Sub
 
 	Private Sub Finished(sender As Object, e As EventArgs) Handles OK_Button.Click
 		Me.DialogResult = DialogResult.OK
@@ -17,31 +34,32 @@ Public Class EditOrderDialog
 	End Sub
 
 	Private Sub DialogLoading(sender As Object, e As EventArgs) Handles Me.Load
-		bsItems.DataSource = _items
-		cbx_Items.DisplayMember = "ItemName"
-		cbx_Items.ValueMember = "ItemID"
 		bw_LoadOrder.RunWorkerAsync()
-		bw_LoadItems.RunWorkerAsync()
-	End Sub
-
-	Private Sub LoadItems(sender As Object, e As DoWorkEventArgs) Handles bw_LoadItems.DoWork
-		Dim items = db_Items.GetProducts()
-		_items.Clear()
-
-		For Each item In items
-			_items.AddInventoryRow(item.Id, item.Name, item.Stock, item.Price, item.Available)
-		Next
-	End Sub
-
-	Private Sub ItemsLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadItems.RunWorkerCompleted
-		Refresh()
-	End Sub
-
-	Private Sub ChangeItem(sender As Object, e As EventArgs) Handles cbx_Items.SelectedIndexChanged
-		Console.WriteLine($"ItemID: {cbx_Items.SelectedValue}{vbNewLine}Item Name: {cbx_Items.SelectedText}")
+		pcb_Items.Reload()
 	End Sub
 
 	Private Sub LoadOrder(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrder.DoWork
-		db_Orders.GetOrder(OrderID)
+		Try
+			CurrentOrder = db_Orders.GetOrderById(OrderID)
+		Catch
+			e.Cancel = True
+		End Try
+	End Sub
+
+	Private Sub OrderLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadOrder.RunWorkerCompleted
+		If CurrentOrder Is Nothing Or e.Cancelled Then
+			Exit Sub
+		End If
+
+		pcb_Items.SelectedValue = CurrentOrder.Product.Id
+		qnc_Quantity.Quantity = CurrentOrder.Quantity
+	End Sub
+
+	Private Sub ItemsLoadBegin() Handles pcb_Items.LoadBegin
+		UseWaitCursor = True
+	End Sub
+
+	Private Sub ItemsLoadEnd() Handles pcb_Items.LoadEnd
+		UseWaitCursor = False
 	End Sub
 End Class

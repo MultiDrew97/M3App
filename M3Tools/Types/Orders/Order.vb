@@ -1,14 +1,16 @@
 ﻿Option Strict On
 Namespace Types
-    Public Class CurrentOrder
-        Public Property Id As Integer
+	' TODO: Consolidate CurrentOrder and CompletedOrder
+	Public Class Order
+		Public Property Id As Integer
 		Public Property Customer As Person
-		Public Property Item As Item
+		Public Property Product As Item
 		Public Property Quantity As Integer
-        Public Property OrderTotal As Double
-        Public Property OrderDate As Date
+		Public Property OrderTotal As Double
+		Public Property OrderDate As Date
+		Public Property CompletedDate As Date
 
-        Public Sub New()
+		Public Sub New()
 			Me.New(-1, -1, -1, 0, 0, Date.Now)
 		End Sub
 
@@ -21,11 +23,15 @@ Namespace Types
 		''' <param name="quantity"></param>
 		''' <param name="orderTotal"></param>
 		''' <param name="orderDate"></param>
-		Public Sub New(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer, orderTotal As Double, orderDate As Date)
+		Public Sub New(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer, orderTotal As Double, orderDate As Date, Optional completedDate As Date = Nothing)
 			Me.Id = orderID
 			Me.Quantity = quantity
 			Me.OrderTotal = orderTotal
 			Me.OrderDate = orderDate
+
+			If completedDate.Year > 1900 Then
+				Me.CompletedDate = completedDate
+			End If
 
 			If customerID > -1 Then
 				GetCustomer(customerID)
@@ -47,20 +53,25 @@ Namespace Types
 		''' <param name="quantity"></param>
 		''' <param name="orderTotal"></param>
 		''' <param name="orderDate"></param>
-		Public Sub New(orderID As Integer, customerID As Integer, customerName As String(), itemID As Integer, itemName As String, quantity As Integer, orderTotal As Double, orderDate As Date)
+		''' <param name="completedDate"></param>
+		Public Sub New(orderID As Integer, customerID As Integer, customerName As String(), itemID As Integer, itemName As String, quantity As Integer, orderTotal As Double, orderDate As Date, Optional completedDate As Date = Nothing)
 			Me.Id = orderID
 			Me.Customer = New Person(customerID, String.Join(" ", customerName))
-			Me.Item = New Item(itemID, itemName)
+			Me.Product = New Item(itemID, itemName)
 			Me.Quantity = quantity
 			Me.OrderTotal = orderTotal
 			Me.OrderDate = orderDate
+
+			If completedDate.Year > 1900 Then
+				Me.CompletedDate = completedDate
+			End If
 		End Sub
 
 		''' <summary>
 		''' Retrieve a user from the database using their CustomerID
 		''' </summary>
 		''' <param name="customerID">CustomerID of the desired customer</param>
-		Private Async Sub GetCustomer(customerID As Integer)
+		Private Sub GetCustomer(customerID As Integer)
 			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
 				Using cmd = db.Connect
 					cmd.CommandText = $"SELECT FirstName, LastName FROM Customers WHERE CustomerID=@CustomerID"
@@ -68,14 +79,10 @@ Namespace Types
 
 					cmd.Parameters.AddWithValue("CustomerID", customerID)
 
-					Using reader = Await cmd.ExecuteReaderAsync
+					Using reader = cmd.ExecuteReader
 						reader.Read()
 
-						Me.Customer = New Person(
-							customerID,
-							reader.GetString(reader.GetOrdinal("FirstName")),
-							reader.GetString(reader.GetOrdinal("LastName"))
-						)
+						Me.Customer = New Person(customerID, CStr(reader("FirstName")), CStr(reader("LastName")))
 					End Using
 				End Using
 			End Using
@@ -85,7 +92,7 @@ Namespace Types
 		''' Retrieve an item from the database using the provided itemID
 		''' </summary>
 		''' <param name="itemID">ItemID of the desired item</param>
-		Private Async Sub GetItem(itemID As Integer)
+		Private Sub GetItem(itemID As Integer)
 			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
 				Using cmd = db.Connect
 					cmd.CommandText = "SELECT ItemName FROM Inventory WHERE ItemID=@ItemID"
@@ -93,13 +100,10 @@ Namespace Types
 
 					cmd.Parameters.AddWithValue("ItemID", itemID)
 
-					Using reader = Await cmd.ExecuteReaderAsync
+					Using reader = cmd.ExecuteReader
 						reader.Read()
 
-						Me.Item = New Item(
-							itemID,
-							reader.GetString(reader.GetOrdinal("ItemName"))
-						)
+						Me.Product = New Item(itemID, CStr(reader("ItemName")))
 					End Using
 				End Using
 			End Using
