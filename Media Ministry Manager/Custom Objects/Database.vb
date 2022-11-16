@@ -267,8 +267,8 @@ Public Class Database
 		myCmd.ExecuteNonQuery()
 	End Sub
 
-	Public Function GetCurrentOrders() As Collection(Of CurrentOrder)
-		Dim orders As New Collection(Of CurrentOrder)
+	Public Function GetCurrentOrders() As Collection(Of Order)
+		Dim orders As New Collection(Of Order)
 		Dim customerName As String()
 		Dim itemName As String
 		Dim orderID, customerID, itemID, quantity As Integer
@@ -289,7 +289,7 @@ Public Class Database
 				quantity = myReader.GetInt32(6)
 				orderTotal = CDec(myReader.GetSqlMoney(7))
 				orderDate = myReader.GetDateTime(8)
-				orders.Add(New CurrentOrder(orderID, customerID, customerName, itemID, itemName, quantity, orderTotal, orderDate))
+				orders.Add(New Order(orderID, customerID, customerName, itemID, itemName, quantity, orderTotal, orderDate))
 			Loop
 		End Using
 
@@ -322,8 +322,8 @@ Public Class Database
 		Return orders
 	End Function
 
-	Public Function GetCompletedOrders() As Collection(Of CompletedOrder)
-		Dim orders As New Collection(Of CompletedOrder)
+	Public Function GetCompletedOrders() As Collection(Of Order)
+		Dim orders As New Collection(Of Order)
 
 		'create view to use with
 		myCmd.CommandText = "GetCompletedOrders"
@@ -331,7 +331,7 @@ Public Class Database
 
 		Using myReader = myCmd.ExecuteReader()
 			Do While myReader.Read()
-				orders.Add(New CompletedOrder(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
+				orders.Add(New Order(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
 			Loop
 		End Using
 

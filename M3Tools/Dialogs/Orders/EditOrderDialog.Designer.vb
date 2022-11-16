@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditOrderDialog
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
-	<System.Diagnostics.DebuggerNonUserCode()> _
+	<System.Diagnostics.DebuggerNonUserCode()>
 	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
 		Try
 			If disposing AndAlso components IsNot Nothing Then
@@ -20,20 +20,17 @@ Partial Class EditOrderDialog
 	'NOTE: The following procedure is required by the Windows Form Designer
 	'It can be modified using the Windows Form Designer.  
 	'Do not modify it using the code editor.
-	<System.Diagnostics.DebuggerStepThrough()> _
+	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.OK_Button = New System.Windows.Forms.Button()
 		Me.Cancel_Button = New System.Windows.Forms.Button()
-		Me.bsItems = New System.Windows.Forms.BindingSource(Me.components)
-		Me.db_Items = New SPPBC.M3Tools.Database.ProductDatabase(Me.components)
-		Me.bw_LoadItems = New System.ComponentModel.BackgroundWorker()
-		Me.cbx_Items = New System.Windows.Forms.ComboBox()
 		Me.bw_LoadOrder = New System.ComponentModel.BackgroundWorker()
 		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
+		Me.pcb_Items = New SPPBC.M3Tools.ProductsComboBox()
+		Me.qnc_Quantity = New SPPBC.M3Tools.QuantityNudCtrl()
 		Me.TableLayoutPanel1.SuspendLayout()
-		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'TableLayoutPanel1
@@ -70,24 +67,6 @@ Partial Class EditOrderDialog
 		Me.Cancel_Button.TabIndex = 1
 		Me.Cancel_Button.Text = "Cancel"
 		'
-		'db_Items
-		'
-		Me.db_Items.InitialCatalog = "Media Ministry"
-		Me.db_Items.Password = "M3AppPassword2499"
-		Me.db_Items.Username = "M3App"
-		'
-		'bw_LoadItems
-		'
-		'
-		'cbx_Items
-		'
-		Me.cbx_Items.DataSource = Me.bsItems
-		Me.cbx_Items.FormattingEnabled = True
-		Me.cbx_Items.Location = New System.Drawing.Point(80, 87)
-		Me.cbx_Items.Name = "cbx_Items"
-		Me.cbx_Items.Size = New System.Drawing.Size(197, 21)
-		Me.cbx_Items.TabIndex = 1
-		'
 		'bw_LoadOrder
 		'
 		'
@@ -97,6 +76,30 @@ Partial Class EditOrderDialog
 		Me.db_Orders.Password = "M3AppPassword2499"
 		Me.db_Orders.Username = "M3App"
 		'
+		'pcb_Items
+		'
+		Me.pcb_Items.AutoSize = True
+		Me.pcb_Items.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.pcb_Items.Location = New System.Drawing.Point(114, 84)
+		Me.pcb_Items.MaximumSize = New System.Drawing.Size(0, 42)
+		Me.pcb_Items.MinimumSize = New System.Drawing.Size(200, 42)
+		Me.pcb_Items.Name = "pcb_Items"
+		Me.pcb_Items.SelectedIndex = -1
+		Me.pcb_Items.SelectedItem = Nothing
+		Me.pcb_Items.SelectedValue = Nothing
+		Me.pcb_Items.Size = New System.Drawing.Size(200, 42)
+		Me.pcb_Items.TabIndex = 3
+		'
+		'qnc_Quantity
+		'
+		Me.qnc_Quantity.Location = New System.Drawing.Point(196, 150)
+		Me.qnc_Quantity.MaximumSize = New System.Drawing.Size(0, 42)
+		Me.qnc_Quantity.MinimumSize = New System.Drawing.Size(100, 42)
+		Me.qnc_Quantity.Name = "qnc_Quantity"
+		Me.qnc_Quantity.Quantity = 0
+		Me.qnc_Quantity.Size = New System.Drawing.Size(100, 42)
+		Me.qnc_Quantity.TabIndex = 4
+		'
 		'EditOrderDialog
 		'
 		Me.AcceptButton = Me.OK_Button
@@ -104,7 +107,8 @@ Partial Class EditOrderDialog
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.Cancel_Button
 		Me.ClientSize = New System.Drawing.Size(435, 315)
-		Me.Controls.Add(Me.cbx_Items)
+		Me.Controls.Add(Me.qnc_Quantity)
+		Me.Controls.Add(Me.pcb_Items)
 		Me.Controls.Add(Me.TableLayoutPanel1)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 		Me.MaximizeBox = False
@@ -114,17 +118,15 @@ Partial Class EditOrderDialog
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
 		Me.Text = "Edit Order"
 		Me.TableLayoutPanel1.ResumeLayout(False)
-		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
+		Me.PerformLayout()
 
 	End Sub
 	Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 	Friend WithEvents OK_Button As System.Windows.Forms.Button
 	Friend WithEvents Cancel_Button As System.Windows.Forms.Button
-	Friend WithEvents bsItems As Windows.Forms.BindingSource
-	Friend WithEvents db_Items As Database.ProductDatabase
-	Friend WithEvents bw_LoadItems As ComponentModel.BackgroundWorker
-	Friend WithEvents cbx_Items As Windows.Forms.ComboBox
 	Friend WithEvents bw_LoadOrder As ComponentModel.BackgroundWorker
 	Friend WithEvents db_Orders As Database.OrdersDatabase
+	Friend WithEvents pcb_Items As ProductsComboBox
+	Friend WithEvents qnc_Quantity As QuantityNudCtrl
 End Class
