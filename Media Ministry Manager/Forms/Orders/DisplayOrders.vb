@@ -2,7 +2,7 @@
 Imports MediaMinistry.Helpers
 
 Public Class Frm_DisplayOrders
-	'TODO: Implement a way to change between current and completed orders
+	' TODO: Add eventhandler for when data is updated to show/hide empty message
 	Private Sub ViewLoading(sender As Object, e As EventArgs) Handles Me.Load
 		lbl_NoOrders.Visible = doc_Orders.IsEmpty
 		mms_Strip.ToggleViewItem("Orders")
@@ -54,5 +54,9 @@ Public Class Frm_DisplayOrders
 	Private Sub ViewSettings() Handles mms_Strip.OpenSettings
 		Dim settings As New Frm_Settings()
 		settings.Show()
+	End Sub
+
+	Private Sub DataUpdated() Handles doc_Orders.DataChanged
+		lbl_NoOrders.Visible = doc_Orders.IsEmpty
 	End Sub
 End Class

@@ -192,8 +192,46 @@ Namespace Database
 
                 Using reader = cmd.ExecuteReader()
                     If Not reader.Read() Then
-                        Throw New Exceptions.DatabaseException($"No order with OrderID={orderID} was found")
+                        Throw New Exceptions.OrderNotFoundException($"No order with OrderID '{orderID}' was found")
                     End If
+
+                    'If CDate(reader("CompletedDate")).Year < 1901 Then
+                    '	Return New Order(
+                    '		CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                    '		CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")))
+                    'Else
+                    ' TODO: Verify NULL from tf won't break this
+                    Return New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate")))
+                    'End If
+                End Using
+            End Using
+
+            Throw New Exceptions.ConnectionException("Failed to connect to database")
+        End Function
+
+        Public Function GetOrderByCustomer(customerID As Integer) As Collection(Of Order)
+            Dim orders As New Collection(Of Order)
+            If customerID < 0 Then
+                Throw New ArgumentException("ID values must be greater than or equal to 0")
+            End If
+
+            Using cmd = db_Connection.Connect()
+                cmd.CommandText = "SELECT * FROM tf_GetOrder(@OrderID)"
+                cmd.Parameters.AddWithValue("CustomerID", customerID)
+
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim compDate As Date = CDate(reader("CompletedDate"))
+                        If CDate(reader("CompletedDate")).Year < 1901 Then
+                            orders.Add(New Order(
+                            CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
+                        Else
+                            orders.Add(New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
+                        End If
+                    End While
 
                     ' TODO: Explore this later
                     Console.WriteLine(reader("CompletedDate"))
