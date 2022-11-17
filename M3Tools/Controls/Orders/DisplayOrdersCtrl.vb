@@ -4,7 +4,6 @@ Imports System.Windows.Forms
 Public Class DisplayOrdersCtrl
     ' TODO: Implement a way to change between current and completed orders
     ' TODO: Make an event for when the count is updated
-    ' TODO: Convert DataGridView to TreeView so that orders for the same person can be grouped together
 
     Private Event ShowCompletedChanged()
     Public Event DataChanged()
@@ -55,51 +54,51 @@ Public Class DisplayOrdersCtrl
         If Not ShowCompleted Then
             Exit Sub
         End If
-
-        ' TODO: Determine how to display completed orders
     End Sub
 
     Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
         Dim orders As New Types.DBEntryCollection(Of Types.Order)
         Try
             orders = db_Orders.GetCurrentOrders()
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
-        End Try
-        _orders.Clear()
+            _orders.Clear()
 
-        For Each order In orders
-            _orders.AddOrdersRow(
-                currentOrder.Id, currentOrder.Customer.Name, currentOrder.Item.Name,
-                currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate)
-        Next
+            For Each currentOrder In currentOrders
+                _orders.AddOrdersRow(
+                    currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
+                    currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate, currentOrder.CompletedDate)
+            Next
+            For Each currentOrder In currentOrders
+                _orders.AddOrdersRow(
+                    currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
+                    currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate)
+            Next
 
         ' TODO: Figure out how to sort the table to sort by order date
-        RaiseEvent DataChanged()
+
     End Sub
 
     Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
         bsOrders.DataSource = _orders
     End Sub
 
+    Private Sub Reload() Handles ts_Refresh.Click
     Public Sub Reload() Handles ts_Refresh.Click
         UseWaitCursor = True
         bw_LoadOrders.RunWorkerAsync()
     End Sub
 
-    Private Sub OrdersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadOrders.RunWorkerCompleted
-        UseWaitCursor = False
-        'Filter = "CompletedDate != 'N/A'"
+		UseWaitCursor = False
+		Refresh()
+	End Sub
         Refresh()
-    End Sub
-
-    Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs)
+	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Orders.CellContentClick
         Dim orderID As Integer
         If (e.RowIndex < 0) Then
-            Exit Sub
-        Else
+            If (e.RowIndex < 0) Then
+                Exit Sub
+            Else
 
-            orderID = CInt(_orders.Rows(e.RowIndex)("OrderID"))
+                orderID = CInt(_orders.Rows(e.RowIndex)("OrderID"))
             ToolButtonsClicked(e.ColumnIndex, orderID)
     End Sub
 
