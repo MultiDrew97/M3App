@@ -22,13 +22,12 @@ Partial Class Frm_DisplayOrders
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container()
 		Me.btn_Complete = New System.Windows.Forms.Button()
 		Me.btn_ShowCompleted = New System.Windows.Forms.Button()
 		Me.lbl_NoOrders = New System.Windows.Forms.Label()
 		Me.doc_Orders = New SPPBC.M3Tools.DisplayOrdersCtrl()
-		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
-		Me.bsOrders = New System.Windows.Forms.BindingSource(Me.components)
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase()
+		Me.bsOrders = New System.Windows.Forms.BindingSource()
 		Me.mms_Strip = New SPPBC.M3Tools.MainMenuStrip()
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
@@ -60,9 +59,10 @@ Partial Class Frm_DisplayOrders
 		'lbl_NoOrders
 		'
 		Me.lbl_NoOrders.AutoSize = True
+		Me.lbl_NoOrders.BackColor = System.Drawing.SystemColors.AppWorkspace
 		Me.lbl_NoOrders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.lbl_NoOrders.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-		Me.lbl_NoOrders.Location = New System.Drawing.Point(274, 219)
+		Me.lbl_NoOrders.Location = New System.Drawing.Point(292, 188)
 		Me.lbl_NoOrders.Name = "lbl_NoOrders"
 		Me.lbl_NoOrders.Size = New System.Drawing.Size(397, 25)
 		Me.lbl_NoOrders.TabIndex = 3
@@ -71,13 +71,15 @@ Partial Class Frm_DisplayOrders
 		'
 		'doc_Orders
 		'
+		Me.doc_Orders.AutoSize = True
 		Me.doc_Orders.Dock = System.Windows.Forms.DockStyle.Right
 		Me.doc_Orders.Filter = Nothing
-		Me.doc_Orders.Location = New System.Drawing.Point(172, 24)
+		Me.doc_Orders.Location = New System.Drawing.Point(158, 24)
 		Me.doc_Orders.Margin = New System.Windows.Forms.Padding(1)
+		Me.doc_Orders.MinimumSize = New System.Drawing.Size(642, 426)
 		Me.doc_Orders.Name = "doc_Orders"
 		Me.doc_Orders.ShowCompleted = False
-		Me.doc_Orders.Size = New System.Drawing.Size(628, 426)
+		Me.doc_Orders.Size = New System.Drawing.Size(642, 426)
 		Me.doc_Orders.TabIndex = 5
 		'
 		'db_Orders
@@ -103,8 +105,8 @@ Partial Class Frm_DisplayOrders
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
 		Me.ClientSize = New System.Drawing.Size(800, 450)
-		Me.Controls.Add(Me.doc_Orders)
 		Me.Controls.Add(Me.lbl_NoOrders)
+		Me.Controls.Add(Me.doc_Orders)
 		Me.Controls.Add(Me.btn_Complete)
 		Me.Controls.Add(Me.btn_ShowCompleted)
 		Me.Controls.Add(Me.mms_Strip)
