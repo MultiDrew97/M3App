@@ -11,6 +11,7 @@
 		Private Quantity As DataColumn
 		Private OrderTotal As DataColumn
 		Private OrderDate As DataColumn
+		Private CompletedDate As DataColumn
 
 		Public Sub New()
 			MyBase.New
@@ -81,6 +82,12 @@
 			End Get
 		End Property
 
+		Public ReadOnly Property CompletedDateColumn() As Global.System.Data.DataColumn
+			Get
+				Return Me.CompletedDate
+			End Get
+		End Property
+
 		Public ReadOnly Property Count() As Integer
 			Get
 				Return Me.Rows.Count
@@ -102,12 +109,12 @@
 		Public Event OrdersDataRowDeleted As OrdersDataRowChangeEventHandler
 
 		Public Sub AddOrdersRow(ByVal row As Rows.OrdersDataRow)
-			AddOrdersRow(CInt(row("OrderID")), CStr(row("CustomerName")), CStr(row("ItemName")), CInt(row("Quantity")), CDec(row("OrderTotal")), CDate(row("OrderDate")))
+			AddOrdersRow(CInt(row("OrderID")), CStr(row("CustomerName")), CStr(row("ItemName")), CInt(row("Quantity")), CDec(row("OrderTotal")), CDate(row("OrderDate")), CDate(row("CompletedDate")))
 		End Sub
 
-		Public Function AddOrdersRow(OrderID As Integer, CustomerName As String, ItemName As String, Quantity As Integer, OrderTotal As Double, OrderDate As Date) As Rows.OrdersDataRow
+		Public Function AddOrdersRow(OrderID As Integer, CustomerName As String, ItemName As String, Quantity As Integer, OrderTotal As Double, OrderDate As Date, Optional CompletedDate As Date = Nothing) As Rows.OrdersDataRow
 			Dim OrdersDataRow As Rows.OrdersDataRow = CType(Me.NewRow, Rows.OrdersDataRow)
-			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate}
+			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate, CompletedDate}
 			Me.Rows.Add(OrdersDataRow)
 			Return OrdersDataRow
 		End Function
@@ -133,6 +140,7 @@
 			Me.Quantity = MyBase.Columns("Quantity")
 			Me.OrderTotal = MyBase.Columns("OrderTotal")
 			Me.OrderDate = MyBase.Columns("OrderDate")
+			Me.CompletedDate = MyBase.Columns("CompletedDate")
 		End Sub
 
 		Private Sub InitClass()
@@ -148,6 +156,8 @@
 			MyBase.Columns.Add(Me.OrderTotal)
 			Me.OrderDate = New DataColumn("OrderDate", GetType(Date), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.OrderDate)
+			Me.CompletedDate = New DataColumn("CompletedDate", GetType(Date), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.CompletedDate)
 			Me.Constraints.Add(New UniqueConstraint("Constraint1", New DataColumn() {Me.OrderID}, True))
 			Me.OrderID.AllowDBNull = False
 			Me.OrderID.ReadOnly = True
@@ -160,6 +170,8 @@
 			Me.OrderTotal.ReadOnly = True
 			Me.OrderDate.AllowDBNull = False
 			Me.OrderDate.ReadOnly = True
+			Me.CompletedDate.AllowDBNull = True
+			Me.CompletedDate.ReadOnly = True
 		End Sub
 
 		Public Function NewOrdersDataRow() As Rows.OrdersDataRow

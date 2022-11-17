@@ -2,7 +2,11 @@
 Imports System.Windows.Forms
 
 Public Class DisplayOrdersCtrl
+	' TODO: Implement a way to change between current and completed orders
+	' TODO: Make an event for when the count is updated
+
 	Private Event ShowCompletedChanged()
+	Public Event DataChanged()
 
 	Private ReadOnly _orders As New DataTables.OrdersDataTable()
 	Private _showCompleted As Boolean = False
@@ -43,7 +47,6 @@ Public Class DisplayOrdersCtrl
 			Next
 		Else
 			MessageBox.Show("You must select at least 1 order to fulfill it.", "Select an Order", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
 		End If
 	End Sub
 
@@ -51,6 +54,8 @@ Public Class DisplayOrdersCtrl
 		If Not ShowCompleted Then
 			Exit Sub
 		End If
+
+		' TODO: Determine how to display completed orders
 	End Sub
 
 	Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
@@ -60,16 +65,15 @@ Public Class DisplayOrdersCtrl
 		For Each currentOrder In currentOrders
 			_orders.AddOrdersRow(
 				currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
-				currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate)
+				currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate, currentOrder.CompletedDate)
 		Next
 
 		' TODO: Figure out how to sort the table to sort by order date
-
+		RaiseEvent DataChanged()
 	End Sub
 
 	Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
 		bsOrders.DataSource = _orders
-		Reload()
 	End Sub
 
 	Private Sub Reload() Handles ts_Refresh.Click

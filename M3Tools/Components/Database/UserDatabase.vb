@@ -157,7 +157,7 @@ Namespace Database
 
 		Function GetUser(userID As Integer) As User
 			If userID < 0 Then
-				Throw New Exceptions.InvalidIdException()
+				Throw New ArgumentException("UserID must be greater than or equal to 0")
 			End If
 
 			Using _con = db_Connection.Connect()

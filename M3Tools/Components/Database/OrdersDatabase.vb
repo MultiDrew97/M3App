@@ -201,6 +201,7 @@ Namespace Database
 					'		CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
 					'		CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")))
 					'Else
+					' TODO: Verify NULL from tf won't break this
 					Return New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
 							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate")))
 					'End If
