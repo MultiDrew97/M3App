@@ -201,8 +201,19 @@ Namespace Database
                     '		CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")))
                     'Else
                     ' TODO: Verify NULL from tf won't break this
+                    Dim completedDate As Date
+
+                    Try
+                        completedDate = CDate(reader("CompletedDate"))
+                        If completedDate.Year <= 2000 Then
+                            completedDate = Nothing
+                        End If
+                    Catch
+                        completedDate = Nothing
+                    End Try
+
                     Return New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate")))
+                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), completedDate)
                     'End If
                 End Using
             End Using
