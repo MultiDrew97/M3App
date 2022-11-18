@@ -4,8 +4,9 @@ Imports MediaMinistry.Helpers
 Public Class Frm_DisplayOrders
 	' TODO: Add eventhandler for when data is updated to show/hide empty message
 	Private Sub ViewLoading(sender As Object, e As EventArgs) Handles Me.Load
-		lbl_NoOrders.Visible = doc_Orders.IsEmpty
+		doc_Orders.Reload()
 		mms_Strip.ToggleViewItem("Orders")
+		lbl_NoOrders.Visible = doc_Orders.IsEmpty
 	End Sub
 
 	Private Sub ViewClosed(sender As Object, e As EventArgs) Handles Me.Closed
@@ -57,6 +58,8 @@ Public Class Frm_DisplayOrders
 	End Sub
 
 	Private Sub DataUpdated() Handles doc_Orders.DataChanged
-		lbl_NoOrders.Visible = doc_Orders.IsEmpty
+		Invoke(Sub()
+				   lbl_NoOrders.Visible = doc_Orders.IsEmpty
+			   End Sub)
 	End Sub
 End Class
