@@ -81,7 +81,6 @@ Public Class DisplayOrdersCtrl
         bsOrders.DataSource = _orders
     End Sub
 
-    Private Sub Reload() Handles ts_Refresh.Click
     Public Sub Reload() Handles ts_Refresh.Click
         UseWaitCursor = True
         bw_LoadOrders.RunWorkerAsync()
@@ -99,7 +98,7 @@ Public Class DisplayOrdersCtrl
             Else
 
                 orderID = CInt(_orders.Rows(e.RowIndex)("OrderID"))
-            ToolButtonsClicked(e.ColumnIndex, orderID)
+                ToolButtonsClicked(e.ColumnIndex, orderID)
     End Sub
 
     Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow

@@ -25,6 +25,10 @@ Partial Class DisplayOrdersCtrl
         Me.components = New System.ComponentModel.Container()
         Me.bsOrders = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgv_Orders = New System.Windows.Forms.DataGridView()
+        Me.bw_LoadOrders = New System.ComponentModel.BackgroundWorker()
+        Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -33,10 +37,6 @@ Partial Class DisplayOrdersCtrl
         Me.btn_Edit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btn_Complete = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btn_Cancel = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.bw_LoadOrders = New System.ComponentModel.BackgroundWorker()
-        Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
         CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,60 +60,75 @@ Partial Class DisplayOrdersCtrl
         Me.dgv_Orders.Size = New System.Drawing.Size(678, 440)
         Me.dgv_Orders.TabIndex = 1
         '
+        'bw_LoadOrders
+        '
+        '
+        'cms_Tools
+        '
+        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
+        Me.cms_Tools.Text = "Tools"
+        '
+        'ts_Refresh
+        '
+        Me.ts_Refresh.Name = "ts_Refresh"
+        Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
+        Me.ts_Refresh.Text = "Refresh"
+        '
+        'ts_Remove
+        '
+        Me.ts_Remove.Name = "ts_Remove"
+        Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
+        Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
+        Me.ts_Remove.Text = "Remove"
+        '
         'OrderID
         '
-        Me.OrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.OrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.OrderID.DataPropertyName = "OrderID"
-        Me.OrderID.Frozen = True
         Me.OrderID.HeaderText = "Order Number"
         Me.OrderID.MinimumWidth = 10
         Me.OrderID.Name = "OrderID"
         Me.OrderID.ReadOnly = True
-        Me.OrderID.Width = 104
         '
         'Customer
         '
-        Me.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Customer.DataPropertyName = "CustomerName"
-        Me.Customer.Frozen = True
         Me.Customer.HeaderText = "Buyer"
         Me.Customer.MinimumWidth = 10
         Me.Customer.Name = "Customer"
         Me.Customer.ReadOnly = True
-        Me.Customer.Width = 104
         '
         'Product
         '
-        Me.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Product.DataPropertyName = "ItemName"
-        Me.Product.Frozen = True
         Me.Product.HeaderText = "Product"
         Me.Product.MinimumWidth = 10
         Me.Product.Name = "Product"
         Me.Product.ReadOnly = True
-        Me.Product.Width = 103
         '
         'Total
         '
-        Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Total.DataPropertyName = "OrderTotal"
-        Me.Total.Frozen = True
         Me.Total.HeaderText = "Total"
         Me.Total.MinimumWidth = 10
         Me.Total.Name = "Total"
         Me.Total.ReadOnly = True
-        Me.Total.Width = 104
         '
         'OrderDate
         '
-        Me.OrderDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.OrderDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.OrderDate.DataPropertyName = "OrderDate"
-        Me.OrderDate.Frozen = True
         Me.OrderDate.HeaderText = "Date Placed"
         Me.OrderDate.MinimumWidth = 10
         Me.OrderDate.Name = "OrderDate"
         Me.OrderDate.ReadOnly = True
-        Me.OrderDate.Width = 104
         '
         'btn_Edit
         '
@@ -155,31 +170,6 @@ Partial Class DisplayOrdersCtrl
         Me.btn_Cancel.ToolTipText = "Cancel Order"
         Me.btn_Cancel.Width = 25
         '
-        'bw_LoadOrders
-        '
-        '
-        'cms_Tools
-        '
-        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
-        Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
-        Me.cms_Tools.Text = "Tools"
-        '
-        'ts_Refresh
-        '
-        Me.ts_Refresh.Name = "ts_Refresh"
-        Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
-        Me.ts_Refresh.Text = "Refresh"
-        '
-        'ts_Remove
-        '
-        Me.ts_Remove.Name = "ts_Remove"
-        Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-        Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
-        Me.ts_Remove.Text = "Remove"
-        '
         'db_Orders
         '
         Me.db_Orders.InitialCatalog = "Media Ministry"
@@ -194,6 +184,7 @@ Partial Class DisplayOrdersCtrl
         Me.ContextMenuStrip = Me.cms_Tools
         Me.Controls.Add(Me.dgv_Orders)
         Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.MinimumSize = New System.Drawing.Size(642, 426)
         Me.Name = "DisplayOrdersCtrl"
         Me.Size = New System.Drawing.Size(678, 440)
         CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).EndInit()
