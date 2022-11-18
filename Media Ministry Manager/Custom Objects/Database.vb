@@ -145,7 +145,7 @@ Public Class Database
         myCmd.Parameters.AddRange(paramerters)
 
         myCmd.CommandType = CommandType.StoredProcedure
-        myCmd.CommandText = "AddListener"
+        myCmd.CommandText = "sp_AddListener"
 
         myCmd.ExecuteNonQuery()
     End Sub
@@ -158,7 +158,7 @@ Public Class Database
         myCmd.Parameters.Add(parameter)
 
         myCmd.CommandType = CommandType.StoredProcedure
-        myCmd.CommandText = "RemoveListener"
+        myCmd.CommandText = "sp_RemoveListener"
 
         myCmd.ExecuteNonQuery()
     End Sub
