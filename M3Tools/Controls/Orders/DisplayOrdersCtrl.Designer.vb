@@ -23,12 +23,14 @@ Partial Class DisplayOrdersCtrl
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
+		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Me.bsOrders = New System.Windows.Forms.BindingSource(Me.components)
 		Me.dgv_Orders = New System.Windows.Forms.DataGridView()
 		Me.bw_LoadOrders = New System.ComponentModel.BackgroundWorker()
 		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,7 +39,6 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Edit = New System.Windows.Forms.DataGridViewButtonColumn()
 		Me.btn_Complete = New System.Windows.Forms.DataGridViewButtonColumn()
 		Me.btn_Cancel = New System.Windows.Forms.DataGridViewButtonColumn()
-		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
@@ -85,6 +86,12 @@ Partial Class DisplayOrdersCtrl
 		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
 		Me.ts_Remove.Text = "Remove"
 		'
+		'db_Orders
+		'
+		Me.db_Orders.InitialCatalog = "Media Ministry"
+		Me.db_Orders.Password = "M3AppPassword2499"
+		Me.db_Orders.Username = "M3App"
+		'
 		'OrderID
 		'
 		Me.OrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -116,6 +123,11 @@ Partial Class DisplayOrdersCtrl
 		'
 		Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.Total.DataPropertyName = "OrderTotal"
+		DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+		DataGridViewCellStyle1.Format = "C2"
+		DataGridViewCellStyle1.NullValue = "N/A"
+		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.Total.DefaultCellStyle = DataGridViewCellStyle1
 		Me.Total.HeaderText = "Total"
 		Me.Total.MinimumWidth = 10
 		Me.Total.Name = "Total"
@@ -169,12 +181,6 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Cancel.Text = "Cancel"
 		Me.btn_Cancel.ToolTipText = "Cancel Order"
 		Me.btn_Cancel.Width = 25
-		'
-		'db_Orders
-		'
-		Me.db_Orders.InitialCatalog = "Media Ministry"
-		Me.db_Orders.Password = "M3AppPassword2499"
-		Me.db_Orders.Username = "M3App"
 		'
 		'DisplayOrdersCtrl
 		'

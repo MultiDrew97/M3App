@@ -76,7 +76,7 @@ Public Class DisplayOrdersCtrl
 		bsOrders.DataSource = _orders
 	End Sub
 
-	Private Sub Reload() Handles ts_Refresh.Click
+	Public Sub Reload() Handles ts_Refresh.Click
 		UseWaitCursor = True
 		bw_LoadOrders.RunWorkerAsync()
 	End Sub
