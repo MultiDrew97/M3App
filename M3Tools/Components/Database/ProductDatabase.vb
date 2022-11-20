@@ -53,7 +53,7 @@ Namespace Database
 		Public Function GetProduct(ParamArray param As SqlParameter()) As Product
 			Using _cmd = db_Connection.Connect()
 				_cmd.Parameters.AddRange(param)
-				_cmd.CommandText = "SELECT * FROM Inventory WHERE ItemID = @ItemID"
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
@@ -71,7 +71,7 @@ Namespace Database
 			Dim products As New Collection(Of Product)
 
 			Using _cmd = db_Connection.Connect
-				_cmd.CommandText = "SELECT * FROM Inventory"
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Items]"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read
@@ -101,7 +101,7 @@ Namespace Database
 			Using _cmd = db_Connection.Connect
 				_cmd.Parameters.AddRange(params)
 
-				_cmd.CommandText = "AddProduct"
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddProduct]"
 				_cmd.CommandType = CommandType.StoredProcedure
 
 				_cmd.ExecuteNonQueryAsync()
@@ -110,15 +110,19 @@ Namespace Database
 
 		Public Sub UpdateInventory(itemID As Integer, column As String, value As String)
 			' TODO: Figure out a better way to perform row updates
-			Dim command As New SqlParameter("Command", SqlDbType.VarChar)
-
-			If column <> "Stock" And column <> "Price" Then
-				command.Value = $"{column} = '{value}'"
-			Else
-				command.Value = $"{column} = {value}"
+			If Not Utils.ValidID(itemID) Then
+				Throw New ArgumentException($"ID values must greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Me.UpdateInventory(New SqlParameter("ItemID", itemID), command)
+			Dim command As String
+
+			If column <> "Stock" And column <> "Price" Then
+				command = $"{column} = '{value}'"
+			Else
+				command = $"{column} = {value}"
+			End If
+
+			Me.UpdateInventory(command, New SqlParameter("ItemID", itemID))
 			'myCmd.Parameters.AddWithValue("ItemID", itemID)
 			'If Not (column.Equals("Stock") Or column.Equals("Price")) Then
 			'    command = String.Format("{0} = '{1}'", column, value)
@@ -131,37 +135,47 @@ Namespace Database
 			'myCmd.ExecuteNonQuery()
 		End Sub
 
-		Private Sub UpdateInventory(ParamArray param As SqlParameter())
+		Private Sub UpdateInventory(command As String, ParamArray param As SqlParameter())
 			Using cmd = db_Connection.Connect
 				cmd.Parameters.AddRange(param)
 				' TODO: Verify I can do this
 				Console.WriteLine(cmd.Parameters("Command"))
-				cmd.CommandText = $"UPDATE Inventory SET {cmd.Parameters("Command")} WHERE ItemID = @ItemID"
+				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Items] SET {command} WHERE ItemID=@ItemID"
 
 				cmd.ExecuteNonQueryAsync()
 			End Using
 		End Sub
 
 		Public Sub RemoveProduct(itemID As Integer)
-            RemoveProduct(New SqlParameter("ItemID", itemID))
-        End Sub
+			If Not Utils.ValidID(itemID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+			End If
 
-        Private Sub RemoveProduct(param As SqlParameter)
-            ChangeAvailability({param, New SqlParameter("Available", 0)})
-        End Sub
+			RemoveProduct(New SqlParameter("ItemID", itemID))
+		End Sub
 
-        Public Sub ChangeAvailability(itemID As Integer, value As Boolean)
-            ChangeAvailability({New SqlParameter("ItemID", itemID), New SqlParameter("Available", If(value, 1, 0))})
-        End Sub
+		Private Sub RemoveProduct(ParamArray param As SqlParameter())
+			' TODO: Verify this works
+			ChangeAvailability(param.Append(New SqlParameter("Available", 0)).ToArray)
+		End Sub
 
-        Private Sub ChangeAvailability(params As SqlParameter())
-            Using _cmd = db_Connection.Connect
-                _cmd.Parameters.AddRange(params)
+		Public Sub ChangeAvailability(itemID As Integer, value As Boolean)
+			If Not Utils.ValidID(itemID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+			End If
 
-                _cmd.CommandText = "UPDATE Inventory SET Available = @Available WHERE ItemID = @ItemID"
+			ChangeAvailability(New SqlParameter("ItemID", itemID), New SqlParameter("Available", If(value, 1, 0)))
+		End Sub
 
-                _cmd.ExecuteNonQueryAsync()
-            End Using
-        End Sub
-    End Class
+		Private Sub ChangeAvailability(ParamArray params As SqlParameter())
+			Console.WriteLine(params.Length)
+			Using _cmd = db_Connection.Connect
+				_cmd.Parameters.AddRange(params)
+
+				_cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Items] SET Available = @Available WHERE ItemID = @ItemID"
+
+				_cmd.ExecuteNonQueryAsync()
+			End Using
+		End Sub
+	End Class
 End Namespace

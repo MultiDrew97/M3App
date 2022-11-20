@@ -133,8 +133,8 @@ Public Class AddListenerDialog
             If IsMatch(txt_Email.Text, emailPattern) Then
                 Try
                     Using db As New Database
-                        db.AddListener(New Listener(0, txt_FirstName.Text, CStr(IIf(String.IsNullOrWhiteSpace(txt_LastName.Text), Nothing, txt_LastName.Text)), txt_Email.Text))
-                    End Using
+						db.AddListener(New Listener(-1, txt_FirstName.Text, CStr(IIf(String.IsNullOrWhiteSpace(txt_LastName.Text), Nothing, txt_LastName.Text)), txt_Email.Text))
+					End Using
 
                     tss_Feedback.ForeColor = Color.Black
                     tss_Feedback.Text = String.Format("{0} has been added successfully...", txt_FirstName.Text)

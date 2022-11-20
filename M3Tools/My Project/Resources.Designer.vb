@@ -100,24 +100,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Media Ministry.
-        '''</summary>
-        Friend ReadOnly Property DefaultCatalog() As String
-            Get
-                Return ResourceManager.GetString("DefaultCatalog", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;.
-        '''</summary>
-        Friend ReadOnly Property DefaultConnectionString() As String
-            Get
-                Return ResourceManager.GetString("DefaultConnectionString", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to &lt;!Doctype html&gt;
         '''&lt;html&gt;
         '''    &lt;head&gt;
@@ -131,15 +113,6 @@ Namespace My.Resources
         Friend ReadOnly Property DefaultNewListenerEmail() As String
             Get
                 Return ResourceManager.GetString("DefaultNewListenerEmail", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to M3AppPassword2499.
-        '''</summary>
-        Friend ReadOnly Property DefaultPassword() As String
-            Get
-                Return ResourceManager.GetString("DefaultPassword", resourceCulture)
             End Get
         End Property
         
@@ -189,15 +162,6 @@ Namespace My.Resources
         Friend ReadOnly Property DefaultSermonEmail() As String
             Get
                 Return ResourceManager.GetString("DefaultSermonEmail", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to M3App.
-        '''</summary>
-        Friend ReadOnly Property DefaultUsername() As String
-            Get
-                Return ResourceManager.GetString("DefaultUsername", resourceCulture)
             End Get
         End Property
         

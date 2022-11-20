@@ -62,7 +62,7 @@ Public Class DisplayCustomersCtrl
 
 		For Each customer In customers
 			_customers.AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address.Street, customer.Address.City,
-						customer.Address.State, customer.Address.ZipCode, customer.PhoneNumber, customer.EmailAddress, Date.Parse(customer.JoinDate))
+						customer.Address.State, customer.Address.ZipCode, customer.PhoneNumber, customer.Email, customer.Joined)
 		Next
 	End Sub
 

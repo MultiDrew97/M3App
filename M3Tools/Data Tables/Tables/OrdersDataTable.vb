@@ -14,7 +14,7 @@
 		Private CompletedDate As DataColumn
 
 		Public Sub New()
-			MyBase.New
+			'MyBase.New
 			Me.TableName = "Orders"
 			Me.BeginInit()
 			Me.InitClass()
@@ -22,7 +22,7 @@
 		End Sub
 
 		Friend Sub New(table As DataTable)
-			MyBase.New
+			'MyBase.New
 			Me.TableName = table.TableName
 			If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
 				Me.CaseSensitive = table.CaseSensitive
@@ -38,7 +38,7 @@
 		End Sub
 
 		Protected Sub New(info As Runtime.Serialization.SerializationInfo, context As Runtime.Serialization.StreamingContext)
-			MyBase.New(info, context)
+			'MyBase.New(info, context)
 			Me.InitVars()
 		End Sub
 

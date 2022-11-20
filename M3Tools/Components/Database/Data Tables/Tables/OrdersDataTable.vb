@@ -10,7 +10,8 @@
         Private ItemName As DataColumn
         Private Quantity As DataColumn
         Private OrderTotal As DataColumn
-        Private OrderDate As DataColumn
+		Private OrderDate As DataColumn
+		Private CompletedDate As DataColumn
 
 		Public Sub New()
             MyBase.New
@@ -75,13 +76,19 @@
             End Get
         End Property
 
-        Public ReadOnly Property OrderDateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.OrderDate
-            End Get
-        End Property
+		Public ReadOnly Property OrderDateColumn() As Global.System.Data.DataColumn
+			Get
+				Return Me.OrderDate
+			End Get
+		End Property
 
-        Public ReadOnly Property Count() As Integer
+		Public ReadOnly Property CompletedDateColumn() As Global.System.Data.DataColumn
+			Get
+				Return Me.CompletedDate
+			End Get
+		End Property
+
+		Public ReadOnly Property Count() As Integer
             Get
                 Return Me.Rows.Count
             End Get
@@ -102,17 +109,17 @@
         Public Event OrdersDataRowDeleted As OrdersDataRowChangeEventHandler
 
         Public Sub AddOrdersRow(ByVal row As OrdersDataRow)
-            AddOrdersRow(CInt(row("OrderID")), CStr(row("CustomerName")), CStr(row("ItemName")), CInt(row("Quantity")), CDec(row("OrderTotal")), CDate(row("OrderDate")))
-        End Sub
+			AddOrdersRow(CInt(row("OrderID")), CStr(row("CustomerName")), CStr(row("ItemName")), CInt(row("Quantity")), CDec(row("OrderTotal")), CDate(row("OrderDate")), CDate(row("CompletedDate")))
+		End Sub
 
-        Public Function AddOrdersRow(OrderID As Integer, CustomerName As String, ItemName As String, Quantity As Integer, OrderTotal As Double, OrderDate As Date) As OrdersDataRow
-            Dim OrdersDataRow As OrdersDataRow = CType(Me.NewRow, OrdersDataRow)
-            OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate}
-            Me.Rows.Add(OrdersDataRow)
-            Return OrdersDataRow
-        End Function
+		Public Function AddOrdersRow(OrderID As Integer, CustomerName As String, ItemName As String, Quantity As Integer, OrderTotal As Double, OrderDate As Date, Optional CompletedDate As Date = Nothing) As OrdersDataRow
+			Dim OrdersDataRow As OrdersDataRow = CType(Me.NewRow, OrdersDataRow)
+			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate, CompletedDate}
+			Me.Rows.Add(OrdersDataRow)
+			Return OrdersDataRow
+		End Function
 
-        Public Function FindByID(ByVal ID As Integer) As OrdersDataRow
+		Public Function FindByID(ByVal ID As Integer) As OrdersDataRow
             Return CType(Me.Rows.Find(New Object() {ID}), OrdersDataRow)
         End Function
 
@@ -132,8 +139,9 @@
             Me.ItemName = MyBase.Columns("ItemName")
             Me.Quantity = MyBase.Columns("Quantity")
             Me.OrderTotal = MyBase.Columns("OrderTotal")
-            Me.OrderDate = MyBase.Columns("OrderDate")
-        End Sub
+			Me.OrderDate = MyBase.Columns("OrderDate")
+			Me.CompletedDate = MyBase.Columns("CompletedDate")
+		End Sub
 
         Private Sub InitClass()
             Me.OrderID = New DataColumn("OrderID", GetType(Integer), Nothing, MappingType.Element)
@@ -147,8 +155,10 @@
             Me.OrderTotal = New DataColumn("OrderTotal", GetType(Double), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.OrderTotal)
             Me.OrderDate = New DataColumn("OrderDate", GetType(Date), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.OrderDate)
-            Me.Constraints.Add(New UniqueConstraint("Constraint1", New DataColumn() {Me.OrderID}, True))
+			MyBase.Columns.Add(Me.OrderDate)
+			Me.CompletedDate = New DataColumn("CompletedDate", GetType(Date), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.CompletedDate)
+			Me.Constraints.Add(New UniqueConstraint("Constraint1", New DataColumn() {Me.OrderID}, True))
             Me.OrderID.AllowDBNull = False
             Me.OrderID.ReadOnly = True
             Me.OrderID.Unique = True
@@ -159,8 +169,11 @@
             Me.Quantity.AllowDBNull = False
             Me.OrderTotal.ReadOnly = True
             Me.OrderDate.AllowDBNull = False
-            Me.OrderDate.ReadOnly = True
-        End Sub
+			Me.OrderDate.ReadOnly = True
+			Me.CompletedDate.AllowDBNull = True
+			Me.CompletedDate.ReadOnly = True
+			Me.CompletedDate.DefaultValue = DBNull.Value
+		End Sub
 
         Public Function NewOrdersDataRow() As OrdersDataRow
             Return CType(Me.NewRow, OrdersDataRow)
