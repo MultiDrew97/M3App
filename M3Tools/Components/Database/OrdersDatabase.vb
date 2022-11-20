@@ -43,12 +43,12 @@ Namespace Database
             End Set
         End Property
 
-        Public Function GetCurrentOrders() As Collection(Of Order)
-            Dim orders As New Collection(Of Order)
+        Public Function GetCurrentOrders() As DBEntryCollection(Of Order)
+            Dim orders As New DBEntryCollection(Of Order)
 
             ' TODO: Investigate how to make this async easier
             Using cmd = db_Connection.Connect
-                cmd.CommandText = "sp_GetOrders"
+                cmd.CommandText = $"[{My.Settings.Schema}].[sp_GetOrders]"
                 cmd.CommandType = CommandType.StoredProcedure
 
                 Using reader = cmd.ExecuteReader
@@ -78,8 +78,8 @@ Namespace Database
             Return orders
         End Function
 
-        Public Function GetCompletedOrders() As Collection(Of CompletedOrder)
-            Dim orders As New Collection(Of CompletedOrder)
+        Public Function GetCompletedOrders() As Collection(Of Order)
+            Dim orders As New Collection(Of Order)
 
             Using cmd = db_Connection.Connect
                 cmd.CommandType = CommandType.StoredProcedure
@@ -87,28 +87,30 @@ Namespace Database
 
                 Using reader = cmd.ExecuteReader
                     Do While reader.Read
-                        orders.Add(New CompletedOrder() With {
-                            .Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
-                            .Customer = New Customer() With {
-                                .Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
-                                .FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                .LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                            },
-                            .Item = New Item() With {
-                                .Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
-                                .Name = reader.GetString(reader.GetOrdinal("ItemName"))
-                            },
-                            .Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-                            .OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
-                        .OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate")),
-                            .CompletedDate = reader.GetDateTime(reader.GetOrdinal("CompletedDate"))
-                        })
+                        orders.Add(New Order(
+                                   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                                    CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
+                        '			With {
+                        '	.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
+                        '	.Customer = New Customer() With {
+                        '		.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
+                        '		.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                        '		.LastName = reader.GetString(reader.GetOrdinal("LastName"))
+                        '	},
+                        '	.Product = New Item() With {
+                        '		.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+                        '		.Name = reader.GetString(reader.GetOrdinal("ItemName"))
+                        '	},
+                        '	.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+                        '	.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
+                        '	.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
+                        '})
                     Loop
                 End Using
             End Using
+            AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
+            End Sub
 
-            Return orders
-        End Function
 
         Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
             If customerID < 0 Or itemID < 0 Then
@@ -186,8 +188,7 @@ Namespace Database
             End If
 
             Using cmd = db_Connection.Connect()
-                cmd.CommandText = "sp_GetOrder"
-                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "SELECT * FROM tf_GetOrder(@OrderID)"
                 cmd.Parameters.AddWithValue("OrderID", orderID)
 
                 Using reader = cmd.ExecuteReader()

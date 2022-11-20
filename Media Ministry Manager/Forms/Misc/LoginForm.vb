@@ -18,6 +18,8 @@ Public Class Frm_Login
 					Try
 						If MessageBox.Show(reason, "Login Failed", MessageBoxButtons.RetryCancel) = DialogResult.Retry Then
 							TryLogin()
+						Else
+							Exit While
 						End If
 					Catch
 						Continue While

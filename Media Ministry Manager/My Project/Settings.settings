@@ -9,7 +9,7 @@
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="DefaultCatalog" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Media Ministry</Value>
+      <Value Profile="(Default)">Media Ministry Test</Value>
     </Setting>
     <Setting Name="DefaultPassword" Type="System.String" Scope="Application">
       <Value Profile="(Default)">M3AppPassword2499</Value>
@@ -24,7 +24,7 @@
       <Value Profile="(Default)">-1;JohnDoe123;User</Value>
     </Setting>
     <Setting Name="Username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">arandlemiller97</Value>
+      <Value Profile="(Default)">arandle</Value>
     </Setting>
     <Setting Name="Password" Type="System.String" Scope="User">
       <Value Profile="(Default)">JasmineLove2697</Value>

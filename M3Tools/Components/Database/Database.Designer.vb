@@ -15,8 +15,8 @@
 
         <System.Diagnostics.DebuggerNonUserCode()>
         Public Sub New()
-            Me.New(My.Resources.DefaultUsername, My.Resources.DefaultPassword, My.Resources.DefaultCatalog)
-            InitializeComponent()
+			Me.New(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
+			InitializeComponent()
         End Sub
 
         'Component Overrides dispose To clean up the component list.

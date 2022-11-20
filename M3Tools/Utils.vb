@@ -155,4 +155,8 @@ Public Structure Utils
 			Return False
 		End Try
 	End Function
+
+	Shared Function ValidID(id As Integer) As Boolean
+		Return id >= My.Settings.MinID
+	End Function
 End Structure

@@ -12,9 +12,9 @@ Namespace Database
 
         Private __connection As SqlConnection
         Private ReadOnly __command As SqlCommand
-        Private ReadOnly __connectionString As New SqlConnectionStringBuilder(My.Resources.DefaultConnectionString)
+		Private ReadOnly __connectionString As New SqlConnectionStringBuilder(My.Settings.DefaultConnectionString)
 
-        <Description("The username to use for the database connection")>
+		<Description("The username to use for the database connection")>
         <SettingsBindable(True)>
         Friend Property Username As String
             Get
@@ -51,19 +51,19 @@ Namespace Database
         Sub New(username As String, password As String, Optional catalog As String = Nothing)
             Me.Username = username
             Me.Password = password
-            InitialCatalog = If(catalog, My.Resources.DefaultCatalog)
-        End Sub
+			InitialCatalog = If(catalog, My.Settings.DefaultCatalog)
+		End Sub
 
-        Public Function Connect(Optional connectionString As String = Nothing) As SqlCommand
-            'Connect to the database that I have createed for Media Ministry
-            __connection = New SqlConnection(If(connectionString, __connectionString.ConnectionString))
+		Public Function Connect(Optional connectionString As String = Nothing) As SqlCommand
+			'Connect to the database that I have createed for Media Ministry
+			__connection = New SqlConnection(If(connectionString, __connectionString.ConnectionString))
 
-            'open the connection
-            __connection.Open()
+			'open the connection
+			__connection.Open()
 
-            ' Create the command object to use for queries
-            Return __connection.CreateCommand()
-        End Function
+			' Create the command object to use for queries
+			Return __connection.CreateCommand()
+		End Function
 
 		Public Sub Disconnect() Implements IDisposable.Dispose
 			If __connection Is Nothing Then
@@ -76,7 +76,7 @@ Namespace Database
 
 		Public Sub Close()
 			Disconnect()
-			Dispose(True)
+			MyBase.Dispose(True)
 		End Sub
 	End Class
 End Namespace

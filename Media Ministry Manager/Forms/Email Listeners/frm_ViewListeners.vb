@@ -67,9 +67,9 @@ Public Class Frm_ViewListeners
 	End Sub
 
 	Private Sub Dgv_Listeners_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Listeners.UserDeletingRow
-		Using db = New Database
-			db.RemoveListener(CInt(CType(e.Row.DataBoundItem, DataRowView)("ListenerID")))
-		End Using
+		'Using db = New Database
+		'	db.RemoveListener(CInt(CType(e.Row.DataBoundItem, DataRowView)("ListenerID")))
+		'End Using
 	End Sub
 
 	Private Sub Dgv_Listeners_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Listeners.CellEndEdit
@@ -77,9 +77,9 @@ Public Class Frm_ViewListeners
 		Dim value As String = CStr(dgv_Listeners.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
 		Dim listenerID As Integer = CInt(CType(dgv_Listeners.Rows(e.RowIndex).DataBoundItem, DataRowView)("ListenerID"))
 
-		Using db As New Database
-			db.UpdateListener(listenerID, column, value)
-		End Using
+		'Using db As New Database
+		'	db.UpdateListener(listenerID, column, value)
+		'End Using
 	End Sub
 
 	Private Sub UpdateTotal()
@@ -145,9 +145,9 @@ Public Class Frm_ViewListeners
 	End Sub
 
 	Private Sub GetData()
-		Using db As New Database
-			ListenersData = db.GetListeners()
-		End Using
+		'Using db As New Database
+		'	ListenersData = db.GetListeners()
+		'End Using
 	End Sub
 
 	Private Sub LoadData()
@@ -157,7 +157,7 @@ Public Class Frm_ViewListeners
 			row = ListenersTable.NewRow
 			row("ListenerID") = listener.Id
 			row("Name") = listener.Name
-			row("EmailAddress") = listener.EmailAddress
+			row("EmailAddress") = listener.Email
 			ListenersTable.Rows.Add(row)
 		Next
 

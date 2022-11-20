@@ -76,7 +76,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry Test")>  _
     Public ReadOnly Property DefaultCatalog() As String
         Get
             Return CType(Me("DefaultCatalog"),String)
@@ -127,7 +127,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("arandle")>  _
     Public Property Username() As String
         Get
             Return CType(Me("Username"),String)

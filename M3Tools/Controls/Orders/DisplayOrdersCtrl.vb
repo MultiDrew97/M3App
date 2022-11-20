@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 Public Class DisplayOrdersCtrl
 	' TODO: Implement a way to change between current and completed orders
 	' TODO: Make an event for when the count is updated
+	' TODO: Convert DataGridView to TreeView so that orders for the same person can be grouped together
 
 	Private Event ShowCompletedChanged()
 	Public Event DataChanged()
@@ -59,13 +60,13 @@ Public Class DisplayOrdersCtrl
 	End Sub
 
 	Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
-		Dim currentOrders = db_Orders.GetCurrentOrders()
+		Dim orders = db_Orders.GetCurrentOrders()
 		_orders.Clear()
 
-		For Each currentOrder In currentOrders
+		For Each order In orders
 			_orders.AddOrdersRow(
-				currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
-				currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate, currentOrder.CompletedDate)
+				order.Id, order.Customer.Name, order.Product.Name,
+				order.Quantity, order.OrderTotal, order.OrderDate, order.CompletedDate)
 		Next
 
 		' TODO: Figure out how to sort the table to sort by order date
@@ -83,6 +84,7 @@ Public Class DisplayOrdersCtrl
 
 	Private Sub OrdersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadOrders.RunWorkerCompleted
 		UseWaitCursor = False
+		'Filter = "CompletedDate != 'N/A'"
 		Refresh()
 	End Sub
 
@@ -119,5 +121,9 @@ Public Class DisplayOrdersCtrl
 					edit.ShowDialog(Me)
 				End Using
 		End Select
+	End Sub
+
+	Private Sub ShowCompletedOrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCompletedOrdersToolStripMenuItem.Click
+		ShowCompleted = True
 	End Sub
 End Class
