@@ -6,7 +6,7 @@ Public Class ListenerViewPanel
     Private __listeners As New Types.DBEntryCollection(Of Types.Listener)
     Private ReadOnly __listenerTable As New DataTables.ListenersDataTable
 
-    Property Listeners As Types.DBEntryCollection(Of Types.Listener)
+    Property Listeners As Types.ListenerCollection
         Get
             Return __listeners
         End Get
@@ -79,10 +79,10 @@ Public Class ListenerViewPanel
 
     Private Sub LoadListenersTable(sender As Object, e As DoWorkEventArgs) Handles bw_LoadListenersTable.DoWork
         'Dim row As DataRow
-        ListenerTable.Clear()
-        Dim listenersArgument = CType(e.Argument, Types.DBEntryCollection(Of Types.Listener))
+        ListenerTable.ClearRows()
+        Dim listenersArgument = CType(e.Argument, Types.ListenerCollection)
         For Each listener In If(listenersArgument, Listeners)
-            ListenerTable.AddListenersRow(listener.Id, listener.Name, listener.Email)
+            ListenerTable.AddEmailListenersRow(listener.Id, listener.Name, listener.EmailAddress)
             'row = ListenerTable.NewListenersDataRow
 
             'row("ListenerID") = listener.Id

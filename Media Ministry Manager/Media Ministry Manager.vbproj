@@ -182,9 +182,7 @@
     <Compile Include="Custom Objects\Data Tables\Tables\CustomersDataTable.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\InventoryDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Data Tables\Tables\InventoryDataTable.vb" />
     <Compile Include="Custom Objects\Data Tables\Tables\ListenersDataTable.vb">
       <SubType>Component</SubType>
     </Compile>

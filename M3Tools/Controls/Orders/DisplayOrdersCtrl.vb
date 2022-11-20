@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 Public Class DisplayOrdersCtrl
     ' TODO: Implement a way to change between current and completed orders
     ' TODO: Make an event for when the count is updated
+    ' TODO: Convert DataGridView to TreeView so that orders for the same person can be grouped together
 
     Private Event ShowCompletedChanged()
     Public Event DataChanged()
@@ -57,24 +58,17 @@ Public Class DisplayOrdersCtrl
     End Sub
 
     Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
-        Dim orders As New Types.DBEntryCollection(Of Types.Order)
-        Try
-            orders = db_Orders.GetCurrentOrders()
-            _orders.Clear()
+        Dim orders = db_Orders.GetCurrentOrders()
+        _orders.Clear()
 
-            For Each currentOrder In currentOrders
-                _orders.AddOrdersRow(
-                    currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
-                    currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate, currentOrder.CompletedDate)
-            Next
-            For Each currentOrder In currentOrders
-                _orders.AddOrdersRow(
-                    currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
-                    currentOrder.Quantity, currentOrder.OrderTotal, currentOrder.OrderDate)
-            Next
+        For Each currentOrder In currentOrders
+            _orders.AddOrdersRow(
+                currentOrder.Id, currentOrder.Customer.Name, currentOrder.Product.Name,
+                order.Quantity, order.OrderTotal, order.OrderDate, order.CompletedDate)
+        Next
 
         ' TODO: Figure out how to sort the table to sort by order date
-
+        RaiseEvent DataChanged()
     End Sub
 
     Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
@@ -87,6 +81,7 @@ Public Class DisplayOrdersCtrl
     End Sub
 
 		UseWaitCursor = False
+		'Filter = "CompletedDate != 'N/A'"
 		Refresh()
 	End Sub
         Refresh()
@@ -126,12 +121,7 @@ Public Class DisplayOrdersCtrl
         End Select
     End Sub
 
-    Private Sub Dgv_Orders_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow
-        If MessageBox.Show("Are you sure you want to cancel this order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Dim orderID As Integer = CInt(CType(e.Row.DataBoundItem, DataRowView)("OrderID"))
-            db_Orders.CancelOrder(orderID)
-        Else
-            e.Cancel = True
-        End If
+    Private Sub ShowCompletedOrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCompletedOrdersToolStripMenuItem.Click
+        ShowCompleted = True
     End Sub
 End Class

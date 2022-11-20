@@ -66,7 +66,7 @@ Namespace Database
 
                 Using reader = _cmd.ExecuteReaderAsync().Result
                     Do While reader.Read()
-                        If CBool(reader("Success")) Then
+                        If reader.GetBoolean(reader.GetOrdinal("Success")) Then
                             Return True
                         Else
                             Throw New Exceptions.UserException(CStr(reader("Message")))
@@ -81,22 +81,22 @@ Namespace Database
         End Function
 
         Public Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
-            Return ChangePassword(
+            Dim parameters() As SqlParameter = {
                 New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
                 New SqlParameter("OldPassword", oldPassword) With {.Direction = ParameterDirection.Input},
                 New SqlParameter("NewPassword", newPassword) With {.Direction = ParameterDirection.Input}
-                )
+            }
+
+            Return ChangePassword(parameters)
         End Function
 
-        Public Function ChangePassword(ParamArray params As SqlParameter()) As Boolean
-            Using _cmd = db_Connection.Connect()
-                _cmd.Parameters.AddRange(params)
-                _cmd.CommandText = $"[{My.Settings.Schema}].[sp_ChangePassword]"
-                _cmd.CommandType = CommandType.StoredProcedure
+        Public Function ChangePassword(params As SqlParameter()) As Boolean
+            _cmd.CommandText = $"[{My.Settings.Schema}].[sp_ChangePassword]"
+            _cmd.CommandType = CommandType.StoredProcedure
 
-                _cmd.ExecuteNonQueryAsync()
-                ' TODO: Test this
-                Return CBool(_cmd.Parameters("Success").Value)
+            _cmd.ExecuteNonQueryAsync()
+            ' TODO: Test this
+            Return CBool(_cmd.Parameters("Success").Value)
             End Using
         End Function
 
@@ -104,9 +104,9 @@ Namespace Database
             CloseAccount(New SqlParameter("Username", username))
         End Sub
 
-        Private Sub CloseAccount(ParamArray params As SqlParameter())
+        Private Sub CloseAccount(param As SqlParameter)
             Using _cmd = db_Connection.Connect
-                _cmd.Parameters.AddRange(params)
+                _cmd.Parameters.Add(param)
                 _cmd.CommandText = $"[{My.Settings.Schema}].[sp_DeactivateAccount]"
                 _cmd.CommandType = CommandType.StoredProcedure
 
@@ -115,7 +115,7 @@ Namespace Database
         End Sub
 
         Public Function Login(username As String, password As String) As User
-            Return Login(
+            Return Login({
                 New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
                 New SqlParameter("Password", password) With {.Direction = ParameterDirection.Input}
             )
@@ -123,10 +123,10 @@ Namespace Database
 
         Private Function Login(ParamArray params As SqlParameter()) As User
             Using _con = db_Connection.Connect()
-                _con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_Login](@Username, @Password)"
+                _con.CommandText = "SELECT * FROM tf_M3Login(@Username, @Password)"
                 _con.Parameters.AddRange(params)
 
-                Using reader = _con.ExecuteReader()
+                Using reader = _con.ExecuteReaderAsync().Result
                     If reader.Read() Then
                         If Utils.ValidID(CInt(reader("UserID"))) Then
                             Dim user As User
@@ -136,109 +136,108 @@ Namespace Database
                                 Throw New Exceptions.DatabaseException($"Unable to find user with ID {CInt(reader("UserID"))}", ex)
                             End Try
 
-                            If Not user.IsAdmin Then
-                                ' User's account is not an admin account
-                                Throw New Exceptions.RoleException("Unathorized Account Type")
-                            End If
-
                             Return user
                         Else
-                            If CStr(reader("Message")).ToLower().Contains("username") Then
-                                Throw New Exceptions.UsernameException(CStr(reader("Message")))
-                            ElseIf CStr(reader("Message")).ToLower().Contains("password") Then
-                                Throw New Exceptions.PasswordException(CStr(reader("Message")))
+                            If reader.GetString(reader.GetOrdinal("Message")).ToLower().Contains("username") Then
+                                Throw New Exceptions.UsernameException(reader.GetString(reader.GetOrdinal("Message")))
+                            ElseIf reader.GetString(reader.GetOrdinal("Message")).ToLower().Contains("password") Then
+                                Return user
                             Else
-                                Throw New Exceptions.DatabaseException("Unknown Error")
-                            End If
-                        End If
-                    Else
-                        Throw New Exceptions.LoginException("Unable to Login at this time.")
-                    End If
+                                If CStr(reader("Message")).ToLower().Contains("username") Then
+                                    Throw New Exceptions.UsernameException(CStr(reader("Message")))
+                                ElseIf CStr(reader("Message")).ToLower().Contains("password") Then
+                                    Throw New Exceptions.PasswordException(CStr(reader("Message")))
+                                    Throw New Exceptions.LoginException("Unable to Login at this time.")
+                                End If
                 End Using
             End Using
         End Function
 
-        Function GetUser(userID As Integer) As User
-            If Not Utils.ValidID(userID) Then
-                Throw New ArgumentException($"UserID must be greater than or equal to {My.Settings.MinID}")
-            End If
+        End If
+        End Using
+        End Using
+        End Function
 
-            Using _con = db_Connection.Connect()
+        Using _con = db_Connection.Connect()
                 _con.Parameters.AddWithValue("UserID", userID)
-                _con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE UserID=@UserID"
+                _con.CommandText = "SELECT * FROM m3_Users WHERE UserID = @UserID"
+			End If
 
-                Using reader = _con.ExecuteReader()
-                    Do While reader.Read()
-                        Dim buffer(64) As Byte
+			Using _con = db_Connection.Connect()
+				_con.Parameters.AddWithValue("UserID", userID)
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE UserID=@UserID"
 
+				Using reader = _con.ExecuteReader()
+					Do While reader.Read()
+						Dim buffer(64) As Byte
                         reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
-                        Return New User(
-                                CInt(reader("UserID")),
-                                CStr(reader("Username")),
-                                buffer,
-                                CType(reader("Salt"), Guid),
-                                CType(reader("AccountRole"), AccountRole)
-                            )
-                    Loop
+                        Return New User() With {
+                                .Id = reader.GetInt32(reader.GetOrdinal("UserID")),
+                                .Username = reader.GetString(reader.GetOrdinal("Username")),
+                                .Password = buffer,
+                                .Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
+                                .AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
+                            }
+							)
+					Loop
 
-                    Throw New Exceptions.UserException("Invalid UserID")
-                End Using
-            End Using
-        End Function
+					Throw New Exceptions.UserException("Invalid UserID")
+				End Using
+			End Using
+		End Function
 
-        Function GetUser(username As String) As User
-            If String.IsNullOrWhiteSpace(username) Then
-                Throw New Exceptions.UsernameException("Empty Username")
-            End If
+		Function GetUser(username As String) As User
+			If String.IsNullOrWhiteSpace(username) Then
+				Throw New Exceptions.UsernameException("Empty Username")
+			End If
 
-            Using _con = db_Connection.Connect()
-                _con.Parameters.AddWithValue("Username", username)
-                _con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE Username=@Username"
-
-                Using reader = _con.ExecuteReader()
-                    Dim buffer(64) As Byte
-
-                    Do While reader.Read()
-                        reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
-
-                        Return New User(
-                            CInt(reader("UserID")),
-                            CStr(reader("Username")),
-                            buffer,
-                            CType(reader("Salt"), Guid),
-                            CType(reader("AccountRole"), AccountRole)
-                        )
-                    Loop
-
-                    Throw New Exceptions.UserException("Invalid username")
-                End Using
-            End Using
-        End Function
-
-        Function GetUsers() As DBEntryCollection(Of User)
-            Dim users As New DBEntryCollection(Of User)
-
-            Using _con = db_Connection.Connect()
-                _con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users]"
-
-                Using reader = _con.ExecuteReader()
-                    Dim buffer(64) As Byte
+			Using _con = db_Connection.Connect()
+				_con.Parameters.AddWithValue("Username", username)
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE Username=@Username"
+                Using reader = _con.ExecuteReaderAsync().Result
+                    Dim buffer(100) As Byte
 
                     Do While reader.Read()
                         reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
-                        users.Append(New User(
-                                CInt(reader("UserID")),
-                                CStr(reader("Username")),
-                                buffer,
-                                CType(reader("Salt"), Guid),
-                                CType(reader("AccountRole"), AccountRole)
-                        ))
-                    Loop
-                End Using
-            End Using
 
-            Return users
-        End Function
+                        Return New User() With {
+                            .Id = reader.GetInt32(reader.GetOrdinal("UserID")),
+                            .username = reader.GetString(reader.GetOrdinal("Username")),
+                            .Password = buffer,
+                            .Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
+                            .AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
+                        }
+                    Loop
+
+					Throw New Exceptions.UserException("Invalid username")
+				End Using
+			End Using
+		End Function
+
+		Function GetUsers() As DBEntryCollection(Of User)
+			Dim users As New DBEntryCollection(Of User)
+
+			Using _con = db_Connection.Connect()
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users]"
+
+				Using reader = _con.ExecuteReader()
+					Dim buffer(64) As Byte
+
+					Do While reader.Read()
+						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
+						users.Append(New User(
+								CInt(reader("UserID")),
+								CStr(reader("Username")),
+								buffer,
+								CType(reader("Salt"), Guid),
+								CType(reader("AccountRole"), AccountRole)
+						))
+					Loop
+				End Using
+			End Using
+
+			Return users
+		End Function
     End Class
 End Namespace

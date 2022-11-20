@@ -12,7 +12,7 @@ Namespace DataTables
         Private LastName As DataColumn
         Private Address As DataColumn
         Private PhoneNumber As DataColumn
-        Private Email As DataColumn
+        Private EmailAddress As DataColumn
         Private JoinDate As DataColumn
 
         Public Sub New()
@@ -80,7 +80,7 @@ Namespace DataTables
 
         Public ReadOnly Property EmailColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.Email
+                Return Me.EmailAddress
             End Get
         End Property
 
@@ -111,8 +111,19 @@ Namespace DataTables
         Public Event CustomersDataRowDeleted As CustomersDataRowChangeEventHandler
 
         Public Sub AddCustomersRow(ByVal row As CustomersDataRow)
-            AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Address")), CStr(row("PhoneNumber")), CStr(row("Email")), CDate(row("JoinDate")))
+            AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Address")), CStr(row("PhoneNumber")), CStr(row("EmailAddress")), CDate(row("JoinDate")))
         End Sub
+
+        Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As CustomersDataRow
+            Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
+            CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, PhoneNumber, EmailAddress, JoinDate}
+            Me.Rows.Add(CustomersDataRow)
+            Return CustomersDataRow
+        End Function
+
+        Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As CustomersDataRow
+            Return AddCustomersRow(CustomerID, FirstName, LastName, String.Join(","c, Street, City, State, ZipCode), PhoneNumber, EmailAddress, JoinDate)
+        End Function
 
         Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
             Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
@@ -183,7 +194,7 @@ Namespace DataTables
             Me.LastName = MyBase.Columns("LastName")
             Me.Address = MyBase.Columns("Address")
             Me.PhoneNumber = MyBase.Columns("PhoneNumber")
-            Me.Email = MyBase.Columns("Email")
+            Me.EmailAddress = MyBase.Columns("EmailAddress")
             Me.JoinDate = MyBase.Columns("JoinDate")
         End Sub
 
@@ -194,20 +205,12 @@ Namespace DataTables
             MyBase.Columns.Add(Me.FirstName)
             Me.LastName = New DataColumn("LastName", GetType(String), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.LastName)
-            Me.Address = New DataColumn("Address", GetType(String), Nothing, MappingType.Element)
+            Me.Address = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.Address)
-            'Me.Street = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
-            '         MyBase.Columns.Add(Me.Street)
-            '         Me.City = New DataColumn("City", GetType(String), Nothing, MappingType.Element)
-            '         MyBase.Columns.Add(Me.City)
-            '         Me.State = New DataColumn("State", GetType(String), Nothing, MappingType.Element)
-            '         MyBase.Columns.Add(Me.State)
-            '         Me.ZipCode = New DataColumn("ZipCode", GetType(String), Nothing, MappingType.Element)
-            '         MyBase.Columns.Add(Me.ZipCode)
             Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(String), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.PhoneNumber)
-            Me.EmailAddress = New DataColumn("EmailAddress", GetType(String), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.EmailAddress)
+            Me.Email = New DataColumn("Email", GetType(String), Nothing, MappingType.Element)
+            MyBase.Columns.Add(Me.Email)
             Me.JoinDate = New DataColumn("JoinDate", GetType(Date), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.JoinDate)
             Me.Constraints.Add(New UniqueConstraint("CustomerID", New DataColumn() {Me.CustomerID}, True))
@@ -222,18 +225,10 @@ Namespace DataTables
             Me.LastName.MaxLength = 50
             Me.Address.AllowDBNull = True
             Me.Address.MaxLength = 10000
-            'Me.Street.AllowDBNull = True
-            '         Me.Street.MaxLength = 50
-            '         Me.City.AllowDBNull = True
-            '         Me.City.MaxLength = 50
-            '         Me.State.AllowDBNull = True
-            '         Me.State.MaxLength = 50
-            '         Me.ZipCode.AllowDBNull = True
-            '         Me.ZipCode.MaxLength = 50
             Me.PhoneNumber.MaxLength = 15
             Me.PhoneNumber.AllowDBNull = False
-            Me.EmailAddress.AllowDBNull = True
-            Me.EmailAddress.MaxLength = 100
+            Me.Email.AllowDBNull = True
+            Me.Email.MaxLength = 100
             Me.JoinDate.AllowDBNull = False
         End Sub
 
