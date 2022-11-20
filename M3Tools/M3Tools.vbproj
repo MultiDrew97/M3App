@@ -342,13 +342,13 @@
     <Compile Include="Components\Database\Data Tables\Events\ListenersRowChangeEvent.vb" />
     <Compile Include="Components\Database\Data Tables\Events\OrdersRowChangeEvent.vb" />
     <Compile Include="Components\Database\Data Tables\Rows\CustomersDataRow.vb" />
-    <Compile Include="Components\Database\Data Tables\Rows\InventoryDataRow.vb" />
+    <Compile Include="Components\Database\Data Tables\Rows\ItemsDataRow.vb" />
     <Compile Include="Components\Database\Data Tables\Rows\ListenersDataRow.vb" />
     <Compile Include="Components\Database\Data Tables\Rows\OrdersDataRow.vb" />
     <Compile Include="Components\Database\Data Tables\Tables\CustomersDataTable.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Database\Data Tables\Tables\InventoryDataTable.vb">
+    <Compile Include="Components\Database\Data Tables\Tables\ItemsDataTable.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Database\Data Tables\Tables\ListenersDataTable.vb">
@@ -383,6 +383,7 @@
     <Compile Include="Dialogs\User\LoginDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Exceptions\Items\ItemNotFoundException.vb" />
     <Compile Include="Exceptions\MenuException.vb" />
     <Compile Include="Exceptions\Customers\CustomerNotFoundException.vb" />
     <Compile Include="Exceptions\Database\CreationException.vb" />
@@ -408,6 +409,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Types\DBEntry.vb" />
+    <Compile Include="Types\People\DBEntryCollection.vb" />
     <Compile Include="UpdateService.Designer.vb">
       <DependentUpon>UpdateService.vb</DependentUpon>
     </Compile>

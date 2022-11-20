@@ -14,8 +14,8 @@
 		'      Private State As DataColumn
 		'      Private ZipCode As DataColumn
 		Private PhoneNumber As DataColumn
-        Private EmailAddress As DataColumn
-        Private JoinDate As DataColumn
+		Private Email As DataColumn
+		Private JoinDate As DataColumn
 
 		Public Sub New()
             MyBase.New
@@ -106,8 +106,8 @@
 
         Public ReadOnly Property EmailColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.EmailAddress
-            End Get
+				Return Me.Email
+			End Get
         End Property
 
         Public ReadOnly Property JoinDateColumn() As DataColumn
@@ -137,21 +137,21 @@
         Public Event CustomersDataRowDeleted As CustomersDataRowChangeEventHandler
 
 		Public Sub AddCustomersRow(ByVal row As CustomersDataRow)
-			AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Address")), CStr(row("PhoneNumber")), CStr(row("EmailAddress")), CDate(row("JoinDate")))
+			AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Address")), CStr(row("PhoneNumber")), CStr(row("Email")), CDate(row("JoinDate")))
 		End Sub
 
-		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As CustomersDataRow
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
 			Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
-			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, PhoneNumber, EmailAddress, JoinDate}
+			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, PhoneNumber, Email, JoinDate}
 			Me.Rows.Add(CustomersDataRow)
 			Return CustomersDataRow
 		End Function
 
-		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As CustomersDataRow
-			Return AddCustomersRow(CustomerID, FirstName, LastName, String.Join(","c, Street, City, State, ZipCode), PhoneNumber, EmailAddress, JoinDate)
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
+			Return AddCustomersRow(CustomerID, FirstName, LastName, String.Join(","c, Street, City, State, ZipCode), PhoneNumber, Email, JoinDate)
 		End Function
 
-        Public Function FindByID(ByVal ID As Integer) As CustomersDataRow
+		Public Function FindByID(ByVal ID As Integer) As CustomersDataRow
             Return CType(Me.Rows.Find(New Object() {ID}), CustomersDataRow)
         End Function
 
@@ -175,8 +175,8 @@
 			'Me.State = MyBase.Columns("State")
 			'Me.ZipCode = MyBase.Columns("ZipCode")
 			Me.PhoneNumber = MyBase.Columns("PhoneNumber")
-            Me.EmailAddress = MyBase.Columns("EmailAddress")
-            Me.JoinDate = MyBase.Columns("JoinDate")
+			Me.Email = MyBase.Columns("Email")
+			Me.JoinDate = MyBase.Columns("JoinDate")
         End Sub
 
         Private Sub InitClass()
@@ -198,9 +198,9 @@
 			'         MyBase.Columns.Add(Me.ZipCode)
 			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(String), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.PhoneNumber)
-            Me.EmailAddress = New DataColumn("EmailAddress", GetType(String), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.EmailAddress)
-            Me.JoinDate = New DataColumn("JoinDate", GetType(Date), Nothing, MappingType.Element)
+			Me.Email = New DataColumn("Email", GetType(String), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.Email)
+			Me.JoinDate = New DataColumn("JoinDate", GetType(Date), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.JoinDate)
             Me.Constraints.Add(New UniqueConstraint("CustomerID", New DataColumn() {Me.CustomerID}, True))
             Me.CustomerID.AllowDBNull = False
@@ -224,9 +224,9 @@
 			'         Me.ZipCode.MaxLength = 50
 			Me.PhoneNumber.MaxLength = 15
             Me.PhoneNumber.AllowDBNull = False
-            Me.EmailAddress.AllowDBNull = True
-            Me.EmailAddress.MaxLength = 100
-            Me.JoinDate.AllowDBNull = False
+			Me.Email.AllowDBNull = True
+			Me.Email.MaxLength = 100
+			Me.JoinDate.AllowDBNull = False
         End Sub
 
         Public Function NewCustomersDataRow() As CustomersDataRow

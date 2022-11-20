@@ -1,6 +1,6 @@
 ﻿Namespace Types
     Public Enum AccountRole
-        User
-        Admin
+		User = 1
+		Admin
     End Enum
 End Namespace

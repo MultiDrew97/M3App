@@ -2,7 +2,8 @@
 Namespace Types
 	' TODO: Consolidate CurrentOrder and CompletedOrder
 	Public Class Order
-		Public Property Id As Integer
+		Inherits DBEntry
+
 		Public Property Customer As Person
 		Public Property Product As Item
 		Public Property Quantity As Integer
@@ -11,7 +12,7 @@ Namespace Types
 		Public Property CompletedDate As Date
 
 		Public Sub New()
-			Me.New(-1, -1, -1, 0, 0, Date.Now)
+			Me.New(-1, -1, -1, 0, 0, Nothing)
 		End Sub
 
 		''' <summary>
@@ -24,22 +25,13 @@ Namespace Types
 		''' <param name="orderTotal"></param>
 		''' <param name="orderDate"></param>
 		Public Sub New(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer, orderTotal As Double, orderDate As Date, Optional completedDate As Date = Nothing)
-			Me.Id = orderID
+			MyBase.New(orderID)
 			Me.Quantity = quantity
 			Me.OrderTotal = orderTotal
 			Me.OrderDate = orderDate
-
-			If completedDate.Year > 1900 Then
-				Me.CompletedDate = completedDate
-			End If
-
-			If customerID > -1 Then
-				GetCustomer(customerID)
-			End If
-
-			If itemID > -1 Then
-				GetItem(itemID)
-			End If
+			Me.CompletedDate = completedDate
+			GetCustomer(customerID)
+			GetItem(itemID)
 		End Sub
 
 		''' <summary>
@@ -55,16 +47,13 @@ Namespace Types
 		''' <param name="orderDate"></param>
 		''' <param name="completedDate"></param>
 		Public Sub New(orderID As Integer, customerID As Integer, customerName As String(), itemID As Integer, itemName As String, quantity As Integer, orderTotal As Double, orderDate As Date, Optional completedDate As Date = Nothing)
-			Me.Id = orderID
+			MyBase.New(orderID)
 			Me.Customer = New Person(customerID, String.Join(" ", customerName))
 			Me.Product = New Item(itemID, itemName)
 			Me.Quantity = quantity
 			Me.OrderTotal = orderTotal
 			Me.OrderDate = orderDate
-
-			If completedDate.Year > 1900 Then
-				Me.CompletedDate = completedDate
-			End If
+			Me.CompletedDate = completedDate
 		End Sub
 
 		''' <summary>
@@ -72,15 +61,21 @@ Namespace Types
 		''' </summary>
 		''' <param name="customerID">CustomerID of the desired customer</param>
 		Private Sub GetCustomer(customerID As Integer)
+			If customerID > -1 Then
+				Exit Sub
+			End If
+
 			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
 				Using cmd = db.Connect
-					cmd.CommandText = $"SELECT FirstName, LastName FROM Customers WHERE CustomerID=@CustomerID"
+					cmd.CommandText = $"SELECT FirstName, LastName FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID=@CustomerID"
 					cmd.CommandType = CommandType.Text
 
 					cmd.Parameters.AddWithValue("CustomerID", customerID)
 
 					Using reader = cmd.ExecuteReader
-						reader.Read()
+						If Not reader.Read() Then
+							Throw New Exceptions.CustomerNotFoundException($"Unable to find customer with ID {customerID}")
+						End If
 
 						Me.Customer = New Person(customerID, CStr(reader("FirstName")), CStr(reader("LastName")))
 					End Using
@@ -93,15 +88,21 @@ Namespace Types
 		''' </summary>
 		''' <param name="itemID">ItemID of the desired item</param>
 		Private Sub GetItem(itemID As Integer)
+			If itemID > -1 Then
+				Exit Sub
+			End If
+
 			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
 				Using cmd = db.Connect
-					cmd.CommandText = "SELECT ItemName FROM Inventory WHERE ItemID=@ItemID"
+					cmd.CommandText = $"SELECT ItemName FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
 					cmd.CommandType = CommandType.Text
 
 					cmd.Parameters.AddWithValue("ItemID", itemID)
 
 					Using reader = cmd.ExecuteReader
-						reader.Read()
+						If Not reader.Read() Then
+							Throw New Exceptions.ItemNotFoundException($"Unable to find ")
+						End If
 
 						Me.Product = New Item(itemID, CStr(reader("ItemName")))
 					End Using

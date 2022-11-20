@@ -2,9 +2,20 @@
 Namespace Types
 	' TODO: Potentially return to MustInherit
 	Public Class Person
-		Public Property Id As Integer
+		Inherits DBEntry
+
+		Private __email As MimeKit.MailboxAddress
 		Public Property FirstName As String
 		Public Property LastName As String
+
+		Public Property Email As String
+			Get
+				Return __email.Address
+			End Get
+			Set(value As String)
+				__email = New MimeKit.MailboxAddress(Name, If(Not String.IsNullOrWhiteSpace(value), value, ""))
+			End Set
+		End Property
 
 		Public Property Name As String
 			Get
@@ -23,18 +34,25 @@ Namespace Types
 		End Property
 
 		Public Sub New()
-			Me.New(-1, "John Doe")
+			Me.New(-1, "John", "Doe", "johndoe@domain.ext")
 		End Sub
 
-		Public Sub New(id As Integer, name As String)
-			Me.Id = id
+		Public Sub New(id As Integer, fName As String, lName As String, Optional email As String = Nothing)
+			Me.New(id, $"{fName} {lName}", email)
+		End Sub
+
+		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)
+			MyBase.New(id)
 			Me.Name = name
+			Me.Email = email
 		End Sub
 
-		Public Sub New(id As Integer, firstName As String, lastName As String)
-			Me.Id = id
-			Me.FirstName = firstName
-			Me.LastName = lastName
-		End Sub
+		Overloads Shared Operator =(ls As Person, rs As Person) As Boolean
+			Return ls.Id = rs.Id And ls.Name.Equals(rs.Name) And ls.Email.Equals(rs.Email)
+		End Operator
+
+		Overloads Shared Operator <>(ls As Person, rs As Person) As Boolean
+			Return Not ls = rs
+		End Operator
 	End Class
 End Namespace

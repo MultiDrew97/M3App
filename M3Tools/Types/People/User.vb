@@ -2,7 +2,8 @@
 Namespace Types
 	<TypeConverter(GetType(Converters.UserConverter))>
 	Public Class User
-		Public Property Id As Integer
+		Inherits Person
+
 		Public Property Username As String
 		Public Property Password As Byte()
 		Public Property Salt As Guid
@@ -15,6 +16,7 @@ Namespace Types
 		End Property
 
 		Public Sub New()
+			' TODO: Add constructor options like other objects
 			Me.New(-1, "JohnDoe123", Nothing, Nothing, AccountRole.User)
 		End Sub
 
@@ -28,7 +30,7 @@ Namespace Types
 
 		Shadows ReadOnly Property ToString() As String
 			Get
-				Return String.Join(";", Id, Username, Text.Encoding.Unicode.GetString(Password), Salt, CInt(AccountRole))
+				Return String.Join(";", Id, Username, Salt, CInt(AccountRole))
 			End Get
 		End Property
 	End Class

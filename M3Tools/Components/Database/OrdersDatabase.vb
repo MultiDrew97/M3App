@@ -43,12 +43,12 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Function GetCurrentOrders() As Collection(Of Order)
-			Dim orders As New Collection(Of Order)
+		Public Function GetCurrentOrders() As DBEntryCollection(Of Order)
+			Dim orders As New DBEntryCollection(Of Order)
 
 			' TODO: Investigate how to make this async easier
 			Using cmd = db_Connection.Connect
-				cmd.CommandText = "sp_GetOrders"
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_GetOrders]"
 				cmd.CommandType = CommandType.StoredProcedure
 
 				Using reader = cmd.ExecuteReader
@@ -56,21 +56,6 @@ Namespace Database
 						orders.Add(New Order(
 								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
 									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
-						'			With {
-						'	.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
-						'	.Customer = New Customer() With {
-						'		.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
-						'		.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-						'		.LastName = reader.GetString(reader.GetOrdinal("LastName"))
-						'	},
-						'	.Product = New Item() With {
-						'		.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
-						'		.Name = reader.GetString(reader.GetOrdinal("ItemName"))
-						'	},
-						'	.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-						'	.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
-						'	.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
-						'})
 					Loop
 				End Using
 			End Using
@@ -78,33 +63,19 @@ Namespace Database
 			Return orders
 		End Function
 
-		Public Function GetCompletedOrders() As Collection(Of Order)
-			Dim orders As New Collection(Of Order)
+		Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
+			Dim orders As New DBEntryCollection(Of Order)
 
 			Using cmd = db_Connection.Connect
 				cmd.CommandType = CommandType.StoredProcedure
-				cmd.CommandText = "sp_GetCompletedOrders"
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_GetCompletedOrders]"
 
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read
 						orders.Add(New Order(
 								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
-						'			With {
-						'	.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
-						'	.Customer = New Customer() With {
-						'		.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
-						'		.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-						'		.LastName = reader.GetString(reader.GetOrdinal("LastName"))
-						'	},
-						'	.Product = New Item() With {
-						'		.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
-						'		.Name = reader.GetString(reader.GetOrdinal("ItemName"))
-						'	},
-						'	.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-						'	.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
-						'	.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
-						'})
+									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
+									CDate(reader("CompletedDate"))))
 					Loop
 				End Using
 			End Using
@@ -113,12 +84,12 @@ Namespace Database
 		End Function
 
 		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
-			If customerID < 0 Or itemID < 0 Then
-				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			If Not Utils.ValidID(customerID) Or Not Utils.ValidID(itemID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			If quantity < 0 Then
-				Throw New ArgumentException("Quantity values must be greater than or equal to 0")
+			If quantity < 1 Then
+				Throw New ArgumentException("Quantity values must be greater than or equal to 1")
 			End If
 
 			'insert the order into the ORDERS table
@@ -127,7 +98,7 @@ Namespace Database
 
 		Public Sub AddOrder(parameters As SqlParameter())
 			Using cmd = db_Connection.Connect
-				cmd.CommandText = "sp_AddOrder"
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddOrder]"
 				cmd.CommandType = CommandType.StoredProcedure
 
 				cmd.Parameters.AddRange(parameters)
@@ -138,32 +109,40 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateOrder(orderID As Integer, quantity As Integer)
-			If orderID < 0 Then
-				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			If Not Utils.ValidID(orderID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			If quantity < 0 Then
-				Throw New ArgumentException("Quantity values must be greater than or equal to 0")
+			If quantity < 1 Then
+				Throw New ArgumentException($"Quantity values must be greater than or equal to 1")
 			End If
 
-			Throw New Exceptions.DatabaseException("Update Order not implemented yet")
-			'myCmd.Parameters.AddWithValue("OrderID", orderID)
-			'myCmd.Parameters.AddWithValue("Quantity", quantity)
+			UpdateOrder(New SqlParameter("OrderID", orderID), New SqlParameter("Quantity", quantity))
+		End Sub
 
-			'myCmd.CommandText = "UPDATE Orders SET QUANTITY = @Quantity WHERE OrderID = @OrderID"
+		Private Sub UpdateOrder(ParamArray params As SqlParameter())
+			Using cmd = db_Connection.Connect
+				cmd.Parameters.AddRange(params)
 
-			'myCmd.ExecuteNonQuery()
+				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Orders] SET QUANTITY = @Quantity WHERE OrderID = @OrderID"
+				Throw New Exceptions.DatabaseException("Update Order not implemented yet")
+				'myCmd.ExecuteNonQuery()
+			End Using
 		End Sub
 
 		Public Sub CancelOrder(orderID As Integer)
-			If orderID < 0 Then
-				Throw New ArgumentException("ID values must be greater than or equal to 0")
+			If Not Utils.ValidID(orderID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
-			Using cmd = db_Connection.Connect
-				cmd.CommandText = "sp_CancelOrder"
-				cmd.CommandType = CommandType.StoredProcedure
 
-				cmd.Parameters.AddWithValue("OrderID", orderID)
+			CancelOrder(New SqlParameter("OrderID", orderID))
+		End Sub
+
+		Private Sub CancelOrder(ParamArray params As SqlParameter())
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_CancelOrder]"
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddRange(params)
 
 				cmd.ExecuteNonQueryAsync()
 			End Using
@@ -173,10 +152,15 @@ Namespace Database
 			If orderID < 0 Then
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
+
+			CompleteOrder(New SqlParameter("OrderID", orderID))
+		End Sub
+
+		Private Sub CompleteOrder(ParamArray params As SqlParameter())
 			Using cmd = db_Connection.Connect
-				cmd.CommandText = "sp_CompleteOrder"
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_CompleteOrder]"
 				cmd.CommandType = CommandType.StoredProcedure
-				cmd.Parameters.AddWithValue("OrderID", orderID)
+				cmd.Parameters.AddRange(params)
 
 				cmd.ExecuteNonQueryAsync()
 			End Using
@@ -188,7 +172,7 @@ Namespace Database
 			End If
 
 			Using cmd = db_Connection.Connect()
-				cmd.CommandText = "SELECT * FROM tf_GetOrder(@OrderID)"
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_GetOrder](@OrderID)"
 				cmd.Parameters.AddWithValue("OrderID", orderID)
 
 				Using reader = cmd.ExecuteReader()
@@ -202,13 +186,14 @@ Namespace Database
 					'		CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")))
 					'Else
 					' TODO: Verify NULL from tf won't break this
+					Dim typing = GetType(Date)
 					Dim completedDate As Date
 
 					Try
-						completedDate = CDate(reader("CompletedDate"))
-						If completedDate.Year <= 2000 Then
-							completedDate = Nothing
-						End If
+						completedDate = DirectCast(reader("CompletedDate"), Date)
+						'If completedDate.Year <= 2000 Then
+						'	completedDate = Nothing
+						'End If
 					Catch
 						completedDate = Nothing
 					End Try
@@ -229,7 +214,7 @@ Namespace Database
 			End If
 
 			Using cmd = db_Connection.Connect()
-				cmd.CommandText = "SELECT * FROM tf_GetOrder(@OrderID)"
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_GetOrder](@OrderID)"
 				cmd.Parameters.AddWithValue("CustomerID", customerID)
 
 				Using reader = cmd.ExecuteReader()

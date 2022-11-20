@@ -3,14 +3,14 @@ Imports System.Windows.Forms
 
 Public Class ListenerViewPanel
 	Event ListenersUpdated As EventHandler
-	Private __listeners As New Types.ListenerCollection
+	Private __listeners As New Types.DBEntryCollection(Of Types.Listener)
 	Private ReadOnly __listenerTable As New DataTables.ListenersDataTable
 
-	Property Listeners As Types.ListenerCollection
+	Property Listeners As Types.DBEntryCollection(Of Types.Listener)
 		Get
 			Return __listeners
 		End Get
-		Set(value As Types.ListenerCollection)
+		Set(value As Types.DBEntryCollection(Of Types.Listener))
 			__listeners = value
 			RaiseEvent ListenersUpdated(Me, New EventArgs())
 		End Set
@@ -80,9 +80,9 @@ Public Class ListenerViewPanel
 	Private Sub LoadListenersTable(sender As Object, e As DoWorkEventArgs) Handles bw_LoadListenersTable.DoWork
 		'Dim row As DataRow
 		ListenerTable.ClearRows()
-		Dim listenersArgument = CType(e.Argument, Types.ListenerCollection)
+		Dim listenersArgument = CType(e.Argument, Types.DBEntryCollection(Of Types.Listener))
 		For Each listener In If(listenersArgument, Listeners)
-			ListenerTable.AddEmailListenersRow(listener.Id, listener.Name, listener.EmailAddress)
+			ListenerTable.AddEmailListenersRow(listener.Id, listener.Name, listener.Email)
 			'row = ListenerTable.NewListenersDataRow
 
 			'row("ListenerID") = listener.Id

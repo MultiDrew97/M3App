@@ -6,8 +6,8 @@ Imports SPPBC.M3Tools.Types
 
 Public Class ListenerSelectionDialog
     Shared Property Listeners As New Collection(Of Listener)
-    Private ListenerList As Collection(Of Listener)
-    Private ReadOnly ListenersTable As New CustomData.ListenersDataTable
+	Private ListenerList As Collection(Of Listener)
+	Private ReadOnly ListenersTable As New CustomData.ListenersDataTable
     Private column As String
 
     Private Sub ListenerSelectionDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -52,10 +52,10 @@ Public Class ListenerSelectionDialog
     End Sub
 
     Private Sub Bw_RetrieveListeners_DoWork(sender As Object, e As DoWorkEventArgs) Handles bw_RetrieveListeners.DoWork
-        Using db As New Database()
-            ListenerList = db.GetListeners()
-        End Using
-    End Sub
+		'Using db As New Database()
+		'    ListenerList = db.GetListeners()
+		'End Using
+	End Sub
 
     Private Sub FillTable()
         Try
@@ -65,7 +65,7 @@ Public Class ListenerSelectionDialog
                 row = ListenersTable.NewRow
                 row("ListenerID") = listener.Id
                 row("Name") = listener.Name
-				row("EmailAddress") = listener.EmailAddress
+				row("EmailAddress") = listener.Email
 				ListenersTable.Rows.Add(row)
             Next
         Catch ex As ConstraintException

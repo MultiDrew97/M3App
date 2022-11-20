@@ -61,15 +61,15 @@ Namespace Database
 		Public Function CreateUser(params As SqlParameter()) As Boolean
 			Using _cmd = db_Connection.Connect()
 				_cmd.Parameters.AddRange(params)
-				_cmd.CommandText = "sp_AddM3Login"
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddM3Login]"
 				_cmd.CommandType = CommandType.StoredProcedure
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
-						If reader.GetBoolean(reader.GetOrdinal("Success")) Then
+						If CBool(reader("Success")) Then
 							Return True
 						Else
-							Throw New Exceptions.UserException(reader.GetString(reader.GetOrdinal("Message")))
+							Throw New Exceptions.UserException(CStr(reader("Message")))
 						End If
 					Loop
 
@@ -81,23 +81,21 @@ Namespace Database
 		End Function
 
 		Public Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
-			Dim parameters() As SqlParameter = {
+			Return ChangePassword(
 				New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
 				New SqlParameter("OldPassword", oldPassword) With {.Direction = ParameterDirection.Input},
 				New SqlParameter("NewPassword", newPassword) With {.Direction = ParameterDirection.Input}
-			}
-
-			Return ChangePassword(parameters)
+				)
 		End Function
 
-		Public Function ChangePassword(params As SqlParameter()) As Boolean
+		Public Function ChangePassword(ParamArray params As SqlParameter()) As Boolean
 			Using _cmd = db_Connection.Connect()
 				_cmd.Parameters.AddRange(params)
-				_cmd.CommandText = "sp_ChangePassword"
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_ChangePassword]"
 				_cmd.CommandType = CommandType.StoredProcedure
 
 				_cmd.ExecuteNonQueryAsync()
-
+				' TODO: Test this
 				Return CBool(_cmd.Parameters("Success").Value)
 			End Using
 		End Function
@@ -106,10 +104,10 @@ Namespace Database
 			CloseAccount(New SqlParameter("Username", username))
 		End Sub
 
-		Private Sub CloseAccount(param As SqlParameter)
+		Private Sub CloseAccount(ParamArray params As SqlParameter())
 			Using _cmd = db_Connection.Connect
-				_cmd.Parameters.Add(param)
-				_cmd.CommandText = "sp_DeactivateAccount"
+				_cmd.Parameters.AddRange(params)
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_DeactivateAccount]"
 				_cmd.CommandType = CommandType.StoredProcedure
 
 				_cmd.ExecuteNonQueryAsync()
@@ -117,21 +115,26 @@ Namespace Database
 		End Sub
 
 		Public Function Login(username As String, password As String) As User
-			Return Login({
+			Return Login(
 				New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
 				New SqlParameter("Password", password) With {.Direction = ParameterDirection.Input}
-			})
+			)
 		End Function
 
-		Private Function Login(params As SqlParameter()) As User
+		Private Function Login(ParamArray params As SqlParameter()) As User
 			Using _con = db_Connection.Connect()
-				_con.CommandText = "SELECT * FROM tf_M3Login(@Username, @Password)"
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_Login](@Username, @Password)"
 				_con.Parameters.AddRange(params)
 
-				Using reader = _con.ExecuteReaderAsync().Result
+				Using reader = _con.ExecuteReader()
 					If reader.Read() Then
-						If reader.GetInt32(reader.GetOrdinal("UserID")) > -1 Then
-							Dim user = GetUser(reader.GetInt32(reader.GetOrdinal("UserID")))
+						If Utils.ValidID(CInt(reader("UserID"))) Then
+							Dim user As User
+							Try
+								user = GetUser(CInt(reader("UserID")))
+							Catch ex As Exception
+								Throw New Exceptions.DatabaseException($"Unable to find user with ID {CInt(reader("UserID"))}", ex)
+							End Try
 
 							If Not user.IsAdmin Then
 								' User's account is not an admin account
@@ -140,10 +143,10 @@ Namespace Database
 
 							Return user
 						Else
-							If reader.GetString(reader.GetOrdinal("Message")).ToLower().Contains("username") Then
-								Throw New Exceptions.UsernameException(reader.GetString(reader.GetOrdinal("Message")))
-							ElseIf reader.GetString(reader.GetOrdinal("Message")).ToLower().Contains("password") Then
-								Throw New Exceptions.PasswordException(reader.GetString(reader.GetOrdinal("Message")))
+							If CStr(reader("Message")).ToLower().Contains("username") Then
+								Throw New Exceptions.UsernameException(CStr(reader("Message")))
+							ElseIf CStr(reader("Message")).ToLower().Contains("password") Then
+								Throw New Exceptions.PasswordException(CStr(reader("Message")))
 							Else
 								Throw New Exceptions.DatabaseException("Unknown Error")
 							End If
@@ -156,26 +159,27 @@ Namespace Database
 		End Function
 
 		Function GetUser(userID As Integer) As User
-			If userID < 0 Then
-				Throw New ArgumentException("UserID must be greater than or equal to 0")
+			If Not Utils.ValidID(userID) Then
+				Throw New ArgumentException($"UserID must be greater than or equal to {My.Settings.MinID}")
 			End If
 
 			Using _con = db_Connection.Connect()
 				_con.Parameters.AddWithValue("UserID", userID)
-				_con.CommandText = "SELECT * FROM m3_Users WHERE UserID = @UserID"
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE UserID=@UserID"
 
-				Using reader = _con.ExecuteReaderAsync().Result
+				Using reader = _con.ExecuteReader()
 					Do While reader.Read()
 						Dim buffer(64) As Byte
+
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
-						Return New User() With {
-								.Id = reader.GetInt32(reader.GetOrdinal("UserID")),
-								.Username = reader.GetString(reader.GetOrdinal("Username")),
-								.Password = buffer,
-								.Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
-								.AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
-							}
+						Return New User(
+								CInt(reader("UserID")),
+								CStr(reader("Username")),
+								buffer,
+								CType(reader("Salt"), Guid),
+								CType(reader("AccountRole"), AccountRole)
+							)
 					Loop
 
 					Throw New Exceptions.UserException("Invalid UserID")
@@ -190,21 +194,21 @@ Namespace Database
 
 			Using _con = db_Connection.Connect()
 				_con.Parameters.AddWithValue("Username", username)
-				_con.CommandText = "SELECT * FROM m3_Users WHERE Username = @Username"
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE Username=@Username"
 
-				Using reader = _con.ExecuteReaderAsync().Result
-					Dim buffer(100) As Byte
+				Using reader = _con.ExecuteReader()
+					Dim buffer(64) As Byte
 
 					Do While reader.Read()
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
-						Return New User() With {
-							.Id = reader.GetInt32(reader.GetOrdinal("UserID")),
-							.Username = reader.GetString(reader.GetOrdinal("Username")),
-							.Password = buffer,
-							.Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
-							.AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
-						}
+						Return New User(
+							CInt(reader("UserID")),
+							CStr(reader("Username")),
+							buffer,
+							CType(reader("Salt"), Guid),
+							CType(reader("AccountRole"), AccountRole)
+						)
 					Loop
 
 					Throw New Exceptions.UserException("Invalid username")
@@ -212,28 +216,29 @@ Namespace Database
 			End Using
 		End Function
 
-		Function GetUsers() As Collection(Of User)
-			Using _con = db_Connection.Connect()
-				_con.CommandText = "SELECT * FROM m3_Users"
+		Function GetUsers() As DBEntryCollection(Of User)
+			Dim users As New DBEntryCollection(Of User)
 
-				Using reader = _con.ExecuteReaderAsync().Result
-					Dim users As New Collection(Of User)
+			Using _con = db_Connection.Connect()
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users]"
+
+				Using reader = _con.ExecuteReader()
 					Dim buffer(64) As Byte
 
 					Do While reader.Read()
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
-						users.Append(New User() With {
-								.Id = reader.GetInt32(reader.GetOrdinal("UserID")),
-								.Username = reader.GetString(reader.GetOrdinal("Username")),
-								.Password = buffer,
-								.Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
-								.AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
-						})
+						users.Append(New User(
+								CInt(reader("UserID")),
+								CStr(reader("Username")),
+								buffer,
+								CType(reader("Salt"), Guid),
+								CType(reader("AccountRole"), AccountRole)
+						))
 					Loop
-
-					Return users
 				End Using
 			End Using
+
+			Return users
 		End Function
 	End Class
 End Namespace

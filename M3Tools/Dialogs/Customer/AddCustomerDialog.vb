@@ -106,7 +106,7 @@ Namespace Dialogs
 							.ZipCode = af_Address.ZipCode
 						},
 						.PhoneNumber = pn_PhoneNumber.PhoneNumber,
-						.EmailAddress = gi_EmailAddress.Text
+						.Email = gi_EmailAddress.Text
 					}
 					db_Customers.AddCustomer(customer)
 				End If
