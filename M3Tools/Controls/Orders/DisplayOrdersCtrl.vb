@@ -58,7 +58,12 @@ Public Class DisplayOrdersCtrl
     End Sub
 
     Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
-        Dim orders = db_Orders.GetCurrentOrders()
+        Dim orders As New Types.DBEntryCollection(Of Types.Order)
+        Try
+            orders = db_Orders.GetCurrentOrders()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
         _orders.Clear()
 
         For Each currentOrder In currentOrders
@@ -84,16 +89,15 @@ Public Class DisplayOrdersCtrl
 		'Filter = "CompletedDate != 'N/A'"
 		Refresh()
 	End Sub
-        Refresh()
-	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Orders.CellContentClick
+
+    Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Orders.CellContentClick
         Dim orderID As Integer
         If (e.RowIndex < 0) Then
-            If (e.RowIndex < 0) Then
-                Exit Sub
-            Else
+            Exit Sub
+        End If
 
-                orderID = CInt(_orders.Rows(e.RowIndex)("OrderID"))
-                ToolButtonsClicked(e.ColumnIndex, orderID)
+        orderID = TryCast(_orders.Rows(e.RowIndex)("OrderID"), Integer)
+        ToolButtonsClicked(e.ColumnIndex, orderID)
     End Sub
 
     Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow

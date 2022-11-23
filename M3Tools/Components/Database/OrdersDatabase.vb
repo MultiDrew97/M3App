@@ -119,9 +119,14 @@ Namespace Database
             Throw New Exception("CancelOrder Not Yet Implemented")
         End Sub
 
-        Public Sub CompleteOrder(orderID As Integer)
-            CompleteOrder(New SqlParameter("OrderID", orderID))
-        Public Sub CancelOrder(orderID As Integer)
+                cmd.ExecuteNonQueryAsync()
+				Throw New ArgumentException("ID values must be greater than Or equal to 0")
+        End If
+
+			CompleteOrder(New SqlParameter("OrderID", orderID))
+            If orderID < 0 Then
+        Throw New ArgumentException("ID values must be greater than or equal to 0")
+        End If
 
         Private Sub CompleteOrder(ParamArray params As SqlParameter())
             Throw New Exception("CompleteOrder Not Yet Implemented")
@@ -143,14 +148,28 @@ Namespace Database
                 cmd.Parameters.AddWithValue("OrderID", orderID)
 
                 Using reader = cmd.ExecuteReader()
-                    If Not reader.Read() Then
-                        Throw New Exceptions.DatabaseException($"No order with OrderID={orderID} was found")
-                    End If
+    While reader.Read()
+    Dim compDate As Date = CDate(reader("CompletedDate"))
+    If CDate(reader("CompletedDate")).Year < 1901 Then
+                            orders.Add(New Order(
+                            CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
+					While reader.Read()
+    Dim compDate As Date = CDate(reader("CompletedDate"))
+    If CDate(reader("CompletedDate")).Year < 1901 Then
+							orders.Add(New Order(
+							CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
+						Else
+							orders.Add(New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
+						End If
+    End While
 
                     ' TODO: Explore this later
                     Console.WriteLine(reader("CompletedDate"))
                 End Using
-            End Using
-        End Function
+    End Using
+    End Function
     End Class
 End Namespace

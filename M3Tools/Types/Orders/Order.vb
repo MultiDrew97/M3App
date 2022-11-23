@@ -64,9 +64,13 @@ Namespace Types
         ''' </summary>
         ''' <param name="customerID">CustomerID of the desired customer</param>
         Private Sub GetCustomer(customerID As Integer)
+            If customerID > -1 Then
+                Exit Sub
+            End If
+
             Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
                 Using cmd = db.Connect
-                    cmd.CommandText = $"SELECT FirstName, LastName FROM Customers WHERE CustomerID=@CustomerID"
+                    cmd.CommandText = $"SELECT FirstName, LastName FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID=@CustomerID"
                     cmd.CommandType = CommandType.Text
 
                     cmd.Parameters.AddWithValue("CustomerID", customerID)
@@ -90,13 +94,18 @@ Namespace Types
             If itemID > -1 Then
                 Exit Sub
             End If
-            cmd.CommandText = "SELECT ItemName FROM Inventory WHERE ItemID=@ItemID"
-            cmd.CommandType = CommandType.Text
+
+            Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
+                Using cmd = db.Connect
+                    cmd.CommandText = $"SELECT ItemName FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
+                    cmd.CommandType = CommandType.Text
 
                     cmd.Parameters.AddWithValue("ItemID", itemID)
 
                     Using reader = cmd.ExecuteReader
-                        reader.Read()
+                        If Not reader.Read() Then
+                            Throw New Exceptions.ItemNotFoundException($"Unable to find Item with ID {itemID}")
+                        End If
 
                         Me.Product = New Item(itemID, CStr(reader("ItemName")))
                     End Using

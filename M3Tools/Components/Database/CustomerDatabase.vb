@@ -131,9 +131,14 @@ Namespace Database
                                     CInt(reader("CustomerID")),
                                     CStr(reader("FirstName")),
                                     CStr(reader("LastName")),
-                                    Address.Parse(reader("Street"), reader("City"), reader("State"), reader("ZipCode")),
-                                    TryCast(reader("PhoneNumber"), String),
-                                    TryCast(reader("Email"), String),
+                                    New Address(
+                                        CStr(reader("Street")),
+                                        CStr(reader("City")),
+                                        CStr(reader("State")),
+                                        CStr(reader("ZipCode"))
+                                    ),
+                                    CStr(reader("PhoneNumber")),
+                                    CStr(reader("EmailAddress")),
                                     CDate(reader("JoinDate"))
                                   ))
                     Loop
