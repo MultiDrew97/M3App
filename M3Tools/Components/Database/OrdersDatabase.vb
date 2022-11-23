@@ -48,8 +48,8 @@ Namespace Database
 
             ' TODO: Investigate how to make this async easier
             Using cmd = db_Connection.Connect
-                cmd.CommandText = $"[{My.Settings.Schema}].[sp_GetOrders]"
-                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Orders] WHERE CompletedDate IS NULL" '$"[{My.Settings.Schema}].[sp_GetOrders]"
+                cmd.CommandType = CommandType.Text
 
                 Using reader = cmd.ExecuteReader
                     Do While reader.Read()
@@ -155,7 +155,7 @@ Namespace Database
 
 			CompleteOrder(New SqlParameter("OrderID", orderID))
             If orderID < 0 Then
-                Throw New ArgumentException("ID values must be greater than or equal to 0")
+                Throw New ArgumentException("ID values must be greater than Or equal to 0")
             End If
 
             Using cmd = db_Connection.Connect()
@@ -212,9 +212,9 @@ Namespace Database
                 cmd.Parameters.AddWithValue("CustomerID", customerID)
 
                 Using reader = cmd.ExecuteReader()
-                    While reader.Read()
-                        Dim compDate As Date = CDate(reader("CompletedDate"))
-                        If CDate(reader("CompletedDate")).Year < 1901 Then
+        While reader.Read()
+        Dim compDate As Date = CDate(reader("CompletedDate"))
+        If CDate(reader("CompletedDate")).Year < 1901 Then
                             orders.Add(New Order(
                             CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
                             CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))

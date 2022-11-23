@@ -33,41 +33,50 @@
 			End Set
 		End Property
 
-		Public Property Street() As String
+		Public Property Address() As String
 			Get
-				Return CStr(Me(Me.tableCustomers.StreetColumn))
+				Return CStr(Me(Me.tableCustomers.AddressColumn))
 			End Get
-			Set
-				Me(Me.tableCustomers.StreetColumn) = Value
+			Set(value As String)
+				Me(Me.tableCustomers.AddressColumn) = value
 			End Set
 		End Property
 
-		Public Property City() As String
-			Get
-				Return CStr(Me(Me.tableCustomers.CityColumn))
-			End Get
-			Set
-				Me(Me.tableCustomers.CityColumn) = Value
-			End Set
-		End Property
+		'Public Property Street() As String
+		'	Get
+		'		Return CStr(Me(Me.tableCustomers.StreetColumn))
+		'	End Get
+		'	Set
+		'		Me(Me.tableCustomers.StreetColumn) = Value
+		'	End Set
+		'End Property
 
-		Public Property State() As String
-			Get
-				Return CStr(Me(Me.tableCustomers.StateColumn))
-			End Get
-			Set
-				Me(Me.tableCustomers.StateColumn) = Value
-			End Set
-		End Property
+		'Public Property City() As String
+		'	Get
+		'		Return CStr(Me(Me.tableCustomers.CityColumn))
+		'	End Get
+		'	Set
+		'		Me(Me.tableCustomers.CityColumn) = Value
+		'	End Set
+		'End Property
 
-		Public Property ZipCode() As String
-			Get
-				Return CStr(Me(Me.tableCustomers.ZipCodeColumn))
-			End Get
-			Set
-				Me(Me.tableCustomers.ZipCodeColumn) = Value
-			End Set
-		End Property
+		'Public Property State() As String
+		'	Get
+		'		Return CStr(Me(Me.tableCustomers.StateColumn))
+		'	End Get
+		'	Set
+		'		Me(Me.tableCustomers.StateColumn) = Value
+		'	End Set
+		'End Property
+
+		'Public Property ZipCode() As String
+		'	Get
+		'		Return CStr(Me(Me.tableCustomers.ZipCodeColumn))
+		'	End Get
+		'	Set
+		'		Me(Me.tableCustomers.ZipCodeColumn) = Value
+		'	End Set
+		'End Property
 
 		Public Property PhoneNumber() As String
 			Get

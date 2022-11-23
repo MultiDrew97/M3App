@@ -8,10 +8,11 @@
 		Private CustomerID As DataColumn
 		Private FirstName As DataColumn
 		Private LastName As DataColumn
-		Private Street As DataColumn
-		Private City As DataColumn
-		Private State As DataColumn
-		Private ZipCode As DataColumn
+		Private Address As DataColumn
+		'Private Street As DataColumn
+		'Private City As DataColumn
+		'Private State As DataColumn
+		'Private ZipCode As DataColumn
 		Private PhoneNumber As DataColumn
 		Private EmailAddress As DataColumn
 		Private JoinDate As DataColumn
@@ -67,29 +68,35 @@
 			End Get
 		End Property
 
-		Public ReadOnly Property StreetColumn() As DataColumn
+		Public ReadOnly Property AddressColumn() As DataColumn
 			Get
-				Return Me.Street
+				Return Me.Address
 			End Get
 		End Property
 
-		Public ReadOnly Property CityColumn() As DataColumn
-			Get
-				Return Me.City
-			End Get
-		End Property
+		'Public ReadOnly Property StreetColumn() As DataColumn
+		'	Get
+		'		Return Me.Street
+		'	End Get
+		'End Property
 
-		Public ReadOnly Property StateColumn() As DataColumn
-			Get
-				Return Me.State
-			End Get
-		End Property
+		'Public ReadOnly Property CityColumn() As DataColumn
+		'	Get
+		'		Return Me.City
+		'	End Get
+		'End Property
 
-		Public ReadOnly Property ZipCodeColumn() As DataColumn
-			Get
-				Return Me.ZipCode
-			End Get
-		End Property
+		'Public ReadOnly Property StateColumn() As DataColumn
+		'	Get
+		'		Return Me.State
+		'	End Get
+		'End Property
+
+		'Public ReadOnly Property ZipCodeColumn() As DataColumn
+		'	Get
+		'		Return Me.ZipCode
+		'	End Get
+		'End Property
 
 		Public ReadOnly Property PhoneNumberColumn() As DataColumn
 			Get
@@ -133,11 +140,30 @@
 			AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Street")), CStr(row("City")), CStr(row("State")), CStr(row("ZipCode")), CStr(row("PhoneNumber")), CStr(row("EmailAddress")), CDate(row("JoinDate")))
 		End Sub
 
-		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As Rows.CustomersDataRow
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As Types.Address, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As Rows.CustomersDataRow
 			Dim CustomersDataRow As Rows.CustomersDataRow = CType(Me.NewRow, Rows.CustomersDataRow)
-			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Street, City, State, ZipCode, PhoneNumber, EmailAddress, JoinDate}
+			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, ParseAddress(Address), PhoneNumber, EmailAddress, JoinDate}
 			Me.Rows.Add(CustomersDataRow)
 			Return CustomersDataRow
+		End Function
+
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, EmailAddress As String, JoinDate As Date) As Rows.CustomersDataRow
+			Dim CustomersDataRow As Rows.CustomersDataRow = CType(Me.NewRow, Rows.CustomersDataRow)
+			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, ParseAddress(Street, City, State, ZipCode), PhoneNumber, EmailAddress, JoinDate}
+			Me.Rows.Add(CustomersDataRow)
+			Return CustomersDataRow
+		End Function
+
+		Private Function ParseAddress(Street As String, City As String, State As String, ZipCode As String) As Object
+			Return ParseAddress(Types.Address.Parse(Street, City, State, ZipCode))
+		End Function
+
+		Private Function ParseAddress(address As Types.Address) As Object
+			If address Is Nothing Then
+				Return DBNull.Value
+			Else
+				Return address.ToString()
+			End If
 		End Function
 
 		Public Function FindByID(ByVal ID As Integer) As Rows.CustomersDataRow
@@ -158,10 +184,11 @@
 			Me.CustomerID = MyBase.Columns("CustomerID")
 			Me.FirstName = MyBase.Columns("FirstName")
 			Me.LastName = MyBase.Columns("LastName")
-			Me.Street = MyBase.Columns("Street")
-			Me.City = MyBase.Columns("City")
-			Me.State = MyBase.Columns("State")
-			Me.ZipCode = MyBase.Columns("ZipCode")
+			Me.Address = MyBase.Columns("Address")
+			'Me.Street = MyBase.Columns("Street")
+			'Me.City = MyBase.Columns("City")
+			'Me.State = MyBase.Columns("State")
+			'Me.ZipCode = MyBase.Columns("ZipCode")
 			Me.PhoneNumber = MyBase.Columns("PhoneNumber")
 			Me.EmailAddress = MyBase.Columns("EmailAddress")
 			Me.JoinDate = MyBase.Columns("JoinDate")
@@ -174,14 +201,16 @@
 			MyBase.Columns.Add(Me.FirstName)
 			Me.LastName = New DataColumn("LastName", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.LastName)
-			Me.Street = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
-			MyBase.Columns.Add(Me.Street)
-			Me.City = New DataColumn("City", GetType(String), Nothing, MappingType.Element)
-			MyBase.Columns.Add(Me.City)
-			Me.State = New DataColumn("State", GetType(String), Nothing, MappingType.Element)
-			MyBase.Columns.Add(Me.State)
-			Me.ZipCode = New DataColumn("ZipCode", GetType(String), Nothing, MappingType.Element)
-			MyBase.Columns.Add(Me.ZipCode)
+			Me.Address = New DataColumn("Address", GetType(String), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.Address)
+			'Me.Street = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
+			'MyBase.Columns.Add(Me.Street)
+			'Me.City = New DataColumn("City", GetType(String), Nothing, MappingType.Element)
+			'MyBase.Columns.Add(Me.City)
+			'Me.State = New DataColumn("State", GetType(String), Nothing, MappingType.Element)
+			'MyBase.Columns.Add(Me.State)
+			'Me.ZipCode = New DataColumn("ZipCode", GetType(String), Nothing, MappingType.Element)
+			'MyBase.Columns.Add(Me.ZipCode)
 			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.PhoneNumber)
 			Me.EmailAddress = New DataColumn("EmailAddress", GetType(String), Nothing, MappingType.Element)
@@ -198,16 +227,18 @@
 			Me.FirstName.MaxLength = 50
 			Me.LastName.AllowDBNull = False
 			Me.LastName.MaxLength = 50
-			Me.Street.AllowDBNull = True
-			Me.Street.MaxLength = 50
-			Me.City.AllowDBNull = True
-			Me.City.MaxLength = 50
-			Me.State.AllowDBNull = True
-			Me.State.MaxLength = 50
-			Me.ZipCode.AllowDBNull = True
-			Me.ZipCode.MaxLength = 50
+			Me.Address.AllowDBNull = True
+			Me.Address.MaxLength = 400
+			'Me.Street.AllowDBNull = True
+			'Me.Street.MaxLength = 50
+			'Me.City.AllowDBNull = True
+			'Me.City.MaxLength = 50
+			'Me.State.AllowDBNull = True
+			'Me.State.MaxLength = 50
+			'Me.ZipCode.AllowDBNull = True
+			'Me.ZipCode.MaxLength = 50
 			Me.PhoneNumber.MaxLength = 15
-			Me.PhoneNumber.AllowDBNull = False
+			Me.PhoneNumber.AllowDBNull = True
 			Me.EmailAddress.AllowDBNull = True
 			Me.EmailAddress.MaxLength = 100
 			Me.JoinDate.AllowDBNull = False
