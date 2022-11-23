@@ -3,6 +3,7 @@ Imports System.Windows.Forms
 
 Public Class DisplayCustomersCtrl
 	Private ReadOnly _customers As New DataTables.CustomersDataTable()
+	Dim Confirmed As Boolean = False
 
 	''' <summary>
 	'''		Allow the user to add new customers from the datagrid view
@@ -69,25 +70,26 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub UserDeletingCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_CustomerTable.UserDeletingRow
-		If MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-			Dim id As Integer = CInt(CType(dgv_CustomerTable.Rows(e.Row.Index).DataBoundItem, DataRowView)("CustomerID"))
+		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
 
-			RemoveCustomer()
-		Else
-			e.Cancel = True
+		If Not Confirmed Or dgv_CustomerTable.SelectedRows.Count < 1 Then
+			Return
 		End If
+
+		RemoveSelectedRows()
 	End Sub
 
 	Private Sub UserEditedCustomer(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_CustomerTable.CellValueChanged
+		' TODO: Improve for customer data modifications
+
 		If (e.RowIndex < 0) Then
 			Return
 		End If
-		Console.WriteLine(dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
-		' TODO: Improve for customer data modifications
+
 		'get values from table
+		Dim id As Integer = CInt(_customers.Rows(e.RowIndex)("CustomerID"))
 		Dim column As String = dgv_CustomerTable.Columns(e.ColumnIndex).DataPropertyName
-		Dim value As String = If(dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).FormattedValue IsNot DBNull.Value, dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString()
-		Dim customerID As Integer = CInt(_customers.Rows(e.RowIndex)("CustomerID"))
+		Dim value As Object = dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
 
 		'Select Case column
 		'	Case "FirstName", "LastName", "PhoneNumber"
@@ -102,21 +104,42 @@ Public Class DisplayCustomersCtrl
 
 	End Sub
 
-	Private Sub RemoveCustomer()
-		' TODO: Flesh this out
-		Try
-			'db_Customers.RemoveCustomer()
-		Catch
-			MessageBox.Show("Failed to remove customer", "Couldn't Remove", MessageBoxButtons.OK, MessageBoxIcon.Error)
-		End Try
+	Private Sub RemoveSelectedRows()
+		Dim id As Integer
+		Dim failed As Integer = 0
+		Dim total As Integer = dgv_CustomerTable.SelectedRows.Count
+
+		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
+			Try
+				id = DirectCast(row.Cells.Item("CustomerID").Value, Integer)
+				db_Customers.RemoveCustomer(id)
+			Catch
+				failed += 1
+			End Try
+		Next
+
+		If failed > 0 Then
+			MessageBox.Show($"Failed to remove {failed} customer{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		End If
+
+		If total - failed > 0 Then
+			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		End If
+		Reload()
 	End Sub
 
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
-		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
-			If row.Selected Then
-				UserDeletingCustomer(sender, New DataGridViewRowCancelEventArgs(row))
-			End If
-		Next
+		' TODO: Flesh this out
+		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+
+		If Not Confirmed OrElse Not ts_Remove.Enabled OrElse dgv_CustomerTable.SelectedRows.Count < 1 Then
+			Return
+		End If
+
+		' TODO: Open a dialog for bulk deletion
+		'Using bulk As New BulkDeletionDialog(dgv_CustomerTable)
+		'	bulk.ShowDialog()
+		'End Using
 	End Sub
 
 	Private Sub DoneLoadingCustomers(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
