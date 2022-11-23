@@ -1,4 +1,4 @@
-﻿Namespace CustomData
+﻿Namespace DataTables
     Public Class CustomersDataRow
         Inherits DataRow
 		'Private _street As String

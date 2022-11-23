@@ -1,4 +1,4 @@
-﻿Namespace CustomData
+﻿Namespace DataTables
     <Serializable>
     Public Class ListenersDataTable
         Inherits TypedTableBase(Of ListenersDataRow)

@@ -339,26 +339,6 @@
     <Compile Include="Components\Database\Data Tables\Tables\OrdersDataTable.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Data Tables\Events\CustomersRowChangeEvent.vb" />
-    <Compile Include="Data Tables\Events\InventoryRowChangeEvent.vb" />
-    <Compile Include="Data Tables\Events\ListenersRowChangeEvent.vb" />
-    <Compile Include="Data Tables\Events\OrdersRowChangeEvent.vb" />
-    <Compile Include="Data Tables\Rows\CustomersDataRow.vb" />
-    <Compile Include="Data Tables\Rows\InventoryDataRow.vb" />
-    <Compile Include="Data Tables\Rows\ListenersDataRow.vb" />
-    <Compile Include="Data Tables\Rows\OrdersDataRow.vb" />
-    <Compile Include="Data Tables\Tables\CustomersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Data Tables\Tables\InventoryDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Data Tables\Tables\ListenersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Data Tables\Tables\OrdersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Dialogs\User\LoginDialog.Designer.vb">
       <DependentUpon>LoginDialog.vb</DependentUpon>
     </Compile>
@@ -625,7 +605,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
