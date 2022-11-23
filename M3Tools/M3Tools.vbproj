@@ -175,6 +175,12 @@
     <Compile Include="Dialogs\BulkDeletionDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Controls\Products\ProductsComboBox.Designer.vb">
+      <DependentUpon>ProductsComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Products\ProductsComboBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Dialogs\Customer\AddCustomerDialog.Designer.vb">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>
     </Compile>
