@@ -1,20 +1,21 @@
 ﻿Namespace CustomData
     Public Class CustomersDataRow
-        Inherits DataRow
-		'Private _street As String
-		'Private _city As String
-		'Private _state As String
-		'Private _zipCode As String
-
+		Inherits DataRow
 
 		Private ReadOnly tableCustomers As CustomersDataTable
 
-        Friend Sub New(ByVal rb As DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableCustomers = CType(Me.Table, CustomersDataTable)
-        End Sub
+		Friend Sub New(ByVal rb As DataRowBuilder)
+			MyBase.New(rb)
+			Me.tableCustomers = CType(Me.Table, CustomersDataTable)
+		End Sub
 
-        Public ReadOnly Property CustomerID As Integer
+		Public ReadOnly Property Test As Integer
+			Get
+				Return CInt(Me(Me.tableCustomers.TestColumn))
+			End Get
+		End Property
+
+		Public ReadOnly Property CustomerID As Integer
             Get
                 Return CInt(Me(Me.tableCustomers.CustomerIDColumn))
             End Get

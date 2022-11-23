@@ -156,4 +156,8 @@ Public Class DisplayCustomersCtrl
 	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
 		ts_Remove.Enabled = dgv_CustomerTable.SelectedRows.Count > 0
 	End Sub
+
+	Public Overloads Function Focus() As Boolean
+		Return dgv_CustomerTable.Focus()
+	End Function
 End Class

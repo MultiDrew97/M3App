@@ -57,4 +57,8 @@ Public Class Frm_DisplayCustomers
 			settings.Show()
 		End Using
 	End Sub
+
+	Private Sub Frm_DisplayCustomers_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+		dcc_Customers.Refresh()
+	End Sub
 End Class

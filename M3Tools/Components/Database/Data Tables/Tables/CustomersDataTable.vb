@@ -5,7 +5,8 @@
 
         Public Delegate Sub CustomersDataRowChangeEventHandler(ByVal sender As Object, ByVal e As CustomersRowChangeEvent)
 
-        Private CustomerID As DataColumn
+		Private Test As DataColumn
+		Private CustomerID As DataColumn
         Private FirstName As DataColumn
 		Private LastName As DataColumn
 		Private Address As DataColumn
@@ -50,7 +51,13 @@
             MyBase.GetObjectData(info, context)
         End Sub
 
-        Public ReadOnly Property CustomerIdColumn() As DataColumn
+		Public ReadOnly Property TestColumn() As DataColumn
+			Get
+				Return Me.Test
+			End Get
+		End Property
+
+		Public ReadOnly Property CustomerIdColumn() As DataColumn
             Get
                 Return Me.CustomerID
             End Get
@@ -142,7 +149,7 @@
 
 		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
 			Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
-			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, PhoneNumber, Email, JoinDate}
+			CustomersDataRow.ItemArray = {1234567890, CustomerID, FirstName, LastName, Address, PhoneNumber, Email, JoinDate}
 			Me.Rows.Add(CustomersDataRow)
 			Return CustomersDataRow
 		End Function
@@ -165,9 +172,10 @@
             Return New CustomersDataTable()
         End Function
 
-        Friend Sub InitVars()
-            Me.CustomerID = MyBase.Columns("CustomerID")
-            Me.FirstName = MyBase.Columns("FirstName")
+		Friend Sub InitVars()
+			Me.Test = MyBase.Columns("Test")
+			Me.CustomerID = MyBase.Columns("CustomerID")
+			Me.FirstName = MyBase.Columns("FirstName")
 			Me.LastName = MyBase.Columns("LastName")
 			Me.Address = MyBase.Columns("Address")
 			'Me.Street = MyBase.Columns("Street")
@@ -177,14 +185,16 @@
 			Me.PhoneNumber = MyBase.Columns("PhoneNumber")
 			Me.Email = MyBase.Columns("Email")
 			Me.JoinDate = MyBase.Columns("JoinDate")
-        End Sub
+		End Sub
 
-        Private Sub InitClass()
-            Me.CustomerID = New DataColumn("CustomerID", GetType(Integer), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.CustomerID)
-            Me.FirstName = New DataColumn("FirstName", GetType(String), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.FirstName)
-            Me.LastName = New DataColumn("LastName", GetType(String), Nothing, MappingType.Element)
+		Private Sub InitClass()
+			Me.Test = New DataColumn("Test", GetType(Integer), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.Test)
+			Me.CustomerID = New DataColumn("CustomerID", GetType(Integer), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.CustomerID)
+			Me.FirstName = New DataColumn("FirstName", GetType(String), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.FirstName)
+			Me.LastName = New DataColumn("LastName", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.LastName)
 			Me.Address = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Address)
@@ -197,20 +207,22 @@
 			'         Me.ZipCode = New DataColumn("ZipCode", GetType(String), Nothing, MappingType.Element)
 			'         MyBase.Columns.Add(Me.ZipCode)
 			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(String), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.PhoneNumber)
+			MyBase.Columns.Add(Me.PhoneNumber)
 			Me.Email = New DataColumn("Email", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Email)
 			Me.JoinDate = New DataColumn("JoinDate", GetType(Date), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.JoinDate)
-            Me.Constraints.Add(New UniqueConstraint("CustomerID", New DataColumn() {Me.CustomerID}, True))
-            Me.CustomerID.AllowDBNull = False
-            Me.CustomerID.ReadOnly = True
-            Me.CustomerID.Unique = True
-            Me.FirstName.AllowDBNull = False
-            Me.FirstName.MaxLength = 50
-            Me.FirstName.AllowDBNull = False
-            Me.FirstName.MaxLength = 50
-            Me.LastName.AllowDBNull = False
+			MyBase.Columns.Add(Me.JoinDate)
+			Me.Constraints.Add(New UniqueConstraint("CustomerID", New DataColumn() {Me.CustomerID}, True))
+			Me.Test.AllowDBNull = False
+			Me.Test.ReadOnly = True
+			Me.CustomerID.AllowDBNull = False
+			Me.CustomerID.ReadOnly = True
+			Me.CustomerID.Unique = True
+			Me.FirstName.AllowDBNull = False
+			Me.FirstName.MaxLength = 50
+			Me.FirstName.AllowDBNull = False
+			Me.FirstName.MaxLength = 50
+			Me.LastName.AllowDBNull = False
 			Me.LastName.MaxLength = 50
 			Me.Address.AllowDBNull = True
 			Me.Address.MaxLength = 10000
@@ -223,13 +235,13 @@
 			'         Me.ZipCode.AllowDBNull = True
 			'         Me.ZipCode.MaxLength = 50
 			Me.PhoneNumber.MaxLength = 15
-            Me.PhoneNumber.AllowDBNull = False
+			Me.PhoneNumber.AllowDBNull = False
 			Me.Email.AllowDBNull = True
 			Me.Email.MaxLength = 100
 			Me.JoinDate.AllowDBNull = False
-        End Sub
+		End Sub
 
-        Public Function NewCustomersDataRow() As CustomersDataRow
+		Public Function NewCustomersDataRow() As CustomersDataRow
             Return CType(Me.NewRow, CustomersDataRow)
         End Function
 
