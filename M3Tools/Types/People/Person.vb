@@ -10,7 +10,7 @@ Namespace Types
 
 		Public Property Email As String
 			Get
-				Return __email.Address
+				Return If(String.IsNullOrWhiteSpace(__email.Address), Nothing, __email.Address)
 			End Get
 			Set(value As String)
 				__email = New MimeKit.MailboxAddress(Name, If(Not String.IsNullOrWhiteSpace(value), value, ""))
@@ -34,11 +34,7 @@ Namespace Types
 		End Property
 
 		Public Sub New()
-			Me.New(-1, "John", "Doe", "johndoe@domain.ext")
-		End Sub
-
-		Public Sub New(id As Integer, fName As String, lName As String, Optional email As String = Nothing)
-			Me.New(id, $"{fName} {lName}", email)
+			Me.New(-1, "John Doe", "johndoe@domain.ext")
 		End Sub
 
 		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)

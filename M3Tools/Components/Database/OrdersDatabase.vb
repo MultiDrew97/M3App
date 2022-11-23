@@ -48,8 +48,8 @@ Namespace Database
 
 			' TODO: Investigate how to make this async easier
 			Using cmd = db_Connection.Connect
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_GetOrders]"
-				cmd.CommandType = CommandType.StoredProcedure
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Orders] WHERE CompletedDate IS NULL" '$"[{My.Settings.Schema}].[sp_GetOrders]"
+				cmd.CommandType = CommandType.Text
 
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read()

@@ -3,6 +3,11 @@ Imports MediaMinistry.Helpers
 
 Public Class Frm_DisplayCustomers
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
+		Try
+			dcc_Customers.Reload()
+		Catch ex As Exception
+			Console.WriteLine(ex.Message)
+		End Try
 		mms_Main.ToggleViewItem("Customers")
 	End Sub
 

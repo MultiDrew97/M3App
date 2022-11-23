@@ -61,7 +61,7 @@ Namespace Types
 		''' </summary>
 		''' <param name="customerID">CustomerID of the desired customer</param>
 		Private Sub GetCustomer(customerID As Integer)
-			If customerID > -1 Then
+			If customerID < My.Settings.MinID Then
 				Exit Sub
 			End If
 
@@ -77,7 +77,7 @@ Namespace Types
 							Throw New Exceptions.CustomerNotFoundException($"Unable to find customer with ID {customerID}")
 						End If
 
-						Me.Customer = New Person(customerID, CStr(reader("FirstName")), CStr(reader("LastName")))
+						Me.Customer = New Person(customerID, $"{CStr(reader("FirstName"))} {CStr(reader("LastName"))}")
 					End Using
 				End Using
 			End Using
@@ -88,7 +88,7 @@ Namespace Types
 		''' </summary>
 		''' <param name="itemID">ItemID of the desired item</param>
 		Private Sub GetItem(itemID As Integer)
-			If itemID > -1 Then
+			If itemID < My.Settings.MinID Then
 				Exit Sub
 			End If
 
