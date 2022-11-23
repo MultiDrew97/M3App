@@ -1,5 +1,5 @@
-﻿Namespace CustomData
-    Public Class CustomersDataRow
+﻿Namespace DataTables
+	Public Class CustomersDataRow
 		Inherits DataRow
 
 		Private ReadOnly tableCustomers As CustomersDataTable
@@ -9,26 +9,20 @@
 			Me.tableCustomers = CType(Me.Table, CustomersDataTable)
 		End Sub
 
-		Public ReadOnly Property Test As Integer
+		Public ReadOnly Property CustomerID As Integer
 			Get
-				Return CInt(Me(Me.tableCustomers.TestColumn))
+				Return CInt(Me(Me.tableCustomers.CustomerIdColumn))
 			End Get
 		End Property
 
-		Public ReadOnly Property CustomerID As Integer
-            Get
-                Return CInt(Me(Me.tableCustomers.CustomerIDColumn))
-            End Get
-        End Property
-
-        Public Property FirstName() As String
-            Get
-                Return CStr(Me(Me.tableCustomers.FirstNameColumn))
-            End Get
-            Set
-                Me(Me.tableCustomers.FirstNameColumn) = Value
-            End Set
-        End Property
+		Public Property FirstName() As String
+			Get
+				Return CStr(Me(Me.tableCustomers.FirstNameColumn))
+			End Get
+			Set
+				Me(Me.tableCustomers.FirstNameColumn) = Value
+			End Set
+		End Property
 
 		Public Property LastName() As String
 			Get
@@ -48,64 +42,28 @@
 			End Set
 		End Property
 
-		'Public Property Street() As String
-		'          Get
-		'              Return CStr(Me(Me.tableCustomers.StreetColumn))
-		'          End Get
-		'          Set
-		'              Me(Me.tableCustomers.StreetColumn) = Value
-		'          End Set
-		'      End Property
-
-		'      Public Property City() As String
-		'          Get
-		'              Return CStr(Me(Me.tableCustomers.CityColumn))
-		'          End Get
-		'          Set
-		'              Me(Me.tableCustomers.CityColumn) = Value
-		'          End Set
-		'      End Property
-
-		'      Public Property State() As String
-		'          Get
-		'              Return CStr(Me(Me.tableCustomers.StateColumn))
-		'          End Get
-		'          Set
-		'              Me(Me.tableCustomers.StateColumn) = Value
-		'          End Set
-		'      End Property
-
-		'      Public Property ZipCode() As String
-		'          Get
-		'              Return CStr(Me(Me.tableCustomers.ZipCodeColumn))
-		'          End Get
-		'          Set
-		'              Me(Me.tableCustomers.ZipCodeColumn) = Value
-		'          End Set
-		'      End Property
-
 		Public Property PhoneNumber() As String
-            Get
-                Return CStr(Me(Me.tableCustomers.PhoneNumberColumn))
-            End Get
-            Set
-                Me(Me.tableCustomers.PhoneNumberColumn) = Value
-            End Set
-        End Property
+			Get
+				Return CStr(Me(Me.tableCustomers.PhoneNumberColumn))
+			End Get
+			Set
+				Me(Me.tableCustomers.PhoneNumberColumn) = Value
+			End Set
+		End Property
 
-        Public Property Email() As String
-            Get
-                Return CStr(Me(Me.tableCustomers.EmailColumn))
-            End Get
-            Set
-                Me(Me.tableCustomers.EmailColumn) = Value
-            End Set
-        End Property
+		Public Property Email() As String
+			Get
+				Return CStr(Me(Me.tableCustomers.EmailColumn))
+			End Get
+			Set
+				Me(Me.tableCustomers.EmailColumn) = Value
+			End Set
+		End Property
 
-        Public ReadOnly Property JoinDate() As Date
-            Get
-                Return CDate(Me(Me.tableCustomers.JoinDateColumn))
-            End Get
-        End Property
-    End Class
+		Public ReadOnly Property JoinDate() As Date
+			Get
+				Return CDate(Me(Me.tableCustomers.JoinDateColumn))
+			End Get
+		End Property
+	End Class
 End Namespace

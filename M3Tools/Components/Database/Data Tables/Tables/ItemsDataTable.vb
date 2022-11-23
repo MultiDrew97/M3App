@@ -1,4 +1,4 @@
-﻿Namespace CustomData
+﻿Namespace DataTables
 	<Serializable>
 	Public Class ItemsDataTable
 		Inherits TypedTableBase(Of ItemsDataRow)

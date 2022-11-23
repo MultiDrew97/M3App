@@ -23,11 +23,10 @@ Partial Class DisplayCustomersCtrl
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
-		Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Me.dgv_CustomerTable = New System.Windows.Forms.DataGridView()
 		Me.bs_Customers = New System.Windows.Forms.BindingSource(Me.components)
 		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -38,7 +37,7 @@ Partial Class DisplayCustomersCtrl
 		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
 		Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
 		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
-		Me.Test = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.EmailAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -59,17 +58,17 @@ Partial Class DisplayCustomersCtrl
 		Me.dgv_CustomerTable.AllowUserToAddRows = False
 		Me.dgv_CustomerTable.AutoGenerateColumns = False
 		Me.dgv_CustomerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-		Me.dgv_CustomerTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Test, Me.FirstName, Me.LastName, Me.EmailAddress, Me.PhoneNumber, Me.Address, Me.JoinDate})
+		Me.dgv_CustomerTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomerID, Me.FirstName, Me.LastName, Me.EmailAddress, Me.PhoneNumber, Me.Address, Me.JoinDate})
 		Me.dgv_CustomerTable.DataSource = Me.bs_Customers
-		DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-		DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-		DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-		DataGridViewCellStyle5.NullValue = "N/A"
-		DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-		DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-		DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.dgv_CustomerTable.DefaultCellStyle = DataGridViewCellStyle5
+		DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+		DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+		DataGridViewCellStyle4.NullValue = "N/A"
+		DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.dgv_CustomerTable.DefaultCellStyle = DataGridViewCellStyle4
 		Me.dgv_CustomerTable.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.dgv_CustomerTable.Location = New System.Drawing.Point(0, 0)
 		Me.dgv_CustomerTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -149,16 +148,14 @@ Partial Class DisplayCustomersCtrl
 		Me.db_Customers.Password = "M3AppPassword2499"
 		Me.db_Customers.Username = "M3App"
 		'
-		'Test
+		'CustomerID
 		'
-		Me.Test.DataPropertyName = "Test"
-		DataGridViewCellStyle1.Format = "(###) - ### - ####"
-		DataGridViewCellStyle1.NullValue = "N/A"
-		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.Test.DefaultCellStyle = DataGridViewCellStyle1
-		Me.Test.HeaderText = "Test"
-		Me.Test.Name = "Test"
-		Me.Test.ReadOnly = True
+		Me.CustomerID.DataPropertyName = "CustomerID"
+		Me.CustomerID.HeaderText = ""
+		Me.CustomerID.Name = "CustomerID"
+		Me.CustomerID.ReadOnly = True
+		Me.CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.CustomerID.Visible = False
 		'
 		'FirstName
 		'
@@ -180,9 +177,9 @@ Partial Class DisplayCustomersCtrl
 		'
 		Me.EmailAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.EmailAddress.DataPropertyName = "EmailAddress"
-		DataGridViewCellStyle2.NullValue = "N/A"
-		DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.EmailAddress.DefaultCellStyle = DataGridViewCellStyle2
+		DataGridViewCellStyle1.NullValue = "N/A"
+		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.EmailAddress.DefaultCellStyle = DataGridViewCellStyle1
 		Me.EmailAddress.HeaderText = "Email"
 		Me.EmailAddress.MinimumWidth = 10
 		Me.EmailAddress.Name = "EmailAddress"
@@ -191,9 +188,9 @@ Partial Class DisplayCustomersCtrl
 		'
 		Me.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-		DataGridViewCellStyle3.Format = "(###) - ### - ####"
-		DataGridViewCellStyle3.NullValue = "N/A"
-		Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle3
+		DataGridViewCellStyle2.Format = "(###) ###-####"
+		DataGridViewCellStyle2.NullValue = "N/A"
+		Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle2
 		Me.PhoneNumber.HeaderText = "Phone"
 		Me.PhoneNumber.MinimumWidth = 10
 		Me.PhoneNumber.Name = "PhoneNumber"
@@ -202,9 +199,9 @@ Partial Class DisplayCustomersCtrl
 		'
 		Me.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.Address.DataPropertyName = "Address"
-		DataGridViewCellStyle4.NullValue = "N/A"
-		DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.Address.DefaultCellStyle = DataGridViewCellStyle4
+		DataGridViewCellStyle3.NullValue = "N/A"
+		DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.Address.DefaultCellStyle = DataGridViewCellStyle3
 		Me.Address.HeaderText = "Address"
 		Me.Address.MinimumWidth = 10
 		Me.Address.Name = "Address"
@@ -252,7 +249,7 @@ Partial Class DisplayCustomersCtrl
 	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
 	Friend WithEvents ToolStripButton1 As Windows.Forms.ToolStripButton
 	Private WithEvents db_Customers As Database.CustomerDatabase
-	Friend WithEvents Test As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents CustomerID As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents FirstName As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents LastName As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents EmailAddress As Windows.Forms.DataGridViewTextBoxColumn

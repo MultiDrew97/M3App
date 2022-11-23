@@ -1,7 +1,7 @@
 ﻿Imports System.ComponentModel
 
 Public Class ProductsComboBox
-	Private ReadOnly _items As New DataTables.InventoryDataTable
+	Private ReadOnly _items As New DataTables.ItemsDataTable
 	Public Event LoadBegin()
 	Public Event LoadEnd()
 
@@ -38,7 +38,7 @@ Public Class ProductsComboBox
 		_items.Clear()
 
 		For Each item In items
-			_items.AddInventoryRow(item.Id, item.Name, item.Stock, item.Price, item.Available)
+			_items.AddItemsRow(item.Id, item.Name, item.Stock, item.Price, item.Available)
 		Next
 	End Sub
 

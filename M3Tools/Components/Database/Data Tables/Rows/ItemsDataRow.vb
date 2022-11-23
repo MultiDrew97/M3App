@@ -1,4 +1,4 @@
-﻿Namespace CustomData
+﻿Namespace DataTables
 	Public Class ItemsDataRow
 		Inherits DataRow
 

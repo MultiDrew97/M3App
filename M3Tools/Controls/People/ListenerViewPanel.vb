@@ -79,10 +79,10 @@ Public Class ListenerViewPanel
 
 	Private Sub LoadListenersTable(sender As Object, e As DoWorkEventArgs) Handles bw_LoadListenersTable.DoWork
 		'Dim row As DataRow
-		ListenerTable.ClearRows()
+		ListenerTable.Clear()
 		Dim listenersArgument = CType(e.Argument, Types.DBEntryCollection(Of Types.Listener))
 		For Each listener In If(listenersArgument, Listeners)
-			ListenerTable.AddEmailListenersRow(listener.Id, listener.Name, listener.Email)
+			ListenerTable.AddListenersRow(listener.Id, listener.Name, listener.Email)
 			'row = ListenerTable.NewListenersDataRow
 
 			'row("ListenerID") = listener.Id

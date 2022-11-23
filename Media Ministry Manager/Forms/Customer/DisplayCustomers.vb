@@ -1,22 +1,30 @@
 ﻿Option Strict On
+Imports System.ComponentModel
 Imports MediaMinistry.Helpers
 
 Public Class Frm_DisplayCustomers
+	Private Tooled As Boolean = False
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
+		mms_Main.ToggleViewItem("Customers")
 		Try
 			dcc_Customers.Reload()
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)
 		End Try
-		mms_Main.ToggleViewItem("Customers")
 	End Sub
 
-	Private Sub DisplayClosing(sender As Object, e As EventArgs) Handles Me.Closing
-		mms_Main.ToggleViewItem("Customers")
+	Private Sub DisplayClosing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+		' TODO: Find easier way
+		If Tooled Then
+			Return
+		End If
+
+		Frm_Main.Show()
 	End Sub
 
 	Private Sub Logout() Handles mms_Main.Logout
 		Utils.Logout()
+		Tooled = True
 		Me.Close()
 	End Sub
 
@@ -27,28 +35,28 @@ Public Class Frm_DisplayCustomers
 	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
 		Dim customers As New Frm_DisplayCustomers
 		customers.Show()
-		Utils.SpecialClose(sender)
+		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ViewProducts(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
 		Dim products As New Frm_DisplayInventory
 		products.Show()
-		Utils.SpecialClose(sender)
+		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ViewOrders(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
 		Dim orders As New Frm_DisplayOrders
 		orders.Show()
-		Utils.SpecialClose(sender)
+		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
 		Dim listeners As New Frm_ViewListeners
 		listeners.Show()
-		Utils.SpecialClose(sender)
+		Tooled = True
 		Me.Close()
 	End Sub
 
@@ -56,9 +64,5 @@ Public Class Frm_DisplayCustomers
 		Using settings As New Frm_Settings()
 			settings.Show()
 		End Using
-	End Sub
-
-	Private Sub Frm_DisplayCustomers_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-		dcc_Customers.Refresh()
 	End Sub
 End Class
