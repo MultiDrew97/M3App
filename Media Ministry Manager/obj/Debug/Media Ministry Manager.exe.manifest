@@ -199,14 +199,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1830984">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1830472">
       <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="E198E3547A7C28A0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fKutkNKESDCQkt3zHAHDcFQiHn4pIlbshNTQyUu2BDw=</dsig:DigestValue>
+        <dsig:DigestValue>QjMCeuB/UxzO7NLpFUvVmCVaaF+XmAmkQiMEq92sCi4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

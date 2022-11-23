@@ -160,4 +160,10 @@ Public Class DisplayCustomersCtrl
 	Public Overloads Function Focus() As Boolean
 		Return dgv_CustomerTable.Focus()
 	End Function
+
+	Private Sub AddCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
+		Using newCustomer As New Dialogs.AddCustomerDialog()
+			newCustomer.ShowDialog()
+		End Using
+	End Sub
 End Class

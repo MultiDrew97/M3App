@@ -28,15 +28,6 @@ Partial Class DisplayCustomersCtrl
 		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Me.dgv_CustomerTable = New System.Windows.Forms.DataGridView()
-		Me.bs_Customers = New System.Windows.Forms.BindingSource(Me.components)
-		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
-		Me.bw_LoadCustomers = New System.ComponentModel.BackgroundWorker()
-		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
-		Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		Me.CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,6 +35,15 @@ Partial Class DisplayCustomersCtrl
 		Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.JoinDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.bs_Customers = New System.Windows.Forms.BindingSource(Me.components)
+		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
+		Me.bw_LoadCustomers = New System.ComponentModel.BackgroundWorker()
+		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
+		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
+		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
@@ -76,77 +76,6 @@ Partial Class DisplayCustomersCtrl
 		Me.dgv_CustomerTable.RowHeadersWidth = 82
 		Me.dgv_CustomerTable.Size = New System.Drawing.Size(1026, 497)
 		Me.dgv_CustomerTable.TabIndex = 0
-		'
-		'cms_Tools
-		'
-		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
-		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
-		Me.cms_Tools.Text = "Tools"
-		'
-		'ts_Refresh
-		'
-		Me.ts_Refresh.Name = "ts_Refresh"
-		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-		Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
-		Me.ts_Refresh.Text = "Refresh"
-		'
-		'ts_Remove
-		'
-		Me.ts_Remove.Name = "ts_Remove"
-		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
-		Me.ts_Remove.Text = "Remove"
-		'
-		'bw_LoadCustomers
-		'
-		'
-		'ToolStripContainer1
-		'
-		'
-		'ToolStripContainer1.ContentPanel
-		'
-		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_CustomerTable)
-		Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1026, 497)
-		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-		Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.ToolStripContainer1.Name = "ToolStripContainer1"
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(1026, 536)
-		Me.ToolStripContainer1.TabIndex = 9
-		Me.ToolStripContainer1.Text = "ToolStripContainer1"
-		'
-		'ToolStripContainer1.TopToolStripPanel
-		'
-		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
-		'
-		'ts_CustomerTools
-		'
-		Me.ts_CustomerTools.Dock = System.Windows.Forms.DockStyle.None
-		Me.ts_CustomerTools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1})
-		Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
-		Me.ts_CustomerTools.Name = "ts_CustomerTools"
-		Me.ts_CustomerTools.Size = New System.Drawing.Size(48, 39)
-		Me.ts_CustomerTools.TabIndex = 6
-		Me.ts_CustomerTools.Text = "Customer Tools"
-		'
-		'ToolStripButton1
-		'
-		Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.ToolStripButton1.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
-		Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.ToolStripButton1.Name = "ToolStripButton1"
-		Me.ToolStripButton1.Size = New System.Drawing.Size(36, 36)
-		Me.ToolStripButton1.Text = "New Customer"
-		'
-		'db_Customers
-		'
-		Me.db_Customers.InitialCatalog = "Media Ministry Test"
-		Me.db_Customers.Password = "M3AppPassword2499"
-		Me.db_Customers.Username = "M3App"
 		'
 		'CustomerID
 		'
@@ -215,6 +144,77 @@ Partial Class DisplayCustomersCtrl
 		Me.JoinDate.Name = "JoinDate"
 		Me.JoinDate.ReadOnly = True
 		'
+		'cms_Tools
+		'
+		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
+		Me.cms_Tools.Name = "cms_Tools"
+		Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
+		Me.cms_Tools.Text = "Tools"
+		'
+		'ts_Refresh
+		'
+		Me.ts_Refresh.Name = "ts_Refresh"
+		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+		Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
+		Me.ts_Refresh.Text = "Refresh"
+		'
+		'ts_Remove
+		'
+		Me.ts_Remove.Name = "ts_Remove"
+		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
+		Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
+		Me.ts_Remove.Text = "Remove"
+		'
+		'bw_LoadCustomers
+		'
+		'
+		'ToolStripContainer1
+		'
+		'
+		'ToolStripContainer1.ContentPanel
+		'
+		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_CustomerTable)
+		Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1026, 497)
+		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+		Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.ToolStripContainer1.Name = "ToolStripContainer1"
+		Me.ToolStripContainer1.Size = New System.Drawing.Size(1026, 536)
+		Me.ToolStripContainer1.TabIndex = 9
+		Me.ToolStripContainer1.Text = "ToolStripContainer1"
+		'
+		'ToolStripContainer1.TopToolStripPanel
+		'
+		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
+		'
+		'ts_CustomerTools
+		'
+		Me.ts_CustomerTools.Dock = System.Windows.Forms.DockStyle.None
+		Me.ts_CustomerTools.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer})
+		Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
+		Me.ts_CustomerTools.Name = "ts_CustomerTools"
+		Me.ts_CustomerTools.Size = New System.Drawing.Size(79, 39)
+		Me.ts_CustomerTools.TabIndex = 6
+		Me.ts_CustomerTools.Text = "Customer Tools"
+		'
+		'ToolStripButton1
+		'
+		Me.tbtn_AddCustomer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_AddCustomer.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
+		Me.tbtn_AddCustomer.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_AddCustomer.Name = "ToolStripButton1"
+		Me.tbtn_AddCustomer.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_AddCustomer.Text = "New Customer"
+		'
+		'db_Customers
+		'
+		Me.db_Customers.InitialCatalog = "Media Ministry Test"
+		Me.db_Customers.Password = "M3AppPassword2499"
+		Me.db_Customers.Username = "M3App"
+		'
 		'DisplayCustomersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -247,7 +247,7 @@ Partial Class DisplayCustomersCtrl
 	Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
 	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
-	Friend WithEvents ToolStripButton1 As Windows.Forms.ToolStripButton
+	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
 	Private WithEvents db_Customers As Database.CustomerDatabase
 	Friend WithEvents CustomerID As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents FirstName As Windows.Forms.DataGridViewTextBoxColumn
