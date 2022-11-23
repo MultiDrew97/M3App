@@ -63,35 +63,6 @@ Namespace Database
         Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
             Dim orders As New DBEntryCollection(Of Order)
 
-            Using cmd = db_Connection.Connect
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "sp_GetCompletedOrders"
-
-                Using reader = cmd.ExecuteReader
-                    Do While reader.Read
-                        orders.Add(New Order(
-                                   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-                                    CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
-                        '			With {
-                        '	.Id = reader.GetInt32(reader.GetOrdinal("OrderID")),
-                        '	.Customer = New Customer() With {
-                        '		.Id = reader.GetInt32(reader.GetOrdinal("CustomerID")),
-                        '		.FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                        '		.LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                        '	},
-                        '	.Product = New Item() With {
-                        '		.Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
-                        '		.Name = reader.GetString(reader.GetOrdinal("ItemName"))
-                        '	},
-                        '	.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-                        '	.OrderTotal = reader.GetDecimal(reader.GetOrdinal("OrderTotal")),
-                        '	.OrderDate = reader.GetDateTime(reader.GetOrdinal("OrderDate"))
-                        Throw New ArgumentException("Quantity values must be greater than or equal to 1")
-                        End If
-                End Using
-            End Using
-            AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
-            End Sub
             Return orders
         End Function
 
@@ -111,6 +82,22 @@ Namespace Database
                 cmd.ExecuteNonQueryAsync()
             End Using
         End Sub
+
+        Public Sub UpdateOrder(orderID As Integer, quantity As Integer)
+            If Not Utils.ValidID(orderID) Then
+                Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+            End If
+
+            If quantity < 1 Then
+                Throw New ArgumentException($"Quantity values must be greater than or equal to 1")
+            End If
+
+            UpdateOrder(New SqlParameter("OrderID", orderID), New SqlParameter("Quantity", quantity))
+        End Sub
+
+        Private Sub UpdateOrder(ParamArray params As SqlParameter())
+            Throw New Exception("Update Order not implemented yet")
+        End Sub
         Public Sub CancelOrder(orderID As Integer)
             CancelOrder(New SqlParameter("OrderID", orderID))
         End Sub
@@ -119,57 +106,20 @@ Namespace Database
             Throw New Exception("CancelOrder Not Yet Implemented")
         End Sub
 
-                cmd.ExecuteNonQueryAsync()
-				Throw New ArgumentException("ID values must be greater than Or equal to 0")
-        End If
-
-			CompleteOrder(New SqlParameter("OrderID", orderID))
-            If orderID < 0 Then
-        Throw New ArgumentException("ID values must be greater than or equal to 0")
-        End If
+        Public Sub CompleteOrder(orderID As Integer)
+            CompleteOrder(New SqlParameter("OrderID", orderID))
+        End Sub
 
         Private Sub CompleteOrder(ParamArray params As SqlParameter())
             Throw New Exception("CompleteOrder Not Yet Implemented")
-
-            cmd.ExecuteNonQueryAsync()
-            End Using
         End Sub
 
-        Public Sub CompleteOrder(orderID As Integer)
-            If orderID < 0 Then
-                Throw New Exception("GetOrderById Not Yet Implemented")
-                End Function
-    End Class
-    End If
+        Public Function GetOrderById(id As Integer) As Order
+            Throw New Exception("GetOrderById Not Yet Implemented")
+        End Function
 
-    Using cmd = db_Connection.Connect()
-                cmd.CommandText = "sp_GetOrder"
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.Parameters.AddWithValue("OrderID", orderID)
-
-                Using reader = cmd.ExecuteReader()
-    While reader.Read()
-    Dim compDate As Date = CDate(reader("CompletedDate"))
-    If CDate(reader("CompletedDate")).Year < 1901 Then
-                            orders.Add(New Order(
-                            CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-                            CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
-					While reader.Read()
-    Dim compDate As Date = CDate(reader("CompletedDate"))
-    If CDate(reader("CompletedDate")).Year < 1901 Then
-							orders.Add(New Order(
-							CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
-						Else
-							orders.Add(New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
-						End If
-    End While
-
-                    ' TODO: Explore this later
-                    Console.WriteLine(reader("CompletedDate"))
-                End Using
-    End Using
-    End Function
+        Public Function GetOrderByCustomerId(id As Integer) As DBEntryCollection(Of Order)
+            Throw New Exception("GetOrderById Not Yet Implemented")
+        End Function
     End Class
 End Namespace
