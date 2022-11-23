@@ -4,49 +4,49 @@ Imports System.Data.SqlClient
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
-    Public NotInheritable Class CustomerDatabase
-        'The username to use for the database connection
-        <EditorBrowsable()>
-        <Description("The username to use for the database connection")>
-        <SettingsBindable(True)>
-        Public Property Username As String
-            Get
-                Return db_Connection.Username
-            End Get
-            Set(value As String)
-                db_Connection.Username = value
-            End Set
-        End Property
+	Public NotInheritable Class CustomerDatabase
+		'The username to use for the database connection
+		<EditorBrowsable()>
+		<SettingsBindable(True)>
+		<Description("The username to use for the database connection")>
+		Public Property Username As String
+			Get
+				Return db_Connection.Username
+			End Get
+			Set(value As String)
+				db_Connection.Username = value
+			End Set
+		End Property
 
-        'The password to use for the database connection
-        <PasswordPropertyText(True)>
-        <SettingsBindable(True)>
-        <Description("The password to use for the database connection")>
-        Public Property Password As String
-            Get
-                Return db_Connection.Password
-                'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
-            End Get
-            Set(value As String)
-                'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
-                'Console.WriteLine(temp)
-                '__connectionString.Password = temp
-                db_Connection.Password = value
-            End Set
-        End Property
+		'The password to use for the database connection
+		<PasswordPropertyText(True)>
+		<SettingsBindable(True)>
+		<Description("The password to use for the database connection")>
+		Public Property Password As String
+			Get
+				Return db_Connection.Password
+				'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
+			End Get
+			Set(value As String)
+				'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
+				'Console.WriteLine(temp)
+				'__connectionString.Password = temp
+				db_Connection.Password = value
+			End Set
+		End Property
 
-        'The initial catalog to use for the database connection
-        <Bindable(True)>
-        <Description("The initial catalog to use for the database connection")>
-        <SettingsBindable(True)>
-        Public Property InitialCatalog As String
-            Get
-                Return db_Connection.InitialCatalog
-            End Get
-            Set(value As String)
-                db_Connection.InitialCatalog = value
-            End Set
-        End Property
+		'The initial catalog to use for the database connection
+		<Bindable(True)>
+		<SettingsBindable(True)>
+		<Description("The initial catalog to use for the database connection")>
+		Public Property InitialCatalog As String
+			Get
+				Return db_Connection.InitialCatalog
+			End Get
+			Set(value As String)
+				db_Connection.InitialCatalog = value
+			End Set
+		End Property
 
 		Public Sub AddCustomer(customer As Customer)
 			AddCustomer(customer.FirstName, customer.LastName, customer.Address, customer.PhoneNumber, customer.Email)
@@ -131,14 +131,9 @@ Namespace Database
 									CInt(reader("CustomerID")),
 									CStr(reader("FirstName")),
 									CStr(reader("LastName")),
-									New Address(
-										CStr(reader("Street")),
-										CStr(reader("City")),
-										CStr(reader("State")),
-										CStr(reader("ZipCode"))
-									),
-									CStr(reader("PhoneNumber")),
-									CStr(reader("EmailAddress")),
+									Address.Parse(reader("Street"), reader("City"), reader("State"), reader("ZipCode")),
+									TryCast(reader("PhoneNumber"), String),
+									TryCast(reader("Email"), String),
 									CDate(reader("JoinDate"))
 								  ))
 					Loop

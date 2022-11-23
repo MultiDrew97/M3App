@@ -60,7 +60,12 @@ Public Class DisplayOrdersCtrl
 	End Sub
 
 	Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
-		Dim orders = db_Orders.GetCurrentOrders()
+		Dim orders As New Types.DBEntryCollection(Of Types.Order)
+		Try
+			orders = db_Orders.GetCurrentOrders()
+		Catch ex As Exception
+			Console.WriteLine(ex.Message)
+		End Try
 		_orders.Clear()
 
 		For Each order In orders
@@ -88,7 +93,7 @@ Public Class DisplayOrdersCtrl
 		Refresh()
 	End Sub
 
-	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Orders.CellContentClick
+	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs)
 		Dim orderID As Integer
 		If (e.RowIndex < 0) Then
 			Exit Sub
@@ -98,7 +103,7 @@ Public Class DisplayOrdersCtrl
 		ToolButtonsClicked(e.ColumnIndex, orderID)
 	End Sub
 
-	Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow
+	Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs)
 		If MessageBox.Show("Are you sure you want to cancel this order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 			Dim orderID As Integer = CInt(CType(e.Row.DataBoundItem, DataRowView)("OrderID"))
 			db_Orders.CancelOrder(orderID)
@@ -125,5 +130,13 @@ Public Class DisplayOrdersCtrl
 
 	Private Sub ShowCompletedOrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCompletedOrdersToolStripMenuItem.Click
 		ShowCompleted = True
+	End Sub
+
+	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles tbtn_New.Click
+		Using newOrder As New PlaceOrderDialog()
+			If newOrder.ShowDialog() = DialogResult.OK Then
+				Reload()
+			End If
+		End Using
 	End Sub
 End Class

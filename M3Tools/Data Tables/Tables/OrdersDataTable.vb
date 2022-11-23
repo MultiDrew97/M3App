@@ -109,14 +109,23 @@
 		Public Event OrdersDataRowDeleted As OrdersDataRowChangeEventHandler
 
 		Public Sub AddOrdersRow(ByVal row As Rows.OrdersDataRow)
+			' TODO: Figure out where to set completed to null
 			AddOrdersRow(CInt(row("OrderID")), CStr(row("CustomerName")), CStr(row("ItemName")), CInt(row("Quantity")), CDec(row("OrderTotal")), CDate(row("OrderDate")), CDate(row("CompletedDate")))
 		End Sub
 
 		Public Function AddOrdersRow(OrderID As Integer, CustomerName As String, ItemName As String, Quantity As Integer, OrderTotal As Double, OrderDate As Date, Optional CompletedDate As Date = Nothing) As Rows.OrdersDataRow
 			Dim OrdersDataRow As Rows.OrdersDataRow = CType(Me.NewRow, Rows.OrdersDataRow)
-			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate, CompletedDate}
+			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate, completed(CompletedDate)}
 			Me.Rows.Add(OrdersDataRow)
 			Return OrdersDataRow
+		End Function
+
+		Private Function Completed(completedDate As Date) As Object
+			If completedDate.Year < 2000 Then
+				Return DBNull.Value
+			Else
+				Return completedDate
+			End If
 		End Function
 
 		Public Function FindByID(ByVal ID As Integer) As Rows.OrdersDataRow

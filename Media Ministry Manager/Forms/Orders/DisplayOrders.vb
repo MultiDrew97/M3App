@@ -11,6 +11,7 @@ Public Class Frm_DisplayOrders
 
 	Private Sub ViewClosed(sender As Object, e As EventArgs) Handles Me.Closed
 		mms_Strip.ToggleViewItem("Orders")
+		Frm_Main.Show()
 	End Sub
 
 	Private Sub CompleteOrder(sender As Object, e As EventArgs) Handles btn_Complete.Click
