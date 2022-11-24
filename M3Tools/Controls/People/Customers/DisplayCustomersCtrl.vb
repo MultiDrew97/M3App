@@ -51,21 +51,21 @@ Public Class DisplayCustomersCtrl
 		bs_Customers.DataSource = _customers
 	End Sub
 
-	Public Sub Reload() Handles ts_Refresh.Click
+	Public Sub Reload(sender As Object, e As EventArgs) Handles ts_Refresh.Click, tbtn_Refresh.Click
 		UseWaitCursor = True
+		_customers.Clear()
 		bw_LoadCustomers.RunWorkerAsync()
 	End Sub
 
 	Private Sub LoadCustomers(sender As Object, e As DoWorkEventArgs) Handles bw_LoadCustomers.DoWork
 		Try
-			Dim customers = db_Customers.GetCustomers()
-			_customers.Clear()
+			Dim data As Types.DBEntryCollection(Of Types.Customer) = db_Customers.GetCustomers()
 
-			For Each customer In customers
+			For Each customer In data
 				_customers.AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address?.ToString, customer.PhoneNumber, customer.Email, CDate(customer.Joined))
 			Next
 		Catch ex As Exception
-			Console.WriteLine(ex.Message)
+			Console.Error.WriteLine(ex.Message)
 		End Try
 	End Sub
 
@@ -112,6 +112,7 @@ Public Class DisplayCustomersCtrl
 		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
 			Try
 				id = DirectCast(row.Cells.Item("CustomerID").Value, Integer)
+				_customers.RemoveCustomersRow(CType(CType(row.DataBoundItem, DataRowView).Row, DataTables.CustomersDataRow))
 				db_Customers.RemoveCustomer(id)
 			Catch
 				failed += 1
@@ -125,16 +126,18 @@ Public Class DisplayCustomersCtrl
 		If total - failed > 0 Then
 			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
-		Reload()
+
+		Reload(Me, EventArgs.Empty)
 	End Sub
 
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
-		' TODO: Flesh this out
 		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
 
 		If Not Confirmed OrElse Not ts_Remove.Enabled OrElse dgv_CustomerTable.SelectedRows.Count < 1 Then
 			Return
 		End If
+
+		RemoveSelectedRows()
 
 		' TODO: Open a dialog for bulk deletion
 		'Using bulk As New BulkDeletionDialog(dgv_CustomerTable)
@@ -145,6 +148,7 @@ Public Class DisplayCustomersCtrl
 	Private Sub DoneLoadingCustomers(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
 		UseWaitCursor = False
 		dgv_CustomerTable.Refresh()
+		dgv_CustomerTable.Rows(0).Cells(0).Selected = True
 	End Sub
 
 	Private Sub ClearSelectedRows()
@@ -157,15 +161,15 @@ Public Class DisplayCustomersCtrl
 		ts_Remove.Enabled = dgv_CustomerTable.SelectedRows.Count > 0
 	End Sub
 
-	Public Overloads Function Focus() As Boolean
-		Return dgv_CustomerTable.Focus()
-	End Function
-
 	Private Sub AddCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
 		Using newCustomer As New Dialogs.AddCustomerDialog()
 			If newCustomer.ShowDialog() = DialogResult.OK Then
-				Reload()
+				Reload(Me, e)
 			End If
 		End Using
+	End Sub
+
+	Private Sub dgv_CustomerTable_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgv_CustomerTable.DataError
+		Console.Error.WriteLine(e.Exception.StackTrace)
 	End Sub
 End Class

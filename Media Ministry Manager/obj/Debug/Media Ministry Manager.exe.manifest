@@ -206,7 +206,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QjMCeuB/UxzO7NLpFUvVmCVaaF+XmAmkQiMEq92sCi4=</dsig:DigestValue>
+        <dsig:DigestValue>hByZ9hUSf/7jgS2DQL3SP0VG4As4blOFV4WTFOQO7ZQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -343,14 +343,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="960000">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="961536">
       <assemblyIdentity name="SPPBC.M3Tools" version="1.0.410.2201" publicKeyToken="4F5539A43069F3F0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ayQEKBXgMMkeQ2G7AqfVlja7oMXJyY5g0ahmw+bZEo4=</dsig:DigestValue>
+        <dsig:DigestValue>GVJDieG+Ro9CNdy9tijEMOJGKO9EZ9LojdXibPzlHco=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

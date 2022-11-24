@@ -116,7 +116,6 @@ Namespace DataTables
 
 		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
 			Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
-
 			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, ParsePhone(PhoneNumber), Email, ParseDate(JoinDate)}
 			Me.Rows.Add(CustomersDataRow)
 			Return CustomersDataRow
@@ -183,10 +182,6 @@ Namespace DataTables
 			Me.FirstName = MyBase.Columns("FirstName")
 			Me.LastName = MyBase.Columns("LastName")
 			Me.Address = MyBase.Columns("Address")
-			'Me.Street = MyBase.Columns("Street")
-			'Me.City = MyBase.Columns("City")
-			'Me.State = MyBase.Columns("State")
-			'Me.ZipCode = MyBase.Columns("ZipCode")
 			Me.PhoneNumber = MyBase.Columns("PhoneNumber")
 			Me.Email = MyBase.Columns("Email")
 			Me.JoinDate = MyBase.Columns("JoinDate")
@@ -199,7 +194,7 @@ Namespace DataTables
 			MyBase.Columns.Add(Me.FirstName)
 			Me.LastName = New DataColumn("LastName", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.LastName)
-			Me.Address = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
+			Me.Address = New DataColumn("Address", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Address)
 			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(Integer), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.PhoneNumber)

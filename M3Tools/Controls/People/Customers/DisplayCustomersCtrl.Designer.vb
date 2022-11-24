@@ -27,6 +27,7 @@ Partial Class DisplayCustomersCtrl
 		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
 		Me.dgv_CustomerTable = New System.Windows.Forms.DataGridView()
 		Me.CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,6 +45,7 @@ Partial Class DisplayCustomersCtrl
 		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
 		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
+		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
 		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
@@ -193,19 +195,19 @@ Partial Class DisplayCustomersCtrl
 		'
 		Me.ts_CustomerTools.Dock = System.Windows.Forms.DockStyle.None
 		Me.ts_CustomerTools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer})
+		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer, Me.tbtn_Refresh})
 		Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
 		Me.ts_CustomerTools.Name = "ts_CustomerTools"
-		Me.ts_CustomerTools.Size = New System.Drawing.Size(79, 39)
+		Me.ts_CustomerTools.Size = New System.Drawing.Size(115, 39)
 		Me.ts_CustomerTools.TabIndex = 6
 		Me.ts_CustomerTools.Text = "Customer Tools"
 		'
-		'ToolStripButton1
+		'tbtn_AddCustomer
 		'
 		Me.tbtn_AddCustomer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
 		Me.tbtn_AddCustomer.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
 		Me.tbtn_AddCustomer.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_AddCustomer.Name = "ToolStripButton1"
+		Me.tbtn_AddCustomer.Name = "tbtn_AddCustomer"
 		Me.tbtn_AddCustomer.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_AddCustomer.Text = "New Customer"
 		'
@@ -214,6 +216,15 @@ Partial Class DisplayCustomersCtrl
 		Me.db_Customers.InitialCatalog = "Media Ministry Test"
 		Me.db_Customers.Password = "M3AppPassword2499"
 		Me.db_Customers.Username = "M3App"
+		'
+		'tbtn_Refresh
+		'
+		Me.tbtn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_Refresh.Image = CType(resources.GetObject("tbtn_Refresh.Image"), System.Drawing.Image)
+		Me.tbtn_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_Refresh.Name = "tbtn_Refresh"
+		Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_Refresh.Text = "Refresh"
 		'
 		'DisplayCustomersCtrl
 		'
@@ -256,4 +267,5 @@ Partial Class DisplayCustomersCtrl
 	Friend WithEvents PhoneNumber As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents Address As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents JoinDate As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
 End Class
