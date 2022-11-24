@@ -51,7 +51,7 @@ Public Class DisplayCustomersCtrl
 		bs_Customers.DataSource = _customers
 	End Sub
 
-	Public Sub Reload(sender As Object, e As EventArgs) Handles ts_Refresh.Click, tbtn_Refresh.Click
+	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
 		UseWaitCursor = True
 		_customers.Clear()
 		bw_LoadCustomers.RunWorkerAsync()
