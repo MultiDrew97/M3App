@@ -87,7 +87,8 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub UserEditedCustomer(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_CustomerTable.CellValueChanged
-		' TODO: Improve for customer data modifications
+		' TODO: Add buttons like orders to edit/delete
+		' TODO: Create edit customer dialog and pass current customer
 
 		If (e.RowIndex < 0) Then
 			Return
