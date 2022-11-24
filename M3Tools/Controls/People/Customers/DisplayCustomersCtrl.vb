@@ -62,7 +62,7 @@ Public Class DisplayCustomersCtrl
 			_customers.Clear()
 
 			For Each customer In customers
-				_customers.AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address?.ToString, customer.PhoneNumber, customer.Email, customer.Joined)
+				_customers.AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address?.ToString, customer.PhoneNumber, customer.Email, CDate(customer.Joined))
 			Next
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)

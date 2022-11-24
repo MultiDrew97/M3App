@@ -7,7 +7,6 @@ Namespace DataTables
 
 		Public Delegate Sub CustomersDataRowChangeEventHandler(ByVal sender As Object, ByVal e As CustomersRowChangeEvent)
 
-		Private Test As DataColumn
 		Private CustomerID As DataColumn
 		Private FirstName As DataColumn
 		Private LastName As DataColumn
@@ -117,11 +116,33 @@ Namespace DataTables
 
 		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
 			Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
+
+			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, ParsePhone(PhoneNumber), Email, ParseDate(JoinDate)}
+			Me.Rows.Add(CustomersDataRow)
+			Return CustomersDataRow
+		End Function
+
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
+			Return AddCustomersRow(CustomerID, FirstName, LastName, String.Join(","c, Street, City, State, ZipCode), PhoneNumber, Email, JoinDate)
+		End Function
+
+		Private Function ParseDate(value As Date) As Object
+			If value.Year < 1950 Then
+				Return Nothing
+			End If
+
+			Return value
+		End Function
+
+		Private Function ParsePhone(value As String) As Object
 			Dim phoneInt As Integer = Nothing
-			If PhoneNumber IsNot Nothing Then
-				Dim filteredPhone = PhoneNumber.Where(Function(currentChar As Char) As Boolean
-														  Return Not Regex.IsMatch(currentChar, "[\s()-]")
-													  End Function)
+			If value Is Nothing Then
+				Return Nothing
+			End If
+
+			Dim filteredPhone = value.Where(Function(currentChar As Char) As Boolean
+													Return Not Regex.IsMatch(currentChar, "[\s()-]")
+												End Function)
 
 				Dim phoneStr = String.Join("", filteredPhone)
 
@@ -129,20 +150,18 @@ Namespace DataTables
 					phoneStr.Remove(10)
 				End If
 
+			Try
 				phoneInt = Integer.Parse(phoneStr)
-			End If
+			Catch ex As Exception
+				Return Nothing
+			End Try
 
 			Dim result As Object = Nothing
-			If phoneInt > 0 AndAlso phoneInt < 9999999999 Then
-				result = phoneInt
+			If Not (phoneInt > 0 AndAlso phoneInt < 9999999999) Then
+				Return Nothing
 			End If
-			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, result, Email, JoinDate}
-			Me.Rows.Add(CustomersDataRow)
-			Return CustomersDataRow
-		End Function
 
-		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
-			Return AddCustomersRow(CustomerID, FirstName, LastName, String.Join(","c, Street, City, State, ZipCode), PhoneNumber, Email, JoinDate)
+			Return phoneInt
 		End Function
 
 		Public Function FindByID(ByVal ID As Integer) As CustomersDataRow

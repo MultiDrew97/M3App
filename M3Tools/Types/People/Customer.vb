@@ -4,10 +4,26 @@ Namespace Types
     Public Class Customer
         Inherits Person
 		'Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
+		Private __joined As Date
 
 		Public Property PhoneNumber As String
 		Public Property Address As Address
-		Public Property Joined As Date
+		Public Property Joined As Object
+			Get
+				If __joined.Year < 1950 OrElse IsNothing(__joined) Then
+					Return Nothing
+				End If
+
+				Return __joined
+			End Get
+			Set(value As Object)
+				Try
+					__joined = CDate(value)
+				Catch ex As Exception
+					__joined = Nothing
+				End Try
+			End Set
+		End Property
 
 		Public Sub New()
 			Me.New(-1, "John", "Doe", "123 Main St", "City", "ST", "12345", "123-456-7890", "johndoe@domain.ext")
