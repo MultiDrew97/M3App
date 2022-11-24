@@ -147,4 +147,10 @@ Public Structure Utils
 				Throw New Exceptions.InvalidStateCodeException("The provided state code is invalid.")
 		End Select
 	End Function
+
+	Public Shared Sub PrintConsole(title As String, value As Object)
+		Console.WriteLine($"------------------------ {title} ------------------------")
+		Console.WriteLine(value)
+		Console.WriteLine($"---------------------------------------------------------")
+	End Sub
 End Structure
