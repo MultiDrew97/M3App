@@ -105,11 +105,12 @@
 			'
 			Me.af_Address.AutoSize = True
 			Me.af_Address.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+			Me.af_Address.BackColor = System.Drawing.Color.LightGray
 			Me.af_Address.City = ""
 			Me.af_Address.Dock = System.Windows.Forms.DockStyle.Fill
 			Me.af_Address.Location = New System.Drawing.Point(3, 3)
 			Me.af_Address.Name = "af_Address"
-			Me.af_Address.Size = New System.Drawing.Size(555, 220)
+			Me.af_Address.Size = New System.Drawing.Size(638, 245)
 			Me.af_Address.State = ""
 			Me.af_Address.Street = ","
 			Me.af_Address.TabIndex = 5
@@ -125,7 +126,7 @@
 			'
 			Me.gi_FirstName.AutoSize = True
 			Me.gi_FirstName.LabelText = "* First Name"
-			Me.gi_FirstName.Location = New System.Drawing.Point(20, 16)
+			Me.gi_FirstName.Location = New System.Drawing.Point(85, 61)
 			Me.gi_FirstName.Mask = ""
 			Me.gi_FirstName.Name = "gi_FirstName"
 			Me.gi_FirstName.Size = New System.Drawing.Size(244, 62)
@@ -137,7 +138,7 @@
 			'
 			Me.gi_LastName.AutoSize = True
 			Me.gi_LastName.LabelText = "Last Name"
-			Me.gi_LastName.Location = New System.Drawing.Point(281, 16)
+			Me.gi_LastName.Location = New System.Drawing.Point(346, 61)
 			Me.gi_LastName.Mask = ""
 			Me.gi_LastName.Name = "gi_LastName"
 			Me.gi_LastName.Size = New System.Drawing.Size(244, 62)
@@ -149,7 +150,7 @@
 			'
 			Me.pn_PhoneNumber.AutoSize = True
 			Me.pn_PhoneNumber.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-			Me.pn_PhoneNumber.Location = New System.Drawing.Point(58, 84)
+			Me.pn_PhoneNumber.Location = New System.Drawing.Point(123, 129)
 			Me.pn_PhoneNumber.Name = "pn_PhoneNumber"
 			Me.pn_PhoneNumber.PhoneNumber = "(   )    -"
 			Me.pn_PhoneNumber.Size = New System.Drawing.Size(107, 55)
@@ -159,7 +160,7 @@
 			'
 			Me.gi_EmailAddress.AutoSize = True
 			Me.gi_EmailAddress.LabelText = "* Email Address"
-			Me.gi_EmailAddress.Location = New System.Drawing.Point(202, 84)
+			Me.gi_EmailAddress.Location = New System.Drawing.Point(267, 129)
 			Me.gi_EmailAddress.Mask = ""
 			Me.gi_EmailAddress.Name = "gi_EmailAddress"
 			Me.gi_EmailAddress.Size = New System.Drawing.Size(258, 40)
@@ -181,6 +182,7 @@
 			'
 			'tp_Basic
 			'
+			Me.tp_Basic.BackColor = System.Drawing.Color.LightGray
 			Me.tp_Basic.Controls.Add(Me.gi_FirstName)
 			Me.tp_Basic.Controls.Add(Me.gi_LastName)
 			Me.tp_Basic.Controls.Add(Me.pn_PhoneNumber)
@@ -191,7 +193,6 @@
 			Me.tp_Basic.Size = New System.Drawing.Size(644, 251)
 			Me.tp_Basic.TabIndex = 0
 			Me.tp_Basic.Text = "Basics"
-			Me.tp_Basic.UseVisualStyleBackColor = True
 			'
 			'tp_Address
 			'
@@ -199,7 +200,7 @@
 			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
 			Me.tp_Address.Name = "tp_Address"
 			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Address.Size = New System.Drawing.Size(561, 226)
+			Me.tp_Address.Size = New System.Drawing.Size(644, 251)
 			Me.tp_Address.TabIndex = 1
 			Me.tp_Address.Text = "Address"
 			Me.tp_Address.UseVisualStyleBackColor = True

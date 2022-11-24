@@ -8,6 +8,69 @@ Imports SPPBC.M3Tools.Types
 Namespace Dialogs
 	Public Class AddCustomerDialog
 		Private ReadOnly __emailPattern As New Regex(My.Resources.EmailRegex)
+
+		Private ReadOnly Property CustomerName As String
+			Get
+				Return $"{FirstName} {LastName}"
+			End Get
+		End Property
+
+		Private Property FirstName As String
+			Get
+				Return gi_FirstName.Text
+			End Get
+			Set(value As String)
+				gi_FirstName.Text = value
+			End Set
+		End Property
+
+		Private Property LastName As String
+			Get
+				Return gi_LastName.Text
+			End Get
+			Set(value As String)
+				gi_LastName.Text = value
+			End Set
+		End Property
+
+		Private Property CustomerAddress As Address
+			Get
+				Return New Address(af_Address.Street, af_Address.City, af_Address.State, af_Address.ZipCode)
+			End Get
+			Set(value As Address)
+				af_Address.Street = value.Street
+				af_Address.City = value.City
+				af_Address.State = value.State
+				af_Address.ZipCode = value.ZipCode
+
+				If Not af_Address.IsValidAddress Then
+					af_Address.Street = ""
+					af_Address.City = ""
+					af_Address.State = ""
+					af_Address.ZipCode = ""
+				End If
+			End Set
+		End Property
+
+		Private Property Phone As String
+			Get
+				Return pn_PhoneNumber.PhoneNumber
+			End Get
+			Set(value As String)
+				pn_PhoneNumber.PhoneNumber = value
+			End Set
+		End Property
+
+		Private Property Email As String
+			Get
+				Return gi_EmailAddress.Text
+			End Get
+			Set(value As String)
+				gi_EmailAddress.Text = value
+			End Set
+		End Property
+
+
 		Private Sub Btn_Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Cancel.Click
 			Select Case btn_Cancel.Text
 				Case "Back"
@@ -95,21 +158,12 @@ Namespace Dialogs
 
 		Private Sub TryCreate()
 			Try
-				If ValidName() And ValidEmail() And ValidAddress() Then
-					Dim customer As New Customer() With {
-						.FirstName = gi_FirstName.Text,
-						.LastName = gi_LastName.Text,
-						.Address = New Address() With {
-							.Street = af_Address.Street,
-							.City = af_Address.City,
-							.State = af_Address.State,
-							.ZipCode = af_Address.ZipCode
-						},
-						.PhoneNumber = pn_PhoneNumber.PhoneNumber,
-						.Email = gi_EmailAddress.Text
-					}
-					db_Customers.AddCustomer(customer)
+				Dim customer As New Customer(-1, FirstName, LastName, CustomerAddress, Phone, Email)
+				If Not (ValidName() AndAlso ValidEmail() AndAlso ValidAddress()) Then
+					Throw New Exception("Invalid Inputs")
 				End If
+
+				db_Customers.AddCustomer(customer)
 			Catch ex As Exception
 				Throw New Exceptions.CreationException("Failed to create the customer. Please try again.")
 			End Try
