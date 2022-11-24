@@ -69,6 +69,13 @@ Public Class DisplayCustomersCtrl
 		End Try
 	End Sub
 
+	Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
+		' TODO: Figure out why highlighted cell doesn't change properly
+		UseWaitCursor = False
+		dgv_CustomerTable.CurrentCell = dgv_CustomerTable.Rows(0).Cells(1)
+		dgv_CustomerTable.Refresh()
+	End Sub
+
 	Private Sub UserDeletingCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_CustomerTable.UserDeletingRow
 		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
 
@@ -112,7 +119,7 @@ Public Class DisplayCustomersCtrl
 		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
 			Try
 				id = DirectCast(row.Cells.Item("CustomerID").Value, Integer)
-				_customers.RemoveCustomersRow(CType(CType(row.DataBoundItem, DataRowView).Row, DataTables.CustomersDataRow))
+				'_customers.RemoveCustomersRow(CType(CType(row.DataBoundItem, DataRowView).Row, DataTables.CustomersDataRow))
 				db_Customers.RemoveCustomer(id)
 			Catch
 				failed += 1
@@ -145,12 +152,6 @@ Public Class DisplayCustomersCtrl
 		'End Using
 	End Sub
 
-	Private Sub DoneLoadingCustomers(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
-		UseWaitCursor = False
-		dgv_CustomerTable.Refresh()
-		dgv_CustomerTable.Rows(0).Cells(0).Selected = True
-	End Sub
-
 	Private Sub ClearSelectedRows()
 		For Each row As DataGridViewRow In dgv_CustomerTable.SelectedRows
 			row.Selected = False
@@ -167,9 +168,5 @@ Public Class DisplayCustomersCtrl
 				Reload(Me, e)
 			End If
 		End Using
-	End Sub
-
-	Private Sub dgv_CustomerTable_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgv_CustomerTable.DataError
-		Console.Error.WriteLine(e.Exception.StackTrace)
 	End Sub
 End Class

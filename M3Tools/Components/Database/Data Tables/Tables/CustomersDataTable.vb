@@ -140,14 +140,14 @@ Namespace DataTables
 			End If
 
 			Dim filteredPhone = value.Where(Function(currentChar As Char) As Boolean
-													Return Not Regex.IsMatch(currentChar, "[\s()-]")
-												End Function)
+												Return Not Regex.IsMatch(currentChar, "[\s()-]")
+											End Function)
 
-				Dim phoneStr = String.Join("", filteredPhone)
+			Dim phoneStr = String.Join("", filteredPhone)
 
-				If phoneStr.Length > 10 Then
-					phoneStr.Remove(10)
-				End If
+			If phoneStr.Length > 10 Then
+				phoneStr.Remove(10)
+			End If
 
 			Try
 				phoneInt = Integer.Parse(phoneStr)
