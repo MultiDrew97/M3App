@@ -43,7 +43,7 @@ Namespace Types
 		End Function
 
 		Public Overrides Function ToString() As String
-			Return String.Join(",", Street, City, State, ZipCode)
+			Return String.Join(My.Settings.ObjectDelimiter, Street, City, State, ZipCode)
 		End Function
 
 		Public Function Display() As String
@@ -51,8 +51,9 @@ Namespace Types
 			Return If(
 				(String.IsNullOrEmpty(Street) Or String.IsNullOrEmpty(City) Or String.IsNullOrEmpty(State) Or String.IsNullOrEmpty(ZipCode)),
 				"",
-				$"{Street}{vbCrLf}
-				{City}, {State} {ZipCode}")
+				$"{String.Join(vbCrLf, Street.Split(","c).Where(Function(currentString As String) As Boolean
+																	Return Not String.IsNullOrWhiteSpace(currentString)
+																End Function))}{vbCrLf}{City}, {State} {ZipCode}")
 		End Function
 	End Class
 End Namespace

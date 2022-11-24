@@ -30,15 +30,15 @@
 			Me.ep_InputError = New System.Windows.Forms.ErrorProvider(Me.components)
 			Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
 			Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
-			Me.af_Address = New SPPBC.M3Tools.AddressField()
-			Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
+			Me.tc_Creation = New System.Windows.Forms.TabControl()
+			Me.tp_Basic = New System.Windows.Forms.TabPage()
+			Me.tp_Address = New System.Windows.Forms.TabPage()
 			Me.gi_FirstName = New SPPBC.M3Tools.GenericInputPair()
 			Me.gi_LastName = New SPPBC.M3Tools.GenericInputPair()
 			Me.pn_PhoneNumber = New SPPBC.M3Tools.PhoneNumberField()
 			Me.gi_EmailAddress = New SPPBC.M3Tools.GenericInputPair()
-			Me.tc_Creation = New System.Windows.Forms.TabControl()
-			Me.tp_Basic = New System.Windows.Forms.TabPage()
-			Me.tp_Address = New System.Windows.Forms.TabPage()
+			Me.af_Address = New SPPBC.M3Tools.AddressField()
+			Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 			Me.TableLayoutPanel1.SuspendLayout()
 			CType(Me.ep_InputError, System.ComponentModel.ISupportInitialize).BeginInit()
 			Me.StatusStrip1.SuspendLayout()
@@ -65,7 +65,6 @@
 			'btn_Cancel
 			'
 			Me.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None
-			Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
 			Me.btn_Cancel.Location = New System.Drawing.Point(3, 3)
 			Me.btn_Cancel.Name = "btn_Cancel"
 			Me.btn_Cancel.Size = New System.Drawing.Size(67, 23)
@@ -75,7 +74,6 @@
 			'btn_Create
 			'
 			Me.btn_Create.Anchor = System.Windows.Forms.AnchorStyles.None
-			Me.btn_Create.DialogResult = System.Windows.Forms.DialogResult.Cancel
 			Me.btn_Create.Location = New System.Drawing.Point(76, 3)
 			Me.btn_Create.Name = "btn_Create"
 			Me.btn_Create.Size = New System.Drawing.Size(67, 23)
@@ -101,26 +99,41 @@
 			Me.tss_Feedback.Size = New System.Drawing.Size(271, 17)
 			Me.tss_Feedback.Text = "Please enter the infomation for the new customer."
 			'
-			'af_Address
+			'tc_Creation
 			'
-			Me.af_Address.AutoSize = True
-			Me.af_Address.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-			Me.af_Address.BackColor = System.Drawing.Color.LightGray
-			Me.af_Address.City = ""
-			Me.af_Address.Dock = System.Windows.Forms.DockStyle.Fill
-			Me.af_Address.Location = New System.Drawing.Point(3, 3)
-			Me.af_Address.Name = "af_Address"
-			Me.af_Address.Size = New System.Drawing.Size(638, 245)
-			Me.af_Address.State = ""
-			Me.af_Address.Street = ","
-			Me.af_Address.TabIndex = 5
-			Me.af_Address.ZipCode = ""
+			Me.tc_Creation.Controls.Add(Me.tp_Basic)
+			Me.tc_Creation.Controls.Add(Me.tp_Address)
+			Me.tc_Creation.Dock = System.Windows.Forms.DockStyle.Top
+			Me.tc_Creation.Location = New System.Drawing.Point(0, 0)
+			Me.tc_Creation.Name = "tc_Creation"
+			Me.tc_Creation.SelectedIndex = 0
+			Me.tc_Creation.Size = New System.Drawing.Size(652, 277)
+			Me.tc_Creation.TabIndex = 7
 			'
-			'db_Customers
+			'tp_Basic
 			'
-			Me.db_Customers.InitialCatalog = "Media Ministry"
-			Me.db_Customers.Password = "M3AppPassword2499"
-			Me.db_Customers.Username = "M3App"
+			Me.tp_Basic.BackColor = System.Drawing.Color.LightGray
+			Me.tp_Basic.Controls.Add(Me.gi_FirstName)
+			Me.tp_Basic.Controls.Add(Me.gi_LastName)
+			Me.tp_Basic.Controls.Add(Me.pn_PhoneNumber)
+			Me.tp_Basic.Controls.Add(Me.gi_EmailAddress)
+			Me.tp_Basic.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Basic.Name = "tp_Basic"
+			Me.tp_Basic.Padding = New System.Windows.Forms.Padding(3)
+			Me.tp_Basic.Size = New System.Drawing.Size(644, 251)
+			Me.tp_Basic.TabIndex = 0
+			Me.tp_Basic.Text = "Basics"
+			'
+			'tp_Address
+			'
+			Me.tp_Address.Controls.Add(Me.af_Address)
+			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Address.Name = "tp_Address"
+			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
+			Me.tp_Address.Size = New System.Drawing.Size(644, 251)
+			Me.tp_Address.TabIndex = 1
+			Me.tp_Address.Text = "Address"
+			Me.tp_Address.UseVisualStyleBackColor = True
 			'
 			'gi_FirstName
 			'
@@ -168,49 +181,32 @@
 			Me.gi_EmailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
 			Me.gi_EmailAddress.UseSystemPasswordChar = False
 			'
-			'tc_Creation
+			'af_Address
 			'
-			Me.tc_Creation.Controls.Add(Me.tp_Basic)
-			Me.tc_Creation.Controls.Add(Me.tp_Address)
-			Me.tc_Creation.Dock = System.Windows.Forms.DockStyle.Top
-			Me.tc_Creation.Enabled = False
-			Me.tc_Creation.Location = New System.Drawing.Point(0, 0)
-			Me.tc_Creation.Name = "tc_Creation"
-			Me.tc_Creation.SelectedIndex = 0
-			Me.tc_Creation.Size = New System.Drawing.Size(652, 277)
-			Me.tc_Creation.TabIndex = 7
+			Me.af_Address.AutoSize = True
+			Me.af_Address.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+			Me.af_Address.BackColor = System.Drawing.Color.LightGray
+			Me.af_Address.City = ""
+			Me.af_Address.Dock = System.Windows.Forms.DockStyle.Fill
+			Me.af_Address.Location = New System.Drawing.Point(3, 3)
+			Me.af_Address.Name = "af_Address"
+			Me.af_Address.Size = New System.Drawing.Size(638, 245)
+			Me.af_Address.State = ""
+			Me.af_Address.Street = ","
+			Me.af_Address.TabIndex = 5
+			Me.af_Address.ZipCode = ""
 			'
-			'tp_Basic
+			'db_Customers
 			'
-			Me.tp_Basic.BackColor = System.Drawing.Color.LightGray
-			Me.tp_Basic.Controls.Add(Me.gi_FirstName)
-			Me.tp_Basic.Controls.Add(Me.gi_LastName)
-			Me.tp_Basic.Controls.Add(Me.pn_PhoneNumber)
-			Me.tp_Basic.Controls.Add(Me.gi_EmailAddress)
-			Me.tp_Basic.Location = New System.Drawing.Point(4, 22)
-			Me.tp_Basic.Name = "tp_Basic"
-			Me.tp_Basic.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Basic.Size = New System.Drawing.Size(644, 251)
-			Me.tp_Basic.TabIndex = 0
-			Me.tp_Basic.Text = "Basics"
-			'
-			'tp_Address
-			'
-			Me.tp_Address.Controls.Add(Me.af_Address)
-			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
-			Me.tp_Address.Name = "tp_Address"
-			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Address.Size = New System.Drawing.Size(644, 251)
-			Me.tp_Address.TabIndex = 1
-			Me.tp_Address.Text = "Address"
-			Me.tp_Address.UseVisualStyleBackColor = True
+			Me.db_Customers.InitialCatalog = "Media Ministry"
+			Me.db_Customers.Password = "M3AppPassword2499"
+			Me.db_Customers.Username = "M3App"
 			'
 			'AddCustomerDialog
 			'
 			Me.AcceptButton = Me.btn_Create
 			Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 			Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-			Me.CancelButton = Me.btn_Cancel
 			Me.ClientSize = New System.Drawing.Size(652, 337)
 			Me.Controls.Add(Me.tc_Creation)
 			Me.Controls.Add(Me.StatusStrip1)

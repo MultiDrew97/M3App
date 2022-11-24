@@ -7,6 +7,7 @@ Imports SPPBC.M3Tools.Types
 ' TODO: Cleanup this dialog box
 Namespace Dialogs
 	Public Class AddCustomerDialog
+		Private Event PageChangedEvent(currentPage As Integer)
 		Private ReadOnly __emailPattern As New Regex(My.Resources.EmailRegex)
 
 		Private ReadOnly Property CustomerName As String
@@ -54,10 +55,14 @@ Namespace Dialogs
 
 		Private Property Phone As String
 			Get
-				Return pn_PhoneNumber.PhoneNumber
+				Return String.Join("", pn_PhoneNumber.PhoneNumber.Where(Function(currentChar As Char) As Boolean
+																			Return Not Regex.IsMatch(currentChar, "[\s()-]")
+																		End Function))
 			End Get
 			Set(value As String)
-				pn_PhoneNumber.PhoneNumber = value
+				pn_PhoneNumber.PhoneNumber = String.Join("", value.Where(Function(currentChar As Char) As Boolean
+																			 Return Not Regex.IsMatch(currentChar, "[\s()-]")
+																		 End Function))
 			End Set
 		End Property
 
@@ -71,37 +76,38 @@ Namespace Dialogs
 		End Property
 
 
-		Private Sub Btn_Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Cancel.Click
+		Private Sub PreviousStep(sender As Object, e As EventArgs) Handles btn_Cancel.Click
 			Select Case btn_Cancel.Text
 				Case "Back"
 					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex - 1
-					If tc_Creation.SelectedIndex <= 0 Then
-						btn_Create.Text = "Cancel"
-					End If
+					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
 				Case "Cancel"
 					DialogResult = DialogResult.Cancel
 					Close()
 			End Select
 		End Sub
 
-		Private Sub CreateCustomer(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Create.Click
+		Private Sub NextStep(sender As Object, e As EventArgs) Handles btn_Create.Click
 			Select Case btn_Create.Text
 				Case "Next"
 					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex + 1
 					btn_Cancel.Text = "Back"
-					If tc_Creation.SelectedIndex >= tc_Creation.TabCount Then
-						btn_Create.Text = "Create"
-					End If
+					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
 				Case "Create"
 					Try
 						TryCreate()
-						DialogResult = DialogResult.OK
-						Close()
+						'DialogResult = DialogResult.OK
+						'Close()
 					Catch ex As Exception
 						tss_Feedback.ForeColor = Color.Red
 						tss_Feedback.Text = ex.Message
 					End Try
 			End Select
+		End Sub
+
+		Private Sub PageChanged(currentPage As Integer) Handles Me.PageChangedEvent
+			btn_Cancel.Text = If(currentPage <= 0, "Cancel", "Back")
+			btn_Create.Text = If(currentPage >= tc_Creation.TabCount - 1, "Create", "Next")
 		End Sub
 
 		Private Function ValidName() As Boolean
@@ -113,48 +119,16 @@ Namespace Dialogs
 		End Function
 
 		Private Function ValidLastName() As Boolean
-			Return gi_LastName.Text <> "" '(gi_LastName.Text <> "" And Not String.IsNullOrWhiteSpace(gi_LastName.Text)) Or String.IsNullOrEmpty(gi_LastName.Text)
+			Return gi_LastName.Text <> ""
 		End Function
 
 		Private Function ValidEmail() As Boolean
-			Return gi_EmailAddress.Text <> "" '(gi_EmailAddress.Text <> "" And __emailPattern.IsMatch(gi_EmailAddress.Text)) Or String.IsNullOrWhiteSpace(gi_EmailAddress.Text)
+			Return Email <> "" AndAlso Regex.IsMatch(Email, My.Resources.EmailRegex2)
 		End Function
 
 		Private Function ValidAddress() As Boolean
 			Return af_Address.IsValidAddress()
 		End Function
-
-		Private Sub ValidateLastName(sender As Object, e As EventArgs) Handles gi_LastName.TextChanged
-			If Not ValidLastName() Then
-				ep_InputError.SetError(gi_LastName, "The entered last name is invalid")
-			Else
-				ep_InputError.SetError(gi_LastName, "")
-			End If
-		End Sub
-
-		Private Sub ValidateFirstName(sender As Object, e As EventArgs) Handles gi_FirstName.TextChanged
-			If Not ValidFirstName() Then
-				ep_InputError.SetError(gi_FirstName, "You must enter a first name")
-			Else
-				ep_InputError.SetError(gi_FirstName, "")
-			End If
-		End Sub
-
-		Private Sub ValidateEmail(sender As Object, e As EventArgs) Handles gi_EmailAddress.TextChanged
-			If Not ValidEmail() Then
-				ep_InputError.SetError(gi_EmailAddress, "The email address isn't in the correct format (i.e. johndoe@domain.ext)")
-			Else
-				ep_InputError.SetError(gi_EmailAddress, "")
-			End If
-		End Sub
-
-		Private Sub ValidateAddress(sender As Object, e As EventArgs) Handles af_Address.TextChanged
-			If Not ValidAddress() Then
-				ep_InputError.SetError(af_Address, "You either have to enter a complete address, or none at all")
-			Else
-				ep_InputError.SetError(af_Address, "")
-			End If
-		End Sub
 
 		Private Sub TryCreate()
 			Try
@@ -163,7 +137,15 @@ Namespace Dialogs
 					Throw New Exception("Invalid Inputs")
 				End If
 
-				db_Customers.AddCustomer(customer)
+				Console.WriteLine("---------- Customer -----------")
+				Console.WriteLine(customer.Display())
+				Console.WriteLine("-------------------------------")
+
+				Console.WriteLine("---------- Address -----------")
+				Console.WriteLine(CustomerAddress.Display())
+				Console.WriteLine("-------------------------------")
+				MessageBox.Show(customer.Display, "New Customer", MessageBoxButtons.OK)
+				'db_Customers.AddCustomer(customer)
 			Catch ex As Exception
 				Throw New Exceptions.CreationException("Failed to create the customer. Please try again.")
 			End Try

@@ -60,13 +60,15 @@ Namespace Types
 		End Function
 
 		Public Overrides Function ToString() As String
+			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Email, Address.ToString, PhoneNumber)
+		End Function
+
+		Public Function Display() As String
 			'ID) Name (Email)
 			'Street
 			'City, ST ZipCode
 			'Phone Number
-			Return $"{Id}) {Name} ({Email}){vbCrLf}
-					{vbTab}{Address}{vbCrLf}
-					{vbTab}{PhoneNumber}"
+			Return $"{Id}) {Name} (e: {Email} p: {PhoneNumber}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
 		End Function
 	End Class
 End Namespace

@@ -109,6 +109,15 @@ Namespace My
                 Return CType(Me("MinID"),Integer)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute(";")>  _
+        Public ReadOnly Property ObjectDelimiter() As String
+            Get
+                Return CType(Me("ObjectDelimiter"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

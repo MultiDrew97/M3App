@@ -163,7 +163,9 @@ Public Class DisplayCustomersCtrl
 
 	Private Sub AddCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
 		Using newCustomer As New Dialogs.AddCustomerDialog()
-			newCustomer.ShowDialog()
+			If newCustomer.ShowDialog() = DialogResult.OK Then
+				Reload()
+			End If
 		End Using
 	End Sub
 End Class
