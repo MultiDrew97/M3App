@@ -96,7 +96,7 @@ Namespace Dialogs
 				Case "Create"
 					Try
 						TryCreate()
-						'DialogResult = DialogResult.OK
+						DialogResult = DialogResult.OK
 						'Close()
 					Catch ex As Exception
 						tss_Feedback.ForeColor = Color.Red
@@ -134,18 +134,10 @@ Namespace Dialogs
 			Try
 				Dim customer As New Customer(-1, FirstName, LastName, CustomerAddress, Phone, Email)
 				If Not (ValidName() AndAlso ValidEmail() AndAlso ValidAddress()) Then
-					Throw New Exception("Invalid Inputs")
+					Throw New ArgumentException("Invalid Inputs")
 				End If
 
-				Console.WriteLine("---------- Customer -----------")
-				Console.WriteLine(customer.Display())
-				Console.WriteLine("-------------------------------")
-
-				Console.WriteLine("---------- Address -----------")
-				Console.WriteLine(CustomerAddress.Display())
-				Console.WriteLine("-------------------------------")
-				MessageBox.Show(customer.Display, "New Customer", MessageBoxButtons.OK)
-				'db_Customers.AddCustomer(customer)
+				db_Customers.AddCustomer(customer)
 			Catch ex As Exception
 				Throw New Exceptions.CreationException("Failed to create the customer. Please try again.")
 			End Try

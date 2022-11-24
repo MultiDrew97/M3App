@@ -28,10 +28,10 @@
             Return ssf_State.StateCode
         End Get
         Set(value As String)
-            If value.Length >= 2 Then
-                ssf_State.StateCode = value.Substring(0, 2)
-            End If
-        End Set
+			If value?.Length >= 2 Then
+				ssf_State.StateCode = value.Substring(0, 2)
+			End If
+		End Set
     End Property
 
     Public Property ZipCode As String

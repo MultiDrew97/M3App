@@ -32,11 +32,11 @@
 			Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
 			Me.tc_Creation = New System.Windows.Forms.TabControl()
 			Me.tp_Basic = New System.Windows.Forms.TabPage()
-			Me.tp_Address = New System.Windows.Forms.TabPage()
 			Me.gi_FirstName = New SPPBC.M3Tools.GenericInputPair()
 			Me.gi_LastName = New SPPBC.M3Tools.GenericInputPair()
 			Me.pn_PhoneNumber = New SPPBC.M3Tools.PhoneNumberField()
 			Me.gi_EmailAddress = New SPPBC.M3Tools.GenericInputPair()
+			Me.tp_Address = New System.Windows.Forms.TabPage()
 			Me.af_Address = New SPPBC.M3Tools.AddressField()
 			Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 			Me.TableLayoutPanel1.SuspendLayout()
@@ -124,17 +124,6 @@
 			Me.tp_Basic.TabIndex = 0
 			Me.tp_Basic.Text = "Basics"
 			'
-			'tp_Address
-			'
-			Me.tp_Address.Controls.Add(Me.af_Address)
-			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
-			Me.tp_Address.Name = "tp_Address"
-			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Address.Size = New System.Drawing.Size(644, 251)
-			Me.tp_Address.TabIndex = 1
-			Me.tp_Address.Text = "Address"
-			Me.tp_Address.UseVisualStyleBackColor = True
-			'
 			'gi_FirstName
 			'
 			Me.gi_FirstName.AutoSize = True
@@ -181,6 +170,17 @@
 			Me.gi_EmailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
 			Me.gi_EmailAddress.UseSystemPasswordChar = False
 			'
+			'tp_Address
+			'
+			Me.tp_Address.Controls.Add(Me.af_Address)
+			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Address.Name = "tp_Address"
+			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
+			Me.tp_Address.Size = New System.Drawing.Size(644, 251)
+			Me.tp_Address.TabIndex = 1
+			Me.tp_Address.Text = "Address"
+			Me.tp_Address.UseVisualStyleBackColor = True
+			'
 			'af_Address
 			'
 			Me.af_Address.AutoSize = True
@@ -191,16 +191,16 @@
 			Me.af_Address.Location = New System.Drawing.Point(3, 3)
 			Me.af_Address.Name = "af_Address"
 			Me.af_Address.Size = New System.Drawing.Size(638, 245)
-			Me.af_Address.State = ""
+			Me.af_Address.State = Nothing
 			Me.af_Address.Street = ","
 			Me.af_Address.TabIndex = 5
 			Me.af_Address.ZipCode = ""
 			'
 			'db_Customers
 			'
-			Me.db_Customers.InitialCatalog = "Media Ministry"
-			Me.db_Customers.Password = "M3AppPassword2499"
-			Me.db_Customers.Username = "M3App"
+			Me.db_Customers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+			Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+			Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 			'
 			'AddCustomerDialog
 			'
