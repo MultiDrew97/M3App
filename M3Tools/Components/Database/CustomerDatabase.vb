@@ -153,7 +153,7 @@ Namespace Database
 			Using _conn = db_Connection.Connect()
 				_conn.Parameters.AddWithValue("CustomerID", customerID)
 
-				_conn.CommandText = "SELECT * FROM CUSTOMERS WHERE CustomerID = @CustomerID"
+				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID = @CustomerID"
 
 				Using reader = _conn.ExecuteReader()
 					If Not reader.Read() Then
@@ -165,7 +165,7 @@ Namespace Database
 							New Address(
 								CStr(reader("Street")), CStr(reader("City")), CStr(reader("State")), CStr(reader("ZipCode"))
 								),
-							CStr(reader("PhoneNumber")), CStr(reader("EmailAddress")), CDate(reader("JoinDate"))
+							CStr(reader("PhoneNumber")), CStr(reader("Email")), CDate(reader("JoinDate"))
 						)
 
 				End Using

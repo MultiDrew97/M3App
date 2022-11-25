@@ -187,6 +187,12 @@
     <Compile Include="Dialogs\Customer\AddCustomerDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.vb">
+      <DependentUpon>EditCustomerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Customer\EditCustomerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Emails\ReciepientSelectionDialog.designer.vb">
       <DependentUpon>ReciepientSelectionDialog.vb</DependentUpon>
     </Compile>
@@ -491,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Customer\AddCustomerDialog.resx">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Customer\EditCustomerDialog.resx">
+      <DependentUpon>EditCustomerDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Emails\CustomEmailDialog.resx">
       <DependentUpon>CustomEmailDialog.vb</DependentUpon>

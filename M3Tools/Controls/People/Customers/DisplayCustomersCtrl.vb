@@ -135,7 +135,7 @@ Public Class DisplayCustomersCtrl
 			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
 
-		Reload(Me, EventArgs.Empty)
+		Reload()
 	End Sub
 
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
@@ -166,8 +166,28 @@ Public Class DisplayCustomersCtrl
 	Private Sub AddCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
 		Using newCustomer As New Dialogs.AddCustomerDialog()
 			If newCustomer.ShowDialog() = DialogResult.OK Then
-				Reload(Me, e)
+				Reload()
 			End If
 		End Using
+	End Sub
+
+	Private Sub TableButtonClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_CustomerTable.CellContentClick
+		If Not e.ColumnIndex = btn_Edit.Index AndAlso Not e.ColumnIndex = btn_Delete.Index Then
+			Return
+		End If
+
+		Dim customerID As Integer = CInt(dgv_CustomerTable.Rows(e.RowIndex).Cells("CustomerID").Value)
+
+		Select Case e.ColumnIndex
+			Case btn_Edit.Index
+				Console.WriteLine("Edit Pressed")
+				Using editCustomer As New Dialogs.EditCustomerDialog() With {.CustomerID = customerID}
+					If editCustomer.ShowDialog() = DialogResult.OK Then
+						Reload()
+					End If
+				End Using
+			Case btn_Delete.Index
+				Console.WriteLine("Delete Pressed")
+		End Select
 	End Sub
 End Class

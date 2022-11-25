@@ -24,18 +24,11 @@ Partial Class DisplayCustomersCtrl
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
 		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
 		Me.dgv_CustomerTable = New System.Windows.Forms.DataGridView()
-		Me.CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.EmailAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.JoinDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.bs_Customers = New System.Windows.Forms.BindingSource(Me.components)
 		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
@@ -44,8 +37,17 @@ Partial Class DisplayCustomersCtrl
 		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
 		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
-		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
+		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
+		Me.CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.EmailAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.JoinDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+		Me.btn_Edit = New System.Windows.Forms.DataGridViewButtonColumn()
+		Me.btn_Delete = New System.Windows.Forms.DataGridViewButtonColumn()
 		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
@@ -60,7 +62,7 @@ Partial Class DisplayCustomersCtrl
 		Me.dgv_CustomerTable.AllowUserToAddRows = False
 		Me.dgv_CustomerTable.AutoGenerateColumns = False
 		Me.dgv_CustomerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-		Me.dgv_CustomerTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomerID, Me.FirstName, Me.LastName, Me.EmailAddress, Me.PhoneNumber, Me.Address, Me.JoinDate})
+		Me.dgv_CustomerTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomerID, Me.FirstName, Me.LastName, Me.EmailAddress, Me.PhoneNumber, Me.Address, Me.JoinDate, Me.btn_Edit, Me.btn_Delete})
 		Me.dgv_CustomerTable.DataSource = Me.bs_Customers
 		DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
 		DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
@@ -78,73 +80,6 @@ Partial Class DisplayCustomersCtrl
 		Me.dgv_CustomerTable.RowHeadersWidth = 82
 		Me.dgv_CustomerTable.Size = New System.Drawing.Size(1026, 497)
 		Me.dgv_CustomerTable.TabIndex = 0
-		'
-		'CustomerID
-		'
-		Me.CustomerID.DataPropertyName = "CustomerID"
-		Me.CustomerID.HeaderText = ""
-		Me.CustomerID.Name = "CustomerID"
-		Me.CustomerID.ReadOnly = True
-		Me.CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.CustomerID.Visible = False
-		'
-		'FirstName
-		'
-		Me.FirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.FirstName.DataPropertyName = "FirstName"
-		Me.FirstName.HeaderText = "First Name"
-		Me.FirstName.MinimumWidth = 10
-		Me.FirstName.Name = "FirstName"
-		'
-		'LastName
-		'
-		Me.LastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.LastName.DataPropertyName = "LastName"
-		Me.LastName.HeaderText = "Last Name"
-		Me.LastName.MinimumWidth = 10
-		Me.LastName.Name = "LastName"
-		'
-		'EmailAddress
-		'
-		Me.EmailAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.EmailAddress.DataPropertyName = "EmailAddress"
-		DataGridViewCellStyle1.NullValue = "N/A"
-		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.EmailAddress.DefaultCellStyle = DataGridViewCellStyle1
-		Me.EmailAddress.HeaderText = "Email"
-		Me.EmailAddress.MinimumWidth = 10
-		Me.EmailAddress.Name = "EmailAddress"
-		'
-		'PhoneNumber
-		'
-		Me.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-		DataGridViewCellStyle2.Format = "(###) ###-####"
-		DataGridViewCellStyle2.NullValue = "N/A"
-		Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle2
-		Me.PhoneNumber.HeaderText = "Phone"
-		Me.PhoneNumber.MinimumWidth = 10
-		Me.PhoneNumber.Name = "PhoneNumber"
-		'
-		'Address
-		'
-		Me.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.Address.DataPropertyName = "Address"
-		DataGridViewCellStyle3.NullValue = "N/A"
-		DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.Address.DefaultCellStyle = DataGridViewCellStyle3
-		Me.Address.HeaderText = "Address"
-		Me.Address.MinimumWidth = 10
-		Me.Address.Name = "Address"
-		'
-		'JoinDate
-		'
-		Me.JoinDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.JoinDate.DataPropertyName = "JoinDate"
-		Me.JoinDate.HeaderText = "Join Date"
-		Me.JoinDate.MinimumWidth = 10
-		Me.JoinDate.Name = "JoinDate"
-		Me.JoinDate.ReadOnly = True
 		'
 		'cms_Tools
 		'
@@ -198,7 +133,7 @@ Partial Class DisplayCustomersCtrl
 		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer, Me.tbtn_Refresh})
 		Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
 		Me.ts_CustomerTools.Name = "ts_CustomerTools"
-		Me.ts_CustomerTools.Size = New System.Drawing.Size(115, 39)
+		Me.ts_CustomerTools.Size = New System.Drawing.Size(84, 39)
 		Me.ts_CustomerTools.TabIndex = 6
 		Me.ts_CustomerTools.Text = "Customer Tools"
 		'
@@ -211,12 +146,6 @@ Partial Class DisplayCustomersCtrl
 		Me.tbtn_AddCustomer.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_AddCustomer.Text = "New Customer"
 		'
-		'db_Customers
-		'
-		Me.db_Customers.InitialCatalog = "Media Ministry Test"
-		Me.db_Customers.Password = "M3AppPassword2499"
-		Me.db_Customers.Username = "M3App"
-		'
 		'tbtn_Refresh
 		'
 		Me.tbtn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -225,6 +154,103 @@ Partial Class DisplayCustomersCtrl
 		Me.tbtn_Refresh.Name = "tbtn_Refresh"
 		Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_Refresh.Text = "Refresh"
+		'
+		'db_Customers
+		'
+		Me.db_Customers.InitialCatalog = "Media Ministry Test"
+		Me.db_Customers.Password = "M3AppPassword2499"
+		Me.db_Customers.Username = "M3App"
+		'
+		'CustomerID
+		'
+		Me.CustomerID.DataPropertyName = "CustomerID"
+		Me.CustomerID.HeaderText = ""
+		Me.CustomerID.Name = "CustomerID"
+		Me.CustomerID.ReadOnly = True
+		Me.CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.CustomerID.Visible = False
+		'
+		'FirstName
+		'
+		Me.FirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.FirstName.DataPropertyName = "FirstName"
+		Me.FirstName.FillWeight = 40.81633!
+		Me.FirstName.HeaderText = "First Name"
+		Me.FirstName.MinimumWidth = 10
+		Me.FirstName.Name = "FirstName"
+		'
+		'LastName
+		'
+		Me.LastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.LastName.DataPropertyName = "LastName"
+		Me.LastName.HeaderText = "Last Name"
+		Me.LastName.MinimumWidth = 10
+		Me.LastName.Name = "LastName"
+		'
+		'EmailAddress
+		'
+		Me.EmailAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.EmailAddress.DataPropertyName = "EmailAddress"
+		DataGridViewCellStyle1.NullValue = "N/A"
+		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.EmailAddress.DefaultCellStyle = DataGridViewCellStyle1
+		Me.EmailAddress.FillWeight = 40.81633!
+		Me.EmailAddress.HeaderText = "Email"
+		Me.EmailAddress.MinimumWidth = 10
+		Me.EmailAddress.Name = "EmailAddress"
+		'
+		'PhoneNumber
+		'
+		Me.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.PhoneNumber.DataPropertyName = "PhoneNumber"
+		DataGridViewCellStyle2.Format = "(###) ###-####"
+		DataGridViewCellStyle2.NullValue = "N/A"
+		Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle2
+		Me.PhoneNumber.FillWeight = 40.81633!
+		Me.PhoneNumber.HeaderText = "Phone"
+		Me.PhoneNumber.MinimumWidth = 10
+		Me.PhoneNumber.Name = "PhoneNumber"
+		'
+		'Address
+		'
+		Me.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.Address.DataPropertyName = "Address"
+		DataGridViewCellStyle3.NullValue = "N/A"
+		DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.Address.DefaultCellStyle = DataGridViewCellStyle3
+		Me.Address.FillWeight = 40.81633!
+		Me.Address.HeaderText = "Address"
+		Me.Address.MinimumWidth = 10
+		Me.Address.Name = "Address"
+		'
+		'JoinDate
+		'
+		Me.JoinDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.JoinDate.DataPropertyName = "JoinDate"
+		Me.JoinDate.FillWeight = 40.81633!
+		Me.JoinDate.HeaderText = "Join Date"
+		Me.JoinDate.MinimumWidth = 10
+		Me.JoinDate.Name = "JoinDate"
+		Me.JoinDate.ReadOnly = True
+		'
+		'btn_Edit
+		'
+		Me.btn_Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+		Me.btn_Edit.HeaderText = ""
+		Me.btn_Edit.MinimumWidth = 25
+		Me.btn_Edit.Name = "btn_Edit"
+		Me.btn_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.btn_Edit.Text = "Edit"
+		Me.btn_Edit.ToolTipText = "Edit Customer"
+		Me.btn_Edit.Width = 25
+		'
+		'btn_Delete
+		'
+		Me.btn_Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+		Me.btn_Delete.HeaderText = ""
+		Me.btn_Delete.MinimumWidth = 25
+		Me.btn_Delete.Name = "btn_Delete"
+		Me.btn_Delete.Width = 25
 		'
 		'DisplayCustomersCtrl
 		'
@@ -260,6 +286,7 @@ Partial Class DisplayCustomersCtrl
 	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
 	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
 	Private WithEvents db_Customers As Database.CustomerDatabase
+	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
 	Friend WithEvents CustomerID As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents FirstName As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents LastName As Windows.Forms.DataGridViewTextBoxColumn
@@ -267,5 +294,6 @@ Partial Class DisplayCustomersCtrl
 	Friend WithEvents PhoneNumber As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents Address As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents JoinDate As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
+	Friend WithEvents btn_Edit As Windows.Forms.DataGridViewButtonColumn
+	Friend WithEvents btn_Delete As Windows.Forms.DataGridViewButtonColumn
 End Class

@@ -7,7 +7,7 @@ Public Class Frm_DisplayCustomers
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
 		mms_Main.ToggleViewItem("Customers")
 		Try
-			dcc_Customers.Reload(sender, e)
+			dcc_Customers.Reload()
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)
 		End Try
