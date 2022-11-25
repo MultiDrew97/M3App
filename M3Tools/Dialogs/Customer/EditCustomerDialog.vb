@@ -19,7 +19,6 @@ Namespace Dialogs
 				__id = value
 			End Set
 		End Property
-
 		Public Property FirstName As String
 			Get
 				Return gi_FirstName.Text
@@ -70,9 +69,14 @@ Namespace Dialogs
 				Return
 			End If
 
-			MessageBox.Show("At least one change detected!", "Changes Detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-			'Me.DialogResult = DialogResult.OK
-			'Me.Close()
+			Try
+				db_Customers.UpdateCustomer(CustomerID, FirstName, LastName, Address.Street, Address.City, Address.State, Address.ZipCode, Phone, Email)
+				Me.DialogResult = DialogResult.OK
+				Me.Close()
+			Catch ex As Exception
+				Console.Error.WriteLine(ex.Message)
+				MessageBox.Show("Unable to update this customer's information. Please try again", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			End Try
 		End Sub
 
 		Private Sub CancelDialog(sender As Object, e As EventArgs) Handles Cancel_Button.Click

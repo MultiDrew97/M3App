@@ -41,14 +41,12 @@ Namespace Types
 			Me.New(id, $"{fName} {lName}", address, phone, email, join)
 		End Sub
 
-		Public Sub New(id As Integer, name As String, address As Address, phone As String, email As String, join As Date)
+		Public Sub New(id As Integer, name As String, addr As Address, phone As String, email As String, Optional join As Date = Nothing)
 			MyBase.New(id, name, email)
 			PhoneNumber = phone
-			Me.Address = address
+			Address = addr
 			Joined = join
 		End Sub
-
-
 
 		Shared Function Parse(ParamArray arr As Object()) As Customer
 			' TODO: Make this way better

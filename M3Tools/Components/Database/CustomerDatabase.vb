@@ -172,29 +172,43 @@ Namespace Database
 			End Using
 		End Function
 
-		Public Sub UpdateCustomer(customerID As Integer, column As String, value As String)
+		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
 			If Not Utils.ValidID(customerID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Using _conn = db_Connection.Connect()
-				Dim command As String
+			UpdateCustomer(customerID, fName, lName, Address.Parse(street, city, state, zipCode), phone, email)
+		End Sub
 
-				' If using an empty string, set the database value to null
-				'TODO: Figure out if N/A counts as null or empty
-				If Not (String.IsNullOrEmpty(value) Or value.Equals("N/A")) Then
-					command = $"{column} = '{value}'"
-				Else
-					command = $"{column} = NULL"
-				End If
+		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, addr As Address, phone As String, email As String)
+			UpdateCustomer(customerID, $"{fName} {lName}", addr, phone, email)
+		End Sub
 
-				_conn.Parameters.AddWithValue("CustomerID", customerID)
+		Public Sub UpdateCustomer(customerID As Integer, name As String, addr As Address, phone As String, email As String)
+			UpdateCustomer(New Customer(customerID, name, addr, phone, email))
+		End Sub
 
-				_conn.CommandText = $"UPDATE CUSTOMERS
-                                            SET {command}
-                                            WHERE CustomerID = @CustomerID"
+		Public Sub UpdateCustomer(customer As Customer)
+			UpdateCustomer(
+				New SqlParameter("CustomerID", customer.Id),
+				New SqlParameter("FirstName", customer.FirstName),
+				New SqlParameter("LastName", customer.LastName),
+				New SqlParameter("Street", customer.Address?.Street),
+				New SqlParameter("City", customer.Address?.City),
+				New SqlParameter("State", customer.Address?.State),
+				New SqlParameter("ZipCode", customer.Address?.ZipCode),
+				New SqlParameter("Phone", customer.PhoneNumber),
+				New SqlParameter("Email", customer.Email)
+			)
+		End Sub
 
-				_conn.ExecuteNonQuery()
+		Public Sub UpdateCustomer(ParamArray params As SqlParameter())
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateCustomer]"
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddRange(params)
+
+				cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 

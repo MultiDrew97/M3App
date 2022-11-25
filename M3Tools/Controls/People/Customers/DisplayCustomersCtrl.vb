@@ -37,7 +37,7 @@ Public Class DisplayCustomersCtrl
 	''' 
 	''' </summary>
 	''' <returns></returns>
-	<DefaultValue(True)>
+	<DefaultValue(False)>
 	Public Property AllowUserEdit As Boolean
 		Get
 			Return Not dgv_CustomerTable.ReadOnly

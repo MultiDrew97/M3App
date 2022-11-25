@@ -35,7 +35,7 @@ Namespace Types
 			stateStr = TryCast(state, String)
 			zipStr = TryCast(zipCode, String)
 
-			If Not (streetStr <> "" Or cityStr <> "" Or stateStr <> "" Or zipStr <> "") Then
+			If Not (streetStr <> "" OrElse cityStr <> "" OrElse stateStr <> "" OrElse zipStr <> "") Then
 				Return Nothing
 			End If
 
