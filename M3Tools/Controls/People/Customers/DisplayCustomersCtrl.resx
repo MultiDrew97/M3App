@@ -141,22 +141,56 @@
   <metadata name="btn_Edit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="DataGridViewCellStyle5.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
   <metadata name="btn_Delete.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="DataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
   <metadata name="bs_Customers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>21, 16</value>
+    <value>34, 41</value>
   </metadata>
   <metadata name="cms_Tools.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>151, 18</value>
+    <value>166, 57</value>
   </metadata>
   <metadata name="bw_LoadCustomers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>387, 18</value>
+    <value>457, 58</value>
   </metadata>
   <metadata name="ts_CustomerTools.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>553, 15</value>
+    <value>698, 38</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tbtn_Refresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -173,6 +207,9 @@
 </value>
   </data>
   <metadata name="db_Customers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>258, 18</value>
+    <value>308, 63</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>115</value>
   </metadata>
 </root>

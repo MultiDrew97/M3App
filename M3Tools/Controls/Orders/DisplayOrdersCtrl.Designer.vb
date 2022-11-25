@@ -33,7 +33,6 @@ Partial Class DisplayOrdersCtrl
 		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
-		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
 		Me.dgv_Orders = New System.Windows.Forms.DataGridView()
 		Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +46,7 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Cancel = New System.Windows.Forms.DataGridViewButtonColumn()
 		Me.ts_OrderTools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_New = New System.Windows.Forms.ToolStripButton()
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
@@ -95,12 +95,6 @@ Partial Class DisplayOrdersCtrl
 		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
 		Me.ts_Remove.Size = New System.Drawing.Size(203, 22)
 		Me.ts_Remove.Text = "Remove"
-		'
-		'db_Orders
-		'
-		Me.db_Orders.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-		Me.db_Orders.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-		Me.db_Orders.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 		'
 		'ToolStripContainer1
 		'
@@ -259,6 +253,12 @@ Partial Class DisplayOrdersCtrl
 		Me.tbtn_New.Name = "tbtn_New"
 		Me.tbtn_New.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_New.Text = "New Customer"
+		'
+		'db_Orders
+		'
+		Me.db_Orders.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+		Me.db_Orders.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+		Me.db_Orders.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 		'
 		'DisplayOrdersCtrl
 		'

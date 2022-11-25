@@ -491,6 +491,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Customers\DisplayCustomersCtrl.resx">
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
       <DependentUpon>ProductsComboBox.vb</DependentUpon>
@@ -603,6 +604,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Images\dove.png" />
+    <Content Include="Resources\Images\edit.png" />
     <Content Include="Resources\Images\ErrorImage.png" />
     <Content Include="Resources\Images\faith.png" />
     <Content Include="Resources\Images\font.png" />
@@ -659,7 +661,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

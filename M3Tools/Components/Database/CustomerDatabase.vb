@@ -163,9 +163,9 @@ Namespace Database
 					Return New Customer(
 							customerID, CStr(reader("FirstName")), CStr(reader("LastName")),
 							New Address(
-								CStr(reader("Street")), CStr(reader("City")), CStr(reader("State")), CStr(reader("ZipCode"))
+								TryCast(reader("Street"), String), TryCast(reader("City"), String), TryCast(reader("State"), String), TryCast(reader("ZipCode"), String)
 								),
-							CStr(reader("PhoneNumber")), CStr(reader("Email")), CDate(reader("JoinDate"))
+							TryCast(reader("PhoneNumber"), String), TryCast(reader("Email"), String), CDate(reader("JoinDate"))
 						)
 
 				End Using

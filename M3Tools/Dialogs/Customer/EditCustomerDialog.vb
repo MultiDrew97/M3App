@@ -129,6 +129,7 @@ Namespace Dialogs
 		End Sub
 
 		Private Function CheckChangedValues() As Boolean
+			' TODO: Check to allow empty Nullable fields
 			If Not FirstName.Equals(_customer.FirstName) Or Not LastName.Equals(_customer.LastName) AndAlso IsValidName() Then
 				Return True
 			End If

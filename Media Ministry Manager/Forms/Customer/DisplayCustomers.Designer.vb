@@ -64,9 +64,9 @@ Partial Class Frm_DisplayCustomers
 		Me.ss_CustomerView.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.ss_CustomerView.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.ss_CustomerView.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tss_CustomersView})
-		Me.ss_CustomerView.Location = New System.Drawing.Point(0, 518)
+		Me.ss_CustomerView.Location = New System.Drawing.Point(0, 626)
 		Me.ss_CustomerView.Name = "ss_CustomerView"
-		Me.ss_CustomerView.Size = New System.Drawing.Size(888, 22)
+		Me.ss_CustomerView.Size = New System.Drawing.Size(1159, 22)
 		Me.ss_CustomerView.TabIndex = 3
 		'
 		'tss_CustomersView
@@ -81,18 +81,20 @@ Partial Class Frm_DisplayCustomers
 		Me.mms_Main.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.mms_Main.Location = New System.Drawing.Point(0, 0)
 		Me.mms_Main.Name = "mms_Main"
-		Me.mms_Main.Size = New System.Drawing.Size(888, 24)
+		Me.mms_Main.Size = New System.Drawing.Size(1159, 24)
 		Me.mms_Main.TabIndex = 6
 		Me.mms_Main.Text = "Menu"
 		'
 		'dcc_Customers
 		'
+		Me.dcc_Customers.AutoSize = True
 		Me.dcc_Customers.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.dcc_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.dcc_Customers.Location = New System.Drawing.Point(0, 24)
 		Me.dcc_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.dcc_Customers.MinimumSize = New System.Drawing.Size(1100, 550)
 		Me.dcc_Customers.Name = "dcc_Customers"
-		Me.dcc_Customers.Size = New System.Drawing.Size(888, 494)
+		Me.dcc_Customers.Size = New System.Drawing.Size(1159, 602)
 		Me.dcc_Customers.TabIndex = 7
 		'
 		'RemoveToolStripMenuItem
@@ -274,8 +276,9 @@ Partial Class Frm_DisplayCustomers
 		'Frm_DisplayCustomers
 		'
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+		Me.AutoSize = True
 		Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-		Me.ClientSize = New System.Drawing.Size(888, 540)
+		Me.ClientSize = New System.Drawing.Size(1159, 648)
 		Me.Controls.Add(Me.dcc_Customers)
 		Me.Controls.Add(Me.ss_CustomerView)
 		Me.Controls.Add(Me.mms_Main)

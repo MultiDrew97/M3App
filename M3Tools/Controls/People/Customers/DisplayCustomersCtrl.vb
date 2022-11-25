@@ -72,7 +72,6 @@ Public Class DisplayCustomersCtrl
 	Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
 		' TODO: Figure out why highlighted cell doesn't change properly
 		UseWaitCursor = False
-		dgv_CustomerTable.CurrentCell = dgv_CustomerTable.Rows(0).Cells(1)
 		dgv_CustomerTable.Refresh()
 	End Sub
 
@@ -87,8 +86,7 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub UserEditedCustomer(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_CustomerTable.CellValueChanged
-		' TODO: Add buttons like orders to edit/delete
-		' TODO: Create edit customer dialog and pass current customer
+		' TODO: Check if still necessary
 
 		If (e.RowIndex < 0) Then
 			Return
@@ -99,6 +97,13 @@ Public Class DisplayCustomersCtrl
 		Dim column As String = dgv_CustomerTable.Columns(e.ColumnIndex).DataPropertyName
 		Dim value As Object = dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
 
+		Dim tableRow = _customers.Rows(e.RowIndex)
+
+		If value.Equals(tableRow(column)) Then
+			Return
+		End If
+
+		MessageBox.Show("A change has been detected", "Change Detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 		'Select Case column
 		'	Case "FirstName", "LastName", "PhoneNumber"
 		'		If Not String.IsNullOrWhiteSpace(value) Then

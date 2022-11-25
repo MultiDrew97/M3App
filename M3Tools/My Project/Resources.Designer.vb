@@ -166,11 +166,31 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property delete() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("delete", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;p&gt;&lt;a href=&quot;{1}&quot;&gt;{0}&lt;/a&gt;&lt;/p&gt;.
         '''</summary>
         Friend ReadOnly Property DriveLinkAttachment() As String
             Get
                 Return ResourceManager.GetString("DriveLinkAttachment", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property edit() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("edit", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
