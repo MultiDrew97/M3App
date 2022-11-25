@@ -134,7 +134,7 @@ Namespace DataTables
 		End Function
 
 		Private Function ParsePhone(value As String) As Object
-			Dim phoneInt As Integer = Nothing
+			Dim phoneInt As Long = Nothing
 			If value Is Nothing Then
 				Return Nothing
 			End If
@@ -150,13 +150,13 @@ Namespace DataTables
 			End If
 
 			Try
-				phoneInt = Integer.Parse(phoneStr)
+				phoneInt = Long.Parse(phoneStr)
 			Catch ex As Exception
 				Return Nothing
 			End Try
 
 			Dim result As Object = Nothing
-			If Not (phoneInt > 0 AndAlso phoneInt < 9999999999) Then
+			If Not (phoneInt > 999999999 AndAlso phoneInt <= 9999999999) Then
 				Return Nothing
 			End If
 
@@ -196,7 +196,7 @@ Namespace DataTables
 			MyBase.Columns.Add(Me.LastName)
 			Me.Address = New DataColumn("Address", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Address)
-			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(Integer), Nothing, MappingType.Element)
+			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(Long), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.PhoneNumber)
 			Me.Email = New DataColumn("Email", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Email)

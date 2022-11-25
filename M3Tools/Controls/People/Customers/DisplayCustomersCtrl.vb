@@ -181,10 +181,11 @@ Public Class DisplayCustomersCtrl
 			Return
 		End If
 
-		Dim customerID As Integer = CInt(dgv_CustomerTable.Rows(e.RowIndex).Cells("CustomerID").Value)
+		Dim row = dgv_CustomerTable.Rows(e.RowIndex)
 
 		Select Case e.ColumnIndex
 			Case btn_Edit.Index
+				Dim customerID As Integer = CInt(row.Cells("CustomerID").Value)
 				Console.WriteLine("Edit Pressed")
 				Using editCustomer As New Dialogs.EditCustomerDialog() With {.CustomerID = customerID}
 					If editCustomer.ShowDialog() = DialogResult.OK Then
@@ -193,6 +194,9 @@ Public Class DisplayCustomersCtrl
 				End Using
 			Case btn_Delete.Index
 				Console.WriteLine("Delete Pressed")
+				ClearSelectedRows()
+				row.Selected = True
+				UserDeletingCustomer(sender, New DataGridViewRowCancelEventArgs(dgv_CustomerTable.Rows(e.RowIndex)))
 		End Select
 	End Sub
 End Class

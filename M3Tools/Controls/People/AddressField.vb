@@ -1,8 +1,14 @@
 ﻿Public Class AddressField
     Public Property Street As String
         Get
-            Return String.Join(",", {if_Address1.Text, if_Address2.Text})
-        End Get
+			Dim str = String.Join(",", if_Address1.Text, if_Address2.Text)
+
+			If str.Equals(",") Then
+				Return ""
+			End If
+
+			Return str
+		End Get
         Set(value As String)
             If value.Contains(",") Then
                 Dim parts = value.Split(","c)
@@ -47,7 +53,7 @@
 
     Public ReadOnly Property IsValidAddress As Boolean
         Get
-            Return (Street <> "" And City <> "" And State <> "" And ZipCode <> "") Or (String.IsNullOrEmpty(Street) And String.IsNullOrEmpty(City) And String.IsNullOrEmpty(State) And String.IsNullOrEmpty(ZipCode))
-        End Get
+			Return (Street <> "" And City <> "" And State <> "" And ZipCode <> "") Or (String.IsNullOrEmpty(Street) And String.IsNullOrEmpty(City) And String.IsNullOrEmpty(State) And String.IsNullOrEmpty(ZipCode))
+		End Get
     End Property
 End Class

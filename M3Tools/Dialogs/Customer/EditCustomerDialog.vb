@@ -165,7 +165,7 @@ Namespace Dialogs
 		End Function
 
 		Private Function IsValidPhone() As Boolean
-			Return Phone <> ""
+			Return Phone <> "" AndAlso Regex.IsMatch(Phone, "\(\d{3}\)\s\d{3}-\d{4}")
 		End Function
 
 		Private Function IsValidAddress() As Boolean
