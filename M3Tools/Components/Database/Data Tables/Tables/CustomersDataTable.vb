@@ -206,9 +206,9 @@ Namespace DataTables
             '         MyBase.Columns.Add(Me.ZipCode)
             Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(String), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.PhoneNumber)
-            Me.EmailAddress = New DataColumn("EmailAddress", GetType(String), Nothing, MappingType.Element)
-            MyBase.Columns.Add(Me.EmailAddress)
-            Me.JoinDate = New DataColumn("JoinDate", GetType(Date), Nothing, MappingType.Element)
+			Me.Email = New DataColumn("Email", GetType(String), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.Email)
+			Me.JoinDate = New DataColumn("JoinDate", GetType(Date), Nothing, MappingType.Element)
             MyBase.Columns.Add(Me.JoinDate)
             Me.Constraints.Add(New UniqueConstraint("CustomerID", New DataColumn() {Me.CustomerID}, True))
             Me.CustomerID.AllowDBNull = False
@@ -232,9 +232,9 @@ Namespace DataTables
             '         Me.ZipCode.MaxLength = 50
             Me.PhoneNumber.MaxLength = 15
             Me.PhoneNumber.AllowDBNull = False
-            Me.EmailAddress.AllowDBNull = True
-            Me.EmailAddress.MaxLength = 100
-            Me.JoinDate.AllowDBNull = False
+			Me.Email.AllowDBNull = True
+			Me.Email.MaxLength = 100
+			Me.JoinDate.AllowDBNull = False
         End Sub
 
         Public Function NewCustomersDataRow() As CustomersDataRow
