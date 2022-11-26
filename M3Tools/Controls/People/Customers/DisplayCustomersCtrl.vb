@@ -9,7 +9,7 @@ Public Class DisplayCustomersCtrl
 	'''		Allow the user to add new customers from the datagrid view
 	''' </summary>
 	''' <returns></returns>
-	<DefaultValue(True)>
+	<DefaultValue(False)>
 	Public Property AllowUserAdd As Boolean
 		Get
 			Return dgv_CustomerTable.AllowUserToAddRows
@@ -47,9 +47,8 @@ Public Class DisplayCustomersCtrl
 		End Set
 	End Property
 
-	Private Sub DisplayCustomers_Load(sender As Object, e As EventArgs) Handles Me.Load
+	Private Sub DisplayCustomersLoaded(sender As Object, e As EventArgs) Handles Me.Load
 		bs_Customers.DataSource = _customers
-		Reload()
 	End Sub
 
 	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
@@ -59,44 +58,62 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub LoadCustomers(sender As Object, e As DoWorkEventArgs) Handles bw_LoadCustomers.DoWork
-		Dim customers = db_Customers.GetCustomers()
-		_customers.Clear()
+		Try
+			Dim data As Types.DBEntryCollection(Of Types.Customer) = db_Customers.GetCustomers()
 
-		For Each customer In customers
-			_customers.AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address.Street, customer.Address.City,
-						customer.Address.State, customer.Address.ZipCode, customer.PhoneNumber, customer.Email, customer.Joined)
-		Next
+			For Each customer In data
+				_customers.AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address?.ToString, customer.PhoneNumber, customer.Email, CDate(customer.Joined))
+			Next
+		Catch ex As Exception
+			Console.Error.WriteLine(ex.Message)
+		End Try
+	End Sub
+
+	Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomers.RunWorkerCompleted
+		' TODO: Figure out why highlighted cell doesn't change properly
+		UseWaitCursor = False
+		dgv_CustomerTable.Refresh()
 	End Sub
 
 	Private Sub UserDeletingCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_CustomerTable.UserDeletingRow
-		If MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-			Dim id As Integer = CInt(CType(dgv_CustomerTable.Rows(e.Row.Index).DataBoundItem, DataRowView)("CustomerID"))
-			Try
-				db_Customers.RemoveCustomer(id)
-			Catch
-				MessageBox.Show("Failed to remove customer", "Couldn't Remove", MessageBoxButtons.OK, MessageBoxIcon.Error)
-			End Try
-		Else
-			e.Cancel = True
+		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+
+		If Not Confirmed Or dgv_CustomerTable.SelectedRows.Count < 1 Then
+			Return
 		End If
+
+		RemoveSelectedRows()
 	End Sub
 
-	Private Sub UserEditedCustomer(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_CustomerTable.CellEndEdit
-		'get values from table
-		Dim column As String = dgv_CustomerTable.Columns(e.ColumnIndex).DataPropertyName
-		Dim value As String = If(dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value IsNot DBNull.Value, dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString()
-		Dim customerID As Integer = CInt(_customers.Rows(e.RowIndex)("CustomerID"))
+	Private Sub UserEditedCustomer(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_CustomerTable.CellValueChanged
+		' TODO: Check if still necessary
 
-		Select Case column
-			Case "FirstName", "LastName", "PhoneNumber"
-				If Not String.IsNullOrWhiteSpace(value) Then
-					db_Customers.UpdateCustomer(customerID, column, value)
-				Else
-					MessageBox.Show($"You must enter a value for {column}", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
-				End If
-			Case Else
-				db_Customers.UpdateCustomer(customerID, column, value)
-		End Select
+		If (e.RowIndex < 0) Then
+			Return
+		End If
+
+		'get values from table
+		Dim id As Integer = CInt(_customers.Rows(e.RowIndex)("CustomerID"))
+		Dim column As String = dgv_CustomerTable.Columns(e.ColumnIndex).DataPropertyName
+		Dim value As Object = dgv_CustomerTable.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+
+		Dim tableRow = _customers.Rows(e.RowIndex)
+
+		If value.Equals(tableRow(column)) Then
+			Return
+		End If
+
+		MessageBox.Show("A change has been detected", "Change Detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+		'Select Case column
+		'	Case "FirstName", "LastName", "PhoneNumber"
+		'		If Not String.IsNullOrWhiteSpace(value) Then
+		'			db_Customers.UpdateCustomer(customerID, column, value)
+		'		Else
+		'			MessageBox.Show($"You must enter a value for {column}", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		'		End If
+		'	Case Else
+		'		db_Customers.UpdateCustomer(customerID, column, value)
+		'End Select
 
 	End Sub
 
@@ -126,10 +143,19 @@ Public Class DisplayCustomersCtrl
 		Reload()
 	End Sub
 
-	Private Sub Dgv_Customers_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_CustomerTable.MouseClick
-		If e.Button = MouseButtons.Right Then
-			ClearSelectedRows()
+	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
+		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+
+		If Not Confirmed OrElse Not ts_Remove.Enabled OrElse dgv_CustomerTable.SelectedRows.Count < 1 Then
+			Return
 		End If
+
+		RemoveSelectedRows()
+
+		' TODO: Open a dialog for bulk deletion
+		'Using bulk As New BulkDeletionDialog(dgv_CustomerTable)
+		'	bulk.ShowDialog()
+		'End Using
 	End Sub
 
 	Private Sub ClearSelectedRows()
@@ -139,17 +165,12 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
-		Console.WriteLine(MousePosition)
-
-		Dim info As DataGridView.HitTestInfo = dgv_CustomerTable.HitTest(MousePosition.X, MousePosition.Y)
-		ts_Remove.Enabled = info.RowIndex > -1
-
-		If info.RowIndex > -1 Then
-			Dim row = dgv_CustomerTable.Rows(info.RowIndex)
-			row.Selected = True
-		End If
+		ts_Remove.Enabled = dgv_CustomerTable.SelectedRows.Count > 0
 	End Sub
 
+	Private Sub ToolsClosed(sender As Object, e As ToolStripDropDownClosedEventArgs) Handles cms_Tools.Closed
+		ts_Remove.Enabled = False
+	End Sub
 
 	Private Sub AddCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
 		Using newCustomer As New Dialogs.AddCustomerDialog()

@@ -1,9 +1,9 @@
 ﻿Namespace DataTables
     <Serializable>
     Public Class ItemsDataTable
-    Inherits TypedTableBase(Of ItemsDataRow)
+		Inherits TypedTableBase(Of ItemsDataRow)
 
-    Public Delegate Sub ItemsDataRowChangeEventHandler(sender As Object, e As ItemsRowChangeEvent)
+		Public Delegate Sub ItemsDataRowChangeEventHandler(sender As Object, e As ItemsRowChangeEvent)
 
     Private ItemID As DataColumn
     Private ItemName As DataColumn
@@ -69,25 +69,19 @@
         End Get
     End Property
 
-    Public ReadOnly Property AvailableColumn() As DataColumn
-        Get
-            Return Me.Available
-        End Get
-    End Property
+		Public ReadOnly Property AvailableColumn() As DataColumn
+			Get
+				Return Me.Available
+			End Get
+		End Property
 
-    Public ReadOnly Property CompletedDateColumn() As Global.System.Data.DataColumn
-        Get
-            Return Me.CompletedDate
-        End Get
-    End Property
+		Public ReadOnly Property Count() As Integer
+			Get
+				Return Me.Rows.Count
+			End Get
+		End Property
 
-    Public ReadOnly Property Count() As Integer
-        Get
-            Return Me.Rows.Count
-        End Get
-    End Property
-
-    Default Public ReadOnly Property Item(index As Integer) As ItemsDataRow
+		Default Public ReadOnly Property Item(index As Integer) As ItemsDataRow
         Get
             Return CType(Me.Rows(index), ItemsDataRow)
         End Get
@@ -155,15 +149,13 @@
         Me.Available.AllowDBNull = False
     End Sub
 
-    Public Function NewItemsDataRow() As ItemsDataRow
-        Return CType(Me.NewRow, ItemsDataRow)
-    End Function
-    Return CType(Me.NewRow, ItemsDataRow)
-    End Function
+		Public Function NewItemsDataRow() As ItemsDataRow
+			Return CType(Me.NewRow, ItemsDataRow)
+		End Function
 
-    Protected Overrides Function NewRowFromBuilder(builder As DataRowBuilder) As DataRow
-        Return New ItemsDataRow(builder)
-    End Function
+		Protected Overrides Function NewRowFromBuilder(builder As DataRowBuilder) As DataRow
+			Return New ItemsDataRow(builder)
+		End Function
 
     Protected Overrides Function GetRowType() As Type
         Return GetType(ItemsDataRow)

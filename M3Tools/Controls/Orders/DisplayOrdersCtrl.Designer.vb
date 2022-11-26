@@ -34,8 +34,8 @@ Partial Class DisplayOrdersCtrl
         Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
-        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-        Me.dgv_Orders = New System.Windows.Forms.DataGridView()
+		'        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+		Me.dgv_Orders = New System.Windows.Forms.DataGridView()
         Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,16 +45,16 @@ Partial Class DisplayOrdersCtrl
         Me.btn_Edit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btn_Complete = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btn_Cancel = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.ts_OrderTools = New System.Windows.Forms.ToolStrip()
-        Me.tbtn_New = New System.Windows.Forms.ToolStripButton()
-        CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
+		'        Me.ts_OrderTools = New System.Windows.Forms.ToolStrip()
+		'Me.tbtn_New = New System.Windows.Forms.ToolStripButton()
+		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cms_Tools.SuspendLayout()
-        Me.ToolStripContainer1.ContentPanel.SuspendLayout()
-        Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
-        Me.ToolStripContainer1.SuspendLayout()
-        CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ts_OrderTools.SuspendLayout()
-        Me.SuspendLayout()
+		'Me.ToolStripContainer1.ContentPanel.SuspendLayout()
+		'Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
+		'Me.ToolStripContainer1.SuspendLayout()
+		CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).BeginInit()
+		'Me.ts_OrderTools.SuspendLayout()
+		Me.SuspendLayout()
         '
         'bsOrders
         '
@@ -101,28 +101,28 @@ Partial Class DisplayOrdersCtrl
         Me.db_Orders.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Orders.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Orders.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-        '
-        'ToolStripContainer1
-        '
-        '
-        'ToolStripContainer1.ContentPanel
-        '
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_Orders)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(803, 401)
-        Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStripContainer1.Name = "ToolStripContainer1"
-        Me.ToolStripContainer1.Size = New System.Drawing.Size(803, 440)
-        Me.ToolStripContainer1.TabIndex = 1
-        Me.ToolStripContainer1.Text = "ToolStripContainer1"
-        '
-        'ToolStripContainer1.TopToolStripPanel
-        '
-        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_OrderTools)
-        '
-        'dgv_Orders
-        '
-        Me.dgv_Orders.AllowUserToAddRows = False
+		'
+		'ToolStripContainer1
+		'
+		'
+		'ToolStripContainer1.ContentPanel
+		'
+		'Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_Orders)
+		'Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(803, 401)
+		'Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+		'Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+		'Me.ToolStripContainer1.Name = "ToolStripContainer1"
+		'Me.ToolStripContainer1.Size = New System.Drawing.Size(803, 440)
+		'Me.ToolStripContainer1.TabIndex = 1
+		'Me.ToolStripContainer1.Text = "ToolStripContainer1"
+		'
+		'ToolStripContainer1.TopToolStripPanel
+		'
+		'Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_OrderTools)
+		'
+		'dgv_Orders
+		'
+		Me.dgv_Orders.AllowUserToAddRows = False
         Me.dgv_Orders.AllowUserToOrderColumns = True
         Me.dgv_Orders.AutoGenerateColumns = False
         Me.dgv_Orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -239,49 +239,49 @@ Partial Class DisplayOrdersCtrl
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.ToolTipText = "Cancel Order"
         Me.btn_Cancel.Width = 25
-        '
-        'ts_OrderTools
-        '
-        Me.ts_OrderTools.Dock = System.Windows.Forms.DockStyle.None
-        Me.ts_OrderTools.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ts_OrderTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_New})
-        Me.ts_OrderTools.Location = New System.Drawing.Point(3, 0)
-        Me.ts_OrderTools.Name = "ts_OrderTools"
-        Me.ts_OrderTools.Size = New System.Drawing.Size(79, 39)
-        Me.ts_OrderTools.TabIndex = 7
-        Me.ts_OrderTools.Text = "ToolStrip1"
-        '
-        'tbtn_New
-        '
-        Me.tbtn_New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tbtn_New.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
-        Me.tbtn_New.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tbtn_New.Name = "tbtn_New"
-        Me.tbtn_New.Size = New System.Drawing.Size(36, 36)
-        Me.tbtn_New.Text = "New Customer"
-        '
-        'DisplayOrdersCtrl
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+		'
+		'ts_OrderTools
+		'
+		'Me.ts_OrderTools.Dock = System.Windows.Forms.DockStyle.None
+		'Me.ts_OrderTools.ImageScalingSize = New System.Drawing.Size(32, 32)
+		'Me.ts_OrderTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_New})
+		'Me.ts_OrderTools.Location = New System.Drawing.Point(3, 0)
+		'Me.ts_OrderTools.Name = "ts_OrderTools"
+		'Me.ts_OrderTools.Size = New System.Drawing.Size(79, 39)
+		'Me.ts_OrderTools.TabIndex = 7
+		'Me.ts_OrderTools.Text = "ToolStrip1"
+		'
+		'tbtn_New
+		'
+		'Me.tbtn_New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		'		Me.tbtn_New.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
+		'Me.tbtn_New.ImageTransparentColor = System.Drawing.Color.Magenta
+		'Me.tbtn_New.Name = "tbtn_New"
+		'Me.tbtn_New.Size = New System.Drawing.Size(36, 36)
+		'Me.tbtn_New.Text = "New Customer"
+		'
+		'DisplayOrdersCtrl
+		'
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ContextMenuStrip = Me.cms_Tools
-        Me.Controls.Add(Me.ToolStripContainer1)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+		'        Me.Controls.Add(Me.ToolStripContainer1)
+		Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(803, 440)
         Me.Name = "DisplayOrdersCtrl"
         Me.Size = New System.Drawing.Size(803, 440)
         CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cms_Tools.ResumeLayout(False)
-        Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
-        Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
-        Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
-        Me.ToolStripContainer1.ResumeLayout(False)
-        Me.ToolStripContainer1.PerformLayout()
-        CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ts_OrderTools.ResumeLayout(False)
-        Me.ts_OrderTools.PerformLayout()
-        Me.ResumeLayout(False)
+		'Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
+		'Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
+		'Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
+		'Me.ToolStripContainer1.ResumeLayout(False)
+		'Me.ToolStripContainer1.PerformLayout()
+		CType(Me.dgv_Orders, System.ComponentModel.ISupportInitialize).EndInit()
+		'Me.ts_OrderTools.ResumeLayout(False)
+		'Me.ts_OrderTools.PerformLayout()
+		Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents db_Orders As Database.OrdersDatabase

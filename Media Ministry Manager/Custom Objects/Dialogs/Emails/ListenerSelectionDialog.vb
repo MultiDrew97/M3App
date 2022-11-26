@@ -7,8 +7,8 @@ Imports SPPBC.M3Tools.Types
 Public Class ListenerSelectionDialog
     Shared Property Listeners As New Collection(Of Listener)
 	Private ListenerList As Collection(Of Listener)
-	Private ReadOnly ListenersTable As New CustomData.ListenersDataTable
-    Private column As String
+	Private ReadOnly ListenersTable As New SPPBC.M3Tools.DataTables.ListenersDataTable
+	Private column As String
 
     Private Sub ListenerSelectionDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: Add a search function to easily find specific listeners

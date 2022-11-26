@@ -80,27 +80,22 @@ Namespace Database
             End Using
         End Function
 
-        Public Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
-            Dim parameters() As SqlParameter = {
-                New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
-                New SqlParameter("OldPassword", oldPassword) With {.Direction = ParameterDirection.Input},
-                New SqlParameter("NewPassword", newPassword) With {.Direction = ParameterDirection.Input}
-            }
+		Public Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
+			Return ChangePassword(New SqlParameter("Username", username), New SqlParameter("OldPassword", oldPassword), New SqlParameter("NewPassword", newPassword))
+		End Function
 
-            Return ChangePassword(parameters)
-        End Function
+		Public Function ChangePassword(ParamArray params As SqlParameter()) As Boolean
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_ChangePassword]"
+				cmd.CommandType = CommandType.StoredProcedure
 
-        Public Function ChangePassword(params As SqlParameter()) As Boolean
-            _cmd.CommandText = $"[{My.Settings.Schema}].[sp_ChangePassword]"
-            _cmd.CommandType = CommandType.StoredProcedure
+				cmd.ExecuteNonQueryAsync()
+				' TODO: Test this
+				Return CBool(cmd.Parameters("Success").Value)
+			End Using
+		End Function
 
-            _cmd.ExecuteNonQueryAsync()
-            ' TODO: Test this
-            Return CBool(_cmd.Parameters("Success").Value)
-            End Using
-        End Function
-
-        Public Sub CloseAccount(username As String)
+		Public Sub CloseAccount(username As String)
             CloseAccount(New SqlParameter("Username", username))
         End Sub
 
@@ -115,54 +110,37 @@ Namespace Database
         End Sub
 
         Public Function Login(username As String, password As String) As User
-            Return Login({
-                New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
-                New SqlParameter("Password", password) With {.Direction = ParameterDirection.Input}
-            )
-        End Function
+			Return Login(New SqlParameter("Username", username), New SqlParameter("Password", password))
+		End Function
 
         Private Function Login(ParamArray params As SqlParameter()) As User
-            Using _con = db_Connection.Connect()
-                _con.CommandText = "SELECT * FROM tf_M3Login(@Username, @Password)"
-                _con.Parameters.AddRange(params)
+			Using cmd = db_Connection.Connect()
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_Login](@Username, @Password)"
+				cmd.Parameters.AddRange(params)
 
-                Using reader = _con.ExecuteReaderAsync().Result
-                    If reader.Read() Then
-                        If Utils.ValidID(CInt(reader("UserID"))) Then
-                            Dim user As User
-                            Try
-                                user = GetUser(CInt(reader("UserID")))
-                            Catch ex As Exception
-                                Throw New Exceptions.DatabaseException($"Unable to find user with ID {CInt(reader("UserID"))}", ex)
-                            End Try
+				Using reader = cmd.ExecuteReader
+					If reader.Read() Then
+						If Not Utils.ValidID(CInt(reader("UserID"))) Then
+							If CStr(reader("Message")).ToLower().Contains("username") Then
+								Throw New Exceptions.UsernameException(CStr(reader("Message")))
+							ElseIf CStr(reader("Message")).ToLower().Contains("password") Then
+								Throw New Exceptions.PasswordException(CStr(reader("Message")))
+								Throw New Exceptions.LoginException("Unable to Login at this time.")
+							End If
+						End If
+					End If
 
-                            Return user
-                        Else
-                            If reader.GetString(reader.GetOrdinal("Message")).ToLower().Contains("username") Then
-                                Throw New Exceptions.UsernameException(reader.GetString(reader.GetOrdinal("Message")))
-                            ElseIf reader.GetString(reader.GetOrdinal("Message")).ToLower().Contains("password") Then
-                                Return user
-                            Else
-                                If CStr(reader("Message")).ToLower().Contains("username") Then
-                                    Throw New Exceptions.UsernameException(CStr(reader("Message")))
-                                ElseIf CStr(reader("Message")).ToLower().Contains("password") Then
-                                    Throw New Exceptions.PasswordException(CStr(reader("Message")))
-                                    Throw New Exceptions.LoginException("Unable to Login at this time.")
-                                End If
-                End Using
-            End Using
+					Try
+						Dim user = GetUser(CInt(reader("UserID")))
+						Return user
+					Catch ex As Exception
+						Throw New Exceptions.DatabaseException($"Unable to find user with ID {CInt(reader("UserID"))}", ex)
+					End Try
+				End Using
+			End Using
         End Function
 
-        End If
-        End Using
-        End Using
-        End Function
-
-        Using _con = db_Connection.Connect()
-                _con.Parameters.AddWithValue("UserID", userID)
-                _con.CommandText = "SELECT * FROM m3_Users WHERE UserID = @UserID"
-			End If
-
+		Public Function GetUser(userID As Integer) As User
 			Using _con = db_Connection.Connect()
 				_con.Parameters.AddWithValue("UserID", userID)
 				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Users] WHERE UserID=@UserID"
@@ -170,15 +148,13 @@ Namespace Database
 				Using reader = _con.ExecuteReader()
 					Do While reader.Read()
 						Dim buffer(64) As Byte
-                        reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
+						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
-                        Return New User() With {
-                                .Id = reader.GetInt32(reader.GetOrdinal("UserID")),
-                                .Username = reader.GetString(reader.GetOrdinal("Username")),
-                                .Password = buffer,
-                                .Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
-                                .AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
-                            }
+						Return New User(CInt(reader("UserID")),
+								CStr(reader("Username")),
+								buffer,
+								CType(reader("Salt"), Guid),
+								CType(reader("AccountRole"), AccountRole)
 							)
 					Loop
 
