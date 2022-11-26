@@ -1,39 +1,54 @@
 ﻿Option Strict On
 Namespace Types
-    Public MustInherit Class Person
-        Public Property Id As Integer
-        Public Property FirstName As String
-        Public Property LastName As String
+	' TODO: Potentially return to MustInherit
+	Public Class Person
+		Inherits DBEntry
 
-        Public Property Name As String
-            Get
-                Return CType(IIf(IsNothing(LastName), FirstName, String.Join(" "c, {FirstName, LastName})), String)
-            End Get
-            Set(name As String)
-                Dim parts = name.Split(" "c)
-                FirstName = parts(0)
+		Private __email As MimeKit.MailboxAddress
+		Public Property FirstName As String
+		Public Property LastName As String
 
-                Try
-                    LastName = parts(1)
-                Catch ex As Exception
-                    LastName = ""
-                End Try
-            End Set
-        End Property
+		Public Property Email As String
+			Get
+				Return If(String.IsNullOrWhiteSpace(__email.Address), Nothing, __email.Address)
+			End Get
+			Set(value As String)
+				__email = New MimeKit.MailboxAddress(Name, If(Not String.IsNullOrWhiteSpace(value), value, ""))
+			End Set
+		End Property
 
-        Public Sub New()
-            Me.New(-1, "John Doe")
-        End Sub
+		Public Property Name As String
+			Get
+				Return CType(IIf(IsNothing(LastName), FirstName, String.Join(" "c, {FirstName, LastName})), String)
+			End Get
+			Set(name As String)
+				Dim parts = name.Split(" "c)
+				FirstName = parts(0)
 
-        Public Sub New(id As Integer, name As String)
-            Me.Id = id
-            Me.Name = name
-        End Sub
+				Try
+					LastName = parts(1)
+				Catch ex As Exception
+					LastName = ""
+				End Try
+			End Set
+		End Property
 
-        Public Sub New(id As Integer, firstName As String, lastName As String)
-            Me.Id = id
-            Me.FirstName = firstName
-            Me.LastName = lastName
-        End Sub
-    End Class
+		Public Sub New()
+			Me.New(-1, "John Doe", "johndoe@domain.ext")
+		End Sub
+
+		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)
+			MyBase.New(id)
+			Me.Name = name
+			Me.Email = email
+		End Sub
+
+		Overloads Shared Operator =(ls As Person, rs As Person) As Boolean
+			Return ls.Id = rs.Id And ls.Name.Equals(rs.Name) And ls.Email.Equals(rs.Email)
+		End Operator
+
+		Overloads Shared Operator <>(ls As Person, rs As Person) As Boolean
+			Return Not ls = rs
+		End Operator
+	End Class
 End Namespace

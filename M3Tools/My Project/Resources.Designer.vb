@@ -100,24 +100,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Media Ministry.
-        '''</summary>
-        Friend ReadOnly Property DefaultCatalog() As String
-            Get
-                Return ResourceManager.GetString("DefaultCatalog", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication=&quot;Sql Password&quot;.
-        '''</summary>
-        Friend ReadOnly Property DefaultConnectionString() As String
-            Get
-                Return ResourceManager.GetString("DefaultConnectionString", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to &lt;!Doctype html&gt;
         '''&lt;html&gt;
         '''    &lt;head&gt;
@@ -131,15 +113,6 @@ Namespace My.Resources
         Friend ReadOnly Property DefaultNewListenerEmail() As String
             Get
                 Return ResourceManager.GetString("DefaultNewListenerEmail", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to M3AppPassword2499.
-        '''</summary>
-        Friend ReadOnly Property DefaultPassword() As String
-            Get
-                Return ResourceManager.GetString("DefaultPassword", resourceCulture)
             End Get
         End Property
         
@@ -193,11 +166,12 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to M3App.
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property DefaultUsername() As String
+        Friend ReadOnly Property delete() As System.Drawing.Bitmap
             Get
-                Return ResourceManager.GetString("DefaultUsername", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("delete", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
@@ -211,11 +185,30 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property edit() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("edit", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to ^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$.
         '''</summary>
         Friend ReadOnly Property EmailRegex() As String
             Get
                 Return ResourceManager.GetString("EmailRegex", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ^[a-zA-Z0-9_!#$%&amp;’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$.
+        '''</summary>
+        Friend ReadOnly Property EmailRegex2() As String
+            Get
+                Return ResourceManager.GetString("EmailRegex2", resourceCulture)
             End Get
         End Property
         

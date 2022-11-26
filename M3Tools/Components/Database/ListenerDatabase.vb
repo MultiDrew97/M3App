@@ -3,8 +3,8 @@ Imports System.Data.SqlClient
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
+	' TODO: Revamp this area as well
 	Public NotInheritable Class ListenerDatabase
-
 		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
@@ -42,67 +42,73 @@ Namespace Database
 			End Set
 		End Property
 		Public Sub AddListener(listener As Listener)
-			AddListener(listener.Name, listener.EmailAddress.Address)
+			AddListener(listener.Name, listener.Email)
 		End Sub
 
 		Public Sub AddListener(name As String, email As String)
-			AddListener({New SqlParameter("Name", name), New SqlParameter("Email", email)})
+			AddListener(New SqlParameter("Name", name), New SqlParameter("Email", email))
 		End Sub
 
-		Private Sub AddListener(params As SqlParameter())
+		Private Sub AddListener(ParamArray params As SqlParameter())
 			Using _cmd = db_Connection.Connect()
-				_cmd.Parameters.AddRange(params)
-
 				_cmd.CommandType = CommandType.StoredProcedure
-				_cmd.CommandText = "AddListener"
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddListener]"
+				_cmd.Parameters.AddRange(params)
 
 				_cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
 		Public Sub RemoveListener(listenerID As Integer)
+			If Not Utils.ValidID(listenerID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+			End If
+
 			RemoveListener(New SqlParameter("ListenerID", listenerID))
 		End Sub
 
-		Public Sub RemoveListener(param As SqlParameter)
+		Public Sub RemoveListener(ParamArray param As SqlParameter())
 			Using _cmd = db_Connection.Connect()
-				_cmd.Parameters.Add(param)
-
 				_cmd.CommandType = CommandType.StoredProcedure
-				_cmd.CommandText = "RemoveListener"
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_RemoveListener]"
+				_cmd.Parameters.AddRange(param)
 
 				_cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
 		Public Sub UpdateListener(listenerID As Integer, column As String, value As String)
-			UpdateListener(New SqlParameter("ListenerID", listenerID), column, value)
+			If Not Utils.ValidID(listenerID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+			End If
+
+			UpdateListener(column, value, New SqlParameter("ListenerID", listenerID))
 		End Sub
 
-		Private Sub UpdateListener(param As SqlParameter, column As String, value As String)
+		Private Sub UpdateListener(column As String, value As String, ParamArray params As SqlParameter())
 			Using _cmd = db_Connection.Connect()
-				Dim command As String = String.Format("{0} = '{1}'", column, value)
-				_cmd.Parameters.Add(param)
+				Dim command As String = $"{column} = '{value}'"
 
-				_cmd.CommandText = String.Format("UPDATE EmailListeners SET {0} WHERE ListenerID = @ListenerID", command)
+				_cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Listeners] SET {command} WHERE ListenerID = @ListenerID"
+				_cmd.Parameters.AddRange(params)
 
 				_cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
-		Public Function GetListeners() As ListenerCollection
-			Dim listeners As New ListenerCollection
+		Public Function GetListeners() As DBEntryCollection(Of Listener)
+			Dim listeners As New DBEntryCollection(Of Listener)
 
 			Using _cmd = db_Connection.Connect()
-				_cmd.CommandText = "SELECT * FROM EmailListeners"
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Listeners]"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
-						listeners.Add(New Listener() With {
-							.Id = reader.GetInt32(0),
-							.Name = reader.GetString(1),
-							.EmailAddress = New MimeKit.MailboxAddress(.Name, reader.GetString(2))
-						})
+						listeners.Add(New Listener(
+							CInt(reader("ListenerID")),
+							CStr(reader("Name")),
+							CStr(reader("Email"))
+						))
 					Loop
 				End Using
 			End Using
@@ -111,34 +117,38 @@ Namespace Database
 		End Function
 
 		Public Function GetListener(emailAddress As String) As Listener
-			Return GetListener(New SqlParameter("EmailAddress", emailAddress), "Email")
+			Return GetListener("Email", New SqlParameter("EmailAddress", emailAddress))
 		End Function
 
 		Public Function GetListener(listenerID As Integer) As Listener
-			Return GetListener(New SqlParameter("ListenerID", listenerID), "ID")
+			If Not Utils.ValidID(listenerID) Then
+				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+			End If
+
+			Return GetListener("ID", New SqlParameter("ListenerID", listenerID))
 		End Function
 
-		Public Function GetListener(param As SqlParameter, column As String) As Listener
+		Public Function GetListener(column As String, ParamArray params As SqlParameter()) As Listener
 			Using _cmd = db_Connection.Connect()
-				_cmd.Parameters.Add(param)
+				_cmd.Parameters.AddRange(params)
 				Dim cmdText As String = ""
 
 				Select Case column
 					Case "Email"
-						cmdText = "WHERE EmailAddress = @EmailAddress"
+						cmdText = "WHERE {column}=@EmailAddress"
 					Case "ID"
-						cmdText = "WHERE ListenerID = @ListenerID"
+						cmdText = "WHERE {column}=@ListenerID"
 				End Select
 
-				_cmd.CommandText = String.Format("SELECT * FROM EmailListeners {0}", cmdText)
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Listeners] {cmdText}"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
-						Return New Listener() With {
-							.Id = reader.GetInt32(0),
-							.Name = reader.GetString(1),
-							.EmailAddress = New MimeKit.MailboxAddress(.Name, reader.GetString(2))
-						}
+						Return New Listener(
+							CInt(reader("ListenerID")),
+							CStr(reader("Name")),
+							CStr(reader("Email"))
+						)
 					Loop
 				End Using
 			End Using

@@ -1,9 +1,9 @@
 ﻿Option Strict On
 
 Imports System.ComponentModel
+Imports MediaMinistry.Helpers
 
 Public Class Frm_Main
-	ReadOnly emailerLocation As String = Application.StartupPath & "\sender.jar"
 	Dim firstTime As Boolean = True
 
 	Structure WindowSizes
@@ -11,62 +11,52 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	'Private Sub FormClose(sender As Object, e As EventArgs) Handles MyBase.Closing
-	'	If My.Application.OpenForms.Count = 1 And Not My.Settings.KeepLoggedIn Then
-	'		Frm_Login.Show()
-	'		'Dim login As New Frm_Login()
-	'		'login.Show()
-	'	End If
-	'End Sub
-
 	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles btn_placeOrder.Click
 		PlaceOrderDialog.ShowDialog(Me)
 	End Sub
 
 	Private Sub DisplayProductMgmt(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.OpenProducts
-		Frm_DisplayInventory.Show(Me)
-		'Dim inventory As New Frm_DisplayInventory
-		'inventory.Show()
+		Dim inventory As New Frm_DisplayInventory
+		inventory.Show()
 		Me.Close()
 	End Sub
 
 	Private Sub DisplayOrders(sender As Object, e As EventArgs) Handles btn_ShowOrders.Click, mms_Main.OpenOrders
-		Dim orders = New Frm_DisplayOrders()
-		'Dim ordersView = New Frm_DisplayOrders
+		Dim orders As New Frm_DisplayOrders()
 		orders.Show()
 		Me.Close()
 	End Sub
 
 	Private Sub DisplayCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.OpenCustomers
-		'Dim displayCustomers = New Frm_DisplayCustomers
-		'displayCustomers.Show()
-		Dim customers As New Frm_DisplayCustomers(Me)
+		Dim customers As New Frm_DisplayCustomers
 		customers.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub Reset()
+	Private Sub Reset() Handles Me.Load
 		tss_Feedback.Text = "What would you like to do?"
 		tss_Feedback.ForeColor = SystemColors.WindowText
 	End Sub
 
 	Private Sub EmailMinistry(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.OpenListeners
 		If EmailMinistryDialog.ShowDialog = DialogResult.OK Then
-			Dim form As Form
 			Select Case EmailMinistryDialog.SelectedItem
 				Case "Send"
 					SendEmailsDialog.ShowDialog()
 				Case "Upload"
 					DriveUploadDialog.ShowDialog()
 				Case "View"
-					form = New Frm_ViewListeners
-					form.Show()
+					Dim listeners As New Frm_ViewListeners
+					listeners.Show()
 					Me.Close()
 			End Select
 		End If
 	End Sub
 
 	Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+
+		' TODO: Determine proper way to do this
+
 		Dim size As String
 
 		If Me.Size = WindowSizes.max Then
@@ -109,19 +99,16 @@ Public Class Frm_Main
 		'tctl_MaxOption.Hide()
 	End Sub
 
-	Private Sub Logout(sender As Object, e As EventArgs) Handles mms_Main.Logout
-		My.Settings.Username = ""
-		My.Settings.Password = ""
-		My.Settings.KeepLoggedIn = False
-		My.Settings.Save()
+	Private Sub Logout() Handles mms_Main.Logout
+		Utils.Logout()
 		Me.Close()
 	End Sub
 
-	Private Sub ExitApp(sender As Object, e As EventArgs) Handles mms_Main.ExitApplication
-		Helpers.Utils.CloseOpenForms()
+	Private Sub ExitApp() Handles mms_Main.ExitApplication, mms_Main.UpdateAvailable
+		Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub DisplaySettings(sender As Object, e As EventArgs) Handles mms_Main.OpenSettings
+	Private Sub DisplaySettings() Handles mms_Main.OpenSettings
 		Frm_Settings.Show()
 	End Sub
 
@@ -140,22 +127,5 @@ Public Class Frm_Main
 					End Sub
 				)
 		End Select
-	End Sub
-
-	Private Sub UpdateApp(sender As Object, e As EventArgs) Handles mms_Main.UpdateAvailable
-		Helpers.Utils.CloseOpenForms()
-		'ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13
-		'Dim latestVersion As String = ""
-
-		'While String.IsNullOrEmpty(latestVersion) Or (latestVersion.Split("."c).Length) > 4
-		'	wb_Browser.Url = New Uri("https://sppbc.hopto.org/manager/version")
-		'	Console.WriteLine(wb_Browser.DocumentText)
-
-		'	latestVersion = wb_Browser.DocumentText.Replace("Version ", String.Empty)
-		'	latestVersion = latestVersion.Replace(vbCrLf, String.Empty)
-		'	latestVersion = latestVersion.Trim
-
-		'	Console.WriteLine(latestVersion)
-		'End While
 	End Sub
 End Class

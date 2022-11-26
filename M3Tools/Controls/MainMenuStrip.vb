@@ -1,15 +1,15 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
-Imports System.Net
 Imports System.Windows.Forms
 
+' TODO: Open Display forms from here and figure out to discern closing type
 Public Class MainMenuStrip
 	Private ReadOnly toolStripPrefix As String = "tsmi_"
 
 	''' <summary>
 	''' Occurs when the Logout menu item is clicked
 	''' </summary>
-	Public Event Logout As EventHandler
+	Public Event Logout()
 
 	''' <summary>
 	''' Occurs when the ViewCustomer menu item is clicked
@@ -34,17 +34,17 @@ Public Class MainMenuStrip
 	''' <summary>
 	''' Occurs when the Settings menu item is clicked
 	''' </summary>
-	Public Event OpenSettings As EventHandler
+	Public Event OpenSettings()
 
 	''' <summary>
 	''' Occurs when the Exit menu item is clicked
 	''' </summary>
-	Public Event ExitApplication As EventHandler
+	Public Event ExitApplication()
 
 	''' <summary>
 	''' Occurs when the Update menu item is clicked, and an update is available
 	''' </summary>
-	Public Event UpdateAvailable As EventHandler
+	Public Event UpdateAvailable()
 
 	''' <summary>
 	''' The location to save the installer for the application when updating
@@ -55,11 +55,11 @@ Public Class MainMenuStrip
 	Private ReadOnly _UpdateUri As New Uri(My.Resources.AppUpdateUri)
 
 	Private Sub LogoutApplication(sender As Object, e As EventArgs) Handles tsmi_Logout.Click
-		RaiseEvent Logout(Me, e)
+		RaiseEvent Logout()
 	End Sub
 
 	Private Sub [Exit](sender As Object, e As EventArgs) Handles tsmi_Exit.Click
-		RaiseEvent ExitApplication(Me, e)
+		RaiseEvent ExitApplication()
 	End Sub
 
 	Private Sub CreateCustomer(sender As Object, e As EventArgs) Handles tsmi_NewCustomer.Click
@@ -100,7 +100,7 @@ Public Class MainMenuStrip
 		'lsd_Loading.ShowDialog()
 
 		'If IsUpdateAvailable() Then
-		'	'RaiseEvent UpdateAvailable(sender, e)
+		'	'RaiseEvent UpdateAvailable()
 		'	'wb_Updater.Url = New Uri(My.Resources.AppUpdateUri)
 		'	bw_Update.RunWorkerAsync(wb_Updater)
 		'Else
@@ -127,7 +127,7 @@ Public Class MainMenuStrip
 	End Sub
 
 	Private Sub ViewSettings(sender As Object, e As EventArgs) Handles tsmi_Settings.Click
-		RaiseEvent OpenSettings(Me, e)
+		RaiseEvent OpenSettings()
 	End Sub
 
 	Private Sub UpdateAppBW(sender As Object, e As DoWorkEventArgs) Handles bw_Update.DoWork
@@ -141,7 +141,7 @@ Public Class MainMenuStrip
 		My.Computer.Network.DownloadFile(My.Resources.AppUpdateUri, setupFileLocation)
 		Try
 			Process.Start(setupFileLocation)
-			RaiseEvent UpdateAvailable(Me, New EventArgs)
+			RaiseEvent UpdateAvailable()
 		Catch
 			e.Cancel = True
 		End Try
@@ -193,17 +193,50 @@ Public Class MainMenuStrip
 		Return False
 	End Function
 
-	Public Sub ToggleViewItem(itemName As String)
-		Dim viewName As String = String.Concat(toolStripPrefix, "View")
-		Dim viewCol As ToolStripMenuItem = CType(Items(viewName), ToolStripMenuItem)
+	Private Sub ToggleItem(ParamArray path As String())
+		If String.IsNullOrWhiteSpace(path(0)) Then
+			Throw New Exceptions.MenuException("Initial path must be passed")
+		End If
+		Dim parentItemName = If(path(0).Contains(toolStripPrefix), path(0), $"{toolStripPrefix}{path(0)}")
+		Dim parentItem As ToolStripMenuItem = CType(Items(parentItemName), ToolStripMenuItem)
 
-		' Iterates through the View tool strip item's children to try to find the specified name
-		For Each item As ToolStripItem In viewCol.DropDownItems
-			If item.Name.Contains(itemName) Then
+		If parentItem Is Nothing Then
+			Throw New Exceptions.MenuException($"Menu item with name {path(0)} not found")
+		End If
+
+		ToggleItem(parentItem, path.Skip(1).ToArray)
+	End Sub
+
+	Private Sub ToggleItem(parent As ToolStripMenuItem, ParamArray path As String())
+		Dim currentItem As ToolStripMenuItem
+
+		Select Case path.Length
+			Case 0
+				currentItem = parent
+			Case 1
+				currentItem = GetChildItem(parent, path(0))
+			Case Else
+				currentItem = parent
+				For Each child As String In path
+					currentItem = GetChildItem(currentItem, child)
+				Next
+		End Select
+
+		currentItem.Available = Not currentItem.Available
+	End Sub
+
+	Private Function GetChildItem(parent As ToolStripMenuItem, name As String) As ToolStripMenuItem
+		For Each item As ToolStripMenuItem In parent.DropDownItems
+			If item.AccessibleName.Equals(name) Or item.Name.Contains(name) Then
 				' The current child has the name that is being looked for
-				item.Available = (Not item.Available)
-				Exit For
+				Return item
 			End If
 		Next
+
+		Throw New Exceptions.MenuException($"Menu item {name} under the parent of {parent.AccessibleName} not found")
+	End Function
+
+	Public Sub ToggleViewItem(itemName As String)
+		ToggleItem({"view", itemName})
 	End Sub
 End Class

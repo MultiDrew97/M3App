@@ -22,18 +22,18 @@ Public Class Database
 #If DEBUG Then
 		Me.New(New SqlConnectionStringBuilder(My.Settings.debugConnection) With {
 			   .UserID = username,
-			   .Password = password
+			   .password = password
 			   })
 #Else
-        Me.New(New SqlConnectionStringBuilder(My.Settings.releaseConnection) With {
-               .UserID = username,
-               .Password = password
-               })
+	        Me.New(New SqlConnectionStringBuilder(My.Settings.releaseConnection) With {
+	               .UserID = username,
+	               .Password = password
+	               })
 #End If
 		'Me.New(New SqlConnectionStringBuilder(If(Not Debugger.IsAttached, My.Resources.releaseConnection, My.Resources.debugConnection)) With {
-		'       .UserID = username,
-		'       .Password = password
-		'       })
+		'	   .UserID = username,
+		'	   .Password = password
+		'	   })
 	End Sub
 
 	Public Sub New(connectionString As SqlConnectionStringBuilder)
@@ -55,26 +55,26 @@ Public Class Database
 
 	Private Sub Dispose(value As Boolean)
 		If value Then
-			'If Not Debugger.IsAttached Then
-			'close connection
-			If (myReader IsNot Nothing) Then
-				'if the reader is still open, close it
-				myReader.Close()
+			If Not Debugger.IsAttached Then
+				'close connection
+				If (myReader IsNot Nothing) Then
+					'if the reader is still open, close it
+					myReader.Close()
+				End If
+
+				myConn.Close()
+				myConn.Dispose()
+				'Else
+				'	If mySqlRdr IsNot Nothing Then
+				'		mySqlRdr.Close()
+				'	End If
+
+				'	mySqlConn.Close()
+				'	mySqlConn.Dispose()
 			End If
-
-			myConn.Close()
-			myConn.Dispose()
-			'Else
-			'    If mySqlRdr IsNot Nothing Then
-			'        mySqlRdr.Close()
-			'    End If
-
-			'    mySqlConn.Close()
-			'    mySqlConn.Dispose()
-			'End If
 		Else
-		End If
-	End Sub
+			End If
+    End Sub
 
 	Public Sub CreateUser(username As String, password As String)
 		myCmd.Parameters.AddRange({New SqlParameter("Username", username), New SqlParameter("Password", password)})
@@ -133,7 +133,7 @@ Public Class Database
 	End Sub
 
 	Public Sub AddListener(listener As Listener)
-		AddListener(listener.Name, listener.EmailAddress.Address)
+		AddListener(listener.Name, listener.Email)
 	End Sub
 
 	Public Sub AddListener(name As String, email As String)
@@ -184,8 +184,8 @@ Public Class Database
 		myCmd.Parameters.AddWithValue("CustomerID", customerID)
 
 		myCmd.CommandText = String.Format("UPDATE CUSTOMERS
-                                            SET {0}
-                                            WHERE CustomerID = @CustomerID", command)
+	                                            SET {0}
+	                                            WHERE CustomerID = @CustomerID", command)
 
 		myCmd.ExecuteNonQuery()
 	End Sub
@@ -267,8 +267,8 @@ Public Class Database
 		myCmd.ExecuteNonQuery()
 	End Sub
 
-	Public Function GetCurrentOrders() As Collection(Of CurrentOrder)
-		Dim orders As New Collection(Of CurrentOrder)
+	Public Function GetCurrentOrders() As Collection(Of Order)
+		Dim orders As New Collection(Of Order)
 		Dim customerName As String()
 		Dim itemName As String
 		Dim orderID, customerID, itemID, quantity As Integer
@@ -289,7 +289,7 @@ Public Class Database
 				quantity = myReader.GetInt32(6)
 				orderTotal = CDec(myReader.GetSqlMoney(7))
 				orderDate = myReader.GetDateTime(8)
-				orders.Add(New CurrentOrder(orderID, customerID, customerName, itemID, itemName, quantity, orderTotal, orderDate))
+				orders.Add(New Order(orderID, customerID, customerName, itemID, itemName, quantity, orderTotal, orderDate))
 			Loop
 		End Using
 
@@ -322,8 +322,8 @@ Public Class Database
 		Return orders
 	End Function
 
-	Public Function GetCompletedOrders() As Collection(Of CompletedOrder)
-		Dim orders As New Collection(Of CompletedOrder)
+	Public Function GetCompletedOrders() As Collection(Of Order)
+		Dim orders As New Collection(Of Order)
 
 		'create view to use with
 		myCmd.CommandText = "GetCompletedOrders"
@@ -331,7 +331,7 @@ Public Class Database
 
 		Using myReader = myCmd.ExecuteReader()
 			Do While myReader.Read()
-				orders.Add(New CompletedOrder(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
+				orders.Add(New Order(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
 			Loop
 		End Using
 
@@ -341,7 +341,8 @@ Public Class Database
 	Public Function GetCustomers() As Collection(Of Customer)
 		Dim customers As New Collection(Of Customer)
 		Dim customerID As Integer
-		Dim first, last, street, city, state, zip, phone, email, join As String
+		Dim first, last, street, city, state, zip, phone, email As String
+		Dim join As Date
 
 		myCmd.CommandText = "SELECT * FROM CUSTOMERS"
 
@@ -362,7 +363,7 @@ Public Class Database
 					email = Nothing
 				End Try
 
-				join = myReader.GetString(9)
+				join = myReader.GetDateTime(9)
 				customers.Add(New Customer(customerID, first, last, street, city, state, zip, phone, email, join))
 			Loop
 		End Using
@@ -379,7 +380,7 @@ Public Class Database
 
 		Using myReader = myCmd.ExecuteReader
 			If myReader.Read() Then
-				Return New Customer(customerID, myReader.GetString(0), myReader.GetString(1), myReader.GetString(2), myReader.GetString(3), myReader.GetString(4), myReader.GetString(5), myReader.GetString(6), myReader.GetString(7), myReader.GetString(8))
+				Return New Customer(customerID, myReader.GetString(0), myReader.GetString(1), myReader.GetString(2), myReader.GetString(3), myReader.GetString(4), myReader.GetString(5), myReader.GetString(6), myReader.GetString(7), myReader.GetDateTime(8))
 			Else
 				Return Nothing
 			End If

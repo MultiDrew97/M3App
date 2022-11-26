@@ -137,7 +137,7 @@ Public Class SendEmailsDialog
 			End Using
 		End If
 
-		Console.WriteLine(String.Format("Subject: {0}{3}html:{3}{1}{3}rtf:{3}{2}", subject, htmlBody, rtfBody, vbNewLine))
+		Console.WriteLine($"Subject: {subject}{vbNewLine}html:{vbNewLine}{htmlBody}{vbNewLine}rtf:{vbNewLine}{rtfBody}")
 	End Sub
 
 	Private Sub GatherReceipients(sender As Object, e As DoWorkEventArgs) Handles bw_GatherReceipients.DoWork

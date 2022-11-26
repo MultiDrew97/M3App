@@ -26,9 +26,8 @@ Partial Class Frm_DisplayCustomers
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_DisplayCustomers))
 		Me.ss_CustomerView = New System.Windows.Forms.StatusStrip()
 		Me.tss_CustomersView = New System.Windows.Forms.ToolStripStatusLabel()
-		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
-		Me.dc_Customers = New SPPBC.M3Tools.DisplayCustomersCtrl()
+		Me.dcc_Customers = New SPPBC.M3Tools.DisplayCustomersCtrl()
 		Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.mnstr_Strip = New System.Windows.Forms.MenuStrip()
 		Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -65,9 +64,9 @@ Partial Class Frm_DisplayCustomers
 		Me.ss_CustomerView.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.ss_CustomerView.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.ss_CustomerView.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tss_CustomersView})
-		Me.ss_CustomerView.Location = New System.Drawing.Point(0, 518)
+		Me.ss_CustomerView.Location = New System.Drawing.Point(0, 626)
 		Me.ss_CustomerView.Name = "ss_CustomerView"
-		Me.ss_CustomerView.Size = New System.Drawing.Size(888, 22)
+		Me.ss_CustomerView.Size = New System.Drawing.Size(1159, 22)
 		Me.ss_CustomerView.TabIndex = 3
 		'
 		'tss_CustomersView
@@ -77,28 +76,26 @@ Partial Class Frm_DisplayCustomers
 		Me.tss_CustomersView.Size = New System.Drawing.Size(170, 17)
 		Me.tss_CustomersView.Text = "Here are the current customers"
 		'
-		'db_Customers
-		'
-		Me.db_Customers.InitialCatalog = Global.MediaMinistry.MySettings.Default.DefaultCatalog
-		Me.db_Customers.Password = Global.MediaMinistry.MySettings.Default.DefaultPassword
-		Me.db_Customers.Username = Global.MediaMinistry.MySettings.Default.DefaultUsername
-		'
 		'mms_Main
 		'
 		Me.mms_Main.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.mms_Main.Location = New System.Drawing.Point(0, 0)
 		Me.mms_Main.Name = "mms_Main"
-		Me.mms_Main.Size = New System.Drawing.Size(888, 24)
+		Me.mms_Main.Size = New System.Drawing.Size(1159, 24)
 		Me.mms_Main.TabIndex = 6
-		Me.mms_Main.Text = "MainMenuStrip1"
+		Me.mms_Main.Text = "Menu"
 		'
-		'dc_Customers
+		'dcc_Customers
 		'
-		Me.dc_Customers.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dc_Customers.Location = New System.Drawing.Point(0, 24)
-		Me.dc_Customers.Name = "dc_Customers"
-		Me.dc_Customers.Size = New System.Drawing.Size(888, 494)
-		Me.dc_Customers.TabIndex = 7
+		Me.dcc_Customers.AutoSize = True
+		Me.dcc_Customers.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.dcc_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.dcc_Customers.Location = New System.Drawing.Point(0, 24)
+		Me.dcc_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.dcc_Customers.MinimumSize = New System.Drawing.Size(1100, 550)
+		Me.dcc_Customers.Name = "dcc_Customers"
+		Me.dcc_Customers.Size = New System.Drawing.Size(1159, 602)
+		Me.dcc_Customers.TabIndex = 7
 		'
 		'RemoveToolStripMenuItem
 		'
@@ -279,9 +276,10 @@ Partial Class Frm_DisplayCustomers
 		'Frm_DisplayCustomers
 		'
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+		Me.AutoSize = True
 		Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-		Me.ClientSize = New System.Drawing.Size(888, 540)
-		Me.Controls.Add(Me.dc_Customers)
+		Me.ClientSize = New System.Drawing.Size(1159, 648)
+		Me.Controls.Add(Me.dcc_Customers)
 		Me.Controls.Add(Me.ss_CustomerView)
 		Me.Controls.Add(Me.mms_Main)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -307,9 +305,8 @@ Partial Class Frm_DisplayCustomers
 	Friend WithEvents Phone_Number As DataGridViewTextBoxColumn
 	Friend WithEvents EmailAddress As DataGridViewTextBoxColumn
 	Friend WithEvents JoinDate As DataGridViewTextBoxColumn
-	Friend WithEvents db_Customers As SPPBC.M3Tools.Database.CustomerDatabase
 	Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
-	Friend WithEvents dc_Customers As SPPBC.M3Tools.DisplayCustomersCtrl
+	Friend WithEvents dcc_Customers As SPPBC.M3Tools.DisplayCustomersCtrl
 	Friend WithEvents mnstr_Strip As MenuStrip
 	Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
 	Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem

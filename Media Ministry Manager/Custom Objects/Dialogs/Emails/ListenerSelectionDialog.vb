@@ -6,8 +6,8 @@ Imports SPPBC.M3Tools.Types
 
 Public Class ListenerSelectionDialog
     Shared Property Listeners As New Collection(Of Listener)
-    Private ListenerList As Collection(Of Listener)
-    Private ReadOnly ListenersTable As New CustomData.ListenersDataTable
+	Private ListenerList As Collection(Of Listener)
+	Private ReadOnly ListenersTable As New CustomData.ListenersDataTable
     Private column As String
 
     Private Sub ListenerSelectionDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -17,12 +17,12 @@ Public Class ListenerSelectionDialog
         bw_RetrieveListeners.RunWorkerAsync()
     End Sub
 
-    Public Overrides Sub Refresh()
-        Listeners.Clear()
-        ClearSelections()
-    End Sub
+	Public Sub Reload()
+		Listeners.Clear()
+		ClearSelections()
+	End Sub
 
-    Private Sub Btn_Finish_Click(sender As Object, e As EventArgs) Handles btn_Finish.Click
+	Private Sub Btn_Finish_Click(sender As Object, e As EventArgs) Handles btn_Finish.Click
         For Each row As DataGridViewRow In dgv_Listeners.Rows
             If CBool(row.Cells(0).Value) = True Then
                 Listeners.Add(Listener.Parse(ListenersTable.Rows(row.Index).ItemArray()))
@@ -47,15 +47,15 @@ Public Class ListenerSelectionDialog
         If chk_AllListeners.Checked Then
             bw_AllListeners.RunWorkerAsync()
         Else
-            Refresh()
-        End If
+			Reload()
+		End If
     End Sub
 
     Private Sub Bw_RetrieveListeners_DoWork(sender As Object, e As DoWorkEventArgs) Handles bw_RetrieveListeners.DoWork
-        Using db As New Database()
-            ListenerList = db.GetListeners()
-        End Using
-    End Sub
+		'Using db As New Database()
+		'    ListenerList = db.GetListeners()
+		'End Using
+	End Sub
 
     Private Sub FillTable()
         Try
@@ -65,8 +65,8 @@ Public Class ListenerSelectionDialog
                 row = ListenersTable.NewRow
                 row("ListenerID") = listener.Id
                 row("Name") = listener.Name
-                row("EmailAddress") = listener.EmailAddress.Address
-                ListenersTable.Rows.Add(row)
+				row("EmailAddress") = listener.Email
+				ListenersTable.Rows.Add(row)
             Next
         Catch ex As ConstraintException
 
@@ -75,8 +75,8 @@ Public Class ListenerSelectionDialog
 
     Private Sub Bw_RetrieveListeners_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_RetrieveListeners.RunWorkerCompleted
         FillTable()
-        Refresh()
-    End Sub
+		Reload()
+	End Sub
 
     Private Sub Cbx_Column_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_Column.SelectedIndexChanged
         txt_Search.Text = ""

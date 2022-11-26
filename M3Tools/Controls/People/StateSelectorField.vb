@@ -1,8 +1,8 @@
 ﻿Public Class StateSelectorField
     Public Property StateCode As String
         Get
-            Return cbx_States.SelectedText
-        End Get
+			Return CStr(cbx_States.SelectedItem)
+		End Get
         Set(value As String)
             cbx_States.Text = value
         End Set

@@ -50,10 +50,16 @@
             End Set
         End Property
 
-        Public ReadOnly Property OrderDate() As Date
-            Get
-                Return CDate(Me(Me.tableOrders.OrderDateColumn))
-            End Get
-        End Property
-    End Class
+		Public ReadOnly Property OrderDate() As Date
+			Get
+				Return CDate(Me(Me.tableOrders.OrderDateColumn))
+			End Get
+		End Property
+
+		Public ReadOnly Property CompletedDate() As Date
+			Get
+				Return CDate(Me(Me.tableOrders.CompletedDateColumn))
+			End Get
+		End Property
+	End Class
 End Namespace

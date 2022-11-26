@@ -118,33 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="HidePasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images\hidepasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\configs\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ShowPasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images\showpasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AppUpdateUri" xml:space="preserve">
+    <value>https://sppbc.hopto.org/manager/setup.exe</value>
+    <comment>The uri where the latest version of the application can be downloaded</comment>
   </data>
-  <data name="BannerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\BannerImage.JPG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DefaultCatalog" xml:space="preserve">
-    <value>Media Ministry</value>
-    <comment>The default deployment catalog for the database</comment>
+  <data name="HidePasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\hidepasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DefaultConnectionString" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication="Sql Password"</value>
-    <comment>The default connection string to access the database</comment>
+  <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DefaultPassword" xml:space="preserve">
-    <value>M3AppPassword2499</value>
-    <comment>The default password to access the database</comment>
-  </data>
-  <data name="DefaultUsername" xml:space="preserve">
-    <value>M3App</value>
-    <comment>The default username to access the database</comment>
+  <data name="Loading_Loop_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loading-loop-2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EmailRegex" xml:space="preserve">
     <value>^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$</value>
@@ -154,8 +145,76 @@
     <value>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,}$</value>
     <comment>The regex for a valid password with at least 1 capital, lower, number and special character</comment>
   </data>
+  <data name="DriveLinkAttachment" xml:space="preserve">
+    <value>&lt;p&gt;&lt;a href="{1}"&gt;{0}&lt;/a&gt;&lt;/p&gt;</value>
+    <comment>The formatting for linking a drive file in an email</comment>
+  </data>
+  <data name="NewDocumentOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\new-document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FontOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\font.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BoldOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\bold-text-option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LatestAppVersionUri" xml:space="preserve">
+    <value>https://sppbc.hopto.org/manager/version</value>
+    <comment>The uri containing the latest version of the application</comment>
+  </data>
+  <data name="ItalicOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\italics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DefaultSermonEmail" xml:space="preserve">
+    <value>&lt;!Doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
+
+        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href="https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos"&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
+        &lt;p&gt;Also, give us a follow on &lt;a href="https://facebook.com/bryon.miller436"&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
+        &lt;p&gt;You may give an offering to any of the ministries of St. Paul Primitive Baptist Church &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-A Special Gift to the Pastor)&lt;/em&gt;.&lt;/p&gt;
+        &lt;p&gt;Select Any of the Available Option Below.&lt;/p&gt;
+
+        &lt;p&gt;Send Cashier's Check or Money Order To:&lt;/p&gt;
+        &lt;p class="center"&gt;&lt;strong&gt;Attention: Pastor B. Miller&lt;/strong&gt;&lt;br&gt;
+        ST. PAUL PRIMITIVE BAPTIST CHURCH&lt;br&gt;
+        2209 East 14th Street&lt;br&gt;
+        Austin, TX. 78702&lt;/p&gt;
+        &lt;p&gt;Send Through &lt;a href="https://cash.app/$elderbmiller" target="_blank"&gt;Cash App&lt;/a&gt;, &lt;a href="https://www.givelify.com/donate/st-paul-primitive-baptist-curch-austin-tx-2j7wy5ODg4OTA3/donation/amount" target="_blank"&gt;Givelify&lt;/a&gt;, or &lt;a href="https://paypal.me/elderbmiller" target="_blank"&gt;Paypal&lt;/a&gt;&lt;/p&gt;
+        &lt;p class="center"&gt;ADD A NOTE, MEMO or MESSAGE&lt;br&gt;
+        St. Paul Primitive Baptist Church&lt;br&gt;
+        &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-Special Gift to the Pastor).&lt;/em&gt;&lt;/p&gt;
+
+        &lt;p class="center"&gt;&lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;(A personal email message of donation received will be delivered upon receipt. If you have any questions, please contact Elder Bryon Miller personally by:&lt;br&gt;
+        Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
+        Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
+        -Identifying yourself as an Email Subscriber by &lt;em&gt;Last Name&lt;/em&gt; &amp; &lt;em&gt;Email Address&lt;/em&gt;. Once verified you will receive a call back from Elder Miller. These processes are in place to protect your privacy, personal information, the integrity and trust of this Ministry &amp; Staff, and the well-being of St. Paul PBC)&lt;/em&gt;&lt;/p&gt;
+
+        &lt;p&gt;Thank for your support and be blessed.&lt;/p&gt;
+
+        &lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+		&lt;hr&gt;
+		
+        &lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+        St. Paul Primitive Baptist Church&lt;br&gt;
+        Email Listening Ministry&lt;br&gt;
+        2209 East 14th Street&lt;br&gt;
+        Austin, TX. 78702&lt;/p&gt;
+		
+		{1}
+		
+		&lt;div class="center-image"&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+		&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+    <comment>The default template for a new sermon email</comment>
   </data>
   <data name="DefaultNewListenerEmail" xml:space="preserve">
     <value>&lt;!Doctype html&gt;
@@ -221,6 +280,24 @@
 &lt;/html&gt;</value>
     <comment>The default template for a new listener email</comment>
   </data>
+  <data name="BannerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\BannerImage.JPG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EmailRegex2" xml:space="preserve">
+    <value>^[a-zA-Z0-9_!#$%&amp;’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$</value>
+  </data>
+  <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\loading-loop.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StrikeThruOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\strikethrough-text-interface-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnderlineOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowPasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\showpasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DefaultReceiptEmail" xml:space="preserve">
     <value>&lt;!Doctype html&gt;
 &lt;html&gt;
@@ -254,97 +331,13 @@
 &lt;/html&gt;</value>
     <comment>The default template for a new receipt email</comment>
   </data>
-  <data name="DefaultSermonEmail" xml:space="preserve">
-    <value>&lt;!Doctype html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
-
-        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href="https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos"&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
-        &lt;p&gt;Also, give us a follow on &lt;a href="https://facebook.com/bryon.miller436"&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
-        &lt;p&gt;You may give an offering to any of the ministries of St. Paul Primitive Baptist Church &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-A Special Gift to the Pastor)&lt;/em&gt;.&lt;/p&gt;
-        &lt;p&gt;Select Any of the Available Option Below.&lt;/p&gt;
-
-        &lt;p&gt;Send Cashier's Check or Money Order To:&lt;/p&gt;
-        &lt;p class="center"&gt;&lt;strong&gt;Attention: Pastor B. Miller&lt;/strong&gt;&lt;br&gt;
-        ST. PAUL PRIMITIVE BAPTIST CHURCH&lt;br&gt;
-        2209 East 14th Street&lt;br&gt;
-        Austin, TX. 78702&lt;/p&gt;
-        &lt;p&gt;Send Through &lt;a href="https://cash.app/$elderbmiller" target="_blank"&gt;Cash App&lt;/a&gt;, &lt;a href="https://www.givelify.com/donate/st-paul-primitive-baptist-curch-austin-tx-2j7wy5ODg4OTA3/donation/amount" target="_blank"&gt;Givelify&lt;/a&gt;, or &lt;a href="https://paypal.me/elderbmiller" target="_blank"&gt;Paypal&lt;/a&gt;&lt;/p&gt;
-        &lt;p class="center"&gt;ADD A NOTE, MEMO or MESSAGE&lt;br&gt;
-        St. Paul Primitive Baptist Church&lt;br&gt;
-        &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-Special Gift to the Pastor).&lt;/em&gt;&lt;/p&gt;
-
-        &lt;p class="center"&gt;&lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;&lt;/p&gt;
-        &lt;p&gt;&lt;em&gt;(A personal email message of donation received will be delivered upon receipt. If you have any questions, please contact Elder Bryon Miller personally by:&lt;br&gt;
-        Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
-        Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
-        -Identifying yourself as an Email Subscriber by &lt;em&gt;Last Name&lt;/em&gt; &amp; &lt;em&gt;Email Address&lt;/em&gt;. Once verified you will receive a call back from Elder Miller. These processes are in place to protect your privacy, personal information, the integrity and trust of this Ministry &amp; Staff, and the well-being of St. Paul PBC)&lt;/em&gt;&lt;/p&gt;
-
-        &lt;p&gt;Thank for your support and be blessed.&lt;/p&gt;
-
-        &lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
-
-		&lt;hr&gt;
-		
-        &lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-        St. Paul Primitive Baptist Church&lt;br&gt;
-        Email Listening Ministry&lt;br&gt;
-        2209 East 14th Street&lt;br&gt;
-        Austin, TX. 78702&lt;/p&gt;
-		
-		{1}
-		
-		&lt;div class="center-image"&gt;
-			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
-		&lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</value>
-    <comment>The default template for a new sermon email</comment>
-  </data>
-  <data name="DriveLinkAttachment" xml:space="preserve">
-    <value>&lt;p&gt;&lt;a href="{1}"&gt;{0}&lt;/a&gt;&lt;/p&gt;</value>
-    <comment>The formatting for linking a drive file in an email</comment>
-  </data>
-  <data name="FontOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\font.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ItalicOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\italics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NewDocumentOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\new-document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StrikeThruOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\strikethrough-text-interface-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UnderlineOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AppUpdateUri" xml:space="preserve">
-    <value>https://sppbc.hopto.org/manager/setup.exe</value>
-    <comment>The uri where the latest version of the application can be downloaded</comment>
-  </data>
   <data name="ErrorImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\errorimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LatestAppVersionUri" xml:space="preserve">
-    <value>https://sppbc.hopto.org/manager/version</value>
-    <comment>The uri containing the latest version of the application</comment>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\loading-loop.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loading_Loop_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loading-loop-2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

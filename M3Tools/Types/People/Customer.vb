@@ -3,92 +3,70 @@
 Namespace Types
     Public Class Customer
         Inherits Person
-        Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
-        Private __email As MimeKit.MailboxAddress
-        Private __joinDate As Date
+		'Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
+		Private __joined As Date
 
-        Public Property PhoneNumber As String
-        Public Property Address As Address
-        'Public Property Address As String
-        '    Get
-        '        Return __address.ToString
-        '    End Get
-        '    Set(value As String)
-        '        Dim addressParts As String() = value.Split(","c)
-        '        __address = New Address() With {
-        '            .Street = addressParts(0),
-        '            .City = addressParts(1),
-        '            .State = addressParts(2),
-        '            .ZipCode = addressParts(3)}
-        '    End Set
-        'End Property
-        Public Property EmailAddress As String
-            Get
-                Return __email.Address
-            End Get
-			Set(value As String)
-				If value Is Nothing Then
-					Exit Property
+		Public Property PhoneNumber As String
+		Public Property Address As Address
+		Public Property Joined As Object
+			Get
+				If __joined.Year < 1950 OrElse IsNothing(__joined) Then
+					Return Nothing
 				End If
-				__email = New MimeKit.MailboxAddress(Name, If(ValidEmail(value), value, __email.Address))
+
+				Return __joined
+			End Get
+			Set(value As Object)
+				Try
+					__joined = CDate(value)
+				Catch ex As Exception
+					__joined = Nothing
+				End Try
 			End Set
 		End Property
-        Public Property JoinDate As String
-            Get
-                Return __joinDate.ToShortDateString()
-            End Get
-            Set(value As String)
-                __joinDate = Date.Parse(If(String.IsNullOrWhiteSpace(value), "1/1/1970", value))
-            End Set
-        End Property
 
-        Public Sub New()
-            Me.New(-1, "John Doe", "123 Main St", "City", "ST", "00000", "123-456-7890", "johndoe@domain.ext")
-        End Sub
+		Public Sub New()
+			Me.New(-1, "John", "Doe", "123 Main St", "City", "ST", "12345", "123-456-7890", "johndoe@domain.ext")
+		End Sub
 
-        Public Sub New(customerID As Integer, name As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As String = "")
-            MyBase.New(customerID, name)
-            Address = New Address(street, city, state, zip)
-            PhoneNumber = phone
-            EmailAddress = email
-            JoinDate = join
-        End Sub
+		Public Sub New(id As Integer, fName As String, lName As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As Date = Nothing)
+			Me.New(id, $"{fName} {lName}", Address.Parse(street, city, state, zip), phone, email, join)
+		End Sub
 
-        Public Sub New(customerID As Integer, firstName As String, lastName As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As String = "")
-            MyBase.New(customerID, firstName, lastName)
-            PhoneNumber = phone
-            Address = New Address(street, city, state, zip)
+		Public Sub New(id As Integer, name As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As Date = Nothing)
+			Me.New(id, name, Address.parse(street, city, state, zip), phone, email, join)
+		End Sub
 
-            If ValidEmail(email) Then
-                EmailAddress = email
-            Else
-                EmailAddress = Nothing
-            End If
+		Public Sub New(id As Integer, fName As String, lName As String, address As Address, phone As String, email As String, Optional join As Date = Nothing)
+			Me.New(id, $"{fName} {lName}", address, phone, email, join)
+		End Sub
 
-            If Not String.IsNullOrEmpty(JoinDate) Then
-                JoinDate = join
-            End If
-        End Sub
+		Public Sub New(id As Integer, name As String, addr As Address, phone As String, email As String, Optional join As Date = Nothing)
+			MyBase.New(id, name, email)
+			PhoneNumber = phone
+			Address = addr
+			Joined = join
+		End Sub
 
-        Private Function ValidEmail(email As String) As Boolean
-            Try
-                Return Text.RegularExpressions.Regex.IsMatch(email, EmailPattern)
-            Catch ex As ArgumentNullException
-                Return False
-            End Try
+		Shared Function Parse(ParamArray arr As Object()) As Customer
+			' TODO: Make this way better
+			If Not arr.Any() Then
+				Return Nothing
+			End If
 
-        End Function
+			Return New Customer(CInt(arr(0)), CStr(arr(1)), CStr(arr(2)), CStr(arr(3)), CStr(arr(4)), CStr(arr(5)), CStr(arr(6)), CStr(arr(7)), CStr(arr(8)), CDate(arr(9)))
+		End Function
 
-        Shared Function Parse(arr As Object()) As Customer
-            Return New Customer(CInt(arr(0)), CStr(arr(1)), CStr(arr(2)), CStr(arr(3)), CStr(arr(4)), CStr(arr(5)), CStr(arr(6)), CStr(arr(7)), CStr(arr(8)), CStr(arr(9)))
-        End Function
+		Public Overrides Function ToString() As String
+			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Email, Address.ToString, PhoneNumber)
+		End Function
 
-        Public Overrides Function ToString() As String
-            'Name (Email)
-            'Street
-            'City, ST ZipCode
-            'Phone Number
-            Return String.Format("{0} ({1}){4}{2}{4}{3}", Name, EmailAddress, Address.ToString, PhoneNumber, vbCrLf)
-        End Function
-    End Class
+		Public Function Display() As String
+			'ID) Name (Email)
+			'Street
+			'City, ST ZipCode
+			'Phone Number
+			Return $"{Id}) {Name} (e: {Email} p: {PhoneNumber}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
+		End Function
+	End Class
 End Namespace
