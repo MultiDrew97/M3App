@@ -86,6 +86,7 @@
 			'
 			'StatusStrip1
 			'
+			Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
 			Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tss_Feedback})
 			Me.StatusStrip1.Location = New System.Drawing.Point(0, 315)
 			Me.StatusStrip1.Name = "StatusStrip1"
@@ -139,7 +140,7 @@
 			'gi_LastName
 			'
 			Me.gi_LastName.AutoSize = True
-			Me.gi_LastName.LabelText = "Last Name"
+			Me.gi_LastName.LabelText = "* Last Name"
 			Me.gi_LastName.Location = New System.Drawing.Point(346, 61)
 			Me.gi_LastName.Mask = ""
 			Me.gi_LastName.Name = "gi_LastName"
@@ -161,7 +162,7 @@
 			'gi_EmailAddress
 			'
 			Me.gi_EmailAddress.AutoSize = True
-			Me.gi_EmailAddress.LabelText = "* Email Address"
+			Me.gi_EmailAddress.LabelText = "Email Address"
 			Me.gi_EmailAddress.Location = New System.Drawing.Point(267, 129)
 			Me.gi_EmailAddress.Mask = ""
 			Me.gi_EmailAddress.Name = "gi_EmailAddress"
@@ -192,7 +193,7 @@
 			Me.af_Address.Name = "af_Address"
 			Me.af_Address.Size = New System.Drawing.Size(638, 245)
 			Me.af_Address.State = Nothing
-			Me.af_Address.Street = ","
+			Me.af_Address.Street = ""
 			Me.af_Address.TabIndex = 5
 			Me.af_Address.ZipCode = ""
 			'

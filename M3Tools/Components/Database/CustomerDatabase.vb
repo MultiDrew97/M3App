@@ -74,7 +74,7 @@ Namespace Database
 
 			'date string that holds the command to get the date for when the person joined
 			'Dim dateString = "SELECT CONVERT(VARCHAR(10), GETDATE(), 111)"
-			AddCustomer(fName, lName, address.Street, address.City, address.State, address.ZipCode, phone, email)
+			AddCustomer(fName, lName, address?.Street, address?.City, address?.State, address?.ZipCode, phone, email)
 		End Sub
 
 		Public Sub AddCustomer(
