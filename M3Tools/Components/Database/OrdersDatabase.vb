@@ -30,60 +30,46 @@ Namespace Database
             End Set
         End Property
 
-        'The initial catalog to use for the database connection
-        <Bindable(True)>
-        <Description("The initial catalog to use for the database connection")>
-        <SettingsBindable(True)>
-        Public Property InitialCatalog As String
-            Get
-                Return db_Connection.InitialCatalog
-            End Get
-            Set(value As String)
-                db_Connection.InitialCatalog = value
-            End Set
-        End Property
-        Public Function GetCurrentOrders() As Collection(Of CurrentOrder)
-            Dim orders As New Collection(Of CurrentOrder)
+		'The initial catalog to use for the database connection
+		<Bindable(True)>
+		<Description("The initial catalog to use for the database connection")>
+		<SettingsBindable(True)>
+		Public Property InitialCatalog As String
+			Get
+				Return db_Connection.InitialCatalog
+			End Get
+			Set(value As String)
+				db_Connection.InitialCatalog = value
+			End Set
+		End Property
 
-            'create view to use with
-            'myCmd.CommandText = "GetOrders"
-            Using cmd = db_Connection.Connect
-                cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Orders] WHERE CompletedDate IS NULL" '$"[{My.Settings.Schema}].[sp_GetOrders]"
-                cmd.CommandType = CommandType.Text
+		Public Function GetOrders() As DBEntryCollection(Of Order)
+			Dim orders As New DBEntryCollection(Of Order)
 
-                Using reader = cmd.ExecuteReader
-                    Do While reader.Read()
-                        orders.Add(New Order(
-                                   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-                                    CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
-                    Loop
-                End Using
-            End Using
+			Using cmd = db_Connection.Connect
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Orders]"
 
-            Return orders
-        End Function
+				Using reader = cmd.ExecuteReader
+					Do While reader.Read
+						orders.Add(New Order(
+								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
+									CDate(reader("CompletedDate"))))
+					Loop
+				End Using
+			End Using
 
-        Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
-            Dim orders As New DBEntryCollection(Of Order)
+			Return orders
+		End Function
 
-            Using cmd = db_Connection.Connect
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = $"[{My.Settings.Schema}].[sp_GetCompletedOrders]"
+		Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
+			' TODO: Test this to make sure it works properly
+			Return CType(GetOrders().Where(Function(order As Order) As Boolean
+											   Return order.CompletedDate.Year > 1950
+										   End Function), DBEntryCollection(Of Order))
+		End Function
 
-                Using reader = cmd.ExecuteReader
-                    Do While reader.Read
-                        orders.Add(New Order(
-                                   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-                                    CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
-                                    CDate(reader("CompletedDate"))))
-                    Loop
-                End Using
-            End Using
-
-            Return orders
-        End Function
-
-        Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
+		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
             If Not Utils.ValidID(customerID) Or Not Utils.ValidID(itemID) Then
                 Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
             End If

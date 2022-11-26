@@ -11,11 +11,6 @@ Public Class Frm_DisplayCustomers
 			Console.WriteLine(ex.Message)
 		End Try
 		mms_Main.ToggleViewItem("Customers")
-		Try
-			dcc_Customers.Reload()
-		Catch ex As Exception
-			Console.WriteLine(ex.Message)
-		End Try
 	End Sub
 
 	Private Sub DisplayClosing(sender As Object, e As CancelEventArgs) Handles Me.Closing

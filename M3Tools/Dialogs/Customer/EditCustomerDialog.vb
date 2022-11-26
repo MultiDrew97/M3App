@@ -53,7 +53,7 @@ Namespace Dialogs
 		End Property
 		Public Property Address As Types.Address
 			Get
-				Return New Types.Address(af_Address.Street, af_Address.City, af_Address.State, af_Address.ZipCode)
+				Return Types.Address.Parse(af_Address.Street, af_Address.City, af_Address.State, af_Address.ZipCode)
 			End Get
 			Set(value As Types.Address)
 				af_Address.Street = If(value?.Street, "")
@@ -134,7 +134,7 @@ Namespace Dialogs
 				Return True
 			End If
 
-			If Not Address.ToString.Equals(_customer.Address.ToString) AndAlso IsValidAddress() Then
+			If IsValidAddress() AndAlso Not Address.ToString.Equals(_customer.Address.ToString) Then
 				Return True
 			End If
 

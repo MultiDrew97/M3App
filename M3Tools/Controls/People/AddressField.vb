@@ -7,7 +7,7 @@
 
 	Public Property Street As String
 		Get
-			If String.IsNullOrWhiteSpace(if_Address1.Text) And String.IsNullOrWhiteSpace(if_Address2.Text) Then
+			If String.IsNullOrWhiteSpace(if_Address1.Text) Then
 				' No values present
 				Return ""
 			End If

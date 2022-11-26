@@ -109,8 +109,8 @@ Namespace Database
         End Sub
 
         Public Sub UpdateInventory(itemID As Integer, column As String, value As String)
-            ' TODO: Figure out a better way to perform row updates
-            If Not Utils.ValidID(itemID) Then
+			' TODO: Refactor to just update all fields at all times no matter what
+			If Not Utils.ValidID(itemID) Then
                 Throw New ArgumentException($"ID values must greater than or equal to {My.Settings.MinID}")
             End If
             Dim command As New SqlParameter("Command", SqlDbType.VarChar)
@@ -145,13 +145,15 @@ Namespace Database
             End Using
         End Sub
 
-        Public Sub RemoveProduct(itemID As Integer)
-            RemoveProduct(New SqlParameter("ItemID", itemID))
-        End Sub
+		Public Sub RemoveProduct(itemID As Integer)
+			RemoveProduct(New SqlParameter("ItemID", itemID))
+		End Sub
 
-        End Sub
+		Public Sub RemoveProduct(ParamArray params As SqlParameter())
+			Throw New Exception("RemoveItem Not Yet Implemented")
+		End Sub
 
-        Private Sub ChangeAvailability(ParamArray params As SqlParameter())
+		Private Sub ChangeAvailability(ParamArray params As SqlParameter())
 
             Using _cmd = db_Connection.Connect
                 _cmd.Parameters.AddRange(params)
