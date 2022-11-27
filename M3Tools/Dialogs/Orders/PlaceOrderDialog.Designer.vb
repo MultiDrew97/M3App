@@ -22,9 +22,10 @@ Partial Class PlaceOrderDialog
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
-		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
-		Me.OK_Button = New System.Windows.Forms.Button
-		Me.Cancel_Button = New System.Windows.Forms.Button
+		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+		Me.OK_Button = New System.Windows.Forms.Button()
+		Me.Cancel_Button = New System.Windows.Forms.Button()
+		Me.pcb_Items = New SPPBC.M3Tools.ProductsComboBox()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.SuspendLayout()
 		'
@@ -55,11 +56,25 @@ Partial Class PlaceOrderDialog
 		'Cancel_Button
 		'
 		Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
+		Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Cancel_Button.Location = New System.Drawing.Point(76, 3)
 		Me.Cancel_Button.Name = "Cancel_Button"
 		Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)
 		Me.Cancel_Button.TabIndex = 1
 		Me.Cancel_Button.Text = "Cancel"
+		'
+		'ProductsComboBox1
+		'
+		Me.pcb_Items.AutoSize = True
+		Me.pcb_Items.Location = New System.Drawing.Point(110, 66)
+		Me.pcb_Items.MaximumSize = New System.Drawing.Size(0, 42)
+		Me.pcb_Items.MinimumSize = New System.Drawing.Size(200, 42)
+		Me.pcb_Items.Name = "ProductsComboBox1"
+		Me.pcb_Items.SelectedIndex = -1
+		Me.pcb_Items.SelectedItem = Nothing
+		Me.pcb_Items.SelectedValue = Nothing
+		Me.pcb_Items.Size = New System.Drawing.Size(200, 42)
+		Me.pcb_Items.TabIndex = 1
 		'
 		'PlaceOrderDialog
 		'
@@ -68,6 +83,7 @@ Partial Class PlaceOrderDialog
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.Cancel_Button
 		Me.ClientSize = New System.Drawing.Size(435, 315)
+		Me.Controls.Add(Me.pcb_Items)
 		Me.Controls.Add(Me.TableLayoutPanel1)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 		Me.MaximizeBox = False
@@ -78,10 +94,11 @@ Partial Class PlaceOrderDialog
 		Me.Text = "PlaceOrderDialog"
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.ResumeLayout(False)
+		Me.PerformLayout()
 
 	End Sub
 	Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 	Friend WithEvents OK_Button As System.Windows.Forms.Button
 	Friend WithEvents Cancel_Button As System.Windows.Forms.Button
-
+	Friend WithEvents pcb_Items As ProductsComboBox
 End Class

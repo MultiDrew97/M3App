@@ -51,10 +51,18 @@ Namespace Database
 
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read
+						Dim completedDate As Date = Nothing
+
+						Try
+							completedDate = CDate(reader("CompletedDate"))
+						Catch ex As Exception
+							completedDate = Nothing
+						End Try
+
 						orders.Add(New Order(
 								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
 									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
-									CDate(reader("CompletedDate"))))
+									completedDate))
 					Loop
 				End Using
 			End Using

@@ -25,9 +25,9 @@ Partial Class ProductsComboBox
 		Me.components = New System.ComponentModel.Container()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.cbx_Items = New System.Windows.Forms.ComboBox()
+		Me.bsItems = New System.Windows.Forms.BindingSource(Me.components)
 		Me.lbl_Items = New System.Windows.Forms.Label()
 		Me.bw_LoadItems = New System.ComponentModel.BackgroundWorker()
-		Me.bsItems = New System.Windows.Forms.BindingSource(Me.components)
 		Me.db_Products = New SPPBC.M3Tools.Database.ProductDatabase(Me.components)
 		Me.TableLayoutPanel1.SuspendLayout()
 		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,12 +50,20 @@ Partial Class ProductsComboBox
 		'
 		'cbx_Items
 		'
+		Me.cbx_Items.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.bsItems, "ItemID", True))
+		Me.cbx_Items.DataSource = Me.bsItems
+		Me.cbx_Items.DisplayMember = "ItemName"
 		Me.cbx_Items.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.cbx_Items.FormattingEnabled = True
 		Me.cbx_Items.Location = New System.Drawing.Point(3, 16)
 		Me.cbx_Items.Name = "cbx_Items"
 		Me.cbx_Items.Size = New System.Drawing.Size(194, 21)
 		Me.cbx_Items.TabIndex = 2
+		Me.cbx_Items.ValueMember = "ItemID"
+		'
+		'bsItems
+		'
+		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.DataTables.ItemsDataTable)
 		'
 		'lbl_Items
 		'

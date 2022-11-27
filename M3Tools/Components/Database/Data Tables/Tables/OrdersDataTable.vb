@@ -114,9 +114,17 @@
 
 		Public Function AddOrdersRow(OrderID As Integer, CustomerName As String, ItemName As String, Quantity As Integer, OrderTotal As Double, OrderDate As Date, Optional CompletedDate As Date = Nothing) As OrdersDataRow
 			Dim OrdersDataRow As OrdersDataRow = CType(Me.NewRow, OrdersDataRow)
-			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, OrderDate, CompletedDate}
+			OrdersDataRow.ItemArray = {OrderID, CustomerName, ItemName, Quantity, OrderTotal, ParseDate(OrderDate), ParseDate(CompletedDate)}
 			Me.Rows.Add(OrdersDataRow)
 			Return OrdersDataRow
+		End Function
+
+		Private Function ParseDate(value As Date) As Object
+			If value.Year < 1950 Then
+				Return Nothing
+			End If
+
+			Return value
 		End Function
 
 		Public Function FindByID(ByVal ID As Integer) As OrdersDataRow

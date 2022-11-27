@@ -12,4 +12,7 @@ Public Class PlaceOrderDialog
 		Me.Close()
 	End Sub
 
+	Private Sub DialogLoading(sender As Object, e As EventArgs) Handles Me.Load
+		pcb_Items.Reload()
+	End Sub
 End Class

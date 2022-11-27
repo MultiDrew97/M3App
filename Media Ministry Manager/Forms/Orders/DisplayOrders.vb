@@ -14,11 +14,11 @@ Public Class Frm_DisplayOrders
         Frm_Main.Show()
     End Sub
 
-    Private Sub CompleteOrder(sender As Object, e As EventArgs) Handles btn_Complete.Click
+    Private Sub CompleteOrder(sender As Object, e As EventArgs) 
         doc_Orders.FulfilOrder()
     End Sub
 
-    Private Sub ShowCompleted(sender As Object, e As EventArgs) Handles btn_ShowCompleted.Click
+    Private Sub ShowCompleted(sender As Object, e As EventArgs) 
         'TODO: Create a new form or dialog box to show completed orders
         doc_Orders.ShowCompleted = Not doc_Orders.ShowCompleted
     End Sub
@@ -59,6 +59,8 @@ Public Class Frm_DisplayOrders
     End Sub
 
     Private Sub DataUpdated() Handles doc_Orders.DataChanged
-        lbl_NoOrders.Visible = doc_Orders.IsEmpty
-    End Sub
+		Invoke(Sub()
+				   lbl_NoOrders.Visible = doc_Orders.IsEmpty
+			   End Sub)
+	End Sub
 End Class

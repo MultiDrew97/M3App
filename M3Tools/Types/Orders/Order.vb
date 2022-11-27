@@ -64,14 +64,14 @@ Namespace Types
         ''' </summary>
         ''' <param name="customerID">CustomerID of the desired customer</param>
         Private Sub GetCustomer(customerID As Integer)
-            If customerID > -1 Then
-                Exit Sub
-            End If
+			If Not Utils.ValidID(customerID) Then
+				Exit Sub
+			End If
 
-            Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
+			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
                 Using cmd = db.Connect
-                    cmd.CommandText = $"SELECT FirstName, LastName FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID=@CustomerID"
-                    cmd.CommandType = CommandType.Text
+					cmd.CommandText = $"SELECT FirstName, LastName, Email FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID=@CustomerID"
+					cmd.CommandType = CommandType.Text
 
                     cmd.Parameters.AddWithValue("CustomerID", customerID)
 
@@ -80,8 +80,8 @@ Namespace Types
                             Throw New Exceptions.CustomerNotFoundException($"Unable to find customer with ID {customerID}")
                         End If
 
-                        Me.Customer = New Person(customerID, CStr(reader("FirstName")), CStr(reader("LastName")))
-                    End Using
+						Me.Customer = New Person(customerID, CStr(reader("FirstName")), CStr(reader("LastName")), TryCast(reader("Email"), String))
+					End Using
                 End Using
             End Using
         End Sub
@@ -91,11 +91,11 @@ Namespace Types
         ''' </summary>
         ''' <param name="itemID">ItemID of the desired item</param>
         Private Sub GetItem(itemID As Integer)
-            If itemID > -1 Then
-                Exit Sub
-            End If
+			If Not Utils.ValidID(itemID) Then
+				Exit Sub
+			End If
 
-            Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
+			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
                 Using cmd = db.Connect
                     cmd.CommandText = $"SELECT ItemName FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
                     cmd.CommandType = CommandType.Text

@@ -79,6 +79,7 @@ Public Class DisplayCustomersCtrl
 		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
 
 		If Not Confirmed Or dgv_CustomerTable.SelectedRows.Count < 1 Then
+			e.Cancel = True
 			Return
 		End If
 
@@ -146,7 +147,7 @@ Public Class DisplayCustomersCtrl
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
 		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
 
-		If Not Confirmed OrElse Not ts_Remove.Enabled OrElse dgv_CustomerTable.SelectedRows.Count < 1 Then
+		If Not Confirmed OrElse dgv_CustomerTable.SelectedRows.Count < 1 Then
 			Return
 		End If
 
