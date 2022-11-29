@@ -24,8 +24,11 @@ Partial Class DisplayOrdersCtrl
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+		Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Me.bsOrders = New System.Windows.Forms.BindingSource(Me.components)
 		Me.bw_LoadOrders = New System.ComponentModel.BackgroundWorker()
 		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -37,7 +40,6 @@ Partial Class DisplayOrdersCtrl
 		Me.dgv_Orders = New System.Windows.Forms.DataGridView()
 		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_PlaceOrder = New System.Windows.Forms.ToolStripButton()
-		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,6 +50,7 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Edit = New System.Windows.Forms.DataGridViewImageColumn()
 		Me.btn_Complete = New System.Windows.Forms.DataGridViewImageColumn()
 		Me.btn_Cancel = New System.Windows.Forms.DataGridViewImageColumn()
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
@@ -104,11 +107,11 @@ Partial Class DisplayOrdersCtrl
 		'ToolStripContainer1.ContentPanel
 		'
 		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_Orders)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(996, 419)
+		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(800, 403)
 		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
 		Me.ToolStripContainer1.Name = "ToolStripContainer1"
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(996, 458)
+		Me.ToolStripContainer1.Size = New System.Drawing.Size(800, 442)
 		Me.ToolStripContainer1.TabIndex = 1
 		Me.ToolStripContainer1.Text = "ToolStripContainer1"
 		'
@@ -123,16 +126,40 @@ Partial Class DisplayOrdersCtrl
 		Me.dgv_Orders.AutoGenerateColumns = False
 		Me.dgv_Orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
 		Me.dgv_Orders.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
+		DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+		DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+		DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.dgv_Orders.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
 		Me.dgv_Orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
 		Me.dgv_Orders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.OrderID, Me.Customer, Me.Product, Me.OrderQuantity, Me.Total, Me.OrderDate, Me.CompletedDate, Me.btn_Edit, Me.btn_Complete, Me.btn_Cancel})
 		Me.dgv_Orders.DataSource = Me.bsOrders
+		DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+		DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+		DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.dgv_Orders.DefaultCellStyle = DataGridViewCellStyle5
 		Me.dgv_Orders.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.dgv_Orders.Location = New System.Drawing.Point(0, 0)
 		Me.dgv_Orders.MinimumSize = New System.Drawing.Size(800, 400)
 		Me.dgv_Orders.Name = "dgv_Orders"
 		Me.dgv_Orders.ReadOnly = True
+		DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+		DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+		DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+		DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+		DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+		DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+		Me.dgv_Orders.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
 		Me.dgv_Orders.RowHeadersWidth = 82
-		Me.dgv_Orders.Size = New System.Drawing.Size(996, 419)
+		Me.dgv_Orders.Size = New System.Drawing.Size(800, 403)
 		Me.dgv_Orders.TabIndex = 3
 		'
 		'ToolStrip1
@@ -140,7 +167,7 @@ Partial Class DisplayOrdersCtrl
 		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
 		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_PlaceOrder})
-		Me.ToolStrip1.Location = New System.Drawing.Point(6, 0)
+		Me.ToolStrip1.Location = New System.Drawing.Point(3, 0)
 		Me.ToolStrip1.Name = "ToolStrip1"
 		Me.ToolStrip1.Size = New System.Drawing.Size(48, 39)
 		Me.ToolStrip1.TabIndex = 0
@@ -153,12 +180,6 @@ Partial Class DisplayOrdersCtrl
 		Me.tbtn_PlaceOrder.Name = "tbtn_PlaceOrder"
 		Me.tbtn_PlaceOrder.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_PlaceOrder.Text = "Place Order"
-		'
-		'db_Orders
-		'
-		Me.db_Orders.InitialCatalog = "Media Ministry Test"
-		Me.db_Orders.Password = "M3AppPassword2499"
-		Me.db_Orders.Username = "M3App"
 		'
 		'OrderID
 		'
@@ -200,11 +221,11 @@ Partial Class DisplayOrdersCtrl
 		'
 		Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.Total.DataPropertyName = "OrderTotal"
-		DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-		DataGridViewCellStyle1.Format = "C2"
-		DataGridViewCellStyle1.NullValue = "N/A"
-		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.Total.DefaultCellStyle = DataGridViewCellStyle1
+		DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+		DataGridViewCellStyle2.Format = "C2"
+		DataGridViewCellStyle2.NullValue = "N/A"
+		DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.Total.DefaultCellStyle = DataGridViewCellStyle2
 		Me.Total.HeaderText = "Total"
 		Me.Total.MinimumWidth = 100
 		Me.Total.Name = "Total"
@@ -214,9 +235,9 @@ Partial Class DisplayOrdersCtrl
 		'
 		Me.OrderDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.OrderDate.DataPropertyName = "OrderDate"
-		DataGridViewCellStyle2.Format = "d"
-		DataGridViewCellStyle2.NullValue = Nothing
-		Me.OrderDate.DefaultCellStyle = DataGridViewCellStyle2
+		DataGridViewCellStyle3.Format = "d"
+		DataGridViewCellStyle3.NullValue = Nothing
+		Me.OrderDate.DefaultCellStyle = DataGridViewCellStyle3
 		Me.OrderDate.HeaderText = "Date Placed"
 		Me.OrderDate.MinimumWidth = 100
 		Me.OrderDate.Name = "OrderDate"
@@ -225,9 +246,9 @@ Partial Class DisplayOrdersCtrl
 		'CompletedDate
 		'
 		Me.CompletedDate.DataPropertyName = "CompletedDate"
-		DataGridViewCellStyle3.Format = "d"
-		DataGridViewCellStyle3.NullValue = "N/A"
-		Me.CompletedDate.DefaultCellStyle = DataGridViewCellStyle3
+		DataGridViewCellStyle4.Format = "d"
+		DataGridViewCellStyle4.NullValue = "N/A"
+		Me.CompletedDate.DefaultCellStyle = DataGridViewCellStyle4
 		Me.CompletedDate.HeaderText = "Date Completed"
 		Me.CompletedDate.MinimumWidth = 100
 		Me.CompletedDate.Name = "CompletedDate"
@@ -274,6 +295,12 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Cancel.ToolTipText = "Cancel Order"
 		Me.btn_Cancel.Width = 25
 		'
+		'db_Orders
+		'
+		Me.db_Orders.InitialCatalog = "Media Ministry Test"
+		Me.db_Orders.Password = "M3AppPassword2499"
+		Me.db_Orders.Username = "M3App"
+		'
 		'DisplayOrdersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -284,7 +311,7 @@ Partial Class DisplayOrdersCtrl
 		Me.Margin = New System.Windows.Forms.Padding(2)
 		Me.MinimumSize = New System.Drawing.Size(800, 442)
 		Me.Name = "DisplayOrdersCtrl"
-		Me.Size = New System.Drawing.Size(996, 458)
+		Me.Size = New System.Drawing.Size(800, 442)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.cms_Tools.ResumeLayout(False)
 		Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)

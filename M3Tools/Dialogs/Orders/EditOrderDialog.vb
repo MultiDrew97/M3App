@@ -41,7 +41,7 @@ Public Class EditOrderDialog
 	Private Sub LoadOrder(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrder.DoWork
 		Try
 			CurrentOrder = db_Orders.GetOrderById(OrderID)
-		Catch
+		Catch ex As Exception
 			e.Cancel = True
 		End Try
 	End Sub

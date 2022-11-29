@@ -50,20 +50,19 @@ Partial Class ProductsComboBox
 		'
 		'cbx_Items
 		'
-		Me.cbx_Items.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.bsItems, "ItemID", True))
 		Me.cbx_Items.DataSource = Me.bsItems
-		Me.cbx_Items.DisplayMember = "ItemName"
+		Me.cbx_Items.DisplayMember = "Name"
 		Me.cbx_Items.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.cbx_Items.FormattingEnabled = True
 		Me.cbx_Items.Location = New System.Drawing.Point(3, 16)
 		Me.cbx_Items.Name = "cbx_Items"
 		Me.cbx_Items.Size = New System.Drawing.Size(194, 21)
 		Me.cbx_Items.TabIndex = 2
-		Me.cbx_Items.ValueMember = "ItemID"
+		Me.cbx_Items.ValueMember = "Id"
 		'
 		'bsItems
 		'
-		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.DataTables.ItemsDataTable)
+		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.Types.Product)
 		'
 		'lbl_Items
 		'
@@ -80,9 +79,9 @@ Partial Class ProductsComboBox
 		'
 		'db_Products
 		'
-		Me.db_Products.InitialCatalog = "Media Ministry"
-		Me.db_Products.Password = "M3AppPassword2499"
-		Me.db_Products.Username = "M3App"
+		Me.db_Products.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+		Me.db_Products.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+		Me.db_Products.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 		'
 		'ProductsComboBox
 		'

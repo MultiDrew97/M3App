@@ -72,9 +72,9 @@ Partial Class EditOrderDialog
 		'
 		'db_Orders
 		'
-		Me.db_Orders.InitialCatalog = "Media Ministry"
-		Me.db_Orders.Password = "M3AppPassword2499"
-		Me.db_Orders.Username = "M3App"
+		Me.db_Orders.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+		Me.db_Orders.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+		Me.db_Orders.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 		'
 		'pcb_Items
 		'

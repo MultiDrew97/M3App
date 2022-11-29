@@ -40,10 +40,10 @@
                 Me(Me.tableItems.PriceColumn) = Value
             End Set
         End Property
-        Public ReadOnly Property Available() As Boolean
-            Get
-                Return CBool(Me(Me.tableItems.AvailableColumn))
-            End Get
-        End Property
-    End Class
+		Public ReadOnly Property Available() As Boolean
+			Get
+				Return CBool(Me(Me.tableItems.AvailableColumn))
+			End Get
+		End Property
+	End Class
 End Namespace
