@@ -35,6 +35,9 @@ Partial Class DisplayOrdersCtrl
 		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
 		Me.dgv_Orders = New System.Windows.Forms.DataGridView()
+		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+		Me.tbtn_PlaceOrder = New System.Windows.Forms.ToolStripButton()
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		Me.OrderID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Customer = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.Product = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,9 +48,6 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Edit = New System.Windows.Forms.DataGridViewImageColumn()
 		Me.btn_Complete = New System.Windows.Forms.DataGridViewImageColumn()
 		Me.btn_Cancel = New System.Windows.Forms.DataGridViewImageColumn()
-		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-		Me.tbtn_PlaceOrder = New System.Windows.Forms.ToolStripButton()
-		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.cms_Tools.SuspendLayout()
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
@@ -69,33 +69,33 @@ Partial Class DisplayOrdersCtrl
 		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_ShowCompleted, Me.ts_Seperator, Me.ts_Refresh, Me.ts_Remove})
 		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(350, 168)
+		Me.cms_Tools.Size = New System.Drawing.Size(204, 76)
 		Me.cms_Tools.Text = "Tools"
 		'
 		'ts_ShowCompleted
 		'
 		Me.ts_ShowCompleted.CheckOnClick = True
 		Me.ts_ShowCompleted.Name = "ts_ShowCompleted"
-		Me.ts_ShowCompleted.Size = New System.Drawing.Size(349, 38)
+		Me.ts_ShowCompleted.Size = New System.Drawing.Size(203, 22)
 		Me.ts_ShowCompleted.Text = "Show Completed Orders"
 		'
 		'ts_Seperator
 		'
 		Me.ts_Seperator.Name = "ts_Seperator"
-		Me.ts_Seperator.Size = New System.Drawing.Size(346, 6)
+		Me.ts_Seperator.Size = New System.Drawing.Size(200, 6)
 		'
 		'ts_Refresh
 		'
 		Me.ts_Refresh.Name = "ts_Refresh"
 		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-		Me.ts_Refresh.Size = New System.Drawing.Size(349, 38)
+		Me.ts_Refresh.Size = New System.Drawing.Size(203, 22)
 		Me.ts_Refresh.Text = "Refresh"
 		'
 		'ts_Remove
 		'
 		Me.ts_Remove.Name = "ts_Remove"
 		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-		Me.ts_Remove.Size = New System.Drawing.Size(349, 38)
+		Me.ts_Remove.Size = New System.Drawing.Size(203, 22)
 		Me.ts_Remove.Text = "Remove"
 		'
 		'ToolStripContainer1
@@ -104,11 +104,11 @@ Partial Class DisplayOrdersCtrl
 		'ToolStripContainer1.ContentPanel
 		'
 		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_Orders)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1508, 837)
+		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(996, 419)
 		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
 		Me.ToolStripContainer1.Name = "ToolStripContainer1"
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(1508, 887)
+		Me.ToolStripContainer1.Size = New System.Drawing.Size(996, 458)
 		Me.ToolStripContainer1.TabIndex = 1
 		Me.ToolStripContainer1.Text = "ToolStripContainer1"
 		'
@@ -132,12 +132,36 @@ Partial Class DisplayOrdersCtrl
 		Me.dgv_Orders.Name = "dgv_Orders"
 		Me.dgv_Orders.ReadOnly = True
 		Me.dgv_Orders.RowHeadersWidth = 82
-		Me.dgv_Orders.Size = New System.Drawing.Size(1508, 837)
+		Me.dgv_Orders.Size = New System.Drawing.Size(996, 419)
 		Me.dgv_Orders.TabIndex = 3
+		'
+		'ToolStrip1
+		'
+		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_PlaceOrder})
+		Me.ToolStrip1.Location = New System.Drawing.Point(6, 0)
+		Me.ToolStrip1.Name = "ToolStrip1"
+		Me.ToolStrip1.Size = New System.Drawing.Size(48, 39)
+		Me.ToolStrip1.TabIndex = 0
+		'
+		'tbtn_PlaceOrder
+		'
+		Me.tbtn_PlaceOrder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_PlaceOrder.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
+		Me.tbtn_PlaceOrder.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_PlaceOrder.Name = "tbtn_PlaceOrder"
+		Me.tbtn_PlaceOrder.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_PlaceOrder.Text = "Place Order"
+		'
+		'db_Orders
+		'
+		Me.db_Orders.InitialCatalog = "Media Ministry Test"
+		Me.db_Orders.Password = "M3AppPassword2499"
+		Me.db_Orders.Username = "M3App"
 		'
 		'OrderID
 		'
-		Me.OrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.OrderID.DataPropertyName = "OrderID"
 		Me.OrderID.HeaderText = "Order Number"
 		Me.OrderID.MinimumWidth = 10
@@ -147,19 +171,20 @@ Partial Class DisplayOrdersCtrl
 		'
 		'Customer
 		'
-		Me.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.Customer.DataPropertyName = "CustomerName"
 		Me.Customer.HeaderText = "Buyer"
-		Me.Customer.MinimumWidth = 10
+		Me.Customer.MinimumWidth = 100
 		Me.Customer.Name = "Customer"
 		Me.Customer.ReadOnly = True
+		Me.Customer.Width = 200
 		'
 		'Product
 		'
 		Me.Product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
 		Me.Product.DataPropertyName = "ItemName"
 		Me.Product.HeaderText = "Product"
-		Me.Product.MinimumWidth = 10
+		Me.Product.MinimumWidth = 200
 		Me.Product.Name = "Product"
 		Me.Product.ReadOnly = True
 		'
@@ -167,7 +192,7 @@ Partial Class DisplayOrdersCtrl
 		'
 		Me.OrderQuantity.DataPropertyName = "Quantity"
 		Me.OrderQuantity.HeaderText = "Quantity"
-		Me.OrderQuantity.MinimumWidth = 10
+		Me.OrderQuantity.MinimumWidth = 100
 		Me.OrderQuantity.Name = "OrderQuantity"
 		Me.OrderQuantity.ReadOnly = True
 		'
@@ -181,7 +206,7 @@ Partial Class DisplayOrdersCtrl
 		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
 		Me.Total.DefaultCellStyle = DataGridViewCellStyle1
 		Me.Total.HeaderText = "Total"
-		Me.Total.MinimumWidth = 10
+		Me.Total.MinimumWidth = 100
 		Me.Total.Name = "Total"
 		Me.Total.ReadOnly = True
 		'
@@ -193,7 +218,7 @@ Partial Class DisplayOrdersCtrl
 		DataGridViewCellStyle2.NullValue = Nothing
 		Me.OrderDate.DefaultCellStyle = DataGridViewCellStyle2
 		Me.OrderDate.HeaderText = "Date Placed"
-		Me.OrderDate.MinimumWidth = 10
+		Me.OrderDate.MinimumWidth = 100
 		Me.OrderDate.Name = "OrderDate"
 		Me.OrderDate.ReadOnly = True
 		'
@@ -204,13 +229,13 @@ Partial Class DisplayOrdersCtrl
 		DataGridViewCellStyle3.NullValue = "N/A"
 		Me.CompletedDate.DefaultCellStyle = DataGridViewCellStyle3
 		Me.CompletedDate.HeaderText = "Date Completed"
-		Me.CompletedDate.MinimumWidth = 10
+		Me.CompletedDate.MinimumWidth = 100
 		Me.CompletedDate.Name = "CompletedDate"
 		Me.CompletedDate.ReadOnly = True
 		'
 		'btn_Edit
 		'
-		Me.btn_Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+		Me.btn_Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.btn_Edit.Description = "Edit the order of this row"
 		Me.btn_Edit.HeaderText = ""
 		Me.btn_Edit.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
@@ -224,7 +249,7 @@ Partial Class DisplayOrdersCtrl
 		'
 		'btn_Complete
 		'
-		Me.btn_Complete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+		Me.btn_Complete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.btn_Complete.Description = "Fulfil the order of this row"
 		Me.btn_Complete.HeaderText = ""
 		Me.btn_Complete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
@@ -237,7 +262,7 @@ Partial Class DisplayOrdersCtrl
 		'
 		'btn_Cancel
 		'
-		Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+		Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
 		Me.btn_Cancel.Description = "Cancel the order of this row"
 		Me.btn_Cancel.HeaderText = ""
 		Me.btn_Cancel.Image = Global.SPPBC.M3Tools.My.Resources.Resources.delete
@@ -249,31 +274,6 @@ Partial Class DisplayOrdersCtrl
 		Me.btn_Cancel.ToolTipText = "Cancel Order"
 		Me.btn_Cancel.Width = 25
 		'
-		'ToolStrip1
-		'
-		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
-		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_PlaceOrder})
-		Me.ToolStrip1.Location = New System.Drawing.Point(6, 0)
-		Me.ToolStrip1.Name = "ToolStrip1"
-		Me.ToolStrip1.Size = New System.Drawing.Size(68, 50)
-		Me.ToolStrip1.TabIndex = 0
-		'
-		'tbtn_PlaceOrder
-		'
-		Me.tbtn_PlaceOrder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.tbtn_PlaceOrder.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
-		Me.tbtn_PlaceOrder.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_PlaceOrder.Name = "tbtn_PlaceOrder"
-		Me.tbtn_PlaceOrder.Size = New System.Drawing.Size(46, 44)
-		Me.tbtn_PlaceOrder.Text = "Place Order"
-		'
-		'db_Orders
-		'
-		Me.db_Orders.InitialCatalog = "Media Ministry Test"
-		Me.db_Orders.Password = "M3AppPassword2499"
-		Me.db_Orders.Username = "M3App"
-		'
 		'DisplayOrdersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -284,7 +284,7 @@ Partial Class DisplayOrdersCtrl
 		Me.Margin = New System.Windows.Forms.Padding(2)
 		Me.MinimumSize = New System.Drawing.Size(800, 442)
 		Me.Name = "DisplayOrdersCtrl"
-		Me.Size = New System.Drawing.Size(1508, 887)
+		Me.Size = New System.Drawing.Size(996, 458)
 		CType(Me.bsOrders, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.cms_Tools.ResumeLayout(False)
 		Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
@@ -308,6 +308,8 @@ Partial Class DisplayOrdersCtrl
 	Friend WithEvents ts_Seperator As Windows.Forms.ToolStripSeparator
 	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
 	Friend WithEvents dgv_Orders As Windows.Forms.DataGridView
+	Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
+	Friend WithEvents tbtn_PlaceOrder As Windows.Forms.ToolStripButton
 	Friend WithEvents OrderID As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents Customer As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents Product As Windows.Forms.DataGridViewTextBoxColumn
@@ -318,6 +320,4 @@ Partial Class DisplayOrdersCtrl
 	Friend WithEvents btn_Edit As Windows.Forms.DataGridViewImageColumn
 	Friend WithEvents btn_Complete As Windows.Forms.DataGridViewImageColumn
 	Friend WithEvents btn_Cancel As Windows.Forms.DataGridViewImageColumn
-	Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
-	Friend WithEvents tbtn_PlaceOrder As Windows.Forms.ToolStripButton
 End Class
