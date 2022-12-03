@@ -29,6 +29,10 @@ Namespace Types
 			Me.New(-1, "John", "Doe", "123 Main St", "City", "ST", "00000", "123-456-7890", "johndoe@domain.ext")
 		End Sub
 
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, join As Date)
+			Me.New(id, fName, lName, Nothing, Nothing, email, join)
+		End Sub
+
 		Public Sub New(id As Integer, fName As String, lName As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As Date = Nothing)
 			Me.New(id, $"{fName} {lName}", New Address(street, city, state, zip), phone, email, join)
 		End Sub
@@ -69,5 +73,17 @@ Namespace Types
 			'Phone Number
 			Return $"{Id}) {Name} (e: {Email} p: {PhoneNumber}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
 		End Function
+
+		Public Overrides Sub UpdateID(newID As Integer)
+			If newID = Id Then
+				Return
+			End If
+
+			Using conn As New Database.ProductDatabase
+				Dim newProduct = conn.GetProduct(newID)
+
+				' TODO: Finish implementing updates
+			End Using
+		End Sub
 	End Class
 End Namespace

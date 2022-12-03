@@ -17,11 +17,15 @@ Namespace Types
 
 		Public Sub New()
 			' TODO: Add constructor options like other objects
-			Me.New(-1, "JohnDoe123", Nothing, Nothing, AccountRole.User)
+			Me.New(-1, "John", "Doe", Nothing, "JohnDoe123", Nothing, Nothing, AccountRole.User)
 		End Sub
 
-		Public Sub New(id As Integer, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
-			Me.Id = id
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
+			Me.New(id, $"{fName} {lName}", email, username, password, salt, accountRole)
+		End Sub
+
+		Public Sub New(id As Integer, name As String, email As String, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
+			MyBase.New(id, name, email)
 			Me.Username = username
 			Me.Password = password
 			Me.Salt = salt
@@ -33,5 +37,17 @@ Namespace Types
 				Return String.Join(";", Id, Username, Salt, CInt(AccountRole))
 			End Get
 		End Property
+
+		Public Overrides Sub UpdateID(newID As Integer)
+			If newID = Id Then
+				Return
+			End If
+
+			Using conn As New Database.ProductDatabase
+				Dim newProduct = conn.GetProduct(newID)
+
+				' TODO: Finish implementing updates
+			End Using
+		End Sub
 	End Class
 End Namespace

@@ -3,6 +3,7 @@
 Public Class ProductsComboBox
 	Public Event LoadBegin()
 	Public Event LoadEnd()
+	Public Event SelectedItemChanged(newValue As Integer)
 
 	Public Property SelectedItem As Object
 		Get
@@ -81,6 +82,6 @@ Public Class ProductsComboBox
 	End Sub
 
 	Private Sub IndexChanged(sender As Object, e As EventArgs) Handles cbx_Items.SelectedIndexChanged
-
+		RaiseEvent SelectedItemChanged(CInt(SelectedValue))
 	End Sub
 End Class

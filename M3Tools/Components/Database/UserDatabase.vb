@@ -133,6 +133,9 @@ Namespace Database
 
 					Try
 						Dim user = GetUser(CInt(reader("UserID")))
+						cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateLastLogin]"
+						cmd.CommandType = CommandType.StoredProcedure
+						cmd.ExecuteNonQueryAsync()
 						Return user
 					Catch ex As Exception
 						Throw New Exceptions.DatabaseException($"Unable to find user with ID {CInt(reader("UserID"))}", ex)
@@ -151,11 +154,9 @@ Namespace Database
 						Dim buffer(64) As Byte
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
-						Return New User(CInt(reader("UserID")),
-								CStr(reader("Username")),
-								buffer,
-								CType(reader("Salt"), Guid),
-								CType(reader("AccountRole"), AccountRole)
+						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
+								TryCast(reader("Email"), String), CStr(reader("Username")), buffer,
+								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
 							)
 					Loop
 
@@ -169,22 +170,18 @@ Namespace Database
 				Throw New Exceptions.UsernameException("Empty Username")
 			End If
 
-			Using _con = db_Connection.Connect()
-				_con.Parameters.AddWithValue("Username", username)
-				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE Username=@Username"
-				Using reader = _con.ExecuteReaderAsync().Result
-					Dim buffer(100) As Byte
-
+			Using cmd = db_Connection.Connect()
+				cmd.Parameters.AddWithValue("Username", username)
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE Username=@Username"
+				Using reader = cmd.ExecuteReader
 					Do While reader.Read()
+						Dim buffer(64) As Byte
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
-						Return New User() With {
-							.Id = reader.GetInt32(reader.GetOrdinal("UserID")),
-							.Username = reader.GetString(reader.GetOrdinal("Username")),
-							.Password = buffer,
-							.Salt = reader.GetGuid(reader.GetOrdinal("Salt")),
-							.AccountRole = CType(reader.GetInt32(reader.GetOrdinal("AccountRole")), AccountRole)
-						}
+						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
+								TryCast(reader("Email"), String), CStr(reader("Username")), buffer,
+								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
+							)
 					Loop
 
 					Throw New Exceptions.UserException("Invalid username")
@@ -199,17 +196,16 @@ Namespace Database
 				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
 				Using reader = _con.ExecuteReader()
-					Dim buffer(64) As Byte
 
 					Do While reader.Read()
+						Dim buffer(64) As Byte
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
-						users.Append(New User(
-								CInt(reader("UserID")),
-								CStr(reader("Username")),
-								buffer,
-								CType(reader("Salt"), Guid),
-								CType(reader("AccountRole"), AccountRole)
-						))
+
+						users.Append(New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
+								TryCast(reader("Email"), String), CStr(reader("Username")), Buffer,
+								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
+							)
+						)
 					Loop
 				End Using
 			End Using

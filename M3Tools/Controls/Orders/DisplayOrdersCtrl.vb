@@ -174,7 +174,9 @@ Public Class DisplayOrdersCtrl
 			Case btn_Edit.Index
 				' Edit Order
 				Using edit As New EditOrderDialog(orderID)
-					edit.ShowDialog(Me)
+					If edit.ShowDialog(Me) = DialogResult.OK Then
+						Reload()
+					End If
 				End Using
 		End Select
 	End Sub

@@ -199,14 +199,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1807944">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Media Ministry Manager.exe" size="1807432">
       <assemblyIdentity name="Media Ministry Manager" version="3.0.813.2201" publicKeyToken="E198E3547A7C28A0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4z+HhDjVKjdsWQXMP0Ob5rkLoTLNiGPV4Ms/NkQmqiw=</dsig:DigestValue>
+        <dsig:DigestValue>Ikdth3QueNsk4IfnlkPVYzSzzy7/gMhITiYR5HocquA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -343,14 +343,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="975360">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="978944">
       <assemblyIdentity name="SPPBC.M3Tools" version="1.0.410.2201" publicKeyToken="4F5539A43069F3F0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Kkp4NV4bRxrzstUDKJsZv2B1zPlCSIKd+BbV9PXT/lQ=</dsig:DigestValue>
+        <dsig:DigestValue>xcCEzEHOsZTevYkFA/g1rvTlhAGC+3OOYCdkuxP6PqQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

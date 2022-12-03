@@ -1,6 +1,6 @@
 ﻿Option Strict On
 Namespace Types
-	Public Class Item
+	Public MustInherit Class Item
 		Inherits DBEntry
 
 		Public Property Name As String

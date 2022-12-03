@@ -156,11 +156,19 @@ Public Structure Utils
         End Try
     End Function
 
-    Shared Function ValidID(id As Integer) As Boolean
-        Return id >= My.Settings.MinID
-    End Function
+	Shared Function ValidID(id As Integer) As Boolean
+		Return id >= My.Settings.MinID
+	End Function
 
-    Public Shared Sub PrintConsole(title As String, value As Object)
+	Shared Function TryDateCast(value As Object) As Date
+		Try
+			Return CDate(value)
+		Catch ex As Exception
+			Return Nothing
+		End Try
+	End Function
+
+	Public Shared Sub PrintConsole(title As String, value As Object)
         Console.WriteLine($"------------------------ {title} ------------------------")
         Console.WriteLine(value)
         Console.WriteLine($"---------------------------------------------------------")

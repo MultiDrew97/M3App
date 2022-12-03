@@ -10,11 +10,31 @@ Namespace Types
             Me.New(-1, "New Product", 0, 0.0, True)
         End Sub
 
-        Public Sub New(id As Integer, name As String, stock As Integer, price As Double, available As Boolean)
-            MyBase.New(id, name)
-            Me.Stock = stock
-            Me.Price = price
-            Me.Available = available
-        End Sub
-    End Class
+		Public Sub New(id As Integer, name As String)
+			Me.New(id, name, 0, 0, True)
+		End Sub
+
+		Public Sub New(id As Integer, name As String, stock As Integer, price As Double, available As Boolean)
+			MyBase.New(id, name)
+			Me.Stock = stock
+			Me.Price = price
+			Me.Available = available
+		End Sub
+
+		Public Overrides Sub UpdateID(newID As Integer)
+			If newID = Id Then
+				Return
+			End If
+
+			Using conn As New Database.ProductDatabase
+				Dim newProduct = conn.GetProduct(newID)
+
+				Id = newID
+				Name = newProduct.Name
+				Stock = newProduct.Stock
+				Price = newProduct.Price
+				Available = newProduct.Available
+			End Using
+		End Sub
+	End Class
 End Namespace

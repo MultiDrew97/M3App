@@ -52,18 +52,10 @@ Namespace Database
 
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read
-						Dim completedDate As Date = Nothing
-
-						Try
-							completedDate = CDate(reader("CompletedDate"))
-						Catch ex As Exception
-							completedDate = Nothing
-						End Try
-
 						orders.Add(New Order(
 								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
 									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
-									completedDate))
+									Utils.TryDateCast(reader("CompletedDate"))))
 					Loop
 				End Using
 			End Using
@@ -74,7 +66,7 @@ Namespace Database
 		Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
 			' TODO: Test this to make sure it works properly
 			Return CType(GetOrders().Where(Function(order As Order) As Boolean
-											   Return order.CompletedDate.Year > 1950
+											   Return order.CompletedDate.Year > 2000
 										   End Function), DBEntryCollection(Of Order))
 		End Function
 
@@ -103,8 +95,12 @@ Namespace Database
 			End Using
 		End Sub
 
-		Public Sub UpdateOrder(orderID As Integer, quantity As Integer)
-			If Not Utils.ValidID(orderID) Then
+		Public Sub UpdateOrder(order As Order)
+			UpdateOrder(order.Id, order.Product.Id, order.Quantity)
+		End Sub
+
+		Public Sub UpdateOrder(orderID As Integer, itemID As Integer, quantity As Integer)
+			If Not Utils.ValidID(orderID) OrElse Not Utils.ValidID(itemID) Then
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
@@ -112,16 +108,18 @@ Namespace Database
 				Throw New ArgumentException($"Quantity values must be greater than or equal to 1")
 			End If
 
-			UpdateOrder(New SqlParameter("OrderID", orderID), New SqlParameter("Quantity", quantity))
+			UpdateOrder(New SqlParameter("OrderID", orderID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity))
 		End Sub
 
 		Private Sub UpdateOrder(ParamArray params As SqlParameter())
 			Using cmd = db_Connection.Connect
 				cmd.Parameters.AddRange(params)
 
-				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[{tableName}] SET QUANTITY = @Quantity WHERE OrderID = @OrderID"
-				Throw New Exceptions.DatabaseException("Update Order not implemented yet")
-				'myCmd.ExecuteNonQuery()
+				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[{tableName}] SET QUANTITY=@Quantity, ItemID=@ItemID WHERE OrderID = @OrderID"
+
+				cmd.ExecuteNonQuery()
+
+				'Throw New Exceptions.DatabaseException("Update Order not implemented yet")
 			End Using
 		End Sub
 
@@ -175,25 +173,10 @@ Namespace Database
 						Throw New Exceptions.OrderNotFoundException($"No order with OrderID '{orderID}' was found")
 					End If
 
-					'If CDate(reader("CompletedDate")).Year < 1901 Then
-					'	Return New Order(
-					'		CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-					'		CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")))
-					'Else
-					' TODO: Verify NULL from tf won't break this
-					Dim completedDate As Date = Nothing
-
-					Try
-						completedDate = CDate(reader("CompletedDate"))
-					Catch ex As Exception
-						completedDate = Nothing
-					End Try
-
 					Return New Order(
 								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
 									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
-									completedDate)
-					'End If
+									Utils.TryDateCast(reader("CompletedDate")))
 				End Using
 			End Using
 
@@ -212,15 +195,8 @@ Namespace Database
 
 				Using reader = cmd.ExecuteReader()
 					While reader.Read()
-						Dim compDate As Date = CDate(reader("CompletedDate"))
-						If CDate(reader("CompletedDate")).Year < 1901 Then
-							orders.Add(New Order(
-							CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate"))))
-						Else
-							orders.Add(New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), CDate(reader("CompletedDate"))))
-						End If
+						orders.Add(New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
+							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), Utils.TryDateCast(reader("CompletedDate"))))
 					End While
 
 				End Using
