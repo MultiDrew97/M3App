@@ -169,6 +169,12 @@
     <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\People\Customers\CustomersComboBox.Designer.vb">
+      <DependentUpon>CustomersComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Customers\CustomersComboBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Dialogs\BulkDeletionDialog.Designer.vb">
       <DependentUpon>BulkDeletionDialog.vb</DependentUpon>
     </Compile>
@@ -493,6 +499,9 @@
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Customers\CustomersComboBox.resx">
+      <DependentUpon>CustomersComboBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
       <DependentUpon>ProductsComboBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -672,7 +681,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
