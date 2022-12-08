@@ -151,10 +151,22 @@
     <Compile Include="Controls\MainMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Orders\CartCtrl.Designer.vb">
+      <DependentUpon>CartCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Orders\CartCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Orders\DisplayOrdersCtrl.Designer.vb">
       <DependentUpon>DisplayOrdersCtrl.vb</DependentUpon>
     </Compile>
     <Compile Include="Controls\Orders\DisplayOrdersCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Orders\OrderTotalCtrl.Designer.vb">
+      <DependentUpon>OrderTotalCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Orders\OrderTotalCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Orders\QuantityNudCtrl.Designer.vb">
@@ -414,6 +426,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Types\DBEntry.vb" />
+    <Compile Include="Types\Orders\CartItem.vb" />
+    <Compile Include="Types\Orders\CartItemCollection.vb" />
     <Compile Include="Types\People\DBEntryCollection.vb" />
     <Compile Include="UpdateService.Designer.vb">
       <DependentUpon>UpdateService.vb</DependentUpon>
@@ -489,8 +503,14 @@
     <EmbeddedResource Include="Controls\MainMenuStrip.resx">
       <DependentUpon>MainMenuStrip.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Orders\CartCtrl.resx">
+      <DependentUpon>CartCtrl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Orders\DisplayOrdersCtrl.resx">
       <DependentUpon>DisplayOrdersCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Orders\OrderTotalCtrl.resx">
+      <DependentUpon>OrderTotalCtrl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Orders\QuantityNudCtrl.resx">
       <DependentUpon>QuantityNudCtrl.vb</DependentUpon>
@@ -607,6 +627,8 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItem.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Listener.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PlaceOrderDialog
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
-	<System.Diagnostics.DebuggerNonUserCode()> _
+	<System.Diagnostics.DebuggerNonUserCode()>
 	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
 		Try
 			If disposing AndAlso components IsNot Nothing Then
@@ -20,20 +20,20 @@ Partial Class PlaceOrderDialog
 	'NOTE: The following procedure is required by the Windows Form Designer
 	'It can be modified using the Windows Form Designer.  
 	'Do not modify it using the code editor.
-	<System.Diagnostics.DebuggerStepThrough()> _
+	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.btn_Checkout = New System.Windows.Forms.Button()
 		Me.btn_Cancel = New System.Windows.Forms.Button()
+		Me.btn_AddCart = New System.Windows.Forms.Button()
+		Me.bw_PlaceOrders = New System.ComponentModel.BackgroundWorker()
+		Me.otc_Total = New SPPBC.M3Tools.OrderTotalCtrl()
+		Me.qnc_Quantity = New SPPBC.M3Tools.QuantityNudCtrl()
 		Me.ccb_Customers = New SPPBC.M3Tools.CustomersComboBox()
 		Me.pcb_Items = New SPPBC.M3Tools.ProductsComboBox()
-		Me.QuantityNudCtrl1 = New SPPBC.M3Tools.QuantityNudCtrl()
-		Me.lbl_Total = New System.Windows.Forms.Label()
-		Me.txt_Total = New System.Windows.Forms.TextBox()
-		Me.btn_AddCart = New System.Windows.Forms.Button()
-		Me.OrdersDatabase1 = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
-		Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+		Me.cc_Cart = New SPPBC.M3Tools.CartCtrl()
+		Me.db_Orders = New SPPBC.M3Tools.Database.OrdersDatabase(Me.components)
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.SuspendLayout()
 		'
@@ -43,9 +43,9 @@ Partial Class PlaceOrderDialog
 		Me.TableLayoutPanel1.ColumnCount = 2
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
 		Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-		Me.TableLayoutPanel1.Controls.Add(Me.btn_Checkout, 0, 0)
 		Me.TableLayoutPanel1.Controls.Add(Me.btn_Cancel, 1, 0)
-		Me.TableLayoutPanel1.Location = New System.Drawing.Point(148, 312)
+		Me.TableLayoutPanel1.Controls.Add(Me.btn_Checkout, 0, 0)
+		Me.TableLayoutPanel1.Location = New System.Drawing.Point(37, 219)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 1
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -70,10 +70,42 @@ Partial Class PlaceOrderDialog
 		Me.btn_Cancel.TabIndex = 1
 		Me.btn_Cancel.Text = "Cancel"
 		'
+		'btn_AddCart
+		'
+		Me.btn_AddCart.Location = New System.Drawing.Point(137, 129)
+		Me.btn_AddCart.Name = "btn_AddCart"
+		Me.btn_AddCart.Size = New System.Drawing.Size(75, 23)
+		Me.btn_AddCart.TabIndex = 7
+		Me.btn_AddCart.Text = "Add to Cart"
+		Me.btn_AddCart.UseVisualStyleBackColor = True
+		'
+		'bw_PlaceOrders
+		'
+		'
+		'otc_Total
+		'
+		Me.otc_Total.Location = New System.Drawing.Point(55, 179)
+		Me.otc_Total.MaximumSize = New System.Drawing.Size(115, 20)
+		Me.otc_Total.MinimumSize = New System.Drawing.Size(95, 20)
+		Me.otc_Total.Name = "otc_Total"
+		Me.otc_Total.Size = New System.Drawing.Size(115, 20)
+		Me.otc_Total.TabIndex = 8
+		Me.otc_Total.Total = 0R
+		'
+		'qnc_Quantity
+		'
+		Me.qnc_Quantity.Location = New System.Drawing.Point(12, 119)
+		Me.qnc_Quantity.MaximumSize = New System.Drawing.Size(0, 42)
+		Me.qnc_Quantity.MinimumSize = New System.Drawing.Size(100, 42)
+		Me.qnc_Quantity.Name = "qnc_Quantity"
+		Me.qnc_Quantity.Quantity = 1
+		Me.qnc_Quantity.Size = New System.Drawing.Size(100, 42)
+		Me.qnc_Quantity.TabIndex = 3
+		'
 		'ccb_Customers
 		'
 		Me.ccb_Customers.AutoSize = True
-		Me.ccb_Customers.Location = New System.Drawing.Point(42, 12)
+		Me.ccb_Customers.Location = New System.Drawing.Point(12, 14)
 		Me.ccb_Customers.MaximumSize = New System.Drawing.Size(0, 42)
 		Me.ccb_Customers.MinimumSize = New System.Drawing.Size(200, 42)
 		Me.ccb_Customers.Name = "ccb_Customers"
@@ -86,7 +118,7 @@ Partial Class PlaceOrderDialog
 		'pcb_Items
 		'
 		Me.pcb_Items.AutoSize = True
-		Me.pcb_Items.Location = New System.Drawing.Point(42, 76)
+		Me.pcb_Items.Location = New System.Drawing.Point(12, 62)
 		Me.pcb_Items.MaximumSize = New System.Drawing.Size(0, 42)
 		Me.pcb_Items.MinimumSize = New System.Drawing.Size(200, 42)
 		Me.pcb_Items.Name = "pcb_Items"
@@ -96,60 +128,32 @@ Partial Class PlaceOrderDialog
 		Me.pcb_Items.Size = New System.Drawing.Size(200, 42)
 		Me.pcb_Items.TabIndex = 1
 		'
-		'QuantityNudCtrl1
+		'cc_Cart
 		'
-		Me.QuantityNudCtrl1.Location = New System.Drawing.Point(42, 124)
-		Me.QuantityNudCtrl1.MaximumSize = New System.Drawing.Size(0, 42)
-		Me.QuantityNudCtrl1.MinimumSize = New System.Drawing.Size(100, 42)
-		Me.QuantityNudCtrl1.Name = "QuantityNudCtrl1"
-		Me.QuantityNudCtrl1.Quantity = 1
-		Me.QuantityNudCtrl1.Size = New System.Drawing.Size(100, 42)
-		Me.QuantityNudCtrl1.TabIndex = 3
+		Me.cc_Cart.Dock = System.Windows.Forms.DockStyle.Right
+		Me.cc_Cart.Location = New System.Drawing.Point(218, 0)
+		Me.cc_Cart.Name = "cc_Cart"
+		Me.cc_Cart.Size = New System.Drawing.Size(367, 260)
+		Me.cc_Cart.TabIndex = 9
 		'
-		'lbl_Total
+		'db_Orders
 		'
-		Me.lbl_Total.AutoSize = True
-		Me.lbl_Total.Location = New System.Drawing.Point(75, 258)
-		Me.lbl_Total.Name = "lbl_Total"
-		Me.lbl_Total.Size = New System.Drawing.Size(31, 13)
-		Me.lbl_Total.TabIndex = 4
-		Me.lbl_Total.Text = "Total"
-		'
-		'txt_Total
-		'
-		Me.txt_Total.Location = New System.Drawing.Point(118, 255)
-		Me.txt_Total.Name = "txt_Total"
-		Me.txt_Total.ReadOnly = True
-		Me.txt_Total.Size = New System.Drawing.Size(100, 20)
-		Me.txt_Total.TabIndex = 6
-		'
-		'btn_AddCart
-		'
-		Me.btn_AddCart.Location = New System.Drawing.Point(151, 133)
-		Me.btn_AddCart.Name = "btn_AddCart"
-		Me.btn_AddCart.Size = New System.Drawing.Size(75, 23)
-		Me.btn_AddCart.TabIndex = 7
-		Me.btn_AddCart.Text = "Add to Cart"
-		Me.btn_AddCart.UseVisualStyleBackColor = True
-		'
-		'OrdersDatabase1
-		'
-		Me.OrdersDatabase1.InitialCatalog = "Media Ministry Test"
-		Me.OrdersDatabase1.Password = "M3AppPassword2499"
-		Me.OrdersDatabase1.Username = "M3App"
+		Me.db_Orders.InitialCatalog = "Media Ministry Test"
+		Me.db_Orders.Password = "M3AppPassword2499"
+		Me.db_Orders.Username = "M3App"
 		'
 		'PlaceOrderDialog
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(306, 353)
+		Me.ClientSize = New System.Drawing.Size(585, 260)
+		Me.Controls.Add(Me.otc_Total)
 		Me.Controls.Add(Me.btn_AddCart)
-		Me.Controls.Add(Me.txt_Total)
-		Me.Controls.Add(Me.lbl_Total)
-		Me.Controls.Add(Me.QuantityNudCtrl1)
+		Me.Controls.Add(Me.qnc_Quantity)
 		Me.Controls.Add(Me.ccb_Customers)
 		Me.Controls.Add(Me.pcb_Items)
 		Me.Controls.Add(Me.TableLayoutPanel1)
+		Me.Controls.Add(Me.cc_Cart)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 		Me.MaximizeBox = False
 		Me.MinimizeBox = False
@@ -167,10 +171,10 @@ Partial Class PlaceOrderDialog
 	Friend WithEvents btn_Cancel As System.Windows.Forms.Button
 	Friend WithEvents pcb_Items As ProductsComboBox
 	Friend WithEvents ccb_Customers As CustomersComboBox
-	Friend WithEvents QuantityNudCtrl1 As QuantityNudCtrl
-	Friend WithEvents lbl_Total As Windows.Forms.Label
-	Friend WithEvents txt_Total As Windows.Forms.TextBox
+	Friend WithEvents qnc_Quantity As QuantityNudCtrl
 	Friend WithEvents btn_AddCart As Windows.Forms.Button
-	Friend WithEvents OrdersDatabase1 As Database.OrdersDatabase
-	Friend WithEvents BackgroundWorker1 As ComponentModel.BackgroundWorker
+	Friend WithEvents bw_PlaceOrders As ComponentModel.BackgroundWorker
+	Friend WithEvents otc_Total As OrderTotalCtrl
+	Friend WithEvents cc_Cart As CartCtrl
+	Friend WithEvents db_Orders As Database.OrdersDatabase
 End Class

@@ -44,8 +44,6 @@ Namespace Types
 			End If
 
 			Using conn As New Database.ProductDatabase
-				Dim newProduct = conn.GetProduct(newID)
-
 				' TODO: Finish implementing updates
 			End Using
 		End Sub

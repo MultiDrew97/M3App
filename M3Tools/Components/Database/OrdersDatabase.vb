@@ -83,7 +83,7 @@ Namespace Database
 			AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
 		End Sub
 
-		Public Sub AddOrder(ParamArray params As SqlParameter())
+		Private Sub AddOrder(ParamArray params As SqlParameter())
 			Using cmd = db_Connection.Connect
 				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddOrder]"
 				cmd.CommandType = CommandType.StoredProcedure

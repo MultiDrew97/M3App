@@ -7,8 +7,8 @@ Namespace Types
         Public Property Available As Boolean
 
         Public Sub New()
-            Me.New(-1, "New Product", 0, 0.0, True)
-        End Sub
+			Me.New(1, "New Product", 0, 0, True)
+		End Sub
 
 		Public Sub New(id As Integer, name As String)
 			Me.New(id, name, 0, 0, True)
@@ -20,6 +20,14 @@ Namespace Types
 			Me.Price = price
 			Me.Available = available
 		End Sub
+
+		Public Function Display() As String
+			Return $"{Id}) {Name} ({Price}) {If(Available, "Available", "Not Available")}"
+		End Function
+
+		Public Overrides Function ToString() As String
+			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Stock, Price, If(Available, "Available", "Not Available"))
+		End Function
 
 		Public Overrides Sub UpdateID(newID As Integer)
 			If newID = Id Then
