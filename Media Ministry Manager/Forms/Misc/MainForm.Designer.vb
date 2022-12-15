@@ -23,7 +23,7 @@ Partial Class Frm_Main
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_Main))
-		Me.btn_ShowOrders = New System.Windows.Forms.Button()
+		Me.btn_OrderManagement = New System.Windows.Forms.Button()
 		Me.btn_ProductManagement = New System.Windows.Forms.Button()
 		Me.btn_CustomerManagement = New System.Windows.Forms.Button()
 		Me.ss_Queries = New System.Windows.Forms.StatusStrip()
@@ -36,15 +36,15 @@ Partial Class Frm_Main
 		Me.ss_Queries.SuspendLayout()
 		Me.SuspendLayout()
 		'
-		'btn_ShowOrders
+		'btn_OrderManagement
 		'
-		Me.btn_ShowOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_ShowOrders.Location = New System.Drawing.Point(85, 106)
-		Me.btn_ShowOrders.Name = "btn_ShowOrders"
-		Me.btn_ShowOrders.Size = New System.Drawing.Size(226, 43)
-		Me.btn_ShowOrders.TabIndex = 3
-		Me.btn_ShowOrders.Text = "Order Management"
-		Me.btn_ShowOrders.UseVisualStyleBackColor = True
+		Me.btn_OrderManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.btn_OrderManagement.Location = New System.Drawing.Point(85, 106)
+		Me.btn_OrderManagement.Name = "btn_OrderManagement"
+		Me.btn_OrderManagement.Size = New System.Drawing.Size(226, 43)
+		Me.btn_OrderManagement.TabIndex = 3
+		Me.btn_OrderManagement.Text = "Order Management"
+		Me.btn_OrderManagement.UseVisualStyleBackColor = True
 		'
 		'btn_ProductManagement
 		'
@@ -133,7 +133,7 @@ Partial Class Frm_Main
 		Me.Controls.Add(Me.btn_EmailMinistry)
 		Me.Controls.Add(Me.ss_Queries)
 		Me.Controls.Add(Me.btn_CustomerManagement)
-		Me.Controls.Add(Me.btn_ShowOrders)
+		Me.Controls.Add(Me.btn_OrderManagement)
 		Me.Controls.Add(Me.btn_ProductManagement)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -148,7 +148,7 @@ Partial Class Frm_Main
 		Me.PerformLayout()
 
 	End Sub
-	Friend WithEvents btn_ShowOrders As Button
+	Friend WithEvents btn_OrderManagement As Button
 	Friend WithEvents btn_ProductManagement As Button
 	Friend WithEvents btn_CustomerManagement As Button
 	Friend WithEvents ss_Queries As StatusStrip

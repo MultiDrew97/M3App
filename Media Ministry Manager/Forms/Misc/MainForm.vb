@@ -11,17 +11,13 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	Private Sub PlaceOrder(sender As Object, e As EventArgs)
-		PlaceOrderDialog.ShowDialog(Me)
-	End Sub
-
 	Private Sub DisplayProductMgmt(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.OpenProducts
 		Dim inventory As New Frm_DisplayInventory
 		inventory.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub DisplayOrders(sender As Object, e As EventArgs) Handles btn_ShowOrders.Click, mms_Main.OpenOrders
+	Private Sub DisplayOrders(sender As Object, e As EventArgs) Handles btn_OrderManagement.Click, mms_Main.OpenOrders
 		Dim orders As New Frm_DisplayOrders()
 		orders.Show()
 		Me.Close()
@@ -54,28 +50,27 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+		If firstTime Then
+			firstTime = False
+			Return
+		End If
 
 		' TODO: Determine proper way to do this
 
-		Dim size As String
-
 		If Me.Size = WindowSizes.max Then
-			size = "b"
+			GrowToMax()
 		Else
-			size = "s"
+			BackToNormal()
 		End If
 
-		If Not firstTime Then
-			bw_ChangedSizes.RunWorkerAsync(size)
-		Else
-			firstTime = False
-		End If
+
+		'bw_ChangedSizes.RunWorkerAsync(size)
 	End Sub
 
 	Private Sub GrowToMax()
 		'Hide normal size menu buttons
 		btn_CustomerManagement.Hide()
-		btn_ShowOrders.Hide()
+		btn_OrderManagement.Hide()
 		btn_ProductManagement.Hide()
 		btn_EmailMinistry.Hide()
 
@@ -89,7 +84,7 @@ Public Class Frm_Main
 	Private Sub BackToNormal()
 		'show normal size menu buttons
 		btn_CustomerManagement.Show()
-		btn_ShowOrders.Show()
+		btn_OrderManagement.Show()
 		btn_ProductManagement.Show()
 		btn_EmailMinistry.Show()
 
