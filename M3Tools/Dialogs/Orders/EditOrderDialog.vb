@@ -3,6 +3,7 @@ Imports System.Windows.Forms
 
 Public Class EditOrderDialog
 	Private _order As Types.Order
+	Private _changed As Types.Order
 
 	Property OrderID As Integer
 
@@ -15,6 +16,15 @@ Public Class EditOrderDialog
 		End Set
 	End Property
 
+	Property UpdatedOrder As Types.Order
+		Get
+			Return _changed
+		End Get
+		Set(ByVal value As Types.Order)
+			_changed = value
+		End Set
+	End Property
+
 	Sub New(orderID As Integer)
 		' This call is required by the designer.
 		InitializeComponent()
@@ -24,6 +34,13 @@ Public Class EditOrderDialog
 	End Sub
 
 	Private Sub Finished(sender As Object, e As EventArgs) Handles OK_Button.Click
+		If Not ChangesDetected() Then
+			MessageBox.Show("No changes were detected", "No Changes", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			Return
+		End If
+
+		db_Orders.UpdateOrder(UpdatedOrder)
+
 		Me.DialogResult = DialogResult.OK
 		Me.Close()
 	End Sub
@@ -41,7 +58,7 @@ Public Class EditOrderDialog
 	Private Sub LoadOrder(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrder.DoWork
 		Try
 			CurrentOrder = db_Orders.GetOrderById(OrderID)
-		Catch
+		Catch ex As Exception
 			e.Cancel = True
 		End Try
 	End Sub
@@ -51,8 +68,11 @@ Public Class EditOrderDialog
 			Exit Sub
 		End If
 
+		gi_CustomerName.Text = CurrentOrder.Customer.Name
 		pcb_Items.SelectedValue = CurrentOrder.Product.Id
 		qnc_Quantity.Quantity = CurrentOrder.Quantity
+
+		UpdatedOrder = CurrentOrder.Clone
 	End Sub
 
 	Private Sub ItemsLoadBegin() Handles pcb_Items.LoadBegin
@@ -61,5 +81,32 @@ Public Class EditOrderDialog
 
 	Private Sub ItemsLoadEnd() Handles pcb_Items.LoadEnd
 		UseWaitCursor = False
+	End Sub
+
+	Private Function ChangesDetected() As Boolean
+		If UpdatedOrder.Quantity <> CurrentOrder.Quantity Then
+			Return True
+		End If
+
+		If UpdatedOrder.Product.Id <> CurrentOrder.Product.Id Then
+			Return True
+		End If
+
+		Return False
+	End Function
+
+	Private Sub SelectedItemChanged(newValue As Integer) Handles pcb_Items.SelectedItemChanged
+		If Not Utils.ValidID(newValue) OrElse pcb_Items.Disposing OrElse UpdatedOrder Is Nothing Then
+			Return
+		End If
+		UpdatedOrder.Product.UpdateID(newValue)
+	End Sub
+
+	Private Sub QuantityUpdated(newQuantity As Integer) Handles qnc_Quantity.QuantityChanged
+		If newQuantity <= 0 OrElse UpdatedOrder Is Nothing Then
+			Return
+		End If
+
+		UpdatedOrder.Quantity = newQuantity
 	End Sub
 End Class

@@ -151,10 +151,22 @@
     <Compile Include="Controls\MainMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Orders\CartCtrl.Designer.vb">
+      <DependentUpon>CartCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Orders\CartCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Orders\DisplayOrdersCtrl.Designer.vb">
       <DependentUpon>DisplayOrdersCtrl.vb</DependentUpon>
     </Compile>
     <Compile Include="Controls\Orders\DisplayOrdersCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Orders\OrderTotalCtrl.Designer.vb">
+      <DependentUpon>OrderTotalCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Orders\OrderTotalCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Orders\QuantityNudCtrl.Designer.vb">
@@ -169,10 +181,10 @@
     <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Products\ProductsComboBox.Designer.vb">
-      <DependentUpon>ProductsComboBox.vb</DependentUpon>
+    <Compile Include="Controls\People\Customers\CustomersComboBox.Designer.vb">
+      <DependentUpon>CustomersComboBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Products\ProductsComboBox.vb">
+    <Compile Include="Controls\People\Customers\CustomersComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogs\BulkDeletionDialog.Designer.vb">
@@ -180,6 +192,12 @@
     </Compile>
     <Compile Include="Dialogs\BulkDeletionDialog.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Products\ProductsComboBox.Designer.vb">
+      <DependentUpon>ProductsComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Products\ProductsComboBox.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogs\Customer\AddCustomerDialog.Designer.vb">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>
@@ -408,6 +426,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Types\DBEntry.vb" />
+    <Compile Include="Types\Orders\CartItem.vb" />
+    <Compile Include="Types\Orders\CartItemCollection.vb" />
     <Compile Include="Types\People\DBEntryCollection.vb" />
     <Compile Include="UpdateService.Designer.vb">
       <DependentUpon>UpdateService.vb</DependentUpon>
@@ -483,8 +503,14 @@
     <EmbeddedResource Include="Controls\MainMenuStrip.resx">
       <DependentUpon>MainMenuStrip.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Orders\CartCtrl.resx">
+      <DependentUpon>CartCtrl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Orders\DisplayOrdersCtrl.resx">
       <DependentUpon>DisplayOrdersCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Orders\OrderTotalCtrl.resx">
+      <DependentUpon>OrderTotalCtrl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Orders\QuantityNudCtrl.resx">
       <DependentUpon>QuantityNudCtrl.vb</DependentUpon>
@@ -492,6 +518,9 @@
     <EmbeddedResource Include="Controls\People\Customers\DisplayCustomersCtrl.resx">
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Customers\CustomersComboBox.resx">
+      <DependentUpon>CustomersComboBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
       <DependentUpon>ProductsComboBox.vb</DependentUpon>
@@ -528,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Orders\EditOrderDialog.resx">
       <DependentUpon>EditOrderDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Orders\PlaceOrderDialog.resx">
+      <DependentUpon>PlaceOrderDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\User\ChangePasswordDialog.resx">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
@@ -594,7 +626,14 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="My Project\DataSources\Google.Apis.Drive.v3.Data.Permission.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItem.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Listener.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Product.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.User.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -658,10 +697,13 @@
       <Version>1.4.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -5,6 +5,7 @@ Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class CustomerDatabase
+		Private ReadOnly tableName As String = "Customers"
 		'The username to use for the database connection
 		<EditorBrowsable()>
 		<SettingsBindable(True)>
@@ -122,7 +123,7 @@ Namespace Database
 			Dim customers As New DBEntryCollection(Of Customer)
 
 			Using _conn = db_Connection.Connect
-				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Customers]"
+				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
 				Using reader = _conn.ExecuteReader
 
@@ -153,7 +154,7 @@ Namespace Database
 			Using _conn = db_Connection.Connect()
 				_conn.Parameters.AddWithValue("CustomerID", customerID)
 
-				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID = @CustomerID"
+				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE CustomerID = @CustomerID"
 
 				Using reader = _conn.ExecuteReader()
 					If Not reader.Read() Then

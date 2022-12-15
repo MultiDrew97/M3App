@@ -5,12 +5,12 @@ Imports MediaMinistry.Helpers
 Public Class Frm_DisplayCustomers
 	Private Tooled As Boolean = False
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
-		mms_Main.ToggleViewItem("Customers")
 		Try
 			dcc_Customers.Reload()
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)
 		End Try
+		mms_Main.ToggleViewItem("Customers")
 	End Sub
 
 	Private Sub DisplayClosing(sender As Object, e As CancelEventArgs) Handles Me.Closing

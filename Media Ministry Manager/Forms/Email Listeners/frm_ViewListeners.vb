@@ -5,7 +5,7 @@ Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Types
 
 Public Class Frm_ViewListeners
-	Private ReadOnly ListenersTable As New CustomData.ListenersDataTable
+	Private ReadOnly ListenersTable As New SPPBC.M3Tools.DataTables.ListenersDataTable
 	Private ReadOnly FiltersTable As New DataTable
 	ReadOnly totalListeners As String = "Total Listeners: {0}"
 	Private ListenersData As ObjectModel.Collection(Of Listener)

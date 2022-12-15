@@ -171,26 +171,6 @@
     <Compile Include="Custom Objects\Controls\FileLocationField.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Data Tables\Events\CustomersRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Events\InventoryRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Events\ListenersRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Events\OrdersRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\CustomersDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\InventoryDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\ListenersDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\OrdersDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Tables\CustomersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\InventoryDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\ListenersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\OrdersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.Designer.vb">
       <DependentUpon>FileSelectionDialog.vb</DependentUpon>
     </Compile>
@@ -578,7 +558,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

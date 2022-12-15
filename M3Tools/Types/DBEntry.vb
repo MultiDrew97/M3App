@@ -1,7 +1,20 @@
 ﻿Option Strict On
+
 Namespace Types
-	Public Class DBEntry
+	Public MustInherit Class DBEntry
+		Private _id As Integer
 		Property Id As Integer
+			Get
+				Return _id
+			End Get
+			Set(value As Integer)
+				If Not Utils.ValidID(value) Then
+					Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
+				End If
+
+				_id = value
+			End Set
+		End Property
 
 		Public Sub New()
 			Me.New(-1)
@@ -10,6 +23,8 @@ Namespace Types
 		Public Sub New(id As Integer)
 			Me.Id = id
 		End Sub
+
+		Public MustOverride Sub UpdateID(newID As Integer)
 
 		Shared Operator =(ls As DBEntry, rs As DBEntry) As Boolean
 			Return ls.Id = rs.Id

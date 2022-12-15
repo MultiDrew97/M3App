@@ -194,67 +194,67 @@
 		End Sub
 
 		'Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-		'    Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-		'    Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-		'    Dim ds As MediaMinistryDataSet = New MediaMinistryDataSet()
-		'    Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-		'    any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-		'    any1.MinOccurs = New Decimal(0)
-		'    any1.MaxOccurs = Decimal.MaxValue
-		'    any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-		'    sequence.Items.Add(any1)
-		'    Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-		'    any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-		'    any2.MinOccurs = New Decimal(1)
-		'    any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-		'    sequence.Items.Add(any2)
-		'    Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-		'    attribute1.Name = "namespace"
-		'    attribute1.FixedValue = ds.Namespace
-		'    type.Attributes.Add(attribute1)
-		'    Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-		'    attribute2.Name = "tableTypeName"
-		'    attribute2.FixedValue = "InventoryDataTable"
-		'    type.Attributes.Add(attribute2)
-		'    type.Particle = sequence
-		'    Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-		'    If xs.Contains(dsSchema.TargetNamespace) Then
-		'        Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-		'        Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-		'        Try
-		'            Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-		'            dsSchema.Write(s1)
-		'            Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-		'            Do While schemas.MoveNext
-		'                schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
-		'                s2.SetLength(0)
-		'                schema.Write(s2)
-		'                If (s1.Length = s2.Length) Then
-		'                    s1.Position = 0
-		'                    s2.Position = 0
+		'	Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+		'	Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+		'	Dim ds As New MediaMinistryDataSet()
+		'	Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+		'	any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+		'	any1.MinOccurs = New Decimal(0)
+		'	any1.MaxOccurs = Decimal.MaxValue
+		'	any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+		'	sequence.Items.Add(any1)
+		'	Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+		'	any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+		'	any2.MinOccurs = New Decimal(1)
+		'	any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+		'	sequence.Items.Add(any2)
+		'	Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+		'	attribute1.Name = "namespace"
+		'	attribute1.FixedValue = ds.Namespace
+		'	type.Attributes.Add(attribute1)
+		'	Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+		'	attribute2.Name = "tableTypeName"
+		'	attribute2.FixedValue = "InventoryDataTable"
+		'	type.Attributes.Add(attribute2)
+		'	type.Particle = sequence
+		'	Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+		'	If xs.Contains(dsSchema.TargetNamespace) Then
+		'		Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+		'		Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+		'		Try
+		'			Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+		'			dsSchema.Write(s1)
+		'			Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+		'			Do While schemas.MoveNext
+		'				schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
+		'				s2.SetLength(0)
+		'				schema.Write(s2)
+		'				If (s1.Length = s2.Length) Then
+		'					s1.Position = 0
+		'					s2.Position = 0
 
-		'                    Do While ((s1.Position <> s1.Length) _
-		'                            AndAlso (s1.ReadByte = s2.ReadByte))
+		'					Do While ((s1.Position <> s1.Length) _
+		'							AndAlso (s1.ReadByte = s2.ReadByte))
 
 
-		'                    Loop
-		'                    If (s1.Position = s1.Length) Then
-		'                        Return type
-		'                    End If
-		'                End If
+		'					Loop
+		'					If (s1.Position = s1.Length) Then
+		'						Return type
+		'					End If
+		'				End If
 
-		'            Loop
-		'        Finally
-		'            If ((s1) IsNot Nothing) Then
-		'                s1.Close()
-		'            End If
-		'            If ((s2) IsNot Nothing) Then
-		'                s2.Close()
-		'            End If
-		'        End Try
-		'    End If
-		'    xs.Add(dsSchema)
-		'    Return type
+		'			Loop
+		'		Finally
+		'			If ((s1) IsNot Nothing) Then
+		'				s1.Close()
+		'			End If
+		'			If ((s2) IsNot Nothing) Then
+		'				s2.Close()
+		'			End If
+		'		End Try
+		'	End If
+		'	xs.Add(dsSchema)
+		'	Return type
 		'End Function
 	End Class
 End Namespace
