@@ -11,6 +11,7 @@ Public Class DisplayOrdersCtrl
 
 	Private ReadOnly _orders As New DataTables.OrdersDataTable()
 	Private _showCompleted As Boolean = False
+	Private Confirmed As Boolean = False
 
 	Public Property ShowCompleted As Boolean
 		Get
@@ -56,15 +57,17 @@ Public Class DisplayOrdersCtrl
 			Exit Sub
 		End If
 
-		' TODO: Determine how to display completed orders
+		Filter = If(Not ShowCompleted, "[CompletedDate] IS NULL", "")
 	End Sub
 
 	Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
-		Dim orders As New Types.DBEntryCollection(Of Types.Order)
+		Dim orders As Types.DBEntryCollection(Of Types.Order)
 		Try
-			orders = db_Orders.GetCurrentOrders()
+			orders = db_Orders.GetOrders()
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)
+			e.Cancel = True
+			Return
 		End Try
 		_orders.Clear()
 
@@ -75,7 +78,6 @@ Public Class DisplayOrdersCtrl
 		Next
 
 		' TODO: Figure out how to sort the table to sort by order date
-		RaiseEvent DataChanged()
 	End Sub
 
 	Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
@@ -87,13 +89,15 @@ Public Class DisplayOrdersCtrl
 		bw_LoadOrders.RunWorkerAsync()
 	End Sub
 
-	Private Sub OrdersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadOrders.RunWorkerCompleted
+	Private Sub OrdersLoaded() Handles bw_LoadOrders.RunWorkerCompleted
 		UseWaitCursor = False
-		'Filter = "CompletedDate != 'N/A'"
-		Refresh()
+		' TODO: Play around with this to make sure it works
+		Filter = "[CompletedDate] IS NULL"
+		RaiseEvent DataChanged()
+		dgv_Orders.Refresh()
 	End Sub
 
-	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs)
+	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Orders.CellContentClick
 		Dim orderID As Integer
 		If (e.RowIndex < 0) Then
 			Exit Sub
@@ -103,12 +107,59 @@ Public Class DisplayOrdersCtrl
 		ToolButtonsClicked(e.ColumnIndex, orderID)
 	End Sub
 
-	Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs)
-		If MessageBox.Show("Are you sure you want to cancel this order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-			Dim orderID As Integer = CInt(CType(e.Row.DataBoundItem, DataRowView)("OrderID"))
-			db_Orders.CancelOrder(orderID)
-		Else
+	Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow
+		Confirmed = MessageBox.Show("Are you sure you want to cancel this order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+
+		If Not Confirmed Or dgv_Orders.SelectedRows.Count < 1 Then
 			e.Cancel = True
+			Return
+		End If
+
+		ClearSelectedRows()
+		e.Row.Selected = True
+		RemoveSelectedRows()
+	End Sub
+	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
+		Confirmed = MessageBox.Show("Are you sure you want to cancel this order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+
+		If Not Confirmed OrElse dgv_Orders.SelectedRows.Count < 1 Then
+			Return
+		End If
+
+		RemoveSelectedRows()
+
+		' TODO: Open a dialog for bulk deletion
+		'Using bulk As New BulkDeletionDialog(dgv_CustomerTable)
+		'	bulk.ShowDialog()
+		'End Using
+	End Sub
+
+	Private Sub ClearSelectedRows()
+		For Each row As DataGridViewRow In dgv_Orders.SelectedRows
+			row.Selected = False
+		Next
+	End Sub
+
+	Private Sub RemoveSelectedRows()
+		Dim id As Integer
+		Dim failed As Integer = 0
+		Dim total As Integer = dgv_Orders.SelectedRows.Count
+
+		For Each row As DataGridViewRow In dgv_Orders.SelectedRows
+			Try
+				id = DirectCast(row.Cells.Item("CustomerID").Value, Integer)
+				db_Orders.CancelOrder(id)
+			Catch
+				failed += 1
+			End Try
+		Next
+
+		If failed > 0 Then
+			MessageBox.Show($"Failed to remove {failed} customer{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		End If
+
+		If total - failed > 0 Then
+			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
 	End Sub
 
@@ -123,18 +174,20 @@ Public Class DisplayOrdersCtrl
 			Case btn_Edit.Index
 				' Edit Order
 				Using edit As New EditOrderDialog(orderID)
-					edit.ShowDialog(Me)
+					If edit.ShowDialog(Me) = DialogResult.OK Then
+						Reload()
+					End If
 				End Using
 		End Select
 	End Sub
 
-	Private Sub ShowCompletedOrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCompletedOrdersToolStripMenuItem.Click
+	Private Sub ShowCompletedOrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ts_ShowCompleted.Click
 		ShowCompleted = True
 	End Sub
 
-	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles tbtn_New.Click
-		Using newOrder As New PlaceOrderDialog()
-			If newOrder.ShowDialog() = DialogResult.OK Then
+	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles tbtn_PlaceOrder.Click
+		Using placeOrder As New PlaceOrderDialog()
+			If placeOrder.ShowDialog = DialogResult.Yes Then
 				Reload()
 			End If
 		End Using

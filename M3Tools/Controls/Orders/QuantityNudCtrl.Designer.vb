@@ -25,13 +25,13 @@ Partial Class QuantityNudCtrl
 		Me.components = New System.ComponentModel.Container()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.lbl_Items = New System.Windows.Forms.Label()
+		Me.nud_Quantity = New System.Windows.Forms.NumericUpDown()
 		Me.bw_LoadItems = New System.ComponentModel.BackgroundWorker()
 		Me.bsItems = New System.Windows.Forms.BindingSource(Me.components)
 		Me.db_Products = New SPPBC.M3Tools.Database.ProductDatabase(Me.components)
-		Me.nud_Quantity = New System.Windows.Forms.NumericUpDown()
 		Me.TableLayoutPanel1.SuspendLayout()
-		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.nud_Quantity, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'TableLayoutPanel1
@@ -59,12 +59,6 @@ Partial Class QuantityNudCtrl
 		Me.lbl_Items.TabIndex = 0
 		Me.lbl_Items.Text = "Quantity"
 		'
-		'db_Products
-		'
-		Me.db_Products.InitialCatalog = "Media Ministry"
-		Me.db_Products.Password = "M3AppPassword2499"
-		Me.db_Products.Username = "M3App"
-		'
 		'nud_Quantity
 		'
 		Me.nud_Quantity.Dock = System.Windows.Forms.DockStyle.Fill
@@ -72,7 +66,13 @@ Partial Class QuantityNudCtrl
 		Me.nud_Quantity.Name = "nud_Quantity"
 		Me.nud_Quantity.Size = New System.Drawing.Size(94, 20)
 		Me.nud_Quantity.TabIndex = 1
-		Me.nud_Quantity.ThousandsSeparator = True
+		Me.nud_Quantity.Value = New Decimal(New Integer() {1, 0, 0, 0})
+		'
+		'db_Products
+		'
+		Me.db_Products.InitialCatalog = "Media Ministry"
+		Me.db_Products.Password = "M3AppPassword2499"
+		Me.db_Products.Username = "M3App"
 		'
 		'QuantityNudCtrl
 		'
@@ -85,8 +85,8 @@ Partial Class QuantityNudCtrl
 		Me.Size = New System.Drawing.Size(100, 42)
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.TableLayoutPanel1.PerformLayout()
-		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.nud_Quantity, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 
 	End Sub

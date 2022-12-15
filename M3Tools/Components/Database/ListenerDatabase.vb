@@ -5,6 +5,7 @@ Imports SPPBC.M3Tools.Types
 Namespace Database
 	' TODO: Revamp this area as well
 	Public NotInheritable Class ListenerDatabase
+		Private ReadOnly tableName As String = "Listeners"
 		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
@@ -89,7 +90,7 @@ Namespace Database
 			Using _cmd = db_Connection.Connect()
 				Dim command As String = $"{column} = '{value}'"
 
-				_cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[Listeners] SET {command} WHERE ListenerID = @ListenerID"
+				_cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[{tableName}] SET {command} WHERE ListenerID = @ListenerID"
 				_cmd.Parameters.AddRange(params)
 
 				_cmd.ExecuteNonQuery()
@@ -100,7 +101,7 @@ Namespace Database
 			Dim listeners As New DBEntryCollection(Of Listener)
 
 			Using _cmd = db_Connection.Connect()
-				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Listeners]"
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
@@ -140,7 +141,7 @@ Namespace Database
 						cmdText = "WHERE {column}=@ListenerID"
 				End Select
 
-				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[Listeners] {cmdText}"
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] {cmdText}"
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()

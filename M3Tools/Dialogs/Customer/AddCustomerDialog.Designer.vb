@@ -55,28 +55,31 @@
 			Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
 			Me.TableLayoutPanel1.Controls.Add(Me.btn_Cancel, 0, 0)
 			Me.TableLayoutPanel1.Controls.Add(Me.btn_Create, 1, 0)
-			Me.TableLayoutPanel1.Location = New System.Drawing.Point(494, 283)
+			Me.TableLayoutPanel1.Location = New System.Drawing.Point(988, 544)
+			Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 			Me.TableLayoutPanel1.RowCount = 1
 			Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-			Me.TableLayoutPanel1.Size = New System.Drawing.Size(146, 29)
+			Me.TableLayoutPanel1.Size = New System.Drawing.Size(292, 56)
 			Me.TableLayoutPanel1.TabIndex = 0
 			'
 			'btn_Cancel
 			'
 			Me.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None
-			Me.btn_Cancel.Location = New System.Drawing.Point(3, 3)
+			Me.btn_Cancel.Location = New System.Drawing.Point(6, 6)
+			Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.btn_Cancel.Name = "btn_Cancel"
-			Me.btn_Cancel.Size = New System.Drawing.Size(67, 23)
+			Me.btn_Cancel.Size = New System.Drawing.Size(134, 44)
 			Me.btn_Cancel.TabIndex = 0
 			Me.btn_Cancel.Text = "Cancel"
 			'
 			'btn_Create
 			'
 			Me.btn_Create.Anchor = System.Windows.Forms.AnchorStyles.None
-			Me.btn_Create.Location = New System.Drawing.Point(76, 3)
+			Me.btn_Create.Location = New System.Drawing.Point(152, 6)
+			Me.btn_Create.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.btn_Create.Name = "btn_Create"
-			Me.btn_Create.Size = New System.Drawing.Size(67, 23)
+			Me.btn_Create.Size = New System.Drawing.Size(134, 44)
 			Me.btn_Create.TabIndex = 1
 			Me.btn_Create.Text = "Next"
 			'
@@ -88,16 +91,17 @@
 			'
 			Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
 			Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tss_Feedback})
-			Me.StatusStrip1.Location = New System.Drawing.Point(0, 315)
+			Me.StatusStrip1.Location = New System.Drawing.Point(0, 606)
 			Me.StatusStrip1.Name = "StatusStrip1"
-			Me.StatusStrip1.Size = New System.Drawing.Size(652, 22)
+			Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(2, 0, 28, 0)
+			Me.StatusStrip1.Size = New System.Drawing.Size(1304, 42)
 			Me.StatusStrip1.TabIndex = 6
 			Me.StatusStrip1.Text = "StatusStrip1"
 			'
 			'tss_Feedback
 			'
 			Me.tss_Feedback.Name = "tss_Feedback"
-			Me.tss_Feedback.Size = New System.Drawing.Size(271, 17)
+			Me.tss_Feedback.Size = New System.Drawing.Size(551, 32)
 			Me.tss_Feedback.Text = "Please enter the infomation for the new customer."
 			'
 			'tc_Creation
@@ -106,9 +110,10 @@
 			Me.tc_Creation.Controls.Add(Me.tp_Address)
 			Me.tc_Creation.Dock = System.Windows.Forms.DockStyle.Top
 			Me.tc_Creation.Location = New System.Drawing.Point(0, 0)
+			Me.tc_Creation.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.tc_Creation.Name = "tc_Creation"
 			Me.tc_Creation.SelectedIndex = 0
-			Me.tc_Creation.Size = New System.Drawing.Size(652, 277)
+			Me.tc_Creation.Size = New System.Drawing.Size(1304, 533)
 			Me.tc_Creation.TabIndex = 7
 			'
 			'tp_Basic
@@ -118,10 +123,11 @@
 			Me.tp_Basic.Controls.Add(Me.gi_LastName)
 			Me.tp_Basic.Controls.Add(Me.pn_PhoneNumber)
 			Me.tp_Basic.Controls.Add(Me.gi_EmailAddress)
-			Me.tp_Basic.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Basic.Location = New System.Drawing.Point(8, 39)
+			Me.tp_Basic.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.tp_Basic.Name = "tp_Basic"
-			Me.tp_Basic.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Basic.Size = New System.Drawing.Size(644, 251)
+			Me.tp_Basic.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+			Me.tp_Basic.Size = New System.Drawing.Size(1288, 486)
 			Me.tp_Basic.TabIndex = 0
 			Me.tp_Basic.Text = "Basics"
 			'
@@ -129,10 +135,11 @@
 			'
 			Me.gi_FirstName.AutoSize = True
 			Me.gi_FirstName.LabelText = "* First Name"
-			Me.gi_FirstName.Location = New System.Drawing.Point(85, 61)
+			Me.gi_FirstName.Location = New System.Drawing.Point(170, 117)
+			Me.gi_FirstName.Margin = New System.Windows.Forms.Padding(12, 12, 12, 12)
 			Me.gi_FirstName.Mask = ""
 			Me.gi_FirstName.Name = "gi_FirstName"
-			Me.gi_FirstName.Size = New System.Drawing.Size(244, 62)
+			Me.gi_FirstName.Size = New System.Drawing.Size(488, 119)
 			Me.gi_FirstName.TabIndex = 1
 			Me.gi_FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
 			Me.gi_FirstName.UseSystemPasswordChar = False
@@ -141,10 +148,11 @@
 			'
 			Me.gi_LastName.AutoSize = True
 			Me.gi_LastName.LabelText = "* Last Name"
-			Me.gi_LastName.Location = New System.Drawing.Point(346, 61)
+			Me.gi_LastName.Location = New System.Drawing.Point(692, 117)
+			Me.gi_LastName.Margin = New System.Windows.Forms.Padding(12, 12, 12, 12)
 			Me.gi_LastName.Mask = ""
 			Me.gi_LastName.Name = "gi_LastName"
-			Me.gi_LastName.Size = New System.Drawing.Size(244, 62)
+			Me.gi_LastName.Size = New System.Drawing.Size(488, 119)
 			Me.gi_LastName.TabIndex = 2
 			Me.gi_LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
 			Me.gi_LastName.UseSystemPasswordChar = False
@@ -153,20 +161,22 @@
 			'
 			Me.pn_PhoneNumber.AutoSize = True
 			Me.pn_PhoneNumber.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-			Me.pn_PhoneNumber.Location = New System.Drawing.Point(123, 129)
+			Me.pn_PhoneNumber.Location = New System.Drawing.Point(246, 248)
+			Me.pn_PhoneNumber.Margin = New System.Windows.Forms.Padding(12, 12, 12, 12)
 			Me.pn_PhoneNumber.Name = "pn_PhoneNumber"
 			Me.pn_PhoneNumber.PhoneNumber = "(   )    -"
-			Me.pn_PhoneNumber.Size = New System.Drawing.Size(107, 55)
+			Me.pn_PhoneNumber.Size = New System.Drawing.Size(231, 104)
 			Me.pn_PhoneNumber.TabIndex = 3
 			'
 			'gi_EmailAddress
 			'
 			Me.gi_EmailAddress.AutoSize = True
 			Me.gi_EmailAddress.LabelText = "Email Address"
-			Me.gi_EmailAddress.Location = New System.Drawing.Point(267, 129)
+			Me.gi_EmailAddress.Location = New System.Drawing.Point(534, 248)
+			Me.gi_EmailAddress.Margin = New System.Windows.Forms.Padding(12, 12, 12, 12)
 			Me.gi_EmailAddress.Mask = ""
 			Me.gi_EmailAddress.Name = "gi_EmailAddress"
-			Me.gi_EmailAddress.Size = New System.Drawing.Size(258, 40)
+			Me.gi_EmailAddress.Size = New System.Drawing.Size(516, 77)
 			Me.gi_EmailAddress.TabIndex = 4
 			Me.gi_EmailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
 			Me.gi_EmailAddress.UseSystemPasswordChar = False
@@ -174,10 +184,11 @@
 			'tp_Address
 			'
 			Me.tp_Address.Controls.Add(Me.af_Address)
-			Me.tp_Address.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Address.Location = New System.Drawing.Point(8, 39)
+			Me.tp_Address.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.tp_Address.Name = "tp_Address"
-			Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Address.Size = New System.Drawing.Size(644, 251)
+			Me.tp_Address.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+			Me.tp_Address.Size = New System.Drawing.Size(1288, 486)
 			Me.tp_Address.TabIndex = 1
 			Me.tp_Address.Text = "Address"
 			Me.tp_Address.UseVisualStyleBackColor = True
@@ -189,10 +200,11 @@
 			Me.af_Address.BackColor = System.Drawing.Color.LightGray
 			Me.af_Address.City = ""
 			Me.af_Address.Dock = System.Windows.Forms.DockStyle.Fill
-			Me.af_Address.Location = New System.Drawing.Point(3, 3)
+			Me.af_Address.Location = New System.Drawing.Point(6, 6)
+			Me.af_Address.Margin = New System.Windows.Forms.Padding(12, 12, 12, 12)
 			Me.af_Address.Name = "af_Address"
-			Me.af_Address.Size = New System.Drawing.Size(638, 245)
-			Me.af_Address.State = Nothing
+			Me.af_Address.Size = New System.Drawing.Size(1276, 474)
+			Me.af_Address.State = ""
 			Me.af_Address.Street = ""
 			Me.af_Address.TabIndex = 5
 			Me.af_Address.ZipCode = ""
@@ -206,13 +218,14 @@
 			'AddCustomerDialog
 			'
 			Me.AcceptButton = Me.btn_Create
-			Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+			Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
 			Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-			Me.ClientSize = New System.Drawing.Size(652, 337)
+			Me.ClientSize = New System.Drawing.Size(1304, 648)
 			Me.Controls.Add(Me.tc_Creation)
 			Me.Controls.Add(Me.StatusStrip1)
 			Me.Controls.Add(Me.TableLayoutPanel1)
 			Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+			Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
 			Me.MaximizeBox = False
 			Me.MinimizeBox = False
 			Me.Name = "AddCustomerDialog"

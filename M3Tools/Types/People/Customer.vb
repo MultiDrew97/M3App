@@ -1,8 +1,8 @@
 ﻿Option Strict On
 
 Namespace Types
-    Public Class Customer
-        Inherits Person
+	Public Class Customer
+		Inherits Person
 		'Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
 		Private __joined As Date
 
@@ -26,39 +26,44 @@ Namespace Types
 		End Property
 
 		Public Sub New()
-			Me.New(-1, "John", "Doe", "123 Main St", "City", "ST", "12345", "123-456-7890", "johndoe@domain.ext")
+			Me.New(-1, "John", "Doe", "123 Main St", "City", "ST", "00000", "123-456-7890", "johndoe@domain.ext")
+		End Sub
+
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, join As Date)
+			Me.New(id, fName, lName, Nothing, Nothing, email, join)
 		End Sub
 
 		Public Sub New(id As Integer, fName As String, lName As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As Date = Nothing)
-			Me.New(id, $"{fName} {lName}", Address.Parse(street, city, state, zip), phone, email, join)
+			Me.New(id, $"{fName} {lName}", New Address(street, city, state, zip), phone, email, join)
 		End Sub
 
 		Public Sub New(id As Integer, name As String, street As String, city As String, state As String, zip As String, phone As String, email As String, Optional join As Date = Nothing)
-			Me.New(id, name, Address.parse(street, city, state, zip), phone, email, join)
+			Me.New(id, name, New Address(street, city, state, zip), phone, email, join)
 		End Sub
 
 		Public Sub New(id As Integer, fName As String, lName As String, address As Address, phone As String, email As String, Optional join As Date = Nothing)
 			Me.New(id, $"{fName} {lName}", address, phone, email, join)
 		End Sub
 
-		Public Sub New(id As Integer, name As String, addr As Address, phone As String, email As String, Optional join As Date = Nothing)
+		Public Sub New(id As Integer, name As String, address As Address, phone As String, email As String, Optional join As Date = Nothing)
 			MyBase.New(id, name, email)
 			PhoneNumber = phone
-			Address = addr
+			Me.Address = address
 			Joined = join
 		End Sub
 
 		Shared Function Parse(ParamArray arr As Object()) As Customer
-			' TODO: Make this way better
-			If Not arr.Any() Then
-				Return Nothing
-			End If
-
 			Return New Customer(CInt(arr(0)), CStr(arr(1)), CStr(arr(2)), CStr(arr(3)), CStr(arr(4)), CStr(arr(5)), CStr(arr(6)), CStr(arr(7)), CStr(arr(8)), CDate(arr(9)))
 		End Function
 
 		Public Overrides Function ToString() As String
-			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Email, Address.ToString, PhoneNumber)
+			'Name (Email)
+			'Street
+			'City, ST ZipCode
+			'Phone Number
+			Return $"{Name} ({Email}){vbCrLf}
+					{Address}{vbCrLf}
+					{PhoneNumber}"
 		End Function
 
 		Public Function Display() As String
@@ -68,5 +73,17 @@ Namespace Types
 			'Phone Number
 			Return $"{Id}) {Name} (e: {Email} p: {PhoneNumber}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
 		End Function
+
+		Public Overrides Sub UpdateID(newID As Integer)
+			If newID = Id Then
+				Return
+			End If
+
+			Using conn As New Database.ProductDatabase
+				Dim newProduct = conn.GetProduct(newID)
+
+				' TODO: Finish implementing updates
+			End Using
+		End Sub
 	End Class
 End Namespace

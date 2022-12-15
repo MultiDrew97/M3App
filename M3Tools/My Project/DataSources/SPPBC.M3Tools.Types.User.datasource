@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="Permission" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Google.Apis.Drive.v3.Data.Permission, Google.Apis.Drive.v3, Version=1.55.0.2502, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab</TypeInfo>
+<GenericObjectDataSource DisplayName="User" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>SPPBC.M3Tools.Types.User, SPPBC.M3Tools, Version=1.0.410.2201, Culture=neutral, PublicKeyToken=4f5539a43069f3f0</TypeInfo>
 </GenericObjectDataSource>

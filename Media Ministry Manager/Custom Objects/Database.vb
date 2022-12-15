@@ -289,7 +289,7 @@ Public Class Database
 				quantity = myReader.GetInt32(6)
 				orderTotal = CDec(myReader.GetSqlMoney(7))
 				orderDate = myReader.GetDateTime(8)
-				orders.Add(New Order(orderID, customerID, customerName, itemID, itemName, quantity, orderTotal, orderDate))
+				'orders.Add(New Order(orderID, customerID, customerName, itemID, itemName, quantity, orderTotal, orderDate))
 			Loop
 		End Using
 
@@ -331,7 +331,7 @@ Public Class Database
 
 		Using myReader = myCmd.ExecuteReader()
 			Do While myReader.Read()
-				orders.Add(New Order(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
+				'orders.Add(New Order(myReader.GetInt32(0), myReader.GetInt32(1), {myReader.GetString(2), myReader.GetString(3)}, myReader.GetInt32(4), myReader.GetString(5), myReader.GetInt32(6), CDec(myReader.GetSqlMoney(7)), myReader.GetDateTime(8), myReader.GetDateTime(9)))
 			Loop
 		End Using
 
