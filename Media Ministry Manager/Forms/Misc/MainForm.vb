@@ -11,7 +11,7 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	Private Sub PlaceOrder(sender As Object, e As EventArgs) Handles btn_placeOrder.Click
+	Private Sub PlaceOrder(sender As Object, e As EventArgs)
 		PlaceOrderDialog.ShowDialog(Me)
 	End Sub
 
@@ -75,7 +75,6 @@ Public Class Frm_Main
 	Private Sub GrowToMax()
 		'Hide normal size menu buttons
 		btn_CustomerManagement.Hide()
-		btn_placeOrder.Hide()
 		btn_ShowOrders.Hide()
 		btn_ProductManagement.Hide()
 		btn_EmailMinistry.Hide()
@@ -90,7 +89,6 @@ Public Class Frm_Main
 	Private Sub BackToNormal()
 		'show normal size menu buttons
 		btn_CustomerManagement.Show()
-		btn_placeOrder.Show()
 		btn_ShowOrders.Show()
 		btn_ProductManagement.Show()
 		btn_EmailMinistry.Show()
