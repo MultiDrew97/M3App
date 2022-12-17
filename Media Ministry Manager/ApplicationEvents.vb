@@ -17,9 +17,9 @@ Namespace My
 		Protected Overrides Function OnInitialize(commandLineArgs As ReadOnlyCollection(Of String)) As Boolean
 			Me.MinimumSplashScreenDisplayTime = 5000
 			' TODO: Remove before publish
-#If DEBUG Then
-			Settings.KeepLoggedIn = True
-#End If
+			'#If DEBUG Then
+			'			Settings.KeepLoggedIn = True
+			'#End If
 
 			' Bring in the settings from previous version
 			If Settings.UpgradeRequired Then

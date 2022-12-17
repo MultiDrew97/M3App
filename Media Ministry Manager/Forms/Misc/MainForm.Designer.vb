@@ -39,7 +39,7 @@ Partial Class Frm_Main
 		'btn_OrderManagement
 		'
 		Me.btn_OrderManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_OrderManagement.Location = New System.Drawing.Point(85, 106)
+		Me.btn_OrderManagement.Location = New System.Drawing.Point(24, 95)
 		Me.btn_OrderManagement.Name = "btn_OrderManagement"
 		Me.btn_OrderManagement.Size = New System.Drawing.Size(226, 43)
 		Me.btn_OrderManagement.TabIndex = 3
@@ -49,7 +49,7 @@ Partial Class Frm_Main
 		'btn_ProductManagement
 		'
 		Me.btn_ProductManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_ProductManagement.Location = New System.Drawing.Point(85, 171)
+		Me.btn_ProductManagement.Location = New System.Drawing.Point(24, 160)
 		Me.btn_ProductManagement.Name = "btn_ProductManagement"
 		Me.btn_ProductManagement.Size = New System.Drawing.Size(226, 43)
 		Me.btn_ProductManagement.TabIndex = 4
@@ -59,7 +59,7 @@ Partial Class Frm_Main
 		'btn_CustomerManagement
 		'
 		Me.btn_CustomerManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btn_CustomerManagement.Location = New System.Drawing.Point(85, 38)
+		Me.btn_CustomerManagement.Location = New System.Drawing.Point(24, 27)
 		Me.btn_CustomerManagement.Name = "btn_CustomerManagement"
 		Me.btn_CustomerManagement.Size = New System.Drawing.Size(226, 43)
 		Me.btn_CustomerManagement.TabIndex = 1
@@ -71,7 +71,7 @@ Partial Class Frm_Main
 		Me.ss_Queries.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tss_Feedback})
 		Me.ss_Queries.Location = New System.Drawing.Point(0, 300)
 		Me.ss_Queries.Name = "ss_Queries"
-		Me.ss_Queries.Size = New System.Drawing.Size(405, 22)
+		Me.ss_Queries.Size = New System.Drawing.Size(272, 22)
 		Me.ss_Queries.TabIndex = 0
 		'
 		'tss_Feedback
@@ -86,7 +86,7 @@ Partial Class Frm_Main
 		'btn_EmailMinistry
 		'
 		Me.btn_EmailMinistry.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
-		Me.btn_EmailMinistry.Location = New System.Drawing.Point(85, 232)
+		Me.btn_EmailMinistry.Location = New System.Drawing.Point(24, 221)
 		Me.btn_EmailMinistry.Name = "btn_EmailMinistry"
 		Me.btn_EmailMinistry.Size = New System.Drawing.Size(226, 43)
 		Me.btn_EmailMinistry.TabIndex = 5
@@ -107,14 +107,14 @@ Partial Class Frm_Main
 		'
 		Me.mms_Main.Location = New System.Drawing.Point(0, 0)
 		Me.mms_Main.Name = "mms_Main"
-		Me.mms_Main.Size = New System.Drawing.Size(405, 24)
+		Me.mms_Main.Size = New System.Drawing.Size(272, 24)
 		Me.mms_Main.TabIndex = 7
 		Me.mms_Main.Text = "Tools"
 		'
 		'wb_Updater
 		'
 		Me.wb_Updater.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.wb_Updater.Location = New System.Drawing.Point(355, 277)
+		Me.wb_Updater.Location = New System.Drawing.Point(222, 277)
 		Me.wb_Updater.MinimumSize = New System.Drawing.Size(20, 20)
 		Me.wb_Updater.Name = "wb_Updater"
 		Me.wb_Updater.Size = New System.Drawing.Size(38, 20)
@@ -127,7 +127,7 @@ Partial Class Frm_Main
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.ClientSize = New System.Drawing.Size(405, 322)
+		Me.ClientSize = New System.Drawing.Size(272, 322)
 		Me.Controls.Add(Me.wb_Updater)
 		Me.Controls.Add(Me.mms_Main)
 		Me.Controls.Add(Me.btn_EmailMinistry)

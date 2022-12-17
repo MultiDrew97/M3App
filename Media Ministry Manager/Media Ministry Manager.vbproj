@@ -226,6 +226,12 @@
     <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Email Listeners\EmailListeners.Designer.vb">
+      <DependentUpon>EmailListeners.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Email Listeners\EmailListeners.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Email Listeners\frm_ViewListeners.Designer.vb">
       <DependentUpon>frm_ViewListeners.vb</DependentUpon>
     </Compile>
@@ -374,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.resx">
       <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Email Listeners\EmailListeners.resx">
+      <DependentUpon>EmailListeners.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Email Listeners\frm_ViewListeners.resx">
       <DependentUpon>frm_ViewListeners.vb</DependentUpon>
@@ -558,7 +567,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
+      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

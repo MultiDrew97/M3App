@@ -25,7 +25,7 @@ Partial Class ReciepientSelectionDialog
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.lvp_Listeners = New SPPBC.M3Tools.ListenerViewPanel()
+        Me.lvp_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,5 +94,5 @@ Partial Class ReciepientSelectionDialog
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 	Friend WithEvents OK_Button As System.Windows.Forms.Button
 	Friend WithEvents Cancel_Button As System.Windows.Forms.Button
-	Friend WithEvents lvp_Listeners As ListenerViewPanel
+	Friend WithEvents lvp_Listeners As DisplayListenersCtrl
 End Class
