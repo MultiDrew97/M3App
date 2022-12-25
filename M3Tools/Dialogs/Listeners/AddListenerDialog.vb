@@ -1,15 +1,55 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Text.RegularExpressions
+Imports System.Windows.Forms
 
-Public Class AddListenerDialog
+Namespace Dialogs
+	Public Class AddListenerDialog
 
-	Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-		Me.DialogResult = System.Windows.Forms.DialogResult.OK
-		Me.Close()
-	End Sub
+		Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
 
-	Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-		Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-		Me.Close()
-	End Sub
+		Public Property ListenerName As String
+			Get
+				Return gi_Name.Text
+			End Get
+			Set(value As String)
+				gi_Name.Text = value
+			End Set
+		End Property
 
-End Class
+		Public Property ListenerEmail As String
+			Get
+				Return gi_Email.Text
+			End Get
+			Set(value As String)
+				gi_Email.Text = value
+			End Set
+		End Property
+
+		Private Sub AddListener(sender As Object, e As EventArgs) Handles btn_Create.Click
+			If Not ValidInputs() Then
+				Return
+			End If
+
+			db_Listeners.AddListener(Me.ListenerName, Me.ListenerEmail)
+			RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEvent(Me.ListenerName, Me.ListenerEmail))
+			Me.DialogResult = DialogResult.OK
+			Me.Close()
+		End Sub
+
+		Private Sub Cancel(sender As Object, e As EventArgs) Handles btn_Cancel.Click
+			Me.DialogResult = DialogResult.Cancel
+			Me.Close()
+		End Sub
+
+		Private Function ValidInputs() As Boolean
+			If String.IsNullOrWhiteSpace(Me.ListenerName) Then
+				Return False
+			End If
+
+			If String.IsNullOrWhiteSpace(Me.ListenerEmail) OrElse Not Regex.IsMatch(Me.ListenerEmail, My.Resources.EmailRegex2) Then
+				Return False
+			End If
+
+			Return True
+		End Function
+	End Class
+End Namespace

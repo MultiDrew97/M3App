@@ -277,6 +277,7 @@
     <Compile Include="Dialogs\Listeners\ImportListenersDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\Listeners\ListenerEvents.vb" />
     <Compile Include="Dialogs\LoadScreenDialog.Designer.vb">
       <DependentUpon>LoadScreenDialog.vb</DependentUpon>
     </Compile>
@@ -573,6 +574,9 @@
     <EmbeddedResource Include="Dialogs\Listeners\EditListenerDialog.resx">
       <DependentUpon>EditListenerDialog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Listeners\AddListenerDialog.resx">
+      <DependentUpon>AddListenerDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Listeners\ImportListenersDialog.resx">
       <DependentUpon>ImportListenersDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -731,7 +735,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
