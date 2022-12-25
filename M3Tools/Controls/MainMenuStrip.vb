@@ -69,13 +69,13 @@ Public Class MainMenuStrip
 	End Sub
 
 	Private Sub CreateProduct(sender As Object, e As EventArgs) Handles tsmi_NewProduct.Click
-		Using newProduct As New AddProductDialog()
+		Using newProduct As New Dialogs.AddProductDialog()
 			newProduct.ShowDialog()
 		End Using
 	End Sub
 
 	Private Sub CreateListener(sender As Object, e As EventArgs) Handles tsmi_NewListeners.Click
-		Using newListener As New AddListenerDialog()
+		Using newListener As New Dialogs.AddListenerDialog()
 			newListener.ShowDialog()
 		End Using
 	End Sub
