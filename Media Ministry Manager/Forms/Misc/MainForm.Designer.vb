@@ -48,6 +48,7 @@ Partial Class Frm_Main
 		'
 		'btn_ProductManagement
 		'
+		Me.btn_ProductManagement.Enabled = False
 		Me.btn_ProductManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.btn_ProductManagement.Location = New System.Drawing.Point(24, 160)
 		Me.btn_ProductManagement.Name = "btn_ProductManagement"

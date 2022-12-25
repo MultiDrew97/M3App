@@ -111,6 +111,10 @@ Namespace Database
 		End Sub
 
 		Public Function Login(username As String, password As String) As User
+			If username = String.Empty OrElse password = String.Empty Then
+				Throw New ArgumentException("No credentials present")
+			End If
+
 			Return Login(New SqlParameter("Username", username), New SqlParameter("Password", password))
 		End Function
 
