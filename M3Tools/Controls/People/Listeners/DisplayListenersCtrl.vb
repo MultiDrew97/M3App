@@ -1,10 +1,15 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class DisplayListenersCtrl
 	Private ReadOnly dgcPrefix As String = "dgc_"
 	Private Confirmed As Boolean = False
 	Private ReadOnly _listeners As New DataTables.ListenersDataTable
+	Private WithEvents _import As Dialogs.ImportListenersDialog
+	Private WithEvents _add As Dialogs.AddListenerDialog
+
+	Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
 
 	Property Filter As String
 		Get
@@ -136,11 +141,11 @@ Public Class DisplayListenersCtrl
 		Next
 
 		If failed > 0 Then
-			MessageBox.Show($"Failed to remove {failed} customer{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			MessageBox.Show($"Failed to remove {failed} listener{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
 
 		If total - failed > 0 Then
-			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			MessageBox.Show($"Successfully removed {total - failed} listener{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
 
 		Reload()
@@ -197,7 +202,7 @@ Public Class DisplayListenersCtrl
 	End Sub
 
 	Private Sub AddListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
-		Using add As New AddListenerDialog
+		Using add = New Dialogs.AddListenerDialog
 			If add.ShowDialog() = DialogResult.OK Then
 				Reload()
 			End If
@@ -209,8 +214,7 @@ Public Class DisplayListenersCtrl
 	End Sub
 
 	Private Sub ImportListeners(sender As Object, e As EventArgs) Handles tbtn_Import.Click
-		' TODO: Open the import listeners dialog box then refresh the list after importing
-		Using import As New Dialogs.ImportListenersDialog()
+		Using import = New Dialogs.ImportListenersDialog()
 			import.ShowDialog()
 
 			If import.DialogResult = DialogResult.OK Then
@@ -233,5 +237,9 @@ Public Class DisplayListenersCtrl
 				ClearSelectedRows()
 				RemoveListener(sender, New DataGridViewRowCancelEventArgs(row))
 		End Select
+	End Sub
+
+	Private Sub NewListenerAdded(sender As Object, e As ListenerAddedEvent) Handles _add.ListenerAdded, _import.ListenerAdded
+		RaiseEvent ListenerAdded(Me, e)
 	End Sub
 End Class

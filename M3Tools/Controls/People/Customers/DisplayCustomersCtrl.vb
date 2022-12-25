@@ -138,7 +138,7 @@ Public Class DisplayCustomersCtrl
 		End If
 
 		If total - failed > 0 Then
-			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
 
 		Reload()

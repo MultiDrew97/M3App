@@ -5,7 +5,7 @@ Imports Microsoft.VisualBasic.FileIO
 
 Namespace Dialogs
 	Public Class ImportListenersDialog
-
+		Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
 		Private ReadOnly newListenersList As New Collection(Of NewListener)
 
 		Private Sub BeginImport(sender As Object, e As EventArgs) Handles btn_Import.Click
@@ -85,6 +85,7 @@ Namespace Dialogs
 			For Each listener As NewListener In list
 				Try
 					db_Listeners.AddListener(listener.Name, listener.Email)
+					RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEvent(listener.Name, listener.Email))
 					bsListeners.Remove(listener)
 				Catch ex As Exception
 					Console.Error.WriteLine(ex.Message)

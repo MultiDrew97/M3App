@@ -43,10 +43,6 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Sub AddListener(listener As Listener)
-			AddListener(listener.Name, listener.Email)
-		End Sub
-
 		Public Sub AddListener(name As String, email As String)
 			AddListener(New SqlParameter("Name", name), New SqlParameter("Email", email))
 		End Sub
