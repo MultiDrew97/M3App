@@ -147,10 +147,10 @@ Public Class Frm_Login
 
 			If message.ToLower().Contains("username") Then
 				lf_Login.Clear()
-				lf_Login.UsernameField.Focus()
+				lf_Login.Focus()
 			Else
-				lf_Login.PasswordField.Clear()
-				lf_Login.PasswordField.Focus()
+				lf_Login.ClearPassword()
+				lf_Login.Focus("p")
 			End If
 
 			'lsd_LoadScreen.Image = My.Resources.ErrorImage

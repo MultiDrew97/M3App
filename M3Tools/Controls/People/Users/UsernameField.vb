@@ -70,15 +70,16 @@ Public Class UsernameField
         RaiseEvent UsernameLostFocus(Me, e)
     End Sub
 
-    ''' <summary>
-    ''' Sets input focus to the username text box
-    ''' </summary>
-    ''' <returns>true if the input focus request was successful; otherwise false</returns>
-    Shadows Function Focus() As Boolean
-        Return txt_Username.Focus()
-    End Function
+	''' <summary>
+	''' Sets input focus to the username text box
+	''' </summary>
+	''' <returns>true if the input focus request was successful; otherwise false</returns>
+	Shadows Function Focus() As Boolean
+		txt_Username.Select()
+		Return txt_Username.Focus()
+	End Function
 
-    Private Sub Txt_Username_TextChanged(sender As Object, e As EventArgs) Handles txt_Username.TextChanged
+	Private Sub Txt_Username_TextChanged(sender As Object, e As EventArgs) Handles txt_Username.TextChanged
         RaiseEvent UsernameTextChanged(Me, e)
     End Sub
 End Class

@@ -38,14 +38,22 @@
 	End Property
 
 	''' <summary>
-	''' Clears all text from username and password fields
+	''' Clears all text from the username and password fields
 	''' </summary>
 	Public Sub Clear()
-        uf_Username.Clear()
-        pf_Password.Clear()
-    End Sub
+		ClearUsername()
+		ClearPassword()
+	End Sub
 
-	Public Shadows Function Focus(field As String) As Boolean
+	Public Sub ClearUsername()
+		uf_Username.Clear()
+	End Sub
+
+	Public Sub ClearPassword()
+		pf_Password.Clear()
+	End Sub
+
+	Public Shadows Function Focus(Optional field As String = "u") As Boolean
 		Select Case field
 			Case "u"
 				Return UsernameField.Focus()

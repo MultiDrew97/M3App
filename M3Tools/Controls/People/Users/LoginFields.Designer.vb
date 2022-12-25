@@ -44,11 +44,11 @@ Partial Class LoginFields
         '
         Me.spc_UsernamePassword.Panel1.Controls.Add(Me.uf_Username)
         Me.spc_UsernamePassword.Panel1MinSize = 50
-        '
-        'spc_UsernamePassword.Panel2
-        '
-        Me.spc_UsernamePassword.Panel2.Controls.Add(Me.PasswordField)
-        Me.spc_UsernamePassword.Panel2MinSize = 50
+		'
+		'spc_UsernamePassword.Panel2
+		'
+		Me.spc_UsernamePassword.Panel2.Controls.Add(Me.pf_Password)
+		Me.spc_UsernamePassword.Panel2MinSize = 50
         Me.spc_UsernamePassword.Size = New System.Drawing.Size(300, 110)
         Me.spc_UsernamePassword.SplitterWidth = 1
         Me.spc_UsernamePassword.TabIndex = 1
@@ -65,22 +65,22 @@ Partial Class LoginFields
         Me.uf_Username.Size = New System.Drawing.Size(300, 50)
         Me.uf_Username.TabIndex = 0
         Me.uf_Username.Username = ""
-        '
-        'pf_Password
-        '
-        Me.PasswordField.AutoSize = True
-        Me.PasswordField.BackColor = System.Drawing.Color.Transparent
-        Me.PasswordField.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PasswordField.Location = New System.Drawing.Point(0, 0)
-        Me.PasswordField.MinimumSize = New System.Drawing.Size(300, 50)
-        Me.PasswordField.Name = "pf_Password"
-        Me.PasswordField.Password = ""
-        Me.PasswordField.Size = New System.Drawing.Size(300, 59)
-        Me.PasswordField.TabIndex = 0
-        '
-        'LoginFields
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+		'
+		'pf_Password
+		'
+		Me.pf_Password.AutoSize = True
+		Me.pf_Password.BackColor = System.Drawing.Color.Transparent
+		Me.pf_Password.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.pf_Password.Location = New System.Drawing.Point(0, 0)
+		Me.pf_Password.MinimumSize = New System.Drawing.Size(300, 50)
+		Me.pf_Password.Name = "pf_Password"
+		Me.pf_Password.Password = ""
+		Me.pf_Password.Size = New System.Drawing.Size(300, 59)
+		Me.pf_Password.TabIndex = 0
+		'
+		'LoginFields
+		'
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.BackColor = System.Drawing.SystemColors.Control
