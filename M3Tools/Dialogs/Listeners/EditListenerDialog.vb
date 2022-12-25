@@ -6,7 +6,7 @@ Namespace Dialogs
 		Private _listener As Types.Listener
 		Private _newInfo As Types.Listener
 
-		Private Property Listener As Types.Listener
+		Public Property Listener As Types.Listener
 			Get
 				Return _listener
 			End Get

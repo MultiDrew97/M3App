@@ -10,8 +10,6 @@ Public Class LoadScreenDialog
 		Get
 			If LoadScreen Is Nothing OrElse LoadScreen.IsDisposed Then
 				LoadScreen = New LoadingScreen
-				'ElseIf _loadScreen.IsDisposed Then
-				'	_loadScreen = New LoadingScreen
 			End If
 
 			Return LoadScreen

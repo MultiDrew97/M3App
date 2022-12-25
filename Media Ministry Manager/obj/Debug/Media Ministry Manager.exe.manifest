@@ -343,14 +343,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="1026048">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="1028096">
       <assemblyIdentity name="SPPBC.M3Tools" version="1.0.410.2201" publicKeyToken="4F5539A43069F3F0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>R4H+W15XP+aIBhJ5CAGxB2d/YmEUIXwRYPdvj7pyGMo=</dsig:DigestValue>
+        <dsig:DigestValue>RYxAJ6kHdbBBmHRtuXvZ0BKaDRGOigQkFXz8fdmvtHc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -6,8 +6,8 @@ Public Class DisplayListenersCtrl
 	Private ReadOnly dgcPrefix As String = "dgc_"
 	Private Confirmed As Boolean = False
 	Private ReadOnly _listeners As New DataTables.ListenersDataTable
-	Private WithEvents _import As Dialogs.ImportListenersDialog
-	Private WithEvents _add As Dialogs.AddListenerDialog
+	Private WithEvents ImportDialog As Dialogs.ImportListenersDialog
+	Private WithEvents AddDialog As Dialogs.AddListenerDialog
 
 	Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
 
@@ -229,10 +229,13 @@ Public Class DisplayListenersCtrl
 		End If
 
 		Dim row = dgv_Listeners.Rows(e.RowIndex)
+		Dim cRow = CType(row.DataBoundItem, System.Data.DataRowView)
+		Dim listenerRow = CType(cRow.Row, DataTables.ListenersDataRow)
+		Dim listener = Types.Listener.Parse(listenerRow.ItemArray)
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.DisplayIndex
-				Using edit As New Dialogs.EditListenerDialog()
+				Using edit As New Dialogs.EditListenerDialog() With {.Listener = listener}
 					If edit.ShowDialog = DialogResult.OK Then
 						Reload()
 					End If
@@ -243,7 +246,7 @@ Public Class DisplayListenersCtrl
 		End Select
 	End Sub
 
-	Private Sub NewListenerAdded(sender As Object, e As ListenerAddedEvent) Handles _add.ListenerAdded, _import.ListenerAdded
+	Private Sub NewListenerAdded(sender As Object, e As ListenerAddedEvent) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
 		RaiseEvent ListenerAdded(Me, e)
 	End Sub
 End Class
