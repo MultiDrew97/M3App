@@ -228,7 +228,11 @@ Public Class DisplayListenersCtrl
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.DisplayIndex
-				' TODO: Open edit listener dialog
+				Using edit As New Dialogs.EditListenerDialog()
+					If edit.ShowDialog = DialogResult.OK Then
+						Reload()
+					End If
+				End Using
 			Case dgc_Remove.DisplayIndex
 				ClearSelectedRows()
 				RemoveListener(sender, New DataGridViewRowCancelEventArgs(row))

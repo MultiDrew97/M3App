@@ -265,6 +265,12 @@
     <Compile Include="Dialogs\Listeners\AddListenerDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\Listeners\EditListenerDialog.Designer.vb">
+      <DependentUpon>EditListenerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Listeners\EditListenerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Listeners\ImportListenersDialog.Designer.vb">
       <DependentUpon>ImportListenersDialog.vb</DependentUpon>
     </Compile>
@@ -563,6 +569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Google\UploadFileDialog.resx">
       <DependentUpon>UploadFileDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Listeners\EditListenerDialog.resx">
+      <DependentUpon>EditListenerDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Listeners\ImportListenersDialog.resx">
       <DependentUpon>ImportListenersDialog.vb</DependentUpon>

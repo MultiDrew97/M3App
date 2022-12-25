@@ -5,14 +5,14 @@ Namespace Types
 		Inherits Person
 
 		Public Sub New()
-			Me.New(-1, "John Doe")
+			Me.New(-1, "John Doe", "johndoe@domain.ext")
 		End Sub
 
-		Public Sub New(listenerID As Integer, fName As String, lName As String, Optional email As String = "")
+		Public Sub New(listenerID As Integer, fName As String, lName As String, email As String)
 			Me.New(listenerID, $"{fName} {lName}", email)
 		End Sub
 
-		Public Sub New(listenerID As Integer, name As String, Optional email As String = "")
+		Public Sub New(listenerID As Integer, name As String, email As String)
 			MyBase.New(listenerID, name, email)
 		End Sub
 
@@ -52,5 +52,9 @@ Namespace Types
 				' TODO: Finish implementing updates
 			End Using
 		End Sub
+
+		Public Function Clone() As Listener
+			Return New Listener(Me.Id, Me.FirstName, Me.LastName, Me.Email)
+		End Function
 	End Class
 End Namespace

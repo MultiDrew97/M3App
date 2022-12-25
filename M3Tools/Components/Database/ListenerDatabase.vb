@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports SPPBC.M3Tools.Types
+'Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	' TODO: Revamp this area as well
@@ -43,7 +43,7 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Sub AddListener(listener As Listener)
+		Public Sub AddListener(listener As Types.Listener)
 			AddListener(listener.Name, listener.Email)
 		End Sub
 
@@ -79,34 +79,41 @@ Namespace Database
 			End Using
 		End Sub
 
-		Public Sub UpdateListener(listenerID As Integer, column As String, value As String)
+		Public Sub UpdateListener(listenerID As Integer, fName As String, lName As String, email As String)
+			UpdateListener(listenerID, $"{fName} {lName}", email)
+		End Sub
+
+		Public Sub UpdateListener(listenerID As Integer, name As String, email As String)
 			If Not Utils.ValidID(listenerID) Then
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			UpdateListener(column, value, New SqlParameter("ListenerID", listenerID))
+			UpdateListener(New Types.Listener(listenerID, name, email))
 		End Sub
 
-		Private Sub UpdateListener(column As String, value As String, ParamArray params As SqlParameter())
-			Using _cmd = db_Connection.Connect()
-				Dim command As String = $"{column} = '{value}'"
+		Public Sub UpdateListener(listener As Types.Listener)
+			UpdateListener(New SqlParameter("ListenerID", listener.Id), New SqlParameter("Name", listener.Name), New SqlParameter("Email", listener.Email))
+		End Sub
 
-				_cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[{tableName}] SET {command} WHERE ListenerID = @ListenerID"
+		Private Sub UpdateListener(ParamArray params As SqlParameter())
+			Using _cmd = db_Connection.Connect()
+				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateListener]"
+				_cmd.CommandType = CommandType.StoredProcedure
 				_cmd.Parameters.AddRange(params)
 
 				_cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
-		Public Function GetListeners() As DBEntryCollection(Of Listener)
-			Dim listeners As New DBEntryCollection(Of Listener)
+		Public Function GetListeners() As Types.DBEntryCollection(Of Types.Listener)
+			Dim listeners As New Types.DBEntryCollection(Of Types.Listener)
 
 			Using _cmd = db_Connection.Connect()
 				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
 				Using reader = _cmd.ExecuteReader
 					Do While reader.Read()
-						listeners.Add(New Listener(
+						listeners.Add(New Types.Listener(
 							CInt(reader("ListenerID")),
 							CStr(reader("Name")),
 							CStr(reader("Email"))
@@ -118,11 +125,11 @@ Namespace Database
 			Return listeners
 		End Function
 
-		Public Function GetListener(emailAddress As String) As Listener
+		Public Function GetListener(emailAddress As String) As Types.Listener
 			Return GetListener("Email", New SqlParameter("EmailAddress", emailAddress))
 		End Function
 
-		Public Function GetListener(listenerID As Integer) As Listener
+		Public Function GetListener(listenerID As Integer) As Types.Listener
 			If Not Utils.ValidID(listenerID) Then
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
@@ -130,7 +137,7 @@ Namespace Database
 			Return GetListener("ID", New SqlParameter("ListenerID", listenerID))
 		End Function
 
-		Public Function GetListener(column As String, ParamArray params As SqlParameter()) As Listener
+		Public Function GetListener(column As String, ParamArray params As SqlParameter()) As Types.Listener
 			Using _cmd = db_Connection.Connect()
 				_cmd.Parameters.AddRange(params)
 				Dim cmdText As String = ""
@@ -146,7 +153,7 @@ Namespace Database
 
 				Using reader = _cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
-						Return New Listener(
+						Return New Types.Listener(
 							CInt(reader("ListenerID")),
 							CStr(reader("Name")),
 							CStr(reader("Email"))
