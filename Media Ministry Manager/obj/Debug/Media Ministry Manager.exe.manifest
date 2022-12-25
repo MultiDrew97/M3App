@@ -206,7 +206,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GqSPF86Qw3u5owXlq2Ke5lMEo/yRERt1y43j1oCyvH0=</dsig:DigestValue>
+        <dsig:DigestValue>Mgm5BCKPEkea3bwV6/lv/vcMavQAZPifZobRLkiySV0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -343,14 +343,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="995840">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SPPBC.M3Tools.dll" size="1013760">
       <assemblyIdentity name="SPPBC.M3Tools" version="1.0.410.2201" publicKeyToken="4F5539A43069F3F0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jeTyGoUMgk4Se0p6LmBBLhVDCJKmTj5JZ6zr6MHZrOs=</dsig:DigestValue>
+        <dsig:DigestValue>HD7rCrRnUyGWcV6c9LVJNAbCJGZ8kKyjGj2XDmuLvbA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -450,13 +450,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Media Ministry Manager.exe.config" size="7651">
+  <file name="Media Ministry Manager.exe.config" size="7659">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>16xpt0IPJjZlPT1I/k0i6hoe8/ERLWip7EoKp1kIseQ=</dsig:DigestValue>
+      <dsig:DigestValue>ab7EX0fWLoWUvDCrEwNKxAcfWhf9/eSVCuM+ox0QxdM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\App Icon.ico" size="45451">

@@ -279,6 +279,17 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Name,Email
+        '''John Doe,johndoe@domain.ext
+        '''.
+        '''</summary>
+        Friend ReadOnly Property Import_Listeners_Template() As String
+            Get
+                Return ResourceManager.GetString("Import_Listeners_Template", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property ItalicOption() As System.Drawing.Bitmap

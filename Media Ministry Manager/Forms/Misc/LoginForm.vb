@@ -91,45 +91,6 @@ Public Class Frm_Login
 		End Using
 	End Sub
 
-	' TODO: Combine these 3 to remove redundant code
-	Private Sub Login(sender As Object, e As EventArgs) Handles btn_Login.Click
-		Try
-			PerformLogin(If(lf_Login.Username, ""), If(lf_Login.Password, ""))
-		Catch ex As Exception
-			tss_UserFeedback.ForeColor = Color.Red
-
-			Select Case ex.GetType()
-				Case GetType(RoleException), GetType(PasswordException), GetType(ConnectionException)
-					lsd_LoadScreen.LoadText = ex.Message
-				Case Else
-					lsd_LoadScreen.LoadText = String.Format("{0}. Please try again or Contact support.", ex.Message)
-			End Select
-
-			If ex.Message.ToLower().Contains("username") Then
-				lf_Login.Clear()
-				lf_Login.UsernameField.Focus()
-			Else
-				lf_Login.PasswordField.Clear()
-				lf_Login.PasswordField.Focus()
-			End If
-		End Try
-
-		'If TryLogin(lf_UserPass.Username, lf_UserPass.Password) Then
-		'    Try
-		'        Frm_Main.Show()
-		'        'Dim mainForm = New Frm_Main
-		'        'mainForm.Show()
-		'        bw_SaveSettings.RunWorkerAsync()
-		'    Catch exception As SqlException
-		'        tss_UserFeedback.Text = "Unknown Error. Please try again."
-		'        tss_UserFeedback.ForeColor = Color.Red
-		'        Console.WriteLine("Failed to connect to database: " & Exception.Message)
-		'        lf_UserPass.PasswordField.Clear()
-		'        lf_UserPass.PasswordField.Focus()
-		'    End Try
-		'End If
-	End Sub
-
 	Private Sub TryLogin(Optional username As String = Nothing, Optional password As String = Nothing)
 		Try
 			My.Settings.User = db_Users.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
@@ -140,7 +101,7 @@ Public Class Frm_Login
 				Case GetType(UsernameException)
 					Throw New UserException("We couldn't find an account with that username", ex)
 				Case GetType(PasswordException)
-					Throw New PasswordException("Incorrect password. Please try again or reset your password")
+					Throw New PasswordException("Incorrect password. Please try again or reset your password", ex)
 				Case GetType(DatabaseException)
 					Throw New DatabaseException("Unknown Error", ex)
 				Case GetType(ArgumentException), GetType(SqlException)
@@ -149,63 +110,42 @@ Public Class Frm_Login
 					Throw New Exception(ex.Message, ex)
 			End Select
 		End Try
-		'Try
-		'    Dim user = db_Users.Login(username, password)
-
-		'    If Not user.AccountType = AccountType.Admin Then
-		'        Throw New UserException("Only admins can use this application. If this is an error, please contact support")
-		'    End If
-
-		'    Return user IsNot Nothing
-		'Catch e As SqlException
-		'    tss_UserFeedback.Text = "Username/Password was inccorect. Please try again."
-		'    tss_UserFeedback.ForeColor = Color.Red
-		'    Console.WriteLine(e.Message)
-		'    lf_UserPass.PasswordField.Clear()
-		'    lf_UserPass.PasswordField.Focus()
-		'    Return False
-		'Catch e As UserException
-		'    tss_UserFeedback.Text = e.Message
-		'    tss_UserFeedback.ForeColor = Color.Red
-		'    lf_UserPass.PasswordField.Clear()
-		'    lf_UserPass.PasswordField.Focus()
-		'    Return False
-		'End Try
 	End Sub
 
-	Private Sub PerformLogin(username As String, password As String)
+	Private Sub PerformLogin(sender As Object, e As EventArgs) Handles btn_Login.Click
 		UseWaitCursor = True
 		Enabled = False
 		Opacity = 50
 
 		Try
 			RaiseEvent BeginLogin()
-			TryLogin(username, password)
+			TryLogin(If(lf_Login.Username, Nothing), If(lf_Login.Password, Nothing))
 
-			If Not IsNothing(My.Settings.User) Then
-				bw_SaveSettings.RunWorkerAsync()
-				Frm_Main.Show()
-			Else
-				'TODO: Refactor this
-				lsd_LoadScreen.LoadText = "Unable to login. Please try again or contact system support."
-				lsd_LoadScreen.Image = My.Resources.ErrorImage
+			If My.Settings.User Is Nothing Then
+				Throw New Exception("Unable to login. Please try again or contact system support.")
+				'lsd_LoadScreen.LoadText = "Unable to login. Please try again or contact system support."
+				'lsd_LoadScreen.Image = My.Resources.ErrorImage
 			End If
+
+			bw_SaveSettings.RunWorkerAsync()
+			Frm_Main.Show()
 		Catch ex As Exception
 			' TODO: Clear this up
+			Dim message As String = ""
 			Select Case ex.GetType()
 				Case GetType(RoleException)
-					lsd_LoadScreen.LoadText = "Only admins can use this application. If this is an error, please contact support"
+					message = "Only admins can use this application. If this is an error, please contact support"
 				Case GetType(UsernameException)
-					lsd_LoadScreen.LoadText = "We couldn't find an account with that username. Please try again or Contact support."
+					message = "We couldn't find an account with that username. Please try again or contact support."
 				Case GetType(PasswordException)
-					lsd_LoadScreen.LoadText = "Incorrect password. Please try again or reset your password"
+					message = "Incorrect password. Please try again or reset your password"
 				Case GetType(DatabaseException)
-					lsd_LoadScreen.LoadText = "Unknown Error. Please try again or Contact support."
+					message = "Unknown database error. Please try again or contact support."
 				Case Else
-					lsd_LoadScreen.LoadText = ex.Message
+					message = ex.Message
 			End Select
 
-			If ex.Message.ToLower().Contains("username") Then
+			If message.ToLower().Contains("username") Then
 				lf_Login.Clear()
 				lf_Login.UsernameField.Focus()
 			Else
@@ -213,7 +153,8 @@ Public Class Frm_Login
 				lf_Login.PasswordField.Focus()
 			End If
 
-			lsd_LoadScreen.Image = My.Resources.ErrorImage
+			'lsd_LoadScreen.Image = My.Resources.ErrorImage
+			lsd_LoadScreen.ShowError(message)
 		Finally
 			RaiseEvent EndLogin()
 		End Try

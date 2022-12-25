@@ -24,7 +24,7 @@
       <Value Profile="(Default)">-1;JohnDoe123;User</Value>
     </Setting>
     <Setting Name="Username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">arandle</Value>
+      <Value Profile="(Default)">arandlemiller97</Value>
     </Setting>
     <Setting Name="Password" Type="System.String" Scope="User">
       <Value Profile="(Default)">JasmineLove2697</Value>

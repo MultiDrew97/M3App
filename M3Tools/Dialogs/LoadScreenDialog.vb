@@ -1,13 +1,14 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.ComponentModel
+Imports System.Windows.Forms
 
 Public Class LoadScreenDialog
 	Private Event DataChanging As EventHandler
 
 	Private WithEvents LoadScreen As LoadingScreen
 
-	ReadOnly Property LoadingScreen As LoadingScreen
+	Private ReadOnly Property LoadingScreen As LoadingScreen
 		Get
-			If LoadScreen Is Nothing Then 'Or LoadScreen.IsDisposed Then
+			If LoadScreen Is Nothing OrElse LoadScreen.IsDisposed Then
 				LoadScreen = New LoadingScreen
 				'ElseIf _loadScreen.IsDisposed Then
 				'	_loadScreen = New LoadingScreen
@@ -35,6 +36,7 @@ Public Class LoadScreenDialog
 		End Set
 	End Property
 
+	<DefaultValue(False)>
 	Public Property Closable As Boolean
 		Get
 			Return LoadingScreen.Closable
@@ -45,7 +47,7 @@ Public Class LoadScreenDialog
 	End Property
 
 	Private Sub DialogClosed(sender As Object, e As EventArgs) Handles LoadScreen.DialogClosing
-		LoadScreen.Close()
+		'LoadScreen.Close()
 		'__loadScreen = Nothing
 	End Sub
 
@@ -53,18 +55,15 @@ Public Class LoadScreenDialog
 		LoadingScreen.Show()
 	End Function
 
-	Private Sub LoadingScreen_Closing(sender As Object, e As EventArgs) Handles Me.Disposed
+	Private Sub DialogDisposed(sender As Object, e As EventArgs) Handles Me.Disposed
 		If LoadScreen IsNot Nothing Then
 			LoadingScreen.Close()
 			LoadingScreen.Dispose()
 		End If
 	End Sub
 
-	Private Sub LoadScreen_Disposed(sender As Object, e As EventArgs) Handles LoadScreen.Disposed
-
-	End Sub
-
-	Private Sub LoadScreenDialog_DataChanging(sender As Object, e As EventArgs) Handles Me.DataChanging
-
+	Public Sub ShowError(message As String)
+		Image = My.Resources.ErrorImage
+		LoadText = message
 	End Sub
 End Class

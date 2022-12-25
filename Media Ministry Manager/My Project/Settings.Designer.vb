@@ -127,7 +127,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("arandle")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97")>  _
     Public Property Username() As String
         Get
             Return CType(Me("Username"),String)

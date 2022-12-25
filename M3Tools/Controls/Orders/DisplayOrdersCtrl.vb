@@ -5,7 +5,7 @@ Public Class DisplayOrdersCtrl
 	' TODO: Implement a way to change between current and completed orders
 	' TODO: Make an event for when the count is updated
 	' TODO: Convert DataGridView to TreeView so that orders for the same person can be grouped together
-
+	' TODO: Instead of TreeView, use something in the containing ToolStripContainer
 	Private Event ShowCompletedChanged()
 	Public Event DataChanged()
 
@@ -92,7 +92,7 @@ Public Class DisplayOrdersCtrl
 	Private Sub OrdersLoaded() Handles bw_LoadOrders.RunWorkerCompleted
 		UseWaitCursor = False
 		' TODO: Play around with this to make sure it works
-		Filter = "[CompletedDate] IS NULL"
+		ShowCompleted = False
 		RaiseEvent DataChanged()
 		dgv_Orders.Refresh()
 	End Sub

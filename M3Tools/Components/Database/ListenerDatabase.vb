@@ -42,6 +42,7 @@ Namespace Database
 				db_Connection.InitialCatalog = value
 			End Set
 		End Property
+
 		Public Sub AddListener(listener As Listener)
 			AddListener(listener.Name, listener.Email)
 		End Sub
@@ -103,7 +104,7 @@ Namespace Database
 			Using _cmd = db_Connection.Connect()
 				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
-				Using reader = _cmd.ExecuteReaderAsync().Result
+				Using reader = _cmd.ExecuteReader
 					Do While reader.Read()
 						listeners.Add(New Listener(
 							CInt(reader("ListenerID")),

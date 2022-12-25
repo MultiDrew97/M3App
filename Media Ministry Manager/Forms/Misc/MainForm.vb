@@ -35,18 +35,20 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub EmailMinistry(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.OpenListeners
-		If EmailMinistryDialog.ShowDialog = DialogResult.OK Then
-			Select Case EmailMinistryDialog.SelectedItem
-				Case "Send"
-					SendEmailsDialog.ShowDialog()
-				Case "Upload"
-					DriveUploadDialog.ShowDialog()
-				Case "View"
-					Dim listeners As New Frm_ViewListeners
-					listeners.Show()
-					Me.Close()
-			End Select
-		End If
+		frm_EmailListeners.Show()
+		Me.Close()
+		'If EmailMinistryDialog.ShowDialog = DialogResult.OK Then
+		'	Select Case EmailMinistryDialog.SelectedItem
+		'		Case "Send"
+		'			SendEmailsDialog.ShowDialog()
+		'		Case "Upload"
+		'			DriveUploadDialog.ShowDialog()
+		'		Case "View"
+		'			Dim listeners As New Frm_ViewListeners
+		'			listeners.Show()
+		'			Me.Close()
+		'	End Select
+		'End If
 	End Sub
 
 	Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
