@@ -196,6 +196,67 @@
     <value>^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$</value>
     <comment>The regex for a valid email address</comment>
   </data>
+  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ErrorImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\errorimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LatestAppVersionUri" xml:space="preserve">
+    <value>https://sppbc.hopto.org/manager/version</value>
+    <comment>The uri containing the latest version of the application</comment>
+  </data>
+  <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\loading-loop.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowPasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\showpasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FontOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\font.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PasswordRegex" xml:space="preserve">
+    <value>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,}$</value>
+    <comment>The regex for a valid password with at least 1 capital, lower, number and special character</comment>
+  </data>
+  <data name="DefaultConnectionString" xml:space="preserve">
+    <value>Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication="Sql Password"</value>
+    <comment>The default connection string to access the database</comment>
+  </data>
+  <data name="DefaultPassword" xml:space="preserve">
+    <value>M3AppPassword2499</value>
+    <comment>The default password to access the database</comment>
+  </data>
+  <data name="UnderlineOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StrikeThruOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\strikethrough-text-interface-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DriveLinkAttachment" xml:space="preserve">
+    <value>&lt;p&gt;&lt;a href="{1}"&gt;{0}&lt;/a&gt;&lt;/p&gt;</value>
+    <comment>The formatting for linking a drive file in an email</comment>
+  </data>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Import_Listeners_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\import listeners template.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AppUpdateUri" xml:space="preserve">
+    <value>https://sppbc.hopto.org/manager/setup.exe</value>
+    <comment>The uri where the latest version of the application can be downloaded</comment>
+  </data>
+  <data name="DefaultCatalog" xml:space="preserve">
+    <value>Media Ministry Test</value>
+    <comment>The default deployment catalog for the database</comment>
+  </data>
   <data name="DefaultReceiptEmail" xml:space="preserve">
     <value>&lt;!Doctype html&gt;
 &lt;html&gt;
@@ -229,60 +290,11 @@
 &lt;/html&gt;</value>
     <comment>The default template for a new receipt email</comment>
   </data>
-  <data name="LatestAppVersionUri" xml:space="preserve">
-    <value>https://sppbc.hopto.org/manager/version</value>
-    <comment>The uri containing the latest version of the application</comment>
-  </data>
-  <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\loading-loop.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\configs\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ShowPasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images\showpasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FontOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\font.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PasswordRegex" xml:space="preserve">
-    <value>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,}$</value>
-    <comment>The regex for a valid password with at least 1 capital, lower, number and special character</comment>
-  </data>
-  <data name="DefaultConnectionString" xml:space="preserve">
-    <value>Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;Authentication="Sql Password"</value>
-    <comment>The default connection string to access the database</comment>
-  </data>
-  <data name="DefaultPassword" xml:space="preserve">
-    <value>M3AppPassword2499</value>
-    <comment>The default password to access the database</comment>
-  </data>
-  <data name="UnderlineOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StrikeThruOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\strikethrough-text-interface-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DriveLinkAttachment" xml:space="preserve">
-    <value>&lt;p&gt;&lt;a href="{1}"&gt;{0}&lt;/a&gt;&lt;/p&gt;</value>
-    <comment>The formatting for linking a drive file in an email</comment>
-  </data>
-  <data name="AppUpdateUri" xml:space="preserve">
-    <value>https://sppbc.hopto.org/manager/setup.exe</value>
-    <comment>The uri where the latest version of the application can be downloaded</comment>
-  </data>
-  <data name="DefaultCatalog" xml:space="preserve">
-    <value>Media Ministry Test</value>
-    <comment>The default deployment catalog for the database</comment>
-  </data>
-  <data name="ErrorImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images\errorimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HidePasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\hidepasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ItalicOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\italics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -344,16 +356,7 @@
   <data name="EmailRegex2" xml:space="preserve">
     <value>^[a-zA-Z0-9_!#$%&amp;’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$</value>
   </data>
-  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HidePasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images\hidepasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Import_Listeners_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\import listeners template.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -28,11 +28,6 @@ Partial Class DisplayListenersCtrl
 		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 		Me.bw_LoadListeners = New System.ComponentModel.BackgroundWorker()
 		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-		Me.tbtn_AddListener = New System.Windows.Forms.ToolStripButton()
-		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
-		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
 		Me.dgv_Listeners = New System.Windows.Forms.DataGridView()
 		Me.dgc_ListenerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
 		Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -41,13 +36,18 @@ Partial Class DisplayListenersCtrl
 		Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
 		Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
 		Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
+		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+		Me.tbtn_AddListener = New System.Windows.Forms.ToolStripButton()
+		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
+		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
 		Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
 		Me.ToolStripContainer1.SuspendLayout()
-		Me.ToolStrip1.SuspendLayout()
 		CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.ToolStrip1.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'bw_LoadListeners
@@ -73,44 +73,6 @@ Partial Class DisplayListenersCtrl
 		'ToolStripContainer1.TopToolStripPanel
 		'
 		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
-		'
-		'ToolStrip1
-		'
-		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
-		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.ToolStripSeparator2, Me.txt_Filter})
-		Me.ToolStrip1.Location = New System.Drawing.Point(3, 0)
-		Me.ToolStrip1.Name = "ToolStrip1"
-		Me.ToolStrip1.Size = New System.Drawing.Size(192, 39)
-		Me.ToolStrip1.TabIndex = 1
-		'
-		'tbtn_AddListener
-		'
-		Me.tbtn_AddListener.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.tbtn_AddListener.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
-		Me.tbtn_AddListener.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_AddListener.Name = "tbtn_AddListener"
-		Me.tbtn_AddListener.Size = New System.Drawing.Size(36, 36)
-		Me.tbtn_AddListener.Text = "Add Listener"
-		'
-		'tbtn_Import
-		'
-		Me.tbtn_Import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.tbtn_Import.Image = CType(resources.GetObject("tbtn_Import.Image"), System.Drawing.Image)
-		Me.tbtn_Import.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_Import.Name = "tbtn_Import"
-		Me.tbtn_Import.Size = New System.Drawing.Size(36, 36)
-		Me.tbtn_Import.Text = "ToolStripButton1"
-		'
-		'ToolStripSeparator2
-		'
-		Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-		Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 39)
-		'
-		'txt_Filter
-		'
-		Me.txt_Filter.Name = "txt_Filter"
-		Me.txt_Filter.Size = New System.Drawing.Size(100, 39)
 		'
 		'dgv_Listeners
 		'
@@ -187,12 +149,52 @@ Partial Class DisplayListenersCtrl
 		'
 		'cms_Tools
 		'
+		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.cms_Tools.Name = "cms_Tools"
 		Me.cms_Tools.Size = New System.Drawing.Size(118, 48)
 		'
 		'bsListeners
 		'
 		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.DataTables.ListenersDataTable)
+		'
+		'ToolStrip1
+		'
+		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.ToolStripSeparator2, Me.txt_Filter})
+		Me.ToolStrip1.Location = New System.Drawing.Point(3, 0)
+		Me.ToolStrip1.Name = "ToolStrip1"
+		Me.ToolStrip1.Size = New System.Drawing.Size(223, 39)
+		Me.ToolStrip1.TabIndex = 1
+		'
+		'tbtn_AddListener
+		'
+		Me.tbtn_AddListener.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_AddListener.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
+		Me.tbtn_AddListener.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_AddListener.Name = "tbtn_AddListener"
+		Me.tbtn_AddListener.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_AddListener.Text = "Add Listener"
+		'
+		'tbtn_Import
+		'
+		Me.tbtn_Import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_Import.Image = Global.SPPBC.M3Tools.My.Resources.Resources.import
+		Me.tbtn_Import.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_Import.Name = "tbtn_Import"
+		Me.tbtn_Import.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_Import.Text = "ToolStripButton1"
+		'
+		'ToolStripSeparator2
+		'
+		Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+		Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 39)
+		'
+		'txt_Filter
+		'
+		Me.txt_Filter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+		Me.txt_Filter.Name = "txt_Filter"
+		Me.txt_Filter.Size = New System.Drawing.Size(100, 39)
 		'
 		'db_Listeners
 		'
@@ -212,10 +214,10 @@ Partial Class DisplayListenersCtrl
 		Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
 		Me.ToolStripContainer1.ResumeLayout(False)
 		Me.ToolStripContainer1.PerformLayout()
-		Me.ToolStrip1.ResumeLayout(False)
-		Me.ToolStrip1.PerformLayout()
 		CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.ToolStrip1.ResumeLayout(False)
+		Me.ToolStrip1.PerformLayout()
 		Me.ResumeLayout(False)
 
 	End Sub
