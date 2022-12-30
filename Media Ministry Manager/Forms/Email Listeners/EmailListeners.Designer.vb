@@ -57,6 +57,7 @@ Partial Class frm_EmailListeners
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MainMenuStrip = Me.mms_Main
 		Me.Name = "frm_EmailListeners"
+		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Media Ministry Manager"
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
