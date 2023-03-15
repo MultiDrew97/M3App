@@ -3,11 +3,11 @@ Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class DriveTree
-	Private __children As Boolean = True
 	Private __username As String
 
 	Public WriteOnly Property Username As String
 		Set(value As String)
+			' TODO: Make this authorize when written to?
 			__username = value
 		End Set
 	End Property
@@ -38,13 +38,6 @@ Public Class DriveTree
 	<DefaultValue(True)>
 	<Description("Whether the tree should include the children of folders")>
 	Public Property WithChildren As Boolean
-		Get
-			Return __children
-		End Get
-		Set(value As Boolean)
-			__children = value
-		End Set
-	End Property
 
 	Public Sub FillTable(treeNodes As GoogleAPI.Types.FileCollection)
 		UseWaitCursor = True
@@ -166,7 +159,15 @@ Public Class DriveTree
 		UseWaitCursor = False
 	End Sub
 
-	Private Shadows Sub Refresh(sender As Object, e As EventArgs) Handles tsmi_Refresh.Click
+	Private Sub Reload()
 		RefreshTree()
+	End Sub
+
+	Private Sub NewFolder(sender As Object, e As EventArgs) Handles tsmi_NewFolder.Click
+		Using newFolder As New CreateFolderDialog(__username)
+			If newFolder.ShowDialog = DialogResult.OK Then
+				Reload()
+			End If
+		End Using
 	End Sub
 End Class

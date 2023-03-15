@@ -249,4 +249,10 @@ Public Class DisplayListenersCtrl
 	Private Sub NewListenerAdded(sender As Object, e As ListenerAddedEvent) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
 		RaiseEvent ListenerAdded(Me, e)
 	End Sub
+
+	Private Sub SendEmails(sender As Object, e As EventArgs) Handles tbtn_Email.Click
+		Using emails As New SendEmailsDialog
+			Dim res = emails.ShowDialog()
+		End Using
+	End Sub
 End Class

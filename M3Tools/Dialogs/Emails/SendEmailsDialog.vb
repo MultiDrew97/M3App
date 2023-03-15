@@ -2,14 +2,27 @@
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
+Structure EmailDetails
+	Property Subject As String
+	Property Body As String
+	Property Files As Collection(Of String)
+End Structure
+
 Public Class SendEmailsDialog
 	Private __username As String = ""
-	Private ReadOnly __sendingFiles As New Collection(Of String)
-
-	Public WriteOnly Property Username As String
+	'Private ReadOnly __sendingFiles As New Collection(Of String)
+	Private __email As New EmailDetails With {
+		.Subject = "",
+		.Body = "",
+		.Files = New Collection(Of String)
+	}
+	Public Property Username As String
 		Set(value As String)
 			__username = value
 		End Set
+		Get
+			Return __username
+		End Get
 	End Property
 
 	Private Sub SendEmails(sender As Object, e As EventArgs) Handles btn_Send.Click
@@ -45,22 +58,20 @@ Public Class SendEmailsDialog
 		Me.Close()
 	End Sub
 
-	Private Async Sub DialogShown(sender As Object, e As EventArgs) Handles Me.Shown
-		UseWaitCursor = True
-		Await gmt_Gmail.Authorize(__username)
-		Await gdt_GDrive.Authorize(__username)
-		dt_DriveHeirarchy.Username = __username
-		Refresh()
+	Private Async Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
+		Await gmt_Gmail.Authorize(Username)
 	End Sub
 
-	Private Sub LoadWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
-		UseWaitCursor = False
+	Private Sub DialogShown(sender As Object, e As EventArgs) Handles Me.Shown
+		UseWaitCursor = True
+		dt_DriveHeirarchy.Username = Username
+		Reload()
 	End Sub
 
 	Private Sub FindSelectedNodes(nodes As TreeNodeCollection)
 		For Each node As TreeNode In nodes
 			If node.Checked Then
-				__sendingFiles.Add(node.Name)
+				__email.Files.Add(node.Name)
 			End If
 
 			If node.Nodes.Count > 0 Then
@@ -69,24 +80,24 @@ Public Class SendEmailsDialog
 		Next
 	End Sub
 
-	Public Overrides Sub Refresh()
+	Public Sub Reload()
 		UseWaitCursor = True
 		dt_DriveHeirarchy.RefreshTree()
 		UseWaitCursor = False
 	End Sub
 
 	Private Sub NewFolder(sender As Object, e As EventArgs) Handles tsmi_NewFolder.Click
-		Using newFolder As New CreateFolderDialog(__username)
+		Using newFolder As New CreateFolderDialog(Username)
 			If newFolder.ShowDialog = DialogResult.OK Then
-				Refresh()
+				Reload()
 			End If
 		End Using
 	End Sub
 
 	Private Sub NewUpload(sender As Object, e As EventArgs) Handles tsmi_NewUpload.Click
-		Using newUpload As New UploadFileDialog(__username)
+		Using newUpload As New UploadFileDialog(Username)
 			If newUpload.ShowDialog = DialogResult.OK Then
-				Refresh()
+				Reload()
 			End If
 		End Using
 	End Sub
@@ -96,7 +107,7 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub GatherFiles(sender As Object, e As DoWorkEventArgs) Handles bw_GatherFiles.DoWork
-		__sendingFiles.Clear()
+		__email.Files.Clear()
 
 		Select Case CType(e.Argument, TabPages)
 			Case TabPages.Sermon
@@ -104,40 +115,43 @@ Public Class SendEmailsDialog
 
 				For Each node In selectedNodes
 
-					__sendingFiles.Add(node.Name)
+					__email.Files.Add(node.Name)
 				Next
 			Case TabPages.Receipt
 				For Each file In fu_Receipts.Files
-					__sendingFiles.Add(file.Name)
+					__email.Files.Add(file.Name)
 				Next
 		End Select
 
-		Console.WriteLine(__sendingFiles.Count)
+		Console.WriteLine(__email.Files.Count)
 	End Sub
 
 	Private Sub PrepEmails(sender As Object, e As DoWorkEventArgs) Handles bw_PrepEmails.DoWork
-		Dim htmlBody As String = "", subject As String = "", rtfBody As String = ""
-		If MessageBox.Show("Would you like to use the default email template?", "Default Email Template", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-			'Default message
-			Select Case CType(e.Argument, TabPages)
-				Case TabPages.Sermon
-					subject = "New Sermon"
-					htmlBody = My.Resources.DefaultSermonEmail
-				Case TabPages.Receipt
-					subject = "Thank you"
-					htmlBody = My.Resources.DefaultReceiptEmail
-			End Select
-		Else
+		'Dim htmlBody As String = "", subject As String = "", rtfBody As String = ""
+		Dim currentPage = CType(e.Argument, TabPages)
+		Dim res = MessageBox.Show("Would you like to use the default email template?", "Default Email Template", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+		If Not res = DialogResult.Yes Then
 			'Custom Message
 			Using customEmail As New CustomEmailDialog
 				If customEmail.ShowDialog() = DialogResult.OK Then
-					subject = customEmail.Email.Subject
-					rtfBody = customEmail.Email.RichTextBody
+					__email.Subject = customEmail.Email.Subject
+					__email.Body = customEmail.Email.RichTextBody
 				End If
 			End Using
+			Return
 		End If
 
-		Console.WriteLine($"Subject: {subject}{vbNewLine}html:{vbNewLine}{htmlBody}{vbNewLine}rtf:{vbNewLine}{rtfBody}")
+		'Default message
+		Select Case currentPage
+			Case TabPages.Sermon
+				__email.Subject = "New Sermon"
+				__email.Body = My.Resources.DefaultSermonEmail
+			Case TabPages.Receipt
+				__email.Subject = "Thank you"
+				__email.Body = My.Resources.DefaultReceiptEmail
+		End Select
+
+		Console.WriteLine($"Subject: {__email.Subject}{vbNewLine}Body:{vbNewLine}{__email.Body}")
 	End Sub
 
 	Private Sub GatherReceipients(sender As Object, e As DoWorkEventArgs) Handles bw_GatherReceipients.DoWork
@@ -150,5 +164,16 @@ Public Class SendEmailsDialog
 
 			End If
 		End Using
+	End Sub
+
+	Private Sub SendEmails(sender As Object, e As DoWorkEventArgs) Handles bw_SendEmails.DoWork
+		' Loop through files to determine type
+		Console.WriteLine($"Subject: {__email.Subject}")
+		Console.WriteLine($"Body: {__email.Body}")
+		Console.WriteLine($"File Count: {__email.Files.Count}")
+
+		For Each file In __email.Files
+			Console.WriteLine($"File Name: {file}")
+		Next
 	End Sub
 End Class

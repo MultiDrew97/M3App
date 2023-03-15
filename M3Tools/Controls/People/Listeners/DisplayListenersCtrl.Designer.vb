@@ -36,9 +36,10 @@ Partial Class DisplayListenersCtrl
 		Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
 		Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
 		Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
-		Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+		Me.ts_Tools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_AddListener = New System.Windows.Forms.ToolStripButton()
 		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
+		Me.tbtn_Email = New System.Windows.Forms.ToolStripButton()
 		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
 		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
 		Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
@@ -47,7 +48,7 @@ Partial Class DisplayListenersCtrl
 		Me.ToolStripContainer1.SuspendLayout()
 		CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.ToolStrip1.SuspendLayout()
+		Me.ts_Tools.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'bw_LoadListeners
@@ -72,7 +73,7 @@ Partial Class DisplayListenersCtrl
 		'
 		'ToolStripContainer1.TopToolStripPanel
 		'
-		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
+		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_Tools)
 		'
 		'dgv_Listeners
 		'
@@ -157,15 +158,15 @@ Partial Class DisplayListenersCtrl
 		'
 		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.DataTables.ListenersDataTable)
 		'
-		'ToolStrip1
+		'ts_Tools
 		'
-		Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
-		Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.ToolStripSeparator2, Me.txt_Filter})
-		Me.ToolStrip1.Location = New System.Drawing.Point(3, 0)
-		Me.ToolStrip1.Name = "ToolStrip1"
-		Me.ToolStrip1.Size = New System.Drawing.Size(223, 39)
-		Me.ToolStrip1.TabIndex = 1
+		Me.ts_Tools.Dock = System.Windows.Forms.DockStyle.None
+		Me.ts_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.ts_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.tbtn_Email, Me.ToolStripSeparator2, Me.txt_Filter})
+		Me.ts_Tools.Location = New System.Drawing.Point(3, 0)
+		Me.ts_Tools.Name = "ts_Tools"
+		Me.ts_Tools.Size = New System.Drawing.Size(259, 39)
+		Me.ts_Tools.TabIndex = 1
 		'
 		'tbtn_AddListener
 		'
@@ -184,6 +185,15 @@ Partial Class DisplayListenersCtrl
 		Me.tbtn_Import.Name = "tbtn_Import"
 		Me.tbtn_Import.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_Import.Text = "ToolStripButton1"
+		'
+		'tbtn_Email
+		'
+		Me.tbtn_Email.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_Email.Image = CType(resources.GetObject("tbtn_Email.Image"), System.Drawing.Image)
+		Me.tbtn_Email.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_Email.Name = "tbtn_Email"
+		Me.tbtn_Email.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_Email.Text = "ToolStripButton1"
 		'
 		'ToolStripSeparator2
 		'
@@ -216,8 +226,8 @@ Partial Class DisplayListenersCtrl
 		Me.ToolStripContainer1.PerformLayout()
 		CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.ToolStrip1.ResumeLayout(False)
-		Me.ToolStrip1.PerformLayout()
+		Me.ts_Tools.ResumeLayout(False)
+		Me.ts_Tools.PerformLayout()
 		Me.ResumeLayout(False)
 
 	End Sub
@@ -226,7 +236,7 @@ Partial Class DisplayListenersCtrl
 	Friend WithEvents bsListeners As Windows.Forms.BindingSource
 	Friend WithEvents db_Listeners As Database.ListenerDatabase
 	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
-	Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
+	Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
 	Friend WithEvents tbtn_AddListener As Windows.Forms.ToolStripButton
 	Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
 	Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
@@ -237,4 +247,5 @@ Partial Class DisplayListenersCtrl
 	Friend WithEvents EmailDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents dgc_Edit As Windows.Forms.DataGridViewImageColumn
 	Friend WithEvents dgc_Remove As Windows.Forms.DataGridViewImageColumn
+	Friend WithEvents tbtn_Email As Windows.Forms.ToolStripButton
 End Class
