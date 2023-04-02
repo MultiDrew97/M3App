@@ -69,7 +69,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>M3Tools.pfx</AssemblyOriginatorKeyFile>
@@ -314,10 +314,10 @@
     <Compile Include="Dialogs\User\CreateAccountDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\Google\GoogleDriveTool.Designer.vb">
-      <DependentUpon>GoogleDriveTool.vb</DependentUpon>
+    <Compile Include="Components\Google\GdriveTool.Designer.vb">
+      <DependentUpon>GdriveTool.vb</DependentUpon>
     </Compile>
-    <Compile Include="Components\Google\GoogleDriveTool.vb">
+    <Compile Include="Components\Google\GdriveTool.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Google\GmailTool.Designer.vb">
@@ -445,6 +445,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Types\DBEntry.vb" />
+    <Compile Include="Types\Google\API.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Types\Orders\CartItem.vb" />
     <Compile Include="Types\Orders\CartItemCollection.vb" />
     <Compile Include="Types\People\DBEntryCollection.vb" />
@@ -470,7 +473,7 @@
     <Compile Include="Types\People\Person.vb" />
     <Compile Include="Types\People\User.vb" />
     <Compile Include="Types\People\UserConverter.vb" />
-    <Compile Include="Types\Service.vb" />
+    <Compile Include="Types\Google\Service.vb" />
     <Compile Include="Types\TabPages.vb" />
     <Compile Include="Utils.vb" />
     <Compile Include="Controls\FileLocationField.Designer.vb">
@@ -666,7 +669,7 @@
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Product.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.User.datasource" />
     <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>

@@ -8,4 +8,5 @@
   <AuthenticationMode>1</AuthenticationMode>
   <SplashScreen>MediaMinistrySplash</SplashScreen>
   <SaveMySettingsOnExit>true</SaveMySettingsOnExit>
+  <HighDpiMpde>false</HighDpiMpde>
 </MyApplicationData>

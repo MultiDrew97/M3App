@@ -1,8 +1,8 @@
-﻿Namespace GoogleAPI
-	Partial Class GoogleDriveTool
-		Inherits System.ComponentModel.Component
+﻿Namespace GTools
+	Partial Class GdriveTool
+		Inherits API
 
-		<System.Diagnostics.DebuggerNonUserCode()> _
+		<System.Diagnostics.DebuggerNonUserCode()>
 		Public Sub New(ByVal container As System.ComponentModel.IContainer)
 			MyClass.New()
 
@@ -13,7 +13,7 @@
 
 		End Sub
 
-		<System.Diagnostics.DebuggerNonUserCode()> _
+		<System.Diagnostics.DebuggerNonUserCode()>
 		Public Sub New()
 			MyBase.New()
 

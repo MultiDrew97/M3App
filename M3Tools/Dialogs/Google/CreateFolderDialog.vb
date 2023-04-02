@@ -19,15 +19,6 @@ Public Class CreateFolderDialog
 		End Get
 	End Property
 
-	Sub New(username As String)
-		' This call is required by the designer.
-		InitializeComponent()
-
-		' Add any initialization after the InitializeComponent() call.
-		UseWaitCursor = True
-		LoadDialog(username)
-	End Sub
-
 	Private Sub Create(sender As Object, e As EventArgs) Handles btn_Create.Click
 		bw_GatherInfo.RunWorkerAsync(dt_DriveHeirarchy.SelectedNode)
 		Try
@@ -48,10 +39,12 @@ Public Class CreateFolderDialog
 		FolderName = ip_FolderName.Text
 	End Sub
 
-	Private Async Sub LoadDialog(username As String)
-		Await gdt_GDrive.Authorize(username)
+	Private Sub LoadDialog(sender As Object, e As EventArgs) Handles Me.Load
+		UseWaitCursor = True
 
-		dt_DriveHeirarchy.RefreshTree()
+		gdt_GDrive.Authorize()
+
+		dt_DriveHeirarchy.Reload()
 
 		UseWaitCursor = False
 	End Sub

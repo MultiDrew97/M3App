@@ -10,12 +10,12 @@ Public Class EmailMinistryDialog
     End Sub
 
     Private Sub Btn_SendEmails_Click(sender As Object, e As EventArgs) Handles btn_SendEmails.Click
-        Using dialog As New SPPBC.M3Tools.SendEmailsDialog() With {.Username = My.Settings.Username}
-            If dialog.ShowDialog() = DialogResult.OK Then
-                DialogResult = DialogResult.Ignore
-            End If
-        End Using
-    End Sub
+		Using dialog As New SPPBC.M3Tools.SendEmailsDialog()
+			If dialog.ShowDialog() = DialogResult.OK Then
+				DialogResult = DialogResult.Ignore
+			End If
+		End Using
+	End Sub
 
     Private Sub Btn_ViewListeners_Click(sender As Object, e As EventArgs) Handles btn_ViewListeners.Click
         SelectedItem = "View"

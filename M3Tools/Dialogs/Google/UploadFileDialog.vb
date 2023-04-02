@@ -3,27 +3,19 @@ Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class UploadFileDialog
-	Private ReadOnly __username As String
-	Private ReadOnly __files As New GoogleAPI.Types.FileCollection
-	Private __permission As Google.Apis.Drive.v3.Data.Permission
-	Public Property Files As GoogleAPI.Types.FileCollection
+	Private ReadOnly __files As New GTools.Types.FileCollection
+	Private __permission As Global.Google.Apis.Drive.v3.Data.Permission
+	Public Property Files As GTools.Types.FileCollection
 		Get
 			Return __files
 		End Get
-		Set(value As GoogleAPI.Types.FileCollection)
+		Set(value As GTools.Types.FileCollection)
 			__files.Clear()
 			__files.AddRange(value)
 		End Set
 	End Property
 
-	Sub New(username As String)
-		' This call is required by the designer.
-		InitializeComponent()
-
-		' Add any initialization after the InitializeComponent() call.
-		__username = username
-		dt_DriveHeirarchy.Username = __username
-
+	Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		bw_LoadDialog.RunWorkerAsync()
 	End Sub
 
@@ -52,12 +44,12 @@ Public Class UploadFileDialog
 		Me.Close()
 	End Sub
 
-	Private Async Sub DialogLoad(sender As Object, e As DoWorkEventArgs) Handles bw_LoadDialog.DoWork
-		Await gdt_GDrive.Authorize(__username)
+	Private Sub DialogLoad(sender As Object, e As DoWorkEventArgs) Handles bw_LoadDialog.DoWork
+		gdt_GDrive.Authorize()
 	End Sub
 
 	Private Sub DialogLoadFinished(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadDialog.RunWorkerCompleted
-		dt_DriveHeirarchy.RefreshTree()
+		dt_DriveHeirarchy.Reload()
 	End Sub
 
 	Private Sub Finish()
@@ -72,7 +64,7 @@ Public Class UploadFileDialog
 		For Each file In fu_FileUpload.Files
 			fileParts = file.Name.Split("."c)
 			fileExt = fileParts(fileParts.Length - 1)
-			Files.Add(New GoogleAPI.Types.File("", file.Name, fileExt))
+			Files.Add(New GTools.Types.File("", file.Name, fileExt))
 		Next
 	End Sub
 

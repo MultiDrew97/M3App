@@ -1,6 +1,6 @@
-﻿Namespace GoogleAPI
+﻿Namespace GTools
     Partial Class GmailTool
-		Inherits System.ComponentModel.Component
+		Inherits API
 
 		<System.Diagnostics.DebuggerNonUserCode()> _
 		Public Sub New(ByVal container As System.ComponentModel.IContainer)

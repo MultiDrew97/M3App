@@ -42,7 +42,7 @@ Partial Class CustomEmailDialog
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(146, 29)
-        Me.TableLayoutPanel1.TabIndex = 0
+        Me.TableLayoutPanel1.TabIndex = 1
         '
         'btn_Done
         '
@@ -50,7 +50,7 @@ Partial Class CustomEmailDialog
         Me.btn_Done.Location = New System.Drawing.Point(76, 3)
         Me.btn_Done.Name = "btn_Done"
         Me.btn_Done.Size = New System.Drawing.Size(67, 23)
-        Me.btn_Done.TabIndex = 0
+        Me.btn_Done.TabIndex = 1
         Me.btn_Done.Text = "Done"
         '
         'Cancel_Button
@@ -60,18 +60,19 @@ Partial Class CustomEmailDialog
         Me.Cancel_Button.Location = New System.Drawing.Point(3, 3)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)
-        Me.Cancel_Button.TabIndex = 1
+        Me.Cancel_Button.TabIndex = 0
         Me.Cancel_Button.Text = "Cancel"
         '
-        'CustomEmail1
+        'ce_Email
         '
         Me.ce_Email.AutoSize = True
-		Me.ce_Email.Dock = System.Windows.Forms.DockStyle.Top
-		Me.ce_Email.Location = New System.Drawing.Point(0, 0)
-        Me.ce_Email.Name = "CustomEmail1"
+        Me.ce_Email.Body = New String(-1) {}
+        Me.ce_Email.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ce_Email.Location = New System.Drawing.Point(0, 0)
+        Me.ce_Email.Name = "ce_Email"
         Me.ce_Email.Size = New System.Drawing.Size(445, 278)
         Me.ce_Email.Subject = ""
-        Me.ce_Email.TabIndex = 1
+        Me.ce_Email.TabIndex = 0
         '
         'CustomEmailDialog
         '

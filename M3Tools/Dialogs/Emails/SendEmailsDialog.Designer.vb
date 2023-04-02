@@ -29,7 +29,7 @@ Partial Class SendEmailsDialog
         Me.tc_EmailTypes = New System.Windows.Forms.TabControl()
         Me.sermon = New System.Windows.Forms.TabPage()
         Me.tsc_DriveFilesContainer = New System.Windows.Forms.ToolStripContainer()
-        Me.dt_DriveHeirarchy = New SPPBC.M3Tools.DriveTree()
+        Me.gdt_Files = New SPPBC.M3Tools.DriveTree()
         Me.ts_Tools = New System.Windows.Forms.ToolStrip()
         Me.tss_NewItem = New System.Windows.Forms.ToolStripSplitButton()
         Me.tsmi_NewFolder = New System.Windows.Forms.ToolStripMenuItem()
@@ -40,7 +40,7 @@ Partial Class SendEmailsDialog
         Me.bw_PrepEmails = New System.ComponentModel.BackgroundWorker()
         Me.bw_GatherReceipients = New System.ComponentModel.BackgroundWorker()
         Me.bw_SendEmails = New System.ComponentModel.BackgroundWorker()
-        Me.gmt_Gmail = New SPPBC.M3Tools.GoogleAPI.GmailTool(Me.components)
+        Me.gmt_Gmail = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tc_EmailTypes.SuspendLayout()
         Me.sermon.SuspendLayout()
@@ -112,8 +112,8 @@ Partial Class SendEmailsDialog
         '
         'tsc_DriveFilesContainer.ContentPanel
         '
-        Me.tsc_DriveFilesContainer.ContentPanel.Controls.Add(Me.dt_DriveHeirarchy)
-        Me.tsc_DriveFilesContainer.ContentPanel.Size = New System.Drawing.Size(403, 252)
+        Me.tsc_DriveFilesContainer.ContentPanel.Controls.Add(Me.gdt_Files)
+        Me.tsc_DriveFilesContainer.ContentPanel.Size = New System.Drawing.Size(403, 291)
         Me.tsc_DriveFilesContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tsc_DriveFilesContainer.LeftToolStripPanelVisible = False
         Me.tsc_DriveFilesContainer.Location = New System.Drawing.Point(0, 0)
@@ -127,13 +127,14 @@ Partial Class SendEmailsDialog
         '
         Me.tsc_DriveFilesContainer.TopToolStripPanel.Controls.Add(Me.ts_Tools)
         '
-        'dt_DriveHeirarchy
+        'gdt_Files
         '
-        Me.dt_DriveHeirarchy.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dt_DriveHeirarchy.Location = New System.Drawing.Point(0, 0)
-        Me.dt_DriveHeirarchy.Name = "dt_DriveHeirarchy"
-        Me.dt_DriveHeirarchy.Size = New System.Drawing.Size(403, 252)
-        Me.dt_DriveHeirarchy.TabIndex = 4
+        Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
+        Me.gdt_Files.Name = "gdt_Files"
+        Me.gdt_Files.Size = New System.Drawing.Size(403, 291)
+        Me.gdt_Files.TabIndex = 4
+        Me.gdt_Files.WithChildren = False
         '
         'ts_Tools
         '
@@ -144,9 +145,10 @@ Partial Class SendEmailsDialog
         Me.ts_Tools.Location = New System.Drawing.Point(0, 0)
         Me.ts_Tools.Name = "ts_Tools"
         Me.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ts_Tools.Size = New System.Drawing.Size(403, 39)
+        Me.ts_Tools.Size = New System.Drawing.Size(51, 39)
         Me.ts_Tools.Stretch = True
         Me.ts_Tools.TabIndex = 1
+        Me.ts_Tools.Visible = False
         '
         'tss_NewItem
         '
@@ -200,6 +202,10 @@ Partial Class SendEmailsDialog
         'bw_SendEmails
         '
         '
+        'gmt_Gmail
+        '
+        Me.gmt_Gmail.Username = Global.SPPBC.M3Tools.My.MySettings.Default.CurrentUser
+        '
         'SendEmailsDialog
         '
         Me.AcceptButton = Me.btn_Send
@@ -233,19 +239,19 @@ Partial Class SendEmailsDialog
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 	Friend WithEvents btn_Send As System.Windows.Forms.Button
 	Friend WithEvents btn_Cancel As System.Windows.Forms.Button
-    Friend WithEvents gmt_Gmail As GoogleAPI.GmailTool
-    Friend WithEvents dt_DriveHeirarchy As DriveTree
+    Friend WithEvents gmt_Gmail As GTools.GmailTool
+    Friend WithEvents gdt_Files As DriveTree
 	Friend WithEvents tsc_DriveFilesContainer As Windows.Forms.ToolStripContainer
-	Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
-	Friend WithEvents tc_EmailTypes As Windows.Forms.TabControl
-	Friend WithEvents sermon As Windows.Forms.TabPage
-	Friend WithEvents receipt As Windows.Forms.TabPage
-	Friend WithEvents fu_Receipts As FileUpload
-	Friend WithEvents bw_GatherFiles As ComponentModel.BackgroundWorker
-	Friend WithEvents bw_PrepEmails As ComponentModel.BackgroundWorker
-	Friend WithEvents bw_GatherReceipients As ComponentModel.BackgroundWorker
-	Friend WithEvents bw_SendEmails As ComponentModel.BackgroundWorker
-	Friend WithEvents tss_NewItem As Windows.Forms.ToolStripSplitButton
-	Friend WithEvents tsmi_NewFolder As Windows.Forms.ToolStripMenuItem
-	Friend WithEvents tsmi_NewUpload As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tc_EmailTypes As Windows.Forms.TabControl
+    Friend WithEvents sermon As Windows.Forms.TabPage
+    Friend WithEvents receipt As Windows.Forms.TabPage
+    Friend WithEvents fu_Receipts As FileUpload
+    Friend WithEvents bw_GatherFiles As ComponentModel.BackgroundWorker
+    Friend WithEvents bw_PrepEmails As ComponentModel.BackgroundWorker
+    Friend WithEvents bw_GatherReceipients As ComponentModel.BackgroundWorker
+    Friend WithEvents bw_SendEmails As ComponentModel.BackgroundWorker
+    Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
+    Friend WithEvents tss_NewItem As Windows.Forms.ToolStripSplitButton
+    Friend WithEvents tsmi_NewFolder As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmi_NewUpload As Windows.Forms.ToolStripMenuItem
 End Class

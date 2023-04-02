@@ -1,45 +1,31 @@
-﻿Imports Google.Apis.Auth.OAuth2
+﻿Imports System.Threading
 Imports Google.Apis.Gmail.v1
+Imports Google.Apis.Services
 Imports MimeKit
 
-Namespace GoogleAPI
+Namespace GTools
 	Public Class GmailTool
+		Inherits API
 		Implements IDisposable, IGoogleService(Of Data.Profile)
+
 		Private ReadOnly __scopes As String() = {GmailService.Scope.GmailCompose}
-		Private ReadOnly __appName As String = "Media Ministry Manager"
-		Private ReadOnly __credPath As String = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\Tokens")
-		Private __credential As UserCredential
 		Private __service As GmailService
 
-		''' <summary>
-		''' The user account for the current user
-		''' </summary>
-		''' <returns>The Profile object for the current user</returns>
-		ReadOnly Property UserAccount As Data.Profile Implements IGoogleService(Of Data.Profile).UserAccount
+
+		Protected ReadOnly Property UserAccount As Data.Profile Implements IGoogleService(Of Data.Profile).UserAccount
 			Get
 				Return __service.Users.GetProfile("me").Execute()
 			End Get
 		End Property
 
-		''' <summary>
-		''' Begins to try and authorize the use of the users Gmail account
-		''' </summary>
-		''' <param name="username">The username of the currently logged in user</param>
-		''' <param name="ct">The cancellation token that may be used during authorization</param>
-		Async Function Authorize(username As String, Optional ct As Threading.CancellationToken = Nothing) As Task
+		Overrides Sub Authorize(Optional ct As CancellationToken = Nothing)
+			' Create Gmail API service
+			LoadCreds("me", __scopes, If(IsNothing(ct), CancellationToken.None, ct))
 
+			__service = New GmailService(__init)
 
-			Using stream As New System.IO.MemoryStream(My.Resources.credentials)
-				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(
-					GoogleClientSecrets.FromStream(stream).Secrets, __scopes,
-					"me", If(IsNothing(ct), Threading.CancellationToken.None, ct), New Google.Apis.Util.Store.FileDataStore(__credPath, True))
-			End Using
-
-			__service = New GmailService(New Google.Apis.Services.BaseClientService.Initializer() With {
-				.HttpClientInitializer = __credential,
-				.ApplicationName = __appName
-			})
-		End Function
+			MyBase.Authorize(ct)
+		End Sub
 
 		''' <summary>
 		''' Perform cleanup for this component

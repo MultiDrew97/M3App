@@ -27,7 +27,7 @@ Partial Class CreateFolderDialog
         Me.btn_Create = New System.Windows.Forms.Button()
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.dt_DriveHeirarchy = New SPPBC.M3Tools.DriveTree()
-        Me.gdt_GDrive = New SPPBC.M3Tools.GoogleAPI.GoogleDriveTool(Me.components)
+        Me.gdt_GDrive = New SPPBC.M3Tools.GTools.GdriveTool(Me.components)
         Me.ip_FolderName = New SPPBC.M3Tools.GenericInputPair()
         Me.bw_GatherInfo = New System.ComponentModel.BackgroundWorker()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -117,7 +117,7 @@ Partial Class CreateFolderDialog
 	Friend WithEvents btn_Create As System.Windows.Forms.Button
 	Friend WithEvents btn_Cancel As System.Windows.Forms.Button
 	Friend WithEvents dt_DriveHeirarchy As DriveTree
-	Friend WithEvents gdt_GDrive As GoogleAPI.GoogleDriveTool
+	Friend WithEvents gdt_GDrive As GTools.GdriveTool
 	Friend WithEvents ip_FolderName As GenericInputPair
 	Friend WithEvents bw_GatherInfo As ComponentModel.BackgroundWorker
 End Class

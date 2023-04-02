@@ -23,7 +23,11 @@ Partial Class CustomEmail
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
         Me.rtb_Body = New System.Windows.Forms.RichTextBox()
-        Me.ToolStripContainer2 = New System.Windows.Forms.ToolStripContainer()
+        Me.tsc_BodyContainer = New System.Windows.Forms.ToolStripContainer()
+        Me.ShortcutKeyStrip = New System.Windows.Forms.MenuStrip()
+        Me.Bold = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Underline = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Italics = New System.Windows.Forms.ToolStripMenuItem()
         Me.ts_TextButtons = New System.Windows.Forms.ToolStrip()
         Me.btn_Bold = New System.Windows.Forms.ToolStripButton()
         Me.btn_Underline = New System.Windows.Forms.ToolStripButton()
@@ -32,9 +36,10 @@ Partial Class CustomEmail
         Me.btn_ChangeFont = New System.Windows.Forms.ToolStripButton()
         Me.fd_Font = New System.Windows.Forms.FontDialog()
         Me.ip_Subject = New SPPBC.M3Tools.GenericInputPair()
-        Me.ToolStripContainer2.ContentPanel.SuspendLayout()
-        Me.ToolStripContainer2.TopToolStripPanel.SuspendLayout()
-        Me.ToolStripContainer2.SuspendLayout()
+        Me.tsc_BodyContainer.ContentPanel.SuspendLayout()
+        Me.tsc_BodyContainer.TopToolStripPanel.SuspendLayout()
+        Me.tsc_BodyContainer.SuspendLayout()
+        Me.ShortcutKeyStrip.SuspendLayout()
         Me.ts_TextButtons.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,31 +49,63 @@ Partial Class CustomEmail
         Me.rtb_Body.Location = New System.Drawing.Point(0, 0)
         Me.rtb_Body.Name = "rtb_Body"
         Me.rtb_Body.Size = New System.Drawing.Size(542, 335)
-        Me.rtb_Body.TabIndex = 1
+        Me.rtb_Body.TabIndex = 0
         Me.rtb_Body.Text = ""
         '
-        'ToolStripContainer2
+        'tsc_BodyContainer
         '
-        Me.ToolStripContainer2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.tsc_BodyContainer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ToolStripContainer2.BottomToolStripPanelVisible = False
+        Me.tsc_BodyContainer.BottomToolStripPanelVisible = False
         '
-        'ToolStripContainer2.ContentPanel
+        'tsc_BodyContainer.ContentPanel
         '
-        Me.ToolStripContainer2.ContentPanel.Controls.Add(Me.rtb_Body)
-        Me.ToolStripContainer2.ContentPanel.Size = New System.Drawing.Size(542, 335)
-        Me.ToolStripContainer2.LeftToolStripPanelVisible = False
-        Me.ToolStripContainer2.Location = New System.Drawing.Point(0, 48)
-        Me.ToolStripContainer2.Name = "ToolStripContainer2"
-        Me.ToolStripContainer2.RightToolStripPanelVisible = False
-        Me.ToolStripContainer2.Size = New System.Drawing.Size(542, 360)
-        Me.ToolStripContainer2.TabIndex = 4
-        Me.ToolStripContainer2.Text = "ToolStripContainer2"
+        Me.tsc_BodyContainer.ContentPanel.Controls.Add(Me.rtb_Body)
+        Me.tsc_BodyContainer.ContentPanel.Size = New System.Drawing.Size(542, 335)
+        Me.tsc_BodyContainer.LeftToolStripPanelVisible = False
+        Me.tsc_BodyContainer.Location = New System.Drawing.Point(0, 48)
+        Me.tsc_BodyContainer.Name = "tsc_BodyContainer"
+        Me.tsc_BodyContainer.RightToolStripPanelVisible = False
+        Me.tsc_BodyContainer.Size = New System.Drawing.Size(542, 360)
+        Me.tsc_BodyContainer.TabIndex = 1
+        Me.tsc_BodyContainer.Text = "ToolStripContainer2"
         '
-        'ToolStripContainer2.TopToolStripPanel
+        'tsc_BodyContainer.TopToolStripPanel
         '
-        Me.ToolStripContainer2.TopToolStripPanel.Controls.Add(Me.ts_TextButtons)
+        Me.tsc_BodyContainer.TopToolStripPanel.Controls.Add(Me.ts_TextButtons)
+        '
+        'ShortcutKeyStrip
+        '
+        Me.ShortcutKeyStrip.Dock = System.Windows.Forms.DockStyle.None
+        Me.ShortcutKeyStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Bold, Me.Underline, Me.Italics})
+        Me.ShortcutKeyStrip.Location = New System.Drawing.Point(200, 3)
+        Me.ShortcutKeyStrip.Name = "ShortcutKeyStrip"
+        Me.ShortcutKeyStrip.Size = New System.Drawing.Size(170, 24)
+        Me.ShortcutKeyStrip.TabIndex = 1
+        Me.ShortcutKeyStrip.Text = "MenuStrip1"
+        Me.ShortcutKeyStrip.Visible = False
+        '
+        'Bold
+        '
+        Me.Bold.Name = "Bold"
+        Me.Bold.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.B), System.Windows.Forms.Keys)
+        Me.Bold.Size = New System.Drawing.Size(43, 20)
+        Me.Bold.Text = "Bold"
+        '
+        'Underline
+        '
+        Me.Underline.Name = "Underline"
+        Me.Underline.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
+        Me.Underline.Size = New System.Drawing.Size(70, 20)
+        Me.Underline.Text = "Underline"
+        '
+        'Italics
+        '
+        Me.Italics.Name = "Italics"
+        Me.Italics.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
+        Me.Italics.Size = New System.Drawing.Size(49, 20)
+        Me.Italics.Text = "Italics"
         '
         'ts_TextButtons
         '
@@ -76,7 +113,7 @@ Partial Class CustomEmail
         Me.ts_TextButtons.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_Bold, Me.btn_Underline, Me.btn_Italics, Me.ToolStripSeparator1, Me.btn_ChangeFont})
         Me.ts_TextButtons.Location = New System.Drawing.Point(3, 0)
         Me.ts_TextButtons.Name = "ts_TextButtons"
-        Me.ts_TextButtons.Size = New System.Drawing.Size(141, 25)
+        Me.ts_TextButtons.Size = New System.Drawing.Size(110, 25)
         Me.ts_TextButtons.TabIndex = 0
         '
         'btn_Bold
@@ -138,24 +175,26 @@ Partial Class CustomEmail
         Me.ip_Subject.Mask = ""
         Me.ip_Subject.Name = "ip_Subject"
         Me.ip_Subject.Size = New System.Drawing.Size(536, 42)
-        Me.ip_Subject.TabIndex = 5
+        Me.ip_Subject.TabIndex = 0
         Me.ip_Subject.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.ip_Subject.UseSystemPasswordChar = False
         '
         'CustomEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
+        Me.Controls.Add(Me.ShortcutKeyStrip)
         Me.Controls.Add(Me.ip_Subject)
-        Me.Controls.Add(Me.ToolStripContainer2)
+        Me.Controls.Add(Me.tsc_BodyContainer)
         Me.Name = "CustomEmail"
         Me.Size = New System.Drawing.Size(542, 411)
-        Me.ToolStripContainer2.ContentPanel.ResumeLayout(False)
-        Me.ToolStripContainer2.TopToolStripPanel.ResumeLayout(False)
-        Me.ToolStripContainer2.TopToolStripPanel.PerformLayout()
-        Me.ToolStripContainer2.ResumeLayout(False)
-        Me.ToolStripContainer2.PerformLayout()
+        Me.tsc_BodyContainer.ContentPanel.ResumeLayout(False)
+        Me.tsc_BodyContainer.TopToolStripPanel.ResumeLayout(False)
+        Me.tsc_BodyContainer.TopToolStripPanel.PerformLayout()
+        Me.tsc_BodyContainer.ResumeLayout(False)
+        Me.tsc_BodyContainer.PerformLayout()
+        Me.ShortcutKeyStrip.ResumeLayout(False)
+        Me.ShortcutKeyStrip.PerformLayout()
         Me.ts_TextButtons.ResumeLayout(False)
         Me.ts_TextButtons.PerformLayout()
         Me.ResumeLayout(False)
@@ -163,7 +202,7 @@ Partial Class CustomEmail
 
     End Sub
     Friend WithEvents rtb_Body As Windows.Forms.RichTextBox
-    Friend WithEvents ToolStripContainer2 As Windows.Forms.ToolStripContainer
+    Friend WithEvents tsc_BodyContainer As Windows.Forms.ToolStripContainer
     Friend WithEvents fd_Font As Windows.Forms.FontDialog
     Friend WithEvents ts_TextButtons As Windows.Forms.ToolStrip
     Friend WithEvents btn_Bold As Windows.Forms.ToolStripButton
@@ -172,4 +211,8 @@ Partial Class CustomEmail
     Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
     Friend WithEvents btn_ChangeFont As Windows.Forms.ToolStripButton
     Friend WithEvents ip_Subject As GenericInputPair
+    Friend WithEvents ShortcutKeyStrip As Windows.Forms.MenuStrip
+    Friend WithEvents Bold As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Underline As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Italics As Windows.Forms.ToolStripMenuItem
 End Class

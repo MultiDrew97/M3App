@@ -3,19 +3,25 @@ Imports System.Security
 Imports System.Windows.Forms
 
 Public Structure Utils
-    Shared Function ToSecureString(password As String) As SecureString
-        Dim secureString As New SecureString()
+	Shared ReadOnly Property M3ToolsSettings As My.MySettings
+		Get
+			Return My.Settings
+		End Get
+	End Property
 
-        For Each ch As Char In password
-            secureString.AppendChar(ch)
-        Next
+	Shared Function ToSecureString(password As String) As SecureString
+		Dim secureString As New SecureString()
 
-        secureString.MakeReadOnly()
+		For Each ch As Char In password
+			secureString.AppendChar(ch)
+		Next
 
-        Return secureString
-    End Function
+		secureString.MakeReadOnly()
 
-    Shared ReadOnly Property DefaultFileName(fileName As String) As String
+		Return secureString
+	End Function
+
+	Shared ReadOnly Property DefaultFileName(fileName As String) As String
         Get
             Return fileName.Split(CType("\\", Char()))(fileName.Split(CType("\\", Char())).Length - 1).Split(CType(".", Char()))(0) + " " + DateTime.UtcNow.ToString("MM/dd/yyyy")
         End Get

@@ -1,6 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 
-Namespace GoogleAPI.Types
+Namespace GTools.Types
 	Public Class Folder
 		Inherits File
 		Public Property Children As FileCollection

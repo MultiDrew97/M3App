@@ -34,7 +34,7 @@ Partial Class UploadFileDialog
         Me.chk_DefaultPermissions = New System.Windows.Forms.CheckBox()
         Me.fu_FileUpload = New SPPBC.M3Tools.FileUpload()
         Me.dt_DriveHeirarchy = New SPPBC.M3Tools.DriveTree()
-        Me.gdt_GDrive = New SPPBC.M3Tools.GoogleAPI.GoogleDriveTool(Me.components)
+        Me.gdt_GDrive = New SPPBC.M3Tools.GTools.GdriveTool(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -178,7 +178,7 @@ Partial Class UploadFileDialog
 	Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Friend WithEvents dt_DriveHeirarchy As DriveTree
     Friend WithEvents SplitContainer1 As Windows.Forms.SplitContainer
-	Friend WithEvents gdt_GDrive As GoogleAPI.GoogleDriveTool
+	Friend WithEvents gdt_GDrive As GTools.GdriveTool
 	Friend WithEvents bw_LoadDialog As ComponentModel.BackgroundWorker
 	Friend WithEvents fu_FileUpload As FileUpload
 	Friend WithEvents Panel1 As Windows.Forms.Panel

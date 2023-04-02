@@ -156,38 +156,6 @@ Public Class DisplayListenersCtrl
 		cms_Tools.ToggleSend(dgv_Listeners.SelectedRows.Count > 0)
 	End Sub
 
-	Private Sub UserEditedCustomer(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Listeners.CellValueChanged
-		' TODO: Check if still necessary
-
-		If (e.RowIndex < 0) Then
-			Return
-		End If
-
-		'get values from table
-		Dim id As Integer = CInt(_listeners.Rows(e.RowIndex)("CustomerID"))
-		Dim column As String = dgv_Listeners.Columns(e.ColumnIndex).DataPropertyName
-		Dim value As Object = dgv_Listeners.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-
-		Dim tableRow = _listeners.Rows(e.RowIndex)
-
-		If value.Equals(tableRow(column)) Then
-			Return
-		End If
-
-		MessageBox.Show("A change has been detected", "Change Detected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-		'Select Case column
-		'	Case "FirstName", "LastName", "PhoneNumber"
-		'		If Not String.IsNullOrWhiteSpace(value) Then
-		'			db_Customers.UpdateCustomer(customerID, column, value)
-		'		Else
-		'			MessageBox.Show($"You must enter a value for {column}", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
-		'		End If
-		'	Case Else
-		'		db_Customers.UpdateCustomer(customerID, column, value)
-		'End Select
-
-	End Sub
-
 	Private Sub RemoveRowByToolStrip() Handles cms_Tools.RemoveRows
 		If dgv_Listeners.SelectedRows.Count < 1 Then
 			Return

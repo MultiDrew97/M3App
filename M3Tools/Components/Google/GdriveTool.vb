@@ -1,48 +1,43 @@
-﻿Imports Google.Apis.Auth.OAuth2
+﻿Imports System.Threading
+Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Drive.v3
+Imports Google.Apis.Services
+Namespace GTools
 
-Namespace GoogleAPI
-	Public Class GoogleDriveTool
+	Public Structure Roles
+		Shared Reader As String = "reader"
+	End Structure
+
+	Public Structure ShareType
+		Shared Anyone As String = "anyone"
+	End Structure
+
+	Public Class GdriveTool
+		Inherits API
 		Implements IDisposable, IGoogleService(Of Data.User)
 
-		Private ReadOnly Scopes As String() = {DriveService.Scope.Drive}
-		Private ReadOnly ApplicationName As String = "Media Ministry Manager"
-		Private ReadOnly __credPath As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SPPBC\Tokens")
-		Private __credential As UserCredential
+		Private ReadOnly __scopes As String() = {DriveService.Scope.Drive}
 		Private __service As DriveService
+
 		Private ReadOnly __defaultPermissions As New Data.Permission With {
-			.Role = "reader",
-			.Type = "anyone"
+			.Role = Roles.Reader,
+			.Type = ShareType.Anyone
 		}
 
-		''' <summary>
-		''' Gets the account information for the current user.
-		''' </summary>
-		''' <returns>The user account info for the current user</returns>
-		ReadOnly Property UserAccount As Data.User Implements IGoogleService(Of Data.User).UserAccount
+		Protected ReadOnly Property UserAccount As Data.User Implements IGoogleService(Of Data.User).UserAccount
 			Get
 				Return __service.About.Get().Execute().User
 			End Get
 		End Property
 
-		''' <summary>
-		''' Authorize with Google Drive based on the username passed
-		''' </summary>
-		''' <param name="username">Username of the currently logged in user</param>
-		''' <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
-		Public Async Function Authorize(username As String, Optional ct As Threading.CancellationToken = Nothing) As Task
-			Using stream As New IO.MemoryStream(My.Resources.credentials)
-				__credential = Await GoogleWebAuthorizationBroker.AuthorizeAsync(
-					GoogleClientSecrets.FromStream(stream).Secrets, Scopes,
-					"user", If(IsNothing(ct), Threading.CancellationToken.None, ct), New Google.Apis.Util.Store.FileDataStore(__credPath, True))
-			End Using
+		Overrides Sub Authorize(Optional ct As CancellationToken = Nothing)
+			' Create Drive API service.
+			LoadCreds("user", __scopes, If(IsNothing(ct), CancellationToken.None, ct))
 
-			'Create Drive API service.
-			__service = New DriveService(New Google.Apis.Services.BaseClientService.Initializer() With {
-				.HttpClientInitializer = __credential,
-				.ApplicationName = ApplicationName
-			})
-		End Function
+			__service = New DriveService(__init)
+
+			MyBase.Authorize(ct)
+		End Sub
 
 		''' <summary>
 		''' Closes the connection to Google Drive
@@ -300,13 +295,13 @@ Namespace GoogleAPI
 		''' Gets all folders and the children folders and files under them
 		''' </summary>
 		''' <returns>A collection of folders that contains their child files and folders</returns>
-		Function GetFoldersWithChildren() As Task(Of Types.FileCollection)
-			Dim folders = GetFolders()
-			For Each folder As Types.Folder In folders.Result
-				folder.Children.AddRange(GetChildren(folder.Id).Result)
+		Async Function GetFoldersWithChildren() As Task(Of Types.FileCollection)
+			Dim folders = Await GetFolders()
+			For Each folder As Types.Folder In folders
+				folder.Children.AddRange(Await GetChildren(folder.Id))
 			Next
 
-			Return Task.FromResult(folders.Result)
+			Return folders
 		End Function
 
 		''' <summary>

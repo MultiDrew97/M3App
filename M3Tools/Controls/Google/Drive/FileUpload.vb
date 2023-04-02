@@ -1,8 +1,8 @@
 ﻿Imports System.ComponentModel
 
 Public Class FileUpload
-	Private ReadOnly __files As New GoogleAPI.Types.FileCollection()
-	Public ReadOnly Property Files As GoogleAPI.Types.FileCollection
+	Private ReadOnly __files As New GTools.Types.FileCollection()
+	Public ReadOnly Property Files As GTools.Types.FileCollection
 		Get
 			Return __files
 		End Get
@@ -29,7 +29,7 @@ Public Class FileUpload
 	Private Sub LoadFiles()
 		Files.Clear()
 		For Each file In ofd_FileDialog.FileNames
-			Files.Add(New GoogleAPI.Types.File("", file, file.Split("."c)(1)))
+			Files.Add(New GTools.Types.File("", file, file.Split("."c)(1)))
 		Next
 	End Sub
 End Class

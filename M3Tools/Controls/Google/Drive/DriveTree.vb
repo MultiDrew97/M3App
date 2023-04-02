@@ -3,15 +3,7 @@ Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class DriveTree
-	Private __username As String
-
-	Public WriteOnly Property Username As String
-		Set(value As String)
-			' TODO: Make this authorize when written to?
-			__username = value
-		End Set
-	End Property
-
+	'Private __username As String
 
 	ReadOnly Property Nodes As TreeNodeCollection
 		Get
@@ -39,7 +31,7 @@ Public Class DriveTree
 	<Description("Whether the tree should include the children of folders")>
 	Public Property WithChildren As Boolean
 
-	Public Sub FillTable(treeNodes As GoogleAPI.Types.FileCollection)
+	Public Sub FillTable(treeNodes As GTools.Types.FileCollection)
 		UseWaitCursor = True
 		tv_DriveFiles.Nodes(0).Nodes.Clear()
 		tv_DriveFiles.Nodes(0).Nodes.AddRange(ParseNodes(treeNodes))
@@ -52,7 +44,7 @@ Public Class DriveTree
 	''' </summary>
 	''' <param name="folders">The collection of files and folders to filter.</param>
 	''' <returns>The filtered file collection as a tree node array.</returns>
-	Private Function ParseNodes(folders As GoogleAPI.Types.FileCollection) As TreeNode()
+	Private Function ParseNodes(folders As GTools.Types.FileCollection) As TreeNode()
 		Dim i As Integer = 0
 
 		Do
@@ -62,17 +54,17 @@ Public Class DriveTree
 			End If
 
 			If folders.Contains(folders(i).Parents(0)) Then
-				Dim parentFolder = CType(folders(folders(i).Parents(0)), GoogleAPI.Types.Folder)
+				Dim parentFolder = CType(folders(folders(i).Parents(0)), GTools.Types.Folder)
 
 				If parentFolder.Children.Count = 0 Then
 					parentFolder.Children.Add(folders(i))
 				Else
-					Dim folderUnderParent = CType(parentFolder.Children(folders(i).Id), GoogleAPI.Types.Folder)
+					Dim folderUnderParent = CType(parentFolder.Children(folders(i).Id), GTools.Types.Folder)
 
 					If folderUnderParent Is Nothing Then
 						parentFolder.Children.Add(folders(i))
 					Else
-						folderUnderParent.Children.AddRange(CType(folders(i), GoogleAPI.Types.Folder).Children)
+						folderUnderParent.Children.AddRange(CType(folders(i), GTools.Types.Folder).Children)
 					End If
 
 				End If
@@ -92,16 +84,16 @@ Public Class DriveTree
 	''' </summary>
 	''' <param name="folders">The collections of files that hold the file heirarchy information.</param>
 	''' <returns>An array of tree nodes, based on the file heirarchy in the file collection.</returns>
-	Private Function ParseTree(folders As GoogleAPI.Types.FileCollection) As TreeNode()
+	Private Function ParseTree(folders As GTools.Types.FileCollection) As TreeNode()
 		Dim nodes As New Collection(Of TreeNode)
 
 		For Each folder In folders
-			If folder.GetType = GetType(GoogleAPI.Types.Folder) Then
-				If CType(folder, GoogleAPI.Types.Folder).Children.Count = 0 Then
+			If folder.GetType = GetType(GTools.Types.Folder) Then
+				If CType(folder, GTools.Types.Folder).Children.Count = 0 Then
 					'Add This folder to the collection as is
 					nodes.Add(New TreeNode(folder.Name) With {.Name = folder.Id})
 				Else
-					nodes.Add(New TreeNode(folder.Name, ParseTree(CType(folder, GoogleAPI.Types.Folder).Children)) With {.Name = folder.Id})
+					nodes.Add(New TreeNode(folder.Name, ParseTree(CType(folder, GTools.Types.Folder).Children)) With {.Name = folder.Id})
 				End If
 			Else
 				nodes.Add(New TreeNode(folder.Name) With {.Name = folder.Id})
@@ -130,6 +122,7 @@ Public Class DriveTree
 	End Function
 
 	Function GetSelectedNodes(Optional nodes As TreeNodeCollection = Nothing) As Collection(Of TreeNode)
+		' TODO: When checking a folder, check child files and folders as well
 		Dim treeNodes As New Collection(Of TreeNode)
 
 		For Each node As TreeNode In If(nodes, tv_DriveFiles.Nodes)
@@ -148,26 +141,29 @@ Public Class DriveTree
 		Return treeNodes
 	End Function
 
-	Public Async Sub RefreshTree()
-		UseWaitCursor = True
-		Await gdt_GDrive.Authorize(__username)
+	Private Async Sub RefreshTree()
 		If WithChildren Then
-			FillTable(gdt_GDrive.GetFoldersWithChildren().Result)
+			FillTable(Await gdt_GDrive.GetFoldersWithChildren())
 		Else
-			FillTable(gdt_GDrive.GetFolders().Result)
+			FillTable(Await gdt_GDrive.GetFolders())
 		End If
+	End Sub
+
+	Public Sub Reload()
+		UseWaitCursor = True
+		RefreshTree()
 		UseWaitCursor = False
 	End Sub
 
-	Private Sub Reload()
-		RefreshTree()
-	End Sub
-
 	Private Sub NewFolder(sender As Object, e As EventArgs) Handles tsmi_NewFolder.Click
-		Using newFolder As New CreateFolderDialog(__username)
+		Using newFolder As New CreateFolderDialog()
 			If newFolder.ShowDialog = DialogResult.OK Then
 				Reload()
 			End If
 		End Using
+	End Sub
+
+	Public Shadows Sub Load()
+		gdt_GDrive.Authorize()
 	End Sub
 End Class

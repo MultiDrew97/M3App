@@ -28,5 +28,8 @@
     <Setting Name="ObjectDelimiter" Type="System.String" Scope="Application">
       <Value Profile="(Default)">;</Value>
     </Setting>
+    <Setting Name="CurrentUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

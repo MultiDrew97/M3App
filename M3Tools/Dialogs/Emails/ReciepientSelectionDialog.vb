@@ -11,4 +11,8 @@ Public Class ReciepientSelectionDialog
 		Me.DialogResult = DialogResult.Cancel
 		Me.Close()
 	End Sub
+
+	Private Sub DialogShown(sender As Object, e As EventArgs) Handles Me.Shown
+		lvp_Listeners.Reload()
+	End Sub
 End Class

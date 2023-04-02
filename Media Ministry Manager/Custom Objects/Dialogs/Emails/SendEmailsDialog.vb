@@ -257,9 +257,9 @@ Public Class SendEmailsDialog
 		'SelectedOption = tcl_EmailOptions.SelectedIndex
 	End Sub
 
-	Private Async Sub SendEmailsDialog_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+	Private Sub SendEmailsDialog_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 		UseWaitCursor = True
-		Await gd_Uploader.Authorize(My.Settings.Username)
+		gd_Uploader.Authorize()
 		LoadFolders()
 		UseWaitCursor = False
 	End Sub

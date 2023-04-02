@@ -2,53 +2,48 @@
 
 Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports SPPBC.M3Tools.Exceptions
+Imports SPPBC.M3Tools.Utils
 
 Public Class Frm_Login
-	Private loginSuccess As Boolean = False
-	Private reason As String = ""
 	Private Event BeginLogin()
 	Private Event EndLogin()
 
 	' TODO: Potentially consolidate these function
-	Private Sub LoginShown(sender As Object, e As EventArgs) Handles Me.Shown
-		If My.Settings.KeepLoggedIn Then
-			If Not loginSuccess Then
-				While True
-					Try
-						If MessageBox.Show(reason, "Login Failed", MessageBoxButtons.RetryCancel) = DialogResult.Retry Then
-							TryLogin()
-						Else
-							Exit While
-						End If
-					Catch
-						Continue While
-					End Try
-				End While
-			Else
-				Frm_Main.Show()
-				Me.Close()
-			End If
-		End If
-	End Sub
+	Private Sub Showing(sender As Object, e As EventArgs) Handles Me.Shown
+		' TODO: Use PerformLogin sub instead
+		chk_KeepLoggedIn.Checked = My.Settings.KeepLoggedIn
 
-	Private Sub LoginLoad(sender As Object, e As EventArgs) Handles MyBase.Load
-		If My.Settings.KeepLoggedIn Then
-			Try
-				TryLogin()
-
-				If Not IsNothing(My.Settings.User) Then
-					loginSuccess = True
-				End If
-			Catch ex As Exception
-				'loginSuccess = False
-				reason = ex.Message
-				Reset()
-			End Try
-		Else
+		If Not chk_KeepLoggedIn.Checked Then
 			Reset()
+			Return
 		End If
+
+		'Try
+		PerformLogin(sender, e)
+
+		'If Not IsNothing(My.Settings.User) Then
+		'	Frm_Main.Show()
+		'	bw_SaveSettings.RunWorkerAsync()
+		'End If
+		'Catch ex As Exception
+		'	'loginSuccess = False
+		'	While True
+		'		Try
+		'			If MessageBox.Show(ex.Message, "Login Failed", MessageBoxButtons.RetryCancel) = DialogResult.Cancel Then
+		'				Exit While
+		'			End If
+
+		'			TryLogin()
+		'		Catch
+		'			Continue While
+		'		End Try
+		'	End While
+
+		'	Reset()
+		'End Try
 	End Sub
+
+
 
 	Private Sub TimerTicking(sender As Object, e As EventArgs) Handles tmr_LoginTimer.Tick
 		lsd_LoadScreen.LoadText = "Failed to connect to server in time. Please try again or contact system support."
@@ -68,19 +63,15 @@ Public Class Frm_Login
 		My.Settings.KeepLoggedIn = chk_KeepLoggedIn.Checked
 		My.Settings.Username = If(lf_Login.Username, My.Settings.Username)
 		My.Settings.Password = If(lf_Login.Password, My.Settings.Password)
-
 		My.Settings.Save()
+
+		M3ToolsSettings.CurrentUser = My.Settings.Username
+		M3ToolsSettings.Save()
 	End Sub
 
 	Private Sub SettingsSaved(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SaveSettings.RunWorkerCompleted
 		UseWaitCursor = False
 		Me.Close()
-	End Sub
-
-	Private Sub Llb_ForgotPassword_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_ForgotPassword.LinkClicked
-		If ChangePasswordDialog.ShowDialog = DialogResult.OK Then
-			Reset()
-		End If
 	End Sub
 
 	Private Sub NewUser(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_SignUp.LinkClicked
@@ -93,6 +84,7 @@ Public Class Frm_Login
 
 	Private Sub TryLogin(Optional username As String = Nothing, Optional password As String = Nothing)
 		Try
+			RaiseEvent BeginLogin()
 			My.Settings.User = db_Users.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
 		Catch ex As Exception
 			Select Case ex.GetType()
@@ -113,18 +105,11 @@ Public Class Frm_Login
 	End Sub
 
 	Private Sub PerformLogin(sender As Object, e As EventArgs) Handles btn_Login.Click
-		UseWaitCursor = True
-		Enabled = False
-		Opacity = 50
-
 		Try
-			RaiseEvent BeginLogin()
 			TryLogin(If(lf_Login.Username, Nothing), If(lf_Login.Password, Nothing))
 
 			If My.Settings.User Is Nothing Then
 				Throw New Exception("Unable to login. Please try again or contact system support.")
-				'lsd_LoadScreen.LoadText = "Unable to login. Please try again or contact system support."
-				'lsd_LoadScreen.Image = My.Resources.ErrorImage
 			End If
 
 			bw_SaveSettings.RunWorkerAsync()
@@ -183,6 +168,9 @@ Public Class Frm_Login
 	Private Sub LoginBegin() Handles Me.BeginLogin
 		lsd_LoadScreen.LoadText = "Attempting to login..."
 		lsd_LoadScreen.ShowDialog()
+		UseWaitCursor = True
+		Enabled = False
+		Opacity = 50
 		tmr_LoginTimer.Start()
 	End Sub
 

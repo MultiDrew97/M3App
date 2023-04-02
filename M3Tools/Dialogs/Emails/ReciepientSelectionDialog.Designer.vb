@@ -65,7 +65,9 @@ Partial Class ReciepientSelectionDialog
         '
         'lvp_Listeners
         '
+        Me.lvp_Listeners.AllowColumnReordering = True
         Me.lvp_Listeners.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lvp_Listeners.Filter = Nothing
         Me.lvp_Listeners.Location = New System.Drawing.Point(0, 0)
         Me.lvp_Listeners.Name = "lvp_Listeners"
         Me.lvp_Listeners.Size = New System.Drawing.Size(524, 350)
@@ -86,7 +88,7 @@ Partial Class ReciepientSelectionDialog
         Me.Name = "ReciepientSelectionDialog"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "ReciepientSelectionDialog"
+        Me.Text = "Which Listener?"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 

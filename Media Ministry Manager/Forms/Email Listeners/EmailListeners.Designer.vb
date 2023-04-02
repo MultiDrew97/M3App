@@ -26,7 +26,7 @@ Partial Class frm_EmailListeners
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_EmailListeners))
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
 		Me.dlc_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
-		Me.gt_Email = New SPPBC.M3Tools.GoogleAPI.GmailTool(Me.components)
+		Me.gt_Email = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
 		Me.SuspendLayout()
 		'
 		'mms_Main
@@ -66,5 +66,5 @@ Partial Class frm_EmailListeners
 
 	Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
 	Friend WithEvents dlc_Listeners As SPPBC.M3Tools.DisplayListenersCtrl
-	Friend WithEvents gt_Email As SPPBC.M3Tools.GoogleAPI.GmailTool
+	Friend WithEvents gt_Email As SPPBC.M3Tools.GTools.GmailTool
 End Class
