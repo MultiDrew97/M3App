@@ -125,4 +125,16 @@ Public Class CustomEmail
 
 		Return fontStyle
 	End Function
+
+	Private Sub BodyCleared(sender As Object, e As EventArgs) Handles rtb_Body.TextChanged
+		If rtb_Body.Text <> "" Then
+			Return
+		End If
+
+		rtb_Body.SelectionFont = New Drawing.Font(rtb_Body.Font, Drawing.FontStyle.Regular)
+
+		btn_Bold.Checked = False
+		btn_Italics.Checked = False
+		btn_Underline.Checked = False
+	End Sub
 End Class
