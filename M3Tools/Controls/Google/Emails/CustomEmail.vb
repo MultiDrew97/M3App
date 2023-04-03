@@ -31,17 +31,6 @@ Public Class CustomEmail
 		End Get
 	End Property
 
-	Sub New()
-		' This call is required by the designer.
-		InitializeComponent()
-
-		' Add any initialization after the InitializeComponent() call.
-		rtb_Body.SelectionFont = fd_Font.Font
-		btn_Bold.Checked = fd_Font.Font.Bold
-		btn_Italics.Checked = fd_Font.Font.Italic
-		btn_Underline.Checked = fd_Font.Font.Underline
-	End Sub
-
 	Private Sub ChangeFont(sender As Object, e As EventArgs) Handles btn_ChangeFont.Click
 		If fd_Font.ShowDialog = DialogResult.OK Then
 			rtb_Body.Font = fd_Font.Font
@@ -99,7 +88,6 @@ Public Class CustomEmail
 		End If
 
 		rtb_Body.SelectionFont = New Drawing.Font(rtb_Body.Font, CType(fontStyle, Drawing.FontStyle))
-
 	End Sub
 
 	Private Function GetCurrentFontStyle() As Integer
@@ -133,8 +121,19 @@ Public Class CustomEmail
 
 		rtb_Body.SelectionFont = New Drawing.Font(rtb_Body.Font, Drawing.FontStyle.Regular)
 
+		ResetFontButtons()
+	End Sub
+
+	Private Sub ResetFontButtons()
 		btn_Bold.Checked = False
 		btn_Italics.Checked = False
 		btn_Underline.Checked = False
+	End Sub
+
+	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
+		rtb_Body.SelectionFont = fd_Font.Font
+		btn_Bold.Checked = fd_Font.Font.Bold
+		btn_Italics.Checked = fd_Font.Font.Italic
+		btn_Underline.Checked = fd_Font.Font.Underline
 	End Sub
 End Class
