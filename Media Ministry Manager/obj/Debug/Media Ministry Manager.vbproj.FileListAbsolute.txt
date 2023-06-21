@@ -193,6 +193,9 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.xml
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\BouncyCastle.Cryptography.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Enums.NET.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Enums.NET.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.PlatformServices.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.pdb
@@ -210,10 +213,12 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Compression.LZ4.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Compression.LZ4.Streams.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\K4os.Hash.xxHash.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MathNet.Numerics.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Logging.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MimeKit.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MimeKit.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Newtonsoft.Json.dll
@@ -228,11 +233,15 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.pd
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\BouncyCastle.Crypto.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\ICSharpCode.SharpZipLib.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\ICSharpCode.SharpZipLib.pdb
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SixLabors.Fonts.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SixLabors.ImageSharp.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Renci.SshNet.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Buffers.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.IO.Pipelines.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Memory.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Numerics.Vectors.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Encoding.CodePages.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Encodings.Web.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Json.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Threading.Tasks.Extensions.dll

@@ -66,7 +66,33 @@ Public Class GenericInputPair
 		End Set
 	End Property
 
+	<DefaultValue("Input...")>
+	Public Property Placeholder As String = "Input..."
+
 	Private Sub InputTextChanged(sender As Object, e As EventArgs) Handles txt_Input.TextChanged
 		RaiseEvent TextChanged(Me, e)
+	End Sub
+
+	Private Sub InputGotFocus(sender As Object, e As EventArgs) Handles txt_Input.GotFocus
+		If txt_Input.Text <> Placeholder Then
+			Return
+		End If
+
+		txt_Input.Text = ""
+		txt_Input.ForeColor = Drawing.SystemColors.WindowText
+	End Sub
+
+	Private Sub InputLostFocus(sender As Object, e As EventArgs) Handles txt_Input.LostFocus
+		If txt_Input.Text <> "" Then
+			Return
+		End If
+
+		txt_Input.Text = Placeholder
+		txt_Input.ForeColor = Drawing.SystemColors.ControlDark
+	End Sub
+
+	Private Sub GenericInputPair_Load(sender As Object, e As EventArgs) Handles Me.Load
+		txt_Input.Text = Placeholder
+		txt_Input.ForeColor = Drawing.SystemColors.ControlDark
 	End Sub
 End Class

@@ -45,14 +45,13 @@ Public Class SendEmailsDialog
 	'End Property
 
 	Private Sub SendEmails(sender As Object, e As EventArgs) Handles btn_Send.Click
-		btn_Send.Enabled = False
+		RaiseEvent EmailsSending()
 
 		If FileCount = 0 Then
 			MessageBox.Show("You must select a file.", "Emails", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			RaiseEvent EmailsCancelled()
 			Return
 		End If
-
-		RaiseEvent EmailsSending()
 		'gather files to send
 		bw_GatherFiles.RunWorkerAsync(tc_EmailTypes.SelectedIndex)
 		''prep the email contents to be sent
@@ -168,7 +167,7 @@ Public Class SendEmailsDialog
 			End If
 
 			__email.Subject = customEmail.Email.Subject
-			__email.Body = customEmail.Email.RichTextBody
+			__email.Body = customEmail.Email.Body
 		End Using
 
 

@@ -37,7 +37,7 @@ Partial Class CustomEmailDialog
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.btn_Done, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(287, 284)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(287, 319)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -66,11 +66,13 @@ Partial Class CustomEmailDialog
         'ce_Email
         '
         Me.ce_Email.AutoSize = True
-        Me.ce_Email.Body = New String(-1) {}
-        Me.ce_Email.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ce_Email.Body = "Email Body..."
         Me.ce_Email.Location = New System.Drawing.Point(0, 0)
+        Me.ce_Email.Margin = New System.Windows.Forms.Padding(6)
+        Me.ce_Email.MaximumSize = New System.Drawing.Size(600, 500)
+        Me.ce_Email.MinimumSize = New System.Drawing.Size(400, 300)
         Me.ce_Email.Name = "ce_Email"
-        Me.ce_Email.Size = New System.Drawing.Size(445, 278)
+        Me.ce_Email.Size = New System.Drawing.Size(445, 300)
         Me.ce_Email.Subject = ""
         Me.ce_Email.TabIndex = 0
         '
@@ -80,7 +82,7 @@ Partial Class CustomEmailDialog
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(445, 325)
+        Me.ClientSize = New System.Drawing.Size(445, 360)
         Me.Controls.Add(Me.ce_Email)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -88,8 +90,9 @@ Partial Class CustomEmailDialog
         Me.MinimizeBox = False
         Me.Name = "CustomEmailDialog"
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "CustomEmailDialog"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Custom Email"
+        Me.TopMost = True
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

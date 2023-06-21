@@ -61,7 +61,7 @@ Partial Class DisplayListenersCtrl
         'ToolStripContainer1.ContentPanel
         '
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_Listeners)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(517, 356)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(517, 370)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStripContainer1.LeftToolStripPanelVisible = False
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
@@ -87,7 +87,7 @@ Partial Class DisplayListenersCtrl
         Me.dgv_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv_Listeners.Location = New System.Drawing.Point(0, 0)
         Me.dgv_Listeners.Name = "dgv_Listeners"
-        Me.dgv_Listeners.Size = New System.Drawing.Size(517, 356)
+        Me.dgv_Listeners.Size = New System.Drawing.Size(517, 370)
         Me.dgv_Listeners.TabIndex = 0
         '
         'dgc_ListenerID
@@ -161,11 +161,11 @@ Partial Class DisplayListenersCtrl
         'ts_Tools
         '
         Me.ts_Tools.Dock = System.Windows.Forms.DockStyle.None
-        Me.ts_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ts_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.tbtn_Email, Me.ToolStripSeparator2, Me.txt_Filter})
         Me.ts_Tools.Location = New System.Drawing.Point(3, 0)
         Me.ts_Tools.Name = "ts_Tools"
-        Me.ts_Tools.Size = New System.Drawing.Size(259, 39)
+        Me.ts_Tools.Size = New System.Drawing.Size(180, 25)
         Me.ts_Tools.TabIndex = 1
         '
         'tbtn_AddListener
@@ -174,7 +174,7 @@ Partial Class DisplayListenersCtrl
         Me.tbtn_AddListener.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
         Me.tbtn_AddListener.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbtn_AddListener.Name = "tbtn_AddListener"
-        Me.tbtn_AddListener.Size = New System.Drawing.Size(36, 36)
+        Me.tbtn_AddListener.Size = New System.Drawing.Size(23, 22)
         Me.tbtn_AddListener.Text = "Add Listener"
         '
         'tbtn_Import
@@ -183,7 +183,7 @@ Partial Class DisplayListenersCtrl
         Me.tbtn_Import.Image = Global.SPPBC.M3Tools.My.Resources.Resources.import
         Me.tbtn_Import.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbtn_Import.Name = "tbtn_Import"
-        Me.tbtn_Import.Size = New System.Drawing.Size(36, 36)
+        Me.tbtn_Import.Size = New System.Drawing.Size(23, 22)
         Me.tbtn_Import.Text = "Import Listeners"
         '
         'tbtn_Email
@@ -192,18 +192,19 @@ Partial Class DisplayListenersCtrl
         Me.tbtn_Email.Image = CType(resources.GetObject("tbtn_Email.Image"), System.Drawing.Image)
         Me.tbtn_Email.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbtn_Email.Name = "tbtn_Email"
-        Me.tbtn_Email.Size = New System.Drawing.Size(36, 36)
+        Me.tbtn_Email.Size = New System.Drawing.Size(23, 22)
         Me.tbtn_Email.Text = "Send Emails"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
         'txt_Filter
         '
+        Me.txt_Filter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txt_Filter.Name = "txt_Filter"
-        Me.txt_Filter.Size = New System.Drawing.Size(100, 39)
+        Me.txt_Filter.Size = New System.Drawing.Size(100, 25)
         '
         'db_Listeners
         '

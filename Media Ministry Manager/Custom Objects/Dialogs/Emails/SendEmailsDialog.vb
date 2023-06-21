@@ -164,7 +164,17 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub Btn_CustomMessage_Click(sender As Object, e As EventArgs) Handles btn_CustomMessage.Click
-		CustomMessageDialog.ShowDialog()
+		Using custom As New CustomMessageDialog
+			If Not custom.ShowDialog() = DialogResult.OK Then
+				Return
+			End If
+
+			Dim attach As DialogResult = MessageBox.Show("Attachemnt?", "Would you like to attach a file to this email?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+			If attach = DialogResult.No Then
+				Return
+			End If
+		End Using
 	End Sub
 
 	Private Sub GetFile()

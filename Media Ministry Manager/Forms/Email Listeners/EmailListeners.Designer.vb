@@ -22,18 +22,19 @@ Partial Class frm_EmailListeners
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_EmailListeners))
-		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
-		Me.dlc_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
-		Me.gt_Email = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_EmailListeners))
+        Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
+        Me.dlc_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
+        Me.gt_Email = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
 		Me.SuspendLayout()
 		'
 		'mms_Main
 		'
+		Me.mms_Main.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.mms_Main.Location = New System.Drawing.Point(0, 0)
 		Me.mms_Main.Name = "mms_Main"
-		Me.mms_Main.Size = New System.Drawing.Size(733, 24)
+		Me.mms_Main.Size = New System.Drawing.Size(784, 24)
 		Me.mms_Main.TabIndex = 0
 		Me.mms_Main.Text = "MainMenuStrip1"
 		'
@@ -44,18 +45,24 @@ Partial Class frm_EmailListeners
 		Me.dlc_Listeners.Filter = Nothing
 		Me.dlc_Listeners.Location = New System.Drawing.Point(0, 24)
 		Me.dlc_Listeners.Name = "dlc_Listeners"
-		Me.dlc_Listeners.Size = New System.Drawing.Size(733, 350)
+		Me.dlc_Listeners.Size = New System.Drawing.Size(784, 437)
 		Me.dlc_Listeners.TabIndex = 1
+		'
+		'gt_Email
+		'
+		Me.gt_Email.Username = Nothing
 		'
 		'frm_EmailListeners
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(733, 374)
+		Me.ClientSize = New System.Drawing.Size(784, 461)
 		Me.Controls.Add(Me.dlc_Listeners)
 		Me.Controls.Add(Me.mms_Main)
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MainMenuStrip = Me.mms_Main
+		Me.MaximizeBox = False
+		Me.MinimumSize = New System.Drawing.Size(800, 500)
 		Me.Name = "frm_EmailListeners"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Media Ministry Manager"

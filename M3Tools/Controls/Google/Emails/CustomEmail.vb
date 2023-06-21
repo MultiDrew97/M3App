@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Public Class CustomEmail
+	ReadOnly placeholders As String() = {"Subject...", "Email Body..."}
 	Private Structure Shortcuts
 		Shared Bold As String = "Bold"
 		Shared Underline As String = "Underline"
@@ -9,19 +10,19 @@ Public Class CustomEmail
 
 	Public Property Subject As String
 		Get
-			Return ip_Subject.Text
+			Return txt_Subject.Text
 		End Get
 		Set(value As String)
-			ip_Subject.Text = value
+			txt_Subject.Text = value
 		End Set
 	End Property
 
-	Public Property Body As String()
+	Public Property Body As String
 		Get
-			Return rtb_Body.Lines
+			Return txt_Body.Text
 		End Get
-		Set(value As String())
-			rtb_Body.Lines = value
+		Set(value As String)
+			txt_Body.Text = value
 		End Set
 	End Property
 
@@ -41,6 +42,8 @@ Public Class CustomEmail
 	End Sub
 
 	Private Sub BoldText(sender As Object, e As EventArgs) Handles btn_Bold.Click, Bold.Click
+		MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+		Return
 		Dim fontStyle = GetCurrentFontStyle()
 
 		If Not rtb_Body.SelectionFont.Bold Then
@@ -66,6 +69,8 @@ Public Class CustomEmail
 	End Sub
 
 	Private Sub UnderlineText(sender As Object, e As EventArgs) Handles btn_Underline.Click, Underline.Click
+		MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+		Return
 		Dim fontStyle = GetCurrentFontStyle()
 
 		If Not rtb_Body.SelectionFont.Underline Then
@@ -79,6 +84,8 @@ Public Class CustomEmail
 	End Sub
 
 	Private Sub ItalicizeText(sender As Object, e As EventArgs) Handles btn_Italics.Click, Italics.Click
+		MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+		Return
 		Dim fontStyle = GetCurrentFontStyle()
 
 		If Not rtb_Body.SelectionFont.Italic Then
@@ -91,38 +98,43 @@ Public Class CustomEmail
 	End Sub
 
 	Private Function GetCurrentFontStyle() As Integer
-		Dim fontStyle As Integer
+		'Dim fontStyle As Integer
 
-		If rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Italic And rtb_Body.SelectionFont.Bold Then
-			fontStyle = Drawing.FontStyle.Italic + Drawing.FontStyle.Underline + Drawing.FontStyle.Bold
-		ElseIf rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Italic Then
-			fontStyle = Drawing.FontStyle.Underline + Drawing.FontStyle.Italic
-		ElseIf rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Bold Then
-			fontStyle = Drawing.FontStyle.Underline + Drawing.FontStyle.Bold
-		ElseIf rtb_Body.SelectionFont.Italic And rtb_Body.SelectionFont.Bold Then
-			fontStyle = Drawing.FontStyle.Italic + Drawing.FontStyle.Bold
-		ElseIf rtb_Body.SelectionFont.Underline Then
-			fontStyle = Drawing.FontStyle.Underline
-		ElseIf rtb_Body.SelectionFont.Italic Then
-			fontStyle = Drawing.FontStyle.Italic
-		ElseIf rtb_Body.SelectionFont.Bold Then
-			fontStyle = Drawing.FontStyle.Bold
-		Else
-			fontStyle = 0
-		End If
+		Return If(rtb_Body.SelectionFont.Bold, Drawing.FontStyle.Bold, 0) +
+				If(rtb_Body.SelectionFont.Underline, Drawing.FontStyle.Underline, 0) +
+				If(rtb_Body.SelectionFont.Italic, Drawing.FontStyle.Italic, 0)
 
-		Return fontStyle
+		'If rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Italic And rtb_Body.SelectionFont.Bold Then
+		'	fontStyle = Drawing.FontStyle.Italic + Drawing.FontStyle.Underline + Drawing.FontStyle.Bold
+		'ElseIf rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Italic Then
+		'	fontStyle = Drawing.FontStyle.Underline + Drawing.FontStyle.Italic
+		'ElseIf rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Bold Then
+		'	fontStyle = Drawing.FontStyle.Underline + Drawing.FontStyle.Bold
+		'ElseIf rtb_Body.SelectionFont.Italic And rtb_Body.SelectionFont.Bold Then
+		'	fontStyle = Drawing.FontStyle.Italic + Drawing.FontStyle.Bold
+		'ElseIf rtb_Body.SelectionFont.Underline Then
+		'	fontStyle = Drawing.FontStyle.Underline
+		'ElseIf rtb_Body.SelectionFont.Italic Then
+		'	fontStyle = Drawing.FontStyle.Italic
+		'ElseIf rtb_Body.SelectionFont.Bold Then
+		'	fontStyle = Drawing.FontStyle.Bold
+		'Else
+		'	fontStyle = 0
+		'End If
+
+		'Return fontStyle
 	End Function
 
-	Private Sub BodyCleared(sender As Object, e As EventArgs) Handles rtb_Body.TextChanged
-		If rtb_Body.Text <> "" Then
-			Return
-		End If
+	'Private Sub BodyChanged(sender As Object, e As EventArgs) Handles txt_Body.TextChanged
+	'	If txt_Body.Text <> "" Or txt_Body.Text = placeholder Then
+	'		Return
+	'	End If
 
-		rtb_Body.SelectionFont = New Drawing.Font(rtb_Body.Font, Drawing.FontStyle.Regular)
+	'	'rtb_Body.SelectionFont = New Drawing.Font(rtb_Body.Font, Drawing.FontStyle.Regular)
 
-		ResetFontButtons()
-	End Sub
+	'	ResetFontButtons()
+	'	txt_Body.Text = placeholder
+	'End Sub
 
 	Private Sub ResetFontButtons()
 		btn_Bold.Checked = False
@@ -135,5 +147,38 @@ Public Class CustomEmail
 		btn_Bold.Checked = fd_Font.Font.Bold
 		btn_Italics.Checked = fd_Font.Font.Italic
 		btn_Underline.Checked = fd_Font.Font.Underline
+		txt_Subject.Text = placeholders(0)
+		txt_Body.Text = placeholders(1)
+	End Sub
+
+	Private Sub TextGotFocus(sender As Object, e As EventArgs) Handles txt_Body.GotFocus, txt_Subject.GotFocus
+		Dim txtBox = CType(sender, TextBox)
+		Dim value As String = If(txtBox.Name = "txt_Subject", placeholders(0), placeholders(1))
+
+		'Select Case txt.Name
+		'	Case "txt_Subject"
+		'		temp = placeholders(0)
+		'	Case "txt_Body"
+		'		temp = placeholders(1)
+		'End Select
+
+		If txtBox.Text <> value Then
+			Return
+		End If
+
+		txtBox.Text = ""
+		txtBox.ForeColor = Drawing.SystemColors.WindowText
+	End Sub
+
+	Private Sub TextLostFocus(sender As Object, e As EventArgs) Handles txt_Body.LostFocus, txt_Subject.LostFocus
+		Dim txtBox = CType(sender, TextBox)
+		Dim value As String = If(txtBox.Name = "txt_Subject", placeholders(0), placeholders(1))
+
+		If txtBox.Text <> "" Then
+			Return
+		End If
+
+		txtBox.Text = value
+		txtBox.ForeColor = Drawing.SystemColors.ControlDark
 	End Sub
 End Class
