@@ -6,6 +6,8 @@
 Imports System.ComponentModel
 Imports System.Data.SqlClient
 
+' TODO: Go through all functions and make sure that all schema values are present in database
+
 Namespace Database
     Friend Class Database
         Implements IDisposable

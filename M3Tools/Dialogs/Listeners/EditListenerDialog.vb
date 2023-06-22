@@ -51,9 +51,9 @@ Namespace Dialogs
 		End Sub
 
 		Private Sub ListenerUpdated() Handles Me.ListenerChanged
-			ListenerName = Listener.Name
-			ListenerEmail = Listener.Email
 			_newInfo = Listener.Clone()
+			ListenerName = _newInfo.Name
+			ListenerEmail = _newInfo.Email
 		End Sub
 
 		Private Function ChangeDetected() As Boolean

@@ -37,10 +37,10 @@ Partial Class CustomMessageDialog
         '
         Me.btn_Cancel.AutoSize = True
         Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btn_Cancel.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_Cancel.Location = New System.Drawing.Point(136, 362)
+		Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		Me.btn_Cancel.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_Cancel.Location = New System.Drawing.Point(136, 362)
         Me.btn_Cancel.MaximumSize = New System.Drawing.Size(200, 200)
         Me.btn_Cancel.MinimumSize = New System.Drawing.Size(100, 50)
         Me.btn_Cancel.Name = "btn_Cancel"
@@ -52,9 +52,9 @@ Partial Class CustomMessageDialog
         'lbl_MessageSubject
         '
         Me.lbl_MessageSubject.AutoSize = True
-        Me.lbl_MessageSubject.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_MessageSubject.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_MessageSubject.Location = New System.Drawing.Point(36, 33)
+		Me.lbl_MessageSubject.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_MessageSubject.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_MessageSubject.Location = New System.Drawing.Point(36, 33)
         Me.lbl_MessageSubject.Name = "lbl_MessageSubject"
         Me.lbl_MessageSubject.Size = New System.Drawing.Size(98, 25)
         Me.lbl_MessageSubject.TabIndex = 2
@@ -63,44 +63,44 @@ Partial Class CustomMessageDialog
         'lbl_MessageBody
         '
         Me.lbl_MessageBody.AutoSize = True
-        Me.lbl_MessageBody.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_MessageBody.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_MessageBody.Location = New System.Drawing.Point(34, 107)
+		Me.lbl_MessageBody.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_MessageBody.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_MessageBody.Location = New System.Drawing.Point(34, 107)
         Me.lbl_MessageBody.Name = "lbl_MessageBody"
         Me.lbl_MessageBody.Size = New System.Drawing.Size(114, 25)
         Me.lbl_MessageBody.TabIndex = 3
         Me.lbl_MessageBody.Text = "Message:"
-        '
-        'txt_MessageSubject
-        '
-        Me.txt_MessageSubject.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.txt_MessageSubject.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.txt_MessageSubject.Location = New System.Drawing.Point(39, 61)
-        Me.txt_MessageSubject.Name = "txt_MessageSubject"
-        Me.txt_MessageSubject.Size = New System.Drawing.Size(417, 31)
-        Me.txt_MessageSubject.TabIndex = 4
-        '
-        'rtb_MessageBody
-        '
-        Me.rtb_MessageBody.AcceptsTab = True
-        Me.rtb_MessageBody.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.rtb_MessageBody.EnableAutoDragDrop = True
-        Me.rtb_MessageBody.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.rtb_MessageBody.Location = New System.Drawing.Point(37, 135)
-        Me.rtb_MessageBody.MinimumSize = New System.Drawing.Size(600, 200)
-        Me.rtb_MessageBody.Name = "rtb_MessageBody"
-        Me.rtb_MessageBody.Size = New System.Drawing.Size(611, 200)
-        Me.rtb_MessageBody.TabIndex = 5
-        Me.rtb_MessageBody.Text = ""
-        '
-        'btn_UseMessage
-        '
-        Me.btn_UseMessage.AutoSize = True
-        Me.btn_UseMessage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_UseMessage.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_UseMessage.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btn_UseMessage.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_UseMessage.Location = New System.Drawing.Point(419, 362)
+		'
+		'txt_MessageSubject
+		'
+		Me.txt_MessageSubject.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.txt_MessageSubject.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.txt_MessageSubject.Location = New System.Drawing.Point(39, 61)
+		Me.txt_MessageSubject.Name = "txt_MessageSubject"
+		Me.txt_MessageSubject.Size = New System.Drawing.Size(417, 31)
+		Me.txt_MessageSubject.TabIndex = 4
+		'
+		'rtb_MessageBody
+		'
+		Me.rtb_MessageBody.AcceptsTab = True
+		Me.rtb_MessageBody.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.rtb_MessageBody.EnableAutoDragDrop = True
+		Me.rtb_MessageBody.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.rtb_MessageBody.Location = New System.Drawing.Point(37, 135)
+		Me.rtb_MessageBody.MinimumSize = New System.Drawing.Size(600, 200)
+		Me.rtb_MessageBody.Name = "rtb_MessageBody"
+		Me.rtb_MessageBody.Size = New System.Drawing.Size(611, 200)
+		Me.rtb_MessageBody.TabIndex = 5
+		Me.rtb_MessageBody.Text = ""
+		'
+		'btn_UseMessage
+		'
+		Me.btn_UseMessage.AutoSize = True
+		Me.btn_UseMessage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.btn_UseMessage.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_UseMessage.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		Me.btn_UseMessage.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_UseMessage.Location = New System.Drawing.Point(419, 362)
         Me.btn_UseMessage.MaximumSize = New System.Drawing.Size(200, 200)
         Me.btn_UseMessage.MinimumSize = New System.Drawing.Size(100, 50)
         Me.btn_UseMessage.Name = "btn_UseMessage"

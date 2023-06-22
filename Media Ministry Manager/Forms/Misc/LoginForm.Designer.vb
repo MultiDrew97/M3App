@@ -66,9 +66,9 @@ Partial Class Frm_Login
 		'
 		'db_Users
 		'
-		Me.db_Users.InitialCatalog = Global.MediaMinistry.MySettings.Default.DefaultCatalog
-		Me.db_Users.Password = Global.MediaMinistry.MySettings.Default.DefaultPassword
-		Me.db_Users.Username = Global.MediaMinistry.MySettings.Default.DefaultUsername
+		Me.db_Users.InitialCatalog = Global.MediaMinistry.My.Settings.Default.DefaultCatalog
+		Me.db_Users.Password = Global.MediaMinistry.My.Settings.Default.DefaultPassword
+		Me.db_Users.Username = Global.MediaMinistry.My.Settings.Default.DefaultUsername
 		'
 		'lsd_LoadScreen
 		'

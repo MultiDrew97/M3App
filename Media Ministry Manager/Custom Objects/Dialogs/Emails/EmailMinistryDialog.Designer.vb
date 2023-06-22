@@ -265,9 +265,9 @@ Partial Class EmailMinistryDialog
         '
         Me.btn_Cancel.AutoSize = True
         Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_Cancel.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_Cancel.Location = New System.Drawing.Point(65, 180)
+		Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_Cancel.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_Cancel.Location = New System.Drawing.Point(65, 180)
         Me.btn_Cancel.MinimumSize = New System.Drawing.Size(238, 36)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(238, 36)

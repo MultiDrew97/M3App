@@ -232,12 +232,6 @@
     <Compile Include="Forms\Email Listeners\EmailListeners.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Email Listeners\frm_ViewListeners.Designer.vb">
-      <DependentUpon>frm_ViewListeners.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Email Listeners\frm_ViewListeners.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.Designer.vb">
       <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </Compile>
@@ -329,12 +323,6 @@
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Customers\AddCustomerDialog.Designer.vb">
-      <DependentUpon>AddCustomerDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Customers\AddCustomerDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Types\Orders\CompletedOrder.vb" />
     <Compile Include="Custom Objects\Types\Orders\CurrentOrder.vb" />
     <Compile Include="Custom Objects\Types\People\Address.vb" />
@@ -384,9 +372,6 @@
     <EmbeddedResource Include="Forms\Email Listeners\EmailListeners.resx">
       <DependentUpon>EmailListeners.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Email Listeners\frm_ViewListeners.resx">
-      <DependentUpon>frm_ViewListeners.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.resx">
       <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -433,10 +418,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Customers\AddCustomerDialog.resx">
-      <DependentUpon>AddCustomerDialog.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +480,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Custom Objects\Components\" />
+    <Folder Include="Custom Objects\Dialogs\Customers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography">
@@ -567,7 +549,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

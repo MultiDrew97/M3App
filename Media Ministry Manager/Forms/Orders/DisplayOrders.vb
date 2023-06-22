@@ -47,11 +47,11 @@ Public Class Frm_DisplayOrders
     End Sub
 
     Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Strip.OpenListeners
-        Dim listeners As New Frm_ViewListeners()
-        listeners.Show()
-        Utils.SpecialClose(sender)
-        Me.Close()
-    End Sub
+		'Dim listeners As New Frm_ViewListeners()
+		'listeners.Show()
+		'Utils.SpecialClose(sender)
+		'Me.Close()
+	End Sub
 
     Private Sub ViewSettings() Handles mms_Strip.OpenSettings
         Dim settings As New Frm_Settings()

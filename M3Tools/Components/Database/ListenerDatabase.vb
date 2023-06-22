@@ -101,27 +101,27 @@ Namespace Database
             End Using
         End Sub
 
-        Public Function GetListeners() As Types.DBEntryCollection(Of Types.Listener)
-            Dim listeners As New Types.DBEntryCollection(Of Types.Listener)
+		Public Function GetListeners() As Types.ListenerCollection
+			Dim listeners As New Types.ListenerCollection
 
-            Using _cmd = db_Connection.Connect()
-                _cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
+			Using _cmd = db_Connection.Connect()
+				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
-                Using reader = _cmd.ExecuteReader
-                    Do While reader.Read()
-                        listeners.Add(New Types.Listener(
-                            CInt(reader("ListenerID")),
-                            CStr(reader("Name")),
-                            CStr(reader("Email"))
-                        ))
-                    Loop
-                End Using
-            End Using
+				Using reader = _cmd.ExecuteReader
+					Do While reader.Read()
+						listeners.Add(New Types.Listener(
+							CInt(reader("ListenerID")),
+							CStr(reader("Name")),
+							CStr(reader("Email"))
+						))
+					Loop
+				End Using
+			End Using
 
-            Return listeners
-        End Function
+			Return listeners
+		End Function
 
-        Public Function GetListener(emailAddress As String) As Types.Listener
+		Public Function GetListener(emailAddress As String) As Types.Listener
             Return GetListener("Email", New SqlParameter("EmailAddress", emailAddress))
         End Function
 

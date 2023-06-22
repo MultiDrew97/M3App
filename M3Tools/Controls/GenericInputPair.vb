@@ -43,7 +43,7 @@ Public Class GenericInputPair
 			Return txt_Input.Text
 		End Get
 		Set(value As String)
-			txt_Input.Text = value
+			txt_Input.Text = If(value <> "", value, Placeholder)
 		End Set
 	End Property
 
@@ -92,7 +92,7 @@ Public Class GenericInputPair
 	End Sub
 
 	Private Sub GenericInputPair_Load(sender As Object, e As EventArgs) Handles Me.Load
-		txt_Input.Text = Placeholder
-		txt_Input.ForeColor = Drawing.SystemColors.ControlDark
+		Text = If(Text <> "", Text, Placeholder)
+		txt_Input.ForeColor = If(Text <> "", Drawing.SystemColors.WindowText, Drawing.SystemColors.ControlDark)
 	End Sub
 End Class

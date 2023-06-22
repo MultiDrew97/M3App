@@ -113,26 +113,26 @@ Partial Class ListenerSelectionDialog
         Me.btn_Cancel.TabIndex = 3
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.UseVisualStyleBackColor = True
-        '
-        'bw_RetrieveListeners
-        '
-        '
-        'cbx_Column
-        '
-        Me.cbx_Column.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.cbx_Column.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.cbx_Column.FormattingEnabled = True
-        Me.cbx_Column.Items.AddRange(New Object() {"Name", "Email Address"})
-        Me.cbx_Column.Location = New System.Drawing.Point(755, 31)
-        Me.cbx_Column.Name = "cbx_Column"
-        Me.cbx_Column.Size = New System.Drawing.Size(199, 33)
-        Me.cbx_Column.TabIndex = 4
-        '
-        'txt_Search
-        '
-        Me.txt_Search.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.txt_Search.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.txt_Search.Location = New System.Drawing.Point(695, 87)
+		'
+		'bw_RetrieveListeners
+		'
+		'
+		'cbx_Column
+		'
+		Me.cbx_Column.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.cbx_Column.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.cbx_Column.FormattingEnabled = True
+		Me.cbx_Column.Items.AddRange(New Object() {"Name", "Email Address"})
+		Me.cbx_Column.Location = New System.Drawing.Point(755, 31)
+		Me.cbx_Column.Name = "cbx_Column"
+		Me.cbx_Column.Size = New System.Drawing.Size(199, 33)
+		Me.cbx_Column.TabIndex = 4
+		'
+		'txt_Search
+		'
+		Me.txt_Search.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.txt_Search.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.txt_Search.Location = New System.Drawing.Point(695, 87)
         Me.txt_Search.Name = "txt_Search"
         Me.txt_Search.Size = New System.Drawing.Size(320, 31)
         Me.txt_Search.TabIndex = 5

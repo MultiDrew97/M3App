@@ -4,7 +4,11 @@
 			Return cbx_States.Text
 		End Get
         Set(value As String)
-			cbx_States.Text = value?.Substring(0, 2)
+			If value?.Length >= 2 Then
+				value = value.Substring(0, 2)
+			End If
+
+			cbx_States.Text = value
 		End Set
     End Property
 

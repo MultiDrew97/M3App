@@ -155,13 +155,6 @@ Public Class CustomEmail
 		Dim txtBox = CType(sender, TextBox)
 		Dim value As String = If(txtBox.Name = "txt_Subject", placeholders(0), placeholders(1))
 
-		'Select Case txt.Name
-		'	Case "txt_Subject"
-		'		temp = placeholders(0)
-		'	Case "txt_Body"
-		'		temp = placeholders(1)
-		'End Select
-
 		If txtBox.Text <> value Then
 			Return
 		End If

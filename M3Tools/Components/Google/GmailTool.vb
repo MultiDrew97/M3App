@@ -88,6 +88,7 @@ Namespace GTools
 
 			Dim attachments As New AttachmentCollection
 
+			' TODO: Clean this up later to not have to loop twice
 			For Each file In files
 				attachments.Add(file)
 			Next

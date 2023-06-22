@@ -42,9 +42,9 @@ Partial Class RecieptTypeDialog
         Me.btn_Ok.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btn_Ok.AutoSize = True
         Me.btn_Ok.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_Ok.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_Ok.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_Ok.Location = New System.Drawing.Point(239, 266)
+		Me.btn_Ok.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_Ok.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_Ok.Location = New System.Drawing.Point(239, 266)
         Me.btn_Ok.Name = "btn_Ok"
         Me.btn_Ok.Size = New System.Drawing.Size(51, 35)
         Me.btn_Ok.TabIndex = 0
@@ -55,10 +55,10 @@ Partial Class RecieptTypeDialog
         Me.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btn_Cancel.AutoSize = True
         Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btn_Cancel.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_Cancel.Location = New System.Drawing.Point(111, 266)
+		Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		Me.btn_Cancel.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_Cancel.Location = New System.Drawing.Point(111, 266)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(95, 35)
         Me.btn_Cancel.TabIndex = 1
@@ -68,9 +68,9 @@ Partial Class RecieptTypeDialog
         '
         Me.txt_Other.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_Other.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.txt_Other.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.txt_Other.Location = New System.Drawing.Point(61, 257)
+		Me.txt_Other.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.txt_Other.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.txt_Other.Location = New System.Drawing.Point(61, 257)
         Me.txt_Other.Name = "txt_Other"
         Me.txt_Other.Size = New System.Drawing.Size(310, 31)
         Me.txt_Other.TabIndex = 1
@@ -81,9 +81,9 @@ Partial Class RecieptTypeDialog
         Me.lbl_Other.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbl_Other.AutoSize = True
-        Me.lbl_Other.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_Other.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_Other.Location = New System.Drawing.Point(56, 229)
+		Me.lbl_Other.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_Other.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_Other.Location = New System.Drawing.Point(56, 229)
         Me.lbl_Other.Name = "lbl_Other"
         Me.lbl_Other.Size = New System.Drawing.Size(70, 25)
         Me.lbl_Other.TabIndex = 2
@@ -98,9 +98,9 @@ Partial Class RecieptTypeDialog
         Me.gbx_RecieptOptions.Controls.Add(Me.rdo_Other)
         Me.gbx_RecieptOptions.Controls.Add(Me.rdo_LoveOffering)
         Me.gbx_RecieptOptions.Controls.Add(Me.rdo_Offering)
-        Me.gbx_RecieptOptions.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.gbx_RecieptOptions.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.gbx_RecieptOptions.Location = New System.Drawing.Point(70, 12)
+		Me.gbx_RecieptOptions.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.gbx_RecieptOptions.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.gbx_RecieptOptions.Location = New System.Drawing.Point(70, 12)
         Me.gbx_RecieptOptions.Name = "gbx_RecieptOptions"
         Me.gbx_RecieptOptions.Size = New System.Drawing.Size(301, 164)
         Me.gbx_RecieptOptions.TabIndex = 28
@@ -148,13 +148,13 @@ Partial Class RecieptTypeDialog
         Me.rdo_Offering.TabIndex = 0
         Me.rdo_Offering.Text = "Offering"
         Me.rdo_Offering.UseVisualStyleBackColor = True
-        '
-        'nud_Amount
-        '
-        Me.nud_Amount.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.nud_Amount.DecimalPlaces = 2
-        Me.nud_Amount.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.nud_Amount.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+		'
+		'nud_Amount
+		'
+		Me.nud_Amount.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.nud_Amount.DecimalPlaces = 2
+		Me.nud_Amount.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.nud_Amount.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.nud_Amount.Location = New System.Drawing.Point(154, 217)
         Me.nud_Amount.Maximum = New Decimal(New Integer() {1316134912, 2328, 0, 0})
         Me.nud_Amount.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
@@ -168,9 +168,9 @@ Partial Class RecieptTypeDialog
         'lbl_Amount
         '
         Me.lbl_Amount.AutoSize = True
-        Me.lbl_Amount.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_Amount.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_Amount.Location = New System.Drawing.Point(149, 189)
+		Me.lbl_Amount.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_Amount.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_Amount.Location = New System.Drawing.Point(149, 189)
         Me.lbl_Amount.Name = "lbl_Amount"
         Me.lbl_Amount.Size = New System.Drawing.Size(98, 25)
         Me.lbl_Amount.TabIndex = 30

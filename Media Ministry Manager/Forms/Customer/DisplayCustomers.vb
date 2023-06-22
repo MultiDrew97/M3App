@@ -54,10 +54,10 @@ Public Class Frm_DisplayCustomers
 	End Sub
 
 	Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
-		Dim listeners As New Frm_ViewListeners
-		listeners.Show()
-		Tooled = True
-		Me.Close()
+		'Dim listeners As New Frm_ViewListeners
+		'listeners.Show()
+		'Tooled = True
+		'Me.Close()
 	End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.OpenSettings

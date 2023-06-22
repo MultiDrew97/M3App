@@ -31,64 +31,64 @@ Partial Class FolderCreationDialog
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.ts_Feedback.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txt_FolderName
-        '
-        Me.txt_FolderName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.txt_FolderName.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.txt_FolderName.Location = New System.Drawing.Point(53, 48)
-        Me.txt_FolderName.Name = "txt_FolderName"
-        Me.txt_FolderName.Size = New System.Drawing.Size(332, 31)
-        Me.txt_FolderName.TabIndex = 0
-        '
-        'lbl_FolderName
-        '
-        Me.lbl_FolderName.AutoSize = True
-        Me.lbl_FolderName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_FolderName.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_FolderName.Location = New System.Drawing.Point(48, 19)
-        Me.lbl_FolderName.Name = "lbl_FolderName"
-        Me.lbl_FolderName.Size = New System.Drawing.Size(153, 25)
-        Me.lbl_FolderName.TabIndex = 1
-        Me.lbl_FolderName.Text = "Folder Name:"
-        '
-        'btn_CreateFolder
-        '
-        Me.btn_CreateFolder.AutoSize = True
-        Me.btn_CreateFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_CreateFolder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_CreateFolder.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_CreateFolder.Location = New System.Drawing.Point(224, 120)
-        Me.btn_CreateFolder.MinimumSize = New System.Drawing.Size(150, 50)
-        Me.btn_CreateFolder.Name = "btn_CreateFolder"
-        Me.btn_CreateFolder.Size = New System.Drawing.Size(166, 50)
-        Me.btn_CreateFolder.TabIndex = 2
-        Me.btn_CreateFolder.Text = "Create Folder"
-        Me.btn_CreateFolder.UseVisualStyleBackColor = True
-        '
-        'ts_Feedback
-        '
-        Me.ts_Feedback.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ts_Feedback.Location = New System.Drawing.Point(0, 201)
-        Me.ts_Feedback.Name = "ts_Feedback"
-        Me.ts_Feedback.Size = New System.Drawing.Size(439, 25)
-        Me.ts_Feedback.TabIndex = 3
-        Me.ts_Feedback.Text = "Feedback"
-        '
-        'tss_Feedback
-        '
-        Me.tss_Feedback.Name = "tss_Feedback"
-        Me.tss_Feedback.Size = New System.Drawing.Size(183, 22)
-        Me.tss_Feedback.Text = "Enter the name of the new folder."
-        '
-        'btn_Cancel
-        '
-        Me.btn_Cancel.AutoSize = True
-        Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btn_Cancel.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_Cancel.Location = New System.Drawing.Point(50, 120)
+		'
+		'txt_FolderName
+		'
+		Me.txt_FolderName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.txt_FolderName.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.txt_FolderName.Location = New System.Drawing.Point(53, 48)
+		Me.txt_FolderName.Name = "txt_FolderName"
+		Me.txt_FolderName.Size = New System.Drawing.Size(332, 31)
+		Me.txt_FolderName.TabIndex = 0
+		'
+		'lbl_FolderName
+		'
+		Me.lbl_FolderName.AutoSize = True
+		Me.lbl_FolderName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_FolderName.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_FolderName.Location = New System.Drawing.Point(48, 19)
+		Me.lbl_FolderName.Name = "lbl_FolderName"
+		Me.lbl_FolderName.Size = New System.Drawing.Size(153, 25)
+		Me.lbl_FolderName.TabIndex = 1
+		Me.lbl_FolderName.Text = "Folder Name:"
+		'
+		'btn_CreateFolder
+		'
+		Me.btn_CreateFolder.AutoSize = True
+		Me.btn_CreateFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.btn_CreateFolder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_CreateFolder.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_CreateFolder.Location = New System.Drawing.Point(224, 120)
+		Me.btn_CreateFolder.MinimumSize = New System.Drawing.Size(150, 50)
+		Me.btn_CreateFolder.Name = "btn_CreateFolder"
+		Me.btn_CreateFolder.Size = New System.Drawing.Size(166, 50)
+		Me.btn_CreateFolder.TabIndex = 2
+		Me.btn_CreateFolder.Text = "Create Folder"
+		Me.btn_CreateFolder.UseVisualStyleBackColor = True
+		'
+		'ts_Feedback
+		'
+		Me.ts_Feedback.Dock = System.Windows.Forms.DockStyle.Bottom
+		Me.ts_Feedback.Location = New System.Drawing.Point(0, 201)
+		Me.ts_Feedback.Name = "ts_Feedback"
+		Me.ts_Feedback.Size = New System.Drawing.Size(439, 25)
+		Me.ts_Feedback.TabIndex = 3
+		Me.ts_Feedback.Text = "Feedback"
+		'
+		'tss_Feedback
+		'
+		Me.tss_Feedback.Name = "tss_Feedback"
+		Me.tss_Feedback.Size = New System.Drawing.Size(183, 22)
+		Me.tss_Feedback.Text = "Enter the name of the new folder."
+		'
+		'btn_Cancel
+		'
+		Me.btn_Cancel.AutoSize = True
+		Me.btn_Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+		Me.btn_Cancel.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		Me.btn_Cancel.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_Cancel.Location = New System.Drawing.Point(50, 120)
         Me.btn_Cancel.MinimumSize = New System.Drawing.Size(150, 50)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(150, 50)

@@ -82,12 +82,12 @@ Partial Class AdminInfoDialog
         Me.tss_Info.Name = "tss_Info"
         Me.tss_Info.Size = New System.Drawing.Size(159, 17)
         Me.tss_Info.Text = "Enter the admin's credentials"
-        '
-        'pf_Password
-        '
-        Me.pf_Password.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.pf_Password.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.pf_Password.Location = New System.Drawing.Point(30, 106)
+		'
+		'pf_Password
+		'
+		Me.pf_Password.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.pf_Password.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.pf_Password.Location = New System.Drawing.Point(30, 106)
         Me.pf_Password.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.pf_Password.Name = "pf_Password"
         Me.pf_Password.Size = New System.Drawing.Size(271, 40)

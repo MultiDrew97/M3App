@@ -99,10 +99,10 @@ Partial Class SendEmailsDialog
         Me.tcl_EmailOptions.Controls.Add(Me.TabPage1)
         Me.tcl_EmailOptions.Controls.Add(Me.TabPage2)
         Me.tcl_EmailOptions.Controls.Add(Me.TabPage3)
-        Me.tcl_EmailOptions.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.tcl_EmailOptions.Dock = System.Windows.Forms.DockStyle.Right
-        Me.tcl_EmailOptions.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.tcl_EmailOptions.Location = New System.Drawing.Point(217, 0)
+		Me.tcl_EmailOptions.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.tcl_EmailOptions.Dock = System.Windows.Forms.DockStyle.Right
+		Me.tcl_EmailOptions.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.tcl_EmailOptions.Location = New System.Drawing.Point(217, 0)
         Me.tcl_EmailOptions.Name = "tcl_EmailOptions"
         Me.tcl_EmailOptions.SelectedIndex = 0
         Me.tcl_EmailOptions.Size = New System.Drawing.Size(629, 382)
@@ -128,9 +128,9 @@ Partial Class SendEmailsDialog
         '
         Me.btn_SermonSend.AutoSize = True
         Me.btn_SermonSend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_SermonSend.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_SermonSend.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_SermonSend.Location = New System.Drawing.Point(221, 282)
+		Me.btn_SermonSend.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_SermonSend.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_SermonSend.Location = New System.Drawing.Point(221, 282)
         Me.btn_SermonSend.Name = "btn_SermonSend"
         Me.btn_SermonSend.Size = New System.Drawing.Size(178, 35)
         Me.btn_SermonSend.TabIndex = 23
@@ -140,33 +140,33 @@ Partial Class SendEmailsDialog
         'chk_SermonDefault
         '
         Me.chk_SermonDefault.AutoSize = True
-        Me.chk_SermonDefault.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.chk_SermonDefault.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.chk_SermonDefault.Location = New System.Drawing.Point(188, 219)
+		Me.chk_SermonDefault.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.chk_SermonDefault.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.chk_SermonDefault.Location = New System.Drawing.Point(188, 219)
         Me.chk_SermonDefault.Margin = New System.Windows.Forms.Padding(6)
         Me.chk_SermonDefault.Name = "chk_SermonDefault"
         Me.chk_SermonDefault.Size = New System.Drawing.Size(256, 29)
         Me.chk_SermonDefault.TabIndex = 22
         Me.chk_SermonDefault.Text = "Use Default Message"
         Me.chk_SermonDefault.UseVisualStyleBackColor = True
-        '
-        'cbx_Files
-        '
-        Me.cbx_Files.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.cbx_Files.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.cbx_Files.ForeColor = System.Drawing.SystemColors.ControlText
+		'
+		'cbx_Files
+		'
+		Me.cbx_Files.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.cbx_Files.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.cbx_Files.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cbx_Files.FormattingEnabled = True
         Me.cbx_Files.Location = New System.Drawing.Point(75, 156)
         Me.cbx_Files.Margin = New System.Windows.Forms.Padding(6)
         Me.cbx_Files.Name = "cbx_Files"
         Me.cbx_Files.Size = New System.Drawing.Size(480, 33)
         Me.cbx_Files.TabIndex = 21
-        '
-        'cbx_Folders
-        '
-        Me.cbx_Folders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.cbx_Folders.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.cbx_Folders.ForeColor = System.Drawing.SystemColors.ControlText
+		'
+		'cbx_Folders
+		'
+		Me.cbx_Folders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.cbx_Folders.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.cbx_Folders.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cbx_Folders.FormattingEnabled = True
         Me.cbx_Folders.Location = New System.Drawing.Point(75, 57)
         Me.cbx_Folders.Margin = New System.Windows.Forms.Padding(6)
@@ -177,9 +177,9 @@ Partial Class SendEmailsDialog
         'lbl_Folder
         '
         Me.lbl_Folder.AutoSize = True
-        Me.lbl_Folder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_Folder.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_Folder.ForeColor = System.Drawing.SystemColors.ControlText
+		Me.lbl_Folder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_Folder.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_Folder.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lbl_Folder.Location = New System.Drawing.Point(65, 27)
         Me.lbl_Folder.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lbl_Folder.Name = "lbl_Folder"
@@ -190,9 +190,9 @@ Partial Class SendEmailsDialog
         'lbl_FileLocation
         '
         Me.lbl_FileLocation.AutoSize = True
-        Me.lbl_FileLocation.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.lbl_FileLocation.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.lbl_FileLocation.ForeColor = System.Drawing.SystemColors.ControlText
+		Me.lbl_FileLocation.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_FileLocation.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_FileLocation.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lbl_FileLocation.Location = New System.Drawing.Point(65, 125)
         Me.lbl_FileLocation.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lbl_FileLocation.Name = "lbl_FileLocation"
@@ -252,9 +252,9 @@ Partial Class SendEmailsDialog
         '
         Me.btn_LocalSend.AutoSize = True
         Me.btn_LocalSend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_LocalSend.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_LocalSend.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_LocalSend.Location = New System.Drawing.Point(219, 280)
+		Me.btn_LocalSend.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_LocalSend.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_LocalSend.Location = New System.Drawing.Point(219, 280)
         Me.btn_LocalSend.Name = "btn_LocalSend"
         Me.btn_LocalSend.Size = New System.Drawing.Size(178, 35)
         Me.btn_LocalSend.TabIndex = 23
@@ -264,9 +264,9 @@ Partial Class SendEmailsDialog
         'chk_RecieptDefault
         '
         Me.chk_RecieptDefault.AutoSize = True
-        Me.chk_RecieptDefault.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.chk_RecieptDefault.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.chk_RecieptDefault.Location = New System.Drawing.Point(186, 230)
+		Me.chk_RecieptDefault.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.chk_RecieptDefault.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.chk_RecieptDefault.Location = New System.Drawing.Point(186, 230)
         Me.chk_RecieptDefault.Margin = New System.Windows.Forms.Padding(6)
         Me.chk_RecieptDefault.Name = "chk_RecieptDefault"
         Me.chk_RecieptDefault.Size = New System.Drawing.Size(256, 29)
@@ -277,21 +277,21 @@ Partial Class SendEmailsDialog
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.Label2.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
+		Me.Label2.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.Label2.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label2.Location = New System.Drawing.Point(36, 131)
         Me.Label2.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 25)
         Me.Label2.TabIndex = 20
         Me.Label2.Text = "File:"
-        '
-        'flf_LocalReciept
-        '
-        Me.flf_LocalReciept.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.flf_LocalReciept.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.flf_LocalReciept.Location = New System.Drawing.Point(41, 159)
+		'
+		'flf_LocalReciept
+		'
+		Me.flf_LocalReciept.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.flf_LocalReciept.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.flf_LocalReciept.Location = New System.Drawing.Point(41, 159)
         Me.flf_LocalReciept.Name = "flf_LocalReciept"
         Me.flf_LocalReciept.Size = New System.Drawing.Size(560, 33)
         Me.flf_LocalReciept.TabIndex = 26
@@ -334,9 +334,9 @@ Partial Class SendEmailsDialog
         '
         Me.btn_UploadFile.AutoSize = True
         Me.btn_UploadFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_UploadFile.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_UploadFile.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_UploadFile.Location = New System.Drawing.Point(28, 241)
+		Me.btn_UploadFile.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_UploadFile.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_UploadFile.Location = New System.Drawing.Point(28, 241)
         Me.btn_UploadFile.Margin = New System.Windows.Forms.Padding(6)
         Me.btn_UploadFile.MaximumSize = New System.Drawing.Size(154, 80)
         Me.btn_UploadFile.MinimumSize = New System.Drawing.Size(154, 80)
@@ -350,9 +350,9 @@ Partial Class SendEmailsDialog
         '
         Me.btn_AddFolder.AutoSize = True
         Me.btn_AddFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btn_AddFolder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.btn_AddFolder.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.btn_AddFolder.Location = New System.Drawing.Point(28, 81)
+		Me.btn_AddFolder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_AddFolder.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_AddFolder.Location = New System.Drawing.Point(28, 81)
         Me.btn_AddFolder.Margin = New System.Windows.Forms.Padding(6)
         Me.btn_AddFolder.MaximumSize = New System.Drawing.Size(154, 80)
         Me.btn_AddFolder.MinimumSize = New System.Drawing.Size(154, 80)

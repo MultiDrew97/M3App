@@ -187,6 +187,12 @@
     <Compile Include="Controls\People\Customers\CustomersComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\People\Listeners\ListenersDataGrid.Designer.vb">
+      <DependentUpon>ListenersDataGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Listeners\ListenersDataGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ToolsContextMenu.Designer.vb">
       <DependentUpon>ToolsContextMenu.vb</DependentUpon>
     </Compile>
@@ -545,6 +551,9 @@
     <EmbeddedResource Include="Controls\People\Customers\CustomersComboBox.resx">
       <DependentUpon>CustomersComboBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Listeners\ListenersDataGrid.resx">
+      <DependentUpon>ListenersDataGrid.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
       <DependentUpon>ProductsComboBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -666,6 +675,7 @@
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Listener.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Product.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.User.datasource" />

@@ -359,4 +359,8 @@
   <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DriveShareLink" xml:space="preserve">
+    <value>https://drive.google.com/file/d/{0}/view?usp=sharing</value>
+    <comment>The link template to share a file from Google Drive</comment>
+  </data>
 </root>

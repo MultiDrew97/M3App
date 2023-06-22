@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Public Class CustomEmailDialog
-	Public ReadOnly Property Email As CustomEmail
+	Private ReadOnly Property Email As CustomEmail
 		Get
 			Return ce_Email
 		End Get
@@ -19,7 +19,7 @@ Public Class CustomEmailDialog
 		End Get
 	End Property
 
-	ReadOnly Property RTBody As String
+	Private ReadOnly Property RTBody As String
 		Get
 			Return Email.RichTextBody
 		End Get

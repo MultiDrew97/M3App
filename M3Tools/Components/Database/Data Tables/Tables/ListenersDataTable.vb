@@ -73,6 +73,19 @@
 			End Get
 		End Property
 
+		Public ReadOnly Property Listeners As Types.ListenerCollection
+			Get
+				Dim col As New Types.ListenerCollection
+
+				For Each row As ListenersDataRow In Rows
+					col.Add(row.Listener)
+				Next
+
+				Return col
+			End Get
+		End Property
+
+
 		Public Event ListenersDataRowChanging As ListenersDataRowChangeEventHandler
 
 		Public Event ListenersDataRowChanged As ListenersDataRowChangeEventHandler
@@ -81,8 +94,18 @@
 
 		Public Event ListenersDataRowDeleted As ListenersDataRowChangeEventHandler
 
+		Public Sub AddRange(list As Types.ListenerCollection)
+			For Each listener In list
+				AddListenersRow(listener)
+			Next
+		End Sub
+
 		Public Sub AddListenersRow(ByVal row As ListenersDataRow)
 			AddListenersRow(CInt(row("ListenerID")), CStr(row("Name")), CStr(row("EmailAddress")))
+		End Sub
+
+		Public Sub AddListenersRow(ByVal listener As Types.Listener)
+			AddListenersRow(listener.Id, listener.Name, listener.Email)
 		End Sub
 
 		Public Function AddListenersRow(ListenerID As Integer, ByVal Name As String, ByVal Email As String) As ListenersDataRow
@@ -124,7 +147,7 @@
 			Me.ListenerID.ReadOnly = True
 			Me.ListenerID.Unique = True
 			Me.Name.AllowDBNull = False
-			Me.Name.MaxLength = 50
+			Me.Name.MaxLength = 100
 			Me.Email.AllowDBNull = False
 			Me.Email.MaxLength = 100
 		End Sub

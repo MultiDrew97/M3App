@@ -310,9 +310,9 @@ Partial Class Frm_DisplayInventory
         'chk_ShowUnavailable
         '
         Me.chk_ShowUnavailable.AutoSize = True
-        Me.chk_ShowUnavailable.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.chk_ShowUnavailable.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.chk_ShowUnavailable.Location = New System.Drawing.Point(23, 211)
+		Me.chk_ShowUnavailable.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.chk_ShowUnavailable.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.chk_ShowUnavailable.Location = New System.Drawing.Point(23, 211)
         Me.chk_ShowUnavailable.MaximumSize = New System.Drawing.Size(200, 150)
         Me.chk_ShowUnavailable.MinimumSize = New System.Drawing.Size(0, 100)
         Me.chk_ShowUnavailable.Name = "chk_ShowUnavailable"

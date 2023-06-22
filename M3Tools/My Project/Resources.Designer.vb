@@ -221,6 +221,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
+        '''</summary>
+        Friend ReadOnly Property DriveShareLink() As String
+            Get
+                Return ResourceManager.GetString("DriveShareLink", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property edit() As System.Drawing.Bitmap

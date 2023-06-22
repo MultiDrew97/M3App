@@ -91,6 +91,11 @@ Media Ministry Manager
   Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
 </summary>
 </member>
+<member name="P:MediaMinistry.My.Resources.Resources.DriveShareLink">
+<summary>
+  Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
+</summary>
+</member>
 <member name="P:MediaMinistry.My.Resources.Resources.ErrorImage">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

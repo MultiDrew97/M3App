@@ -127,7 +127,7 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub CustomerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewCustomerToolStripMenuItem.Click
-		AddCustomerDialog.ShowDialog()
+		'AddCustomerDialog.ShowDialog()
 	End Sub
 
 	Private Sub ProductToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewProductToolStripMenuItem.Click
@@ -178,10 +178,10 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub ListenersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewListenersToolStripMenuItem.Click
-		Dim listeners As New Frm_ViewListeners
-		listeners.Show()
-		Tooled = True
-		Me.Close()
+		'Dim listeners As New Frm_ViewListeners
+		'listeners.Show()
+		'Tooled = True
+		'Me.Close()
 	End Sub
 
 	Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
