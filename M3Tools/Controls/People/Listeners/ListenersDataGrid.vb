@@ -2,9 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class ListenersDataGrid
-	'TODO: Implement this later for selecting all users https://stackoverflow.com/questions/8906575/checkbox-in-the-header-of-a-datagridview-in-any-column
 	Private ReadOnly _listeners As New DataTables.ListenersDataTable
-	Private Confirmed As Boolean = False
 	Private ReadOnly dgcPrefix As String = "dgc_"
 
 	Public ReadOnly Property SelectedRowsCount As Integer
@@ -147,9 +145,9 @@ Public Class ListenersDataGrid
 		Dim deletedListener As DataTables.ListenersDataRow = CType(row.Row, DataTables.ListenersDataRow)
 		Console.WriteLine(deletedListener)
 
-		Confirmed = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+		Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-		If Not Confirmed Then
+		If Not res = DialogResult.Yes Then
 			e.Cancel = True
 			Return
 		End If

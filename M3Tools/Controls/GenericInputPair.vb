@@ -40,7 +40,7 @@ Public Class GenericInputPair
 
 	Public Overrides Property Text As String
 		Get
-			Return txt_Input.Text
+			Return If(txt_Input.Text <> Placeholder, "", txt_Input.Text)
 		End Get
 		Set(value As String)
 			txt_Input.Text = If(value <> "", value, Placeholder)

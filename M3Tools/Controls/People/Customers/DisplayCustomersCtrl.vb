@@ -5,7 +5,6 @@ Public Class DisplayCustomersCtrl
 	Dim Confirmed As Boolean = False
 
 	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
-		UseWaitCursor = True
 		cdg_Customers.Reload()
 	End Sub
 

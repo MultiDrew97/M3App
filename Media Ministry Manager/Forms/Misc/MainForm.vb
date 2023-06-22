@@ -11,19 +11,19 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	Private Sub MangeProducts(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.OpenProducts
+	Private Sub MangeProducts(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.ManageProducts
 		Dim products As New Frm_DisplayInventory
 		products.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles btn_OrderManagement.Click, mms_Main.OpenOrders
+	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles btn_OrderManagement.Click, mms_Main.ManageOrders
 		Dim orders As New Frm_DisplayOrders()
 		orders.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.OpenCustomers
+	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.ManageCustomers
 		Dim customers As New CustomersManagement
 		customers.Show()
 		Me.Close()
@@ -34,7 +34,7 @@ Public Class Frm_Main
 		tss_Feedback.ForeColor = SystemColors.WindowText
 	End Sub
 
-	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.OpenListeners
+	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.ManageListeners
 		Dim listeners As New ListenersManagement()
 		listeners.Show()
 		Me.Close()
@@ -92,7 +92,7 @@ Public Class Frm_Main
 		Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub ViewSettings() Handles mms_Main.OpenSettings
+	Private Sub ViewSettings() Handles mms_Main.ViewSettings
 		Dim settings As New Frm_Settings()
 		settings.Show()
 	End Sub

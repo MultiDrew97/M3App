@@ -3,9 +3,7 @@ Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class CustomersDataGrid
-	'TODO: Implement this later for selecting all users https://stackoverflow.com/questions/8906575/checkbox-in-the-header-of-a-datagridview-in-any-column
 	Private ReadOnly _customers As New DataTables.CustomersDataTable
-	'Private Confirmed As Boolean = False
 	Private ReadOnly dgcPrefix As String = "dgc_"
 
 	Public ReadOnly Property SelectedRowsCount As Integer

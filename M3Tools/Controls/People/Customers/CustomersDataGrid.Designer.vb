@@ -166,10 +166,11 @@ Partial Class CustomersDataGrid
         Me.dgc_Edit.FillWeight = 5.0!
         Me.dgc_Edit.HeaderText = ""
         Me.dgc_Edit.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
+        Me.dgc_Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Edit.MinimumWidth = 25
         Me.dgc_Edit.Name = "dgc_Edit"
         Me.dgc_Edit.ReadOnly = True
-        Me.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Edit.Width = 25
         '
         'dgc_Remove
@@ -186,6 +187,7 @@ Partial Class CustomersDataGrid
         Me.dgc_Remove.MinimumWidth = 25
         Me.dgc_Remove.Name = "dgc_Remove"
         Me.dgc_Remove.ReadOnly = True
+        Me.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Remove.Width = 25
         '
         'CustomersDataGrid

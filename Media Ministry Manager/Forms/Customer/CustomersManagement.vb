@@ -5,11 +5,9 @@ Imports MediaMinistry.Helpers
 Public Class CustomersManagement
 	Private Tooled As Boolean = False
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
-		Try
-			dcc_Customers.Reload()
-		Catch ex As Exception
-			Console.WriteLine(ex.Message)
-		End Try
+		UseWaitCursor = True
+		dcc_Customers.Reload()
+		UseWaitCursor = False
 		mms_Main.ToggleViewItem("Customers")
 	End Sub
 
@@ -32,35 +30,35 @@ Public Class CustomersManagement
 		Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
+	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.ManageCustomers
 		Dim customers As New CustomersManagement
 		customers.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
+	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
 		Dim products As New Frm_DisplayInventory
 		products.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub MangageOrders(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
+	Private Sub MangageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
 		Dim orders As New Frm_DisplayOrders
 		orders.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
+	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles mms_Main.ManageListeners
 		Dim listeners As New ListenersManagement()
 		listeners.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ViewSettings() Handles mms_Main.OpenSettings
+	Private Sub ViewSettings() Handles mms_Main.ViewSettings
 		Using settings As New Frm_Settings()
 			settings.Show()
 		End Using

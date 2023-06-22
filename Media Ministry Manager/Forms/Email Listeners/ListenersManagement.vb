@@ -3,7 +3,10 @@ Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class ListenersManagement
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
+		UseWaitCursor = True
 		dlc_Listeners.Reload()
+		UseWaitCursor = False
+		mms_Main.ToggleViewItem("Listeners")
 	End Sub
 
 	Private Sub ClosingForm(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -21,31 +24,31 @@ Public Class ListenersManagement
 		Throw New NotYetImplementedException()
 	End Sub
 
-	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
+	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.ManageCustomers
 		Dim customers As New CustomersManagement()
 		customers.ShowDialog()
 		Me.Close()
 	End Sub
 
-	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
+	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles mms_Main.ManageListeners
 		Dim listeners As New ListenersManagement()
 		listeners.ShowDialog()
 		Me.Close()
 	End Sub
 
-	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
+	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
 		Dim orders As New Frm_DisplayOrders()
 		orders.ShowDialog()
 		Me.Close()
 	End Sub
 
-	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
+	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
 		Dim products As New Frm_DisplayInventory()
 		products.ShowDialog()
 		Me.Close()
 	End Sub
 
-	Private Sub ViewSettings() Handles mms_Main.OpenSettings
+	Private Sub ViewSettings() Handles mms_Main.ViewSettings
 		Dim settings As New Frm_Settings()
 		settings.ShowDialog()
 	End Sub

@@ -32,28 +32,28 @@ Public Class Frm_DisplayOrders
         Utils.CloseOpenForms()
     End Sub
 
-    Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles mms_Strip.OpenCustomers
+    Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles mms_Strip.ManageCustomers
         Dim customers As New CustomersManagement()
         customers.Show()
         Utils.SpecialClose(sender)
         Me.Close()
     End Sub
 
-    Private Sub ViewProducts(sender As Object, e As EventArgs) Handles mms_Strip.OpenProducts
+    Private Sub ViewProducts(sender As Object, e As EventArgs) Handles mms_Strip.ManageProducts
         Dim products As New Frm_DisplayInventory()
         products.Show()
         Utils.SpecialClose(sender)
         Me.Close()
     End Sub
 
-    Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Strip.OpenListeners
+    Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Strip.ManageListeners
 		'Dim listeners As New Frm_ViewListeners()
 		'listeners.Show()
 		'Utils.SpecialClose(sender)
 		'Me.Close()
 	End Sub
 
-    Private Sub ViewSettings() Handles mms_Strip.OpenSettings
+    Private Sub ViewSettings() Handles mms_Strip.ViewSettings
         Dim settings As New Frm_Settings()
         settings.Show()
     End Sub

@@ -15,27 +15,27 @@ Public Class MainMenuStrip
 	''' <summary>
 	''' Occurs when the ViewCustomer menu item is clicked
 	''' </summary>
-	Public Event OpenCustomers As EventHandler
+	Public Event ManageCustomers As EventHandler
 
 	''' <summary>
 	''' Occurs when the ViewListener menu item is clicked
 	''' </summary>
-	Public Event OpenListeners As EventHandler
+	Public Event ManageListeners As EventHandler
 
 	''' <summary>
 	''' Occurs when the ViewProducts menu item is clicked
 	''' </summary>
-	Public Event OpenProducts As EventHandler
+	Public Event ManageProducts As EventHandler
 
 	''' <summary>
 	''' Occurs when the ViewOrders menu item is clicked
 	''' </summary>
-	Public Event OpenOrders As EventHandler
+	Public Event ManageOrders As EventHandler
 
 	''' <summary>
 	''' Occurs when the Settings menu item is clicked
 	''' </summary>
-	Public Event OpenSettings()
+	Public Event ViewSettings()
 
 	''' <summary>
 	''' Occurs when the Exit menu item is clicked
@@ -111,24 +111,24 @@ Public Class MainMenuStrip
 	End Sub
 
 	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles tsmi_ViewCustomers.Click
-		RaiseEvent OpenCustomers(Me, e)
+		RaiseEvent ManageCustomers(Me, e)
 		'ToggleViewItem("ViewCustomers")
 	End Sub
 
 	Private Sub ViewProducts(sender As Object, e As EventArgs) Handles tsmi_ViewProducts.Click
-		RaiseEvent OpenProducts(Me, e)
+		RaiseEvent ManageProducts(Me, e)
 	End Sub
 
 	Private Sub ViewOrders(sender As Object, e As EventArgs) Handles tsmi_ViewOrders.Click
-		RaiseEvent OpenOrders(Me, e)
+		RaiseEvent ManageOrders(Me, e)
 	End Sub
 
 	Private Sub ViewListeners(sender As Object, e As EventArgs) Handles tsmi_ViewListeners.Click
-		RaiseEvent OpenListeners(Me, e)
+		RaiseEvent ManageListeners(Me, e)
 	End Sub
 
-	Private Sub ViewSettings(sender As Object, e As EventArgs) Handles tsmi_Settings.Click
-		RaiseEvent OpenSettings()
+	Private Sub ShowSettings(sender As Object, e As EventArgs) Handles tsmi_Settings.Click
+		RaiseEvent ViewSettings()
 	End Sub
 
 	Private Sub UpdateAppBW(sender As Object, e As DoWorkEventArgs) Handles bw_Update.DoWork

@@ -226,10 +226,10 @@
     <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Email Listeners\EmailListeners.Designer.vb">
-      <DependentUpon>EmailListeners.vb</DependentUpon>
+    <Compile Include="Forms\Customer\CustomersManagement.Designer.vb">
+      <DependentUpon>CustomersManagement.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Email Listeners\EmailListeners.vb">
+    <Compile Include="Forms\Customer\CustomersManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.Designer.vb">
@@ -250,12 +250,6 @@
     <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Customer\DisplayCustomers.Designer.vb">
-      <DependentUpon>DisplayCustomers.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Customer\DisplayCustomers.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.Designer.vb">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
     </Compile>
@@ -272,6 +266,12 @@
       <DependentUpon>AdminInfoDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Email Listeners\ListenersManagement.Designer.vb">
+      <DependentUpon>ListenersManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Email Listeners\ListenersManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Misc\LoginForm.Designer.vb">
@@ -369,8 +369,8 @@
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.resx">
       <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Email Listeners\EmailListeners.resx">
-      <DependentUpon>EmailListeners.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Customer\CustomersManagement.resx">
+      <DependentUpon>CustomersManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.resx">
       <DependentUpon>SendEmailsDialog.vb</DependentUpon>
@@ -381,10 +381,6 @@
     <EmbeddedResource Include="Custom Objects\Dialogs\Products\AddProductDialog.resx">
       <DependentUpon>AddProductDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customer\DisplayCustomers.resx">
-      <DependentUpon>DisplayCustomers.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.resx">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.resx">
       <DependentUpon>AdminInfoDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Email Listeners\ListenersManagement.resx">
+      <DependentUpon>ListenersManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Misc\LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
@@ -549,7 +548,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
