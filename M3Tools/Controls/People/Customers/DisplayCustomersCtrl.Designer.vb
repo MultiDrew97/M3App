@@ -22,306 +22,138 @@ Partial Class DisplayCustomersCtrl
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container()
-		Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
-		Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-		Me.dgv_CustomerTable = New System.Windows.Forms.DataGridView()
-		Me.CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.EmailAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.PhoneNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.Address = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.JoinDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-		Me.btn_Edit = New System.Windows.Forms.DataGridViewImageColumn()
-		Me.btn_Delete = New System.Windows.Forms.DataGridViewImageColumn()
-		Me.bs_Customers = New System.Windows.Forms.BindingSource(Me.components)
-		Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
-		Me.bw_LoadCustomers = New System.ComponentModel.BackgroundWorker()
-		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
-		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
-		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
-		Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
-		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.cms_Tools.SuspendLayout()
-		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
-		Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
-		Me.ToolStripContainer1.SuspendLayout()
-		Me.ts_CustomerTools.SuspendLayout()
-		Me.SuspendLayout()
-		'
-		'dgv_CustomerTable
-		'
-		Me.dgv_CustomerTable.AllowUserToAddRows = False
-		Me.dgv_CustomerTable.AllowUserToOrderColumns = True
-		Me.dgv_CustomerTable.AutoGenerateColumns = False
-		Me.dgv_CustomerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-		Me.dgv_CustomerTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustomerID, Me.FirstName, Me.LastName, Me.EmailAddress, Me.PhoneNumber, Me.Address, Me.JoinDate, Me.btn_Edit, Me.btn_Delete})
-		Me.dgv_CustomerTable.DataSource = Me.bs_Customers
-		Me.dgv_CustomerTable.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dgv_CustomerTable.Location = New System.Drawing.Point(0, 0)
-		Me.dgv_CustomerTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.dgv_CustomerTable.Name = "dgv_CustomerTable"
-		Me.dgv_CustomerTable.ReadOnly = True
-		Me.dgv_CustomerTable.RowHeadersWidth = 82
-		Me.dgv_CustomerTable.Size = New System.Drawing.Size(1496, 618)
-		Me.dgv_CustomerTable.TabIndex = 0
-		'
-		'CustomerID
-		'
-		Me.CustomerID.DataPropertyName = "CustomerID"
-		Me.CustomerID.HeaderText = ""
-		Me.CustomerID.MinimumWidth = 10
-		Me.CustomerID.Name = "CustomerID"
-		Me.CustomerID.ReadOnly = True
-		Me.CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.CustomerID.Visible = False
-		Me.CustomerID.Width = 200
-		'
-		'FirstName
-		'
-		Me.FirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-		Me.FirstName.DataPropertyName = "FirstName"
-		Me.FirstName.FillWeight = 360.9017!
-		Me.FirstName.HeaderText = "First Name"
-		Me.FirstName.MinimumWidth = 160
-		Me.FirstName.Name = "FirstName"
-		Me.FirstName.ReadOnly = True
-		Me.FirstName.Width = 202
-		'
-		'LastName
-		'
-		Me.LastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-		Me.LastName.DataPropertyName = "LastName"
-		Me.LastName.FillWeight = 37.20636!
-		Me.LastName.HeaderText = "Last Name"
-		Me.LastName.MinimumWidth = 160
-		Me.LastName.Name = "LastName"
-		Me.LastName.ReadOnly = True
-		Me.LastName.Width = 200
-		'
-		'EmailAddress
-		'
-		Me.EmailAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-		Me.EmailAddress.DataPropertyName = "Email"
-		DataGridViewCellStyle1.NullValue = "N/A"
-		DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.EmailAddress.DefaultCellStyle = DataGridViewCellStyle1
-		Me.EmailAddress.FillWeight = 37.20636!
-		Me.EmailAddress.HeaderText = "Email"
-		Me.EmailAddress.MinimumWidth = 200
-		Me.EmailAddress.Name = "EmailAddress"
-		Me.EmailAddress.ReadOnly = True
-		Me.EmailAddress.Width = 200
-		'
-		'PhoneNumber
-		'
-		Me.PhoneNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-		Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-		DataGridViewCellStyle2.Format = "(###) ###-####"
-		DataGridViewCellStyle2.NullValue = "N/A"
-		Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle2
-		Me.PhoneNumber.FillWeight = 37.20636!
-		Me.PhoneNumber.HeaderText = "Phone Number"
-		Me.PhoneNumber.MinimumWidth = 100
-		Me.PhoneNumber.Name = "PhoneNumber"
-		Me.PhoneNumber.ReadOnly = True
-		Me.PhoneNumber.Width = 254
-		'
-		'Address
-		'
-		Me.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-		Me.Address.DataPropertyName = "Address"
-		DataGridViewCellStyle3.NullValue = "N/A"
-		DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.Address.DefaultCellStyle = DataGridViewCellStyle3
-		Me.Address.FillWeight = 37.20636!
-		Me.Address.HeaderText = "Address"
-		Me.Address.MinimumWidth = 200
-		Me.Address.Name = "Address"
-		Me.Address.ReadOnly = True
-		'
-		'JoinDate
-		'
-		Me.JoinDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-		Me.JoinDate.DataPropertyName = "JoinDate"
-		DataGridViewCellStyle4.Format = "d"
-		DataGridViewCellStyle4.NullValue = "N/A"
-		Me.JoinDate.DefaultCellStyle = DataGridViewCellStyle4
-		Me.JoinDate.FillWeight = 37.20636!
-		Me.JoinDate.HeaderText = "Join Date"
-		Me.JoinDate.MinimumWidth = 50
-		Me.JoinDate.Name = "JoinDate"
-		Me.JoinDate.ReadOnly = True
-		Me.JoinDate.Width = 181
-		'
-		'btn_Edit
-		'
-		Me.btn_Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-		DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-		DataGridViewCellStyle5.NullValue = CType(resources.GetObject("DataGridViewCellStyle5.NullValue"), Object)
-		DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(5)
-		Me.btn_Edit.DefaultCellStyle = DataGridViewCellStyle5
-		Me.btn_Edit.HeaderText = ""
-		Me.btn_Edit.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
-		Me.btn_Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
-		Me.btn_Edit.MinimumWidth = 25
-		Me.btn_Edit.Name = "btn_Edit"
-		Me.btn_Edit.ReadOnly = True
-		Me.btn_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-		Me.btn_Edit.ToolTipText = "Edit Customer"
-		Me.btn_Edit.Width = 25
-		'
-		'btn_Delete
-		'
-		Me.btn_Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-		DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-		DataGridViewCellStyle6.NullValue = CType(resources.GetObject("DataGridViewCellStyle6.NullValue"), Object)
-		DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(5)
-		Me.btn_Delete.DefaultCellStyle = DataGridViewCellStyle6
-		Me.btn_Delete.HeaderText = ""
-		Me.btn_Delete.Image = Global.SPPBC.M3Tools.My.Resources.Resources.delete
-		Me.btn_Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
-		Me.btn_Delete.MinimumWidth = 25
-		Me.btn_Delete.Name = "btn_Delete"
-		Me.btn_Delete.ReadOnly = True
-		Me.btn_Delete.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-		Me.btn_Delete.Width = 25
-		'
-		'cms_Tools
-		'
-		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
-		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(249, 80)
-		Me.cms_Tools.Text = "Tools"
-		'
-		'ts_Refresh
-		'
-		Me.ts_Refresh.Name = "ts_Refresh"
-		Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-		Me.ts_Refresh.Size = New System.Drawing.Size(248, 38)
-		Me.ts_Refresh.Text = "Refresh"
-		'
-		'ts_Remove
-		'
-		Me.ts_Remove.Name = "ts_Remove"
-		Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-		Me.ts_Remove.Size = New System.Drawing.Size(248, 38)
-		Me.ts_Remove.Text = "Remove"
-		'
-		'bw_LoadCustomers
-		'
-		'
-		'ToolStripContainer1
-		'
-		'
-		'ToolStripContainer1.ContentPanel
-		'
-		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.dgv_CustomerTable)
-		Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1496, 618)
-		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-		Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.ToolStripContainer1.Name = "ToolStripContainer1"
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(1496, 660)
-		Me.ToolStripContainer1.TabIndex = 9
-		Me.ToolStripContainer1.Text = "ToolStripContainer1"
-		'
-		'ToolStripContainer1.TopToolStripPanel
-		'
-		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
-		'
-		'ts_CustomerTools
-		'
-		Me.ts_CustomerTools.Dock = System.Windows.Forms.DockStyle.None
-		Me.ts_CustomerTools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer})
-		Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
-		Me.ts_CustomerTools.Name = "ts_CustomerTools"
-		Me.ts_CustomerTools.Size = New System.Drawing.Size(68, 42)
-		Me.ts_CustomerTools.TabIndex = 8
-		Me.ts_CustomerTools.Text = "ToolStrip1"
-		'
-		'tbtn_AddCustomer
-		'
-		Me.tbtn_AddCustomer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.tbtn_AddCustomer.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
-		Me.tbtn_AddCustomer.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_AddCustomer.Name = "tbtn_AddCustomer"
-		Me.tbtn_AddCustomer.Size = New System.Drawing.Size(46, 36)
-		Me.tbtn_AddCustomer.Text = "New Customer"
-		'
-		'tbtn_Refresh
-		'
-		Me.tbtn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.tbtn_Refresh.Enabled = False
-		Me.tbtn_Refresh.Image = CType(resources.GetObject("tbtn_Refresh.Image"), System.Drawing.Image)
-		Me.tbtn_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_Refresh.Name = "tbtn_Refresh"
-		Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
-		Me.tbtn_Refresh.Text = "Refresh"
-		'
-		'db_Customers
-		'
-		Me.db_Customers.InitialCatalog = "Media Ministry Test"
-		Me.db_Customers.Password = "M3AppPassword2499"
-		Me.db_Customers.Username = "M3App"
-		'
-		'DisplayCustomersCtrl
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(19.0!, 37.0!)
-		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.AutoSize = True
-		Me.ContextMenuStrip = Me.cms_Tools
-		Me.Controls.Add(Me.ToolStripContainer1)
-		Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Margin = New System.Windows.Forms.Padding(5)
-		Me.MinimumSize = New System.Drawing.Size(1100, 550)
-		Me.Name = "DisplayCustomersCtrl"
-		Me.Size = New System.Drawing.Size(1496, 660)
-		CType(Me.dgv_CustomerTable, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.bs_Customers, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.cms_Tools.ResumeLayout(False)
-		Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
-		Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
-		Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
-		Me.ToolStripContainer1.ResumeLayout(False)
-		Me.ToolStripContainer1.PerformLayout()
-		Me.ts_CustomerTools.ResumeLayout(False)
-		Me.ts_CustomerTools.PerformLayout()
-		Me.ResumeLayout(False)
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
+        Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+        Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
+        Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
+        Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
+        Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
+        Me.cms_Tools.SuspendLayout()
+        Me.ToolStripContainer1.ContentPanel.SuspendLayout()
+        Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
+        Me.ToolStripContainer1.SuspendLayout()
+        Me.ts_CustomerTools.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'cms_Tools
+        '
+        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(181, 70)
+        Me.cms_Tools.Text = "Tools"
+        '
+        'ts_Refresh
+        '
+        Me.ts_Refresh.Name = "ts_Refresh"
+        Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
+        Me.ts_Refresh.Text = "Refresh"
+        '
+        'ts_Remove
+        '
+        Me.ts_Remove.Name = "ts_Remove"
+        Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
+        Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
+        Me.ts_Remove.Text = "Remove"
+        '
+        'ToolStripContainer1
+        '
+        Me.ToolStripContainer1.BottomToolStripPanelVisible = False
+        '
+        'ToolStripContainer1.ContentPanel
+        '
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.cdg_Customers)
+        Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(748, 525)
+        Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ToolStripContainer1.LeftToolStripPanelVisible = False
+        Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ToolStripContainer1.Name = "ToolStripContainer1"
+        Me.ToolStripContainer1.RightToolStripPanelVisible = False
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(748, 550)
+        Me.ToolStripContainer1.TabIndex = 9
+        Me.ToolStripContainer1.Text = "ToolStripContainer1"
+        '
+        'ToolStripContainer1.TopToolStripPanel
+        '
+        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
+        '
+        'cdg_Customers
+        '
+        Me.cdg_Customers.AllowColumnReordering = True
+        Me.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cdg_Customers.Filter = Nothing
+        Me.cdg_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cdg_Customers.Location = New System.Drawing.Point(0, 0)
+        Me.cdg_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cdg_Customers.Name = "cdg_Customers"
+        Me.cdg_Customers.Size = New System.Drawing.Size(748, 525)
+        Me.cdg_Customers.TabIndex = 1
+        '
+        'ts_CustomerTools
+        '
+        Me.ts_CustomerTools.AllowItemReorder = True
+        Me.ts_CustomerTools.Dock = System.Windows.Forms.DockStyle.None
+        Me.ts_CustomerTools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer})
+        Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
+        Me.ts_CustomerTools.Name = "ts_CustomerTools"
+        Me.ts_CustomerTools.Size = New System.Drawing.Size(26, 25)
+        Me.ts_CustomerTools.TabIndex = 8
+        '
+        'tbtn_AddCustomer
+        '
+        Me.tbtn_AddCustomer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tbtn_AddCustomer.Image = Global.SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption
+        Me.tbtn_AddCustomer.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tbtn_AddCustomer.Name = "tbtn_AddCustomer"
+        Me.tbtn_AddCustomer.Size = New System.Drawing.Size(23, 22)
+        Me.tbtn_AddCustomer.Text = "New Customer"
+        '
+        'tbtn_Refresh
+        '
+        Me.tbtn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tbtn_Refresh.Enabled = False
+        Me.tbtn_Refresh.Image = CType(resources.GetObject("tbtn_Refresh.Image"), System.Drawing.Image)
+        Me.tbtn_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tbtn_Refresh.Name = "tbtn_Refresh"
+        Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
+        Me.tbtn_Refresh.Text = "Refresh"
+        '
+        'DisplayCustomersCtrl
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
+        Me.ContextMenuStrip = Me.cms_Tools
+        Me.Controls.Add(Me.ToolStripContainer1)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Margin = New System.Windows.Forms.Padding(5)
+        Me.Name = "DisplayCustomersCtrl"
+        Me.Size = New System.Drawing.Size(748, 550)
+        Me.cms_Tools.ResumeLayout(False)
+        Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
+        Me.ToolStripContainer1.ResumeLayout(False)
+        Me.ToolStripContainer1.PerformLayout()
+        Me.ts_CustomerTools.ResumeLayout(False)
+        Me.ts_CustomerTools.PerformLayout()
+        Me.ResumeLayout(False)
 
-	End Sub
-
-	Friend WithEvents dgv_CustomerTable As Windows.Forms.DataGridView
-	Friend WithEvents bs_Customers As Windows.Forms.BindingSource
-	Friend WithEvents cms_Tools As Windows.Forms.ContextMenuStrip
-	Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
-	Friend WithEvents bw_LoadCustomers As ComponentModel.BackgroundWorker
-	Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
-	Private WithEvents db_Customers As Database.CustomerDatabase
-	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
-	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
+    End Sub
+    Friend WithEvents cms_Tools As Windows.Forms.ContextMenuStrip
+    Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
+    Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
+    Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
 	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
-	Friend WithEvents CustomerID As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents FirstName As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents LastName As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents EmailAddress As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents PhoneNumber As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents Address As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents JoinDate As Windows.Forms.DataGridViewTextBoxColumn
-	Friend WithEvents btn_Edit As Windows.Forms.DataGridViewImageColumn
-	Friend WithEvents btn_Delete As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents cdg_Customers As CustomersDataGrid
 End Class

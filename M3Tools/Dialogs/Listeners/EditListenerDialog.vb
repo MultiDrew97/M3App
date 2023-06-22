@@ -4,7 +4,7 @@ Namespace Dialogs
 	Public Class EditListenerDialog
 		Private Event ListenerChanged()
 		Private _listener As Types.Listener
-		Private _newInfo As Types.Listener
+		'Private _newInfo As Types.Listener
 
 		Public Property Listener As Types.Listener
 			Get
@@ -39,7 +39,7 @@ Namespace Dialogs
 				Return
 			End If
 
-			db_Listeners.UpdateListener(Listener.Id, _newInfo.Name, _newInfo.Email)
+			db_Listeners.UpdateListener(Listener.Id, ListenerName, ListenerEmail)
 
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
@@ -51,9 +51,9 @@ Namespace Dialogs
 		End Sub
 
 		Private Sub ListenerUpdated() Handles Me.ListenerChanged
-			_newInfo = Listener.Clone()
-			ListenerName = _newInfo.Name
-			ListenerEmail = _newInfo.Email
+			'_newInfo = Listener.Clone()
+			ListenerName = Listener.Name
+			ListenerEmail = Listener.Email
 		End Sub
 
 		Private Function ChangeDetected() As Boolean

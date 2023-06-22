@@ -38,6 +38,7 @@ Partial Class Frm_Main
         '
         'btn_OrderManagement
         '
+        Me.btn_OrderManagement.Enabled = False
         Me.btn_OrderManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_OrderManagement.Location = New System.Drawing.Point(24, 95)
         Me.btn_OrderManagement.Name = "btn_OrderManagement"

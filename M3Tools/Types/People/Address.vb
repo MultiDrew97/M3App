@@ -6,11 +6,11 @@ Namespace Types
         Public Property State As String
         Public Property ZipCode As String
 
-        Public Sub New()
-            Me.New("123 Main St", "City", "ST", "12345")
-        End Sub
+		Public Sub New()
+			Me.New("123 Main St", "City", "ST", "12345")
+		End Sub
 
-        Public Sub New(street As String, city As String, state As String, zipCode As String)
+		Public Sub New(street As String, city As String, state As String, zipCode As String)
             Me.Street = street
             Me.City = city
             Me.State = state

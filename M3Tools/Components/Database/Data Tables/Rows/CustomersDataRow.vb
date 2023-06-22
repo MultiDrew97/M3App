@@ -60,10 +60,17 @@
             End Set
         End Property
 
-        Public ReadOnly Property JoinDate() As Date
-            Get
-                Return CDate(Me(Me.tableCustomers.JoinDateColumn))
-            End Get
-        End Property
-    End Class
+		Public ReadOnly Property JoinDate() As Date
+			Get
+				Return CDate(Me(Me.tableCustomers.JoinDateColumn))
+			End Get
+		End Property
+
+		Public ReadOnly Property Customer As Types.Customer
+			Get
+				Return New Types.Customer(CustomerID, FirstName, LastName, Types.Address.Parse(Address), PhoneNumber, Email, JoinDate)
+			End Get
+		End Property
+
+	End Class
 End Namespace

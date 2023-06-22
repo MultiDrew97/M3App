@@ -38,7 +38,7 @@ Public Class GenericInputPair
 		End Set
 	End Property
 
-	Public Shadows Property Text As String
+	Public Overrides Property Text As String
 		Get
 			Return txt_Input.Text
 		End Get
@@ -70,6 +70,7 @@ Public Class GenericInputPair
 	Public Property Placeholder As String = "Input..."
 
 	Private Sub InputTextChanged(sender As Object, e As EventArgs) Handles txt_Input.TextChanged
+		' TODO: Potentially move placeholder/color logic here?
 		RaiseEvent TextChanged(Me, e)
 	End Sub
 
@@ -93,6 +94,6 @@ Public Class GenericInputPair
 
 	Private Sub GenericInputPair_Load(sender As Object, e As EventArgs) Handles Me.Load
 		Text = If(Text <> "", Text, Placeholder)
-		txt_Input.ForeColor = If(Text <> "", Drawing.SystemColors.WindowText, Drawing.SystemColors.ControlDark)
+		txt_Input.ForeColor = If(Text <> Placeholder, Drawing.SystemColors.WindowText, Drawing.SystemColors.ControlDark)
 	End Sub
 End Class

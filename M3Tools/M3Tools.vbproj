@@ -175,6 +175,12 @@
     <Compile Include="Controls\Orders\QuantityNudCtrl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\People\Customers\CustomersDataGrid.Designer.vb">
+      <DependentUpon>CustomersDataGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\People\Customers\CustomersDataGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.Designer.vb">
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
     </Compile>
@@ -457,6 +463,7 @@
     </Compile>
     <Compile Include="Types\Orders\CartItem.vb" />
     <Compile Include="Types\Orders\CartItemCollection.vb" />
+    <Compile Include="Types\People\CustomerCollection.vb" />
     <Compile Include="Types\People\DBEntryCollection.vb" />
     <Compile Include="UpdateService.Designer.vb">
       <DependentUpon>UpdateService.vb</DependentUpon>
@@ -543,6 +550,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Orders\QuantityNudCtrl.resx">
       <DependentUpon>QuantityNudCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\People\Customers\CustomersDataGrid.resx">
+      <DependentUpon>CustomersDataGrid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Customers\DisplayCustomersCtrl.resx">
       <DependentUpon>DisplayCustomersCtrl.vb</DependentUpon>
@@ -667,8 +677,10 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.CustomersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ListenersDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.OrdersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Dialogs.ImportListenersDialog+NewListener.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Dialogs.ImportListenersDialog.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItem.datasource" />
@@ -749,7 +761,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

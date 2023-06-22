@@ -119,8 +119,8 @@ Namespace Database
 			End Using
 		End Sub
 
-		Public Function GetCustomers() As DBEntryCollection(Of Customer)
-			Dim customers As New DBEntryCollection(Of Customer)
+		Public Function GetCustomers() As CustomerCollection
+			Dim customers As New CustomerCollection()
 
 			Using _conn = db_Connection.Connect
 				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"

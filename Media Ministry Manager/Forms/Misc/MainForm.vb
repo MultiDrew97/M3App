@@ -11,63 +11,52 @@ Public Class Frm_Main
 		Shared max As New Size(1382, 744)
 	End Structure
 
-	Private Sub DisplayProductMgmt(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.OpenProducts
-		Dim inventory As New Frm_DisplayInventory
-		inventory.Show()
+	Private Sub MangeProducts(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.OpenProducts
+		Dim products As New Frm_DisplayInventory
+		products.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub DisplayOrders(sender As Object, e As EventArgs) Handles btn_OrderManagement.Click, mms_Main.OpenOrders
+	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles btn_OrderManagement.Click, mms_Main.OpenOrders
 		Dim orders As New Frm_DisplayOrders()
 		orders.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub DisplayCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.OpenCustomers
-		Dim customers As New Frm_DisplayCustomers
+	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.OpenCustomers
+		Dim customers As New CustomersManagement
 		customers.Show()
 		Me.Close()
 	End Sub
 
-	Private Sub Reset() Handles Me.Load
+	Private Sub Reload() Handles Me.Load
 		tss_Feedback.Text = "What would you like to do?"
 		tss_Feedback.ForeColor = SystemColors.WindowText
 	End Sub
 
-	Private Sub EmailMinistry(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.OpenListeners
-		frm_EmailListeners.Show()
+	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.OpenListeners
+		Dim listeners As New ListenersManagement()
+		listeners.Show()
 		Me.Close()
-		'If EmailMinistryDialog.ShowDialog = DialogResult.OK Then
-		'	Select Case EmailMinistryDialog.SelectedItem
-		'		Case "Send"
-		'			SendEmailsDialog.ShowDialog()
-		'		Case "Upload"
-		'			DriveUploadDialog.ShowDialog()
-		'		Case "View"
-		'			Dim listeners As New Frm_ViewListeners
-		'			listeners.Show()
-		'			Me.Close()
-		'	End Select
-		'End If
 	End Sub
 
-	Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-		If firstTime Then
-			firstTime = False
-			Return
-		End If
+	'Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+	'	If firstTime Then
+	'		firstTime = False
+	'		Return
+	'	End If
 
-		' TODO: Determine proper way to do this
+	'	' TODO: Determine proper way to do this
 
-		If Me.Size = WindowSizes.max Then
-			GrowToMax()
-		Else
-			BackToNormal()
-		End If
+	'	If Me.Size = WindowSizes.max Then
+	'		GrowToMax()
+	'	Else
+	'		BackToNormal()
+	'	End If
 
 
-		'bw_ChangedSizes.RunWorkerAsync(size)
-	End Sub
+	'	'bw_ChangedSizes.RunWorkerAsync(size)
+	'End Sub
 
 	Private Sub GrowToMax()
 		'Hide normal size menu buttons
@@ -103,8 +92,9 @@ Public Class Frm_Main
 		Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub DisplaySettings() Handles mms_Main.OpenSettings
-		Frm_Settings.Show()
+	Private Sub ViewSettings() Handles mms_Main.OpenSettings
+		Dim settings As New Frm_Settings()
+		settings.Show()
 	End Sub
 
 	Private Sub UpdateSizes(sender As Object, e As DoWorkEventArgs) Handles bw_ChangedSizes.DoWork

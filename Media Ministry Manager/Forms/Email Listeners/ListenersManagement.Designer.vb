@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frm_EmailListeners
+Partial Class ListenersManagement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frm_EmailListeners
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_EmailListeners))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ListenersManagement))
         Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
         Me.dlc_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
         Me.gt_Email = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
@@ -50,7 +50,7 @@ Partial Class frm_EmailListeners
         '
         Me.gt_Email.Username = Nothing
         '
-        'frm_EmailListeners
+        'EmailListenersDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -61,7 +61,7 @@ Partial Class frm_EmailListeners
         Me.MainMenuStrip = Me.mms_Main
         Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(800, 500)
-        Me.Name = "frm_EmailListeners"
+        Me.Name = "EmailListenersDisplay"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Media Ministry Manager"
         Me.ResumeLayout(False)

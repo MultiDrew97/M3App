@@ -39,8 +39,8 @@
             Me.TableLayoutPanel1.ColumnCount = 2
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-            Me.TableLayoutPanel1.Controls.Add(Me.btn_Create, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.btn_Cancel, 1, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.btn_Create, 1, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.btn_Cancel, 0, 0)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(174, 149)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 1
@@ -51,7 +51,7 @@
             'btn_Create
             '
             Me.btn_Create.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.btn_Create.Location = New System.Drawing.Point(3, 3)
+            Me.btn_Create.Location = New System.Drawing.Point(76, 3)
             Me.btn_Create.Name = "btn_Create"
             Me.btn_Create.Size = New System.Drawing.Size(67, 23)
             Me.btn_Create.TabIndex = 0
@@ -61,7 +61,7 @@
             '
             Me.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-            Me.btn_Cancel.Location = New System.Drawing.Point(76, 3)
+            Me.btn_Cancel.Location = New System.Drawing.Point(3, 3)
             Me.btn_Cancel.Name = "btn_Cancel"
             Me.btn_Cancel.Size = New System.Drawing.Size(67, 23)
             Me.btn_Cancel.TabIndex = 1

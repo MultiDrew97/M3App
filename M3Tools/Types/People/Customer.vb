@@ -53,7 +53,8 @@ Namespace Types
 		End Sub
 
 		Shared Function Parse(ParamArray arr As Object()) As Customer
-			Return New Customer(CInt(arr(0)), CStr(arr(1)), CStr(arr(2)), CStr(arr(3)), CStr(arr(4)), CStr(arr(5)), CStr(arr(6)), CStr(arr(7)), CStr(arr(8)), CDate(arr(9)))
+			Return New Customer(CInt(arr(0)), CStr(arr(1)), CStr(arr(2)), Address.Parse(CStr(arr(3))),
+								CStr(arr(4)), CStr(arr(5)), CDate(arr(6)))
 		End Function
 
 		Public Overrides Function ToString() As String
@@ -85,5 +86,9 @@ Namespace Types
 				' TODO: Finish implementing updates
 			End Using
 		End Sub
+
+		Public Function Clone() As Customer
+			Return New Customer(Me.Id, Me.FirstName, Me.LastName, Me.Address, Me.PhoneNumber, Me.Email, CDate(Me.Joined))
+		End Function
 	End Class
 End Namespace

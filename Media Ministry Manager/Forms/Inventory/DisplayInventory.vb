@@ -157,7 +157,7 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewCustomersToolStripMenuItem.Click
-		Dim customers As New Frm_DisplayCustomers
+		Dim customers As New CustomersManagement
 		customers.Show()
 		Tooled = True
 		Me.Close()

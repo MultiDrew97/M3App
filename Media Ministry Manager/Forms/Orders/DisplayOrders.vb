@@ -33,7 +33,7 @@ Public Class Frm_DisplayOrders
     End Sub
 
     Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles mms_Strip.OpenCustomers
-        Dim customers As New Frm_DisplayCustomers()
+        Dim customers As New CustomersManagement()
         customers.Show()
         Utils.SpecialClose(sender)
         Me.Close()

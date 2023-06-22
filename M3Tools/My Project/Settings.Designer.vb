@@ -74,7 +74,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry Test")>  _
         Public ReadOnly Property DefaultCatalog() As String
             Get
                 Return CType(Me("DefaultCatalog"),String)

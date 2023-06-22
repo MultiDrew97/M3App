@@ -96,13 +96,25 @@ Namespace DataTables
             End Get
         End Property
 
-        Default Public ReadOnly Property Item(ByVal index As Integer) As CustomersDataRow
-            Get
-                Return CType(Me.Rows(index), CustomersDataRow)
-            End Get
-        End Property
+		Default Public ReadOnly Property Item(ByVal index As Integer) As CustomersDataRow
+			Get
+				Return CType(Me.Rows(index), CustomersDataRow)
+			End Get
+		End Property
 
-        Public Event CustomersDataRowChanging As CustomersDataRowChangeEventHandler
+		Public ReadOnly Property Customers As Types.CustomerCollection
+			Get
+				Dim col As New Types.CustomerCollection
+
+				For Each row As CustomersDataRow In Rows
+					col.Add(row.Customer)
+				Next
+
+				Return col
+			End Get
+		End Property
+
+		Public Event CustomersDataRowChanging As CustomersDataRowChangeEventHandler
 
         Public Event CustomersDataRowChanged As CustomersDataRowChangeEventHandler
 
@@ -110,11 +122,23 @@ Namespace DataTables
 
         Public Event CustomersDataRowDeleted As CustomersDataRowChangeEventHandler
 
-        Public Sub AddCustomersRow(ByVal row As CustomersDataRow)
-            AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Address")), CStr(row("PhoneNumber")), CStr(row("Email")), CDate(row("JoinDate")))
-        End Sub
+		Public Sub AddRange(list As Types.CustomerCollection)
+			For Each customer In list
+				AddCustomersRow(customer)
+			Next
+		End Sub
 
-        Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
+		Public Sub AddCustomersRow(ByVal row As CustomersDataRow)
+			AddCustomersRow(CInt(row("CustomerID")), CStr(row("FirstName")), CStr(row("LastName")), CStr(row("Address")), CStr(row("PhoneNumber")), CStr(row("Email")), CDate(row("JoinDate")))
+		End Sub
+
+		Public Sub AddCustomersRow(ByVal customer As Types.Customer)
+			AddCustomersRow(customer.Id, customer.FirstName, customer.LastName, customer.Address?.Street,
+							customer.Address?.City, customer.Address?.State, customer.Address?.ZipCode,
+							customer.PhoneNumber, customer.Email, CType(customer.Joined, Date))
+		End Sub
+
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
             Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
             CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, ParsePhone(PhoneNumber), Email, ParseDate(JoinDate)}
             Me.Rows.Add(CustomersDataRow)

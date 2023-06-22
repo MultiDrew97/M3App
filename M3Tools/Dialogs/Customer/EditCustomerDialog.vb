@@ -4,21 +4,21 @@ Imports System.Windows.Forms
 
 Namespace Dialogs
 	Public Class EditCustomerDialog
-		Private __id As Integer = -1
 		Private _customer As Types.Customer
+		' Private _newInfo As Types.Customer
 
-		Public Property CustomerID As Integer
+		Private Event CustomerChanged()
+
+		Public Property Customer As Types.Customer
 			Get
-				Return __id
+				Return _customer
 			End Get
-			Set(value As Integer)
-				If value < My.Settings.MinID Then
-					Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
-				End If
-
-				__id = value
+			Set(value As Types.Customer)
+				_customer = value
+				RaiseEvent CustomerChanged()
 			End Set
 		End Property
+
 		Public Property FirstName As String
 			Get
 				Return gi_FirstName.Text
@@ -27,6 +27,7 @@ Namespace Dialogs
 				gi_FirstName.Text = value
 			End Set
 		End Property
+
 		Public Property LastName As String
 			Get
 				Return gi_LastName.Text
@@ -64,19 +65,14 @@ Namespace Dialogs
 		End Property
 
 		Private Sub FinishDialog(sender As Object, e As EventArgs) Handles OK_Button.Click
-			If Not CheckChangedValues() Then
-				MessageBox.Show("No changes were detected. Please try again.", "No Changes Detected", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			If Not ChangeDetected() Then
 				Return
 			End If
 
-			Try
-				db_Customers.UpdateCustomer(CustomerID, FirstName, LastName, Address.Street, Address.City, Address.State, Address.ZipCode, Phone, Email)
-				Me.DialogResult = DialogResult.OK
-				Me.Close()
-			Catch ex As Exception
-				Console.Error.WriteLine(ex.Message)
-				MessageBox.Show("Unable to update this customer's information. Please try again", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-			End Try
+			db_Customers.UpdateCustomer(Customer.Id, FirstName, LastName, Address, Phone, Email)
+
+			Me.DialogResult = DialogResult.OK
+			Me.Close()
 		End Sub
 
 		Private Sub CancelDialog(sender As Object, e As EventArgs) Handles Cancel_Button.Click
@@ -84,49 +80,70 @@ Namespace Dialogs
 			Me.Close()
 		End Sub
 
-		Private Sub DialogLoading(sender As Object, e As EventArgs) Handles Me.Load
-			Reload()
+		Private Sub ListenerUpdated() Handles Me.CustomerChanged
+			'_newInfo = Customer.Clone()
+			FirstName = Customer.FirstName
+			LastName = Customer.LastName
+			Address = Customer.Address
+			Phone = Customer.PhoneNumber
+			Email = Customer.Email
 		End Sub
 
-		Private Sub LoadCustomer(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bw_LoadCustomer.DoWork
-			If CustomerID < 0 Then
+		Private Function ChangeDetected() As Boolean
+			If FirstName <> Customer.FirstName Then
+				Return True
+			End If
+
+			If Email <> Customer.Email Then
+				Return True
+			End If
+
+			Return False
+		End Function
+
+		Private Sub DialogLoading(sender As Object, e As EventArgs) Handles Me.Load
+			' Reload()
+		End Sub
+
+		Private Sub LoadCustomer(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+			If Customer.Id < 0 Then
 				e.Cancel = True
 				Return
 			End If
 
 			Try
-				_customer = db_Customers.GetCustomer(CustomerID)
+				_customer = db_Customers.GetCustomer(Customer.Id)
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
 				e.Cancel = True
 			End Try
 		End Sub
 
-		Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadCustomer.RunWorkerCompleted
-			If e.Cancelled Then
-				Dim answer = MessageBox.Show("Unable to retrieve customer. Would you like to try again?", "Customer Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+		'Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs)
+		'	If e.Cancelled Then
+		'		Dim answer = MessageBox.Show("Unable to retrieve customer. Would you like to try again?", "Customer Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
 
-				If answer = DialogResult.Yes Then
-					While bw_LoadCustomer.IsBusy
-						Console.WriteLine("LoadCustomers Background worker not finished...")
-						Utils.Wait()
-					End While
+		'		If answer = DialogResult.Yes Then
+		'			While bw_LoadCustomer.IsBusy
+		'				Console.WriteLine("LoadCustomers Background worker not finished...")
+		'				Utils.Wait()
+		'			End While
 
-					bw_LoadCustomer.RunWorkerAsync()
-				End If
-				Return
-			End If
+		'			bw_LoadCustomer.RunWorkerAsync()
+		'		End If
+		'		Return
+		'	End If
 
-			FirstName = _customer.FirstName
-			LastName = _customer.LastName
-			Phone = _customer.PhoneNumber
-			Email = _customer.Email
-			Address = _customer.Address
-		End Sub
+		'	FirstName = _customer.FirstName
+		'	LastName = _customer.LastName
+		'	Phone = _customer.PhoneNumber
+		'	Email = _customer.Email
+		'	Address = _customer.Address
+		'End Sub
 
-		Private Sub Reload()
-			bw_LoadCustomer.RunWorkerAsync()
-		End Sub
+		'Private Sub Reload()
+		'	bw_LoadCustomer.RunWorkerAsync()
+		'End Sub
 
 		Private Function CheckChangedValues() As Boolean
 			' TODO: Check to allow empty Nullable fields

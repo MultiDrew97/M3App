@@ -2,7 +2,7 @@
 Imports System.ComponentModel
 Imports MediaMinistry.Helpers
 
-Public Class Frm_DisplayCustomers
+Public Class CustomersManagement
 	Private Tooled As Boolean = False
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
 		Try
@@ -32,32 +32,32 @@ Public Class Frm_DisplayCustomers
 		Utils.CloseOpenForms()
 	End Sub
 
-	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
-		Dim customers As New Frm_DisplayCustomers
+	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.OpenCustomers
+		Dim customers As New CustomersManagement
 		customers.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ViewProducts(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
+	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.OpenProducts
 		Dim products As New Frm_DisplayInventory
 		products.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ViewOrders(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
+	Private Sub MangageOrders(sender As Object, e As EventArgs) Handles mms_Main.OpenOrders
 		Dim orders As New Frm_DisplayOrders
 		orders.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
-		'Dim listeners As New Frm_ViewListeners
-		'listeners.Show()
-		'Tooled = True
-		'Me.Close()
+	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles mms_Main.OpenListeners
+		Dim listeners As New ListenersManagement()
+		listeners.Show()
+		Tooled = True
+		Me.Close()
 	End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.OpenSettings

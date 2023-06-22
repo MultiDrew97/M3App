@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Windows.Forms
 
 ' TODO: Open Display forms from here and figure out to discern closing type
+' TODO: Resolve Collection modified errors
 Public Class MainMenuStrip
 	Private ReadOnly toolStripPrefix As String = "tsmi_"
 
