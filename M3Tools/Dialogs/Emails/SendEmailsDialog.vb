@@ -52,30 +52,13 @@ Public Class SendEmailsDialog
 		gdt_Files.Load()
 	End Sub
 
-	Private Sub DialogShown(sender As Object, e As EventArgs) Handles Me.Shown
-		UseWaitCursor = True
-		Reload()
-	End Sub
-
-	'Private Sub FindSelectedNodes(nodes As TreeNodeCollection)
-	'	For Each node As TreeNode In nodes
-	'		If node.Checked Then
-	'			__email.Files.Add(node.Name)
-	'		End If
-
-	'		If node.Nodes.Count > 0 Then
-	'			FindSelectedNodes(node.Nodes)
-	'		End If
-	'	Next
-	'End Sub
-
-	Public Sub Reload()
+	Public Sub Reload() Handles Me.Shown
 		UseWaitCursor = True
 		gdt_Files.Reload()
 		UseWaitCursor = False
 	End Sub
 
-	Private Sub NewFolder(sender As Object, e As EventArgs) Handles tsmi_NewFolder.Click
+	Private Sub NewFolder(sender As Object, e As EventArgs)
 		Using newFolder As New CreateFolderDialog()
 			Dim res = newFolder.ShowDialog()
 			If res = DialogResult.OK Then
@@ -84,7 +67,7 @@ Public Class SendEmailsDialog
 		End Using
 	End Sub
 
-	Private Sub NewUpload(sender As Object, e As EventArgs) Handles tsmi_NewUpload.Click
+	Private Sub NewUpload(sender As Object, e As EventArgs)
 		Using newUpload As New UploadFileDialog()
 			Dim res = newUpload.ShowDialog()
 			If res = DialogResult.OK Then
@@ -93,25 +76,16 @@ Public Class SendEmailsDialog
 		End Using
 	End Sub
 
-	Private Sub NewItem(sender As Object, e As EventArgs) Handles tss_NewItem.ButtonClick
-		tss_NewItem.ShowDropDown()
-	End Sub
-
 	Private Sub GatherFiles(sender As Object, e As DoWorkEventArgs) Handles bw_GatherFiles.DoWork
 		Dim details = CType(e.Argument, EmailDetails)
 
-		Select Case details.CurrentIndex
-			Case TabPages.Sermon
-				Dim selectedNodes = gdt_Files.GetSelectedNodes()
+		For Each node In gdt_Files.GetSelectedNodes()
+			details.Files.Add(String.Format(My.Resources.DriveShareLink, node.Name))
+		Next
 
-				For Each node In selectedNodes
-					details.Files.Add(node.Name)
-				Next
-			Case TabPages.Receipt
-				For Each file In fu_Receipts.Files
-					details.Files.Add(file.Name)
-				Next
-		End Select
+		For Each file In fu_Receipts.Files
+			details.Files.Add(file.Name)
+		Next
 
 		e.Result = details
 	End Sub
@@ -122,7 +96,7 @@ Public Class SendEmailsDialog
 			Return
 		End If
 
-		bw_PrepEmails.RunWorkerAsync(e.Result)
+		bw_GatherReceipients.RunWorkerAsync(e.Result)
 	End Sub
 
 	Private Sub PrepEmails(sender As Object, e As DoWorkEventArgs) Handles bw_PrepEmails.DoWork
@@ -130,12 +104,13 @@ Public Class SendEmailsDialog
 
 		Dim res = MessageBox.Show("Would you like to use the default email template?", "Default Email Template", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 		If res = DialogResult.Yes Then
+			' TODO: How to get names and links into these templates
 			'Default message
 			Select Case details.CurrentIndex
-				Case TabPages.Sermon
+				Case tp_GDrive.TabIndex
 					details.Subject = "New Sermon"
 					details.Body = My.Resources.DefaultSermonEmail
-				Case TabPages.Receipt
+				Case tp_LocalFiles.TabIndex
 					details.Subject = "Thank you"
 					details.Body = My.Resources.DefaultReceiptEmail
 			End Select
@@ -167,7 +142,7 @@ Public Class SendEmailsDialog
 			Return
 		End If
 
-		bw_GatherReceipients.RunWorkerAsync(e.Result)
+		bw_SendEmails.RunWorkerAsync(e.Result)
 	End Sub
 
 	Private Sub GatherReceipients(sender As Object, e As DoWorkEventArgs) Handles bw_GatherReceipients.DoWork
@@ -190,7 +165,7 @@ Public Class SendEmailsDialog
 			Return
 		End If
 
-		bw_SendEmails.RunWorkerAsync(e.Result)
+		bw_PrepEmails.RunWorkerAsync(e.Result)
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As DoWorkEventArgs) Handles bw_SendEmails.DoWork
@@ -202,24 +177,12 @@ Public Class SendEmailsDialog
 			Console.WriteLine($"Name - {listener.Name}{vbNewLine}Email - {listener.Email}")
 		Next
 
-
 		' Loop through files to determine type
 		Console.WriteLine($"Subject: {details.Subject}")
 		Console.WriteLine($"Body: {details.Body}")
 		Console.WriteLine($"File Count: {details.Files.Count}")
 
-		If details.Files.Count > 0 Then
-			details.Body &= $"{vbNewLine}{vbNewLine}Attachements:{vbNewLine}{vbNewLine}"
-
-			If details.CurrentIndex = 0 Then
-				' Sending Drive links
-				For Each file In details.Files
-					details.Body &= String.Format(My.Resources.DriveShareLink, file)
-				Next
-			ElseIf details.CurrentIndex = 1 Then
-				' Sending actual file
-			End If
-		End If
+		gmt_Gmail.SendEmails(details)
 
 		For Each listener In details.Recipients
 			message = gmt_Gmail.Create(New MimeKit.MailboxAddress(listener.Name, listener.Email), details.Subject, details.Body, bodyType:=details.BodyType)
@@ -250,26 +213,5 @@ Public Class SendEmailsDialog
 
 	Private Sub Sent() Handles Me.EmailsSent
 		btn_Send.Enabled = True
-	End Sub
-End Class
-
-Friend Class EmailDetails
-	Property Subject As String
-	'TODO: Figure out formatted messages later to not need this
-	Property BodyType As String
-	Property Body As String
-	Property Files As Collection(Of String)
-	Property Recipients As Types.ListenerCollection
-
-	'TODO: Find better way to pass between background workers
-	Property CurrentIndex As Integer
-
-	Public Sub New(currentPage As Integer)
-		Subject = ""
-		Body = ""
-		Files = New Collection(Of String)
-		BodyType = "html"
-		Recipients = New Types.ListenerCollection
-		CurrentIndex = currentPage
 	End Sub
 End Class

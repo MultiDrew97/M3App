@@ -127,5 +127,15 @@ Namespace GTools
 		Function Send(emailContent As MimeMessage, Optional sender As String = "me") As Data.Message
 			Return __service.Users().Messages().Send(CreateWithEmail(emailContent), sender).Execute()
 		End Function
+
+		Sub SendEmails(details As EmailDetails)
+			details.Body &= $"{vbNewLine}{vbNewLine}Attachements:{vbNewLine}{vbNewLine}"
+			For Each recv In details.Recipients
+
+				For Each file In details.Files
+
+				Next
+			Next
+		End Sub
 	End Class
 End Namespace

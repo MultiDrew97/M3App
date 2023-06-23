@@ -226,12 +226,6 @@
     <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Customer\CustomersManagement.Designer.vb">
-      <DependentUpon>CustomersManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Customer\CustomersManagement.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.Designer.vb">
       <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </Compile>
@@ -268,7 +262,13 @@
     <Compile Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Email Listeners\ListenersManagement.Designer.vb">
+    <Compile Include="Forms\Customer\CustomersManagement.designer.vb">
+      <DependentUpon>CustomersManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Customer\CustomersManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Email Listeners\ListenersManagement.designer.vb">
       <DependentUpon>ListenersManagement.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Email Listeners\ListenersManagement.vb">
@@ -369,9 +369,6 @@
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.resx">
       <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customer\CustomersManagement.resx">
-      <DependentUpon>CustomersManagement.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.resx">
       <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -389,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.resx">
       <DependentUpon>AdminInfoDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Customer\CustomersManagement.resx">
+      <DependentUpon>CustomersManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Email Listeners\ListenersManagement.resx">
       <DependentUpon>ListenersManagement.vb</DependentUpon>

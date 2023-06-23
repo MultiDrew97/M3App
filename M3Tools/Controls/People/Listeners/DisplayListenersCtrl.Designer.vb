@@ -26,16 +26,17 @@ Partial Class DisplayListenersCtrl
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayListenersCtrl))
         Me.bw_LoadListeners = New System.ComponentModel.BackgroundWorker()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+        Me.ldg_Listeners = New SPPBC.M3Tools.ListenersDataGrid()
         Me.ts_Tools = New System.Windows.Forms.ToolStrip()
         Me.tbtn_AddListener = New System.Windows.Forms.ToolStripButton()
         Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
         Me.tbtn_Email = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
-        Me.ldg_Listeners = New SPPBC.M3Tools.ListenersDataGrid()
         Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
         Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
+        Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -64,14 +65,26 @@ Partial Class DisplayListenersCtrl
         '
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_Tools)
         '
+        'ldg_Listeners
+        '
+        Me.ldg_Listeners.AllowColumnReordering = True
+        Me.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ldg_Listeners.Filter = Nothing
+        Me.ldg_Listeners.ListenersSelectable = False
+        Me.ldg_Listeners.Location = New System.Drawing.Point(0, 0)
+        Me.ldg_Listeners.MinimumSize = New System.Drawing.Size(400, 200)
+        Me.ldg_Listeners.Name = "ldg_Listeners"
+        Me.ldg_Listeners.Size = New System.Drawing.Size(517, 370)
+        Me.ldg_Listeners.TabIndex = 1
+        '
         'ts_Tools
         '
         Me.ts_Tools.Dock = System.Windows.Forms.DockStyle.None
         Me.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ts_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.tbtn_Email, Me.ToolStripSeparator2, Me.txt_Filter})
+        Me.ts_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddListener, Me.tbtn_Import, Me.tbtn_Email, Me.ToolStripSeparator2, Me.tsl_Count, Me.txt_Filter})
         Me.ts_Tools.Location = New System.Drawing.Point(3, 0)
         Me.ts_Tools.Name = "ts_Tools"
-        Me.ts_Tools.Size = New System.Drawing.Size(180, 25)
+        Me.ts_Tools.Size = New System.Drawing.Size(298, 25)
         Me.ts_Tools.TabIndex = 1
         '
         'tbtn_AddListener
@@ -108,21 +121,8 @@ Partial Class DisplayListenersCtrl
         '
         'txt_Filter
         '
-        Me.txt_Filter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txt_Filter.Name = "txt_Filter"
         Me.txt_Filter.Size = New System.Drawing.Size(100, 25)
-        '
-        'ldg_Listeners
-        '
-        Me.ldg_Listeners.AllowColumnReordering = True
-        Me.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ldg_Listeners.Filter = Nothing
-        Me.ldg_Listeners.ListenersSelectable = False
-        Me.ldg_Listeners.Location = New System.Drawing.Point(0, 0)
-        Me.ldg_Listeners.MinimumSize = New System.Drawing.Size(400, 200)
-        Me.ldg_Listeners.Name = "ldg_Listeners"
-        Me.ldg_Listeners.Size = New System.Drawing.Size(517, 370)
-        Me.ldg_Listeners.TabIndex = 1
         '
         'cms_Tools
         '
@@ -139,6 +139,13 @@ Partial Class DisplayListenersCtrl
         Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
+        '
+        'tsl_Count
+        '
+        Me.tsl_Count.Name = "tsl_Count"
+        Me.tsl_Count.Size = New System.Drawing.Size(87, 22)
+        Me.tsl_Count.Text = "ToolStripLabel1"
+        Me.tsl_Count.ToolTipText = "Number of listeners currently subscribed"
         '
         'DisplayListenersCtrl
         '
@@ -170,4 +177,5 @@ Partial Class DisplayListenersCtrl
     Friend WithEvents cms_Tools As ToolsContextMenu
     Friend WithEvents tbtn_Email As Windows.Forms.ToolStripButton
     Friend WithEvents ldg_Listeners As ListenersDataGrid
+    Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
 End Class

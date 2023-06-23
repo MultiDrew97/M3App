@@ -471,7 +471,6 @@
     <Compile Include="UpdateService.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Types\BodyType.vb" />
     <Compile Include="Types\Google\Drive\File.vb" />
     <Compile Include="Types\Google\Drive\Folder.vb" />
     <Compile Include="Types\Google\Drive\FileCollection.vb" />
@@ -488,7 +487,6 @@
     <Compile Include="Types\People\User.vb" />
     <Compile Include="Types\People\UserConverter.vb" />
     <Compile Include="Types\Google\Service.vb" />
-    <Compile Include="Types\TabPages.vb" />
     <Compile Include="Utils.vb" />
     <Compile Include="Controls\FileLocationField.Designer.vb">
       <DependentUpon>FileLocationField.vb</DependentUpon>
@@ -761,7 +759,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -2,6 +2,7 @@
 Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class ListenersManagement
+	Private tooled As Boolean = False
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		UseWaitCursor = True
 		dlc_Listeners.Reload()
@@ -10,6 +11,9 @@ Public Class ListenersManagement
 	End Sub
 
 	Private Sub ClosingForm(sender As Object, e As CancelEventArgs) Handles Me.Closing
+		If tooled Then
+			Return
+		End If
 		Frm_Main.Show()
 	End Sub
 
@@ -27,24 +31,28 @@ Public Class ListenersManagement
 	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.ManageCustomers
 		Dim customers As New CustomersManagement()
 		customers.ShowDialog()
+		tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles mms_Main.ManageListeners
 		Dim listeners As New ListenersManagement()
 		listeners.ShowDialog()
+		tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
 		Dim orders As New Frm_DisplayOrders()
 		orders.ShowDialog()
+		tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
 		Dim products As New Frm_DisplayInventory()
 		products.ShowDialog()
+		tooled = True
 		Me.Close()
 	End Sub
 

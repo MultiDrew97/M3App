@@ -2,16 +2,17 @@
 Imports System.Windows.Forms
 
 Public Class DisplayCustomersCtrl
-	Dim Confirmed As Boolean = False
+	Dim countTemplate As String = "Count: {0}"
 
 	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
 		cdg_Customers.Reload()
+		tsl_Count.Text = String.Format(countTemplate, cdg_Customers.Customers.Count)
 	End Sub
 
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
-		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+		Dim res = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-		If Not Confirmed OrElse cdg_Customers.SelectedCustomers.Count < 1 Then
+		If Not res = DialogResult.Yes OrElse cdg_Customers.SelectedCustomers.Count < 1 Then
 			Return
 		End If
 
@@ -37,5 +38,9 @@ Public Class DisplayCustomersCtrl
 				Reload()
 			End If
 		End Using
+	End Sub
+
+	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
+		Throw New Exceptions.NotYetImplementedException("Import Customers")
 	End Sub
 End Class

@@ -1,14 +1,15 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class DisplayListenersCtrl
 	Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
 	Private WithEvents ImportDialog As Dialogs.ImportListenersDialog
 	Private WithEvents AddDialog As Dialogs.AddListenerDialog
+	Private ReadOnly countTemplate As String = "Count: {0}"
 
 	Public Sub Reload() Handles cms_Tools.RefreshView
 		ldg_Listeners.Reload()
+		tsl_Count.Text = String.Format(countTemplate, ldg_Listeners.Listeners.Count)
 	End Sub
 
 	Private Sub AddListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
@@ -50,7 +51,8 @@ Public Class DisplayListenersCtrl
 		'	bulk.ShowDialog()
 		'End Using
 	End Sub
-	Private Sub NewListenerAdded(sender As Object, e As ListenerAddedEvent) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
+
+	Private Sub NewListenerAdded(sender As Object, e As Events.Listeners.ListenerAddedEvent) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
 		RaiseEvent ListenerAdded(Me, e)
 		ldg_Listeners.Reload()
 	End Sub

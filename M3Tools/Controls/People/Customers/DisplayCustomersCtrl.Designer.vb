@@ -31,6 +31,10 @@ Partial Class DisplayCustomersCtrl
         Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
         Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
         Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
+        Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
+        Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
         Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
         Me.cms_Tools.SuspendLayout()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
@@ -44,7 +48,7 @@ Partial Class DisplayCustomersCtrl
         Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
         Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(181, 70)
+        Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
         Me.cms_Tools.Text = "Tools"
         '
         'ts_Refresh
@@ -98,14 +102,13 @@ Partial Class DisplayCustomersCtrl
         '
         'ts_CustomerTools
         '
-        Me.ts_CustomerTools.AllowItemReorder = True
         Me.ts_CustomerTools.Dock = System.Windows.Forms.DockStyle.None
         Me.ts_CustomerTools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer})
-        Me.ts_CustomerTools.Location = New System.Drawing.Point(6, 0)
+        Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer, Me.tbtn_Import, Me.ToolStripSeparator2, Me.tsl_Count, Me.txt_Filter})
+        Me.ts_CustomerTools.Location = New System.Drawing.Point(3, 0)
         Me.ts_CustomerTools.Name = "ts_CustomerTools"
-        Me.ts_CustomerTools.Size = New System.Drawing.Size(26, 25)
-        Me.ts_CustomerTools.TabIndex = 8
+        Me.ts_CustomerTools.Size = New System.Drawing.Size(244, 25)
+        Me.ts_CustomerTools.TabIndex = 9
         '
         'tbtn_AddCustomer
         '
@@ -114,7 +117,35 @@ Partial Class DisplayCustomersCtrl
         Me.tbtn_AddCustomer.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbtn_AddCustomer.Name = "tbtn_AddCustomer"
         Me.tbtn_AddCustomer.Size = New System.Drawing.Size(23, 22)
-        Me.tbtn_AddCustomer.Text = "New Customer"
+        Me.tbtn_AddCustomer.Text = "Add Listener"
+        '
+        'tbtn_Import
+        '
+        Me.tbtn_Import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tbtn_Import.Enabled = False
+        Me.tbtn_Import.Image = Global.SPPBC.M3Tools.My.Resources.Resources.import
+        Me.tbtn_Import.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tbtn_Import.Name = "tbtn_Import"
+        Me.tbtn_Import.Size = New System.Drawing.Size(23, 22)
+        Me.tbtn_Import.Text = "Import Listeners"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsl_Count
+        '
+        Me.tsl_Count.Name = "tsl_Count"
+        Me.tsl_Count.Size = New System.Drawing.Size(87, 22)
+        Me.tsl_Count.Text = "ToolStripLabel1"
+        Me.tsl_Count.ToolTipText = "Number of listeners currently subscribed"
+        '
+        'txt_Filter
+        '
+        Me.txt_Filter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txt_Filter.Name = "txt_Filter"
+        Me.txt_Filter.Size = New System.Drawing.Size(100, 25)
         '
         'tbtn_Refresh
         '
@@ -153,7 +184,11 @@ Partial Class DisplayCustomersCtrl
     Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
     Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
-    Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
-	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
     Friend WithEvents cdg_Customers As CustomersDataGrid
+    Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
+    Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
+    Friend WithEvents tbtn_Import As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
+    Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
 End Class
