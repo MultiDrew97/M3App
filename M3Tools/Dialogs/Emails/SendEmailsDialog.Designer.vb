@@ -28,18 +28,26 @@ Partial Class SendEmailsDialog
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.tc_EmailTypes = New System.Windows.Forms.TabControl()
         Me.tp_GDrive = New System.Windows.Forms.TabPage()
-        Me.gdt_Files = New SPPBC.M3Tools.DriveTree()
         Me.tp_LocalFiles = New System.Windows.Forms.TabPage()
-        Me.fu_Receipts = New SPPBC.M3Tools.FileUpload()
         Me.bw_GatherFiles = New System.ComponentModel.BackgroundWorker()
         Me.bw_PrepEmails = New System.ComponentModel.BackgroundWorker()
         Me.bw_GatherReceipients = New System.ComponentModel.BackgroundWorker()
         Me.bw_SendEmails = New System.ComponentModel.BackgroundWorker()
+        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+        Me.ss_StatusBar = New System.Windows.Forms.StatusStrip()
+        Me.tsl_Status = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsp_Progress = New System.Windows.Forms.ToolStripProgressBar()
+        Me.gdt_Files = New SPPBC.M3Tools.DriveTree()
         Me.gmt_Gmail = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
+        Me.fu_Receipts = New SPPBC.M3Tools.FileUpload()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tc_EmailTypes.SuspendLayout()
         Me.tp_GDrive.SuspendLayout()
         Me.tp_LocalFiles.SuspendLayout()
+        Me.ToolStripContainer1.BottomToolStripPanel.SuspendLayout()
+        Me.ToolStripContainer1.ContentPanel.SuspendLayout()
+        Me.ToolStripContainer1.SuspendLayout()
+        Me.ss_StatusBar.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -80,11 +88,11 @@ Partial Class SendEmailsDialog
         '
         Me.tc_EmailTypes.Controls.Add(Me.tp_GDrive)
         Me.tc_EmailTypes.Controls.Add(Me.tp_LocalFiles)
-        Me.tc_EmailTypes.Dock = System.Windows.Forms.DockStyle.Top
+        Me.tc_EmailTypes.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tc_EmailTypes.Location = New System.Drawing.Point(0, 0)
         Me.tc_EmailTypes.Name = "tc_EmailTypes"
         Me.tc_EmailTypes.SelectedIndex = 0
-        Me.tc_EmailTypes.Size = New System.Drawing.Size(411, 317)
+        Me.tc_EmailTypes.Size = New System.Drawing.Size(411, 298)
         Me.tc_EmailTypes.TabIndex = 0
         '
         'tp_GDrive
@@ -92,37 +100,20 @@ Partial Class SendEmailsDialog
         Me.tp_GDrive.Controls.Add(Me.gdt_Files)
         Me.tp_GDrive.Location = New System.Drawing.Point(4, 22)
         Me.tp_GDrive.Name = "tp_GDrive"
-        Me.tp_GDrive.Size = New System.Drawing.Size(403, 291)
+        Me.tp_GDrive.Size = New System.Drawing.Size(403, 272)
         Me.tp_GDrive.TabIndex = 0
         Me.tp_GDrive.Text = "Google Drive"
         Me.tp_GDrive.UseVisualStyleBackColor = True
-        '
-        'gdt_Files
-        '
-        Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
-        Me.gdt_Files.Name = "gdt_Files"
-        Me.gdt_Files.Size = New System.Drawing.Size(403, 291)
-        Me.gdt_Files.TabIndex = 4
-        Me.gdt_Files.WithChildren = False
         '
         'tp_LocalFiles
         '
         Me.tp_LocalFiles.Controls.Add(Me.fu_Receipts)
         Me.tp_LocalFiles.Location = New System.Drawing.Point(4, 22)
         Me.tp_LocalFiles.Name = "tp_LocalFiles"
-        Me.tp_LocalFiles.Size = New System.Drawing.Size(403, 291)
+        Me.tp_LocalFiles.Size = New System.Drawing.Size(403, 272)
         Me.tp_LocalFiles.TabIndex = 0
         Me.tp_LocalFiles.Text = "Local Files"
         Me.tp_LocalFiles.UseVisualStyleBackColor = True
-        '
-        'fu_Receipts
-        '
-        Me.fu_Receipts.Location = New System.Drawing.Point(61, 3)
-        Me.fu_Receipts.MultiSelect = True
-        Me.fu_Receipts.Name = "fu_Receipts"
-        Me.fu_Receipts.Size = New System.Drawing.Size(283, 68)
-        Me.fu_Receipts.TabIndex = 1
         '
         'bw_GatherFiles
         '
@@ -136,9 +127,68 @@ Partial Class SendEmailsDialog
         'bw_SendEmails
         '
         '
+        'ToolStripContainer1
+        '
+        '
+        'ToolStripContainer1.BottomToolStripPanel
+        '
+        Me.ToolStripContainer1.BottomToolStripPanel.Controls.Add(Me.ss_StatusBar)
+        '
+        'ToolStripContainer1.ContentPanel
+        '
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.tc_EmailTypes)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(411, 298)
+        Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ToolStripContainer1.LeftToolStripPanelVisible = False
+        Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStripContainer1.Name = "ToolStripContainer1"
+        Me.ToolStripContainer1.RightToolStripPanelVisible = False
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(411, 320)
+        Me.ToolStripContainer1.TabIndex = 1
+        Me.ToolStripContainer1.Text = "ToolStripContainer1"
+        Me.ToolStripContainer1.TopToolStripPanelVisible = False
+        '
+        'ss_StatusBar
+        '
+        Me.ss_StatusBar.Dock = System.Windows.Forms.DockStyle.None
+        Me.ss_StatusBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsl_Status, Me.tsp_Progress})
+        Me.ss_StatusBar.Location = New System.Drawing.Point(0, 0)
+        Me.ss_StatusBar.Name = "ss_StatusBar"
+        Me.ss_StatusBar.Size = New System.Drawing.Size(411, 22)
+        Me.ss_StatusBar.TabIndex = 0
+        '
+        'tsl_Status
+        '
+        Me.tsl_Status.Name = "tsl_Status"
+        Me.tsl_Status.Size = New System.Drawing.Size(141, 17)
+        Me.tsl_Status.Text = "Select the files to attach..."
+        '
+        'tsp_Progress
+        '
+        Me.tsp_Progress.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tsp_Progress.Name = "tsp_Progress"
+        Me.tsp_Progress.Size = New System.Drawing.Size(100, 16)
+        '
+        'gdt_Files
+        '
+        Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
+        Me.gdt_Files.Name = "gdt_Files"
+        Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
+        Me.gdt_Files.TabIndex = 4
+        Me.gdt_Files.WithChildren = False
+        '
         'gmt_Gmail
         '
         Me.gmt_Gmail.Username = Global.SPPBC.M3Tools.My.MySettings.Default.CurrentUser
+        '
+        'fu_Receipts
+        '
+        Me.fu_Receipts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.fu_Receipts.Location = New System.Drawing.Point(0, 0)
+        Me.fu_Receipts.Name = "fu_Receipts"
+        Me.fu_Receipts.Size = New System.Drawing.Size(403, 272)
+        Me.fu_Receipts.TabIndex = 1
         '
         'SendEmailsDialog
         '
@@ -147,7 +197,7 @@ Partial Class SendEmailsDialog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btn_Cancel
         Me.ClientSize = New System.Drawing.Size(411, 364)
-        Me.Controls.Add(Me.tc_EmailTypes)
+        Me.Controls.Add(Me.ToolStripContainer1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -160,6 +210,13 @@ Partial Class SendEmailsDialog
         Me.tc_EmailTypes.ResumeLayout(False)
         Me.tp_GDrive.ResumeLayout(False)
         Me.tp_LocalFiles.ResumeLayout(False)
+        Me.ToolStripContainer1.BottomToolStripPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.BottomToolStripPanel.PerformLayout()
+        Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.ResumeLayout(False)
+        Me.ToolStripContainer1.PerformLayout()
+        Me.ss_StatusBar.ResumeLayout(False)
+        Me.ss_StatusBar.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -171,9 +228,13 @@ Partial Class SendEmailsDialog
     Friend WithEvents tc_EmailTypes As Windows.Forms.TabControl
     Friend WithEvents tp_GDrive As Windows.Forms.TabPage
     Friend WithEvents tp_LocalFiles As Windows.Forms.TabPage
-    Friend WithEvents fu_Receipts As FileUpload
     Friend WithEvents bw_GatherFiles As ComponentModel.BackgroundWorker
     Friend WithEvents bw_PrepEmails As ComponentModel.BackgroundWorker
     Friend WithEvents bw_GatherReceipients As ComponentModel.BackgroundWorker
     Friend WithEvents bw_SendEmails As ComponentModel.BackgroundWorker
+    Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
+    Friend WithEvents ss_StatusBar As Windows.Forms.StatusStrip
+    Friend WithEvents tsl_Status As Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tsp_Progress As Windows.Forms.ToolStripProgressBar
+    Friend WithEvents fu_Receipts As FileUpload
 End Class

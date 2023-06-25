@@ -47,6 +47,7 @@ Public Class DriveTree
 	Private Function ParseNodes(folders As GTools.Types.FileCollection) As TreeNode()
 		Dim i As Integer = 0
 
+		' TODO: Convert to for each?
 		Do
 			If folders(i).Parents Is Nothing Then
 				i += 1

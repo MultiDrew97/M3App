@@ -6,30 +6,24 @@ Public Class SendEmailsDialog
 	Private Event EmailsSending()
 	Private Event EmailsSent()
 	Private Event EmailsCancelled()
+	Private Event ProgressMade()
+	Private Event ProgressReset(total As Integer)
 	'TODO: Make email sending more straight forward
 
 	ReadOnly Property FileCount As Integer
 		Get
-			Dim files As Integer = fu_Receipts.Files.Count, nodes As Integer = gdt_Files.GetSelectedNodes().Count
-
-			Console.WriteLine(files)
-			Console.WriteLine(nodes)
-			If files = 0 Then
-				Return nodes
-			Else
-				Return files
-			End If
+			Return fu_Receipts.Files.Count + gdt_Files.GetSelectedNodes().Count
 		End Get
 	End Property
 
-	Private Sub SendEmails(sender As Object, e As EventArgs) Handles btn_Send.Click
+	Private Sub BeginSending(sender As Object, e As EventArgs) Handles btn_Send.Click
 		RaiseEvent EmailsSending()
 
 		Dim details As New EmailDetails(tc_EmailTypes.SelectedIndex)
 
-		If FileCount = 0 Then
+		If Not FileCount > 0 Then
 			Dim res = MessageBox.Show("Are you wanting to send an email with no attachments?", "No File Selected", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-			If res = DialogResult.No Then
+			If Not res = DialogResult.Yes Then
 				RaiseEvent EmailsCancelled()
 				Return
 			End If
@@ -80,11 +74,11 @@ Public Class SendEmailsDialog
 		Dim details = CType(e.Argument, EmailDetails)
 
 		For Each node In gdt_Files.GetSelectedNodes()
-			details.Files.Add(String.Format(My.Resources.DriveShareLink, node.Name))
+			details.DriveFiles.Add(New GTools.Types.File(node.Name, node.Text, "")) 'String.Format(My.Resources.DriveShareLink, node.Name))
 		Next
 
 		For Each file In fu_Receipts.Files
-			details.Files.Add(file.Name)
+			details.LocalFiles.Add(file.Name)
 		Next
 
 		e.Result = details
@@ -114,6 +108,7 @@ Public Class SendEmailsDialog
 					details.Subject = "Thank you"
 					details.Body = My.Resources.DefaultReceiptEmail
 			End Select
+			' Allow a template selection dialog instead
 			details.BodyType = "html"
 			Return
 		End If
@@ -180,13 +175,25 @@ Public Class SendEmailsDialog
 		' Loop through files to determine type
 		Console.WriteLine($"Subject: {details.Subject}")
 		Console.WriteLine($"Body: {details.Body}")
-		Console.WriteLine($"File Count: {details.Files.Count}")
+		Console.WriteLine($"File Count: {details.DriveFiles.Count + details.LocalFiles.Count}")
 
-		gmt_Gmail.SendEmails(details)
+		tsl_Status.Text = "Prepping any attachments..."
+		RaiseEvent ProgressReset(details.DriveFiles.Count)
+		If details.DriveFiles.Count > 0 Then
+			details.Body &= $"{vbNewLine}{vbNewLine}Attachements:{vbNewLine}{vbNewLine}"
 
+			For Each file In details.DriveFiles
+				details.Body &= String.Format($"{My.Resources.DriveShareLink}{vbNewLine}", file.Id)
+				RaiseEvent ProgressMade()
+			Next
+		End If
+
+		tsl_Status.Text = "Sending emails now..."
+		RaiseEvent ProgressReset(details.Recipients.Count)
 		For Each listener In details.Recipients
-			message = gmt_Gmail.Create(New MimeKit.MailboxAddress(listener.Name, listener.Email), details.Subject, details.Body, bodyType:=details.BodyType)
+			message = gmt_Gmail.CreateWithAttachment(New MimeKit.MailboxAddress(listener.Name, listener.Email), details.Subject, details.Body, details.LocalFiles.ToArray, bodyType:=details.BodyType)
 			gmt_Gmail.Send(message)
+			RaiseEvent ProgressMade()
 		Next
 	End Sub
 
@@ -213,5 +220,14 @@ Public Class SendEmailsDialog
 
 	Private Sub Sent() Handles Me.EmailsSent
 		btn_Send.Enabled = True
+	End Sub
+
+	Private Sub ResetProgress(total As Integer) Handles Me.ProgressReset
+		tsp_Progress.Value = 0
+		tsp_Progress.Step = CInt(Math.Floor(1 / total))
+	End Sub
+
+	Private Sub UpdateProgress() Handles Me.ProgressMade
+		tsp_Progress.PerformStep()
 	End Sub
 End Class

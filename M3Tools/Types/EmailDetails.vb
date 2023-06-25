@@ -5,7 +5,8 @@ Public Class EmailDetails
 	'TODO: Figure out formatted messages later to not need this
 	Property BodyType As String
 	Property Body As String
-	Property Files As Collection(Of String)
+	Property DriveFiles As GTools.Types.FileCollection
+	Property LocalFiles As Collection(Of String)
 	Property Recipients As Types.ListenerCollection
 
 	'TODO: Find better way to pass between background workers
@@ -14,7 +15,8 @@ Public Class EmailDetails
 	Public Sub New(currentPage As Integer)
 		Subject = ""
 		Body = ""
-		Files = New Collection(Of String)
+		DriveFiles = New GTools.Types.FileCollection()
+		LocalFiles = New Collection(Of String)
 		BodyType = "html"
 		Recipients = New Types.ListenerCollection
 		CurrentIndex = currentPage

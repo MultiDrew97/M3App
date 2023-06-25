@@ -1,13 +1,16 @@
-﻿Imports System.ComponentModel
+﻿Imports System.Collections.ObjectModel
+Imports System.ComponentModel
+Imports System.Windows.Forms
 
 Public Class FileUpload
-	Private ReadOnly __files As New GTools.Types.FileCollection()
+
 	Public ReadOnly Property Files As GTools.Types.FileCollection
 		Get
-			Return __files
+			Return CType(bsFiles.List, GTools.Types.FileCollection)
 		End Get
 	End Property
 
+	<DefaultValue(True)>
 	Public Property MultiSelect As Boolean
 		Get
 			Return ofd_FileDialog.Multiselect
@@ -17,19 +20,42 @@ Public Class FileUpload
 		End Set
 	End Property
 
-	Private Sub SelectFiles(sender As Object, e As EventArgs) Handles btn_Select.Click
-		ofd_FileDialog.ShowDialog()
-	End Sub
-
-	Private Sub FilesSelected(sender As Object, e As CancelEventArgs) Handles ofd_FileDialog.FileOk
-		txt_FileName.Text = String.Join(",", ofd_FileDialog.SafeFileNames)
-		LoadFiles()
-	End Sub
-
-	Private Sub LoadFiles()
-		Files.Clear()
+	Private Sub LoadFiles(sender As Object, e As CancelEventArgs) Handles ofd_FileDialog.FileOk
 		For Each file In ofd_FileDialog.FileNames
-			Files.Add(New GTools.Types.File("", file, file.Split("."c)(1)))
+			If Duplicate(file) Then
+				Continue For
+			End If
+			bsFiles.Add(New GTools.Types.File("", file, file.Split("."c)(1)))
 		Next
+	End Sub
+
+	Private Function Duplicate(fileName As String) As Boolean
+		' TODO: Find how to simplify
+		For Each file As GTools.Types.File In bsFiles.List
+			If file.Name = fileName Then
+				Return True
+			End If
+		Next
+
+		Return False
+	End Function
+
+	Private Sub SelectFiles(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+		UseWaitCursor = True
+		Dim res = ofd_FileDialog.ShowDialog()
+		If res = DialogResult.OK Then
+			UseWaitCursor = False
+		End If
+	End Sub
+
+	Private Sub FormLoaded(sender As Object, e As EventArgs) Handles Me.Load
+		bsFiles.DataSource = New GTools.Types.FileCollection()
+		bsFiles.Clear()
+	End Sub
+
+	Private Sub DataSourceUpdated(sender As Object, e As ListChangedEventArgs) Handles bsFiles.ListChanged
+		If e.ListChangedType = ListChangedType.ItemAdded OrElse e.ListChangedType = ListChangedType.ItemDeleted Then
+			bsFiles.ResetBindings(False)
+		End If
 	End Sub
 End Class

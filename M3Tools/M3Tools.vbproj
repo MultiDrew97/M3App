@@ -458,6 +458,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Types\DBEntry.vb" />
+    <Compile Include="Types\EmailDetails.vb" />
     <Compile Include="Types\Google\API.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -681,6 +682,7 @@
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.OrdersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Dialogs.ImportListenersDialog+NewListener.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Dialogs.ImportListenersDialog.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.GTools.Types.FileCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItem.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />

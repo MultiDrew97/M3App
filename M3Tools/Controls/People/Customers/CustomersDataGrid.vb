@@ -114,6 +114,7 @@ Public Class CustomersDataGrid
 
 	Public Sub Reload()
 		UseWaitCursor = True
+		' TODO: Immitate FileUpload structure and do to ListenersDataGrid
 		_customers.Clear()
 		_customers.AddRange(db_Customers.GetCustomers())
 		UseWaitCursor = False

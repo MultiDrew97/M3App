@@ -128,14 +128,14 @@ Namespace GTools
 			Return __service.Users().Messages().Send(CreateWithEmail(emailContent), sender).Execute()
 		End Function
 
-		Sub SendEmails(details As EmailDetails)
-			details.Body &= $"{vbNewLine}{vbNewLine}Attachements:{vbNewLine}{vbNewLine}"
-			For Each recv In details.Recipients
+		'Sub SendEmails(details As EmailDetails)
 
-				For Each file In details.Files
+		'	For Each recv In details.Recipients
 
-				Next
-			Next
-		End Sub
+		'		For Each file In details.DriveFiles
+
+		'		Next
+		'	Next
+		'End Sub
 	End Class
 End Namespace
