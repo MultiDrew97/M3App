@@ -258,10 +258,10 @@
     <comment>The default deployment catalog for the database</comment>
   </data>
   <data name="DefaultReceiptEmail" xml:space="preserve">
-    <value>&lt;!Doctype html&gt;
+    <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
     &lt;/head&gt;
     &lt;body&gt;
 
@@ -303,10 +303,10 @@
     <value>..\Resources\Images\new-document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DefaultSermonEmail" xml:space="preserve">
-    <value>&lt;!Doctype html&gt;
+    <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;p&gt;Good Afternoon {0},&lt;/p&gt;

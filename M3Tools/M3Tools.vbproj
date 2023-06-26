@@ -139,6 +139,12 @@
     <Compile Include="Components\Database\UserDatabase.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Listeners\TemplateSelector.Designer.vb">
+      <DependentUpon>TemplateSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Listeners\TemplateSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\LoadingScreen.Designer.vb">
       <DependentUpon>LoadingScreen.vb</DependentUpon>
     </Compile>
@@ -532,6 +538,9 @@
     <EmbeddedResource Include="Components\Database\UserDatabase.resx">
       <DependentUpon>UserDatabase.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Listeners\TemplateSelector.resx">
+      <DependentUpon>TemplateSelector.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LoadingScreen.resx">
       <DependentUpon>LoadingScreen.vb</DependentUpon>
     </EmbeddedResource>
@@ -761,7 +770,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

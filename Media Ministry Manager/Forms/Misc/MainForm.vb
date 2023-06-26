@@ -4,8 +4,6 @@ Imports System.ComponentModel
 Imports MediaMinistry.Helpers
 
 Public Class Frm_Main
-	Dim firstTime As Boolean = True
-
 	Structure WindowSizes
 		Shared normal As New Size(413, 452)
 		Shared max As New Size(1382, 744)
