@@ -47,6 +47,8 @@ Public Class MainMenuStrip
 	''' </summary>
 	Public Event UpdateAvailable()
 
+	Public Event DataAdded(itemType As String)
+
 	''' <summary>
 	''' The location to save the installer for the application when updating
 	''' </summary>
@@ -65,19 +67,34 @@ Public Class MainMenuStrip
 
 	Private Sub CreateCustomer(sender As Object, e As EventArgs) Handles tsmi_NewCustomer.Click
 		Using newCustomer As New Dialogs.AddCustomerDialog
-			newCustomer.ShowDialog()
+			Dim res = newCustomer.ShowDialog()
+			If Not res = DialogResult.OK Then
+				Return
+			End If
+
+			RaiseEvent DataAdded("customer")
 		End Using
 	End Sub
 
 	Private Sub CreateProduct(sender As Object, e As EventArgs) Handles tsmi_NewProduct.Click
 		Using newProduct As New Dialogs.AddProductDialog()
-			newProduct.ShowDialog()
+			Dim res = newProduct.ShowDialog()
+			If Not Res = DialogResult.OK Then
+				Return
+			End If
+
+			RaiseEvent DataAdded("product")
 		End Using
 	End Sub
 
 	Private Sub CreateListener(sender As Object, e As EventArgs) Handles tsmi_NewListeners.Click
 		Using newListener As New Dialogs.AddListenerDialog()
-			newListener.ShowDialog()
+			Dim res = newListener.ShowDialog()
+			If Not Res = DialogResult.OK Then
+				Return
+			End If
+
+			RaiseEvent DataAdded("listener")
 		End Using
 	End Sub
 
@@ -112,7 +129,6 @@ Public Class MainMenuStrip
 
 	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles tsmi_ViewCustomers.Click
 		RaiseEvent ManageCustomers(Me, e)
-		'ToggleViewItem("ViewCustomers")
 	End Sub
 
 	Private Sub ViewProducts(sender As Object, e As EventArgs) Handles tsmi_ViewProducts.Click

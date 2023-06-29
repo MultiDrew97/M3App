@@ -196,8 +196,38 @@
     <value>^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$</value>
     <comment>The regex for a valid email address</comment>
   </data>
-  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DefaultReceiptEmail" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+	&lt;p&gt;Greetings {0},&lt;/p&gt;
+
+        &lt;p&gt;Thank you for your blessing of {1:C} for {2}.&lt;/p&gt;
+
+		&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
+
+		&lt;p&gt;Be Blessed.&lt;/p&gt;
+
+		&lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+		&lt;hr&gt;
+		
+		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+		St. Paul Primitive Baptist Church&lt;br&gt;
+		Email Listening Ministry&lt;br&gt;
+		2209 East 14th Street&lt;br&gt;
+		Austin, TX. 78702&lt;/p&gt;
+		
+		&lt;div class="center-image"&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+		&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+    <comment>The default template for a new receipt email</comment>
   </data>
   <data name="ErrorImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\errorimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -236,8 +266,15 @@
   <data name="UnderlineOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DriveShareLink" xml:space="preserve">
+    <value>https://drive.google.com/file/d/{0}/view?usp=sharing</value>
+    <comment>The link template to share a file from Google Drive</comment>
+  </data>
   <data name="StrikeThruOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\strikethrough-text-interface-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DriveLinkAttachment" xml:space="preserve">
     <value>&lt;p&gt;&lt;a href="{1}"&gt;{0}&lt;/a&gt;&lt;/p&gt;</value>
@@ -249,6 +286,9 @@
   <data name="Import_Listeners_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\import listeners template.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="AppUpdateUri" xml:space="preserve">
     <value>https://sppbc.hopto.org/manager/setup.exe</value>
     <comment>The uri where the latest version of the application can be downloaded</comment>
@@ -256,39 +296,6 @@
   <data name="DefaultCatalog" xml:space="preserve">
     <value>Media Ministry Test</value>
     <comment>The default deployment catalog for the database</comment>
-  </data>
-  <data name="DefaultReceiptEmail" xml:space="preserve">
-    <value>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-
-	&lt;p&gt;Greetings {0},&lt;/p&gt;
-
-        &lt;p&gt;Thank you for your blessing of {1:C} for {2}.&lt;/p&gt;
-
-		&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
-
-		&lt;p&gt;Be Blessed.&lt;/p&gt;
-
-		&lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
-
-		&lt;hr&gt;
-		
-		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-		St. Paul Primitive Baptist Church&lt;br&gt;
-		Email Listening Ministry&lt;br&gt;
-		2209 East 14th Street&lt;br&gt;
-		Austin, TX. 78702&lt;/p&gt;
-		
-		&lt;div class="center-image"&gt;
-			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
-		&lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</value>
-    <comment>The default template for a new receipt email</comment>
   </data>
   <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\configs\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -356,11 +363,7 @@
   <data name="EmailRegex2" xml:space="preserve">
     <value>^[a-zA-Z0-9_!#$%&amp;’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$</value>
   </data>
-  <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DriveShareLink" xml:space="preserve">
-    <value>https://drive.google.com/file/d/{0}/view?usp=sharing</value>
-    <comment>The link template to share a file from Google Drive</comment>
+  <data name="send-email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\send-email.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

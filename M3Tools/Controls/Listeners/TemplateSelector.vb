@@ -2,52 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class TemplateSelector
-	' TODO: Allow to add more templates later
-
-	'<RefreshProperties(RefreshProperties.Repaint)>
-	'<Category("Data")>
-	'<DesignOnly(True)>
-	'<AttributeProvider(GetType(IListSource))>
-	'<EditorBrowsable(EditorBrowsableState.Always)>
-	'<Browsable(True)>
-	'Public Property DataSource As BindingSource
-	'	Get
-	'		Return bsTemplates
-	'	End Get
-	'	Set(value As BindingSource)
-	'		bsTemplates = value
-	'	End Set
-	'End Property
-
-	'<Category("Data")>
-	'<DesignOnly(True)>
-	'<RefreshProperties(RefreshProperties.Repaint)>
-	'<EditorBrowsable(EditorBrowsableState.Always)>
-	'<Browsable(True)>
-	'<AttributeProvider(GetType(Types.Template))>
-	'Public Property DisplayMember As String
-	'	Get
-	'		Return cbx_TemplateSelection.DisplayMember
-	'	End Get
-	'	Set(value As String)
-	'		cbx_TemplateSelection.DisplayMember = value
-	'	End Set
-	'End Property
-
-	'<Category("Data")>
-	'<DesignOnly(True)>
-	'<RefreshProperties(RefreshProperties.Repaint)>
-	'<EditorBrowsable(EditorBrowsableState.Always)>
-	'<Browsable(True)>
-	'<AttributeProvider(GetType(Types.Template))>
-	'Public Property ValueMember As String
-	'	Get
-	'		Return cbx_TemplateSelection.ValueMember
-	'	End Get
-	'	Set(value As String)
-	'		cbx_TemplateSelection.ValueMember = value
-	'	End Set
-	'End Property
+	' TODO: Create template management system for this later
 
 	Private ReadOnly Property SelectedTemplate As Types.Template
 		Get

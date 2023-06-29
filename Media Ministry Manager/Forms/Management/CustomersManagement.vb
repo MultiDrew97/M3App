@@ -72,4 +72,12 @@ Public Class CustomersManagement
 	Private Sub AddCustomer(sender As Object) Handles dcc_Customers.AddCustomer
 		Dim res = CustomerDialogs.AddCustomer()
 	End Sub
+
+	Private Sub CustomerAdded(itemType As String) Handles mms_Main.DataAdded
+		If Not itemType = "customer" Then
+			Return
+		End If
+
+		dcc_Customers.Reload()
+	End Sub
 End Class

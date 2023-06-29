@@ -2,7 +2,7 @@
 
 Namespace Dialogs
 	Public Class EmailBodySelection
-		Public ReadOnly Property Subject As String
+		Private ReadOnly Property Subject As String
 			Get
 				Select Case TabControl1.SelectedTab.Name
 					Case tp_Templates.Name
@@ -15,20 +15,20 @@ Namespace Dialogs
 			End Get
 		End Property
 
-		Public ReadOnly Property Body As String
+		Private ReadOnly Property Body As String
 			Get
 				Select Case TabControl1.SelectedTab.Name
 					Case tp_Templates.Name
 						Return ts_Templates.TemplateValue
 					Case tp_Custom.Name
-						Return CustomEmail1.Subject
+						Return CustomEmail1.Body
 					Case Else
 						Return Nothing
 				End Select
 			End Get
 		End Property
 
-		Public ReadOnly Property BodyType As String
+		Private ReadOnly Property BodyType As String
 			Get
 				Select Case TabControl1.SelectedTab.Name
 					Case tp_Templates.Name
@@ -40,6 +40,13 @@ Namespace Dialogs
 				End Select
 			End Get
 		End Property
+
+		ReadOnly Property Content As Types.EmailContent
+			Get
+				Return New Types.EmailContent(Subject, Body, BodyType)
+			End Get
+		End Property
+
 
 		Private Sub FinishDialog(sender As Object, e As EventArgs) Handles OK_Button.Click
 			Me.DialogResult = DialogResult.OK

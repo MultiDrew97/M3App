@@ -487,8 +487,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\Google\Drive\File.vb" />
-    <Compile Include="Types\Google\Drive\Folder.vb" />
-    <Compile Include="Types\Google\Drive\FileCollection.vb" />
     <Compile Include="Types\Inventory\Item.vb" />
     <Compile Include="Types\Inventory\Product.vb" />
     <Compile Include="Types\Orders\CompletedOrder.vb" />
