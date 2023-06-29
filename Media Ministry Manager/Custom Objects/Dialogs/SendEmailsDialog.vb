@@ -1,6 +1,8 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.Types
+Imports SPPBC.M3Tools
 
 Public Class SendEmailsDialog
 	Private Event EmailsSending()
@@ -8,6 +10,7 @@ Public Class SendEmailsDialog
 	Private Event EmailsCancelled()
 	Private Event ProgressMade()
 	Private Event ProgressReset(total As Integer)
+	Public Event PrepBody()
 	'TODO: Make email sending more straight forward
 
 	ReadOnly Property FileCount As Integer
@@ -95,39 +98,43 @@ Public Class SendEmailsDialog
 
 	Private Sub PrepEmails(sender As Object, e As DoWorkEventArgs) Handles bw_PrepEmails.DoWork
 		Dim details As EmailDetails = CType(e.Argument, EmailDetails)
-
-		Dim res = MessageBox.Show("Would you like to use the default email template?", "Default Email Template", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-		If res = DialogResult.Yes Then
-			' TODO: How to get names and links into these templates
-			'Default message
-			Select Case details.CurrentIndex
-				Case tp_GDrive.TabIndex
-					details.Subject = "New Sermon"
-					details.Body = My.Resources.DefaultSermonEmail
-				Case tp_LocalFiles.TabIndex
-					details.Subject = "Thank you"
-					details.Body = My.Resources.DefaultReceiptEmail
-			End Select
-			' Allow a template selection dialog instead
-			details.BodyType = "html"
-			Return
-		End If
-
-		'Custom Message
-		Using customEmail As New CustomEmailDialog
-			res = customEmail.ShowDialog()
-			If Not res = DialogResult.OK Then
-				RaiseEvent EmailsCancelled()
-				Return
-			End If
-
-			details.Subject = customEmail.Subject
-			details.Body = customEmail.Body
-			details.BodyType = "plain"
+		' TODO: Convert to have a dialog popup with template selection or sending custom email
+		Using body As New Dialogs.EmailBodySelection()
+			Dim res = body.ShowDialog()
 		End Using
 
+		'Dim res = MessageBox.Show("Would you like to use the default email template?", "Default Email Template", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+		'If res = DialogResult.Yes Then
+		'	' TODO: How to get names and links into these templates
+		'	'Default message
+		'	Select Case details.CurrentIndex
+		'		Case tp_GDrive.TabIndex
+		'			details.Subject = "New Sermon"
+		'			details.Body = newSermon
+		'		Case tp_LocalFiles.TabIndex
+		'			details.Subject = "Thank you"
+		'			details.Body = receipt
+		'	End Select
+		'	' Allow a template selection dialog instead
+		'	details.BodyType = "html"
+		'	Return
+		'End If
 
-		Console.WriteLine($"Subject: {details.Subject}{vbNewLine}Body:{vbNewLine}{details.Body}")
+		''Custom Message
+		'Using customEmail As New CustomEmailDialog
+		'	res = customEmail.ShowDialog()
+		'	If Not res = DialogResult.OK Then
+		'		RaiseEvent EmailsCancelled()
+		'		Return
+		'	End If
+
+		'	details.Subject = customEmail.Subject
+		'	details.Body = customEmail.Body
+		'	details.BodyType = "plain"
+		'End Using
+
+
+		'Console.WriteLine($"Subject: {details.Subject}{vbNewLine}Body:{vbNewLine}{details.Body}")
 		e.Result = details
 	End Sub
 
@@ -160,7 +167,21 @@ Public Class SendEmailsDialog
 			Return
 		End If
 
-		bw_PrepEmails.RunWorkerAsync(e.Result)
+		Dim details = CType(e.Result, EmailDetails)
+
+		Using body As New Dialogs.EmailBodySelection()
+			Dim res = body.ShowDialog()
+			If Not res = DialogResult.OK Then
+				RaiseEvent EmailsCancelled()
+				Return
+			End If
+
+			details.Subject = body.Subject
+			details.Body = body.Body
+			details.BodyType = body.BodyType
+		End Using
+
+		'bw_PrepEmails.RunWorkerAsync(e.Result)
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As DoWorkEventArgs) Handles bw_SendEmails.DoWork

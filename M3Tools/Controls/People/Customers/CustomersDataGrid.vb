@@ -1,8 +1,10 @@
-﻿Imports SPPBC.M3Tools.Events
+﻿Imports SPPBC.M3Tools.Events.Customers
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class CustomersDataGrid
+	Public Event EditCustomer As EditCustomerEventHandler
+
 	Private ReadOnly _customers As New DataTables.CustomersDataTable
 	Private ReadOnly dgcPrefix As String = "dgc_"
 
@@ -132,11 +134,12 @@ Public Class CustomersDataGrid
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
-				Using edit As New Dialogs.EditCustomerDialog() With {.Customer = customer}
-					If edit.ShowDialog = DialogResult.OK Then
-						Reload()
-					End If
-				End Using
+				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer))
+				'Using edit As New Dialogs.EditCustomerDialog() With {.Customer = customer}
+				'	If edit.ShowDialog = DialogResult.OK Then
+				'		Reload()
+				'	End If
+				'End Using
 			Case dgc_Remove.Index
 				ClearSelectedRows()
 				RemoveCustomer(sender, New DataGridViewRowCancelEventArgs(row))

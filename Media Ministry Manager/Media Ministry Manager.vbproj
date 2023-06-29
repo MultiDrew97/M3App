@@ -171,22 +171,16 @@
     <Compile Include="Custom Objects\Controls\FileLocationField.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.Designer.vb">
-      <DependentUpon>FileSelectionDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\ListenerSelectionDialog.Designer.vb">
-      <DependentUpon>ListenerSelectionDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\ListenerSelectionDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.Designer.vb">
       <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.Designer.vb">
+      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Exceptions\FormClosedException.vb" />
@@ -202,34 +196,10 @@
     <Compile Include="Custom Objects\Google\Sender.vb" />
     <Compile Include="Custom Objects\Google\Service.vb" />
     <Compile Include="Custom Objects\Utils.vb" />
-    <Compile Include="Custom Objects\Dialogs\Emails\CustomMessageDialog.Designer.vb">
-      <DependentUpon>CustomMessageDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\CustomMessageDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\EmailMinistryDialog.Designer.vb">
-      <DependentUpon>EmailMinistryDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\EmailMinistryDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.Designer.vb">
       <DependentUpon>FolderCreationDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.Designer.vb">
-      <DependentUpon>AddListenerDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.Designer.vb">
-      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\DriveUploadDialog.Designer.vb">
@@ -254,12 +224,6 @@
       <DependentUpon>NewUserDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Misc\NewUserDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.Designer.vb">
-      <DependentUpon>AdminInfoDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Customer\CustomersManagement.designer.vb">
@@ -345,32 +309,14 @@
     <EmbeddedResource Include="Custom Objects\Controls\FileLocationField.resx">
       <DependentUpon>FileLocationField.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.resx">
-      <DependentUpon>FileSelectionDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\ListenerSelectionDialog.resx">
-      <DependentUpon>ListenerSelectionDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\CustomMessageDialog.resx">
-      <DependentUpon>CustomMessageDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\EmailMinistryDialog.resx">
-      <DependentUpon>EmailMinistryDialog.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.resx">
       <DependentUpon>FolderCreationDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\AddListenerDialog.resx">
-      <DependentUpon>AddListenerDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Controls\PasswordField.resx">
       <DependentUpon>PasswordField.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.resx">
       <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.resx">
-      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\DriveUploadDialog.resx">
       <DependentUpon>DriveUploadDialog.vb</DependentUpon>
@@ -384,8 +330,8 @@
     <EmbeddedResource Include="Custom Objects\Dialogs\Misc\NewUserDialog.resx">
       <DependentUpon>NewUserDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.resx">
-      <DependentUpon>AdminInfoDialog.vb</DependentUpon>
+    <EmbeddedResource Include="Custom Objects\Dialogs\SendEmailsDialog.resx">
+      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customer\CustomersManagement.resx">
       <DependentUpon>CustomersManagement.vb</DependentUpon>
@@ -431,6 +377,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.TemplateList.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
@@ -548,7 +495,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
+      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

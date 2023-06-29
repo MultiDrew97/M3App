@@ -1,14 +1,15 @@
 ﻿Option Strict On
 Imports System.ComponentModel
 Imports MediaMinistry.Helpers
+Imports SPPBC.M3Tools.Events.Customers
 
 Public Class CustomersManagement
 	Private Tooled As Boolean = False
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
+		mms_Main.ToggleViewItem("Customers")
 		UseWaitCursor = True
 		dcc_Customers.Reload()
 		UseWaitCursor = False
-		mms_Main.ToggleViewItem("Customers")
 	End Sub
 
 	Private Sub DisplayClosing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -62,5 +63,13 @@ Public Class CustomersManagement
 		Using settings As New Frm_Settings()
 			settings.Show()
 		End Using
+	End Sub
+
+	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.EditCustomer
+		Dim res = CustomerDialogs.EditCustomer(e.Customer)
+	End Sub
+
+	Private Sub AddCustomer(sender As Object) Handles dcc_Customers.AddCustomer
+		Dim res = CustomerDialogs.AddCustomer()
 	End Sub
 End Class

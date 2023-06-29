@@ -135,7 +135,7 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub ListenerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewListenerToolStripMenuItem.Click
-		AddListenerDialog.Show()
+		'AddListenerDialog.Show()
 	End Sub
 
 	Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateToolStripMenuItem.Click

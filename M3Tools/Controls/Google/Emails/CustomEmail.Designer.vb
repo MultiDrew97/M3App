@@ -57,13 +57,13 @@ Partial Class CustomEmail
         '
         Me.tsc_BodyContainer.ContentPanel.Controls.Add(Me.txt_Body)
         Me.tsc_BodyContainer.ContentPanel.Controls.Add(Me.rtb_Body)
-        Me.tsc_BodyContainer.ContentPanel.Size = New System.Drawing.Size(380, 251)
+        Me.tsc_BodyContainer.ContentPanel.Size = New System.Drawing.Size(380, 236)
         Me.tsc_BodyContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tsc_BodyContainer.LeftToolStripPanelVisible = False
         Me.tsc_BodyContainer.Location = New System.Drawing.Point(10, 10)
         Me.tsc_BodyContainer.Name = "tsc_BodyContainer"
         Me.tsc_BodyContainer.RightToolStripPanelVisible = False
-        Me.tsc_BodyContainer.Size = New System.Drawing.Size(380, 251)
+        Me.tsc_BodyContainer.Size = New System.Drawing.Size(380, 236)
         Me.tsc_BodyContainer.TabIndex = 0
         Me.tsc_BodyContainer.Text = "ToolStripContainer2"
         '
@@ -83,7 +83,7 @@ Partial Class CustomEmail
         Me.txt_Body.Margin = New System.Windows.Forms.Padding(25, 26, 25, 26)
         Me.txt_Body.Multiline = True
         Me.txt_Body.Name = "txt_Body"
-        Me.txt_Body.Size = New System.Drawing.Size(380, 251)
+        Me.txt_Body.Size = New System.Drawing.Size(380, 236)
         Me.txt_Body.TabIndex = 0
         Me.txt_Body.Text = "Email Body..."
         '
@@ -194,6 +194,8 @@ Partial Class CustomEmail
         'sc_CustomComp
         '
         Me.sc_CustomComp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sc_CustomComp.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.sc_CustomComp.IsSplitterFixed = True
         Me.sc_CustomComp.Location = New System.Drawing.Point(0, 0)
         Me.sc_CustomComp.Name = "sc_CustomComp"
         Me.sc_CustomComp.Orientation = System.Windows.Forms.Orientation.Horizontal
@@ -202,15 +204,17 @@ Partial Class CustomEmail
         '
         Me.sc_CustomComp.Panel1.Controls.Add(Me.txt_Subject)
         Me.sc_CustomComp.Panel1.Padding = New System.Windows.Forms.Padding(10)
+        Me.sc_CustomComp.Panel1MinSize = 40
         '
         'sc_CustomComp.Panel2
         '
         Me.sc_CustomComp.Panel2.Controls.Add(Me.tsc_BodyContainer)
         Me.sc_CustomComp.Panel2.Padding = New System.Windows.Forms.Padding(10)
         Me.sc_CustomComp.Size = New System.Drawing.Size(400, 300)
-        Me.sc_CustomComp.SplitterDistance = 25
+        Me.sc_CustomComp.SplitterDistance = 40
         Me.sc_CustomComp.SplitterIncrement = 5
         Me.sc_CustomComp.TabIndex = 0
+        Me.sc_CustomComp.TabStop = False
         '
         'txt_Subject
         '

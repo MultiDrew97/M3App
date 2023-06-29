@@ -85,7 +85,7 @@ Namespace Dialogs
 			For Each listener As NewListener In list
 				Try
 					db_Listeners.AddListener(listener.Name, listener.Email)
-					RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEvent(listener.Name, listener.Email))
+					RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEventArgs(listener.Name, listener.Email))
 					bsListeners.Remove(listener)
 				Catch ex As Exception
 					Console.Error.WriteLine(ex.Message)

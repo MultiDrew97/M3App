@@ -46,20 +46,20 @@ Partial Class DriveUploadDialog
 		'
 		'btn_AddFolder
 		'
-		Me.btn_AddFolder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.btn_AddFolder.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_AddFolder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_AddFolder.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.btn_AddFolder.Location = New System.Drawing.Point(818, 101)
-        Me.btn_AddFolder.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.btn_AddFolder.Name = "btn_AddFolder"
-        Me.btn_AddFolder.Size = New System.Drawing.Size(55, 33)
-        Me.btn_AddFolder.TabIndex = 18
-        Me.btn_AddFolder.Text = "+"
-        Me.btn_AddFolder.UseVisualStyleBackColor = True
+		Me.btn_AddFolder.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+		Me.btn_AddFolder.Name = "btn_AddFolder"
+		Me.btn_AddFolder.Size = New System.Drawing.Size(55, 33)
+		Me.btn_AddFolder.TabIndex = 18
+		Me.btn_AddFolder.Text = "+"
+		Me.btn_AddFolder.UseVisualStyleBackColor = True
 		'
 		'btn_Browse
 		'
-		Me.btn_Browse.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.btn_Browse.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.btn_Browse.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.btn_Browse.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.btn_Browse.ForeColor = System.Drawing.SystemColors.ControlText
 		Me.btn_Browse.Location = New System.Drawing.Point(818, 244)
 		Me.btn_Browse.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
@@ -71,8 +71,8 @@ Partial Class DriveUploadDialog
 		'
 		'txt_FileLocation
 		'
-		Me.txt_FileLocation.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.txt_FileLocation.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.txt_FileLocation.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.txt_FileLocation.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.txt_FileLocation.ForeColor = System.Drawing.SystemColors.ControlText
 		Me.txt_FileLocation.Location = New System.Drawing.Point(338, 244)
 		Me.txt_FileLocation.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
@@ -85,8 +85,8 @@ Partial Class DriveUploadDialog
 		'lbl_FileLocation
 		'
 		Me.lbl_FileLocation.AutoSize = True
-		Me.lbl_FileLocation.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.lbl_FileLocation.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_FileLocation.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_FileLocation.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.lbl_FileLocation.ForeColor = System.Drawing.SystemColors.ControlText
 		Me.lbl_FileLocation.Location = New System.Drawing.Point(328, 213)
 		Me.lbl_FileLocation.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
@@ -98,8 +98,8 @@ Partial Class DriveUploadDialog
 		'lbl_Folder
 		'
 		Me.lbl_Folder.AutoSize = True
-		Me.lbl_Folder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.lbl_Folder.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_Folder.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_Folder.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.lbl_Folder.ForeColor = System.Drawing.SystemColors.ControlText
 		Me.lbl_Folder.Location = New System.Drawing.Point(328, 71)
 		Me.lbl_Folder.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
@@ -110,8 +110,8 @@ Partial Class DriveUploadDialog
 		'
 		'cbx_Folders
 		'
-		Me.cbx_Folders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.cbx_Folders.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.cbx_Folders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.cbx_Folders.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.cbx_Folders.ForeColor = System.Drawing.SystemColors.ControlText
 		Me.cbx_Folders.FormattingEnabled = True
 		Me.cbx_Folders.Location = New System.Drawing.Point(338, 101)
@@ -150,8 +150,8 @@ Partial Class DriveUploadDialog
 		'chk_Custom
 		'
 		Me.chk_Custom.AutoSize = True
-		Me.chk_Custom.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.chk_Custom.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.chk_Custom.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.chk_Custom.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.chk_Custom.Location = New System.Drawing.Point(518, 327)
 		Me.chk_Custom.Name = "chk_Custom"
 		Me.chk_Custom.Size = New System.Drawing.Size(177, 29)
@@ -164,8 +164,8 @@ Partial Class DriveUploadDialog
 		'
 		'txt_CustomName
 		'
-		Me.txt_CustomName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.txt_CustomName.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.txt_CustomName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.txt_CustomName.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.txt_CustomName.ForeColor = System.Drawing.SystemColors.ControlText
 		Me.txt_CustomName.Location = New System.Drawing.Point(338, 356)
 		Me.txt_CustomName.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
@@ -178,8 +178,8 @@ Partial Class DriveUploadDialog
 		'lbl_CustomName
 		'
 		Me.lbl_CustomName.AutoSize = True
-		Me.lbl_CustomName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.lbl_CustomName.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_CustomName.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_CustomName.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.lbl_CustomName.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lbl_CustomName.Location = New System.Drawing.Point(333, 324)
         Me.lbl_CustomName.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)

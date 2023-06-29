@@ -7,24 +7,25 @@ Public Class ChangePasswordDialog
 
     Private Sub Btn_ChangePassword_Click(sender As Object, e As EventArgs) Handles btn_ChangePassword.Click
         Try
-            If PasswordCheck() Then
-                If AdminInfoDialog.ShowDialog = DialogResult.OK Then
-                    _connection.UserID = AdminInfoDialog.Username
-                    _connection.Password = AdminInfoDialog.Password
+			If Not PasswordCheck() Then
+				Throw New FormatException(String.Format("Password: {0}\nConfirm: {1}", txt_Password.Text, txt_ConfirmPassword.Text))
+			End If
 
-                    Using db As New Database(_connection)
-                        db.ChangePassword(txt_Username.Text, txt_Password.Text)
-                    End Using
 
-                    AdminInfoDialog.Clear()
+			'If AdminInfoDialog.ShowDialog = DialogResult.OK Then
+			'    _connection.UserID = AdminInfoDialog.Username
+			'    _connection.Password = AdminInfoDialog.Password
 
-                    DialogResult = DialogResult.OK
-                    Me.Close()
-                End If
-            Else
-                Throw New FormatException(String.Format("Password: {0}\nConfirm: {1}", txt_Password.Text, txt_ConfirmPassword.Text))
-            End If
-        Catch ex As SqlException
+			'    Using db As New Database(_connection)
+			'        db.ChangePassword(txt_Username.Text, txt_Password.Text)
+			'    End Using
+
+			'    AdminInfoDialog.Clear()
+
+			'    DialogResult = DialogResult.OK
+			'    Me.Close()
+			'End If
+		Catch ex As SqlException
             Console.WriteLine("Failed to update user password: " & ex.Message)
         Catch passEx As Exceptions.PasswordMisMatchException
             tss_UserFeedback.Text = "Passwords did not match try again"

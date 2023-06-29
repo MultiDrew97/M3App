@@ -3,20 +3,56 @@ Imports System.Windows.Forms
 
 Public Class TemplateSelector
 	' TODO: Allow to add more templates later
-	Private templates As New TemplateList
 
-	<Category("Data")>
-	<DesignOnly(True)>
-	<RefreshProperties(RefreshProperties.Repaint)>
-	<AttributeProvider(GetType(IListSource))>
-	<EditorBrowsable(EditorBrowsableState.Always)>
-	Public Property DataSource As TemplateList
+	'<RefreshProperties(RefreshProperties.Repaint)>
+	'<Category("Data")>
+	'<DesignOnly(True)>
+	'<AttributeProvider(GetType(IListSource))>
+	'<EditorBrowsable(EditorBrowsableState.Always)>
+	'<Browsable(True)>
+	'Public Property DataSource As BindingSource
+	'	Get
+	'		Return bsTemplates
+	'	End Get
+	'	Set(value As BindingSource)
+	'		bsTemplates = value
+	'	End Set
+	'End Property
+
+	'<Category("Data")>
+	'<DesignOnly(True)>
+	'<RefreshProperties(RefreshProperties.Repaint)>
+	'<EditorBrowsable(EditorBrowsableState.Always)>
+	'<Browsable(True)>
+	'<AttributeProvider(GetType(Types.Template))>
+	'Public Property DisplayMember As String
+	'	Get
+	'		Return cbx_TemplateSelection.DisplayMember
+	'	End Get
+	'	Set(value As String)
+	'		cbx_TemplateSelection.DisplayMember = value
+	'	End Set
+	'End Property
+
+	'<Category("Data")>
+	'<DesignOnly(True)>
+	'<RefreshProperties(RefreshProperties.Repaint)>
+	'<EditorBrowsable(EditorBrowsableState.Always)>
+	'<Browsable(True)>
+	'<AttributeProvider(GetType(Types.Template))>
+	'Public Property ValueMember As String
+	'	Get
+	'		Return cbx_TemplateSelection.ValueMember
+	'	End Get
+	'	Set(value As String)
+	'		cbx_TemplateSelection.ValueMember = value
+	'	End Set
+	'End Property
+
+	Private ReadOnly Property SelectedTemplate As Types.Template
 		Get
-			Return templates
+			Return CType(cbx_TemplateSelection.SelectedItem, Types.Template)
 		End Get
-		Set(value As TemplateList)
-			templates = value
-		End Set
 	End Property
 
 	<[ReadOnly](True)>
@@ -33,15 +69,13 @@ Public Class TemplateSelector
 		End Get
 	End Property
 
-	Private Sub SelectorLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		bsTemplates.DataSource = DataSource
-		cbx_TemplateSelection.DisplayMember = "Name"
-		cbx_TemplateSelection.ValueMember = "Text"
-	End Sub
+	Public ReadOnly Property TemplateSubject As String
+		Get
+			Return If(SelectedTemplate?.Subject, "")
+		End Get
+	End Property
 
 	Sub Reload()
-		bsTemplates.Add(New Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail})
-		bsTemplates.Add(New Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail})
 		cbx_TemplateSelection.SelectedIndex = -1
 	End Sub
 
@@ -51,7 +85,6 @@ Public Class TemplateSelector
 			Return
 		End If
 
-		'wb_TemplateDisplay.Navigate("about:blank")
 		wb_TemplateDisplay.DocumentText = CStr(cbx_TemplateSelection.SelectedValue)
 	End Sub
 
@@ -60,14 +93,33 @@ Public Class TemplateSelector
 			Return
 		End If
 
-		'BindingSource1.ResetBindings(False)
+		'bsTemplates.ResetBindings(False)
 	End Sub
 
-	Public Class Template
-		Property Name As String
-		Property Text As String
-	End Class
-	Public Class TemplateList
-		Inherits List(Of Template)
-	End Class
+	' TODO: Add this to other controls and dialogs to move data handling to main app instead of tools themselves
+	Public Sub AddTemplate(template As Types.Template)
+		bsTemplates.Add(template)
+	End Sub
+
+	Public Sub AddRange(templates As Types.TemplateList)
+		AddRange(templates.ToArray())
+	End Sub
+
+	Public Sub AddRange(templates As Types.Template())
+		For Each template In templates
+			AddTemplate(template)
+		Next
+	End Sub
+
+	Public Sub Clear()
+		bsTemplates.Clear()
+	End Sub
+
+	Public Sub RemoveTemplate(template As Types.Template)
+		bsTemplates.Remove(template)
+	End Sub
+
+	Public Sub RemoveTemplate(index As Integer)
+		bsTemplates.RemoveAt(index)
+	End Sub
 End Class

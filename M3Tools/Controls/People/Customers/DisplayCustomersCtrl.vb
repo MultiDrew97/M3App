@@ -1,8 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.Events.Customers
 
 Public Class DisplayCustomersCtrl
-	Dim countTemplate As String = "Count: {0}"
+	ReadOnly countTemplate As String = "Count: {0}"
+	Public Event AddCustomer As AddCustomerEventHandler
+	Public Event EditCustomer As EditCustomerEventHandler
 
 	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
 		cdg_Customers.Reload()
@@ -32,15 +35,20 @@ Public Class DisplayCustomersCtrl
 		ts_Remove.Enabled = False
 	End Sub
 
-	Private Sub AddCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
-		Using newCustomer As New Dialogs.AddCustomerDialog()
-			If newCustomer.ShowDialog() = DialogResult.OK Then
-				Reload()
-			End If
-		End Using
+	Private Sub NewCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
+		RaiseEvent AddCustomer(Me)
+		'Using newCustomer As New Dialogs.AddCustomerDialog()
+		'	If newCustomer.ShowDialog() = DialogResult.OK Then
+		'		Reload()
+		'	End If
+		'End Using
 	End Sub
 
 	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
 		Throw New Exceptions.NotYetImplementedException("Import Customers")
+	End Sub
+
+	Private Sub SendEdit(sender As Object, e As Events.Customers.CustomerEventArgs) Handles cdg_Customers.EditCustomer
+		RaiseEvent EditCustomer(Me, e)
 	End Sub
 End Class

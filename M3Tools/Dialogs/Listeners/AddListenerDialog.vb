@@ -30,7 +30,7 @@ Namespace Dialogs
 			End If
 
 			db_Listeners.AddListener(Me.ListenerName, Me.ListenerEmail)
-			RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEvent(Me.ListenerName, Me.ListenerEmail))
+			RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEventArgs(Me.ListenerName, Me.ListenerEmail))
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
 		End Sub

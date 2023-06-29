@@ -1,7 +1,7 @@
 ﻿Namespace Events.Listeners
-	Public Delegate Sub ListenerAddedEventHandler(sender As Object, e As ListenerAddedEvent)
+	Public Delegate Sub ListenerAddedEventHandler(sender As Object, e As ListenerAddedEventArgs)
 
-	Public Class ListenerAddedEvent
+	Public Class ListenerAddedEventArgs
 		Inherits EventArgs
 
 		Property ListenerName As String

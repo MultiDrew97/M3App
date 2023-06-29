@@ -17,7 +17,7 @@ Public Class ListenersManagement
 		Frm_Main.Show()
 	End Sub
 
-	Private Sub ListenerAdded(sender As Object, e As ListenerAddedEvent) Handles dlc_Listeners.ListenerAdded
+	Private Sub ListenerAdded(sender As Object, e As ListenerAddedEventArgs) Handles dlc_Listeners.ListenerAdded
 		Dim [to] = New MimeKit.MailboxAddress(e.ListenerName, e.ListenerEmail)
 		Dim subject = "Welcome to the Ministry"
 		Dim body = My.Resources.newListener
@@ -59,5 +59,13 @@ Public Class ListenersManagement
 	Private Sub ViewSettings() Handles mms_Main.ViewSettings
 		Dim settings As New Frm_Settings()
 		settings.ShowDialog()
+	End Sub
+
+	Private Sub SendEmails() Handles dlc_Listeners.Emails
+		Using emails As New SendEmailsDialog()
+			UseWaitCursor = True
+			Dim res = emails.ShowDialog
+			UseWaitCursor = False
+		End Using
 	End Sub
 End Class
