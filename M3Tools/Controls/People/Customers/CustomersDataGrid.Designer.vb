@@ -23,10 +23,13 @@ Partial Class CustomersDataGrid
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersDataGrid))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_Customers = New System.Windows.Forms.DataGridView()
+        Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
+        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
+        Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
         Me.dgc_CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Selection = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgc_FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,9 +40,6 @@ Partial Class CustomersDataGrid
         Me.dgc_Join = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
         Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
-        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
-        Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
         CType(Me.dgv_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -55,9 +55,28 @@ Partial Class CustomersDataGrid
         Me.dgv_Customers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv_Customers.Location = New System.Drawing.Point(0, 0)
         Me.dgv_Customers.Name = "dgv_Customers"
-        Me.dgv_Customers.ReadOnly = True
         Me.dgv_Customers.Size = New System.Drawing.Size(610, 500)
         Me.dgv_Customers.TabIndex = 2
+        '
+        'bsCustomers
+        '
+        Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.DataTables.CustomersDataTable)
+        '
+        'chk_SelectAll
+        '
+        Me.chk_SelectAll.AutoSize = True
+        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
+        Me.chk_SelectAll.Name = "chk_SelectAll"
+        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
+        Me.chk_SelectAll.TabIndex = 3
+        Me.chk_SelectAll.TabStop = False
+        Me.chk_SelectAll.UseVisualStyleBackColor = True
+        '
+        'db_Customers
+        '
+        Me.db_Customers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+        Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+        Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
         'dgc_CustomerID
         '
@@ -77,7 +96,6 @@ Partial Class CustomersDataGrid
         Me.dgc_Selection.HeaderText = ""
         Me.dgc_Selection.MinimumWidth = 25
         Me.dgc_Selection.Name = "dgc_Selection"
-        Me.dgc_Selection.ReadOnly = True
         Me.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgc_Selection.Width = 25
@@ -145,26 +163,25 @@ Partial Class CustomersDataGrid
         '
         'dgc_Edit
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.NullValue = CType(resources.GetObject("DataGridViewCellStyle3.NullValue"), Object)
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(5)
-        Me.dgc_Edit.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.NullValue = CType(resources.GetObject("DataGridViewCellStyle1.NullValue"), Object)
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(5)
+        Me.dgc_Edit.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgc_Edit.FillWeight = 5.0!
         Me.dgc_Edit.HeaderText = ""
         Me.dgc_Edit.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
         Me.dgc_Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Edit.MinimumWidth = 25
         Me.dgc_Edit.Name = "dgc_Edit"
-        Me.dgc_Edit.ReadOnly = True
         Me.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Edit.Width = 25
         '
         'dgc_Remove
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.NullValue = CType(resources.GetObject("DataGridViewCellStyle4.NullValue"), Object)
-        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(5)
-        Me.dgc_Remove.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(5)
+        Me.dgc_Remove.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgc_Remove.Description = "Remove the listener from the database and stop sending emails"
         Me.dgc_Remove.FillWeight = 5.0!
         Me.dgc_Remove.HeaderText = ""
@@ -172,29 +189,8 @@ Partial Class CustomersDataGrid
         Me.dgc_Remove.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Remove.MinimumWidth = 25
         Me.dgc_Remove.Name = "dgc_Remove"
-        Me.dgc_Remove.ReadOnly = True
         Me.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Remove.Width = 25
-        '
-        'bsCustomers
-        '
-        Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.DataTables.CustomersDataTable)
-        '
-        'chk_SelectAll
-        '
-        Me.chk_SelectAll.AutoSize = True
-        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
-        Me.chk_SelectAll.Name = "chk_SelectAll"
-        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
-        Me.chk_SelectAll.TabIndex = 3
-        Me.chk_SelectAll.TabStop = False
-        Me.chk_SelectAll.UseVisualStyleBackColor = True
-        '
-        'db_Customers
-        '
-        Me.db_Customers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-        Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-        Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
         'CustomersDataGrid
         '

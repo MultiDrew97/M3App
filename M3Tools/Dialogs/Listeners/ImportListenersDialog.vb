@@ -9,6 +9,7 @@ Namespace Dialogs
 
 		Private ReadOnly Property DataSource As Types.ListenerCollection
 			Get
+				' TODO: Fix this to properly manage list contents
 				Return ldg_Listeners.Listeners
 			End Get
 		End Property
@@ -47,7 +48,7 @@ Namespace Dialogs
 			Dim validHeaderValues As String() = {"Name", "Email"}
 
 			For Each validHeader In validHeaderValues
-				Dim index = Array.IndexOf(headers, validHeader)
+				Dim index = Array.IndexOf(headers, validHeader.ToLower)
 
 				If index < 0 Then
 					Throw New ArgumentException($"Unable to find column '{validHeader}'. Please update file and try again.")
@@ -113,7 +114,7 @@ Namespace Dialogs
 
 				If chk_Headers.Checked Then
 					Try
-						colDict = ParseHeaders(csvReader.ReadFields)
+						colDict = ParseHeaders(String.Join(";", csvReader.ReadFields).ToLower().Split(";"c))
 					Catch ex As ArgumentException
 						Throw New Exceptions.NotYetImplementedException("Import Fields Error")
 					End Try
@@ -121,17 +122,22 @@ Namespace Dialogs
 
 				While Not csvReader.EndOfData
 					Dim fields = csvReader.ReadFields()
-					DataSource.Add(New Types.Listener() With {
+					Dim listener = New Types.Listener() With {
 									.Name = fields(colDict("Name")),
 									.Email = fields(colDict("Email"))
-									})
+									}
+
+					If DataSource.Contains(listener) Then
+						Continue While
+					End If
+
+					DataSource.Add(listener)
 				End While
 			Next
 		End Sub
 
 		Private Sub FilesParsed(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_ParseFiles.RunWorkerCompleted
-			ldg_Listeners.Filter = "[Name] IS UNIQUE AND [Email] IS UNIQUE"
-
+			ldg_Listeners.Invalidate()
 			ldg_Listeners.Select()
 		End Sub
 	End Class

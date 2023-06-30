@@ -18,14 +18,14 @@ Public Class ListenersManagement
 		Frm_Main.Show()
 	End Sub
 
-	Private Sub ListenerAdded(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.AddListener, mms_Main.ListenerAdded
+	Private Sub ListenerAdded(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.ListenerAdded, mms_Main.ListenerAdded
 		Dim subject = "Welcome to the Ministry"
 		Dim body = My.Resources.newListener
 
 		Dim message = gt_Email.Create(e.Listener, subject, body)
 		' TODO: Make this play nice with multi-tasking
 		'gt_Email.Send(message)
-		'dlc_Listeners.Reload()
+		dlc_Listeners.Reload()
 		Throw New NotYetImplementedException()
 	End Sub
 

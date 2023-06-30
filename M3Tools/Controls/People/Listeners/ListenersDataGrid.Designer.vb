@@ -27,15 +27,15 @@ Partial Class ListenersDataGrid
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ListenersDataGrid))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_Listeners = New System.Windows.Forms.DataGridView()
+        Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
+        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
+        Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
         Me.dgc_ListenerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Selection = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgc_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
         Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
-        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
-        Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
         CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,9 +51,28 @@ Partial Class ListenersDataGrid
         Me.dgv_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv_Listeners.Location = New System.Drawing.Point(0, 0)
         Me.dgv_Listeners.Name = "dgv_Listeners"
-        Me.dgv_Listeners.ReadOnly = True
         Me.dgv_Listeners.Size = New System.Drawing.Size(450, 300)
         Me.dgv_Listeners.TabIndex = 1
+        '
+        'bsListeners
+        '
+        Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.DataTables.ListenersDataTable)
+        '
+        'chk_SelectAll
+        '
+        Me.chk_SelectAll.AutoSize = True
+        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
+        Me.chk_SelectAll.Name = "chk_SelectAll"
+        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
+        Me.chk_SelectAll.TabIndex = 2
+        Me.chk_SelectAll.TabStop = False
+        Me.chk_SelectAll.UseVisualStyleBackColor = True
+        '
+        'db_Listeners
+        '
+        Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+        Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+        Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
         'dgc_ListenerID
         '
@@ -72,7 +91,6 @@ Partial Class ListenersDataGrid
         Me.dgc_Selection.HeaderText = ""
         Me.dgc_Selection.MinimumWidth = 25
         Me.dgc_Selection.Name = "dgc_Selection"
-        Me.dgc_Selection.ReadOnly = True
         Me.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgc_Selection.Width = 25
@@ -111,7 +129,6 @@ Partial Class ListenersDataGrid
         Me.dgc_Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Edit.MinimumWidth = 25
         Me.dgc_Edit.Name = "dgc_Edit"
-        Me.dgc_Edit.ReadOnly = True
         Me.dgc_Edit.Width = 25
         '
         'dgc_Remove
@@ -128,28 +145,7 @@ Partial Class ListenersDataGrid
         Me.dgc_Remove.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Remove.MinimumWidth = 25
         Me.dgc_Remove.Name = "dgc_Remove"
-        Me.dgc_Remove.ReadOnly = True
         Me.dgc_Remove.Width = 25
-        '
-        'bsListeners
-        '
-        Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.DataTables.ListenersDataTable)
-        '
-        'chk_SelectAll
-        '
-        Me.chk_SelectAll.AutoSize = True
-        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
-        Me.chk_SelectAll.Name = "chk_SelectAll"
-        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
-        Me.chk_SelectAll.TabIndex = 2
-        Me.chk_SelectAll.TabStop = False
-        Me.chk_SelectAll.UseVisualStyleBackColor = True
-        '
-        'db_Listeners
-        '
-        Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-        Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-        Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
         'ListenersDataGrid
         '

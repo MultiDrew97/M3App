@@ -8,9 +8,10 @@ Namespace Types
 				Return _id
 			End Get
 			Set(value As Integer)
-				If Not Utils.ValidID(value) Then
-					Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
-				End If
+				' TODO: Figure out what to do for id checking if at all
+				'If Not Utils.ValidID(value) Then
+				'	Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
+				'End If
 
 				_id = value
 			End Set

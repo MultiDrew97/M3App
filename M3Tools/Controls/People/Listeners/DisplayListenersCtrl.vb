@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class DisplayListenersCtrl
-	Public Event AddListener As Events.Listeners.ListenerEventHandler
+	Public Event ListenerAdded As Events.Listeners.ListenerEventHandler
 	Public Event Emails()
 	Private WithEvents ImportDialog As Dialogs.ImportListenersDialog
 	Private WithEvents AddDialog As Dialogs.AddListenerDialog
@@ -54,8 +54,7 @@ Public Class DisplayListenersCtrl
 	End Sub
 
 	Private Sub AddNewListener(sender As Object, e As Events.Listeners.ListenerEventArgs) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
-		RaiseEvent AddListener(Me, e)
-		ldg_Listeners.Reload()
+		RaiseEvent ListenerAdded(Me, e)
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As EventArgs) Handles tbtn_Email.Click

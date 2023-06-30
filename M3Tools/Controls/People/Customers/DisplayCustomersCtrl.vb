@@ -4,7 +4,7 @@ Imports SPPBC.M3Tools.Events.Customers
 
 Public Class DisplayCustomersCtrl
 	ReadOnly countTemplate As String = "Count: {0}"
-	Public Event AddCustomer As CustomerEventHandler
+	Public Event CustomerAdded As CustomerEventHandler
 	Public Event EditCustomer As CustomerEventHandler
 
 	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
@@ -36,12 +36,15 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub NewCustomer(sender As Object, e As EventArgs) Handles tbtn_AddCustomer.Click
-		RaiseEvent AddCustomer(Me, New CustomerEventArgs(Nothing))
-		'Using newCustomer As New Dialogs.AddCustomerDialog()
-		'	If newCustomer.ShowDialog() = DialogResult.OK Then
-		'		Reload()
-		'	End If
-		'End Using
+		Using newCustomer As New Dialogs.AddCustomerDialog()
+			If Not newCustomer.ShowDialog() = DialogResult.OK Then
+				Return
+			End If
+
+			Reload()
+		End Using
+
+		RaiseEvent CustomerAdded(Me, New CustomerEventArgs(Nothing))
 	End Sub
 
 	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
