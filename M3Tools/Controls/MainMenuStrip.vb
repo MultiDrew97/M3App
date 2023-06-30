@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.Events
 
 ' TODO: Open Display forms from here and figure out to discern closing type
 ' TODO: Resolve Collection modified errors
@@ -48,6 +49,21 @@ Public Class MainMenuStrip
 	Public Event UpdateAvailable()
 
 	''' <summary>
+	''' Occurs when a customer is successfully added
+	''' </summary>
+	Public Event CustomerAdded As Customers.CustomerEventHandler
+
+	''' <summary>
+	''' Occurs when a listener is successfully added
+	''' </summary>
+	Public Event ListenerAdded As Listeners.ListenerEventHandler
+
+	''' <summary>
+	''' Occurs when a product is successfully added
+	''' </summary>
+	Public Event ProductAdded As Products.ProductEventHandler
+
+	''' <summary>
 	''' The location to save the installer for the application when updating
 	''' </summary>
 	Private ReadOnly _DownloadLocation As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", "M3")
@@ -65,19 +81,36 @@ Public Class MainMenuStrip
 
 	Private Sub CreateCustomer(sender As Object, e As EventArgs) Handles tsmi_NewCustomer.Click
 		Using newCustomer As New Dialogs.AddCustomerDialog
-			newCustomer.ShowDialog()
+			Dim res = newCustomer.ShowDialog()
+			If Not res = DialogResult.OK Then
+				Return
+			End If
+
+
+			RaiseEvent CustomerAdded(Me, New Customers.CustomerEventArgs(newCustomer.Customer, EventType.Added))
 		End Using
 	End Sub
 
 	Private Sub CreateProduct(sender As Object, e As EventArgs) Handles tsmi_NewProduct.Click
 		Using newProduct As New Dialogs.AddProductDialog()
-			newProduct.ShowDialog()
+			Dim res = newProduct.ShowDialog()
+			If Not Res = DialogResult.OK Then
+				Return
+			End If
+
+			Throw New Exceptions.NotYetImplementedException("CreateProduct")
+			'RaiseEvent ProductAdded(newProduct.Product, EventType.Added)
 		End Using
 	End Sub
 
 	Private Sub CreateListener(sender As Object, e As EventArgs) Handles tsmi_NewListeners.Click
 		Using newListener As New Dialogs.AddListenerDialog()
-			newListener.ShowDialog()
+			Dim res = newListener.ShowDialog()
+			If Not Res = DialogResult.OK Then
+				Return
+			End If
+
+			RaiseEvent ListenerAdded(Me, New Listeners.ListenerEventArgs(newListener.Listener, EventType.Added))
 		End Using
 	End Sub
 
@@ -112,7 +145,6 @@ Public Class MainMenuStrip
 
 	Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles tsmi_ViewCustomers.Click
 		RaiseEvent ManageCustomers(Me, e)
-		'ToggleViewItem("ViewCustomers")
 	End Sub
 
 	Private Sub ViewProducts(sender As Object, e As EventArgs) Handles tsmi_ViewProducts.Click

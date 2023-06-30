@@ -1,10 +1,11 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.Events
 
 Namespace Dialogs
 	Public Class AddListenerDialog
 
-		Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
+		Public Event ListenerAdded As Listeners.ListenerEventHandler
 
 		Public Property ListenerName As String
 			Get
@@ -24,13 +25,22 @@ Namespace Dialogs
 			End Set
 		End Property
 
+		ReadOnly Property Listener As Types.Listener
+			Get
+				Return New Types.Listener() With {
+					.Name = ListenerName,
+					.Email = ListenerEmail
+				}
+			End Get
+		End Property
+
 		Private Sub AddListener(sender As Object, e As EventArgs) Handles btn_Create.Click
 			If Not ValidInputs() Then
 				Return
 			End If
 
-			db_Listeners.AddListener(Me.ListenerName, Me.ListenerEmail)
-			RaiseEvent ListenerAdded(Me, New Events.Listeners.ListenerAddedEvent(Me.ListenerName, Me.ListenerEmail))
+			db_Listeners.AddListener(Me.Listener)
+			RaiseEvent ListenerAdded(Me, New Listeners.ListenerEventArgs(Me.Listener, EventType.Added))
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
 		End Sub

@@ -1,8 +1,10 @@
-﻿Imports SPPBC.M3Tools.Events
+﻿Imports SPPBC.M3Tools.Events.Customers
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class CustomersDataGrid
+	Public Event EditCustomer As CustomerEventHandler
+
 	Private ReadOnly _customers As New DataTables.CustomersDataTable
 	Private ReadOnly dgcPrefix As String = "dgc_"
 
@@ -132,12 +134,13 @@ Public Class CustomersDataGrid
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
-				Using edit As New Dialogs.EditCustomerDialog() With {.Customer = customer}
-					If edit.ShowDialog = DialogResult.OK Then
-						Reload()
-					End If
-				End Using
-			Case dgc_Remove.Index
+				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer))
+				'Using edit As New Dialogs.EditCustomerDialog() With {.Customer = customer}
+				'	If edit.ShowDialog = DialogResult.OK Then
+				'		Reload()
+				'	End If
+				'End Using
+			Case dgc_Remove.DisplayIndex
 				ClearSelectedRows()
 				RemoveCustomer(sender, New DataGridViewRowCancelEventArgs(row))
 		End Select
@@ -171,7 +174,7 @@ Public Class CustomersDataGrid
 
 		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
 			Try
-				id = DirectCast(row.Cells($"{dgcPrefix}ListenerID").Value, Integer)
+				id = DirectCast(row.Cells($"{dgcPrefix}CustomerID").Value, Integer)
 				db_Customers.RemoveCustomer(id)
 				dgv_Customers.Rows.Remove(row)
 			Catch ex As Exception
@@ -180,11 +183,11 @@ Public Class CustomersDataGrid
 		Next
 
 		If failed > 0 Then
-			MessageBox.Show($"Failed to remove {failed} listener{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			MessageBox.Show($"Failed to remove {failed} customer{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
 
 		If total - failed > 0 Then
-			MessageBox.Show($"Successfully removed {total - failed} listener{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
 
 		Reload()

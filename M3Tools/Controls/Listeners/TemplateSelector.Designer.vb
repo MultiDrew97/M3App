@@ -72,15 +72,18 @@ Partial Class TemplateSelector
         Me.cbx_TemplateSelection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbx_TemplateSelection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbx_TemplateSelection.DataSource = Me.bsTemplates
+        Me.cbx_TemplateSelection.DisplayMember = "Name"
         Me.cbx_TemplateSelection.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbx_TemplateSelection.FormattingEnabled = True
         Me.cbx_TemplateSelection.Location = New System.Drawing.Point(0, 0)
         Me.cbx_TemplateSelection.Name = "cbx_TemplateSelection"
         Me.cbx_TemplateSelection.Size = New System.Drawing.Size(200, 21)
         Me.cbx_TemplateSelection.TabIndex = 0
+        Me.cbx_TemplateSelection.ValueMember = "Text"
         '
         'bsTemplates
         '
+        Me.bsTemplates.DataSource = GetType(SPPBC.M3Tools.Types.TemplateList)
         '
         'TemplateSelector
         '

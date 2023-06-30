@@ -1,7 +1,10 @@
-﻿Imports System.ComponentModel
+﻿Imports SPPBC.M3Tools.Events.Listeners
+Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class ListenersDataGrid
+	Public Event EditListener As ListenerEventHandler
+
 	Private ReadOnly _listeners As New DataTables.ListenersDataTable
 	Private ReadOnly dgcPrefix As String = "dgc_"
 
@@ -23,7 +26,6 @@ Public Class ListenersDataGrid
 
 	Public ReadOnly Property Listeners As Types.ListenerCollection
 		Get
-			'Return CType(bsListeners.List, Types.ListenerCollection)
 			Return _listeners.Listeners
 		End Get
 	End Property
@@ -31,6 +33,7 @@ Public Class ListenersDataGrid
 	Public ReadOnly Property SelectedListeners As Types.ListenerCollection
 		Get
 			Dim list As New Types.ListenerCollection
+
 			For Each row As DataGridViewRow In dgv_Listeners.Rows
 				If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
 					Continue For
@@ -51,7 +54,7 @@ Public Class ListenersDataGrid
 			Return bsListeners.Filter
 		End Get
 		Set(value As String)
-			If value <> "" Then
+			If value <> "" AndAlso Not (value.Contains("[") OrElse value.Contains("]")) Then
 				bsListeners.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
 				Return
 			End If
@@ -103,16 +106,17 @@ Public Class ListenersDataGrid
 	<DefaultValue(True)>
 	Property ListenersSelectable As Boolean
 		Get
-			Return dgv_Listeners.Columns(1).Visible
+			Return dgv_Listeners.Columns(dgc_Selection.DisplayIndex).Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Listeners.Columns(1).Visible = value
+			dgv_Listeners.Columns(dgc_Selection.DisplayIndex).Visible = value
 			chk_SelectAll.Visible = value
 		End Set
 	End Property
 
 	Public Sub Reload()
 		UseWaitCursor = True
+		' TODO: Immitate FileUpload structure and do to ListenersDataGrid
 		_listeners.Clear()
 		_listeners.AddRange(db_Listeners.GetListeners())
 		UseWaitCursor = False
@@ -130,18 +134,19 @@ Public Class ListenersDataGrid
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.DisplayIndex
-				Using edit As New Dialogs.EditListenerDialog() With {.Listener = listener}
-					If edit.ShowDialog = DialogResult.OK Then
-						Reload()
-					End If
-				End Using
+				RaiseEvent EditListener(Me, New ListenerEventArgs(listener))
+				'Using edit As New Dialogs.EditListenerDialog() With {.Listener = listener}
+				'	If edit.ShowDialog = DialogResult.OK Then
+				'		Reload()
+				'	End If
+				'End Using
 			Case dgc_Remove.DisplayIndex
 				ClearSelectedRows()
 				RemoveListener(sender, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
 	Private Sub RemoveListener(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Listeners.UserDeletingRow
-		Dim row As System.Data.DataRowView = CType(e.Row.DataBoundItem, System.Data.DataRowView)
+		Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
 		Dim deletedListener As DataTables.ListenersDataRow = CType(row.Row, DataTables.ListenersDataRow)
 		Console.WriteLine(deletedListener)
 

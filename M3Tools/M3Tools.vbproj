@@ -229,10 +229,23 @@
     <Compile Include="Dialogs\Customer\AddCustomerDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\Customer\CustomerBasedDialogs.Designer.vb">
+      <DependentUpon>CustomerBasedDialogs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Customer\CustomerBasedDialogs.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Types\Events\CustomerEvents.vb" />
     <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.vb">
       <DependentUpon>EditCustomerDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Customer\EditCustomerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Emails\EmailBodySelection.Designer.vb">
+      <DependentUpon>EmailBodySelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Emails\EmailBodySelection.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Emails\ReciepientSelectionDialog.designer.vb">
@@ -257,12 +270,6 @@
       <DependentUpon>CreateFolderDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Google\CreateFolderDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\Emails\SendEmailsDialog.Designer.vb">
-      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Emails\SendEmailsDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Google\PermissionsDialog.Designer.vb">
@@ -295,7 +302,8 @@
     <Compile Include="Dialogs\Listeners\ImportListenersDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Listeners\ListenerEvents.vb" />
+    <Compile Include="Types\Events\EventsBase.vb" />
+    <Compile Include="Types\Events\ListenerEvents.vb" />
     <Compile Include="Dialogs\LoadScreenDialog.Designer.vb">
       <DependentUpon>LoadScreenDialog.vb</DependentUpon>
     </Compile>
@@ -465,6 +473,8 @@
     </Compile>
     <Compile Include="Types\DBEntry.vb" />
     <Compile Include="Types\EmailDetails.vb" />
+    <Compile Include="Types\Events\ProductEvents.vb" />
+    <Compile Include="Types\Templates.vb" />
     <Compile Include="Types\Google\API.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -479,8 +489,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\Google\Drive\File.vb" />
-    <Compile Include="Types\Google\Drive\Folder.vb" />
-    <Compile Include="Types\Google\Drive\FileCollection.vb" />
     <Compile Include="Types\Inventory\Item.vb" />
     <Compile Include="Types\Inventory\Product.vb" />
     <Compile Include="Types\Orders\CompletedOrder.vb" />
@@ -584,6 +592,9 @@
     <EmbeddedResource Include="Dialogs\Emails\CustomEmailDialog.resx">
       <DependentUpon>CustomEmailDialog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Emails\EmailBodySelection.resx">
+      <DependentUpon>EmailBodySelection.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Emails\ReciepientSelectionDialog.resx">
       <DependentUpon>ReciepientSelectionDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -592,9 +603,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Google\CreateFolderDialog.resx">
       <DependentUpon>CreateFolderDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Emails\SendEmailsDialog.resx">
-      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Google\PermissionsDialog.resx">
       <DependentUpon>PermissionsDialog.vb</DependentUpon>
@@ -699,6 +707,7 @@
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Product.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.TemplateList.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.User.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -771,7 +780,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

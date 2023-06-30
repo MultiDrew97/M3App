@@ -160,12 +160,7 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.g.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MediaMinistrySplash.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileLocationField.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileSelectionDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ListenerSelectionDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CustomMessageDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.EmailMinistryDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FolderCreationDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.AddListenerDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PasswordField.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.RecieptTypeDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SendEmailsDialog.resources
@@ -173,7 +168,6 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMi
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.AddProductDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ChangePasswordDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.NewUserDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.AdminInfoDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_Login.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_Settings.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayOrders.resources

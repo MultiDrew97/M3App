@@ -91,6 +91,7 @@ Partial Class DisplayCustomersCtrl
         'cdg_Customers
         '
         Me.cdg_Customers.AllowColumnReordering = True
+        Me.cdg_Customers.CustomersSelectable = False
         Me.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cdg_Customers.Filter = Nothing
         Me.cdg_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

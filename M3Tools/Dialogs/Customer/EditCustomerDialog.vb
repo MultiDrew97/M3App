@@ -105,7 +105,7 @@ Namespace Dialogs
 			' Reload()
 		End Sub
 
-		Private Sub LoadCustomer(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+		Private Sub LoadCustomer(sender As Object, e As DoWorkEventArgs)
 			If Customer.Id < 0 Then
 				e.Cancel = True
 				Return

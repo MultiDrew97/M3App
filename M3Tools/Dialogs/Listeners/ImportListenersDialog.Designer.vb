@@ -30,16 +30,14 @@
 			Me.ofd_ImportFile = New System.Windows.Forms.OpenFileDialog()
 			Me.btn_Browse = New System.Windows.Forms.Button()
 			Me.chk_Headers = New System.Windows.Forms.CheckBox()
-			Me.dgv_ImportedListeners = New System.Windows.Forms.DataGridView()
-			Me.dgc_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
-			Me.dgc_Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
 			Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
 			Me.gi_FileName = New SPPBC.M3Tools.GenericInputPair()
 			Me.bw_ImportListeners = New System.ComponentModel.BackgroundWorker()
 			Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
 			Me.btn_Clear = New System.Windows.Forms.Button()
+			Me.ldg_Listeners = New SPPBC.M3Tools.ListenersDataGrid()
+			Me.bw_ParseFiles = New System.ComponentModel.BackgroundWorker()
 			Me.TableLayoutPanel1.SuspendLayout()
-			CType(Me.dgv_ImportedListeners, System.ComponentModel.ISupportInitialize).BeginInit()
 			CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
 			Me.SuspendLayout()
 			'
@@ -105,41 +103,9 @@
 			Me.chk_Headers.Text = "Contains Headers"
 			Me.chk_Headers.UseVisualStyleBackColor = True
 			'
-			'dgv_ImportedListeners
-			'
-			Me.dgv_ImportedListeners.AllowUserToAddRows = False
-			Me.dgv_ImportedListeners.AutoGenerateColumns = False
-			Me.dgv_ImportedListeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-			Me.dgv_ImportedListeners.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_Name, Me.dgc_Email})
-			Me.dgv_ImportedListeners.DataSource = Me.bsListeners
-			Me.dgv_ImportedListeners.Location = New System.Drawing.Point(18, 128)
-			Me.dgv_ImportedListeners.Name = "dgv_ImportedListeners"
-			Me.dgv_ImportedListeners.ReadOnly = True
-			Me.dgv_ImportedListeners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-			Me.dgv_ImportedListeners.Size = New System.Drawing.Size(354, 100)
-			Me.dgv_ImportedListeners.TabIndex = 4
-			'
-			'dgc_Name
-			'
-			Me.dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-			Me.dgc_Name.DataPropertyName = "Name"
-			Me.dgc_Name.FillWeight = 50.0!
-			Me.dgc_Name.HeaderText = "Name"
-			Me.dgc_Name.Name = "dgc_Name"
-			Me.dgc_Name.ReadOnly = True
-			'
-			'dgc_Email
-			'
-			Me.dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-			Me.dgc_Email.DataPropertyName = "Email"
-			Me.dgc_Email.FillWeight = 50.0!
-			Me.dgc_Email.HeaderText = "Email Address"
-			Me.dgc_Email.Name = "dgc_Email"
-			Me.dgc_Email.ReadOnly = True
-			'
 			'bsListeners
 			'
-			Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Dialogs.ImportListenersDialog.NewListener)
+			Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
 			'
 			'gi_FileName
 			'
@@ -149,6 +115,7 @@
 			Me.gi_FileName.Location = New System.Drawing.Point(39, 29)
 			Me.gi_FileName.Mask = ""
 			Me.gi_FileName.Name = "gi_FileName"
+			Me.gi_FileName.Placeholder = "Select Files..."
 			Me.gi_FileName.Size = New System.Drawing.Size(308, 46)
 			Me.gi_FileName.TabIndex = 1
 			Me.gi_FileName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
@@ -171,13 +138,29 @@
 			Me.btn_Clear.Text = "Clear"
 			Me.btn_Clear.UseVisualStyleBackColor = True
 			'
+			'ldg_Listeners
+			'
+			Me.ldg_Listeners.AllowColumnReordering = True
+			Me.ldg_Listeners.AllowDeleting = False
+			Me.ldg_Listeners.AllowEditting = False
+			Me.ldg_Listeners.Filter = ""
+			Me.ldg_Listeners.ListenersSelectable = False
+			Me.ldg_Listeners.Location = New System.Drawing.Point(28, 128)
+			Me.ldg_Listeners.MinimumSize = New System.Drawing.Size(350, 100)
+			Me.ldg_Listeners.Name = "ldg_Listeners"
+			Me.ldg_Listeners.Size = New System.Drawing.Size(350, 100)
+			Me.ldg_Listeners.TabIndex = 6
+			'
+			'bw_ParseFiles
+			'
+			'
 			'ImportListenersDialog
 			'
 			Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 			Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 			Me.ClientSize = New System.Drawing.Size(435, 315)
+			Me.Controls.Add(Me.ldg_Listeners)
 			Me.Controls.Add(Me.btn_Clear)
-			Me.Controls.Add(Me.dgv_ImportedListeners)
 			Me.Controls.Add(Me.chk_Headers)
 			Me.Controls.Add(Me.btn_Browse)
 			Me.Controls.Add(Me.gi_FileName)
@@ -190,7 +173,6 @@
 			Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
 			Me.Text = "Import Listeners"
 			Me.TableLayoutPanel1.ResumeLayout(False)
-			CType(Me.dgv_ImportedListeners, System.ComponentModel.ISupportInitialize).EndInit()
 			CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).EndInit()
 			Me.ResumeLayout(False)
 			Me.PerformLayout()
@@ -203,12 +185,13 @@
 		Friend WithEvents gi_FileName As GenericInputPair
 		Friend WithEvents btn_Browse As Windows.Forms.Button
 		Friend WithEvents chk_Headers As Windows.Forms.CheckBox
-		Friend WithEvents dgv_ImportedListeners As Windows.Forms.DataGridView
 		Friend WithEvents bsListeners As Windows.Forms.BindingSource
 		Friend WithEvents bw_ImportListeners As ComponentModel.BackgroundWorker
 		Friend WithEvents db_Listeners As Database.ListenerDatabase
 		Friend WithEvents dgc_Name As Windows.Forms.DataGridViewTextBoxColumn
 		Friend WithEvents dgc_Email As Windows.Forms.DataGridViewTextBoxColumn
 		Friend WithEvents btn_Clear As Windows.Forms.Button
+		Friend WithEvents ldg_Listeners As ListenersDataGrid
+		Friend WithEvents bw_ParseFiles As ComponentModel.BackgroundWorker
 	End Class
 End Namespace

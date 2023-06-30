@@ -2,21 +2,12 @@
 Imports System.Windows.Forms
 
 Public Class TemplateSelector
-	' TODO: Allow to add more templates later
-	Private templates As New TemplateList
+	' TODO: Create template management system for this later
 
-	<Category("Data")>
-	<DesignOnly(True)>
-	<RefreshProperties(RefreshProperties.Repaint)>
-	<AttributeProvider(GetType(IListSource))>
-	<EditorBrowsable(EditorBrowsableState.Always)>
-	Public Property DataSource As TemplateList
+	Private ReadOnly Property SelectedTemplate As Types.Template
 		Get
-			Return templates
+			Return CType(cbx_TemplateSelection.SelectedItem, Types.Template)
 		End Get
-		Set(value As TemplateList)
-			templates = value
-		End Set
 	End Property
 
 	<[ReadOnly](True)>
@@ -32,16 +23,16 @@ Public Class TemplateSelector
 			Return CStr(cbx_TemplateSelection.SelectedValue)
 		End Get
 	End Property
+	Public ReadOnly Property TemplateSubject As String
+		Get
+			Return If(SelectedTemplate?.Subject, "")
+		End Get
+	End Property
 
-	Private Sub SelectorLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		bsTemplates.DataSource = DataSource
-		cbx_TemplateSelection.DisplayMember = "Name"
-		cbx_TemplateSelection.ValueMember = "Text"
-	End Sub
 
 	Sub Reload()
-		bsTemplates.Add(New Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail})
-		bsTemplates.Add(New Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail})
+		bsTemplates.Add(New Types.Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail})
+		bsTemplates.Add(New Types.Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail})
 		cbx_TemplateSelection.SelectedIndex = -1
 	End Sub
 
@@ -60,14 +51,15 @@ Public Class TemplateSelector
 			Return
 		End If
 
-		'BindingSource1.ResetBindings(False)
 	End Sub
 
-	Public Class Template
-		Property Name As String
-		Property Text As String
-	End Class
-	Public Class TemplateList
-		Inherits List(Of Template)
-	End Class
+	Public Sub AddTemplate(template As Types.Template)
+		bsTemplates.Add(template)
+	End Sub
+
+	Public Sub AddRange(templates As IList(Of Types.Template))
+		For Each template In templates
+			AddTemplate(template)
+		Next
+	End Sub
 End Class

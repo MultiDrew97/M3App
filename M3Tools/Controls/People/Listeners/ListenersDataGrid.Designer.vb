@@ -27,14 +27,14 @@ Partial Class ListenersDataGrid
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ListenersDataGrid))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_Listeners = New System.Windows.Forms.DataGridView()
-        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.dgc_ListenerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Selection = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
         Me.dgc_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
         Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
+        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
         CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,18 +51,9 @@ Partial Class ListenersDataGrid
         Me.dgv_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv_Listeners.Location = New System.Drawing.Point(0, 0)
         Me.dgv_Listeners.Name = "dgv_Listeners"
+        Me.dgv_Listeners.ReadOnly = True
         Me.dgv_Listeners.Size = New System.Drawing.Size(450, 300)
         Me.dgv_Listeners.TabIndex = 1
-        '
-        'chk_SelectAll
-        '
-        Me.chk_SelectAll.AutoSize = True
-        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
-        Me.chk_SelectAll.Name = "chk_SelectAll"
-        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
-        Me.chk_SelectAll.TabIndex = 2
-        Me.chk_SelectAll.TabStop = False
-        Me.chk_SelectAll.UseVisualStyleBackColor = True
         '
         'dgc_ListenerID
         '
@@ -81,9 +72,30 @@ Partial Class ListenersDataGrid
         Me.dgc_Selection.HeaderText = ""
         Me.dgc_Selection.MinimumWidth = 25
         Me.dgc_Selection.Name = "dgc_Selection"
+        Me.dgc_Selection.ReadOnly = True
         Me.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgc_Selection.Width = 25
+        '
+        'dgc_Name
+        '
+        Me.dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgc_Name.DataPropertyName = "Name"
+        Me.dgc_Name.FillWeight = 50.0!
+        Me.dgc_Name.HeaderText = "Name"
+        Me.dgc_Name.MinimumWidth = 25
+        Me.dgc_Name.Name = "dgc_Name"
+        Me.dgc_Name.ReadOnly = True
+        '
+        'dgc_Email
+        '
+        Me.dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgc_Email.DataPropertyName = "Email"
+        Me.dgc_Email.FillWeight = 50.0!
+        Me.dgc_Email.HeaderText = "Email"
+        Me.dgc_Email.MinimumWidth = 25
+        Me.dgc_Email.Name = "dgc_Email"
+        Me.dgc_Email.ReadOnly = True
         '
         'dgc_Edit
         '
@@ -119,27 +131,19 @@ Partial Class ListenersDataGrid
         Me.dgc_Remove.ReadOnly = True
         Me.dgc_Remove.Width = 25
         '
-        'dgc_Name
-        '
-        Me.dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Name.DataPropertyName = "Name"
-        Me.dgc_Name.FillWeight = 50.0!
-        Me.dgc_Name.HeaderText = "Name"
-        Me.dgc_Name.MinimumWidth = 25
-        Me.dgc_Name.Name = "dgc_Name"
-        '
-        'dgc_Email
-        '
-        Me.dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Email.DataPropertyName = "Email"
-        Me.dgc_Email.FillWeight = 50.0!
-        Me.dgc_Email.HeaderText = "Email"
-        Me.dgc_Email.MinimumWidth = 25
-        Me.dgc_Email.Name = "dgc_Email"
-        '
         'bsListeners
         '
         Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.DataTables.ListenersDataTable)
+        '
+        'chk_SelectAll
+        '
+        Me.chk_SelectAll.AutoSize = True
+        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
+        Me.chk_SelectAll.Name = "chk_SelectAll"
+        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
+        Me.chk_SelectAll.TabIndex = 2
+        Me.chk_SelectAll.TabStop = False
+        Me.chk_SelectAll.UseVisualStyleBackColor = True
         '
         'db_Listeners
         '

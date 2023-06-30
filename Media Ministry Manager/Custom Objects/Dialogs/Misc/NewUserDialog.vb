@@ -13,26 +13,26 @@ Public Class NewUserDialog
 
     Private Sub Btn_Create_Click(sender As Object, e As EventArgs) Handles btn_Create.Click
         Try
-            If PasswordCheck() Then
-                If AdminInfoDialog.ShowDialog = DialogResult.OK Then
+			If Not PasswordCheck() Then
+				Throw New Exceptions.PasswordMisMatchException(String.Format("Password: {0}\nConfirm{1}", txt_Password.Text, txt_ConfirmPassword.Text))
+			End If
 
-                    _connection.UserID = AdminInfoDialog.Username
-                    _connection.Password = AdminInfoDialog.Password
+			'If AdminInfoDialog.ShowDialog = DialogResult.OK Then
 
-                    Using db As New Database(_connection)
-                        'TODO: Reimplement later after learning how to assign roles
-                        'db.CreateUser(txt_Username.Text, txt_Password.Text)
-                    End Using
+			'	_connection.UserID = AdminInfoDialog.Username
+			'	_connection.Password = AdminInfoDialog.Password
 
-                    AdminInfoDialog.Clear()
+			'	Using db As New Database(_connection)
+			'		'TODO: Reimplement later after learning how to assign roles
+			'		'db.CreateUser(txt_Username.Text, txt_Password.Text)
+			'	End Using
 
-                    DialogResult = DialogResult.OK
-                    Me.Close()
-                End If
-            Else
-                Throw New Exceptions.PasswordMisMatchException(String.Format("Password: {0}\nConfirm{1}", txt_Password.Text, txt_ConfirmPassword.Text))
-            End If
-        Catch exception As SqlException
+			'	AdminInfoDialog.Clear()
+
+			'	DialogResult = DialogResult.OK
+			'	Me.Close()
+			'End If
+		Catch exception As SqlException
             Console.WriteLine("Could not create user: " & exception.Message)
         Catch passException As Exceptions.PasswordMisMatchException
             tss_UserFeedback.Text = "Passwords did not match try again"

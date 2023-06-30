@@ -1,6 +1,5 @@
 ﻿Imports System.Threading
 Imports Google.Apis.Gmail.v1
-Imports Google.Apis.Services
 Imports MimeKit
 
 Namespace GTools
@@ -18,6 +17,8 @@ Namespace GTools
 			End Get
 		End Property
 
+		Private ReadOnly DefaultSender As New MailboxAddress("Elder Bryon Miller", "me")
+
 		Overrides Sub Authorize(Optional ct As CancellationToken = Nothing)
 			' Create Gmail API service
 			LoadCreds("me", __scopes, If(IsNothing(ct), CancellationToken.None, ct))
@@ -34,6 +35,21 @@ Namespace GTools
 			Dispose(True)
 		End Sub
 
+		Function Create([to] As MailboxAddress, content As M3Tools.Types.EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
+			Dim email As New MimeMessage() With {
+				.Sender = If(from, DefaultSender),
+				.Subject = content.Subject,
+				.Body = New TextPart(content.BodyType) With {
+					.Text = content.Body
+				}
+			}
+
+			email.To.Add([to])
+
+			Return email
+
+		End Function
+
 		''' <summary>
 		''' Creates an email using the provided information
 		''' </summary>
@@ -43,44 +59,28 @@ Namespace GTools
 		''' <param name="from">Who the email is being sent from</param>
 		''' <param name="bodyType">The type of body the email will have. Default html</param>
 		''' <returns></returns>
-		Function Create([to] As MailboxAddress, subject As String, body As String, Optional from As MailboxAddress = Nothing, Optional bodyType As String = "html") As MimeMessage
-			Dim email As New MimeMessage() With {
-				.Sender = If(from, New MailboxAddress("Elder Bryon Miller", "me")),
-				.Subject = subject,
-				.Body = New TextPart(bodyType) With {
-					.Text = body
-				}
-			}
-
-			email.To.Add([to])
-
-			Return email
+		Function Create([to] As MailboxAddress, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return Create([to], New M3Tools.Types.EmailContent(subject, body, bodyType), from)
 		End Function
 
-		''' <summary>
-		''' Create an email that contains attachements to be sent to a email box
-		''' </summary>
-		''' <param name="[to]">The MailBox Address to send to</param>
-		''' <param name="subject">The subject of the email to be sent</param>
-		''' <param name="body">The body portion of the email to be sent</param>
-		''' <param name="files">The files to attach to the email</param>
-		''' <param name="from">The email address to </param>
-		''' <param name="bodyType">The type of body the email will have. Default html</param>
-		''' <returns>Returns an Email to be sent</returns>
-		Function CreateWithAttachment([to] As MailboxAddress, subject As String, body As String, files As String(), Optional from As MailboxAddress = Nothing, Optional bodyType As String = "html") As MimeMessage
-			Dim email As MimeMessage = Create([to], subject, body, from, bodyType)
-			'Dim email As New MimeMessage() With {
-			'	.Sender = If(from, New MailboxAddress("Edler Bryon Miller", "me")),
-			'	.Subject = subject
-			'}
+		Function Create([to] As M3Tools.Types.Listener, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return Create(New MailboxAddress([to].Name, [to].Email), subject, body, bodyType, from)
+		End Function
 
-			'email.To.Add([to])
+		Function Create([to] As M3Tools.Types.Listener, content As M3Tools.Types.EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return Create(New MailboxAddress([to].Name, [to].Email), content, from)
+		End Function
 
-			'Dim mimeBodyPart As MimePart = New TextPart(bodyType) With {
-			'	.Text = body
-			'}
+		Function CreateWithAttachment([to] As M3Tools.Types.Listener, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), New M3Tools.Types.EmailContent(subject, body, bodyType), files, from)
+		End Function
 
-			'mimeBodyPart.setContent(bodyText, "text/plain")
+		Function CreateWithAttachment([to] As M3Tools.Types.Listener, content As M3Tools.Types.EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), content, files, from)
+		End Function
+
+		Function CreateWithAttachment([to] As MailboxAddress, content As M3Tools.Types.EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+			Dim email As MimeMessage = Create([to], content, from)
 
 			Dim multipart As New Multipart From {
 				email.Body
@@ -103,11 +103,25 @@ Namespace GTools
 		End Function
 
 		''' <summary>
+		''' Create an email that contains attachements to be sent to a email box
+		''' </summary>
+		''' <param name="[to]">The MailBox Address to send to</param>
+		''' <param name="subject">The subject of the email to be sent</param>
+		''' <param name="body">The body portion of the email to be sent</param>
+		''' <param name="files">The files to attach to the email</param>
+		''' <param name="from">The email address to </param>
+		''' <param name="bodyType">The type of body the email will have. Default html</param>
+		''' <returns>Returns an Email to be sent</returns>
+		Function CreateWithAttachment([to] As MailboxAddress, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return CreateWithAttachment([to], New M3Tools.Types.EmailContent(subject, body, bodyType), files, from)
+		End Function
+
+		''' <summary>
 		''' Create an Email using a premade message
 		''' </summary>
 		''' <param name="emailContent">The email to be created</param>
 		''' <returns>Returns a message to be sent</returns>
-		Function CreateWithEmail(emailContent As MimeMessage) As Data.Message
+		Private Function CreateWithEmail(emailContent As MimeMessage) As Data.Message
 			Dim buffer As New NPOI.Util.ByteArrayOutputStream()
 			emailContent.WriteTo(buffer)
 			Dim encodedEmail As String = Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Encode(buffer.ToByteArray())
@@ -118,14 +132,14 @@ Namespace GTools
 			Return message
 		End Function
 
+		' <param name="sender">The account the email will be sent from. me is default</param>
 		''' <summary>
 		''' Send an email using the provided email message
 		''' </summary>
 		''' <param name="emailContent">The email to be sent</param>
-		''' <param name="sender">The account the email will be sent from. me is default</param>
 		''' <returns>The message itself after being sent</returns>
-		Function Send(emailContent As MimeMessage, Optional sender As String = "me") As Data.Message
-			Return __service.Users().Messages().Send(CreateWithEmail(emailContent), sender).Execute()
+		Function Send(emailContent As MimeMessage) As Data.Message
+			Return __service.Users().Messages().Send(CreateWithEmail(emailContent), emailContent.Sender.Address).Execute()
 		End Function
 
 		'Sub SendEmails(details As EmailDetails)

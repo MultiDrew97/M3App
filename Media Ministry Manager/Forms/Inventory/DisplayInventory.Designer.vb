@@ -310,69 +310,69 @@ Partial Class Frm_DisplayInventory
         'chk_ShowUnavailable
         '
         Me.chk_ShowUnavailable.AutoSize = True
-		Me.chk_ShowUnavailable.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.chk_ShowUnavailable.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.chk_ShowUnavailable.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.chk_ShowUnavailable.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.chk_ShowUnavailable.Location = New System.Drawing.Point(23, 211)
-        Me.chk_ShowUnavailable.MaximumSize = New System.Drawing.Size(200, 150)
-        Me.chk_ShowUnavailable.MinimumSize = New System.Drawing.Size(0, 100)
-        Me.chk_ShowUnavailable.Name = "chk_ShowUnavailable"
-        Me.chk_ShowUnavailable.Size = New System.Drawing.Size(200, 100)
-        Me.chk_ShowUnavailable.TabIndex = 5
-        Me.chk_ShowUnavailable.Text = "Show Unavailable Items"
-        Me.chk_ShowUnavailable.UseVisualStyleBackColor = True
-        '
-        'mnstr_Strip
-        '
-        Me.mnstr_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
-        Me.mnstr_Strip.Location = New System.Drawing.Point(0, 0)
-        Me.mnstr_Strip.Name = "mnstr_Strip"
-        Me.mnstr_Strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.mnstr_Strip.Size = New System.Drawing.Size(665, 24)
-        Me.mnstr_Strip.TabIndex = 6
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator2, Me.ToolStripMenuItem3, Me.ExitToolStripMenuItem})
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(37, 20)
-        Me.ToolStripMenuItem1.Text = "&File"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewCustomerToolStripMenuItem, Me.NewProductToolStripMenuItem, Me.NewListenerToolStripMenuItem})
-        Me.ToolStripMenuItem2.Image = CType(resources.GetObject("ToolStripMenuItem2.Image"), System.Drawing.Image)
-        Me.ToolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(116, 22)
-        Me.ToolStripMenuItem2.Text = "&New..."
-        '
-        'NewCustomerToolStripMenuItem
-        '
-        Me.NewCustomerToolStripMenuItem.Name = "NewCustomerToolStripMenuItem"
-        Me.NewCustomerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.NewCustomerToolStripMenuItem.Text = "Customer"
-        '
-        'NewProductToolStripMenuItem
-        '
-        Me.NewProductToolStripMenuItem.Name = "NewProductToolStripMenuItem"
-        Me.NewProductToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.NewProductToolStripMenuItem.Text = "Product"
-        '
-        'NewListenerToolStripMenuItem
-        '
-        Me.NewListenerToolStripMenuItem.Name = "NewListenerToolStripMenuItem"
-        Me.NewListenerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.NewListenerToolStripMenuItem.Text = "Listener"
-        '
-        'SettingsToolStripMenuItem
-        '
-        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
-        Me.SettingsToolStripMenuItem.Text = "Settings"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+		Me.chk_ShowUnavailable.MaximumSize = New System.Drawing.Size(200, 150)
+		Me.chk_ShowUnavailable.MinimumSize = New System.Drawing.Size(0, 100)
+		Me.chk_ShowUnavailable.Name = "chk_ShowUnavailable"
+		Me.chk_ShowUnavailable.Size = New System.Drawing.Size(200, 100)
+		Me.chk_ShowUnavailable.TabIndex = 5
+		Me.chk_ShowUnavailable.Text = "Show Unavailable Items"
+		Me.chk_ShowUnavailable.UseVisualStyleBackColor = True
+		'
+		'mnstr_Strip
+		'
+		Me.mnstr_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
+		Me.mnstr_Strip.Location = New System.Drawing.Point(0, 0)
+		Me.mnstr_Strip.Name = "mnstr_Strip"
+		Me.mnstr_Strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+		Me.mnstr_Strip.Size = New System.Drawing.Size(665, 24)
+		Me.mnstr_Strip.TabIndex = 6
+		'
+		'ToolStripMenuItem1
+		'
+		Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator2, Me.ToolStripMenuItem3, Me.ExitToolStripMenuItem})
+		Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+		Me.ToolStripMenuItem1.Size = New System.Drawing.Size(37, 20)
+		Me.ToolStripMenuItem1.Text = "&File"
+		'
+		'ToolStripMenuItem2
+		'
+		Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewCustomerToolStripMenuItem, Me.NewProductToolStripMenuItem, Me.NewListenerToolStripMenuItem})
+		Me.ToolStripMenuItem2.Image = CType(resources.GetObject("ToolStripMenuItem2.Image"), System.Drawing.Image)
+		Me.ToolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+		Me.ToolStripMenuItem2.Size = New System.Drawing.Size(116, 22)
+		Me.ToolStripMenuItem2.Text = "&New..."
+		'
+		'NewCustomerToolStripMenuItem
+		'
+		Me.NewCustomerToolStripMenuItem.Name = "NewCustomerToolStripMenuItem"
+		Me.NewCustomerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+		Me.NewCustomerToolStripMenuItem.Text = "Customer"
+		'
+		'NewProductToolStripMenuItem
+		'
+		Me.NewProductToolStripMenuItem.Name = "NewProductToolStripMenuItem"
+		Me.NewProductToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+		Me.NewProductToolStripMenuItem.Text = "Product"
+		'
+		'NewListenerToolStripMenuItem
+		'
+		Me.NewListenerToolStripMenuItem.Name = "NewListenerToolStripMenuItem"
+		Me.NewListenerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+		Me.NewListenerToolStripMenuItem.Text = "Listener"
+		'
+		'SettingsToolStripMenuItem
+		'
+		Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+		Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+		Me.SettingsToolStripMenuItem.Text = "MySettings"
+		'
+		'ToolStripSeparator2
+		'
+		Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(113, 6)
         '
         'ToolStripMenuItem3

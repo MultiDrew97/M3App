@@ -136,11 +136,11 @@ Public Class CustomEmail
 	'	txt_Body.Text = placeholder
 	'End Sub
 
-	Private Sub ResetFontButtons()
-		btn_Bold.Checked = False
-		btn_Italics.Checked = False
-		btn_Underline.Checked = False
-	End Sub
+	'Private Sub ResetFontButtons()
+	'	btn_Bold.Checked = False
+	'	btn_Italics.Checked = False
+	'	btn_Underline.Checked = False
+	'End Sub
 
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		rtb_Body.SelectionFont = fd_Font.Font

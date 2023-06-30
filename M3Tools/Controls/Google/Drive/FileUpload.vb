@@ -6,7 +6,13 @@ Public Class FileUpload
 
 	Public ReadOnly Property Files As GTools.Types.FileCollection
 		Get
-			Return CType(bsFiles.List, GTools.Types.FileCollection)
+			Dim list As New GTools.Types.FileCollection
+
+			For Each item As GTools.Types.File In bsFiles.List
+				list.Add(item)
+			Next
+
+			Return list
 		End Get
 	End Property
 
@@ -40,7 +46,7 @@ Public Class FileUpload
 		Return False
 	End Function
 
-	Private Sub SelectFiles(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+	Private Sub SelectFiles(sender As Object, e As ToolStripItemClickedEventArgs) Handles ts_Tools.ItemClicked
 		UseWaitCursor = True
 		Dim res = ofd_FileDialog.ShowDialog()
 		If res = DialogResult.OK Then
@@ -48,10 +54,10 @@ Public Class FileUpload
 		End If
 	End Sub
 
-	Private Sub FormLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		bsFiles.DataSource = New GTools.Types.FileCollection()
-		bsFiles.Clear()
-	End Sub
+	'Private Sub FormLoaded(sender As Object, e As EventArgs) Handles Me.Load
+	'	bsFiles.DataSource = New GTools.Types.FileCollection()
+	'	bsFiles.Clear()
+	'End Sub
 
 	Private Sub DataSourceUpdated(sender As Object, e As ListChangedEventArgs) Handles bsFiles.ListChanged
 		If e.ListChangedType = ListChangedType.ItemAdded OrElse e.ListChangedType = ListChangedType.ItemDeleted Then

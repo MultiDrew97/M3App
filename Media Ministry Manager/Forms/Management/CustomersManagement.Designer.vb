@@ -54,6 +54,7 @@ Partial Class CustomersManagement
         Me.EmailAddressColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JoinDateColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dcc_Customers = New SPPBC.M3Tools.DisplayCustomersCtrl()
+        Me.CustomerDialogs = New SPPBC.M3Tools.CustomerBasedDialogs(Me.components)
         Me.ss_CustomerView.SuspendLayout()
         Me.mnstr_Strip.SuspendLayout()
         Me.SuspendLayout()
@@ -332,4 +333,5 @@ Partial Class CustomersManagement
 	Friend WithEvents EmailAddressColumn As DataGridViewTextBoxColumn
 	Friend WithEvents JoinDateColumn As DataGridViewTextBoxColumn
 	Friend WithEvents dcc_Customers As SPPBC.M3Tools.DisplayCustomersCtrl
+    Friend WithEvents CustomerDialogs As SPPBC.M3Tools.CustomerBasedDialogs
 End Class

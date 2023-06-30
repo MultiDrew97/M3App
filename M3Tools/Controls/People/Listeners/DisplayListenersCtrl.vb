@@ -2,7 +2,8 @@
 Imports System.Windows.Forms
 
 Public Class DisplayListenersCtrl
-	Public Event ListenerAdded As Events.Listeners.ListenerAddedEventHandler
+	Public Event AddListener As Events.Listeners.ListenerEventHandler
+	Public Event Emails()
 	Private WithEvents ImportDialog As Dialogs.ImportListenersDialog
 	Private WithEvents AddDialog As Dialogs.AddListenerDialog
 	Private ReadOnly countTemplate As String = "Count: {0}"
@@ -12,7 +13,7 @@ Public Class DisplayListenersCtrl
 		tsl_Count.Text = String.Format(countTemplate, ldg_Listeners.Listeners.Count)
 	End Sub
 
-	Private Sub AddListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
+	Private Sub NewListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
 		Using add = New Dialogs.AddListenerDialog
 			If add.ShowDialog() = DialogResult.OK Then
 				Reload()
@@ -52,14 +53,12 @@ Public Class DisplayListenersCtrl
 		'End Using
 	End Sub
 
-	Private Sub NewListenerAdded(sender As Object, e As Events.Listeners.ListenerAddedEvent) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
-		RaiseEvent ListenerAdded(Me, e)
+	Private Sub AddNewListener(sender As Object, e As Events.Listeners.ListenerEventArgs) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
+		RaiseEvent AddListener(Me, e)
 		ldg_Listeners.Reload()
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As EventArgs) Handles tbtn_Email.Click
-		Using emails As New SendEmailsDialog
-			Dim res = emails.ShowDialog()
-		End Using
+		RaiseEvent Emails()
 	End Sub
 End Class
