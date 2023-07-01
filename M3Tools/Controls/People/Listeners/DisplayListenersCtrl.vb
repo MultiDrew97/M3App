@@ -8,6 +8,15 @@ Public Class DisplayListenersCtrl
 	Private WithEvents AddDialog As Dialogs.AddListenerDialog
 	Private ReadOnly countTemplate As String = "Count: {0}"
 
+	Public Property DataSource As BindingSource
+		Get
+			Return bsListeners
+		End Get
+		Set(value As BindingSource)
+			bsListeners = value
+		End Set
+	End Property
+
 	Public Sub Reload() Handles cms_Tools.RefreshView
 		ldg_Listeners.Reload()
 		tsl_Count.Text = String.Format(countTemplate, ldg_Listeners.Listeners.Count)

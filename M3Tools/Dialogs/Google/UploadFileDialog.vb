@@ -3,20 +3,20 @@ Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class UploadFileDialog
-	Private ReadOnly __files As New GTools.Types.FileCollection
+	'Private ReadOnly __files As New GTools.Types.FileCollection
 	Private __permission As Global.Google.Apis.Drive.v3.Data.Permission
-	Public Property Files As GTools.Types.FileCollection
+	Public ReadOnly Property Files As IList 'GTools.Types.FileCollection
 		Get
-			Return __files
+			Return bsFiles.List '__files
 		End Get
-		Set(value As GTools.Types.FileCollection)
-			__files.Clear()
-			__files.AddRange(value)
-		End Set
+		'Set(value As GTools.Types.FileCollection)
+		'	__files.Clear()
+		'	__files.AddRange(value)
+		'End Set
 	End Property
 
 	Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
-		bw_LoadDialog.RunWorkerAsync()
+		dt_DriveHeirarchy.Reload()
 	End Sub
 
 	Private Sub Upload(sender As Object, e As EventArgs) Handles btn_Upload.Click
@@ -45,7 +45,7 @@ Public Class UploadFileDialog
 	End Sub
 
 	Private Sub DialogLoad(sender As Object, e As DoWorkEventArgs) Handles bw_LoadDialog.DoWork
-		gdt_GDrive.Authorize()
+
 	End Sub
 
 	Private Sub DialogLoadFinished(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadDialog.RunWorkerCompleted
@@ -61,7 +61,7 @@ Public Class UploadFileDialog
 		Dim fileParts() As String
 		Dim fileExt As String
 		Files.Clear()
-		For Each file In fu_FileUpload.Files
+		For Each file As GTools.Types.File In bsFiles.List 'fu_FileUpload.Files
 			fileParts = file.Name.Split("."c)
 			fileExt = fileParts(fileParts.Length - 1)
 			Files.Add(New GTools.Types.File("", file.Name, fileExt))
@@ -70,7 +70,7 @@ Public Class UploadFileDialog
 
 	Private Sub SetParents(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadFiles.RunWorkerCompleted
 		Dim selectedParentId = dt_DriveHeirarchy.SelectedNode.Name
-		For Each file In Files
+		For Each file As GTools.Types.File In Files
 			If file.Parents Is Nothing Then
 				file.Parents = If(selectedParentId.Equals("main"), Nothing, New Collection(Of String)({selectedParentId}))
 			Else
@@ -87,7 +87,7 @@ Public Class UploadFileDialog
 	Private Sub UploadFiles(sender As Object, e As DoWorkEventArgs) Handles bw_UploadFiles.DoWork
 		Dim fileName As String
 		Try
-			For Each file In Files
+			For Each file As GTools.Types.File In Files
 				fileName = InputBox($"What would you like to call this file? (default: {Utils.DefaultFileName(file.Name)})", "File Name", Utils.DefaultFileName(file.Name))
 				gdt_GDrive.UploadFile(file, fileName, __permission)
 			Next

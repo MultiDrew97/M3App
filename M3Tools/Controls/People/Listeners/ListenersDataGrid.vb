@@ -5,8 +5,8 @@ Imports System.Windows.Forms
 Public Class ListenersDataGrid
 	Public Event EditListener As ListenerEventHandler
 
-	Private ReadOnly _listeners As New DataTables.ListenersDataTable
-	Private ReadOnly dgcPrefix As String = "dgc_"
+	'Private ReadOnly _listeners As New DataTables.ListenersDataTable
+	'Private Const ColumnPrefix As String = "dgc_"
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -24,10 +24,19 @@ Public Class ListenersDataGrid
 		End Get
 	End Property
 
-	Public ReadOnly Property Listeners As Types.ListenerCollection
+	Public ReadOnly Property Listeners As IList
 		Get
-			Return _listeners.Listeners
+			Return bsListeners.List '_listeners.Listeners
 		End Get
+	End Property
+
+	Public Property DataSource As BindingSource
+		Get
+			Return bsListeners
+		End Get
+		Set(value As BindingSource)
+			bsListeners = value
+		End Set
 	End Property
 
 	Public ReadOnly Property SelectedListeners As Types.ListenerCollection
@@ -106,20 +115,22 @@ Public Class ListenersDataGrid
 	<DefaultValue(True)>
 	Property ListenersSelectable As Boolean
 		Get
-			Return dgv_Listeners.Columns(dgc_Selection.DisplayIndex).Visible
+			Return dgc_Selection.Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Listeners.Columns(dgc_Selection.DisplayIndex).Visible = value
+			'dgv_Listeners.Columns(dgc_Selection.Index).Visible = value
+			dgc_Selection.Visible = value
 			chk_SelectAll.Visible = value
 		End Set
 	End Property
 
 	Public Sub Reload()
-		UseWaitCursor = True
-		' TODO: Immitate FileUpload structure and do to ListenersDataGrid
-		_listeners.Clear()
-		_listeners.AddRange(db_Listeners.GetListeners())
-		UseWaitCursor = False
+		Dim temp = dgv_Listeners.Rows
+		'UseWaitCursor = True
+		'' TODO: Immitate FileUpload structure and do to ListenersDataGrid
+		'_listeners.Clear()
+		'_listeners.AddRange(db_Listeners.GetListeners())
+		'UseWaitCursor = False
 	End Sub
 
 	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Listeners.CellContentClick
@@ -174,7 +185,7 @@ Public Class ListenersDataGrid
 
 		For Each row As DataGridViewRow In dgv_Listeners.SelectedRows
 			Try
-				id = DirectCast(row.Cells($"{dgcPrefix}ListenerID").Value, Integer)
+				id = DirectCast(row.Cells(dgc_ListenerID.Index).Value, Integer)
 				db_Listeners.RemoveListener(id)
 				dgv_Listeners.Rows.Remove(row)
 			Catch ex As Exception
@@ -194,7 +205,7 @@ Public Class ListenersDataGrid
 	End Sub
 
 	Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		bsListeners.DataSource = _listeners
+		'bsListeners.DataSource = _listeners
 	End Sub
 
 	Private Sub SelectAllListeners(sender As Object, e As EventArgs) Handles chk_SelectAll.CheckedChanged

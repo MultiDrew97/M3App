@@ -4,10 +4,14 @@ Imports SPPBC.M3Tools.Events.Listeners
 Public Class ListenersManagement
 	Private tooled As Boolean = False
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
+		mms_Main.ToggleViewItem("Listeners")
 		UseWaitCursor = True
+		'dlc_Listeners.Reload()
+		For Each listener In dbListeners.GetListeners()
+			bsListeners.Add(listener)
+		Next
 		dlc_Listeners.Reload()
 		UseWaitCursor = False
-		mms_Main.ToggleViewItem("Listeners")
 	End Sub
 
 	Private Sub ClosingForm(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -18,9 +22,9 @@ Public Class ListenersManagement
 		Frm_Main.Show()
 	End Sub
 
-	Private Sub ListenerAdded(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.ListenerAdded, mms_Main.ListenerAdded
+	Private Sub ListenerAdded(sender As Object, e As ListenerEventArgs) Handles mms_Main.ListenerAdded, dlc_Listeners.ListenerAdded
 		Dim subject = "Welcome to the Ministry"
-		Dim body = My.Resources.newListener
+		Dim body = newListener
 
 		Dim message = gt_Email.Create(e.Listener, subject, body)
 		' TODO: Make this play nice with multi-tasking

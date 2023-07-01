@@ -75,17 +75,17 @@ Namespace Types
 			Return $"{Id}) {Name} (e: {Email} p: {PhoneNumber}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
 		End Function
 
-		Public Overrides Sub UpdateID(newID As Integer)
-			If newID = Id Then
-				Return
-			End If
+		'Public Overrides Sub UpdateID(newID As Integer)
+		'	If newID = Id Then
+		'		Return
+		'	End If
 
-			Using conn As New Database.ProductDatabase
-				Dim newProduct = conn.GetProduct(newID)
+		'	Using conn As New Database.ProductDatabase
+		'		Dim newProduct = conn.GetProduct(newID)
 
-				' TODO: Finish implementing updates
-			End Using
-		End Sub
+		'		' TODO: Finish implementing updates
+		'	End Using
+		'End Sub
 
 		Public Function Clone() As Customer
 			Return New Customer(Me.Id, Me.FirstName, Me.LastName, Me.Address, Me.PhoneNumber, Me.Email, CDate(Me.Joined))

@@ -174,9 +174,9 @@ Namespace Database
 		End Function
 
 		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
-			If Not Utils.ValidID(customerID) Then
-				Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
-			End If
+			'If Not Utils.ValidID(customerID) Then
+			'	Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
+			'End If
 
 			UpdateCustomer(customerID, fName, lName, Address.Parse(street, city, state, zipCode), phone, email)
 		End Sub

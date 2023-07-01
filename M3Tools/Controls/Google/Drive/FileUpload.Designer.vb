@@ -1,39 +1,39 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FileUpload
-    Inherits System.Windows.Forms.UserControl
+	Inherits System.Windows.Forms.UserControl
 
-    'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
+	'UserControl overrides dispose to clean up the component list.
+	<System.Diagnostics.DebuggerNonUserCode()>
+	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+		Try
+			If disposing AndAlso components IsNot Nothing Then
+				components.Dispose()
+			End If
+		Finally
+			MyBase.Dispose(disposing)
+		End Try
+	End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+	'Required by the Windows Form Designer
+	Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
-    Private Sub InitializeComponent()
+	'NOTE: The following procedure is required by the Windows Form Designer
+	'It can be modified using the Windows Form Designer.  
+	'Do not modify it using the code editor.
+	<System.Diagnostics.DebuggerStepThrough()>
+	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.ofd_FileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.dgv_Files = New System.Windows.Forms.DataGridView()
-        Me.dgc_File = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
         Me.ts_Tools = New System.Windows.Forms.ToolStrip()
         Me.tbtn_Select = New System.Windows.Forms.ToolStripButton()
+        Me.bsFiles = New System.Windows.Forms.BindingSource(Me.components)
+        Me.dgc_File = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FileTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ParentsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToStringDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsFiles = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.dgv_Files, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
@@ -62,15 +62,6 @@ Partial Class FileUpload
         Me.dgv_Files.Size = New System.Drawing.Size(394, 313)
         Me.dgv_Files.TabIndex = 1
         '
-        'dgc_File
-        '
-        Me.dgc_File.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_File.DataPropertyName = "Name"
-        Me.dgc_File.HeaderText = "File"
-        Me.dgc_File.Name = "dgc_File"
-        Me.dgc_File.ReadOnly = True
-        Me.dgc_File.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
         'ToolStripContainer1
         '
         Me.ToolStripContainer1.BottomToolStripPanelVisible = False
@@ -95,12 +86,12 @@ Partial Class FileUpload
         '
         'ts_Tools
         '
-        Me.ts_Tools.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ts_Tools.Dock = System.Windows.Forms.DockStyle.None
         Me.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ts_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_Select})
         Me.ts_Tools.Location = New System.Drawing.Point(5, 0)
         Me.ts_Tools.Name = "ts_Tools"
-        Me.ts_Tools.Size = New System.Drawing.Size(57, 25)
+        Me.ts_Tools.Size = New System.Drawing.Size(26, 25)
         Me.ts_Tools.TabIndex = 0
         '
         'tbtn_Select
@@ -113,12 +104,28 @@ Partial Class FileUpload
         Me.tbtn_Select.Size = New System.Drawing.Size(23, 25)
         Me.tbtn_Select.Text = "Select"
         '
+        'bsFiles
+        '
+        Me.bsFiles.AllowNew = True
+        Me.bsFiles.DataSource = GetType(SPPBC.M3Tools.GTools.Types.FileCollection)
+        '
+        'dgc_File
+        '
+        Me.dgc_File.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgc_File.DataPropertyName = "Name"
+        Me.dgc_File.HeaderText = "File"
+        Me.dgc_File.MinimumWidth = 300
+        Me.dgc_File.Name = "dgc_File"
+        Me.dgc_File.ReadOnly = True
+        Me.dgc_File.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
         'NameDataGridViewTextBoxColumn
         '
         Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
         Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
         Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
         Me.NameDataGridViewTextBoxColumn.ReadOnly = True
+        Me.NameDataGridViewTextBoxColumn.Visible = False
         '
         'FileTypeDataGridViewTextBoxColumn
         '
@@ -126,6 +133,7 @@ Partial Class FileUpload
         Me.FileTypeDataGridViewTextBoxColumn.HeaderText = "FileType"
         Me.FileTypeDataGridViewTextBoxColumn.Name = "FileTypeDataGridViewTextBoxColumn"
         Me.FileTypeDataGridViewTextBoxColumn.ReadOnly = True
+        Me.FileTypeDataGridViewTextBoxColumn.Visible = False
         '
         'ParentsDataGridViewTextBoxColumn
         '
@@ -133,6 +141,7 @@ Partial Class FileUpload
         Me.ParentsDataGridViewTextBoxColumn.HeaderText = "Parents"
         Me.ParentsDataGridViewTextBoxColumn.Name = "ParentsDataGridViewTextBoxColumn"
         Me.ParentsDataGridViewTextBoxColumn.ReadOnly = True
+        Me.ParentsDataGridViewTextBoxColumn.Visible = False
         '
         'ToStringDataGridViewTextBoxColumn
         '
@@ -140,11 +149,7 @@ Partial Class FileUpload
         Me.ToStringDataGridViewTextBoxColumn.HeaderText = "ToString"
         Me.ToStringDataGridViewTextBoxColumn.Name = "ToStringDataGridViewTextBoxColumn"
         Me.ToStringDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'bsFiles
-        '
-        Me.bsFiles.AllowNew = True
-        Me.bsFiles.DataSource = GetType(SPPBC.M3Tools.GTools.Types.FileCollection)
+        Me.ToStringDataGridViewTextBoxColumn.Visible = False
         '
         'FileUpload
         '
@@ -167,14 +172,14 @@ Partial Class FileUpload
     End Sub
 
     Friend WithEvents ofd_FileDialog As Windows.Forms.OpenFileDialog
-    Friend WithEvents dgv_Files As Windows.Forms.DataGridView
-    Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
-    Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
-    Friend WithEvents tbtn_Select As Windows.Forms.ToolStripButton
-    Friend WithEvents bsFiles As Windows.Forms.BindingSource
-    Friend WithEvents dgc_File As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NameDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FileTypeDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ParentsDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToStringDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents dgv_Files As Windows.Forms.DataGridView
+	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
+	Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
+	Friend WithEvents tbtn_Select As Windows.Forms.ToolStripButton
+	Friend WithEvents bsFiles As Windows.Forms.BindingSource
+	Friend WithEvents dgc_File As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents NameDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents FileTypeDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents ParentsDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
+	Friend WithEvents ToStringDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
 End Class

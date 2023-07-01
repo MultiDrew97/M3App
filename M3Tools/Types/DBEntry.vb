@@ -25,7 +25,7 @@ Namespace Types
 			Me.Id = id
 		End Sub
 
-		Public MustOverride Sub UpdateID(newID As Integer)
+		' Public MustOverride Sub UpdateID(newID As Integer)
 
 		Shared Operator =(ls As DBEntry, rs As DBEntry) As Boolean
 			Return ls.Id = rs.Id

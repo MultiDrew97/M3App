@@ -29,20 +29,20 @@ Namespace Types
 			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Stock, Price, If(Available, "Available", "Not Available"))
 		End Function
 
-		Public Overrides Sub UpdateID(newID As Integer)
-			If newID = Id Then
-				Return
-			End If
+		'Public Overrides Sub UpdateID(newID As Integer)
+		'	If newID = Id Then
+		'		Return
+		'	End If
 
-			Using conn As New Database.ProductDatabase
-				Dim newProduct = conn.GetProduct(newID)
+		'	Using conn As New Database.ProductDatabase
+		'		Dim newProduct = conn.GetProduct(newID)
 
-				Id = newID
-				Name = newProduct.Name
-				Stock = newProduct.Stock
-				Price = newProduct.Price
-				Available = newProduct.Available
-			End Using
-		End Sub
+		'		Id = newID
+		'		Name = newProduct.Name
+		'		Stock = newProduct.Stock
+		'		Price = newProduct.Price
+		'		Available = newProduct.Available
+		'	End Using
+		'End Sub
 	End Class
 End Namespace

@@ -88,17 +88,17 @@ Namespace Types
 			End Using
 		End Sub
 
-		Public Overrides Sub UpdateID(newID As Integer)
-			If newID = Id Then
-				Return
-			End If
+		'Public Overrides Sub UpdateID(newID As Integer)
+		'	If newID = Id Then
+		'		Return
+		'	End If
 
-			Using conn As New Database.OrdersDatabase
-				Dim newOrder = conn.GetOrderById(newID)
+		'	Using conn As New Database.OrdersDatabase
+		'		Dim newOrder = conn.GetOrderById(newID)
 
-				' TODO: Finish implementing updates
-			End Using
-		End Sub
+		'		' TODO: Finish implementing updates
+		'	End Using
+		'End Sub
 
 		Public Function Clone() As Order
 			Return New Order(Id, Customer.Id, Product.Id, Quantity, OrderTotal, OrderDate, CompletedDate)

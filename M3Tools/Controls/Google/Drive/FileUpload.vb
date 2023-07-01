@@ -1,18 +1,13 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.GTools.Types
 
 Public Class FileUpload
 
-	Public ReadOnly Property Files As GTools.Types.FileCollection
+	Public ReadOnly Property Files As IList
 		Get
-			Dim list As New GTools.Types.FileCollection
-
-			For Each item As GTools.Types.File In bsFiles.List
-				list.Add(item)
-			Next
-
-			Return list
+			Return bsFiles.List
 		End Get
 	End Property
 
@@ -26,18 +21,29 @@ Public Class FileUpload
 		End Set
 	End Property
 
+	Public Property DataSource As BindingSource
+		Get
+			Return bsFiles 'CType(dgv_Files.DataSource, BindingSource)
+		End Get
+		Set(value As BindingSource)
+			'dgv_Files.AutoGenerateColumns = False
+			'dgv_Files.DataSource = value
+			bsFiles = value
+		End Set
+	End Property
+
 	Private Sub LoadFiles(sender As Object, e As CancelEventArgs) Handles ofd_FileDialog.FileOk
 		For Each file In ofd_FileDialog.FileNames
 			If Duplicate(file) Then
 				Continue For
 			End If
-			bsFiles.Add(New GTools.Types.File("", file, file.Split("."c)(1)))
+			bsFiles.Add(New File("", file, file.Split("."c)(1)))
 		Next
 	End Sub
 
 	Private Function Duplicate(fileName As String) As Boolean
 		' TODO: Find how to simplify
-		For Each file As GTools.Types.File In bsFiles.List
+		For Each file As File In bsFiles.List
 			If file.Name = fileName Then
 				Return True
 			End If
@@ -53,11 +59,6 @@ Public Class FileUpload
 			UseWaitCursor = False
 		End If
 	End Sub
-
-	'Private Sub FormLoaded(sender As Object, e As EventArgs) Handles Me.Load
-	'	bsFiles.DataSource = New GTools.Types.FileCollection()
-	'	bsFiles.Clear()
-	'End Sub
 
 	Private Sub DataSourceUpdated(sender As Object, e As ListChangedEventArgs) Handles bsFiles.ListChanged
 		If e.ListChangedType = ListChangedType.ItemAdded OrElse e.ListChangedType = ListChangedType.ItemDeleted Then

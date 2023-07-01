@@ -6,7 +6,7 @@ Public Class CustomersDataGrid
 	Public Event EditCustomer As CustomerEventHandler
 
 	Private ReadOnly _customers As New DataTables.CustomersDataTable
-	Private ReadOnly dgcPrefix As String = "dgc_"
+	Private Const ColumnPrefix As String = "dgc_"
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -28,6 +28,15 @@ Public Class CustomersDataGrid
 		Get
 			Return _customers.Customers
 		End Get
+	End Property
+
+	Public Property DataSource As BindingSource
+		Get
+			Return CType(dgv_Customers.DataSource, BindingSource)
+		End Get
+		Set(value As BindingSource)
+			dgv_Customers.DataSource = value
+		End Set
 	End Property
 
 	Public ReadOnly Property SelectedCustomers As Types.CustomerCollection
@@ -174,7 +183,7 @@ Public Class CustomersDataGrid
 
 		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
 			Try
-				id = DirectCast(row.Cells($"{dgcPrefix}CustomerID").Value, Integer)
+				id = DirectCast(row.Cells($"{ColumnPrefix}CustomerID").Value, Integer)
 				db_Customers.RemoveCustomer(id)
 				dgv_Customers.Rows.Remove(row)
 			Catch ex As Exception

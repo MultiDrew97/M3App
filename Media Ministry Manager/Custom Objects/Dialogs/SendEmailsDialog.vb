@@ -82,7 +82,7 @@ Public Class SendEmailsDialog
 			details.DriveLinks.Add(New GTools.Types.File(node.Name, node.Text, "")) 'String.Format(My.Resources.DriveShareLink, node.Name))
 		Next
 
-		For Each file In fu_Receipts.Files
+		For Each file As GTools.Types.File In fu_Receipts.Files
 			details.LocalFiles.Add(file.Name)
 		Next
 

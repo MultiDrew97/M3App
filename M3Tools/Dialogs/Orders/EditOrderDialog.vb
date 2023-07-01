@@ -99,7 +99,8 @@ Public Class EditOrderDialog
 		If Not Utils.ValidID(newValue) OrElse pcb_Items.Disposing OrElse UpdatedOrder Is Nothing Then
 			Return
 		End If
-		UpdatedOrder.Product.UpdateID(newValue)
+
+		'UpdatedOrder.Product.UpdateID(newValue)
 	End Sub
 
 	Private Sub QuantityUpdated(newQuantity As Integer) Handles qnc_Quantity.QuantityChanged
