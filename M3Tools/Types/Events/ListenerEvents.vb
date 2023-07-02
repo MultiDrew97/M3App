@@ -1,6 +1,5 @@
 ﻿Namespace Events.Listeners
 	Public Delegate Sub ListenerEventHandler(sender As Object, e As ListenerEventArgs)
-	'Public Delegate Sub EditListenerEventHandler(sender As Object, e As ListenerEventArgs)
 
 	Public Class ListenerEventArgs
 		Inherits BaseArgs

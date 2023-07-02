@@ -3,17 +3,14 @@
 Namespace Dialogs
 	Public Class EditListenerDialog
 		Private Event ListenerChanged()
-		Private _listener As Types.Listener
 		'Private _newInfo As Types.Listener
 
-		Public Property Listener As Types.Listener
+		Public Property Original As Types.Listener
+
+		Public ReadOnly Property Listener As Types.Listener
 			Get
-				Return _listener
+				Return New Types.Listener(Original.Id, ListenerName, ListenerEmail)
 			End Get
-			Set(value As Types.Listener)
-				_listener = value
-				RaiseEvent ListenerChanged()
-			End Set
 		End Property
 
 		Public Property ListenerName As String
@@ -39,7 +36,8 @@ Namespace Dialogs
 			InitializeComponent()
 
 			' Add any initialization after the InitializeComponent() call.
-			Me.Listener = listener
+			Me.Original = listener
+			RaiseEvent ListenerChanged()
 		End Sub
 
 		Private Sub FinishDialog(sender As Object, e As EventArgs) Handles btn_Save.Click
@@ -57,17 +55,16 @@ Namespace Dialogs
 		End Sub
 
 		Private Sub ListenerUpdated() Handles Me.ListenerChanged
-			'_newInfo = Listener.Clone()
-			ListenerName = Listener.Name
-			ListenerEmail = Listener.Email
+			ListenerName = Original.Name
+			ListenerEmail = Original.Email
 		End Sub
 
 		Private Function ChangeDetected() As Boolean
-			If ListenerName <> Listener.Name Then
+			If ListenerName <> Original.Name Then
 				Return True
 			End If
 
-			If ListenerEmail <> Listener.Email Then
+			If ListenerEmail <> Original.Email Then
 				Return True
 			End If
 

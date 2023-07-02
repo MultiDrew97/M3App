@@ -3,7 +3,8 @@ Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class ListenersManagement
-	Private tooled As Boolean = False
+	Private Tooled As Boolean = False
+
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		mms_Main.ToggleViewItem("Listeners")
 		gt_Email.Authorize()
@@ -12,7 +13,7 @@ Public Class ListenersManagement
 
 	Private Sub ClosingForm(sender As Object, e As CancelEventArgs) Handles Me.Closing
 		' TODO: Find easier way
-		If tooled Then
+		If Tooled Then
 			Return
 		End If
 
@@ -32,21 +33,21 @@ Public Class ListenersManagement
 	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.ManageCustomers
 		Dim customers As New CustomersManagement()
 		customers.Show()
-		tooled = True
+		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
 		Dim orders As New Frm_DisplayOrders()
 		orders.Show()
-		tooled = True
+		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
 		Dim products As New Frm_DisplayInventory()
 		products.Show()
-		tooled = True
+		Tooled = True
 		Me.Close()
 	End Sub
 
@@ -55,7 +56,7 @@ Public Class ListenersManagement
 		settings.ShowDialog()
 	End Sub
 
-	Private Sub SendEmails() Handles dlc_Listeners.Emails
+	Private Sub SendEmails() Handles dlc_Listeners.SendEmails
 		Using emails As New SendEmailsDialog()
 			UseWaitCursor = True
 			Dim res = emails.ShowDialog
@@ -64,25 +65,28 @@ Public Class ListenersManagement
 	End Sub
 
 	Private Sub RemoveListener(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.RemoveListener
-		Console.WriteLine(e.Listener.Name)
+		UseWaitCursor = True
 		dbListeners.RemoveListener(e.Listener.Id)
+		Reload()
 	End Sub
 
 	Private Sub ListenerAdded(sender As Object, e As ListenerEventArgs) Handles mms_Main.ListenerAdded, dlc_Listeners.ListenerAdded
+		UseWaitCursor = True
 		Dim subject = "Welcome to the Ministry"
 		Dim body = String.Format(newListener, e.Listener.Name.Trim)
-
 		Dim message = gt_Email.Create(e.Listener, subject, body)
+
 		gt_Email.Send(message)
 		Reload()
 	End Sub
 
 	Private Sub UpdateListener(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.UpdateListener
+		UseWaitCursor = True
 		dbListeners.UpdateListener(e.Listener)
 		Reload()
 	End Sub
 
-	Private Sub Reload()
+	Private Sub Reload() Handles dlc_Listeners.RefreshDisplay
 		UseWaitCursor = True
 		bsListeners.Clear()
 		For Each listener In dbListeners.GetListeners()

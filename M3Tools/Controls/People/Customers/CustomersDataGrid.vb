@@ -8,17 +8,7 @@ Public Class CustomersDataGrid
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
-			Dim count = 0
-
-			For Each row As DataGridViewRow In dgv_Customers.Rows
-				If Not CBool(row.Cells(dgc_Selection.Index).Value) Then
-					Continue For
-				End If
-
-				count += 1
-			Next
-
-			Return count
+			Return SelectedCustomers.Count
 		End Get
 	End Property
 
@@ -37,9 +27,13 @@ Public Class CustomersDataGrid
 		End Set
 	End Property
 
-	Public ReadOnly Property SelectedCustomers As Types.CustomerCollection
+	Public ReadOnly Property SelectedCustomers As IList
 		Get
 			Dim list As New Types.CustomerCollection
+
+			If chk_SelectAll.Checked Then
+				Return bsCustomers.List
+			End If
 
 			For Each row As DataGridViewRow In dgv_Customers.Rows
 				If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
@@ -113,48 +107,42 @@ Public Class CustomersDataGrid
 	<DefaultValue(True)>
 	Property CustomersSelectable As Boolean
 		Get
-			Return dgv_Customers.Columns(dgc_Selection.DisplayIndex).Visible
+			Return dgc_Selection.Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Customers.Columns(dgc_Selection.DisplayIndex).Visible = value
+			dgc_Selection.Visible = value
 			chk_SelectAll.Visible = value
 		End Set
 	End Property
 
 	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Customers.CellContentClick
-		If e.ColumnIndex <> dgc_Edit.DisplayIndex AndAlso e.ColumnIndex <> dgc_Remove.DisplayIndex Then
+		If e.ColumnIndex <> dgc_Edit.Index AndAlso e.ColumnIndex <> dgc_Remove.Index Then
 			Return
 		End If
 
 		Dim row = dgv_Customers.Rows(e.RowIndex)
-		Dim cRow = CType(row.DataBoundItem, DataRowView)
-		Dim customerRow = CType(cRow.Row, DataTables.CustomersDataRow)
-		Dim customer = Types.Customer.Parse(customerRow.ItemArray)
+		Dim customer = CType(row.DataBoundItem, Types.Customer)
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
 				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer))
-				'Using edit As New Dialogs.EditCustomerDialog() With {.Customer = customer}
-				'	If edit.ShowDialog = DialogResult.OK Then
-				'		Reload()
-				'	End If
-				'End Using
 			Case dgc_Remove.DisplayIndex
 				ClearSelectedRows()
-				DeleteCustomer(sender, New DataGridViewRowCancelEventArgs(row))
+				DeleteCustomer(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
+
 	Private Sub DeleteCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
-		Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
-		Dim deletedCustomer As DataTables.CustomersDataRow = CType(row.Row, DataTables.CustomersDataRow)
-		Console.WriteLine(deletedCustomer)
+		'Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
+		'Dim deletedCustomer As DataTables.CustomersDataRow = CType(row.Row, DataTables.CustomersDataRow)
+		'Console.WriteLine(deletedCustomer)
 
-		Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+		'Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-		If Not res = DialogResult.Yes Then
-			e.Cancel = True
-			Return
-		End If
+		'If Not res = DialogResult.Yes Then
+		'	e.Cancel = True
+		'	Return
+		'End If
 
 		e.Row.Selected = True
 		RemoveSelectedRows()
@@ -175,8 +163,8 @@ Public Class CustomersDataGrid
 		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
 			Try
 				customer = CType(row.DataBoundItem, Types.Customer)
-				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer)) 'db_Customers.RemoveCustomer(id)
-				dgv_Customers.Rows.Remove(row)
+				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
+				'dgv_Customers.Rows.Remove(row)
 			Catch ex As Exception
 				failed += 1
 			End Try

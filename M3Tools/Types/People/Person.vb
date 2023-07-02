@@ -22,14 +22,10 @@ Namespace Types
 				Return CType(IIf(IsNothing(LastName), FirstName, String.Join(" "c, {FirstName, LastName})), String)
 			End Get
 			Set(name As String)
+				' TODO: Look into better parsing name data
 				Dim parts = name.Split(" "c)
 				FirstName = parts(0)
-
-				Try
-					LastName = parts(1)
-				Catch ex As Exception
-					LastName = ""
-				End Try
+				LastName = String.Join(" ", parts.Skip(1))
 			End Set
 		End Property
 

@@ -187,6 +187,15 @@ Namespace My
                 Me("KeepLoggedIn") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Count: {0}")>  _
+        Public ReadOnly Property CountTemplate() As String
+            Get
+                Return CType(Me("CountTemplate"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

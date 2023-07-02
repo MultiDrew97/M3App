@@ -4,7 +4,8 @@ Imports SPPBC.M3Tools.Events.Customers
 
 Public Class CustomersManagement
 	Private Tooled As Boolean = False
-	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
+
+	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		mms_Main.ToggleViewItem("Customers")
 		Reload()
 	End Sub
@@ -26,13 +27,6 @@ Public Class CustomersManagement
 
 	Private Sub ExitApplication() Handles mms_Main.ExitApplication, mms_Main.UpdateAvailable
 		Utils.CloseOpenForms()
-	End Sub
-
-	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.ManageCustomers
-		Dim customers As New CustomersManagement
-		customers.Show()
-		Tooled = True
-		Me.Close()
 	End Sub
 
 	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
@@ -67,12 +61,15 @@ Public Class CustomersManagement
 	End Sub
 
 	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.CustomerAdded, mms_Main.CustomerAdded
+		UseWaitCursor = True
 		Reload()
 	End Sub
 
 	Private Sub RemoveCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.RemoveCustomer
+		UseWaitCursor = True
 		Console.WriteLine(e.Customer.Name)
 		dbCustomers.RemoveCustomer(e.Customer.Id)
+		Reload()
 	End Sub
 
 	Private Sub Reload()

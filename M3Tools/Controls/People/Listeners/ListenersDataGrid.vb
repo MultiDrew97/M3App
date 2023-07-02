@@ -28,9 +28,13 @@ Public Class ListenersDataGrid
 		End Set
 	End Property
 
-	Public ReadOnly Property SelectedListeners As Types.ListenerCollection
+	Public ReadOnly Property SelectedListeners As IList
 		Get
 			Dim list As New Types.ListenerCollection
+
+			If chk_SelectAll.Checked Then
+				Return bsListeners.List
+			End If
 
 			For Each row As DataGridViewRow In dgv_Listeners.Rows
 				If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
@@ -115,7 +119,7 @@ Public Class ListenersDataGrid
 	End Property
 
 	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Listeners.CellContentClick
-		If e.ColumnIndex <> dgc_Edit.DisplayIndex AndAlso e.ColumnIndex <> dgc_Remove.DisplayIndex Then
+		If e.ColumnIndex <> dgc_Edit.Index AndAlso e.ColumnIndex <> dgc_Remove.Index Then
 			Return
 		End If
 
@@ -125,27 +129,23 @@ Public Class ListenersDataGrid
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
 				RaiseEvent EditListener(Me, New ListenerEventArgs(listener))
-				'Using edit As New Dialogs.EditListenerDialog() With {.Listener = listener}
-				'	If edit.ShowDialog = DialogResult.OK Then
-				'		Reload()
-				'	End If
-				'End Using
 			Case dgc_Remove.Index
 				ClearSelectedRows()
-				DeleteListener(sender, New DataGridViewRowCancelEventArgs(row))
+				DeleteListener(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
+
 	Private Sub DeleteListener(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Listeners.UserDeletingRow
 		'Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
 		'Dim deletedListener As DataTables.ListenersDataRow = CType(row.Row, DataTables.ListenersDataRow)
 		'Console.WriteLine(deletedListener)
 
-		Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+		'Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-		If Not res = DialogResult.Yes Then
-			e.Cancel = True
-			Return
-		End If
+		'If Not res = DialogResult.Yes Then
+		'	e.Cancel = True
+		'	Return
+		'End If
 
 		e.Row.Selected = True
 		RemoveSelectedRows()
@@ -166,7 +166,7 @@ Public Class ListenersDataGrid
 		For Each row As DataGridViewRow In dgv_Listeners.SelectedRows
 			Try
 				listener = CType(row.DataBoundItem, Types.Listener)
-				RaiseEvent RemoveListener(Me, New ListenerEventArgs(listener)) 'db_Listeners.RemoveListener(id)
+				RaiseEvent RemoveListener(Me, New ListenerEventArgs(listener))
 				'DataSource.Remove(listener)
 			Catch ex As Exception
 				failed += 1

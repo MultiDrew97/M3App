@@ -151,7 +151,7 @@ Public Class SendEmailsDialog
 				Return
 			End If
 
-			details.Recipients = listenerSelect.Selection
+			details.Recipients = CType(listenerSelect.Selection, ListenerCollection)
 			e.Result = details
 		End Using
 	End Sub

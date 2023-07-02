@@ -6,10 +6,10 @@ Public Class DisplayListenersCtrl
 	Public Event ListenerAdded As ListenerEventHandler
 	Public Event RemoveListener As ListenerEventHandler
 	Public Event UpdateListener As ListenerEventHandler
-	Public Event Emails()
-	Private WithEvents ImportDialog As Dialogs.ImportListenersDialog
-	Private WithEvents AddDialog As Dialogs.AddListenerDialog
-	Private ReadOnly countTemplate As String = "Count: {0}"
+	Public Event RefreshDisplay()
+	Public Event SendEmails()
+
+	Public Property CountTemplate As String
 
 	Public Property DataSource As BindingSource
 		Get
@@ -20,15 +20,23 @@ Public Class DisplayListenersCtrl
 		End Set
 	End Property
 
-	Public Sub Reload() Handles cms_Tools.RefreshView
-		tsl_Count.Text = String.Format(countTemplate, ldg_Listeners.Listeners.Count)
+	Public Sub Reload()
+		tsl_Count.Text = String.Format(CountTemplate, ldg_Listeners.Listeners.Count)
+	End Sub
+
+	Private Sub RefreshView() Handles cms_Tools.RefreshView
+		RaiseEvent RefreshDisplay()
 	End Sub
 
 	Private Sub NewListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
-		Using add = New Dialogs.AddListenerDialog
-			If add.ShowDialog() = DialogResult.OK Then
-				RaiseEvent ListenerAdded(Me, New ListenerEventArgs(add.Listener))
+		Using add As New Dialogs.AddListenerDialog
+			Dim res = add.ShowDialog()
+
+			If Not res = DialogResult.OK Then
+				Return
 			End If
+
+			RaiseEvent ListenerAdded(Me, New ListenerEventArgs(add.Listener))
 		End Using
 	End Sub
 
@@ -69,14 +77,20 @@ Public Class DisplayListenersCtrl
 	End Sub
 
 	Private Sub DeleteListener(sender As Object, e As ListenerEventArgs) Handles ldg_Listeners.RemoveListener
+		Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+		If Not res = DialogResult.Yes Then
+			Return
+		End If
+
 		RaiseEvent RemoveListener(sender, e)
 	End Sub
 
-	Private Sub SendEmails(sender As Object, e As EventArgs) Handles tbtn_Email.Click
-		RaiseEvent Emails()
+	Private Sub OpenEmails(sender As Object, e As EventArgs) Handles tbtn_Email.Click
+		RaiseEvent SendEmails()
 	End Sub
 
-	Private Sub ldg_Listeners_EditListener(sender As Object, e As ListenerEventArgs) Handles ldg_Listeners.EditListener
+	Private Sub EditListener(sender As Object, e As ListenerEventArgs) Handles ldg_Listeners.EditListener
 		Using edit As New Dialogs.EditListenerDialog(e.Listener)
 			Dim res = edit.ShowDialog()
 

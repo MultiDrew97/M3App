@@ -2,7 +2,7 @@
 
 Public Class ReciepientSelectionDialog
 
-	ReadOnly Property Selection As Types.ListenerCollection
+	ReadOnly Property Selection As IList
 		Get
 			Return ldg_Listeners.SelectedListeners
 		End Get

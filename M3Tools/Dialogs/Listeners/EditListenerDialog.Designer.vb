@@ -102,7 +102,7 @@
             Me.Name = "EditListenerDialog"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-            Me.Text = "EditListenerDialog"
+            Me.Text = "Edit Listener"
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()

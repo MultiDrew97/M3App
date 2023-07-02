@@ -24,9 +24,6 @@ Partial Class DisplayCustomersCtrl
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
-        Me.cms_Tools = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
         Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
         Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
@@ -36,34 +33,12 @@ Partial Class DisplayCustomersCtrl
         Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
         Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
         Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
-        Me.cms_Tools.SuspendLayout()
+        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
         Me.ts_CustomerTools.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cms_Tools
-        '
-        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.cms_Tools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
-        Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(155, 48)
-        Me.cms_Tools.Text = "Tools"
-        '
-        'ts_Refresh
-        '
-        Me.ts_Refresh.Name = "ts_Refresh"
-        Me.ts_Refresh.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.ts_Refresh.Size = New System.Drawing.Size(154, 22)
-        Me.ts_Refresh.Text = "Refresh"
-        '
-        'ts_Remove
-        '
-        Me.ts_Remove.Name = "ts_Remove"
-        Me.ts_Remove.ShortcutKeys = System.Windows.Forms.Keys.Delete
-        Me.ts_Remove.Size = New System.Drawing.Size(154, 22)
-        Me.ts_Remove.Text = "Remove"
         '
         'ToolStripContainer1
         '
@@ -118,7 +93,7 @@ Partial Class DisplayCustomersCtrl
         Me.tbtn_AddCustomer.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbtn_AddCustomer.Name = "tbtn_AddCustomer"
         Me.tbtn_AddCustomer.Size = New System.Drawing.Size(23, 22)
-        Me.tbtn_AddCustomer.Text = "Add Listener"
+        Me.tbtn_AddCustomer.Text = "Add Customer"
         '
         'tbtn_Import
         '
@@ -128,7 +103,7 @@ Partial Class DisplayCustomersCtrl
         Me.tbtn_Import.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbtn_Import.Name = "tbtn_Import"
         Me.tbtn_Import.Size = New System.Drawing.Size(23, 22)
-        Me.tbtn_Import.Text = "Import Listeners"
+        Me.tbtn_Import.Text = "Import Customers"
         '
         'ToolStripSeparator2
         '
@@ -158,18 +133,22 @@ Partial Class DisplayCustomersCtrl
         Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
         Me.tbtn_Refresh.Text = "Refresh"
         '
+        'cms_Tools
+        '
+        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(133, 48)
+        '
         'DisplayCustomersCtrl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ContextMenuStrip = Me.cms_Tools
         Me.Controls.Add(Me.ToolStripContainer1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "DisplayCustomersCtrl"
         Me.Size = New System.Drawing.Size(748, 550)
-        Me.cms_Tools.ResumeLayout(False)
         Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
         Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
         Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
@@ -180,9 +159,6 @@ Partial Class DisplayCustomersCtrl
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents cms_Tools As Windows.Forms.ContextMenuStrip
-    Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
     Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
     Friend WithEvents cdg_Customers As CustomersDataGrid
@@ -192,4 +168,5 @@ Partial Class DisplayCustomersCtrl
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
     Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
+    Friend WithEvents cms_Tools As ToolsContextMenu
 End Class
