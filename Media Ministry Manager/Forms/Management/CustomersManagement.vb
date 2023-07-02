@@ -1,5 +1,4 @@
-﻿Option Strict On
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Events.Customers
 
@@ -7,9 +6,7 @@ Public Class CustomersManagement
 	Private Tooled As Boolean = False
 	Private Sub DisplayLoading(sender As Object, e As EventArgs) Handles Me.Load
 		mms_Main.ToggleViewItem("Customers")
-		UseWaitCursor = True
-		dcc_Customers.Reload()
-		UseWaitCursor = False
+		Reload()
 	End Sub
 
 	Private Sub DisplayClosing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -38,16 +35,16 @@ Public Class CustomersManagement
 		Me.Close()
 	End Sub
 
-	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
-		Dim products As New Frm_DisplayInventory
-		products.Show()
+	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
+		Dim orders As New Frm_DisplayOrders
+		orders.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub MangageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
-		Dim orders As New Frm_DisplayOrders
-		orders.Show()
+	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
+		Dim products As New Frm_DisplayInventory
+		products.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
@@ -70,6 +67,21 @@ Public Class CustomersManagement
 	End Sub
 
 	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.CustomerAdded, mms_Main.CustomerAdded
+		Reload()
+	End Sub
+
+	Private Sub RemoveCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.RemoveCustomer
+		Console.WriteLine(e.Customer.Name)
+		dbCustomers.RemoveCustomer(e.Customer.Id)
+	End Sub
+
+	Private Sub Reload()
+		UseWaitCursor = True
+		bsCustomers.Clear()
+		For Each customer In dbCustomers.GetCustomers()
+			bsCustomers.Add(customer)
+		Next
 		dcc_Customers.Reload()
+		UseWaitCursor = False
 	End Sub
 End Class

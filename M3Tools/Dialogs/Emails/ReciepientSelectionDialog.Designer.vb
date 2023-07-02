@@ -22,6 +22,7 @@ Partial Class ReciepientSelectionDialog
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btn_Select = New System.Windows.Forms.Button()
         Me.btn_Cancel = New System.Windows.Forms.Button()

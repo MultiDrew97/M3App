@@ -22,28 +22,40 @@ Partial Class ToolsContextMenu
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
-		components = New System.ComponentModel.Container()
-		Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
-		Me.SuspendLayout()
-		'
-		'ts_Refresh
-		'
-		Me.ts_Refresh.Name = "ts_Refresh"
-		Me.ts_Refresh.Size = New System.Drawing.Size(180, 22)
-		Me.ts_Refresh.Text = "Refresh"
-		'
-		'ts_Remove
-		'
-		Me.ts_Remove.Enabled = False
-		Me.ts_Remove.Name = "ts_Remove"
-		Me.ts_Remove.Size = New System.Drawing.Size(180, 22)
-		Me.ts_Remove.Text = "Remove"
+        Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ts_Send = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SuspendLayout()
+        '
+        'ts_Refresh
+        '
+        Me.ts_Refresh.Name = "ts_Refresh"
+        Me.ts_Refresh.Size = New System.Drawing.Size(132, 22)
+        Me.ts_Refresh.Text = "Refresh"
+        '
+        'ts_Remove
+        '
+        Me.ts_Remove.Enabled = False
+        Me.ts_Remove.Name = "ts_Remove"
+        Me.ts_Remove.Size = New System.Drawing.Size(132, 22)
+        Me.ts_Remove.Text = "Remove"
+        '
+        'ts_Send
+        '
+        Me.ts_Send.Name = "ts_Send"
+        Me.ts_Send.Size = New System.Drawing.Size(132, 22)
+        Me.ts_Send.Text = "Send Email"
+        Me.ts_Send.Visible = False
+        '
+        'ToolsContextMenu
+        '
+        Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove, Me.ts_Send})
+        Me.Size = New System.Drawing.Size(133, 70)
+        Me.ResumeLayout(False)
 
-		Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove})
-		Me.ResumeLayout(False)
-	End Sub
+    End Sub
 
-	Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
+	Friend WithEvents ts_Send As Windows.Forms.ToolStripMenuItem
 End Class

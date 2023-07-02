@@ -34,12 +34,18 @@ Namespace Dialogs
 			End Set
 		End Property
 
+		Sub New(listener As Types.Listener)
+			' This call is required by the designer.
+			InitializeComponent()
+
+			' Add any initialization after the InitializeComponent() call.
+			Me.Listener = listener
+		End Sub
+
 		Private Sub FinishDialog(sender As Object, e As EventArgs) Handles btn_Save.Click
 			If Not ChangeDetected() Then
 				Return
 			End If
-
-			db_Listeners.UpdateListener(Listener.Id, ListenerName, ListenerEmail)
 
 			Me.DialogResult = DialogResult.OK
 			Me.Close()

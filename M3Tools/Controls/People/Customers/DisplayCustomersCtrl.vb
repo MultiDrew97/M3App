@@ -6,9 +6,18 @@ Public Class DisplayCustomersCtrl
 	ReadOnly countTemplate As String = "Count: {0}"
 	Public Event CustomerAdded As CustomerEventHandler
 	Public Event EditCustomer As CustomerEventHandler
+	Public Event RemoveCustomer As CustomerEventHandler
+
+	Public Property DataSource As BindingSource
+		Get
+			Return cdg_Customers.DataSource
+		End Get
+		Set(value As BindingSource)
+			cdg_Customers.DataSource = value
+		End Set
+	End Property
 
 	Public Sub Reload() Handles ts_Refresh.Click, tbtn_Refresh.Click
-		cdg_Customers.Reload()
 		tsl_Count.Text = String.Format(countTemplate, cdg_Customers.Customers.Count)
 	End Sub
 
@@ -53,5 +62,9 @@ Public Class DisplayCustomersCtrl
 
 	Private Sub SendEdit(sender As Object, e As Events.Customers.CustomerEventArgs) Handles cdg_Customers.EditCustomer
 		RaiseEvent EditCustomer(Me, e)
+	End Sub
+
+	Private Sub DeleteCustomer() Handles cdg_Customers.RemoveCustomer
+
 	End Sub
 End Class

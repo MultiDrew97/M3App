@@ -3,6 +3,7 @@
 Public Class ToolsContextMenu
 	Event RefreshView()
 	Event RemoveRows()
+	Event SendEmails()
 
 	Private ReadOnly prefix As String = "ts"
 	Private Confirmed As Boolean = False
@@ -17,7 +18,7 @@ Public Class ToolsContextMenu
 		If Not Confirmed Then
 			Return
 		End If
-
+		' TODO: Flesh out rest of tool context menu
 		RaiseEvent RemoveRows()
 	End Sub
 
@@ -41,5 +42,9 @@ Public Class ToolsContextMenu
 		End If
 
 		send.Enabled = rowsSelected
+	End Sub
+
+	Private Sub Send(sender As Object, e As EventArgs) Handles ts_Send.Click
+		RaiseEvent SendEmails()
 	End Sub
 End Class

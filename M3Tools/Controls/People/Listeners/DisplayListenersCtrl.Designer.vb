@@ -23,10 +23,8 @@ Partial Class DisplayListenersCtrl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.bw_LoadListeners = New System.ComponentModel.BackgroundWorker()
-        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-        Me.ldg_Listeners = New SPPBC.M3Tools.ListenersDataGrid()
-		Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
+		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+		Me.ldg_Listeners = New SPPBC.M3Tools.ListenersDataGrid()
 		Me.ts_Tools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_AddListener = New System.Windows.Forms.ToolStripButton()
 		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
@@ -35,11 +33,9 @@ Partial Class DisplayListenersCtrl
 		Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
 		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
 		Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
-		Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
 		Me.ToolStripContainer1.SuspendLayout()
-		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.ts_Tools.SuspendLayout()
 		Me.SuspendLayout()
 		'
@@ -67,7 +63,6 @@ Partial Class DisplayListenersCtrl
 		'ldg_Listeners
 		'
 		Me.ldg_Listeners.AllowColumnReordering = True
-		Me.ldg_Listeners.DataSource = Me.bsListeners
 		Me.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ldg_Listeners.Filter = Nothing
 		Me.ldg_Listeners.ListenersSelectable = False
@@ -76,10 +71,6 @@ Partial Class DisplayListenersCtrl
 		Me.ldg_Listeners.Name = "ldg_Listeners"
 		Me.ldg_Listeners.Size = New System.Drawing.Size(517, 370)
 		Me.ldg_Listeners.TabIndex = 1
-		'
-		'bsListeners
-		'
-		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
 		'
 		'ts_Tools
 		'
@@ -132,7 +123,6 @@ Partial Class DisplayListenersCtrl
 		'
 		'txt_Filter
 		'
-		Me.txt_Filter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
 		Me.txt_Filter.Name = "txt_Filter"
 		Me.txt_Filter.Size = New System.Drawing.Size(100, 25)
 		'
@@ -140,18 +130,13 @@ Partial Class DisplayListenersCtrl
 		'
 		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
 		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(118, 48)
-		'
-		'db_Listeners
-		'
-		Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-		Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-		Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
+		Me.cms_Tools.Size = New System.Drawing.Size(181, 70)
 		'
 		'DisplayListenersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+		Me.ContextMenuStrip = Me.cms_Tools
 		Me.Controls.Add(Me.ToolStripContainer1)
 		Me.Name = "DisplayListenersCtrl"
 		Me.Size = New System.Drawing.Size(517, 395)
@@ -160,17 +145,13 @@ Partial Class DisplayListenersCtrl
 		Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
 		Me.ToolStripContainer1.ResumeLayout(False)
 		Me.ToolStripContainer1.PerformLayout()
-		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ts_Tools.ResumeLayout(False)
 		Me.ts_Tools.PerformLayout()
 		Me.ResumeLayout(False)
 
 	End Sub
-	Friend WithEvents bw_LoadListeners As ComponentModel.BackgroundWorker
-    Friend WithEvents bsListeners As Windows.Forms.BindingSource
-    Friend WithEvents db_Listeners As Database.ListenerDatabase
-    Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
-    Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
+	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
+	Friend WithEvents ts_Tools As Windows.Forms.ToolStrip
     Friend WithEvents tbtn_AddListener As Windows.Forms.ToolStripButton
     Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator

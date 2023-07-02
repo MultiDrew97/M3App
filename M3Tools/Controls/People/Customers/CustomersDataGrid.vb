@@ -4,9 +4,7 @@ Imports System.Windows.Forms
 
 Public Class CustomersDataGrid
 	Public Event EditCustomer As CustomerEventHandler
-
-	Private ReadOnly _customers As New DataTables.CustomersDataTable
-	Private Const ColumnPrefix As String = "dgc_"
+	Public Event RemoveCustomer As CustomerEventHandler
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -24,9 +22,9 @@ Public Class CustomersDataGrid
 		End Get
 	End Property
 
-	Public ReadOnly Property Customers As Types.CustomerCollection
+	Public ReadOnly Property Customers As IList
 		Get
-			Return _customers.Customers
+			Return DataSource.List '_customers.Customers
 		End Get
 	End Property
 
@@ -123,14 +121,6 @@ Public Class CustomersDataGrid
 		End Set
 	End Property
 
-	Public Sub Reload()
-		UseWaitCursor = True
-		' TODO: Immitate FileUpload structure and do to ListenersDataGrid
-		_customers.Clear()
-		_customers.AddRange(db_Customers.GetCustomers())
-		UseWaitCursor = False
-	End Sub
-
 	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Customers.CellContentClick
 		If e.ColumnIndex <> dgc_Edit.DisplayIndex AndAlso e.ColumnIndex <> dgc_Remove.DisplayIndex Then
 			Return
@@ -151,10 +141,10 @@ Public Class CustomersDataGrid
 				'End Using
 			Case dgc_Remove.DisplayIndex
 				ClearSelectedRows()
-				RemoveCustomer(sender, New DataGridViewRowCancelEventArgs(row))
+				DeleteCustomer(sender, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
-	Private Sub RemoveCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
+	Private Sub DeleteCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
 		Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
 		Dim deletedCustomer As DataTables.CustomersDataRow = CType(row.Row, DataTables.CustomersDataRow)
 		Console.WriteLine(deletedCustomer)
@@ -177,14 +167,15 @@ Public Class CustomersDataGrid
 	End Sub
 
 	Public Sub RemoveSelectedRows()
-		Dim id As Integer = My.Settings.MinID - 1
+		'Dim id As Integer = My.Settings.MinID - 1
+		Dim customer As Types.Customer
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Customers.SelectedRows.Count
 
 		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
 			Try
-				id = DirectCast(row.Cells($"{ColumnPrefix}CustomerID").Value, Integer)
-				db_Customers.RemoveCustomer(id)
+				customer = CType(row.DataBoundItem, Types.Customer)
+				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer)) 'db_Customers.RemoveCustomer(id)
 				dgv_Customers.Rows.Remove(row)
 			Catch ex As Exception
 				failed += 1
@@ -198,12 +189,6 @@ Public Class CustomersDataGrid
 		If total - failed > 0 Then
 			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
-
-		Reload()
-	End Sub
-
-	Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		bsCustomers.DataSource = _customers
 	End Sub
 
 	Private Sub SelectAllCustomers(sender As Object, e As EventArgs) Handles chk_SelectAll.CheckedChanged

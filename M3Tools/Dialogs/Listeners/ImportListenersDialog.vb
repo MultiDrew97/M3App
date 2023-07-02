@@ -7,7 +7,7 @@ Namespace Dialogs
 	Public Class ImportListenersDialog
 		Public Event ListenerAdded As ListenerEventHandler
 
-		Private ReadOnly Property Listeners As IList
+		Public ReadOnly Property Listeners As IList
 			Get
 				' TODO: Fix this to properly manage list contents
 				Return ldg_Listeners.Listeners
@@ -61,13 +61,11 @@ Namespace Dialogs
 		End Function
 
 		Private Sub ImportListeners(sender As Object, e As DoWorkEventArgs) Handles bw_ImportListeners.DoWork
-			Dim list = Listeners
-
 			For Each listener As Types.Listener In Listeners
 				Try
-					db_Listeners.AddListener(listener)
+					dbListeners.AddListener(listener)
 					RaiseEvent ListenerAdded(Me, New ListenerEventArgs(listener, M3Tools.Events.EventType.Added))
-					Listeners.Remove(listener)
+					bsListeners.Remove(listener)
 				Catch ex As Exception
 					Console.Error.WriteLine(ex.Message)
 					Throw New Exceptions.NotYetImplementedException("ImportListeners exception block")
@@ -77,7 +75,7 @@ Namespace Dialogs
 
 		Private Sub ListenersImported(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_ImportListeners.RunWorkerCompleted
 			UseWaitCursor = False
-			If Listeners.Count > 0 Then
+			If bsListeners.Count > 0 Then
 				MessageBox.Show("Some listeners couldn't be imported. Please check list for failed additions", "Failed Imports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				Return
 			End If
@@ -99,7 +97,7 @@ Namespace Dialogs
 			End If
 
 			' TODO: Verify that this works still
-			Listeners.Clear()
+			bsListeners.Clear()
 		End Sub
 
 		Private Sub ParseFiles(sender As Object, e As DoWorkEventArgs) Handles bw_ParseFiles.DoWork
@@ -128,18 +126,18 @@ Namespace Dialogs
 									.Email = fields(colDict("Email"))
 									}
 
-					If Listeners.Contains(listener) Then
+					If bsListeners.Contains(listener) Then
 						Continue While
 					End If
 
-					Listeners.Add(listener)
+					bsListeners.Add(listener)
 				End While
 			Next
 		End Sub
 
 		Private Sub FilesParsed(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_ParseFiles.RunWorkerCompleted
-			ldg_Listeners.Invalidate()
-			ldg_Listeners.Select()
+			'ldg_Listeners.Invalidate()
+			'ldg_Listeners.Select()
 		End Sub
 	End Class
 End Namespace

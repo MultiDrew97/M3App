@@ -4,38 +4,27 @@ Imports System.Windows.Forms
 
 Public Class ListenersDataGrid
 	Public Event EditListener As ListenerEventHandler
-
-	'Private ReadOnly _listeners As New DataTables.ListenersDataTable
-	'Private Const ColumnPrefix As String = "dgc_"
+	Public Event RemoveListener As ListenerEventHandler
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
-			Dim count = 0
-
-			For Each row As DataGridViewRow In dgv_Listeners.Rows
-				If Not CBool(row.Cells(dgc_Selection.Index).Value) Then
-					Continue For
-				End If
-
-				count += 1
-			Next
-
-			Return count
+			Return SelectedListeners.Count
 		End Get
 	End Property
 
 	Public ReadOnly Property Listeners As IList
 		Get
-			Return bsListeners.List '_listeners.Listeners
+			Return DataSource.List '_listeners.Listeners
 		End Get
 	End Property
 
+	<Description("Data Source to use for Data Grid")>
 	Public Property DataSource As BindingSource
 		Get
-			Return bsListeners
+			Return CType(dgv_Listeners.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
-			bsListeners = value
+			dgv_Listeners.DataSource = value
 		End Set
 	End Property
 
@@ -63,6 +52,7 @@ Public Class ListenersDataGrid
 			Return bsListeners.Filter
 		End Get
 		Set(value As String)
+			'TODO: Figure out how I want to do this
 			If value <> "" AndAlso Not (value.Contains("[") OrElse value.Contains("]")) Then
 				bsListeners.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
 				Return
@@ -124,42 +114,31 @@ Public Class ListenersDataGrid
 		End Set
 	End Property
 
-	Public Sub Reload()
-		Dim temp = dgv_Listeners.Rows
-		'UseWaitCursor = True
-		'' TODO: Immitate FileUpload structure and do to ListenersDataGrid
-		'_listeners.Clear()
-		'_listeners.AddRange(db_Listeners.GetListeners())
-		'UseWaitCursor = False
-	End Sub
-
 	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Listeners.CellContentClick
 		If e.ColumnIndex <> dgc_Edit.DisplayIndex AndAlso e.ColumnIndex <> dgc_Remove.DisplayIndex Then
 			Return
 		End If
 
 		Dim row = dgv_Listeners.Rows(e.RowIndex)
-		Dim cRow = CType(row.DataBoundItem, System.Data.DataRowView)
-		Dim listenerRow = CType(cRow.Row, DataTables.ListenersDataRow)
-		Dim listener = Types.Listener.Parse(listenerRow.ItemArray)
+		Dim listener = CType(row.DataBoundItem, Types.Listener)
 
 		Select Case e.ColumnIndex
-			Case dgc_Edit.DisplayIndex
+			Case dgc_Edit.Index
 				RaiseEvent EditListener(Me, New ListenerEventArgs(listener))
 				'Using edit As New Dialogs.EditListenerDialog() With {.Listener = listener}
 				'	If edit.ShowDialog = DialogResult.OK Then
 				'		Reload()
 				'	End If
 				'End Using
-			Case dgc_Remove.DisplayIndex
+			Case dgc_Remove.Index
 				ClearSelectedRows()
-				RemoveListener(sender, New DataGridViewRowCancelEventArgs(row))
+				DeleteListener(sender, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
-	Private Sub RemoveListener(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Listeners.UserDeletingRow
-		Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
-		Dim deletedListener As DataTables.ListenersDataRow = CType(row.Row, DataTables.ListenersDataRow)
-		Console.WriteLine(deletedListener)
+	Private Sub DeleteListener(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Listeners.UserDeletingRow
+		'Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
+		'Dim deletedListener As DataTables.ListenersDataRow = CType(row.Row, DataTables.ListenersDataRow)
+		'Console.WriteLine(deletedListener)
 
 		Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -179,15 +158,16 @@ Public Class ListenersDataGrid
 	End Sub
 
 	Public Sub RemoveSelectedRows()
-		Dim id As Integer = My.Settings.MinID - 1
+		'Dim id As Integer = My.Settings.MinID - 1
+		Dim listener As Types.Listener
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Listeners.SelectedRows.Count
 
 		For Each row As DataGridViewRow In dgv_Listeners.SelectedRows
 			Try
-				id = DirectCast(row.Cells(dgc_ListenerID.Index).Value, Integer)
-				db_Listeners.RemoveListener(id)
-				dgv_Listeners.Rows.Remove(row)
+				listener = CType(row.DataBoundItem, Types.Listener)
+				RaiseEvent RemoveListener(Me, New ListenerEventArgs(listener)) 'db_Listeners.RemoveListener(id)
+				'DataSource.Remove(listener)
 			Catch ex As Exception
 				failed += 1
 			End Try
@@ -200,12 +180,6 @@ Public Class ListenersDataGrid
 		If total - failed > 0 Then
 			MessageBox.Show($"Successfully removed {total - failed} listener{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
-
-		Reload()
-	End Sub
-
-	Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		'bsListeners.DataSource = _listeners
 	End Sub
 
 	Private Sub SelectAllListeners(sender As Object, e As EventArgs) Handles chk_SelectAll.CheckedChanged

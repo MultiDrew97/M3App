@@ -25,12 +25,15 @@ Partial Class SendEmailsDialog
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim MySettings2 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btn_Send = New System.Windows.Forms.Button()
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.tc_EmailTypes = New System.Windows.Forms.TabControl()
         Me.tp_GDrive = New System.Windows.Forms.TabPage()
+        Me.gdt_Files = New SPPBC.M3Tools.DriveTree()
         Me.tp_LocalFiles = New System.Windows.Forms.TabPage()
+        Me.fu_Receipts = New SPPBC.M3Tools.FileUpload()
         Me.bw_GatherFiles = New System.ComponentModel.BackgroundWorker()
         Me.bw_PrepEmails = New System.ComponentModel.BackgroundWorker()
         Me.bw_GatherReceipients = New System.ComponentModel.BackgroundWorker()
@@ -39,8 +42,6 @@ Partial Class SendEmailsDialog
         Me.ss_StatusBar = New System.Windows.Forms.StatusStrip()
         Me.tsl_Status = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsp_Progress = New System.Windows.Forms.ToolStripProgressBar()
-        Me.gdt_Files = New SPPBC.M3Tools.DriveTree()
-        Me.fu_Receipts = New SPPBC.M3Tools.FileUpload()
         Me.gmt_Gmail = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tc_EmailTypes.SuspendLayout()
@@ -107,6 +108,15 @@ Partial Class SendEmailsDialog
         Me.tp_GDrive.Text = "Google Drive"
         Me.tp_GDrive.UseVisualStyleBackColor = True
         '
+        'gdt_Files
+        '
+        Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
+        Me.gdt_Files.Name = "gdt_Files"
+        Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
+        Me.gdt_Files.TabIndex = 4
+        Me.gdt_Files.WithChildren = False
+        '
         'tp_LocalFiles
         '
         Me.tp_LocalFiles.Controls.Add(Me.fu_Receipts)
@@ -116,6 +126,14 @@ Partial Class SendEmailsDialog
         Me.tp_LocalFiles.TabIndex = 0
         Me.tp_LocalFiles.Text = "Local Files"
         Me.tp_LocalFiles.UseVisualStyleBackColor = True
+        '
+        'fu_Receipts
+        '
+        Me.fu_Receipts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.fu_Receipts.Location = New System.Drawing.Point(0, 0)
+        Me.fu_Receipts.Name = "fu_Receipts"
+        Me.fu_Receipts.Size = New System.Drawing.Size(403, 272)
+        Me.fu_Receipts.TabIndex = 1
         '
         'bw_GatherFiles
         '
@@ -171,30 +189,23 @@ Partial Class SendEmailsDialog
         Me.tsp_Progress.Name = "tsp_Progress"
         Me.tsp_Progress.Size = New System.Drawing.Size(100, 16)
         '
-        'gdt_Files
+        'gmt_Gmail
         '
-        Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
-        Me.gdt_Files.Name = "gdt_Files"
-        Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
-        Me.gdt_Files.TabIndex = 4
-        Me.gdt_Files.WithChildren = False
+        MySettings2.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
+        MySettings2.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
+    "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+        MySettings2.KeepLoggedIn = True
+        MySettings2.Password = "JasmineLove2697"
+        MySettings2.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
+    "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+        MySettings2.SettingsKey = ""
+        MySettings2.UpgradeRequired = True
+        MySettings2.Username = "arandlemiller97"
+        Me.gmt_Gmail.Username = MySettings2.Username
         '
-        'fu_Receipts
+        'SendEmailsDialog
         '
-        Me.fu_Receipts.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.fu_Receipts.Location = New System.Drawing.Point(0, 0)
-        Me.fu_Receipts.Name = "fu_Receipts"
-        Me.fu_Receipts.Size = New System.Drawing.Size(403, 272)
-        Me.fu_Receipts.TabIndex = 1
-		'
-		'gmt_Gmail
-		'
-		Me.gmt_Gmail.Username = Global.MediaMinistry.My.MySettings.Default.Username
-		'
-		'SendEmailsDialog
-		'
-		Me.AcceptButton = Me.btn_Send
+        Me.AcceptButton = Me.btn_Send
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btn_Cancel

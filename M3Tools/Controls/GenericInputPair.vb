@@ -4,6 +4,7 @@ Public Class GenericInputPair
 	Public Shadows Event TextChanged As EventHandler
 
 	<DefaultValue("Label1")>
+	<RefreshProperties(RefreshProperties.Repaint)>
 	Public Property LabelText As String
 		Get
 			Return lbl_InputLabel.Text
@@ -38,6 +39,7 @@ Public Class GenericInputPair
 		End Set
 	End Property
 
+	<RefreshProperties(RefreshProperties.Repaint)>
 	Public Overrides Property Text As String
 		Get
 			Return If(txt_Input.Text <> Placeholder, txt_Input.Text, "")
@@ -47,12 +49,14 @@ Public Class GenericInputPair
 		End Set
 	End Property
 
+	<RefreshProperties(RefreshProperties.Repaint)>
 	Public Property TextAlign As Windows.Forms.HorizontalAlignment
 		Get
 			Return txt_Input.TextAlign
 		End Get
 		Set(value As Windows.Forms.HorizontalAlignment)
 			txt_Input.TextAlign = value
+			Refresh()
 		End Set
 	End Property
 
@@ -67,7 +71,8 @@ Public Class GenericInputPair
 	End Property
 
 	<DefaultValue("Input...")>
-	Public Property Placeholder As String = "Input..."
+	<RefreshProperties(RefreshProperties.Repaint)>
+	Public Property Placeholder As String
 
 	Private Sub InputTextChanged(sender As Object, e As EventArgs) Handles txt_Input.TextChanged
 		' TODO: Potentially move placeholder/color logic here?

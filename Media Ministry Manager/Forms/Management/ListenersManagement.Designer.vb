@@ -34,7 +34,6 @@ Partial Class ListenersManagement
         '
         'mms_Main
         '
-        Me.mms_Main.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.mms_Main.Location = New System.Drawing.Point(0, 0)
         Me.mms_Main.Name = "mms_Main"
         Me.mms_Main.Size = New System.Drawing.Size(784, 24)
@@ -53,14 +52,14 @@ Partial Class ListenersManagement
         'bsListeners
         '
         Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
-        '
-        'gt_Email
-        '
-        Me.gt_Email.Username = "arandlemiller97"
-        '
-        'dbListeners
-        '
-        Me.dbListeners.InitialCatalog = "Media Ministry Test"
+		'
+		'gt_Email
+		'
+		Me.gt_Email.Username = Global.MediaMinistry.My.MySettings.Default.Username
+		'
+		'dbListeners
+		'
+		Me.dbListeners.InitialCatalog = "Media Ministry Test"
         Me.dbListeners.Password = "M3AppPassword2499"
         Me.dbListeners.Username = "M3App"
         '

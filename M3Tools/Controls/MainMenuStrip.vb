@@ -4,9 +4,8 @@ Imports System.Windows.Forms
 Imports SPPBC.M3Tools.Events
 
 ' TODO: Open Display forms from here and figure out to discern closing type
-' TODO: Resolve Collection modified errors
 Public Class MainMenuStrip
-	Private ReadOnly toolStripPrefix As String = "tsmi_"
+	Private Const toolStripPrefix As String = "tsmi_"
 
 	''' <summary>
 	''' Occurs when the Logout menu item is clicked

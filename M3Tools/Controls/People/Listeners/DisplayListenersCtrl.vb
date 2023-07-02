@@ -1,8 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class DisplayListenersCtrl
-	Public Event ListenerAdded As Events.Listeners.ListenerEventHandler
+	Public Event ListenerAdded As ListenerEventHandler
+	Public Event RemoveListener As ListenerEventHandler
+	Public Event UpdateListener As ListenerEventHandler
 	Public Event Emails()
 	Private WithEvents ImportDialog As Dialogs.ImportListenersDialog
 	Private WithEvents AddDialog As Dialogs.AddListenerDialog
@@ -10,22 +13,21 @@ Public Class DisplayListenersCtrl
 
 	Public Property DataSource As BindingSource
 		Get
-			Return bsListeners
+			Return ldg_Listeners.DataSource
 		End Get
 		Set(value As BindingSource)
-			bsListeners = value
+			ldg_Listeners.DataSource = value
 		End Set
 	End Property
 
 	Public Sub Reload() Handles cms_Tools.RefreshView
-		ldg_Listeners.Reload()
 		tsl_Count.Text = String.Format(countTemplate, ldg_Listeners.Listeners.Count)
 	End Sub
 
 	Private Sub NewListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
 		Using add = New Dialogs.AddListenerDialog
 			If add.ShowDialog() = DialogResult.OK Then
-				Reload()
+				RaiseEvent ListenerAdded(Me, New ListenerEventArgs(add.Listener))
 			End If
 		End Using
 	End Sub
@@ -36,15 +38,19 @@ Public Class DisplayListenersCtrl
 
 	Private Sub ImportListeners(sender As Object, e As EventArgs) Handles tbtn_Import.Click
 		Using import = New Dialogs.ImportListenersDialog()
-			import.ShowDialog()
+			Dim res = import.ShowDialog()
 
-			If import.DialogResult = DialogResult.OK Then
-				Reload()
+			If Not res = DialogResult.OK Then
+				Return
 			End If
+
+			For Each listener As Types.Listener In import.Listeners
+				RaiseEvent ListenerAdded(Me, New ListenerEventArgs(listener, M3Tools.Events.EventType.Added))
+			Next
 		End Using
 	End Sub
 
-	Private Sub ToolsOpened(sender As Object, e As EventArgs)
+	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
 		cms_Tools.ToggleRemove(ldg_Listeners.SelectedRowsCount > 0)
 		cms_Tools.ToggleSend(ldg_Listeners.SelectedRowsCount > 0)
 	End Sub
@@ -62,11 +68,23 @@ Public Class DisplayListenersCtrl
 		'End Using
 	End Sub
 
-	Private Sub AddNewListener(sender As Object, e As Events.Listeners.ListenerEventArgs) Handles AddDialog.ListenerAdded, ImportDialog.ListenerAdded
-		RaiseEvent ListenerAdded(Me, e)
+	Private Sub DeleteListener(sender As Object, e As ListenerEventArgs) Handles ldg_Listeners.RemoveListener
+		RaiseEvent RemoveListener(sender, e)
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As EventArgs) Handles tbtn_Email.Click
 		RaiseEvent Emails()
+	End Sub
+
+	Private Sub ldg_Listeners_EditListener(sender As Object, e As ListenerEventArgs) Handles ldg_Listeners.EditListener
+		Using edit As New Dialogs.EditListenerDialog(e.Listener)
+			Dim res = edit.ShowDialog()
+
+			If Not res = DialogResult.OK Then
+				Return
+			End If
+
+			RaiseEvent UpdateListener(Me, New ListenerEventArgs(edit.Listener))
+		End Using
 	End Sub
 End Class

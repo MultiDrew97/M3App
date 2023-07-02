@@ -582,6 +582,9 @@
     <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
       <DependentUpon>ProductsComboBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ToolsContextMenu.resx">
+      <DependentUpon>ToolsContextMenu.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Customer\AddCustomerDialog.resx">
       <DependentUpon>AddCustomerDialog.vb</DependentUpon>
     </EmbeddedResource>
