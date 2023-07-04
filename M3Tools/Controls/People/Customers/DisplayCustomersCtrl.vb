@@ -4,7 +4,7 @@ Imports SPPBC.M3Tools.Events.Customers
 
 Public Class DisplayCustomersCtrl
 	Public Event CustomerAdded As CustomerEventHandler
-	Public Event EditCustomer As CustomerEventHandler
+	Public Event UpdateCustomer As CustomerEventHandler
 	Public Event RemoveCustomer As CustomerEventHandler
 	Public Event RefreshDisplay()
 
@@ -35,7 +35,7 @@ Public Class DisplayCustomersCtrl
 				Return
 			End If
 
-			RaiseEvent CustomerAdded(Me, New CustomerEventArgs(Nothing))
+			RaiseEvent CustomerAdded(Me, New CustomerEventArgs(add.Customer))
 		End Using
 	End Sub
 
@@ -66,8 +66,16 @@ Public Class DisplayCustomersCtrl
 		Throw New Exceptions.NotYetImplementedException("Import Customers")
 	End Sub
 
-	Private Sub SendEdit(sender As Object, e As Events.Customers.CustomerEventArgs) Handles cdg_Customers.EditCustomer
-		RaiseEvent EditCustomer(Me, e)
+	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles cdg_Customers.EditCustomer
+		Using edit As New Dialogs.EditCustomerDialog()
+			Dim res = edit.ShowDialog()
+
+			If Not res = DialogResult.OK Then
+				Return
+			End If
+
+			RaiseEvent UpdateCustomer(Me, New CustomerEventArgs(edit.Customer))
+		End Using
 	End Sub
 
 	Private Sub DeleteCustomer(sender As Object, e As CustomerEventArgs) Handles cdg_Customers.RemoveCustomer

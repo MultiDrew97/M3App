@@ -56,8 +56,10 @@ Public Class CustomersManagement
 		End Using
 	End Sub
 
-	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.EditCustomer
-		Dim res = CustomerDialogs.EditCustomer(e.Customer)
+	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.UpdateCustomer
+		'Dim res = CustomerDialogs.EditCustomer(e.Customer)
+		UseWaitCursor = True
+		Reload()
 	End Sub
 
 	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.CustomerAdded, mms_Main.CustomerAdded

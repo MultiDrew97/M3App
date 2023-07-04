@@ -1,9 +1,8 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ListView
 Imports SPPBC.M3Tools.Types
-Imports SPPBC.M3Tools
-Imports Renci.SshNet
 
 Public Class SendEmailsDialog
 	Private Event EmailsSending()
@@ -58,7 +57,7 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub NewFolder(sender As Object, e As EventArgs)
-		Using newFolder As New CreateFolderDialog()
+		Using newFolder As New SPPBC.M3Tools.CreateFolderDialog()
 			Dim res = newFolder.ShowDialog()
 			If res = DialogResult.OK Then
 				Reload()
@@ -67,7 +66,7 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub NewUpload(sender As Object, e As EventArgs)
-		Using newUpload As New UploadFileDialog()
+		Using newUpload As New SPPBC.M3Tools.UploadFileDialog()
 			Dim res = newUpload.ShowDialog()
 			If res = DialogResult.OK Then
 				Reload()
@@ -79,10 +78,10 @@ Public Class SendEmailsDialog
 		Dim details = CType(e.Argument, EmailDetails)
 
 		For Each node In gdt_Files.GetSelectedNodes()
-			details.DriveLinks.Add(New GTools.Types.File(node.Name, node.Text, "")) 'String.Format(My.Resources.DriveShareLink, node.Name))
+			details.DriveLinks.Add(New SPPBC.M3Tools.GTools.Types.File(node.Name, node.Text, "")) 'String.Format(My.Resources.DriveShareLink, node.Name))
 		Next
 
-		For Each file As GTools.Types.File In fu_Receipts.Files
+		For Each file As SPPBC.M3Tools.GTools.Types.File In fu_Receipts.Files
 			details.LocalFiles.Add(file.Name)
 		Next
 
@@ -143,17 +142,26 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub GatherReceipients(sender As Object, e As DoWorkEventArgs) Handles bw_GatherReceipients.DoWork
-		Using listenerSelect As New ReciepientSelectionDialog()
-			Dim details = CType(e.Argument, EmailDetails)
-			Dim res = listenerSelect.ShowDialog()
-			If Not res = DialogResult.OK Then
-				e.Cancel = True
-				Return
-			End If
+		Dim details = CType(e.Argument, EmailDetails)
+		Dim res = rsd_Selection.ShowDialog(dbListeners.GetListeners())
+		If Not res = DialogResult.OK Then
+			e.Cancel = True
+			Return
+		End If
 
-			details.Recipients = CType(listenerSelect.Selection, ListenerCollection)
-			e.Result = details
-		End Using
+		details.Recipients = rsd_Selection.List
+		e.Result = details
+		'Using listenerSelect As New SPPBC.M3Tools.ReciepientSelection()
+		'	Dim details = CType(e.Argument, EmailDetails)
+		'	Dim res = listenerSelect.ShowDialog()
+		'	If Not res = DialogResult.OK Then
+		'		e.Cancel = True
+		'		Return
+		'	End If
+
+		'	details.Recipients = CType(listenerSelect.Selection, ListenerCollection)
+		'	e.Result = details
+		'End Using
 	End Sub
 
 	Private Sub ReceipientsGathered(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_GatherReceipients.RunWorkerCompleted
@@ -164,7 +172,7 @@ Public Class SendEmailsDialog
 
 		Dim details = CType(e.Result, EmailDetails)
 
-		Using body As New Dialogs.EmailBodySelection()
+		Using body As New SPPBC.M3Tools.Dialogs.EmailBodySelection()
 			Dim res = body.ShowDialog()
 			If Not res = DialogResult.OK Then
 				RaiseEvent EmailsCancelled()

@@ -28,23 +28,19 @@ Public Class ListenersDataGrid
 		End Set
 	End Property
 
-	Public ReadOnly Property SelectedListeners As IList
+	Public ReadOnly Property SelectedListeners As Types.ListenerCollection
 		Get
 			Dim list As New Types.ListenerCollection
-
-			If chk_SelectAll.Checked Then
-				Return bsListeners.List
-			End If
 
 			For Each row As DataGridViewRow In dgv_Listeners.Rows
 				If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
 					Continue For
 				End If
 
-				Dim drv = CType(row.DataBoundItem, DataRowView)
-				Dim ldr = CType(drv.Row, DataTables.ListenersDataRow)
+				'Dim drv = CType(row.DataBoundItem, DataRowView)
+				'Dim ldr = CType(drv.Row, DataTables.ListenersDataRow)
 
-				list.Add(ldr.Listener)
+				list.Add(CType(row.DataBoundItem, Types.Listener))
 			Next
 
 			Return list

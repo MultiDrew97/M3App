@@ -1,8 +1,8 @@
 ﻿Imports System.Windows.Forms
 
-Public Class ReciepientSelectionDialog
+Public Class ReciepientSelection
 
-	ReadOnly Property Selection As IList
+	ReadOnly Property Selection As Types.ListenerCollection
 		Get
 			Return ldg_Listeners.SelectedListeners
 		End Get

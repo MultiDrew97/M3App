@@ -235,6 +235,12 @@
     <Compile Include="Dialogs\Customer\CustomerBasedDialogs.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Dialogs\Emails\RecipientSelectionDialog.Designer.vb">
+      <DependentUpon>RecipientSelectionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Emails\RecipientSelectionDialog.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Types\Events\CustomerEvents.vb" />
     <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.vb">
       <DependentUpon>EditCustomerDialog.vb</DependentUpon>
@@ -248,10 +254,10 @@
     <Compile Include="Dialogs\Emails\EmailBodySelection.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Emails\ReciepientSelectionDialog.designer.vb">
-      <DependentUpon>ReciepientSelectionDialog.vb</DependentUpon>
+    <Compile Include="Dialogs\Emails\ReciepientSelection.designer.vb">
+      <DependentUpon>ReciepientSelection.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Emails\ReciepientSelectionDialog.vb">
+    <Compile Include="Dialogs\Emails\ReciepientSelection.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Components\SelectReceipient.Designer.vb">
@@ -597,11 +603,14 @@
     <EmbeddedResource Include="Dialogs\Emails\EmailBodySelection.resx">
       <DependentUpon>EmailBodySelection.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Emails\ReciepientSelectionDialog.resx">
-      <DependentUpon>ReciepientSelectionDialog.vb</DependentUpon>
+    <EmbeddedResource Include="Dialogs\Emails\ReciepientSelection.resx">
+      <DependentUpon>ReciepientSelection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\SelectReceipient.resx">
       <DependentUpon>SelectReceipient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Emails\RecipientSelectionDialog.resx">
+      <DependentUpon>RecipientSelectionDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Google\CreateFolderDialog.resx">
       <DependentUpon>CreateFolderDialog.vb</DependentUpon>
@@ -782,7 +791,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

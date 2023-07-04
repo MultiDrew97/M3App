@@ -1,14 +1,14 @@
 ﻿Imports System.Windows.Forms
 
 Public Class SelectReceipient
-	Private __dialog As ReciepientSelectionDialog
+	Private __dialog As ReciepientSelection
 
-	Private ReadOnly Property RecipientSelection As ReciepientSelectionDialog
+	Private ReadOnly Property RecipientSelection As ReciepientSelection
 		Get
 			If __dialog Is Nothing Then
-				__dialog = New ReciepientSelectionDialog
+				__dialog = New ReciepientSelection
 			ElseIf __dialog.IsDisposed Then
-				__dialog = New ReciepientSelectionDialog
+				__dialog = New ReciepientSelection
 			End If
 
 			Return __dialog

@@ -75,19 +75,37 @@ Namespace Dialogs
 		End Sub
 
 		Private Sub NextStep(sender As Object, e As EventArgs) Handles btn_Create.Click
+			Select Case tc_Creation.SelectedIndex
+				Case tp_Basic.TabIndex
+					tc_Creation.SelectedIndex += 1
+					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
+				Case tp_Address.TabIndex
+					tc_Creation.SelectedIndex += 1
+					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
+				Case tp_Summary.TabIndex
+					DialogResult = DialogResult.OK
+					Me.Close()
+			End Select
+
 			Select Case btn_Create.Text
 				Case "Next"
 					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex + 1
 					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
 				Case "Create"
-					Try
-						TryCreate()
-						DialogResult = DialogResult.OK
-						Close()
-					Catch ex As Exception
-						tss_Feedback.ForeColor = Color.Red
-						tss_Feedback.Text = ex.Message
-					End Try
+					If Not ValidCustomer() Then
+						Return
+					End If
+
+					Me.DialogResult = DialogResult.OK
+					Me.Close()
+					'Try
+					'	TryCreate()
+					'	DialogResult = DialogResult.OK
+					'	Close()
+					'Catch ex As Exception
+					'	tss_Feedback.ForeColor = Color.Red
+					'	tss_Feedback.Text = ex.Message
+					'End Try
 			End Select
 		End Sub
 
@@ -114,6 +132,14 @@ Namespace Dialogs
 
 		Private Function ValidAddress() As Boolean
 			Return af_Address.IsValidAddress()
+		End Function
+
+		Private Function ValidPhone() As Boolean
+			Return pn_PhoneNumber.ValidPhone()
+		End Function
+
+		Private Function ValidCustomer() As Boolean
+			Return ValidName() AndAlso ValidEmail() AndAlso ValidAddress() AndAlso ValidPhone()
 		End Function
 
 		Private Sub TryCreate()
