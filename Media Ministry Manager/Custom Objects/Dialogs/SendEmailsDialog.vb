@@ -1,8 +1,4 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ListView
-Imports Renci.SshNet
+﻿Imports System.ComponentModel
 Imports SPPBC.M3Tools.Types
 
 Public Class SendEmailsDialog
