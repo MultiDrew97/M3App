@@ -4,6 +4,7 @@ Imports System.ComponentModel
 Namespace Types
 	Public Class ListenerCollection
 		Inherits DBEntryCollection(Of Listener)
+
 		Sub New()
 			MyBase.New()
 		End Sub

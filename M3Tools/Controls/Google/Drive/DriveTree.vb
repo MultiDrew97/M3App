@@ -27,6 +27,16 @@ Public Class DriveTree
 		End Get
 	End Property
 
+	<SettingsBindable(True)>
+	Property Username As String
+		Get
+			Return gdt_GDrive.Username
+		End Get
+		Set(value As String)
+			gdt_GDrive.Username = value
+		End Set
+	End Property
+
 	<DefaultValue(True)>
 	<Description("Whether the tree should include the children of folders")>
 	Public Property WithChildren As Boolean

@@ -97,7 +97,7 @@ Public Class MainMenuStrip
 				Return
 			End If
 
-			Throw New Exceptions.NotYetImplementedException("CreateProduct")
+			Throw New NotImplementedException("CreateProduct")
 			'RaiseEvent AddProduct(newProduct.Product, EventType.Added)
 		End Using
 	End Sub

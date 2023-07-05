@@ -4,13 +4,19 @@ Imports System.ComponentModel
 Imports MediaMinistry.Helpers
 
 Public Class Frm_Main
+	' TODO: Add functionality for menu strip items here or figure out how to truley centralize in control
 	Structure WindowSizes
 		Shared normal As New Size(413, 452)
 		Shared max As New Size(1382, 744)
 	End Structure
 
+	Private Sub Reload() Handles Me.Load
+		tss_Feedback.Text = "What would you like to do?"
+		tss_Feedback.ForeColor = SystemColors.WindowText
+	End Sub
+
 	Private Sub MangeProducts(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.ManageProducts
-		Dim products As New Frm_DisplayInventory
+		Dim products As New Frm_DisplayInventory()
 		products.Show()
 		Me.Close()
 	End Sub
@@ -22,14 +28,9 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles btn_CustomerManagement.Click, mms_Main.ManageCustomers
-		Dim customers As New CustomersManagement
+		Dim customers As New CustomersManagement()
 		customers.Show()
 		Me.Close()
-	End Sub
-
-	Private Sub Reload() Handles Me.Load
-		tss_Feedback.Text = "What would you like to do?"
-		tss_Feedback.ForeColor = SystemColors.WindowText
 	End Sub
 
 	Private Sub ManageListeners(sender As Object, e As EventArgs) Handles btn_EmailMinistry.Click, mms_Main.ManageListeners
@@ -98,17 +99,9 @@ Public Class Frm_Main
 	Private Sub UpdateSizes(sender As Object, e As DoWorkEventArgs) Handles bw_ChangedSizes.DoWork
 		Select Case CStr(e.Argument)
 			Case "b"
-				Invoke(
-					Sub()
-						GrowToMax()
-					End Sub
-				)
+				GrowToMax()
 			Case "s"
-				Invoke(
-					Sub()
-						BackToNormal()
-					End Sub
-				)
+				BackToNormal()
 		End Select
 	End Sub
 End Class

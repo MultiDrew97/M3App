@@ -2,14 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="CurrentFont" Type="System.Drawing.Font" Scope="User">
+    <Setting Name="CurrentFont" Roaming="true" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="DefaultFont" Type="System.Drawing.Font" Scope="Application">
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="DefaultCatalog" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Media Ministry</Value>
+      <Value Profile="(Default)">Media Ministry Test</Value>
     </Setting>
     <Setting Name="DefaultPassword" Type="System.String" Scope="Application">
       <Value Profile="(Default)">M3AppPassword2499</Value>
@@ -17,16 +17,16 @@
     <Setting Name="DefaultUsername" Type="System.String" Scope="Application">
       <Value Profile="(Default)">M3App</Value>
     </Setting>
-    <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
+    <Setting Name="UpgradeRequired" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="User" Type="SPPBC.M3Tools.Types.User" Scope="User">
-      <Value Profile="(Default)">-1;JohnDoe123;User</Value>
+    <Setting Name="User" Roaming="true" Type="SPPBC.M3Tools.Types.User" Scope="User">
+      <Value Profile="(Default)">-1;John Doe;JohnDoe123;JohnDoe@domain.ext;;1</Value>
     </Setting>
-    <Setting Name="Username" Type="System.String" Scope="User">
+    <Setting Name="Username" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">arandlemiller97</Value>
     </Setting>
-    <Setting Name="Password" Type="System.String" Scope="User">
+    <Setting Name="Password" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">JasmineLove2697</Value>
     </Setting>
     <Setting Name="releaseConnection" Type="System.String" Scope="User">
@@ -35,7 +35,7 @@
     <Setting Name="debugConnection" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
     </Setting>
-    <Setting Name="KeepLoggedIn" Type="System.Boolean" Scope="User">
+    <Setting Name="KeepLoggedIn" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CountTemplate" Type="System.String" Scope="Application">

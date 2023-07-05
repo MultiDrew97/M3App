@@ -39,8 +39,8 @@ Namespace Types
 
 		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)
 			MyBase.New(id)
-			Me.Name = name
-			Me.Email = email
+			Me.Name = name.Trim()
+			Me.Email = email.Trim()
 		End Sub
 
 		'Public Overrides Sub UpdateID(newID As Integer)

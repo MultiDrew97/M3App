@@ -19,28 +19,28 @@ Namespace Types
 
 		Public Sub New()
 			' TODO: Add constructor options like other objects
-			Me.New(-1, "John", "Doe", Nothing, "JohnDoe123", "JohnDoe123!", Nothing, AccountRole.User)
+			Me.New(-1, "John", "Doe", Nothing, "JohnDoe123", "JohnDoe123!", "", AccountRole.User)
 		End Sub
 
-		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As String, salt As Guid, accountRole As AccountRole)
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As String, salt As String, accountRole As AccountRole)
 			Me.New(id, $"{fName} {lName}", email, username, Text.Encoding.UTF8.GetBytes(password), salt, accountRole)
 		End Sub
 
-		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As Byte(), salt As String, accountRole As AccountRole)
 			Me.New(id, $"{fName} {lName}", email, username, password, salt, accountRole)
 		End Sub
 
-		Public Sub New(id As Integer, name As String, email As String, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
+		Public Sub New(id As Integer, name As String, username As String, email As String, password As Byte(), salt As String, accountRole As AccountRole)
 			MyBase.New(id, name, email)
 			Me.Username = username
 			Me.Password = password
-			Me.Salt = salt
+			Me.Salt = If(salt <> "", Guid.Parse(salt), Guid.NewGuid)
 			Me.AccountRole = accountRole
 		End Sub
 
 		Shadows ReadOnly Property ToString() As String
 			Get
-				Return String.Join(";", Id, Username, Salt, CInt(AccountRole))
+				Return String.Join(";", Id, Name, Username, Email, Salt, CInt(AccountRole))
 			End Get
 		End Property
 
@@ -67,12 +67,11 @@ Namespace Types.Converters
 		Public Overrides Function ConvertFrom(context As ITypeDescriptorContext, culture As CultureInfo, value As Object) As Object
 			If value.GetType = GetType(String) Then
 				Dim parts() As String = CStr(value).Split(";"c)
-				Dim user As New User With {
-					.Id = CInt(parts(0)),
-					.Username = parts(1),
-					.Salt = Guid.Parse(parts(2)),
-					.AccountRole = CType(CInt(parts(3)), AccountRole)
-				}
+				Dim guid As Guid
+
+				Dim success = Guid.TryParse(parts(4), guid)
+
+				Dim user As New User(CInt(parts(0)), parts(1), parts(2), parts(3), Nothing, parts(4), CType(CInt(parts(5)), AccountRole))
 
 				Return user
 			End If

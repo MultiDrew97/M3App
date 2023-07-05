@@ -68,7 +68,7 @@ Namespace Dialogs
 					bsListeners.Remove(listener)
 				Catch ex As Exception
 					Console.Error.WriteLine(ex.Message)
-					Throw New Exceptions.NotYetImplementedException("ImportListeners exception block")
+					Throw New NotImplementedException("ImportListeners exception block")
 				End Try
 			Next
 		End Sub
@@ -115,7 +115,7 @@ Namespace Dialogs
 					Try
 						colDict = ParseHeaders(String.Join(";", csvReader.ReadFields).ToLower().Split(";"c))
 					Catch ex As ArgumentException
-						Throw New Exceptions.NotYetImplementedException("Import Fields Error")
+						Throw New NotImplementedException("Import Fields Error")
 					End Try
 				End If
 

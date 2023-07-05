@@ -2,18 +2,20 @@
 Imports System.ComponentModel
 
 Namespace Types
-	Public MustInherit Class DBEntryCollection(Of T As DBEntry)
+	Public Class DBEntryCollection(Of T As DBEntry)
 		Inherits Collection(Of T)
 		Implements IBindingListView
 
+		'Private _filter As String
+
 		Public Property Filter As String Implements IBindingListView.Filter
-			Get
-				Throw New NotImplementedException()
-			End Get
-			Set(value As String)
-				Throw New NotImplementedException()
-			End Set
-		End Property
+		'	Get
+		'		Return _filter
+		'	End Get
+		'	Set(value As String)
+		'		_filter = value
+		'	End Set
+		'End Property
 
 		Public ReadOnly Property SortDescriptions As ListSortDescriptionCollection Implements IBindingListView.SortDescriptions
 			Get
@@ -23,49 +25,50 @@ Namespace Types
 
 		Public ReadOnly Property SupportsAdvancedSorting As Boolean Implements IBindingListView.SupportsAdvancedSorting
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property SupportsFiltering As Boolean Implements IBindingListView.SupportsFiltering
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property AllowNew As Boolean Implements IBindingList.AllowNew
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property AllowEdit As Boolean Implements IBindingList.AllowEdit
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property AllowRemove As Boolean Implements IBindingList.AllowRemove
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property SupportsChangeNotification As Boolean Implements IBindingList.SupportsChangeNotification
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property SupportsSearching As Boolean Implements IBindingList.SupportsSearching
 			Get
-				Throw New NotImplementedException()
+				Return True
 			End Get
 		End Property
 
 		Public ReadOnly Property SupportsSorting As Boolean Implements IBindingList.SupportsSorting
 			Get
-				Throw New NotImplementedException()
+				Throw New NotImplementedException("SupportsSorting DBCollection")
+				Return True
 			End Get
 		End Property
 
@@ -93,11 +96,11 @@ Namespace Types
 			Throw New NotImplementedException()
 		End Sub
 
-		Public Sub ApplySort([property] As PropertyDescriptor, direction As ListSortDirection) Implements IBindingList.ApplySort
+		Public Sub RemoveFilter() Implements IBindingListView.RemoveFilter
 			Throw New NotImplementedException()
 		End Sub
 
-		Public Sub RemoveFilter() Implements IBindingListView.RemoveFilter
+		Public Sub ApplySort([property] As PropertyDescriptor, direction As ListSortDirection) Implements IBindingList.ApplySort
 			Throw New NotImplementedException()
 		End Sub
 
@@ -123,6 +126,7 @@ Namespace Types
 
 		Default Overloads ReadOnly Property Item(id As Integer) As T
 			Get
+				Throw New NotImplementedException("Item DBEntryCollection")
 				Return GetItem(id)
 			End Get
 		End Property

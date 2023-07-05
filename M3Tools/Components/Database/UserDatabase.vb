@@ -159,8 +159,8 @@ Namespace Database
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
 						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								TryCast(reader("Email"), String), CStr(reader("Username")), buffer,
-								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
+								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
+								CStr(reader("Salt")), CType(reader("AccountRole"), AccountRole)
 							)
 					Loop
 
@@ -183,8 +183,8 @@ Namespace Database
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
 						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								TryCast(reader("Email"), String), CStr(reader("Username")), buffer,
-								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
+								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
+								CStr(reader("Salt")), CType(reader("AccountRole"), AccountRole)
 							)
 					Loop
 
@@ -206,8 +206,8 @@ Namespace Database
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
 						users.Append(New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								TryCast(reader("Email"), String), CStr(reader("Username")), buffer,
-								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
+								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
+								CStr(reader("Salt")), CType(reader("AccountRole"), AccountRole)
 							)
 						)
 					Loop

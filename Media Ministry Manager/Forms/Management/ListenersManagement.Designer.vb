@@ -53,20 +53,21 @@ Partial Class ListenersManagement
         'bsListeners
         '
         Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
-        '
-        'gt_Email
-        '
-        Me.gt_Email.Username = "arandlemiller97"
+        Me.bsListeners.Filter = ""
+		'
+		'gt_Email
+		'
+		Me.gt_Email.Username = Global.MediaMinistry.My.MySettings.Default.Username
 		'
 		'dbListeners
 		'
-		Me.dbListeners.InitialCatalog = Global.MediaMinistry.My.MySettings.Default.DefaultCatalog
-		Me.dbListeners.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbListeners.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
-		'
-		'ListenersManagement
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+		Me.dbListeners.InitialCatalog = "Media Ministry"
+        Me.dbListeners.Password = "M3AppPassword2499"
+        Me.dbListeners.Username = "M3App"
+        '
+        'ListenersManagement
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 461)
         Me.Controls.Add(Me.dlc_Listeners)

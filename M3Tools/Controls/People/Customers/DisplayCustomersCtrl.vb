@@ -61,7 +61,7 @@ Public Class DisplayCustomersCtrl
 
 
 	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
-		Throw New Exceptions.NotYetImplementedException("Import Customers")
+		Throw New NotImplementedException("Import Customers")
 	End Sub
 
 	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles cdg_Customers.EditCustomer
