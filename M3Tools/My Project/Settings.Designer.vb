@@ -118,18 +118,6 @@ Namespace My
                 Return CType(Me("ObjectDelimiter"),String)
             End Get
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property CurrentUser() As String
-            Get
-                Return CType(Me("CurrentUser"),String)
-            End Get
-            Set
-                Me("CurrentUser") = value
-            End Set
-        End Property
     End Class
 End Namespace
 

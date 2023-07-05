@@ -715,8 +715,6 @@
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ListenersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.OrdersDataTable.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Dialogs.ImportListenersDialog+NewListener.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Dialogs.ImportListenersDialog.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.GTools.Types.FileCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItem.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
@@ -798,7 +796,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

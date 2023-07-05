@@ -25,7 +25,7 @@
         'Component overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-            db_Connection.Close()
+            dbConnection.Close()
             Try
                 If disposing AndAlso components IsNot Nothing Then
                     components.Dispose()
@@ -44,10 +44,10 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Me.db_Connection = New SPPBC.M3Tools.Database.Database(Me.components)
+            Me.dbConnection = New SPPBC.M3Tools.Database.Database(Me.components)
 
         End Sub
 
-        Friend WithEvents db_Connection As Database
+        Friend WithEvents dbConnection As Database
     End Class
 End Namespace

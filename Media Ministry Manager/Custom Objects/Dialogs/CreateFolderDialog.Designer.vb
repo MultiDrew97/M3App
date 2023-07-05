@@ -70,16 +70,17 @@ Partial Class CreateFolderDialog
 		'dt_DriveHeirarchy
 		'
 		Me.dt_DriveHeirarchy.Checkboxes = False
+		Me.dt_DriveHeirarchy.DataBindings.Add(New System.Windows.Forms.Binding("Username", Global.MediaMinistry.My.MySettings.Default, "Username", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.dt_DriveHeirarchy.Location = New System.Drawing.Point(12, 69)
 		Me.dt_DriveHeirarchy.Name = "dt_DriveHeirarchy"
 		Me.dt_DriveHeirarchy.Size = New System.Drawing.Size(303, 266)
 		Me.dt_DriveHeirarchy.TabIndex = 2
-		Me.dt_DriveHeirarchy.Username = ""
+		Me.dt_DriveHeirarchy.Username = Global.MediaMinistry.My.MySettings.Default.Username
 		Me.dt_DriveHeirarchy.WithChildren = False
 		'
 		'gdt_GDrive
 		'
-		Me.gdt_GDrive.Username = Nothing
+		Me.gdt_GDrive.Username = Global.MediaMinistry.My.MySettings.Default.Username
 		'
 		'ip_FolderName
 		'
@@ -121,8 +122,8 @@ Partial Class CreateFolderDialog
 	Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 	Friend WithEvents btn_Create As System.Windows.Forms.Button
 	Friend WithEvents btn_Cancel As System.Windows.Forms.Button
-	Friend WithEvents dt_DriveHeirarchy As DriveTree
-	Friend WithEvents gdt_GDrive As GTools.GdriveTool
-	Friend WithEvents ip_FolderName As GenericInputPair
+	Friend WithEvents dt_DriveHeirarchy As SPPBC.M3Tools.DriveTree
+	Friend WithEvents gdt_GDrive As SPPBC.M3Tools.GTools.GdriveTool
+	Friend WithEvents ip_FolderName As SPPBC.M3Tools.GenericInputPair
 	Friend WithEvents bw_GatherInfo As ComponentModel.BackgroundWorker
 End Class

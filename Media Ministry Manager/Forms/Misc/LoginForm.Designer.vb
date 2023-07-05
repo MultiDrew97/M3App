@@ -29,7 +29,7 @@ Partial Class Frm_Login
 		Me.tmr_LoginTimer = New System.Windows.Forms.Timer(Me.components)
 		Me.tss_UserFeedback = New System.Windows.Forms.ToolStripStatusLabel()
 		Me.ss_Feedback = New System.Windows.Forms.StatusStrip()
-		Me.db_Users = New SPPBC.M3Tools.Database.UserDatabase(Me.components)
+		Me.dbUsers = New SPPBC.M3Tools.Database.UserDatabase(Me.components)
 		Me.lsd_LoadScreen = New SPPBC.M3Tools.LoadScreenDialog()
 		Me.llb_ForgotPassword = New System.Windows.Forms.LinkLabel()
 		Me.llb_SignUp = New System.Windows.Forms.LinkLabel()
@@ -64,15 +64,14 @@ Partial Class Frm_Login
 		Me.ss_Feedback.TabIndex = 5
 		Me.ss_Feedback.Text = "StatusStrip1"
 		'
-		'db_Users
+		'dbUsers
 		'
-		Me.db_Users.InitialCatalog = Global.MediaMinistry.My.Settings.Default.DefaultCatalog
-		Me.db_Users.Password = Global.MediaMinistry.My.Settings.Default.DefaultPassword
-		Me.db_Users.Username = Global.MediaMinistry.My.Settings.Default.DefaultUsername
+		Me.dbUsers.InitialCatalog = Global.MediaMinistry.My.MySettings.Default.DefaultCatalog
+		Me.dbUsers.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbUsers.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
 		'
 		'lsd_LoadScreen
 		'
-		Me.lsd_LoadScreen.Closable = False
 		Me.lsd_LoadScreen.Image = CType(resources.GetObject("lsd_LoadScreen.Image"), System.Drawing.Bitmap)
 		Me.lsd_LoadScreen.LoadText = ""
 		'
@@ -179,7 +178,7 @@ Partial Class Frm_Login
 	End Sub
 	Friend WithEvents bw_SaveSettings As System.ComponentModel.BackgroundWorker
     Friend WithEvents tt_Info As ToolTip
-    Friend WithEvents db_Users As SPPBC.M3Tools.Database.UserDatabase
+    Friend WithEvents dbUsers As SPPBC.M3Tools.Database.UserDatabase
 	Friend WithEvents tmr_LoginTimer As Timer
 	Friend WithEvents tss_UserFeedback As ToolStripStatusLabel
     Friend WithEvents ss_Feedback As StatusStrip

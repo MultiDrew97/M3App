@@ -65,8 +65,8 @@ Public Class Frm_Login
 		My.Settings.Password = If(lf_Login.Password, My.Settings.Password)
 		My.Settings.Save()
 
-		M3ToolsSettings.CurrentUser = My.Settings.Username
-		M3ToolsSettings.Save()
+		'M3ToolsSettings.CurrentUser = My.Settings.Username
+		'M3ToolsSettings.Save()
 	End Sub
 
 	Private Sub SettingsSaved(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SaveSettings.RunWorkerCompleted
@@ -85,7 +85,7 @@ Public Class Frm_Login
 	Private Sub TryLogin(Optional username As String = Nothing, Optional password As String = Nothing)
 		Try
 			RaiseEvent BeginLogin()
-			My.Settings.User = db_Users.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
+			My.Settings.User = dbUsers.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
 		Catch ex As Exception
 			Select Case ex.GetType()
 				Case GetType(RoleException)

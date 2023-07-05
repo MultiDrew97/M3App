@@ -26,15 +26,27 @@ Namespace Types
 			Me.New(id, $"{fName} {lName}", email, username, Text.Encoding.UTF8.GetBytes(password), salt, accountRole)
 		End Sub
 
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As String, salt As Guid, accountRole As AccountRole)
+			Me.New(id, $"{fName} {lName}", email, username, Text.Encoding.UTF8.GetBytes(password), salt, accountRole)
+		End Sub
+
 		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As Byte(), salt As String, accountRole As AccountRole)
 			Me.New(id, $"{fName} {lName}", email, username, password, salt, accountRole)
 		End Sub
 
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
+			Me.New(id, $"{fName} {lName}", email, username, password, salt, accountRole)
+		End Sub
+
 		Public Sub New(id As Integer, name As String, username As String, email As String, password As Byte(), salt As String, accountRole As AccountRole)
+			Me.New(id, name, username, email, password, If(String.IsNullOrWhiteSpace(salt), Guid.NewGuid(), Guid.Parse(salt)), accountRole)
+		End Sub
+
+		Public Sub New(id As Integer, name As String, username As String, email As String, password As Byte(), salt As Guid, accountRole As AccountRole)
 			MyBase.New(id, name, email)
 			Me.Username = username
 			Me.Password = password
-			Me.Salt = If(salt <> "", Guid.Parse(salt), Guid.NewGuid)
+			Me.Salt = salt
 			Me.AccountRole = accountRole
 		End Sub
 

@@ -35,7 +35,7 @@ Public Class CreateFolderDialog
 			gdt_GDrive.CreateFolder(FolderName, Parents)
 			DialogResult = DialogResult.OK
 			Close()
-		Catch ex As Exceptions.FolderException
+		Catch ex As FolderException
 			MessageBox.Show(Me, ex.Message, "New Folder", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End Try
 	End Sub

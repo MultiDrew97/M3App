@@ -5,15 +5,15 @@ Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class UserDatabase
-		Private ReadOnly tableName As String = "Users"
+		Private Const TableName As String = "Users"
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
 		Public Property Username As String
 			Get
-				Return db_Connection.Username
+				Return dbConnection.Username
 			End Get
 			Set(value As String)
-				db_Connection.Username = value
+				dbConnection.Username = value
 			End Set
 		End Property
 
@@ -23,14 +23,14 @@ Namespace Database
 		<Description("The password to use for the database connection")>
 		Public Property Password As String
 			Get
-				Return db_Connection.Password
+				Return dbConnection.Password
 				'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
 			End Get
 			Set(value As String)
 				'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
 				'Console.WriteLine(temp)
 				'__connectionString.Password = temp
-				db_Connection.Password = value
+				dbConnection.Password = value
 			End Set
 		End Property
 
@@ -40,10 +40,10 @@ Namespace Database
 		<SettingsBindable(True)>
 		Public Property InitialCatalog As String
 			Get
-				Return db_Connection.InitialCatalog
+				Return dbConnection.InitialCatalog
 			End Get
 			Set(value As String)
-				db_Connection.InitialCatalog = value
+				dbConnection.InitialCatalog = value
 			End Set
 		End Property
 		Public Function CreateUser(username As String, password As String, Optional role As AccountRole = AccountRole.User) As Boolean
@@ -60,7 +60,7 @@ Namespace Database
 		End Function
 
 		Public Function CreateUser(params As SqlParameter()) As Boolean
-			Using _cmd = db_Connection.Connect()
+			Using _cmd = dbConnection.Connect()
 				_cmd.Parameters.AddRange(params)
 				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddM3Login]"
 				_cmd.CommandType = CommandType.StoredProcedure
@@ -86,7 +86,7 @@ Namespace Database
 		End Function
 
 		Public Function ChangePassword(ParamArray params As SqlParameter()) As Boolean
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.CommandText = $"[{My.Settings.Schema}].[sp_ChangePassword]"
 				cmd.CommandType = CommandType.StoredProcedure
 
@@ -101,7 +101,7 @@ Namespace Database
 		End Sub
 
 		Private Sub CloseAccount(param As SqlParameter)
-			Using _cmd = db_Connection.Connect
+			Using _cmd = dbConnection.Connect
 				_cmd.Parameters.Add(param)
 				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_DeactivateAccount]"
 				_cmd.CommandType = CommandType.StoredProcedure
@@ -119,7 +119,7 @@ Namespace Database
 		End Function
 
 		Private Function Login(ParamArray params As SqlParameter()) As User
-			Using cmd = db_Connection.Connect()
+			Using cmd = dbConnection.Connect()
 				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_Login](@Username, @Password)"
 				cmd.Parameters.AddRange(params)
 
@@ -149,9 +149,9 @@ Namespace Database
 		End Function
 
 		Public Function GetUser(userID As Integer) As User
-			Using _con = db_Connection.Connect()
+			Using _con = dbConnection.Connect()
 				_con.Parameters.AddWithValue("UserID", userID)
-				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE UserID=@UserID"
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}] WHERE UserID=@UserID"
 
 				Using reader = _con.ExecuteReader()
 					Do While reader.Read()
@@ -160,7 +160,7 @@ Namespace Database
 
 						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
 								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
-								CStr(reader("Salt")), CType(reader("AccountRole"), AccountRole)
+								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
 							)
 					Loop
 
@@ -174,9 +174,9 @@ Namespace Database
 				Throw New Exceptions.UsernameException("Empty Username")
 			End If
 
-			Using cmd = db_Connection.Connect()
+			Using cmd = dbConnection.Connect()
 				cmd.Parameters.AddWithValue("Username", username)
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE Username=@Username"
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}] WHERE Username=@Username"
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read()
 						Dim buffer(64) As Byte
@@ -196,8 +196,8 @@ Namespace Database
 		Function GetUsers() As UserCollection
 			Dim users As New UserCollection()
 
-			Using _con = db_Connection.Connect()
-				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
+			Using _con = dbConnection.Connect()
+				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}]"
 
 				Using reader = _con.ExecuteReader()
 

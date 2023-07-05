@@ -15,7 +15,7 @@
 
         <System.Diagnostics.DebuggerNonUserCode()>
         Public Sub New()
-			Me.New(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
+			'Me.New(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
 			InitializeComponent()
         End Sub
 

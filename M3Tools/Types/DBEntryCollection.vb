@@ -6,16 +6,16 @@ Namespace Types
 		Inherits Collection(Of T)
 		Implements IBindingListView
 
-		'Private _filter As String
+		Private _filter As String
 
 		Public Property Filter As String Implements IBindingListView.Filter
-		'	Get
-		'		Return _filter
-		'	End Get
-		'	Set(value As String)
-		'		_filter = value
-		'	End Set
-		'End Property
+			Get
+				Return _filter
+			End Get
+			Set(value As String)
+				_filter = value
+			End Set
+		End Property
 
 		Public ReadOnly Property SortDescriptions As ListSortDescriptionCollection Implements IBindingListView.SortDescriptions
 			Get
