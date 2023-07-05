@@ -24,7 +24,6 @@ Partial Class CustomersManagement
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersManagement))
-        Dim MySettings2 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
         Me.ss_CustomerView = New System.Windows.Forms.StatusStrip()
         Me.tss_CustomersView = New System.Windows.Forms.ToolStripStatusLabel()
         Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
@@ -55,7 +54,6 @@ Partial Class CustomersManagement
         Me.EmailAddressColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JoinDateColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dcc_Customers = New SPPBC.M3Tools.DisplayCustomersCtrl()
-        Me.CustomerDialogs = New SPPBC.M3Tools.CustomerBasedDialogs(Me.components)
         Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
         Me.dbCustomers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
         Me.ss_CustomerView.SuspendLayout()
@@ -268,17 +266,7 @@ Partial Class CustomersManagement
         'dcc_Customers
         '
         Me.dcc_Customers.AutoSize = True
-        MySettings2.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
-        MySettings2.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
-    "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-        MySettings2.KeepLoggedIn = True
-        MySettings2.Password = "JasmineLove2697"
-        MySettings2.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
-    "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-        MySettings2.SettingsKey = ""
-        MySettings2.UpgradeRequired = True
-        MySettings2.Username = "arandlemiller97"
-        Me.dcc_Customers.CountTemplate = MySettings2.CountTemplate
+        Me.dcc_Customers.CountTemplate = "Count: {0}"
         Me.dcc_Customers.DataSource = Me.bsCustomers
         Me.dcc_Customers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dcc_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -291,10 +279,11 @@ Partial Class CustomersManagement
         'bsCustomers
         '
         Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.Types.CustomerCollection)
+        Me.bsCustomers.Filter = "[Name] like '%f%'"
         '
         'dbCustomers
         '
-        Me.dbCustomers.InitialCatalog = "Media Ministry Test"
+        Me.dbCustomers.InitialCatalog = "Media Ministry"
         Me.dbCustomers.Password = "M3AppPassword2499"
         Me.dbCustomers.Username = "M3App"
         '
@@ -359,7 +348,6 @@ Partial Class CustomersManagement
 	Friend WithEvents EmailAddressColumn As DataGridViewTextBoxColumn
 	Friend WithEvents JoinDateColumn As DataGridViewTextBoxColumn
 	Friend WithEvents dcc_Customers As SPPBC.M3Tools.DisplayCustomersCtrl
-    Friend WithEvents CustomerDialogs As SPPBC.M3Tools.CustomerBasedDialogs
 	Friend WithEvents bsCustomers As BindingSource
 	Friend WithEvents dbCustomers As SPPBC.M3Tools.Database.CustomerDatabase
 End Class

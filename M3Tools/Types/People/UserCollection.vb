@@ -2,14 +2,14 @@
 Imports System.ComponentModel
 
 Namespace Types
-	Public Class ListenerCollection
-		Inherits DBEntryCollection(Of Listener)
+	Public Class UserCollection
+		Inherits DBEntryCollection(Of User)
 		Sub New()
 			MyBase.New()
 		End Sub
 
-		Sub New(listeners As IList(Of Listener))
-			MyBase.New(listeners)
+		Sub New(users As IList(Of User))
+			MyBase.New(users)
 		End Sub
 
 		'Default Overloads ReadOnly Property Item(listenerID As Integer) As Listener

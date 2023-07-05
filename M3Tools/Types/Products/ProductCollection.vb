@@ -2,15 +2,8 @@
 Imports System.ComponentModel
 
 Namespace Types
-	Public Class ListenerCollection
-		Inherits DBEntryCollection(Of Listener)
-		Sub New()
-			MyBase.New()
-		End Sub
-
-		Sub New(listeners As IList(Of Listener))
-			MyBase.New(listeners)
-		End Sub
+	Public Class ProductCollection
+		Inherits DBEntryCollection(Of Product)
 
 		'Default Overloads ReadOnly Property Item(listenerID As Integer) As Listener
 		'	Get
@@ -18,6 +11,13 @@ Namespace Types
 		'	End Get
 		'End Property
 
+		Sub New()
+			MyBase.New()
+		End Sub
+
+		Sub New(products As IList(Of Product))
+			MyBase.New(products)
+		End Sub
 
 		'Overloads Function Contains(id As Integer) As Boolean
 		'	For Each listener In Items

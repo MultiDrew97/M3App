@@ -1,21 +1,23 @@
 ﻿Option Strict On
+Imports System.ComponentModel
 
 Namespace Types
 	Public MustInherit Class DBEntry
-		Private _id As Integer
-		Property Id As Integer
-			Get
-				Return _id
-			End Get
-			Set(value As Integer)
-				' TODO: Figure out what to do for id checking if at all
-				'If Not Utils.ValidID(value) Then
-				'	Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
-				'End If
+		'Private _id As Integer
 
-				_id = value
-			End Set
-		End Property
+		Property Id As Integer
+		'	Get
+		'		Return _id
+		'	End Get
+		'	Set(value As Integer)
+		'		' TODO: Figure out what to do for id checking if at all
+		'		'If Not Utils.ValidID(value) Then
+		'		'	Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
+		'		'End If
+
+		'		_id = value
+		'	End Set
+		'End Property
 
 		Public Sub New()
 			Me.New(-1)

@@ -19,7 +19,11 @@ Namespace Types
 
 		Public Sub New()
 			' TODO: Add constructor options like other objects
-			Me.New(-1, "John", "Doe", Nothing, "JohnDoe123", Nothing, Nothing, AccountRole.User)
+			Me.New(-1, "John", "Doe", Nothing, "JohnDoe123", "JohnDoe123!", Nothing, AccountRole.User)
+		End Sub
+
+		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As String, salt As Guid, accountRole As AccountRole)
+			Me.New(id, $"{fName} {lName}", email, username, Text.Encoding.UTF8.GetBytes(password), salt, accountRole)
 		End Sub
 
 		Public Sub New(id As Integer, fName As String, lName As String, email As String, username As String, password As Byte(), salt As Guid, accountRole As AccountRole)
@@ -66,9 +70,8 @@ Namespace Types.Converters
 				Dim user As New User With {
 					.Id = CInt(parts(0)),
 					.Username = parts(1),
-					.Password = Text.Encoding.Unicode.GetBytes(parts(2)),
-					.Salt = Guid.Parse(parts(3)),
-					.AccountRole = CType(CInt(parts(4)), AccountRole)
+					.Salt = Guid.Parse(parts(2)),
+					.AccountRole = CType(CInt(parts(3)), AccountRole)
 				}
 
 				Return user

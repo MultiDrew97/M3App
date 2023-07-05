@@ -53,16 +53,16 @@ Public Class ListenersDataGrid
 
 	Property Filter As String
 		Get
-			Return bsListeners.Filter
+			Return DataSource.Filter
 		End Get
 		Set(value As String)
 			'TODO: Figure out how I want to do this
 			If value <> "" AndAlso Not (value.Contains("[") OrElse value.Contains("]")) Then
-				bsListeners.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
+				DataSource.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
 				Return
 			End If
 
-			bsListeners.Filter = value
+			DataSource.Filter = value
 		End Set
 	End Property
 

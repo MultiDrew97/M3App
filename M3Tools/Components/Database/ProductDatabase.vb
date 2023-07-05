@@ -71,8 +71,8 @@ Namespace Database
 			Return Nothing
 		End Function
 
-		Public Function GetProducts() As DBEntryCollection(Of Product)
-			Dim products As New DBEntryCollection(Of Product)
+		Public Function GetProducts() As ProductCollection
+			Dim products As New ProductCollection()
 
 			Using _cmd = db_Connection.Connect
 				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"

@@ -241,6 +241,7 @@
     <Compile Include="Dialogs\Emails\RecipientSelectionDialog.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Exceptions\Products\ProductNotFoundException.vb" />
     <Compile Include="Types\Events\CustomerEvents.vb" />
     <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.vb">
       <DependentUpon>EditCustomerDialog.vb</DependentUpon>
@@ -450,7 +451,7 @@
     <Compile Include="Dialogs\User\LoginDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Exceptions\Items\ItemNotFoundException.vb" />
+    <Compile Include="Exceptions\ItemNotFoundException.vb" />
     <Compile Include="Exceptions\MenuException.vb" />
     <Compile Include="Exceptions\Customers\CustomerNotFoundException.vb" />
     <Compile Include="Exceptions\Database\CreationException.vb" />
@@ -480,6 +481,9 @@
     <Compile Include="Types\DBEntry.vb" />
     <Compile Include="Types\EmailDetails.vb" />
     <Compile Include="Types\Events\ProductEvents.vb" />
+    <Compile Include="Types\Orders\OrderCollection.vb" />
+    <Compile Include="Types\People\UserCollection.vb" />
+    <Compile Include="Types\Products\ProductCollection.vb" />
     <Compile Include="Types\Templates.vb" />
     <Compile Include="Types\Google\API.vb">
       <SubType>Component</SubType>
@@ -487,7 +491,7 @@
     <Compile Include="Types\Orders\CartItem.vb" />
     <Compile Include="Types\Orders\CartItemCollection.vb" />
     <Compile Include="Types\People\CustomerCollection.vb" />
-    <Compile Include="Types\People\DBEntryCollection.vb" />
+    <Compile Include="Types\DBEntryCollection.vb" />
     <Compile Include="UpdateService.Designer.vb">
       <DependentUpon>UpdateService.vb</DependentUpon>
     </Compile>
@@ -794,7 +798,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

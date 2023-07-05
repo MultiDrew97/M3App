@@ -7,6 +7,7 @@ Public Class DisplayListenersCtrl
 	Public Event RemoveListener As ListenerEventHandler
 	Public Event UpdateListener As ListenerEventHandler
 	Public Event AddListener As ListenerEventHandler
+	Public Event FilterChanged(value As String)
 	Public Event RefreshDisplay()
 	Public Event SendEmails()
 
@@ -41,7 +42,7 @@ Public Class DisplayListenersCtrl
 		End Using
 	End Sub
 
-	Private Sub FilterChanged(sender As Object, e As EventArgs) Handles txt_Filter.TextChanged
+	Private Sub FilterUpdated(sender As Object, e As EventArgs) Handles txt_Filter.TextChanged
 		ldg_Listeners.Filter = txt_Filter.Text
 	End Sub
 

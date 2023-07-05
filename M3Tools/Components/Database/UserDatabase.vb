@@ -193,8 +193,8 @@ Namespace Database
 			End Using
 		End Function
 
-		Function GetUsers() As DBEntryCollection(Of User)
-			Dim users As New DBEntryCollection(Of User)
+		Function GetUsers() As UserCollection
+			Dim users As New UserCollection()
 
 			Using _con = db_Connection.Connect()
 				_con.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
@@ -206,7 +206,7 @@ Namespace Database
 						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
 
 						users.Append(New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								TryCast(reader("Email"), String), CStr(reader("Username")), Buffer,
+								TryCast(reader("Email"), String), CStr(reader("Username")), buffer,
 								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
 							)
 						)

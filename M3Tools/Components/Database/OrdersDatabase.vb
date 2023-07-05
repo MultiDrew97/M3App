@@ -44,8 +44,8 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Function GetOrders() As DBEntryCollection(Of Order)
-			Dim orders As New DBEntryCollection(Of Order)
+		Public Function GetOrders() As OrderCollection
+			Dim orders As New OrderCollection()
 
 			Using cmd = db_Connection.Connect
 				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
@@ -63,11 +63,11 @@ Namespace Database
 			Return orders
 		End Function
 
-		Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
+		Public Function GetCompletedOrders() As OrderCollection
 			' TODO: Test this to make sure it works properly
 			Return CType(GetOrders().Where(Function(order As Order) As Boolean
 											   Return order.CompletedDate.Year > 2000
-										   End Function), DBEntryCollection(Of Order))
+										   End Function), OrderCollection)
 		End Function
 
 		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
@@ -183,8 +183,8 @@ Namespace Database
 			Throw New Exceptions.ConnectionException("Failed to connect to database")
 		End Function
 
-		Public Function GetOrderByCustomer(customerID As Integer) As DBEntryCollection(Of Order)
-			Dim orders As New DBEntryCollection(Of Order)
+		Public Function GetOrderByCustomer(customerID As Integer) As OrderCollection
+			Dim orders As New OrderCollection()
 			If customerID < 0 Then
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If

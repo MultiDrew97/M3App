@@ -66,6 +66,10 @@ Public Class ListenersManagement
 		End Using
 	End Sub
 
+	Private Sub FilterChanged(value As String) Handles dlc_Listeners.FilterChanged
+		bsListeners.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
+	End Sub
+
 	Private Sub RemoveListener(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.RemoveListener
 		UseWaitCursor = True
 		dbListeners.RemoveListener(e.Listener.Id)

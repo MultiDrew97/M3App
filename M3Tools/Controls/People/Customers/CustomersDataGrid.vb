@@ -49,17 +49,18 @@ Public Class CustomersDataGrid
 		End Get
 	End Property
 
+	<DefaultValue("")>
 	Property Filter As String
 		Get
-			Return bsCustomers.Filter
+			Return DataSource.Filter
 		End Get
 		Set(value As String)
 			If value <> "" Then
-				bsCustomers.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
+				DataSource.Filter = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
 				Return
 			End If
 
-			bsCustomers.Filter = value
+			DataSource.Filter = value
 		End Set
 	End Property
 

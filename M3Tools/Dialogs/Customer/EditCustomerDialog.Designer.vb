@@ -151,7 +151,7 @@
             Me.Name = "EditCustomerDialog"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-            Me.Text = "EditCustomerDialog"
+            Me.Text = "Update Customer"
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
