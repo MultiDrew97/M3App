@@ -4,6 +4,7 @@ Public Class ToolsContextMenu
 	Event RefreshView()
 	Event RemoveRows()
 	Event SendEmails()
+	Event EditPerson()
 
 	Private ReadOnly prefix As String = "ts"
 	Private Confirmed As Boolean = False
@@ -30,21 +31,29 @@ Public Class ToolsContextMenu
 		ts_Remove.Enabled = False
 	End Sub
 
-	Public Sub ToggleRemove(rowsSelected As Boolean)
-		ts_Remove.Enabled = rowsSelected
+	Public Sub ToggleRemove(enable As Boolean)
+		ts_Remove.Enabled = enable
 	End Sub
 
-	Public Sub ToggleSend(rowsSelected As Boolean)
+	Public Sub ToggleSend(enable As Boolean)
 		Dim send As ToolStripItem = Me.Items.Item($"{prefix}_Send")
 
-		If send Is Nothing Then
+		If Not ts_Send.Visible Then
 			Return
 		End If
 
-		send.Enabled = rowsSelected
+		ts_Send.Enabled = enable
 	End Sub
 
-	Private Sub Send(sender As Object, e As EventArgs) Handles ts_Send.Click
+	Public Sub ToggleEdit(enable As Boolean)
+		ts_Edit.Enabled = enable
+	End Sub
+
+	Private Sub EmailFunctions(sender As Object, e As EventArgs) Handles ts_Send.Click
 		RaiseEvent SendEmails()
+	End Sub
+
+	Private Sub EditClicked(sender As Object, e As EventArgs) Handles ts_Edit.Click
+		RaiseEvent EditPerson()
 	End Sub
 End Class

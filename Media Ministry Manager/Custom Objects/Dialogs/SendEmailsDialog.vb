@@ -2,6 +2,7 @@
 Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ListView
+Imports Renci.SshNet
 Imports SPPBC.M3Tools.Types
 
 Public Class SendEmailsDialog
@@ -99,37 +100,19 @@ Public Class SendEmailsDialog
 
 	Private Sub PrepEmails(sender As Object, e As DoWorkEventArgs) Handles bw_PrepEmails.DoWork
 		Dim details = CType(e.Argument, EmailDetails)
-		Dim messages As New List(Of MimeKit.MimeMessage)
-		Dim links As New List(Of String)
+		'Dim links As New List(Of String)
 
 		For Each file In details.DriveLinks
 			Select Case details.EmailContents.BodyType
 				Case "plain"
-					links.Add(String.Format(DriveShareLink, file.Id))
+					details.SendingLinks.Add(String.Format(DriveShareLink, file.Id))
 				Case "html"
-					links.Add(String.Format(DriveLinkHtml, String.Format(DriveShareLink, file.Id), file.Name))
+					details.SendingLinks.Add(String.Format(DriveLinkHtml, String.Format(DriveShareLink, file.Id), file.Name))
 				Case Else
 			End Select
 		Next
 
-		For Each listener In details.Recipients
-			Dim body As String
-			Select Case details.EmailContents.BodyType
-				Case "plain"
-					body = $"Hello {listener.Name}, {vbCrLf}{vbCrLf}{details.EmailContents.Body}{vbCrLf}{vbCrLf}{String.Join(vbCrLf, links)}"
-				Case "html"
-					body = String.Format(details.EmailContents.Body, listener.Name, String.Join("<br />", links))
-				Case Else
-					e.Cancel = True
-					Exit Sub
-			End Select
-
-			' TODO: Make login screen store the user info instead of just username and password to use for sender info
-			Dim message = gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles) ', New MimeKit.MailboxAddress(My.Settings.User.Name, My.Settings.User.Email))
-			messages.Add(message)
-		Next
-
-		e.Result = messages
+		e.Result = details
 	End Sub
 
 	Private Sub EmailsPrepped(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_PrepEmails.RunWorkerCompleted
@@ -151,17 +134,6 @@ Public Class SendEmailsDialog
 
 		details.Recipients = rsd_Selection.List
 		e.Result = details
-		'Using listenerSelect As New SPPBC.M3Tools.ReciepientSelection()
-		'	Dim details = CType(e.Argument, EmailDetails)
-		'	Dim res = listenerSelect.ShowDialog()
-		'	If Not res = DialogResult.OK Then
-		'		e.Cancel = True
-		'		Return
-		'	End If
-
-		'	details.Recipients = CType(listenerSelect.Selection, ListenerCollection)
-		'	e.Result = details
-		'End Using
 	End Sub
 
 	Private Sub ReceipientsGathered(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_GatherReceipients.RunWorkerCompleted
@@ -182,29 +154,29 @@ Public Class SendEmailsDialog
 			details.EmailContents = body.Content
 		End Using
 
-		'bw_SendEmails.RunWorkerAsync(messages)
-
 		bw_PrepEmails.RunWorkerAsync(details)
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As DoWorkEventArgs) Handles bw_SendEmails.DoWork
-		Console.WriteLine("Selected Listeners:")
+		Dim messages As New List(Of MimeKit.MimeMessage)
+		Dim details = CType(e.Argument, EmailDetails)
+		For Each listener In details.Recipients
+			Dim body As String
+			Select Case details.EmailContents.BodyType
+				Case "plain"
+					body = $"Hello {listener.Name}, {vbCrLf}{vbCrLf}{details.EmailContents.Body}{vbCrLf}{vbCrLf}{String.Join(vbCrLf, details.SendingLinks)}"
+				Case "html"
+					body = String.Format(details.EmailContents.Body, listener.Name, String.Join("<br />", details.SendingLinks))
+				Case Else
+					e.Cancel = True
+					Exit Sub
+			End Select
 
-		Dim messages = CType(e.Argument, List(Of MimeKit.MimeMessage))
-
-		Invoke(
-		Sub()
-			RaiseEvent ProgressReset(messages.Count)
-		End Sub
-		)
-		For Each message In messages
-			gmt_Gmail.Send(message)
-			Invoke(
-		Sub()
-			RaiseEvent ProgressReset(messages.Count)
-		End Sub
-		)
+			' TODO: Make login screen store the user info instead of just username and password to use for sender info
+			Dim message = gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles) ', New MimeKit.MailboxAddress(My.Settings.User.Name, My.Settings.User.Email))
+			messages.Add(message)
 		Next
+
 		'Dim message As MimeKit.MimeMessage
 		'For Each listener In details.Recipients
 		'	Console.WriteLine($"Name - {listener.Name}{vbNewLine}Email - {listener.Email}")
@@ -232,14 +204,18 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub EmailsDone(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SendEmails.RunWorkerCompleted
-		If e.Cancelled Then
+		If e.Cancelled OrElse e.Error IsNot Nothing Then
 			RaiseEvent EmailsCancelled()
 			Console.Out.WriteLine("Worker was cancelled")
+			Return
 		End If
 
-		If e.Error IsNot Nothing Then
-			Console.Error.WriteLine(e.Error.Message)
-		End If
+		Dim messages = CType(e.Result, List(Of MimeKit.MimeMessage))
+		RaiseEvent ProgressReset(messages.Count)
+		For Each message In messages
+			gmt_Gmail.Send(message)
+			RaiseEvent ProgressMade()
+		Next
 
 		RaiseEvent EmailsSent()
 	End Sub

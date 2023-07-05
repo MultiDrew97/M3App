@@ -66,6 +66,7 @@ Partial Class DisplayCustomersCtrl
         'cdg_Customers
         '
         Me.cdg_Customers.AllowColumnReordering = True
+        Me.cdg_Customers.ContextMenuStrip = Me.cms_Tools
         Me.cdg_Customers.CustomersSelectable = False
         Me.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cdg_Customers.Filter = Nothing

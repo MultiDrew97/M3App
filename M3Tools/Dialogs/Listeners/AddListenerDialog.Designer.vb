@@ -29,7 +29,7 @@
             Me.btn_Cancel = New System.Windows.Forms.Button()
             Me.gi_Name = New SPPBC.M3Tools.GenericInputPair()
             Me.gi_Email = New SPPBC.M3Tools.GenericInputPair()
-            Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
+            Me.dbListeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -91,11 +91,11 @@
             Me.gi_Email.TabIndex = 2
             Me.gi_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
             '
-            'db_Listeners
+            'dbListeners
             '
-            Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-            Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-            Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
+            Me.dbListeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+            Me.dbListeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+            Me.dbListeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
             '
             'AddListenerDialog
             '
@@ -113,7 +113,7 @@
             Me.Name = "AddListenerDialog"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-            Me.Text = "AddListenerDialog"
+            Me.Text = "New Listener"
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
@@ -124,6 +124,6 @@
 		Friend WithEvents btn_Cancel As System.Windows.Forms.Button
 		Friend WithEvents gi_Name As GenericInputPair
 		Friend WithEvents gi_Email As GenericInputPair
-		Friend WithEvents db_Listeners As Database.ListenerDatabase
+		Friend WithEvents dbListeners As Database.ListenerDatabase
 	End Class
 End Namespace

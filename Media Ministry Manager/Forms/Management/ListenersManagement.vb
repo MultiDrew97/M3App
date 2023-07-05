@@ -3,6 +3,8 @@ Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class ListenersManagement
+
+	Private Event ListenerAdded As ListenerEventHandler
 	Private Tooled As Boolean = False
 
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
@@ -70,14 +72,18 @@ Public Class ListenersManagement
 		Reload()
 	End Sub
 
-	Private Sub ListenerAdded(sender As Object, e As ListenerEventArgs) Handles mms_Main.ListenerAdded, dlc_Listeners.ListenerAdded
+	Private Sub AddListener(sender As Object, e As ListenerEventArgs) Handles mms_Main.AddListener, dlc_Listeners.AddListener
+		dbListeners.AddListener(e.Listener)
+		RaiseEvent ListenerAdded(Me, e)
+	End Sub
+
+	Private Sub SendWelcom(sender As Object, e As ListenerEventArgs) Handles Me.ListenerAdded
 		UseWaitCursor = True
 		Dim subject = "Welcome to the Ministry"
 		Dim body = String.Format(newListener, e.Listener.Name.Trim)
 		Dim message = gt_Email.Create(e.Listener, subject, body)
 
 		gt_Email.Send(message)
-		Reload()
 	End Sub
 
 	Private Sub UpdateListener(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.UpdateListener
@@ -86,7 +92,7 @@ Public Class ListenersManagement
 		Reload()
 	End Sub
 
-	Private Sub Reload() Handles dlc_Listeners.RefreshDisplay
+	Private Sub Reload() Handles dlc_Listeners.RefreshDisplay, Me.ListenerAdded
 		UseWaitCursor = True
 		bsListeners.Clear()
 		For Each listener In dbListeners.GetListeners()

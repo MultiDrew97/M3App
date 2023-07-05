@@ -5,6 +5,7 @@ Imports System.Windows.Forms
 Public Class CustomersDataGrid
 	Public Event EditCustomer As CustomerEventHandler
 	Public Event RemoveCustomer As CustomerEventHandler
+	Public Event RefreshDisplay()
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -29,24 +30,22 @@ Public Class CustomersDataGrid
 
 	Public ReadOnly Property SelectedCustomers As IList
 		Get
-			Dim list As New Types.CustomerCollection
-
-			If chk_SelectAll.Checked Then
-				Return bsCustomers.List
-			End If
-
-			For Each row As DataGridViewRow In dgv_Customers.Rows
-				If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
-					Continue For
+			If CustomersSelectable Then
+				If chk_SelectAll.Checked Then
+					Return dgv_Customers.Rows
 				End If
 
-				Dim drv = CType(row.DataBoundItem, DataRowView)
-				Dim ldr = CType(drv.Row, DataTables.CustomersDataRow)
+				For Each row As DataGridViewRow In dgv_Customers.Rows
+					If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
+						row.Selected = False
+						Continue For
+					End If
 
-				list.Add(ldr.Customer)
-			Next
+					row.Selected = True
+				Next
+			End If
 
-			Return list
+			Return dgv_Customers.SelectedRows
 		End Get
 	End Property
 
@@ -184,5 +183,33 @@ Public Class CustomersDataGrid
 			row.Cells(dgc_Selection.DisplayIndex).Value = chk_SelectAll.Checked
 		Next
 		dgv_Customers.Invalidate()
+	End Sub
+
+	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
+		cms_Tools.ToggleRemove(SelectedRowsCount > 0)
+		cms_Tools.ToggleEdit(SelectedRowsCount > 0)
+	End Sub
+
+	Private Sub EditPerson() Handles cms_Tools.EditPerson
+		If SelectedRowsCount <= 0 Then
+			Return
+		End If
+
+		For Each row As DataGridViewRow In SelectedCustomers
+			CellClicked(Me, New DataGridViewCellEventArgs(dgc_Edit.Index, row.Index))
+		Next
+	End Sub
+
+	Private Sub RefreshView() Handles cms_Tools.RefreshView
+		RaiseEvent RefreshDisplay()
+	End Sub
+
+
+	Private Sub RemoveRowByToolStrip() Handles cms_Tools.RemoveRows
+		If SelectedRowsCount < 1 Then
+			Return
+		End If
+
+		RemoveSelectedRows()
 	End Sub
 End Class

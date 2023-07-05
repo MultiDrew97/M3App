@@ -44,7 +44,7 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
             Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 0, 0)
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(277, 274)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(387, 274)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 1
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -79,10 +79,11 @@
             '
             Me.gi_FirstName.AutoSize = True
             Me.gi_FirstName.LabelText = "First Name"
-            Me.gi_FirstName.Location = New System.Drawing.Point(28, 12)
+            Me.gi_FirstName.Location = New System.Drawing.Point(12, 12)
             Me.gi_FirstName.Mask = ""
             Me.gi_FirstName.Name = "gi_FirstName"
-            Me.gi_FirstName.Size = New System.Drawing.Size(185, 46)
+            Me.gi_FirstName.Placeholder = Nothing
+            Me.gi_FirstName.Size = New System.Drawing.Size(229, 46)
             Me.gi_FirstName.TabIndex = 1
             Me.gi_FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
             '
@@ -90,10 +91,11 @@
             '
             Me.gi_LastName.AutoSize = True
             Me.gi_LastName.LabelText = "Last Name"
-            Me.gi_LastName.Location = New System.Drawing.Point(219, 12)
+            Me.gi_LastName.Location = New System.Drawing.Point(270, 12)
             Me.gi_LastName.Mask = ""
             Me.gi_LastName.Name = "gi_LastName"
-            Me.gi_LastName.Size = New System.Drawing.Size(186, 46)
+            Me.gi_LastName.Placeholder = Nothing
+            Me.gi_LastName.Size = New System.Drawing.Size(242, 46)
             Me.gi_LastName.TabIndex = 2
             Me.gi_LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
             '
@@ -101,19 +103,20 @@
             '
             Me.PhoneNumberField1.AutoSize = True
             Me.PhoneNumberField1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.PhoneNumberField1.Location = New System.Drawing.Point(28, 64)
+            Me.PhoneNumberField1.Location = New System.Drawing.Point(12, 64)
             Me.PhoneNumberField1.Name = "PhoneNumberField1"
-            Me.PhoneNumberField1.PhoneNumber = "(   )    -"
-            Me.PhoneNumberField1.Size = New System.Drawing.Size(98, 45)
+            Me.PhoneNumberField1.PhoneNumber = ""
+            Me.PhoneNumberField1.Size = New System.Drawing.Size(107, 45)
             Me.PhoneNumberField1.TabIndex = 3
             '
             'gi_Email
             '
             Me.gi_Email.AutoSize = True
             Me.gi_Email.LabelText = "Email"
-            Me.gi_Email.Location = New System.Drawing.Point(132, 64)
+            Me.gi_Email.Location = New System.Drawing.Point(239, 64)
             Me.gi_Email.Mask = ""
             Me.gi_Email.Name = "gi_Email"
+            Me.gi_Email.Placeholder = Nothing
             Me.gi_Email.Size = New System.Drawing.Size(273, 46)
             Me.gi_Email.TabIndex = 4
             Me.gi_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
@@ -121,13 +124,13 @@
             'af_Address
             '
             Me.af_Address.AutoSize = True
-            Me.af_Address.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.af_Address.City = "Input..."
-            Me.af_Address.Location = New System.Drawing.Point(28, 137)
+            Me.af_Address.City = ""
+            Me.af_Address.Location = New System.Drawing.Point(12, 138)
+            Me.af_Address.MinimumSize = New System.Drawing.Size(500, 100)
             Me.af_Address.Name = "af_Address"
-            Me.af_Address.Size = New System.Drawing.Size(377, 108)
+            Me.af_Address.Size = New System.Drawing.Size(500, 100)
             Me.af_Address.State = ""
-            Me.af_Address.Street = "Input...,Input..."
+            Me.af_Address.Street = ""
             Me.af_Address.TabIndex = 5
             Me.af_Address.ZipCode = ""
             '
@@ -135,7 +138,7 @@
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.ClientSize = New System.Drawing.Size(435, 315)
+            Me.ClientSize = New System.Drawing.Size(545, 315)
             Me.Controls.Add(Me.af_Address)
             Me.Controls.Add(Me.gi_Email)
             Me.Controls.Add(Me.PhoneNumberField1)

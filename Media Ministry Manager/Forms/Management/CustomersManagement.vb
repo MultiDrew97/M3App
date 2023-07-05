@@ -3,6 +3,7 @@ Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Events.Customers
 
 Public Class CustomersManagement
+	Private Event CustomerDBModified As CustomerEventHandler
 	Private Tooled As Boolean = False
 
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
@@ -59,22 +60,23 @@ Public Class CustomersManagement
 	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.UpdateCustomer
 		'Dim res = CustomerDialogs.EditCustomer(e.Customer)
 		UseWaitCursor = True
-		Reload()
+		dbCustomers.UpdateCustomer(e.Customer)
+		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
-	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.CustomerAdded, mms_Main.CustomerAdded
+	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.AddCustomer, mms_Main.AddCustomer
 		UseWaitCursor = True
-		Reload()
+		dbCustomers.AddCustomer(e.Customer)
+		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
 	Private Sub RemoveCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.RemoveCustomer
 		UseWaitCursor = True
-		Console.WriteLine(e.Customer.Name)
 		dbCustomers.RemoveCustomer(e.Customer.Id)
-		Reload()
+		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
-	Private Sub Reload()
+	Private Sub Reload() Handles dcc_Customers.RefreshDisplay, Me.CustomerDBModified
 		UseWaitCursor = True
 		bsCustomers.Clear()
 		For Each customer In dbCustomers.GetCustomers()

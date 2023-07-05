@@ -39,15 +39,21 @@ Namespace Dialogs
 				Return
 			End If
 
-			db_Listeners.AddListener(Me.Listener)
-			RaiseEvent ListenerAdded(Me, New Listeners.ListenerEventArgs(Me.Listener, EventType.Added))
+			'dbListeners.AddListener(Me.Listener)
+			'RaiseEvent ListenerAdded(Me, New Listeners.ListenerEventArgs(Me.Listener, EventType.Added))
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
 		End Sub
 
 		Private Sub Cancel(sender As Object, e As EventArgs) Handles btn_Cancel.Click
-			Me.DialogResult = DialogResult.Cancel
-			Me.Close()
+			Dim res = MessageBox.Show("Are you sure you want to cancel listener creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+			If Not res = DialogResult.Yes Then
+				Return
+			End If
+
+			DialogResult = DialogResult.Cancel
+			Close()
 		End Sub
 
 		Private Function ValidInputs() As Boolean

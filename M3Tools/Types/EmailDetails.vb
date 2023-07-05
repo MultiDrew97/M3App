@@ -6,7 +6,7 @@ Namespace Types
 		''' The contents of the email
 		''' </summary>
 		''' <returns></returns>
-		Property EmailContents As EmailContent
+		Property EmailContents As New EmailContent("", "", "html")
 
 		''' <summary>
 		''' The list of any drive links that may have been selected to be sent
@@ -18,20 +18,27 @@ Namespace Types
 		''' The list of any local files that were selected to be sent
 		''' </summary>
 		''' <returns></returns>
-		Property LocalFiles As Collection(Of String)
+		Property LocalFiles As New Collection(Of String)
 
 		''' <summary>
 		''' The list of reciepients of the email
 		''' </summary>
 		''' <returns></returns>
-		Property Recipients As ListenerCollection
+		Property Recipients As New ListenerCollection
 
-		Public Sub New()
-			EmailContents = New EmailContent("", "", "html")
-			DriveLinks = New GTools.Types.FileCollection() 'List(Of String)
-			LocalFiles = New Collection(Of String)
-			Recipients = New ListenerCollection
-		End Sub
+		''' <summary>
+		''' The list of links to be added to the email body
+		''' </summary>
+		''' <returns></returns>
+		Property SendingLinks As New List(Of String)
+
+		'Public Sub New()
+		'	EmailContents = New EmailContent("", "", "html")
+		'	DriveLinks = New GTools.Types.FileCollection() 'List(Of String)
+		'	LocalFiles = New Collection(Of String)
+		'	Recipients = New ListenerCollection
+		'	SendingLinks = New List(Of String)
+		'End Sub
 	End Class
 
 	Public Class EmailContent

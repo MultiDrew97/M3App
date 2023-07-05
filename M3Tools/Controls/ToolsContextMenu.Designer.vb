@@ -25,6 +25,7 @@ Partial Class ToolsContextMenu
         Me.ts_Refresh = New System.Windows.Forms.ToolStripMenuItem()
         Me.ts_Remove = New System.Windows.Forms.ToolStripMenuItem()
         Me.ts_Send = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ts_Edit = New System.Windows.Forms.ToolStripMenuItem()
         Me.SuspendLayout()
         '
         'ts_Refresh
@@ -47,10 +48,17 @@ Partial Class ToolsContextMenu
         Me.ts_Send.Text = "Send Email"
         Me.ts_Send.Visible = False
         '
+        'ts_Edit
+        '
+        Me.ts_Edit.Enabled = False
+        Me.ts_Edit.Name = "ts_Edit"
+        Me.ts_Edit.Size = New System.Drawing.Size(132, 22)
+        Me.ts_Edit.Text = "Edit"
+        '
         'ToolsContextMenu
         '
-        Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove, Me.ts_Send})
-        Me.Size = New System.Drawing.Size(133, 70)
+        Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ts_Refresh, Me.ts_Remove, Me.ts_Edit, Me.ts_Send})
+        Me.Size = New System.Drawing.Size(133, 92)
         Me.ResumeLayout(False)
 
     End Sub
@@ -58,4 +66,5 @@ Partial Class ToolsContextMenu
     Friend WithEvents ts_Refresh As Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ts_Remove As Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ts_Send As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ts_Edit As Windows.Forms.ToolStripMenuItem
 End Class

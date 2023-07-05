@@ -40,6 +40,7 @@ Partial Class CustomersDataGrid
         Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
         Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
+        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         CType(Me.dgv_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,6 +52,7 @@ Partial Class CustomersDataGrid
         Me.dgv_Customers.AutoGenerateColumns = False
         Me.dgv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_Customers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_CustomerID, Me.dgc_Selection, Me.dgc_FirstName, Me.dgc_LastName, Me.dgc_Address, Me.dgc_Phone, Me.dgc_Email, Me.dgc_Join, Me.dgc_Edit, Me.dgc_Remove})
+        Me.dgv_Customers.ContextMenuStrip = Me.cms_Tools
         Me.dgv_Customers.DataSource = Me.bsCustomers
         Me.dgv_Customers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv_Customers.Location = New System.Drawing.Point(0, 0)
@@ -193,6 +195,12 @@ Partial Class CustomersDataGrid
         Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
+        'cms_Tools
+        '
+        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(181, 92)
+        '
         'CustomersDataGrid
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -222,4 +230,5 @@ Partial Class CustomersDataGrid
     Friend WithEvents dgc_Join As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgc_Edit As Windows.Forms.DataGridViewImageColumn
     Friend WithEvents dgc_Remove As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents cms_Tools As ToolsContextMenu
 End Class

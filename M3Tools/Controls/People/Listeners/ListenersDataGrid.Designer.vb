@@ -36,6 +36,7 @@ Partial Class ListenersDataGrid
         Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
         Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
+        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -47,6 +48,7 @@ Partial Class ListenersDataGrid
         Me.dgv_Listeners.AutoGenerateColumns = False
         Me.dgv_Listeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_Listeners.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_ListenerID, Me.dgc_Selection, Me.dgc_Name, Me.dgc_Email, Me.dgc_Edit, Me.dgc_Remove})
+        Me.dgv_Listeners.ContextMenuStrip = Me.cms_Tools
         Me.dgv_Listeners.DataSource = Me.bsListeners
         Me.dgv_Listeners.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv_Listeners.Location = New System.Drawing.Point(0, 0)
@@ -148,6 +150,11 @@ Partial Class ListenersDataGrid
         Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
+        'cms_Tools
+        '
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
+        '
         'ListenersDataGrid
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -174,4 +181,5 @@ Partial Class ListenersDataGrid
 	Friend WithEvents dgc_Email As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents dgc_Edit As Windows.Forms.DataGridViewImageColumn
 	Friend WithEvents dgc_Remove As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents cms_Tools As ToolsContextMenu
 End Class

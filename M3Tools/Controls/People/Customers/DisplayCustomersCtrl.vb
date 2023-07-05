@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports SPPBC.M3Tools.Events.Customers
 
 Public Class DisplayCustomersCtrl
-	Public Event CustomerAdded As CustomerEventHandler
+	Public Event AddCustomer As CustomerEventHandler
 	Public Event UpdateCustomer As CustomerEventHandler
 	Public Event RemoveCustomer As CustomerEventHandler
 	Public Event RefreshDisplay()
@@ -23,7 +23,7 @@ Public Class DisplayCustomersCtrl
 		tsl_Count.Text = String.Format(CountTemplate, cdg_Customers.Customers.Count)
 	End Sub
 
-	Private Sub RefreshView() Handles cms_Tools.RefreshView
+	Private Sub RefreshView() Handles cdg_Customers.RefreshDisplay
 		RaiseEvent RefreshDisplay()
 	End Sub
 
@@ -35,7 +35,7 @@ Public Class DisplayCustomersCtrl
 				Return
 			End If
 
-			RaiseEvent CustomerAdded(Me, New CustomerEventArgs(add.Customer))
+			RaiseEvent AddCustomer(Me, New CustomerEventArgs(add.Customer))
 		End Using
 	End Sub
 
@@ -58,16 +58,14 @@ Public Class DisplayCustomersCtrl
 		'End Using
 	End Sub
 
-	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
-		cms_Tools.ToggleRemove(cdg_Customers.SelectedCustomers.Count > 0)
-	End Sub
+
 
 	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
 		Throw New Exceptions.NotYetImplementedException("Import Customers")
 	End Sub
 
 	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles cdg_Customers.EditCustomer
-		Using edit As New Dialogs.EditCustomerDialog()
+		Using edit As New Dialogs.EditCustomerDialog() With {.Customer = e.Customer}
 			Dim res = edit.ShowDialog()
 
 			If Not res = DialogResult.OK Then
@@ -79,7 +77,7 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub DeleteCustomer(sender As Object, e As CustomerEventArgs) Handles cdg_Customers.RemoveCustomer
-		Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+		Dim res = MessageBox.Show("Are you sure you want to remove this Customer?", "Remove Customer", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
 		If Not res = DialogResult.Yes Then
 			Return

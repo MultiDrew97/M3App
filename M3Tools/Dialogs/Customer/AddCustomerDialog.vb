@@ -8,8 +8,7 @@ Imports SPPBC.M3Tools.Events.Customers
 Namespace Dialogs
 	Public Class AddCustomerDialog
 		Public Event CustomerAdded As CustomerEventHandler
-		Private Event PageChangedEvent(currentPage As Integer)
-		Private ReadOnly __emailPattern As New Regex(My.Resources.EmailRegex)
+		Private Event PageChangedEvent As EventHandler
 
 		Private ReadOnly Property CustomerName As String
 			Get
@@ -62,56 +61,68 @@ Namespace Dialogs
 			End Get
 		End Property
 
+		Private ReadOnly Property CustomerDisplay As DisplayCustomer
+			Get
+				Return New DisplayCustomer() With {
+					.Name = CustomerName,
+					.Email = Email,
+					.Address = Address
+				}
+			End Get
+		End Property
+
 
 		Private Sub PreviousStep(sender As Object, e As EventArgs) Handles btn_Cancel.Click
-			Select Case btn_Cancel.Text
-				Case "Back"
-					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex - 1
-					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
-				Case "Cancel"
+			Select Case tc_Creation.SelectedIndex
+				Case tp_Basic.TabIndex
+					Dim res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+					If Not res = DialogResult.Yes Then
+						Return
+					End If
+
 					DialogResult = DialogResult.Cancel
 					Close()
+				Case Else
+					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex - 1
+					RaiseEvent PageChangedEvent(Me, New EventArgs())
 			End Select
 		End Sub
 
 		Private Sub NextStep(sender As Object, e As EventArgs) Handles btn_Create.Click
 			Select Case tc_Creation.SelectedIndex
-				Case tp_Basic.TabIndex
-					tc_Creation.SelectedIndex += 1
-					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
-				Case tp_Address.TabIndex
-					tc_Creation.SelectedIndex += 1
-					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
 				Case tp_Summary.TabIndex
-					DialogResult = DialogResult.OK
-					Me.Close()
-			End Select
-
-			Select Case btn_Create.Text
-				Case "Next"
-					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex + 1
-					RaiseEvent PageChangedEvent(tc_Creation.SelectedIndex)
-				Case "Create"
 					If Not ValidCustomer() Then
+						MessageBox.Show("There were errors in your customer submission. Please try again.", "Customer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 						Return
 					End If
 
-					Me.DialogResult = DialogResult.OK
+					DialogResult = DialogResult.OK
 					Me.Close()
-					'Try
-					'	TryCreate()
-					'	DialogResult = DialogResult.OK
-					'	Close()
-					'Catch ex As Exception
-					'	tss_Feedback.ForeColor = Color.Red
-					'	tss_Feedback.Text = ex.Message
-					'End Try
+				Case Else
+					tc_Creation.SelectedIndex += 1
+					RaiseEvent PageChangedEvent(Me, New EventArgs())
 			End Select
 		End Sub
 
-		Private Sub PageChanged(currentPage As Integer) Handles Me.PageChangedEvent
-			btn_Cancel.Text = If(currentPage <= 0, "Cancel", "Back")
-			btn_Create.Text = If(currentPage >= tc_Creation.TabCount - 1, "Create", "Next")
+		Private Sub PageChanged(sender As Object, e As EventArgs) Handles Me.PageChangedEvent, tc_Creation.SelectedIndexChanged
+			btn_Cancel.Text = If(tc_Creation.SelectedIndex <= tp_Basic.TabIndex, "Cancel", "Back")
+			btn_Create.Text = If(tc_Creation.SelectedIndex >= tp_Summary.TabIndex, "Create", "Next")
+
+			If tc_Creation.SelectedIndex = tp_Summary.TabIndex Then
+				' TODO: Create custom summary page for this. No controls provide desired look and feel
+
+				'' Summary
+				''	* Basics
+				''		- Name:	Customer Name
+				''		- Email: Customer Email
+				'' * Address
+				''		- Street: Customer Street Address
+				''		- City: Customer City
+				''		- State: Customer State
+				''		- Zip Code: Customer Zip Code
+				pg_Summary.SelectedObject = CustomerDisplay
+			End If
 		End Sub
 
 		Private Function ValidName() As Boolean
@@ -149,11 +160,36 @@ Namespace Dialogs
 				End If
 				Dim customer As New Customer(-1, FirstName, LastName, Address, Phone, Email)
 
-				db_Customers.AddCustomer(customer)
+				' dbCustomers.AddCustomer(customer)
 				RaiseEvent CustomerAdded(Me, New CustomerEventArgs(customer, M3Tools.Events.EventType.Added))
 			Catch ex As Exception
 				Throw New Exceptions.CreationException("Failed to create the customer. Please try again.", ex)
 			End Try
 		End Sub
+
+		Private Class DisplayCustomer
+			<Category("Basics")>
+			Property Name As String
+			<Category("Basics")>
+			Property Email As String
+
+			<Category("Address")>
+			Property Street As String
+			<Category("Address")>
+			Property City As String
+			<Category("Address")>
+			Property State As String
+			<Category("Address")>
+			Property ZipCode As String
+
+			WriteOnly Property Address As Address
+				Set(value As Address)
+					Me.Street = value?.Street
+					Me.City = value?.City
+					Me.State = value?.State
+					Me.ZipCode = value?.ZipCode
+				End Set
+			End Property
+		End Class
 	End Class
 End Namespace

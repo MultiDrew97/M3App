@@ -6,6 +6,7 @@ Public Class DisplayListenersCtrl
 	Public Event ListenerAdded As ListenerEventHandler
 	Public Event RemoveListener As ListenerEventHandler
 	Public Event UpdateListener As ListenerEventHandler
+	Public Event AddListener As ListenerEventHandler
 	Public Event RefreshDisplay()
 	Public Event SendEmails()
 
@@ -24,7 +25,7 @@ Public Class DisplayListenersCtrl
 		tsl_Count.Text = String.Format(CountTemplate, ldg_Listeners.Listeners.Count)
 	End Sub
 
-	Private Sub RefreshView() Handles cms_Tools.RefreshView
+	Private Sub RefreshView() Handles ldg_Listeners.RefreshDisplay
 		RaiseEvent RefreshDisplay()
 	End Sub
 
@@ -36,7 +37,7 @@ Public Class DisplayListenersCtrl
 				Return
 			End If
 
-			RaiseEvent ListenerAdded(Me, New ListenerEventArgs(add.Listener))
+			RaiseEvent AddListener(Me, New ListenerEventArgs(add.Listener))
 		End Using
 	End Sub
 
@@ -56,24 +57,6 @@ Public Class DisplayListenersCtrl
 				RaiseEvent ListenerAdded(Me, New ListenerEventArgs(listener, M3Tools.Events.EventType.Added))
 			Next
 		End Using
-	End Sub
-
-	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
-		cms_Tools.ToggleRemove(ldg_Listeners.SelectedRowsCount > 0)
-		cms_Tools.ToggleSend(ldg_Listeners.SelectedRowsCount > 0)
-	End Sub
-
-	Private Sub RemoveRowByToolStrip() Handles cms_Tools.RemoveRows
-		If ldg_Listeners.SelectedRowsCount < 1 Then
-			Return
-		End If
-
-		ldg_Listeners.RemoveSelectedRows()
-
-		' TODO: Open a dialog for bulk deletion
-		'Using bulk As New BulkDeletionDialog(dgv_CustomerTable)
-		'	bulk.ShowDialog()
-		'End Using
 	End Sub
 
 	Private Sub DeleteListener(sender As Object, e As ListenerEventArgs) Handles ldg_Listeners.RemoveListener

@@ -32,7 +32,6 @@ Partial Class DisplayListenersCtrl
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
         Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
-        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -127,17 +126,10 @@ Partial Class DisplayListenersCtrl
         Me.txt_Filter.Name = "txt_Filter"
         Me.txt_Filter.Size = New System.Drawing.Size(100, 25)
         '
-        'cms_Tools
-        '
-        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(133, 48)
-        '
         'DisplayListenersCtrl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ContextMenuStrip = Me.cms_Tools
         Me.Controls.Add(Me.ToolStripContainer1)
         Me.Name = "DisplayListenersCtrl"
         Me.Size = New System.Drawing.Size(517, 395)
@@ -157,7 +149,6 @@ Partial Class DisplayListenersCtrl
     Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents tbtn_Import As Windows.Forms.ToolStripButton
-    Friend WithEvents cms_Tools As ToolsContextMenu
     Friend WithEvents tbtn_Email As Windows.Forms.ToolStripButton
     Friend WithEvents ldg_Listeners As ListenersDataGrid
     Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel

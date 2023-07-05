@@ -62,9 +62,9 @@ Partial Class SendEmailsDialog
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.btn_Send, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btn_Cancel, 0, 0)
-		Me.TableLayoutPanel1.Location = New System.Drawing.Point(253, 323)
-		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-		Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(253, 323)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(146, 29)
         Me.TableLayoutPanel1.TabIndex = 0
@@ -96,17 +96,17 @@ Partial Class SendEmailsDialog
         Me.tc_EmailTypes.Location = New System.Drawing.Point(0, 0)
         Me.tc_EmailTypes.Name = "tc_EmailTypes"
         Me.tc_EmailTypes.SelectedIndex = 0
-		Me.tc_EmailTypes.Size = New System.Drawing.Size(411, 298)
-		Me.tc_EmailTypes.TabIndex = 0
-		'
-		'tp_GDrive
-		'
-		Me.tp_GDrive.Controls.Add(Me.gdt_Files)
+        Me.tc_EmailTypes.Size = New System.Drawing.Size(411, 298)
+        Me.tc_EmailTypes.TabIndex = 0
+        '
+        'tp_GDrive
+        '
+        Me.tp_GDrive.Controls.Add(Me.gdt_Files)
         Me.tp_GDrive.Location = New System.Drawing.Point(4, 22)
         Me.tp_GDrive.Name = "tp_GDrive"
-		Me.tp_GDrive.Size = New System.Drawing.Size(403, 272)
-		Me.tp_GDrive.TabIndex = 0
-		Me.tp_GDrive.Text = "Google Drive"
+        Me.tp_GDrive.Size = New System.Drawing.Size(403, 272)
+        Me.tp_GDrive.TabIndex = 0
+        Me.tp_GDrive.Text = "Google Drive"
         Me.tp_GDrive.UseVisualStyleBackColor = True
         '
         'gdt_Files
@@ -114,18 +114,18 @@ Partial Class SendEmailsDialog
         Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
         Me.gdt_Files.Name = "gdt_Files"
-		Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
-		Me.gdt_Files.TabIndex = 4
-		Me.gdt_Files.WithChildren = False
+        Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
+        Me.gdt_Files.TabIndex = 4
+        Me.gdt_Files.WithChildren = False
         '
         'tp_LocalFiles
         '
         Me.tp_LocalFiles.Controls.Add(Me.fu_Receipts)
         Me.tp_LocalFiles.Location = New System.Drawing.Point(4, 22)
         Me.tp_LocalFiles.Name = "tp_LocalFiles"
-		Me.tp_LocalFiles.Size = New System.Drawing.Size(403, 272)
-		Me.tp_LocalFiles.TabIndex = 0
-		Me.tp_LocalFiles.Text = "Local Files"
+        Me.tp_LocalFiles.Size = New System.Drawing.Size(403, 272)
+        Me.tp_LocalFiles.TabIndex = 0
+        Me.tp_LocalFiles.Text = "Local Files"
         Me.tp_LocalFiles.UseVisualStyleBackColor = True
         '
         'fu_Receipts
@@ -133,54 +133,54 @@ Partial Class SendEmailsDialog
         Me.fu_Receipts.Dock = System.Windows.Forms.DockStyle.Fill
         Me.fu_Receipts.Location = New System.Drawing.Point(0, 0)
         Me.fu_Receipts.Name = "fu_Receipts"
-		Me.fu_Receipts.Size = New System.Drawing.Size(403, 272)
-		Me.fu_Receipts.TabIndex = 1
-		'
-		'bw_GatherFiles
-		'
-		'
-		'bw_PrepEmails
-		'
-		'
-		'bw_GatherReceipients
-		'
-		'
-		'bw_SendEmails
-		'
-		'
-		'ToolStripContainer1
-		'
-		'
-		'ToolStripContainer1.BottomToolStripPanel
-		'
-		Me.ToolStripContainer1.BottomToolStripPanel.Controls.Add(Me.ss_StatusBar)
+        Me.fu_Receipts.Size = New System.Drawing.Size(403, 272)
+        Me.fu_Receipts.TabIndex = 1
+        '
+        'bw_GatherFiles
+        '
+        '
+        'bw_PrepEmails
+        '
+        '
+        'bw_GatherReceipients
+        '
+        '
+        'bw_SendEmails
+        '
+        '
+        'ToolStripContainer1
+        '
+        '
+        'ToolStripContainer1.BottomToolStripPanel
+        '
+        Me.ToolStripContainer1.BottomToolStripPanel.Controls.Add(Me.ss_StatusBar)
         '
         'ToolStripContainer1.ContentPanel
         '
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.tc_EmailTypes)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(411, 298)
-		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Top
-		Me.ToolStripContainer1.LeftToolStripPanelVisible = False
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(411, 298)
+        Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ToolStripContainer1.LeftToolStripPanelVisible = False
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
         Me.ToolStripContainer1.RightToolStripPanelVisible = False
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(411, 320)
-		Me.ToolStripContainer1.TabIndex = 1
-		Me.ToolStripContainer1.Text = "ToolStripContainer1"
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(411, 320)
+        Me.ToolStripContainer1.TabIndex = 1
+        Me.ToolStripContainer1.Text = "ToolStripContainer1"
         Me.ToolStripContainer1.TopToolStripPanelVisible = False
         '
         'ss_StatusBar
         '
         Me.ss_StatusBar.Dock = System.Windows.Forms.DockStyle.None
-		Me.ss_StatusBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsl_Status, Me.tsp_Progress})
-		Me.ss_StatusBar.Location = New System.Drawing.Point(0, 0)
+        Me.ss_StatusBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsl_Status, Me.tsp_Progress})
+        Me.ss_StatusBar.Location = New System.Drawing.Point(0, 0)
         Me.ss_StatusBar.Name = "ss_StatusBar"
-		Me.ss_StatusBar.Size = New System.Drawing.Size(411, 22)
-		Me.ss_StatusBar.TabIndex = 0
-		'
-		'tsl_Status
-		'
-		Me.tsl_Status.Name = "tsl_Status"
+        Me.ss_StatusBar.Size = New System.Drawing.Size(411, 22)
+        Me.ss_StatusBar.TabIndex = 0
+        '
+        'tsl_Status
+        '
+        Me.tsl_Status.Name = "tsl_Status"
         Me.tsl_Status.Size = New System.Drawing.Size(141, 17)
         Me.tsl_Status.Text = "Select the files to attach..."
         '
@@ -206,9 +206,9 @@ Partial Class SendEmailsDialog
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btn_Cancel
-		Me.ClientSize = New System.Drawing.Size(411, 364)
-		Me.Controls.Add(Me.ToolStripContainer1)
-		Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.ClientSize = New System.Drawing.Size(411, 364)
+        Me.Controls.Add(Me.ToolStripContainer1)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False

@@ -1,10 +1,12 @@
-﻿Imports SPPBC.M3Tools.Events.Listeners
+﻿Imports SPPBC.M3Tools.Events
+Imports SPPBC.M3Tools.Events.Listeners
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
 Public Class ListenersDataGrid
 	Public Event EditListener As ListenerEventHandler
 	Public Event RemoveListener As ListenerEventHandler
+	Public Event RefreshDisplay()
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -28,22 +30,24 @@ Public Class ListenersDataGrid
 		End Set
 	End Property
 
-	Public ReadOnly Property SelectedListeners As Types.ListenerCollection
+	Public ReadOnly Property SelectedListeners As IList
 		Get
-			Dim list As New Types.ListenerCollection
-
-			For Each row As DataGridViewRow In dgv_Listeners.Rows
-				If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
-					Continue For
+			If ListenersSelectable Then
+				If chk_SelectAll.Checked Then
+					Return dgv_Listeners.Rows
 				End If
 
-				'Dim drv = CType(row.DataBoundItem, DataRowView)
-				'Dim ldr = CType(drv.Row, DataTables.ListenersDataRow)
+				For Each row As DataGridViewRow In dgv_Listeners.Rows
+					If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
+						row.Selected = False
+						Continue For
+					End If
 
-				list.Add(CType(row.DataBoundItem, Types.Listener))
-			Next
+					row.Selected = True
+				Next
+			End If
 
-			Return list
+			Return dgv_Listeners.SelectedRows
 		End Get
 	End Property
 
@@ -183,5 +187,28 @@ Public Class ListenersDataGrid
 			row.Cells(dgc_Selection.DisplayIndex).Value = chk_SelectAll.Checked
 		Next
 		dgv_Listeners.Invalidate()
+	End Sub
+
+	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
+		cms_Tools.ToggleRemove(SelectedRowsCount > 0)
+		cms_Tools.ToggleEdit(SelectedRowsCount > 0)
+	End Sub
+
+	Private Sub EditPerson() Handles cms_Tools.EditPerson
+		If SelectedRowsCount <= 0 Then
+			Return
+		End If
+
+		For Each row As DataGridViewRow In SelectedListeners
+			CellClicked(Me, New DataGridViewCellEventArgs(dgc_Edit.Index, row.Index))
+		Next
+	End Sub
+
+	Private Sub RemoveRowByToolStrip() Handles cms_Tools.RemoveRows
+		If SelectedRowsCount < 1 Then
+			Return
+		End If
+
+		RemoveSelectedRows()
 	End Sub
 End Class
