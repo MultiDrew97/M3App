@@ -43,10 +43,10 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Me.db_Connection = New M3Tools.Database.Database(Me.components)
+            Me.dbConnection = New SPPBC.M3Tools.Database.Database(Me.components)
 
         End Sub
 
-        Friend WithEvents db_Connection As Database
+        Friend WithEvents dbConnection As Database
     End Class
 End Namespace

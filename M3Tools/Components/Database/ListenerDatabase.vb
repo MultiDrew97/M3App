@@ -11,10 +11,10 @@ Namespace Database
 		<SettingsBindable(True)>
 		Public Property Username As String
 			Get
-				Return db_Connection.Username
+				Return dbConnection.Username
 			End Get
 			Set(value As String)
-				db_Connection.Username = value
+				dbConnection.Username = value
 			End Set
 		End Property
 
@@ -24,10 +24,10 @@ Namespace Database
 		<Description("The password to use for the database connection")>
 		Public Property Password As String
 			Get
-				Return db_Connection.Password
+				Return dbConnection.Password
 			End Get
 			Set(value As String)
-				db_Connection.Password = value
+				dbConnection.Password = value
 			End Set
 		End Property
 
@@ -36,10 +36,10 @@ Namespace Database
 		<SettingsBindable(True)>
 		Public Property InitialCatalog As String
 			Get
-				Return db_Connection.InitialCatalog
+				Return dbConnection.InitialCatalog
 			End Get
 			Set(value As String)
-				db_Connection.InitialCatalog = value
+				dbConnection.InitialCatalog = value
 			End Set
 		End Property
 
@@ -52,12 +52,12 @@ Namespace Database
 		End Sub
 
 		Private Sub AddListener(ParamArray params As SqlParameter())
-			Using _cmd = db_Connection.Connect()
-				_cmd.CommandType = CommandType.StoredProcedure
-				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddListener]"
-				_cmd.Parameters.AddRange(params)
+			Using cmd = dbConnection.Connect()
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddListener]"
+				cmd.Parameters.AddRange(params)
 
-				_cmd.ExecuteNonQuery()
+				cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
@@ -70,12 +70,12 @@ Namespace Database
 		End Sub
 
 		Private Sub RemoveListener(ParamArray param As SqlParameter())
-			Using _cmd = db_Connection.Connect()
-				_cmd.CommandType = CommandType.StoredProcedure
-				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_RemoveListener]"
-				_cmd.Parameters.AddRange(param)
+			Using cmd = dbConnection.Connect()
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_RemoveListener]"
+				cmd.Parameters.AddRange(param)
 
-				_cmd.ExecuteNonQuery()
+				cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
@@ -96,27 +96,27 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateListener(ParamArray params As SqlParameter())
-			Using _cmd = db_Connection.Connect()
-				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateListener]"
-				_cmd.CommandType = CommandType.StoredProcedure
-				_cmd.Parameters.AddRange(params)
+			Using cmd = dbConnection.Connect()
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateListener]"
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddRange(params)
 
-				_cmd.ExecuteNonQuery()
+				cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
 		Public Function GetListeners() As Types.ListenerCollection
 			Dim listeners As New Types.ListenerCollection
 
-			Using _cmd = db_Connection.Connect()
-				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
+			Using cmd = dbConnection.Connect()
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
-				Using reader = _cmd.ExecuteReader
+				Using reader = cmd.ExecuteReader
 					Do While reader.Read()
 						listeners.Add(New Types.Listener(
-							CInt(reader("ListenerID")),
-							CStr(reader("Name")),
-							CStr(reader("Email"))
+							CInt(reader(ColumnNames.ID)),
+							CStr(reader(ColumnNames.Name)),
+							CStr(reader(ColumnNames.Email))
 						))
 					Loop
 				End Using
@@ -138,25 +138,27 @@ Namespace Database
 		End Function
 
 		Private Function GetListener(column As ColumnSelection, ParamArray params As SqlParameter()) As Types.Listener
-			Using _cmd = db_Connection.Connect()
-				_cmd.Parameters.AddRange(params)
-				Dim cmdText As String = ""
+			Using cmd = dbConnection.Connect()
+				Dim cmdText As String = "WHERE {0}={1}"
 
 				Select Case column
 					Case ColumnSelection.Email
-						cmdText = "WHERE {column}=@EmailAddress"
+						cmdText = "WHERE Email=@EmailAddress"
 					Case ColumnSelection.ID
-						cmdText = "WHERE {column}=@ListenerID"
+						cmdText = "WHERE ListenerID=@ListenerID"
+					Case Else
+						Throw New ArgumentException()
 				End Select
 
-				_cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] {cmdText}"
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] {cmdText}"
+				cmd.Parameters.AddRange(params)
 
-				Using reader = _cmd.ExecuteReaderAsync().Result
+				Using reader = cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
 						Return New Types.Listener(
-							CInt(reader("ListenerID")),
-							CStr(reader("Name")),
-							CStr(reader("Email"))
+							CInt(reader(ColumnNames.ID)),
+							CStr(reader(ColumnNames.Name)),
+							CStr(reader(ColumnNames.Email))
 						)
 					Loop
 				End Using
@@ -164,5 +166,14 @@ Namespace Database
 
 			Return Nothing
 		End Function
+
+		Private Structure ColumnNames
+			Shared ReadOnly Property ID As String = "ListenerID"
+			Shared ReadOnly Property Name As String = "Name"
+			Shared ReadOnly Property Email As String = "Email"
+			Shared ReadOnly Property Joined As String = "Joined"
+
+			Shared ReadOnly Property Message As String = "Message"
+		End Structure
 	End Class
 End Namespace

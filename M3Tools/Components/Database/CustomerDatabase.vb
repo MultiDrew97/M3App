@@ -1,21 +1,23 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports SPPBC.M3Tools.Events
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class CustomerDatabase
-		Private ReadOnly tableName As String = "Customers"
+		Private Const TableName As String = "Customers"
+
 		'The username to use for the database connection
 		<EditorBrowsable()>
 		<SettingsBindable(True)>
 		<Description("The username to use for the database connection")>
 		Public Property Username As String
 			Get
-				Return db_Connection.Username
+				Return dbConnection.Username
 			End Get
 			Set(value As String)
-				db_Connection.Username = value
+				dbConnection.Username = value
 			End Set
 		End Property
 
@@ -25,14 +27,14 @@ Namespace Database
 		<Description("The password to use for the database connection")>
 		Public Property Password As String
 			Get
-				Return db_Connection.Password
+				Return dbConnection.Password
 				'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
 			End Get
 			Set(value As String)
 				'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
 				'Console.WriteLine(temp)
 				'__connectionString.Password = temp
-				db_Connection.Password = value
+				dbConnection.Password = value
 			End Set
 		End Property
 
@@ -42,10 +44,10 @@ Namespace Database
 		<Description("The initial catalog to use for the database connection")>
 		Public Property InitialCatalog As String
 			Get
-				Return db_Connection.InitialCatalog
+				Return dbConnection.InitialCatalog
 			End Get
 			Set(value As String)
-				db_Connection.InitialCatalog = value
+				dbConnection.InitialCatalog = value
 			End Set
 		End Property
 
@@ -83,24 +85,6 @@ Namespace Database
 				   Optional addrStreet As String = Nothing, Optional addrCity As String = Nothing,
 				   Optional addrState As String = Nothing, Optional addrZip As String = Nothing,
 				   Optional phone As String = Nothing, Optional email As String = Nothing)
-
-			'used string.format due to enormous query strings and concatination, allowing for easy expansion
-			'SELECT CONVERT(VARCHAR(10), getdate(), 101) is a query found online that gets just the date of getdate().
-			'source = https://tableplus.io/blog/2018/09/ms-sql-server-how-to-get-date-only-from-datetime-value.html
-
-			'Style	How it’s displayed
-			'101    mm/dd/yyyy
-			'102    yyyy.mm.dd
-			'103    dd/mm/yyyy
-			'104    dd.mm.yyyy
-			'105    dd-mm-yyyy
-			'110    mm-dd-yyyy
-			'111    yyyy/mm/dd
-			'106    dd mon yyyy
-			'107    Mon dd, yyyy
-
-			'date string that holds the command to get the date for when the person joined
-			'Dim dateString = "SELECT CONVERT(VARCHAR(10), GETDATE(), 111)"
 			AddCustomer(
 				New SqlParameter("FirstName", fName), New SqlParameter("LastName", lName),
 				New SqlParameter("Street", addrStreet), New SqlParameter("City", addrCity),
@@ -109,34 +93,32 @@ Namespace Database
 		End Sub
 
 		Private Sub AddCustomer(ParamArray params As SqlParameter())
-			Using _conn = db_Connection.Connect()
-				_conn.CommandType = CommandType.StoredProcedure
-				_conn.CommandText = $"[{My.Settings.Schema}].[sp_AddCustomer]"
+			Using cmd = dbConnection.Connect()
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddCustomer]"
+				cmd.Parameters.AddRange(params)
 
-				_conn.Parameters.AddRange(params)
-
-				_conn.ExecuteNonQuery()
+				cmd.ExecuteNonQuery()
 			End Using
 		End Sub
 
 		Public Function GetCustomers() As CustomerCollection
 			Dim customers As New CustomerCollection()
 
-			Using _conn = db_Connection.Connect
-				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
+			Using cmd = dbConnection.Connect
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}]"
 
-				Using reader = _conn.ExecuteReader
+				Using reader = cmd.ExecuteReader
 
 					Do While reader.Read()
 						customers.Add(New Customer(
-									CInt(reader("CustomerID")),
-									CStr(reader("FirstName")),
-									CStr(reader("LastName")),
-									Address.Parse(reader("Street"), reader("City"), reader("State"), reader("ZipCode")),
-									TryCast(reader("PhoneNumber"), String),
-									TryCast(reader("Email"), String),
-									CDate(reader("JoinDate"))
-								  ))
+							CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(reader(ColumnNames.LastName)),
+							New Address(
+								TryCast(reader(ColumnNames.Street), String), TryCast(reader(ColumnNames.City), String),
+								TryCast(reader(ColumnNames.State), String), TryCast(reader(ColumnNames.Zip), String)
+								),
+							TryCast(reader(ColumnNames.Phone), String), TryCast(reader(ColumnNames.Email), String), CDate(reader(ColumnNames.Joined))
+						))
 					Loop
 
 
@@ -151,22 +133,23 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Using _conn = db_Connection.Connect()
-				_conn.Parameters.AddWithValue("CustomerID", customerID)
+			Using cmd = dbConnection.Connect()
+				cmd.Parameters.AddWithValue("CustomerID", customerID)
 
-				_conn.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE CustomerID = @CustomerID"
+				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}] WHERE CustomerID = @CustomerID"
 
-				Using reader = _conn.ExecuteReader()
+				Using reader = cmd.ExecuteReader()
 					If Not reader.Read() Then
 						Throw New Exceptions.CustomerNotFoundException()
 					End If
 
 					Return New Customer(
-							customerID, CStr(reader("FirstName")), CStr(reader("LastName")),
+							CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(reader(ColumnNames.LastName)),
 							New Address(
-								TryCast(reader("Street"), String), TryCast(reader("City"), String), TryCast(reader("State"), String), TryCast(reader("ZipCode"), String)
+								TryCast(reader(ColumnNames.Street), String), TryCast(reader(ColumnNames.City), String),
+								TryCast(reader(ColumnNames.State), String), TryCast(reader(ColumnNames.Zip), String)
 								),
-							TryCast(reader("PhoneNumber"), String), TryCast(reader("Email"), String), CDate(reader("JoinDate"))
+							TryCast(reader(ColumnNames.Phone), String), TryCast(reader(ColumnNames.Email), String), CDate(reader(ColumnNames.Joined))
 						)
 
 				End Using
@@ -174,10 +157,6 @@ Namespace Database
 		End Function
 
 		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
-			'If Not Utils.ValidID(customerID) Then
-			'	Throw New ArgumentException($"ID Values must be greater than or equal to {My.Settings.MinID}")
-			'End If
-
 			UpdateCustomer(customerID, fName, lName, Address.Parse(street, city, state, zipCode), phone, email)
 		End Sub
 
@@ -204,7 +183,7 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateCustomer(ParamArray params As SqlParameter())
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateCustomer]"
 				cmd.CommandType = CommandType.StoredProcedure
 				cmd.Parameters.AddRange(params)
@@ -214,17 +193,28 @@ Namespace Database
 		End Sub
 
 		Public Sub RemoveCustomer(customerID As Integer)
-			If Not Utils.ValidID(customerID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
-			End If
+			Using cmd = dbConnection.Connect()
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_RemoveCustomer]"
+				cmd.CommandType = CommandType.StoredProcedure
+				cmd.Parameters.AddWithValue("CustomerID", customerID)
 
-			Using _conn = db_Connection.Connect()
-				_conn.Parameters.AddWithValue("CustomerID", customerID)
-
-				_conn.CommandText = "DELETE FROM CUSTOMERS WHERE CustomerID = @CustomerID"
-
-				_conn.ExecuteNonQuery()
+				cmd.ExecuteNonQuery()
 			End Using
 		End Sub
+
+		Private Structure ColumnNames
+			Shared ReadOnly Property ID As String = "CustomerID"
+			Shared ReadOnly Property FirstName As String = "FirstName"
+			Shared ReadOnly Property LastName As String = "LastName"
+			Shared ReadOnly Property Street As String = "Street"
+			Shared ReadOnly Property City As String = "City"
+			Shared ReadOnly Property State As String = "State"
+			Shared ReadOnly Property Zip As String = "ZipCode"
+			Shared ReadOnly Property Email As String = "Email"
+			Shared ReadOnly Property Phone As String = "PhoneNumber"
+			Shared ReadOnly Property Joined As String = "JoinDate"
+
+			Shared ReadOnly Property Message As String = "Message"
+		End Structure
 	End Class
 End Namespace

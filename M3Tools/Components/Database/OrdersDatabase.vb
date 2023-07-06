@@ -11,10 +11,10 @@ Namespace Database
 		<SettingsBindable(True)>
 		Public Property Username As String
 			Get
-				Return db_Connection.Username
+				Return dbConnection.Username
 			End Get
 			Set(value As String)
-				db_Connection.Username = value
+				dbConnection.Username = value
 			End Set
 		End Property
 
@@ -24,10 +24,10 @@ Namespace Database
 		<Description("The password to use for the database connection")>
 		Public Property Password As String
 			Get
-				Return db_Connection.Password
+				Return dbConnection.Password
 			End Get
 			Set(value As String)
-				db_Connection.Password = value
+				dbConnection.Password = value
 			End Set
 		End Property
 
@@ -37,25 +37,25 @@ Namespace Database
 		<SettingsBindable(True)>
 		Public Property InitialCatalog As String
 			Get
-				Return db_Connection.InitialCatalog
+				Return dbConnection.InitialCatalog
 			End Get
 			Set(value As String)
-				db_Connection.InitialCatalog = value
+				dbConnection.InitialCatalog = value
 			End Set
 		End Property
 
 		Public Function GetOrders() As OrderCollection
 			Dim orders As New OrderCollection()
 
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
 
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read
-						orders.Add(New Order(
-								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
-									Utils.TryDateCast(reader("CompletedDate"))))
+						orders.Add(New Order(CInt(reader(ColumnNames.ID)), CInt(reader(ColumnNames.Customer)),
+											 CInt(reader(ColumnNames.Item)), CInt(reader(ColumnNames.Quantity)),
+											 CDec(reader(ColumnNames.Total)), CDate(reader(ColumnNames.PlacedDate)),
+											 Utils.TryDateCast(reader(ColumnNames.CompletedDate))))
 					Loop
 				End Using
 			End Using
@@ -84,7 +84,7 @@ Namespace Database
 		End Sub
 
 		Private Sub AddOrder(ParamArray params As SqlParameter())
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddOrder]"
 				cmd.CommandType = CommandType.StoredProcedure
 
@@ -112,7 +112,7 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateOrder(ParamArray params As SqlParameter())
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.Parameters.AddRange(params)
 
 				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[{tableName}] SET QUANTITY=@Quantity, ItemID=@ItemID WHERE OrderID = @OrderID"
@@ -132,7 +132,7 @@ Namespace Database
 		End Sub
 
 		Private Sub CancelOrder(ParamArray params As SqlParameter())
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.CommandText = $"[{My.Settings.Schema}].[sp_CancelOrder]"
 				cmd.CommandType = CommandType.StoredProcedure
 				cmd.Parameters.AddRange(params)
@@ -150,7 +150,7 @@ Namespace Database
 		End Sub
 
 		Private Sub CompleteOrder(ParamArray params As SqlParameter())
-			Using cmd = db_Connection.Connect
+			Using cmd = dbConnection.Connect
 				cmd.CommandText = $"[{My.Settings.Schema}].[sp_CompleteOrder]"
 				cmd.CommandType = CommandType.StoredProcedure
 				cmd.Parameters.AddRange(params)
@@ -164,7 +164,7 @@ Namespace Database
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
 
-			Using cmd = db_Connection.Connect()
+			Using cmd = dbConnection.Connect()
 				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE OrderID=@OrderID"
 				cmd.Parameters.AddWithValue("OrderID", orderID)
 
@@ -173,10 +173,10 @@ Namespace Database
 						Throw New Exceptions.OrderNotFoundException($"No order with OrderID '{orderID}' was found")
 					End If
 
-					Return New Order(
-								   CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-									CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")),
-									Utils.TryDateCast(reader("CompletedDate")))
+					Return New Order(CInt(reader(ColumnNames.ID)), CInt(reader(ColumnNames.Customer)),
+											 CInt(reader(ColumnNames.Item)), CInt(reader(ColumnNames.Quantity)),
+											 CDec(reader(ColumnNames.Total)), CDate(reader(ColumnNames.PlacedDate)),
+											 Utils.TryDateCast(reader(ColumnNames.CompletedDate)))
 				End Using
 			End Using
 
@@ -189,14 +189,16 @@ Namespace Database
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
 
-			Using cmd = db_Connection.Connect()
+			Using cmd = dbConnection.Connect()
 				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE CustomerID=@CustomerID"
 				cmd.Parameters.AddWithValue("CustomerID", customerID)
 
 				Using reader = cmd.ExecuteReader()
 					While reader.Read()
-						orders.Add(New Order(CInt(reader("OrderID")), CInt(reader("CustomerID")), CInt(reader("ItemID")),
-							CInt(reader("Quantity")), CDec(reader("OrderTotal")), CDate(reader("OrderDate")), Utils.TryDateCast(reader("CompletedDate"))))
+						orders.Add(New Order(CInt(reader(ColumnNames.ID)), CInt(reader(ColumnNames.Customer)),
+											 CInt(reader(ColumnNames.Item)), CInt(reader(ColumnNames.Quantity)),
+											 CDec(reader(ColumnNames.Total)), CDate(reader(ColumnNames.PlacedDate)),
+											 Utils.TryDateCast(reader(ColumnNames.CompletedDate))))
 					End While
 
 				End Using
@@ -204,5 +206,19 @@ Namespace Database
 
 			Return orders
 		End Function
+
+
+
+		Private Structure ColumnNames
+			Shared ReadOnly Property ID As String = "OrderID"
+			Shared ReadOnly Property Customer As String = "CustomerID"
+			Shared ReadOnly Property Item As String = "ItemID"
+			Shared ReadOnly Property Quantity As String = "Quantity"
+			Shared ReadOnly Property Total As String = "OrderTotal"
+			Shared ReadOnly Property PlacedDate As String = "OrderDate"
+			Shared ReadOnly Property CompletedDate As String = "CompletedDate"
+
+			Shared ReadOnly Property Message As String = "Message"
+		End Structure
 	End Class
 End Namespace

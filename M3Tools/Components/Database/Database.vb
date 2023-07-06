@@ -12,13 +12,14 @@ Namespace Database
 	Friend Enum ColumnSelection
 		ID
 		Email
+		Stock
+		Price
 	End Enum
 
 	Friend Class Database
 		Implements IDisposable
 
 		Private __connection As SqlConnection
-		Private ReadOnly __command As SqlCommand
 		Private ReadOnly __connectionString As New SqlConnectionStringBuilder(My.Settings.DefaultConnectionString)
 
 		<Description("The username to use for the database connection")>
@@ -54,6 +55,8 @@ Namespace Database
 				__connectionString.InitialCatalog = value
 			End Set
 		End Property
+
+		Friend Property TableName As String
 
 		Sub New(username As String, password As String, Optional catalog As String = Nothing)
 			Me.Username = username

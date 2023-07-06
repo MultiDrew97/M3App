@@ -6,6 +6,7 @@ Imports SPPBC.M3Tools.Types
 Namespace Database
 	Public NotInheritable Class UserDatabase
 		Private Const TableName As String = "Users"
+
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
 		Public Property Username As String
@@ -46,26 +47,22 @@ Namespace Database
 				dbConnection.InitialCatalog = value
 			End Set
 		End Property
+
 		Public Function CreateUser(username As String, password As String, Optional role As AccountRole = AccountRole.User) As Boolean
 			Return CreateUser({
 				New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
 				New SqlParameter("Password", password) With {.Direction = ParameterDirection.Input},
 				New SqlParameter("AccountRole", role) With {.Direction = ParameterDirection.Input}
 			})
-			'myCmd.Parameters.AddRange({New SqlParameter("Username", username), New SqlParameter("Password", password)})
-
-			'myCmd.CommandText = "CREATE USER @Username WITH PASSWORD = @Password"
-
-			'myCmd.ExecuteNonQuery()
 		End Function
 
 		Public Function CreateUser(params As SqlParameter()) As Boolean
-			Using _cmd = dbConnection.Connect()
-				_cmd.Parameters.AddRange(params)
-				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddM3Login]"
-				_cmd.CommandType = CommandType.StoredProcedure
+			Using cmd = dbConnection.Connect()
+				cmd.Parameters.AddRange(params)
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddM3Login]"
+				cmd.CommandType = CommandType.StoredProcedure
 
-				Using reader = _cmd.ExecuteReaderAsync().Result
+				Using reader = cmd.ExecuteReaderAsync().Result
 					Do While reader.Read()
 						If reader.GetBoolean(reader.GetOrdinal("Success")) Then
 							Return True
@@ -77,7 +74,7 @@ Namespace Database
 					Throw New Exceptions.UserException("Unable to create")
 				End Using
 
-				' Return CBool(_cmd.Parameters("Success").Value)
+				' Return CBool(cmd.Parameters("Success").Value)
 			End Using
 		End Function
 
@@ -101,12 +98,12 @@ Namespace Database
 		End Sub
 
 		Private Sub CloseAccount(param As SqlParameter)
-			Using _cmd = dbConnection.Connect
-				_cmd.Parameters.Add(param)
-				_cmd.CommandText = $"[{My.Settings.Schema}].[sp_DeactivateAccount]"
-				_cmd.CommandType = CommandType.StoredProcedure
+			Using cmd = dbConnection.Connect
+				cmd.Parameters.Add(param)
+				cmd.CommandText = $"[{My.Settings.Schema}].[sp_DeactivateAccount]"
+				cmd.CommandType = CommandType.StoredProcedure
 
-				_cmd.ExecuteNonQueryAsync()
+				cmd.ExecuteNonQueryAsync()
 			End Using
 		End Sub
 
@@ -120,16 +117,17 @@ Namespace Database
 
 		Private Function Login(ParamArray params As SqlParameter()) As User
 			Using cmd = dbConnection.Connect()
+				' TODO: Convert to a stored procedure to clean this up
 				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[tf_Login](@Username, @Password)"
 				cmd.Parameters.AddRange(params)
 
 				Using reader = cmd.ExecuteReader
 					If reader.Read() Then
-						If Not Utils.ValidID(CInt(reader("UserID"))) Then
-							If CStr(reader("Message")).ToLower().Contains("username") Then
-								Throw New Exceptions.UsernameException(CStr(reader("Message")))
-							ElseIf CStr(reader("Message")).ToLower().Contains("password") Then
-								Throw New Exceptions.PasswordException(CStr(reader("Message")))
+						If Not Utils.ValidID(CInt(reader(ColumnNames.ID))) Then
+							If CStr(reader(ColumnNames.Message)).ToLower().Contains("username") Then
+								Throw New Exceptions.UsernameException(CStr(reader(ColumnNames.Message)))
+							ElseIf CStr(reader(ColumnNames.Message)).ToLower().Contains("password") Then
+								Throw New Exceptions.PasswordException(CStr(reader(ColumnNames.Message)))
 								Throw New Exceptions.LoginException("Unable to Login at this time.")
 							End If
 						End If
@@ -156,11 +154,11 @@ Namespace Database
 				Using reader = _con.ExecuteReader()
 					Do While reader.Read()
 						Dim buffer(64) As Byte
-						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
+						reader.GetBytes(reader.GetOrdinal(ColumnNames.Password), 0, buffer, 0, 64)
 
-						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
-								CType(reader("Salt"), Guid), CType(reader("AccountRole"), AccountRole)
+						Return New User(CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(ColumnNames.LastName),
+								CStr(reader(ColumnNames.Username)), TryCast(reader(ColumnNames.Email), String), buffer,
+								CStr(reader(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
 							)
 					Loop
 
@@ -180,11 +178,11 @@ Namespace Database
 				Using reader = cmd.ExecuteReader
 					Do While reader.Read()
 						Dim buffer(64) As Byte
-						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
+						reader.GetBytes(reader.GetOrdinal(ColumnNames.Password), 0, buffer, 0, 64)
 
-						Return New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
-								CStr(reader("Salt")), CType(reader("AccountRole"), AccountRole)
+						Return New User(CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(ColumnNames.LastName),
+								CStr(reader(ColumnNames.Username)), TryCast(reader(ColumnNames.Email), String), buffer,
+								CStr(reader(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
 							)
 					Loop
 
@@ -203,11 +201,11 @@ Namespace Database
 
 					Do While reader.Read()
 						Dim buffer(64) As Byte
-						reader.GetBytes(reader.GetOrdinal("Password"), 0, buffer, 0, 64)
+						reader.GetBytes(reader.GetOrdinal(ColumnNames.Password), 0, buffer, 0, 64)
 
-						users.Append(New User(CInt(reader("UserID")), CStr(reader("FirstName")), CStr(reader("LastName")),
-								CStr(reader("Username")), TryCast(reader("Email"), String), buffer,
-								CStr(reader("Salt")), CType(reader("AccountRole"), AccountRole)
+						users.Append(New User(CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(ColumnNames.LastName),
+								CStr(reader(ColumnNames.Username)), TryCast(reader(ColumnNames.Email), String), buffer,
+								CStr(reader(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
 							)
 						)
 					Loop
@@ -216,5 +214,20 @@ Namespace Database
 
 			Return users
 		End Function
+
+		Private Structure ColumnNames
+			Shared ReadOnly Property ID As String = "UserID"
+			Shared ReadOnly Property FirstName As String = "FirstName"
+			Shared ReadOnly Property LastName As String = "LastName"
+			Shared ReadOnly Property Email As String = "Email"
+			Shared ReadOnly Property Username As String = "Username"
+			Shared ReadOnly Property Password As String = "Password"
+			Shared ReadOnly Property Role As String = "AccountRole"
+			Shared ReadOnly Property Salt As String = "Salt"
+			Shared ReadOnly Property LastLogin As String = "LastLogin"
+			Shared ReadOnly Property Joined As String = "Joined"
+
+			Shared ReadOnly Property Message As String = "Message"
+		End Structure
 	End Class
 End Namespace
