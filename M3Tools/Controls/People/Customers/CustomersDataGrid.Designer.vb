@@ -24,9 +24,14 @@ Partial Class CustomersDataGrid
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersDataGrid))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersDataGrid))
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_Customers = New System.Windows.Forms.DataGridView()
+        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
+        Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
+        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
+        Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
         Me.dgc_CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Selection = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgc_FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,10 +42,6 @@ Partial Class CustomersDataGrid
         Me.dgc_Join = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
         Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
-        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
-        Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
-        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         CType(Me.dgv_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -60,6 +61,32 @@ Partial Class CustomersDataGrid
         Me.dgv_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_Customers.Size = New System.Drawing.Size(610, 500)
         Me.dgv_Customers.TabIndex = 2
+        '
+        'cms_Tools
+        '
+        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
+        '
+        'bsCustomers
+        '
+        Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.DataTables.CustomersDataTable)
+        '
+        'chk_SelectAll
+        '
+        Me.chk_SelectAll.AutoSize = True
+        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
+        Me.chk_SelectAll.Name = "chk_SelectAll"
+        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
+        Me.chk_SelectAll.TabIndex = 3
+        Me.chk_SelectAll.TabStop = False
+        Me.chk_SelectAll.UseVisualStyleBackColor = True
+        '
+        'db_Customers
+        '
+        Me.db_Customers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+        Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
+        Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '
         'dgc_CustomerID
         '
@@ -118,6 +145,8 @@ Partial Class CustomersDataGrid
         '
         Me.dgc_Phone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgc_Phone.DataPropertyName = "PhoneNumber"
+        DataGridViewCellStyle1.Format = "(999) 000-0000"
+        Me.dgc_Phone.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgc_Phone.FillWeight = 20.0!
         Me.dgc_Phone.HeaderText = "Phone"
         Me.dgc_Phone.MinimumWidth = 100
@@ -146,10 +175,10 @@ Partial Class CustomersDataGrid
         '
         'dgc_Edit
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.NullValue = CType(resources.GetObject("DataGridViewCellStyle1.NullValue"), Object)
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(5)
-        Me.dgc_Edit.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(5)
+        Me.dgc_Edit.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgc_Edit.FillWeight = 5.0!
         Me.dgc_Edit.HeaderText = ""
         Me.dgc_Edit.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
@@ -161,10 +190,10 @@ Partial Class CustomersDataGrid
         '
         'dgc_Remove
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(5)
-        Me.dgc_Remove.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.NullValue = CType(resources.GetObject("DataGridViewCellStyle3.NullValue"), Object)
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(5)
+        Me.dgc_Remove.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgc_Remove.Description = "Remove the listener from the database and stop sending emails"
         Me.dgc_Remove.FillWeight = 5.0!
         Me.dgc_Remove.HeaderText = ""
@@ -174,32 +203,6 @@ Partial Class CustomersDataGrid
         Me.dgc_Remove.Name = "dgc_Remove"
         Me.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Remove.Width = 25
-        '
-        'bsCustomers
-        '
-        Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.DataTables.CustomersDataTable)
-        '
-        'chk_SelectAll
-        '
-        Me.chk_SelectAll.AutoSize = True
-        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
-        Me.chk_SelectAll.Name = "chk_SelectAll"
-        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
-        Me.chk_SelectAll.TabIndex = 3
-        Me.chk_SelectAll.TabStop = False
-        Me.chk_SelectAll.UseVisualStyleBackColor = True
-        '
-        'db_Customers
-        '
-        Me.db_Customers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-        Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-        Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-        '
-        'cms_Tools
-        '
-        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(181, 92)
         '
         'CustomersDataGrid
         '
@@ -220,6 +223,7 @@ Partial Class CustomersDataGrid
     Friend WithEvents bsCustomers As Windows.Forms.BindingSource
     Friend WithEvents chk_SelectAll As Windows.Forms.CheckBox
     Friend WithEvents db_Customers As Database.CustomerDatabase
+    Friend WithEvents cms_Tools As ToolsContextMenu
     Friend WithEvents dgc_CustomerID As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgc_Selection As Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents dgc_FirstName As Windows.Forms.DataGridViewTextBoxColumn
@@ -230,5 +234,4 @@ Partial Class CustomersDataGrid
     Friend WithEvents dgc_Join As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgc_Edit As Windows.Forms.DataGridViewImageColumn
     Friend WithEvents dgc_Remove As Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents cms_Tools As ToolsContextMenu
 End Class

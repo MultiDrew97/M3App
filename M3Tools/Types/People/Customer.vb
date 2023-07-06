@@ -5,8 +5,17 @@ Namespace Types
 		Inherits Person
 		'Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
 		Private __joined As Date
+		Private __phone As String
 
 		Public Property PhoneNumber As String
+			Get
+				' TODO: Look up how to add extension to classes to make a text formatter
+				Return __phone
+			End Get
+			Set(value As String)
+				__phone = value
+			End Set
+		End Property
 		Public Property Address As Address
 		Public Property Joined As Object
 			Get
