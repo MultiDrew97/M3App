@@ -134,7 +134,7 @@ Namespace Database
 					End If
 
 					Try
-						Dim user = GetUser(CInt(reader("UserID")))
+						Dim user = GetUser(CInt(reader(ColumnNames.ID)))
 						cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateLastLogin]"
 						cmd.CommandType = CommandType.StoredProcedure
 						cmd.ExecuteNonQueryAsync()
@@ -158,7 +158,7 @@ Namespace Database
 
 						Return New User(CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(ColumnNames.LastName),
 								CStr(reader(ColumnNames.Username)), TryCast(reader(ColumnNames.Email), String), buffer,
-								CStr(reader(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
+								reader.GetGuid(reader.GetOrdinal(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
 							)
 					Loop
 
@@ -182,7 +182,7 @@ Namespace Database
 
 						Return New User(CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(ColumnNames.LastName),
 								CStr(reader(ColumnNames.Username)), TryCast(reader(ColumnNames.Email), String), buffer,
-								CStr(reader(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
+								reader.GetGuid(reader.GetOrdinal(ColumnNames.Salt)), CType(reader(ColumnNames.Role), AccountRole)
 							)
 					Loop
 
