@@ -19,6 +19,18 @@ Namespace Dialogs
 			End Set
 		End Property
 
+		Public ReadOnly Property NewInfo As Types.Customer
+			Get
+				Return New Types.Customer() With {
+					.Id = Customer.Id,
+					.Name = $"{FirstName} {LastName}".Trim(),
+					.Email = Email,
+					.Address = Address,
+					.PhoneNumber = Phone
+				}
+			End Get
+		End Property
+
 		Public Property FirstName As String
 			Get
 				Return gi_FirstName.Text
@@ -36,6 +48,7 @@ Namespace Dialogs
 				gi_LastName.Text = value
 			End Set
 		End Property
+
 		Public Property Phone As String
 			Get
 				Return PhoneNumberField1.PhoneNumber
@@ -54,22 +67,20 @@ Namespace Dialogs
 		End Property
 		Public Property Address As Types.Address
 			Get
-				Return Types.Address.Parse(af_Address.Street, af_Address.City, af_Address.State, af_Address.ZipCode)
+				Return af_Address.Address
 			End Get
 			Set(value As Types.Address)
-				af_Address.Street = If(value?.Street, "")
-				af_Address.City = If(value?.City, "")
-				af_Address.State = If(value?.State, "")
-				af_Address.ZipCode = If(value?.ZipCode, "")
+				af_Address.Address = value
 			End Set
 		End Property
 
 		Private Sub FinishDialog(sender As Object, e As EventArgs) Handles OK_Button.Click
-			If Not ChangeDetected() Then
+			If Not ValidChangesDetected() Then
+				MessageBox.Show("There were errors in your edits. Please review and try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error)
 				Return
 			End If
 
-			db_Customers.UpdateCustomer(Customer.Id, FirstName, LastName, Address, Phone, Email)
+			'dbCustomers.UpdateCustomer(Customer.Id, FirstName, LastName, Address, Phone, Email)
 
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
@@ -80,7 +91,7 @@ Namespace Dialogs
 			Me.Close()
 		End Sub
 
-		Private Sub ListenerUpdated() Handles Me.CustomerChanged
+		Private Sub CustomerUpdated() Handles Me.CustomerChanged
 			'_newInfo = Customer.Clone()
 			FirstName = Customer.FirstName
 			LastName = Customer.LastName
@@ -89,21 +100,26 @@ Namespace Dialogs
 			Email = Customer.Email
 		End Sub
 
-		Private Function ChangeDetected() As Boolean
-			If FirstName <> Customer.FirstName Then
+		Private Function ValidChangesDetected() As Boolean
+			Dim validFirstName = FirstName <> String.Empty
+			If FirstName <> Customer.FirstName AndAlso validFirstName Then
 				Return True
 			End If
 
-			If Email <> Customer.Email Then
+			If LastName <> Customer.LastName AndAlso validFirstName Then
 				Return True
 			End If
 
-			Return False
-		End Function
+			If Email <> Customer.Email AndAlso (String.IsNullOrWhiteSpace(Email) OrElse Regex.IsMatch(Email, My.Resources.EmailRegex2)) Then
+					Return True
+				End If
 
-		Private Sub DialogLoading(sender As Object, e As EventArgs) Handles Me.Load
-			' Reload()
-		End Sub
+				If Address <> Customer.Address AndAlso af_Address.IsValidAddress() Then
+					Return True
+				End If
+
+				Return False
+        End Function
 
 		Private Sub LoadCustomer(sender As Object, e As DoWorkEventArgs)
 			If Customer.Id < 0 Then
@@ -112,7 +128,7 @@ Namespace Dialogs
 			End If
 
 			Try
-				_customer = db_Customers.GetCustomer(Customer.Id)
+				_customer = dbCustomers.GetCustomer(Customer.Id)
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
 				e.Cancel = True

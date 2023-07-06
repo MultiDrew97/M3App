@@ -67,23 +67,25 @@ Partial Class CustomersManagement
         Me.ss_CustomerView.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ss_CustomerView.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ss_CustomerView.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tss_CustomersView})
-        Me.ss_CustomerView.Location = New System.Drawing.Point(0, 437)
+        Me.ss_CustomerView.Location = New System.Drawing.Point(0, 417)
         Me.ss_CustomerView.Name = "ss_CustomerView"
-        Me.ss_CustomerView.Size = New System.Drawing.Size(574, 22)
+        Me.ss_CustomerView.Size = New System.Drawing.Size(574, 42)
         Me.ss_CustomerView.TabIndex = 3
         '
         'tss_CustomersView
         '
         Me.tss_CustomersView.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tss_CustomersView.Name = "tss_CustomersView"
-        Me.tss_CustomersView.Size = New System.Drawing.Size(170, 17)
+        Me.tss_CustomersView.Size = New System.Drawing.Size(346, 32)
         Me.tss_CustomersView.Text = "Here are the current customers"
         '
         'mms_Main
         '
+        Me.mms_Main.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.mms_Main.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.mms_Main.Location = New System.Drawing.Point(0, 0)
         Me.mms_Main.Name = "mms_Main"
-        Me.mms_Main.Size = New System.Drawing.Size(574, 24)
+        Me.mms_Main.Size = New System.Drawing.Size(574, 40)
         Me.mms_Main.TabIndex = 6
         Me.mms_Main.Text = "Menu"
         '
@@ -95,6 +97,7 @@ Partial Class CustomersManagement
         '
         'mnstr_Strip
         '
+        Me.mnstr_Strip.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnstr_Strip.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.mnstr_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ViewToolStripMenuItem})
         Me.mnstr_Strip.Location = New System.Drawing.Point(0, 0)
@@ -107,7 +110,7 @@ Partial Class CustomersManagement
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.toolStripSeparator1, Me.LogoutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
         'NewToolStripMenuItem
@@ -116,87 +119,87 @@ Partial Class CustomersManagement
         Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"), System.Drawing.Image)
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(233, 44)
         Me.NewToolStripMenuItem.Text = "&New..."
         '
         'NewCustomerToolStripMenuItem
         '
         Me.NewCustomerToolStripMenuItem.Name = "NewCustomerToolStripMenuItem"
-        Me.NewCustomerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.NewCustomerToolStripMenuItem.Size = New System.Drawing.Size(250, 44)
         Me.NewCustomerToolStripMenuItem.Text = "Customer"
         '
         'NewProductToolStripMenuItem
         '
         Me.NewProductToolStripMenuItem.Name = "NewProductToolStripMenuItem"
-        Me.NewProductToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.NewProductToolStripMenuItem.Size = New System.Drawing.Size(250, 44)
         Me.NewProductToolStripMenuItem.Text = "Product"
         '
         'NewListenerToolStripMenuItem
         '
         Me.NewListenerToolStripMenuItem.Name = "NewListenerToolStripMenuItem"
-        Me.NewListenerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.NewListenerToolStripMenuItem.Size = New System.Drawing.Size(250, 44)
         Me.NewListenerToolStripMenuItem.Text = "Listener"
         '
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(233, 44)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(113, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(230, 6)
         '
         'LogoutToolStripMenuItem
         '
         Me.LogoutToolStripMenuItem.Image = Global.MediaMinistry.My.Resources.Resources.Logout
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
-        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(233, 44)
         Me.LogoutToolStripMenuItem.Text = "&Logout"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(233, 44)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
         '
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UpdateToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(89, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
         '
         'UpdateToolStripMenuItem
         '
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
-        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(224, 44)
         Me.UpdateToolStripMenuItem.Text = "Update"
         '
         'ViewToolStripMenuItem
         '
         Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewOrdersToolStripMenuItem, Me.ViewProductsToolStripMenuItem, Me.ViewListenersToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
         Me.ViewToolStripMenuItem.Text = "&View"
         '
         'ViewOrdersToolStripMenuItem
         '
         Me.ViewOrdersToolStripMenuItem.Name = "ViewOrdersToolStripMenuItem"
-        Me.ViewOrdersToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.ViewOrdersToolStripMenuItem.Size = New System.Drawing.Size(240, 44)
         Me.ViewOrdersToolStripMenuItem.Text = "Orders"
         '
         'ViewProductsToolStripMenuItem
         '
         Me.ViewProductsToolStripMenuItem.Name = "ViewProductsToolStripMenuItem"
-        Me.ViewProductsToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.ViewProductsToolStripMenuItem.Size = New System.Drawing.Size(240, 44)
         Me.ViewProductsToolStripMenuItem.Text = "Products"
         '
         'ViewListenersToolStripMenuItem
         '
         Me.ViewListenersToolStripMenuItem.Name = "ViewListenersToolStripMenuItem"
-        Me.ViewListenersToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.ViewListenersToolStripMenuItem.Size = New System.Drawing.Size(240, 44)
         Me.ViewListenersToolStripMenuItem.Text = "Listeners"
         '
         'FirstNameColumn
@@ -204,6 +207,7 @@ Partial Class CustomersManagement
         Me.FirstNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.FirstNameColumn.DataPropertyName = "FirstName"
         Me.FirstNameColumn.HeaderText = "First Name"
+        Me.FirstNameColumn.MinimumWidth = 10
         Me.FirstNameColumn.Name = "FirstNameColumn"
         '
         'LastNameColumn
@@ -211,6 +215,7 @@ Partial Class CustomersManagement
         Me.LastNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.LastNameColumn.DataPropertyName = "LastName"
         Me.LastNameColumn.HeaderText = "Last Name"
+        Me.LastNameColumn.MinimumWidth = 10
         Me.LastNameColumn.Name = "LastNameColumn"
         '
         'Street
@@ -218,6 +223,7 @@ Partial Class CustomersManagement
         Me.Street.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Street.DataPropertyName = "Street"
         Me.Street.HeaderText = "Street"
+        Me.Street.MinimumWidth = 10
         Me.Street.Name = "Street"
         '
         'City
@@ -225,6 +231,7 @@ Partial Class CustomersManagement
         Me.City.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.City.DataPropertyName = "City"
         Me.City.HeaderText = "City"
+        Me.City.MinimumWidth = 10
         Me.City.Name = "City"
         '
         'State
@@ -232,6 +239,7 @@ Partial Class CustomersManagement
         Me.State.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.State.DataPropertyName = "State"
         Me.State.HeaderText = "State"
+        Me.State.MinimumWidth = 10
         Me.State.Name = "State"
         '
         'ZipCode
@@ -239,6 +247,7 @@ Partial Class CustomersManagement
         Me.ZipCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.ZipCode.DataPropertyName = "ZipCode"
         Me.ZipCode.HeaderText = "Zip Code"
+        Me.ZipCode.MinimumWidth = 10
         Me.ZipCode.Name = "ZipCode"
         '
         'PhoneNumberColumn
@@ -246,6 +255,7 @@ Partial Class CustomersManagement
         Me.PhoneNumberColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.PhoneNumberColumn.DataPropertyName = "PhoneNumber"
         Me.PhoneNumberColumn.HeaderText = "Phone Number"
+        Me.PhoneNumberColumn.MinimumWidth = 10
         Me.PhoneNumberColumn.Name = "PhoneNumberColumn"
         '
         'EmailAddressColumn
@@ -253,6 +263,7 @@ Partial Class CustomersManagement
         Me.EmailAddressColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.EmailAddressColumn.DataPropertyName = "EmailAddress"
         Me.EmailAddressColumn.HeaderText = "Email Address"
+        Me.EmailAddressColumn.MinimumWidth = 10
         Me.EmailAddressColumn.Name = "EmailAddressColumn"
         '
         'JoinDateColumn
@@ -260,6 +271,7 @@ Partial Class CustomersManagement
         Me.JoinDateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.JoinDateColumn.DataPropertyName = "JoinDate"
         Me.JoinDateColumn.HeaderText = "Join Date"
+        Me.JoinDateColumn.MinimumWidth = 10
         Me.JoinDateColumn.Name = "JoinDateColumn"
         Me.JoinDateColumn.ReadOnly = True
         '
@@ -270,26 +282,26 @@ Partial Class CustomersManagement
         Me.dcc_Customers.DataSource = Me.bsCustomers
         Me.dcc_Customers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dcc_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dcc_Customers.Location = New System.Drawing.Point(0, 24)
+        Me.dcc_Customers.Location = New System.Drawing.Point(0, 40)
         Me.dcc_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dcc_Customers.Name = "dcc_Customers"
-        Me.dcc_Customers.Size = New System.Drawing.Size(574, 413)
+        Me.dcc_Customers.Size = New System.Drawing.Size(574, 377)
         Me.dcc_Customers.TabIndex = 7
         '
         'bsCustomers
         '
         Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.Types.CustomerCollection)
         Me.bsCustomers.Filter = "[Name] like '%f%'"
-        '
-        'dbCustomers
-        '
-        Me.dbCustomers.InitialCatalog = "Media Ministry"
-        Me.dbCustomers.Password = "M3AppPassword2499"
-        Me.dbCustomers.Username = "M3App"
-        '
-        'CustomersManagement
-        '
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+		'
+		'dbCustomers
+		'
+		Me.dbCustomers.InitialCatalog = Global.MediaMinistry.My.MySettings.Default.DefaultCatalog
+		Me.dbCustomers.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbCustomers.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		'
+		'CustomersManagement
+		'
+		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSize = True
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(574, 459)

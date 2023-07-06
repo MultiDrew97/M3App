@@ -74,7 +74,7 @@ Namespace Dialogs
 
 		Private Sub PreviousStep(sender As Object, e As EventArgs) Handles btn_Cancel.Click
 			Select Case tc_Creation.SelectedIndex
-				Case tp_Basic.TabIndex
+				Case 0 ' tp_Basic.TabIndex
 					Dim res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
 					If Not res = DialogResult.Yes Then
@@ -130,15 +130,35 @@ Namespace Dialogs
 		End Function
 
 		Private Function ValidFirstName() As Boolean
-			Return gi_FirstName.Text <> ""
+			If String.IsNullOrWhiteSpace(FirstName) Then
+				ep_InputError.SetError(gi_FirstName, "A first name is required")
+				Return False
+			End If
+
+			Return True
 		End Function
 
 		Private Function ValidLastName() As Boolean
-			Return gi_LastName.Text <> ""
+			If String.IsNullOrWhiteSpace(LastName) Then
+				ep_InputError.SetError(gi_LastName, "A last name is required")
+				Return False
+			End If
+
+			Return True
 		End Function
 
 		Private Function ValidEmail() As Boolean
-			Return String.IsNullOrEmpty(Email) OrElse Regex.IsMatch(Email, My.Resources.EmailRegex2)
+			If Not String.IsNullOrWhiteSpace(Email) Then
+				If Not Regex.IsMatch(Email, My.Resources.EmailRegex2) Then
+					ep_InputError.SetError(gi_EmailAddress, "Email address is not in a proper format. Either")
+					Return False
+				Else
+					Return True
+				End If
+				Return False
+			End If
+
+			Return False
 		End Function
 
 		Private Function ValidAddress() As Boolean

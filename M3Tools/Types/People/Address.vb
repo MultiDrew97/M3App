@@ -46,14 +46,46 @@ Namespace Types
             Return String.Join(My.Settings.ObjectDelimiter, Street, City, State, ZipCode)
         End Function
 
-        Public Function Display() As String
-            'If there was not an address supplied, it doesn't apply the formating
-            Return If(
-                (String.IsNullOrEmpty(Street) Or String.IsNullOrEmpty(City) Or String.IsNullOrEmpty(State) Or String.IsNullOrEmpty(ZipCode)),
-                "",
-                $"{String.Join(vbCrLf, Street.Split(","c).Where(Function(currentString As String) As Boolean
-                                                                    Return Not String.IsNullOrWhiteSpace(currentString)
-                                                                End Function))}{vbCrLf}{City}, {State} {ZipCode}")
-        End Function
-    End Class
+		Public Function Display() As String
+			'If there was not an address supplied, it doesn't apply the formating
+			Return If(
+				(String.IsNullOrEmpty(Street) Or String.IsNullOrEmpty(City) Or String.IsNullOrEmpty(State) Or String.IsNullOrEmpty(ZipCode)),
+				"",
+				$"{String.Join(vbCrLf, Street.Split(","c).Where(Function(currentString As String) As Boolean
+																	Return Not String.IsNullOrWhiteSpace(currentString)
+																End Function))}{vbCrLf}{City}, {State} {ZipCode}")
+		End Function
+
+		Shared Operator =(left As Address, right As Address) As Boolean
+			If left Is Nothing AndAlso right Is Nothing Then
+				Return True
+			End If
+
+			If (left Is Nothing And right IsNot Nothing) OrElse (left IsNot Nothing And right Is Nothing) Then
+				Return False
+			End If
+
+			If left.Street <> right.Street Then
+				Return False
+			End If
+
+			If left.City <> right.City Then
+				Return False
+			End If
+
+			If left.State <> right.State Then
+				Return False
+			End If
+
+			If left.ZipCode <> right.ZipCode Then
+				Return False
+			End If
+
+			Return True
+		End Operator
+
+		Shared Operator <>(left As Address, right As Address) As Boolean
+			Return Not left = right
+		End Operator
+	End Class
 End Namespace

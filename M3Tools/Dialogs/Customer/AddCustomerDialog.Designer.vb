@@ -162,8 +162,8 @@
             Me.pn_PhoneNumber.Location = New System.Drawing.Point(43, 153)
             Me.pn_PhoneNumber.Margin = New System.Windows.Forms.Padding(6)
             Me.pn_PhoneNumber.Name = "pn_PhoneNumber"
-            Me.pn_PhoneNumber.PhoneNumber = "(   )    -"
-            Me.pn_PhoneNumber.Size = New System.Drawing.Size(112, 47)
+            Me.pn_PhoneNumber.PhoneNumber = ""
+            Me.pn_PhoneNumber.Size = New System.Drawing.Size(112, 242)
             Me.pn_PhoneNumber.TabIndex = 3
             '
             'gi_EmailAddress

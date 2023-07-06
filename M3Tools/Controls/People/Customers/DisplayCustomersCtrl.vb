@@ -72,7 +72,7 @@ Public Class DisplayCustomersCtrl
 				Return
 			End If
 
-			RaiseEvent UpdateCustomer(Me, New CustomerEventArgs(edit.Customer))
+			RaiseEvent UpdateCustomer(Me, New CustomerEventArgs(edit.NewInfo))
 		End Using
 	End Sub
 

@@ -3,8 +3,9 @@
 Public Class PhoneNumberField
 	Public Property PhoneNumber As String
 		Get
+			' TODO: Fix this to make it cleaner
 			If txt_PhoneNumber.Text = "(   )    -" Then
-				Return ""
+				Return String.Empty
 			End If
 
 			Return txt_PhoneNumber.Text
@@ -16,7 +17,17 @@ Public Class PhoneNumberField
 
 	Public ReadOnly Property ValidPhone As Boolean
 		Get
-			Return String.IsNullOrEmpty(PhoneNumber) OrElse Regex.IsMatch(PhoneNumber, My.Resources.PhoneRegex)
+			Return ValidatePhone()
 		End Get
 	End Property
+
+	Private Function ValidatePhone() As Boolean
+		If Not (String.IsNullOrWhiteSpace(PhoneNumber) OrElse Regex.IsMatch(PhoneNumber, My.Resources.PhoneRegex)) Then
+			'  Set error provider for phone number control
+			ep_InvalidPhone.SetError(txt_PhoneNumber, "Either a valid number or no number is required")
+			Return False
+		End If
+
+		Return True
+	End Function
 End Class
