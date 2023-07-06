@@ -6,20 +6,13 @@ Public Class ToolsContextMenu
 	Event SendEmails()
 	Event EditPerson()
 
-	Private ReadOnly prefix As String = "ts"
-	Private Confirmed As Boolean = False
-
-	Private Sub NewItemAdded(sender As Object, e As ToolStripItemEventArgs) Handles Me.ItemAdded
-		Console.WriteLine(e.Item)
-	End Sub
-
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
-		Confirmed = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes
+		Dim res = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-		If Not Confirmed Then
+		If Not res = DialogResult.Yes Then
 			Return
 		End If
-		' TODO: Flesh out rest of tool context menu
+
 		RaiseEvent RemoveRows()
 	End Sub
 
@@ -36,8 +29,6 @@ Public Class ToolsContextMenu
 	End Sub
 
 	Public Sub ToggleSend(enable As Boolean)
-		Dim send As ToolStripItem = Me.Items.Item($"{prefix}_Send")
-
 		If Not ts_Send.Visible Then
 			Return
 		End If
