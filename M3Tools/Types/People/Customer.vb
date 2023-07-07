@@ -1,4 +1,5 @@
 ﻿Option Strict On
+Imports SPPBC.M3Tools.Types.Extensions
 
 Namespace Types
 	Public Class Customer
@@ -9,11 +10,10 @@ Namespace Types
 
 		Public Property PhoneNumber As String
 			Get
-				' TODO: Look up how to add extension to classes to make a text formatter
 				Return __phone
 			End Get
 			Set(value As String)
-				__phone = value
+				__phone = value.FormatPhone()
 			End Set
 		End Property
 		Public Property Address As Address
