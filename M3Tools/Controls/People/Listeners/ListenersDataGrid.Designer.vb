@@ -33,10 +33,10 @@ Partial Class ListenersDataGrid
         Me.dgc_Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
         Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
         Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.db_Listeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
-        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         CType(Me.dgv_Listeners, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -130,6 +130,11 @@ Partial Class ListenersDataGrid
         Me.dgc_Remove.Name = "dgc_Remove"
         Me.dgc_Remove.Width = 25
         '
+        'cms_Tools
+        '
+        Me.cms_Tools.Name = "cms_Tools"
+        Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
+        '
         'bsListeners
         '
         Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
@@ -149,11 +154,6 @@ Partial Class ListenersDataGrid
         Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-        '
-        'cms_Tools
-        '
-        Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
         '
         'ListenersDataGrid
         '

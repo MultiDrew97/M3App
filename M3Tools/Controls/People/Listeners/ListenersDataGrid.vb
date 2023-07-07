@@ -7,6 +7,8 @@ Public Class ListenersDataGrid
 	Public Event EditListener As ListenerEventHandler
 	Public Event RemoveListener As ListenerEventHandler
 	Public Event RefreshDisplay()
+	Private Const EditColumn As Integer = 3
+	Private Const RemoveColumn As Integer = 4
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -69,10 +71,17 @@ Public Class ListenersDataGrid
 	<DefaultValue(True)>
 	Property AllowEditting As Boolean
 		Get
-			Return dgv_Listeners.Columns(dgc_Edit.DisplayIndex).Visible
+			Return dgc_Edit.Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Listeners.Columns(dgc_Edit.DisplayIndex).Visible = value
+			'If value Then
+			'	dgv_Listeners.Columns.Insert(EditColumn, New DataGridViewImageButtonEditColumn())
+			'Else
+			'	If dgv_Listeners.Columns(EditColumn).Name = "dgc_Edit" Then
+			'		dgv_Listeners.Columns.RemoveAt(EditColumn)
+			'	End If
+			'End If
+			dgc_Edit.Visible = value
 		End Set
 	End Property
 
@@ -89,10 +98,17 @@ Public Class ListenersDataGrid
 	<DefaultValue(True)>
 	Property AllowDeleting As Boolean
 		Get
-			Return dgv_Listeners.Columns(dgc_Remove.DisplayIndex).Visible
+			Return dgc_Remove.Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Listeners.Columns(dgc_Remove.DisplayIndex).Visible = value
+			'If value Then
+			'	dgv_Listeners.Columns.Insert(RemoveColumn, New DataGridViewImageButtonEditColumn())
+			'Else
+			'	If dgv_Listeners.Columns(RemoveColumn).Name = "dgc_Remove" Then
+			'		dgv_Listeners.Columns.RemoveAt(RemoveColumn)
+			'	End If
+			'End If
+			dgc_Remove.Visible = value
 		End Set
 	End Property
 
@@ -112,7 +128,6 @@ Public Class ListenersDataGrid
 			Return dgc_Selection.Visible
 		End Get
 		Set(value As Boolean)
-			'dgv_Listeners.Columns(dgc_Selection.Index).Visible = value
 			dgc_Selection.Visible = value
 			chk_SelectAll.Visible = value
 		End Set
