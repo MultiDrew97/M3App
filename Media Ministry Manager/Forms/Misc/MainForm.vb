@@ -1,6 +1,9 @@
 ﻿Option Strict On
 
 Imports System.ComponentModel
+Imports System.Drawing.Imaging
+Imports System.IO
+Imports System.Text
 Imports MediaMinistry.Helpers
 
 Public Class Frm_Main

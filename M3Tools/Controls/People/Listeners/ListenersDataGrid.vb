@@ -1,5 +1,6 @@
 ﻿Imports SPPBC.M3Tools.Events
 Imports SPPBC.M3Tools.Events.Listeners
+Imports SPPBC.M3Tools.Types
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
@@ -7,8 +8,6 @@ Public Class ListenersDataGrid
 	Public Event EditListener As ListenerEventHandler
 	Public Event RemoveListener As ListenerEventHandler
 	Public Event RefreshDisplay()
-	Private Const EditColumn As Integer = 3
-	Private Const RemoveColumn As Integer = 4
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
@@ -18,7 +17,7 @@ Public Class ListenersDataGrid
 
 	Public ReadOnly Property Listeners As IList
 		Get
-			Return DataSource.List '_listeners.Listeners
+			Return DataSource.List
 		End Get
 	End Property
 
@@ -58,7 +57,7 @@ Public Class ListenersDataGrid
 			Return DataSource.Filter
 		End Get
 		Set(value As String)
-			'TODO: Figure out how I want to do this
+			'TODO: Fix bug and flesh out
 			If value <> "" AndAlso Not (value.Contains("[") OrElse value.Contains("]")) Then
 				DataSource.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
 				Return
@@ -74,13 +73,6 @@ Public Class ListenersDataGrid
 			Return dgc_Edit.Visible
 		End Get
 		Set(value As Boolean)
-			'If value Then
-			'	dgv_Listeners.Columns.Insert(EditColumn, New DataGridViewImageButtonEditColumn())
-			'Else
-			'	If dgv_Listeners.Columns(EditColumn).Name = "dgc_Edit" Then
-			'		dgv_Listeners.Columns.RemoveAt(EditColumn)
-			'	End If
-			'End If
 			dgc_Edit.Visible = value
 		End Set
 	End Property
@@ -101,13 +93,6 @@ Public Class ListenersDataGrid
 			Return dgc_Remove.Visible
 		End Get
 		Set(value As Boolean)
-			'If value Then
-			'	dgv_Listeners.Columns.Insert(RemoveColumn, New DataGridViewImageButtonEditColumn())
-			'Else
-			'	If dgv_Listeners.Columns(RemoveColumn).Name = "dgc_Remove" Then
-			'		dgv_Listeners.Columns.RemoveAt(RemoveColumn)
-			'	End If
-			'End If
 			dgc_Remove.Visible = value
 		End Set
 	End Property
@@ -145,35 +130,22 @@ Public Class ListenersDataGrid
 			Case dgc_Edit.Index
 				RaiseEvent EditListener(Me, New ListenerEventArgs(listener))
 			Case dgc_Remove.Index
-				ClearSelectedRows()
 				DeleteListener(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
 
 	Private Sub DeleteListener(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Listeners.UserDeletingRow
-		'Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
-		'Dim deletedListener As DataTables.ListenersDataRow = CType(row.Row, DataTables.ListenersDataRow)
-		'Console.WriteLine(deletedListener)
+		Dim listener = CType(e.Row.DataBoundItem, Types.Listener)
 
-		'Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-		'If Not res = DialogResult.Yes Then
-		'	e.Cancel = True
-		'	Return
-		'End If
-
-		e.Row.Selected = True
-		RemoveSelectedRows()
+		RaiseEvent RemoveListener(Me, New ListenerEventArgs(listener, EventType.Deleted))
+		MessageBox.Show($"Successfully removed listener", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information)
 	End Sub
 
-	Private Sub ClearSelectedRows()
-		For Each row As DataGridViewRow In dgv_Listeners.SelectedRows
-			row.Selected = False
-		Next
-	End Sub
+	Public Sub RemoveSelectedListeners() Handles cms_Tools.RemoveRows
+		If SelectedRowsCount < 1 Then
+			Return
+		End If
 
-	Public Sub RemoveSelectedRows()
-		'Dim id As Integer = My.Settings.MinID - 1
 		Dim listener As Types.Listener
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Listeners.SelectedRows.Count
@@ -182,9 +154,9 @@ Public Class ListenersDataGrid
 			Try
 				listener = CType(row.DataBoundItem, Types.Listener)
 				RaiseEvent RemoveListener(Me, New ListenerEventArgs(listener))
-				'DataSource.Remove(listener)
 			Catch ex As Exception
-				failed += 1
+				Console.WriteLine(ex.Message)
+				Exit Sub
 			End Try
 		Next
 
@@ -201,6 +173,7 @@ Public Class ListenersDataGrid
 		For Each row As DataGridViewRow In dgv_Listeners.Rows
 			row.Cells(dgc_Selection.DisplayIndex).Value = chk_SelectAll.Checked
 		Next
+
 		dgv_Listeners.Invalidate()
 	End Sub
 
@@ -210,7 +183,7 @@ Public Class ListenersDataGrid
 	End Sub
 
 	Private Sub EditPerson() Handles cms_Tools.EditPerson
-		If SelectedRowsCount <= 0 Then
+		If SelectedRowsCount < 1 Then
 			Return
 		End If
 
@@ -219,11 +192,7 @@ Public Class ListenersDataGrid
 		Next
 	End Sub
 
-	Private Sub RemoveRowByToolStrip() Handles cms_Tools.RemoveRows
-		If SelectedRowsCount < 1 Then
-			Return
-		End If
-
-		RemoveSelectedRows()
+	Private Sub RefreshView() Handles cms_Tools.RefreshView
+		RaiseEvent RefreshDisplay()
 	End Sub
 End Class

@@ -1,4 +1,5 @@
-﻿Imports SPPBC.M3Tools.Events.Customers
+﻿Imports SPPBC.M3Tools.Events
+Imports SPPBC.M3Tools.Events.Customers
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
@@ -15,7 +16,7 @@ Public Class CustomersDataGrid
 
 	Public ReadOnly Property Customers As IList
 		Get
-			Return DataSource.List '_customers.Customers
+			Return DataSource.List
 		End Get
 	End Property
 
@@ -55,6 +56,7 @@ Public Class CustomersDataGrid
 			Return DataSource.Filter
 		End Get
 		Set(value As String)
+			' TODO: Fix bug and flesh out
 			If value <> "" Then
 				DataSource.Filter = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
 				Return
@@ -67,10 +69,10 @@ Public Class CustomersDataGrid
 	<DefaultValue(True)>
 	Property AllowEditting As Boolean
 		Get
-			Return dgv_Customers.Columns(dgc_Edit.DisplayIndex).Visible
+			Return dgc_Edit.Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Customers.Columns(dgc_Edit.DisplayIndex).Visible = value
+			dgc_Edit.Visible = value
 		End Set
 	End Property
 
@@ -87,10 +89,10 @@ Public Class CustomersDataGrid
 	<DefaultValue(True)>
 	Property AllowDeleting As Boolean
 		Get
-			Return dgv_Customers.Columns(dgc_Remove.DisplayIndex).Visible
+			Return dgc_Remove.Visible
 		End Get
 		Set(value As Boolean)
-			dgv_Customers.Columns(dgc_Remove.DisplayIndex).Visible = value
+			dgc_Remove.Visible = value
 		End Set
 	End Property
 
@@ -127,35 +129,22 @@ Public Class CustomersDataGrid
 			Case dgc_Edit.Index
 				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer))
 			Case dgc_Remove.DisplayIndex
-				ClearSelectedRows()
 				DeleteCustomer(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
 
 	Private Sub DeleteCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
-		'Dim row As DataRowView = CType(e.Row.DataBoundItem, DataRowView)
-		'Dim deletedCustomer As DataTables.CustomersDataRow = CType(row.Row, DataTables.CustomersDataRow)
-		'Console.WriteLine(deletedCustomer)
+		Dim customer = CType(e.Row.DataBoundItem, Types.Customer)
 
-		'Dim res = MessageBox.Show("Are you sure you want to remove this listener?", "Remove listener", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-		'If Not res = DialogResult.Yes Then
-		'	e.Cancel = True
-		'	Return
-		'End If
-
-		e.Row.Selected = True
-		RemoveSelectedRows()
+		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer, EventType.Deleted))
+		MessageBox.Show($"Successfully removed listener", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information)
 	End Sub
 
-	Private Sub ClearSelectedRows()
-		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
-			row.Selected = False
-		Next
-	End Sub
+	Public Sub RemoveSelectedRows() Handles cms_Tools.RemoveRows
+		If SelectedRowsCount < 1 Then
+			Return
+		End If
 
-	Public Sub RemoveSelectedRows()
-		'Dim id As Integer = My.Settings.MinID - 1
 		Dim customer As Types.Customer
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Customers.SelectedRows.Count
@@ -164,9 +153,9 @@ Public Class CustomersDataGrid
 			Try
 				customer = CType(row.DataBoundItem, Types.Customer)
 				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
-				'dgv_Customers.Rows.Remove(row)
 			Catch ex As Exception
-				failed += 1
+				Console.WriteLine(ex.Message)
+				Exit Sub
 			End Try
 		Next
 
@@ -192,7 +181,7 @@ Public Class CustomersDataGrid
 	End Sub
 
 	Private Sub EditPerson() Handles cms_Tools.EditPerson
-		If SelectedRowsCount <= 0 Then
+		If SelectedRowsCount < 1 Then
 			Return
 		End If
 
@@ -203,14 +192,5 @@ Public Class CustomersDataGrid
 
 	Private Sub RefreshView() Handles cms_Tools.RefreshView
 		RaiseEvent RefreshDisplay()
-	End Sub
-
-
-	Private Sub RemoveRowByToolStrip() Handles cms_Tools.RemoveRows
-		If SelectedRowsCount < 1 Then
-			Return
-		End If
-
-		RemoveSelectedRows()
 	End Sub
 End Class
