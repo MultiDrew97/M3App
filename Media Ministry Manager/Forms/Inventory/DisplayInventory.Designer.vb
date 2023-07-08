@@ -1,26 +1,26 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Frm_DisplayInventory
-    Inherits System.Windows.Forms.Form
+	Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
+	'Form overrides dispose to clean up the component list.
+	<System.Diagnostics.DebuggerNonUserCode()>
+	Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+		Try
+			If disposing AndAlso components IsNot Nothing Then
+				components.Dispose()
+			End If
+		Finally
+			MyBase.Dispose(disposing)
+		End Try
+	End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+	'Required by the Windows Form Designer
+	Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+	'NOTE: The following procedure is required by the Windows Form Designer
+	'It can be modified using the Windows Form Designer.  
+	'Do not modify it using the code editor.
+	<System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -227,7 +227,7 @@ Partial Class Frm_DisplayInventory
         '
         'LogoutToolStripMenuItem
         '
-        Me.LogoutToolStripMenuItem.Image = Global.MediaMinistry.My.Resources.Resources.logout_button
+        Me.LogoutToolStripMenuItem.Image = Global.MediaMinistry.My.Resources.Resources.Logout
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
         Me.LogoutToolStripMenuItem.Text = "&Logout"
@@ -310,74 +310,74 @@ Partial Class Frm_DisplayInventory
         'chk_ShowUnavailable
         '
         Me.chk_ShowUnavailable.AutoSize = True
-        Me.chk_ShowUnavailable.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.chk_ShowUnavailable.Font = Global.MediaMinistry.MySettings.Default.CurrentFont
-        Me.chk_ShowUnavailable.Location = New System.Drawing.Point(23, 211)
-        Me.chk_ShowUnavailable.MaximumSize = New System.Drawing.Size(200, 150)
-        Me.chk_ShowUnavailable.MinimumSize = New System.Drawing.Size(0, 100)
-        Me.chk_ShowUnavailable.Name = "chk_ShowUnavailable"
-        Me.chk_ShowUnavailable.Size = New System.Drawing.Size(200, 100)
-        Me.chk_ShowUnavailable.TabIndex = 5
-        Me.chk_ShowUnavailable.Text = "Show Unavailable Items"
-        Me.chk_ShowUnavailable.UseVisualStyleBackColor = True
-        '
-        'mnstr_Strip
-        '
-        Me.mnstr_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
-        Me.mnstr_Strip.Location = New System.Drawing.Point(0, 0)
-        Me.mnstr_Strip.Name = "mnstr_Strip"
-        Me.mnstr_Strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.mnstr_Strip.Size = New System.Drawing.Size(665, 24)
-        Me.mnstr_Strip.TabIndex = 6
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator2, Me.ToolStripMenuItem3, Me.ExitToolStripMenuItem})
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(37, 20)
-        Me.ToolStripMenuItem1.Text = "&File"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewCustomerToolStripMenuItem, Me.NewProductToolStripMenuItem, Me.NewListenerToolStripMenuItem})
-        Me.ToolStripMenuItem2.Image = CType(resources.GetObject("ToolStripMenuItem2.Image"), System.Drawing.Image)
-        Me.ToolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(116, 22)
-        Me.ToolStripMenuItem2.Text = "&New..."
-        '
-        'NewCustomerToolStripMenuItem
-        '
-        Me.NewCustomerToolStripMenuItem.Name = "NewCustomerToolStripMenuItem"
-        Me.NewCustomerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.NewCustomerToolStripMenuItem.Text = "Customer"
-        '
-        'NewProductToolStripMenuItem
-        '
-        Me.NewProductToolStripMenuItem.Name = "NewProductToolStripMenuItem"
-        Me.NewProductToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.NewProductToolStripMenuItem.Text = "Product"
-        '
-        'NewListenerToolStripMenuItem
-        '
-        Me.NewListenerToolStripMenuItem.Name = "NewListenerToolStripMenuItem"
-        Me.NewListenerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.NewListenerToolStripMenuItem.Text = "Listener"
-        '
-        'SettingsToolStripMenuItem
-        '
-        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
-        Me.SettingsToolStripMenuItem.Text = "Settings"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+		Me.chk_ShowUnavailable.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.chk_ShowUnavailable.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
+		Me.chk_ShowUnavailable.Location = New System.Drawing.Point(23, 211)
+		Me.chk_ShowUnavailable.MaximumSize = New System.Drawing.Size(200, 150)
+		Me.chk_ShowUnavailable.MinimumSize = New System.Drawing.Size(0, 100)
+		Me.chk_ShowUnavailable.Name = "chk_ShowUnavailable"
+		Me.chk_ShowUnavailable.Size = New System.Drawing.Size(200, 100)
+		Me.chk_ShowUnavailable.TabIndex = 5
+		Me.chk_ShowUnavailable.Text = "Show Unavailable Items"
+		Me.chk_ShowUnavailable.UseVisualStyleBackColor = True
+		'
+		'mnstr_Strip
+		'
+		Me.mnstr_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
+		Me.mnstr_Strip.Location = New System.Drawing.Point(0, 0)
+		Me.mnstr_Strip.Name = "mnstr_Strip"
+		Me.mnstr_Strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+		Me.mnstr_Strip.Size = New System.Drawing.Size(665, 24)
+		Me.mnstr_Strip.TabIndex = 6
+		'
+		'ToolStripMenuItem1
+		'
+		Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator2, Me.ToolStripMenuItem3, Me.ExitToolStripMenuItem})
+		Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+		Me.ToolStripMenuItem1.Size = New System.Drawing.Size(37, 20)
+		Me.ToolStripMenuItem1.Text = "&File"
+		'
+		'ToolStripMenuItem2
+		'
+		Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewCustomerToolStripMenuItem, Me.NewProductToolStripMenuItem, Me.NewListenerToolStripMenuItem})
+		Me.ToolStripMenuItem2.Image = CType(resources.GetObject("ToolStripMenuItem2.Image"), System.Drawing.Image)
+		Me.ToolStripMenuItem2.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+		Me.ToolStripMenuItem2.Size = New System.Drawing.Size(116, 22)
+		Me.ToolStripMenuItem2.Text = "&New..."
+		'
+		'NewCustomerToolStripMenuItem
+		'
+		Me.NewCustomerToolStripMenuItem.Name = "NewCustomerToolStripMenuItem"
+		Me.NewCustomerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+		Me.NewCustomerToolStripMenuItem.Text = "Customer"
+		'
+		'NewProductToolStripMenuItem
+		'
+		Me.NewProductToolStripMenuItem.Name = "NewProductToolStripMenuItem"
+		Me.NewProductToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+		Me.NewProductToolStripMenuItem.Text = "Product"
+		'
+		'NewListenerToolStripMenuItem
+		'
+		Me.NewListenerToolStripMenuItem.Name = "NewListenerToolStripMenuItem"
+		Me.NewListenerToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+		Me.NewListenerToolStripMenuItem.Text = "Listener"
+		'
+		'SettingsToolStripMenuItem
+		'
+		Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+		Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+		Me.SettingsToolStripMenuItem.Text = "MySettings"
+		'
+		'ToolStripSeparator2
+		'
+		Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(113, 6)
         '
         'ToolStripMenuItem3
         '
-        Me.ToolStripMenuItem3.Image = Global.MediaMinistry.My.Resources.Resources.logout_button
+        Me.ToolStripMenuItem3.Image = Global.MediaMinistry.My.Resources.Resources.Logout
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(116, 22)
         Me.ToolStripMenuItem3.Text = "&Logout"
@@ -447,54 +447,53 @@ Partial Class Frm_DisplayInventory
         Me.mnstr_Strip.ResumeLayout(False)
         Me.mnstr_Strip.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
+		Me.PerformLayout()
+	End Sub
 
-    End Sub
-
-    Friend WithEvents dgv_Inventory As DataGridView
-    Friend WithEvents btn_AddProduct As Button
-    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CustomerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ProductToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ListenerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents toolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExitToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CustomizeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CustomerToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ProductToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ListenerToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CustomersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OrdersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ProductsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ListenersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents bsProducts As BindingSource
-    Friend WithEvents chk_ShowUnavailable As CheckBox
-    Friend WithEvents cms_ProductsTable As ContextMenuStrip
-    Friend WithEvents RefreshToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AvailabilityToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ProductNameColumn As DataGridViewTextBoxColumn
-    Friend WithEvents StockColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PriceColumn As DataGridViewTextBoxColumn
-    Friend WithEvents AvailableColumn As DataGridViewTextBoxColumn
-    Friend WithEvents mnstr_Strip As MenuStrip
-    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents NewCustomerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewProductToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NewListenerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
-    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
-    Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
-    Friend WithEvents ViewCustomersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewOrdersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewListenersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents dgv_Inventory As DataGridView
+	Friend WithEvents btn_AddProduct As Button
+	Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents CustomerToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ProductToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ListenerToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents toolStripSeparator1 As ToolStripSeparator
+	Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ExitToolStripMenuItem1 As ToolStripMenuItem
+	Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents CustomizeToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents CustomerToolStripMenuItem1 As ToolStripMenuItem
+	Friend WithEvents ProductToolStripMenuItem1 As ToolStripMenuItem
+	Friend WithEvents ListenerToolStripMenuItem1 As ToolStripMenuItem
+	Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents CustomersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents OrdersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ProductsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ListenersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents bsProducts As BindingSource
+	Friend WithEvents chk_ShowUnavailable As CheckBox
+	Friend WithEvents cms_ProductsTable As ContextMenuStrip
+	Friend WithEvents RefreshToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents AvailabilityToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ProductNameColumn As DataGridViewTextBoxColumn
+	Friend WithEvents StockColumn As DataGridViewTextBoxColumn
+	Friend WithEvents PriceColumn As DataGridViewTextBoxColumn
+	Friend WithEvents AvailableColumn As DataGridViewTextBoxColumn
+	Friend WithEvents mnstr_Strip As MenuStrip
+	Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+	Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+	Friend WithEvents NewCustomerToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewProductToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents NewListenerToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+	Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+	Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+	Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
+	Friend WithEvents ViewCustomersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewOrdersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ViewListenersToolStripMenuItem As ToolStripMenuItem
 End Class

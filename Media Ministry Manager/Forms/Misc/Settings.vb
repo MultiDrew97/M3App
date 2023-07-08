@@ -5,6 +5,7 @@ Imports Google.Apis.Gmail.v1.Data
 Imports MediaMinistry.GoogleAPI
 Imports MediaMinistry.Helpers
 
+' TODO: Incorporate Gmail and GDrive tools in this page
 Public Class Frm_Settings
     Private Const currentUser = "Current User: {0}"
     Private cts As CancellationTokenSource
@@ -127,16 +128,16 @@ Public Class Frm_Settings
 
     Private Sub Bw_Service_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bw_Service.DoWork
         cts = New CancellationTokenSource()
-        Dim service As Service
-        Select Case CType(e.Argument, String)
+		'Dim service As Service
+		Select Case CType(e.Argument, String)
             Case "d"
                 Try
-                    service = New DriveUploader(cts.Token)
-                    Invoke(
+					'service = New DriveUploader(cts.Token)
+					Invoke(
                         Sub()
                             btn_GoogleDrive.Text = "Unlink Google Drive"
-                            lbl_CurrentDrive.Text = String.Format(currentUser, CType(service.Info, User).EmailAddress)
-                        End Sub
+							'lbl_CurrentDrive.Text = String.Format(currentUser, CType(service.Info, User).EmailAddress)
+						End Sub
                     )
                 Catch ex As OperationCanceledException
                     Console.WriteLine("Canceled Exception")
@@ -148,10 +149,10 @@ Public Class Frm_Settings
                 Try
                     Invoke(
                         Sub()
-                            service = New Sender(cts.Token)
-                            btn_Gmail.Text = "Unlink Gmail"
-                            lbl_CurrentGmail.Text = String.Format(currentUser, CType(service.Info, Profile).EmailAddress)
-                        End Sub
+							'service = New Sender(cts.Token)
+							btn_Gmail.Text = "Unlink Gmail"
+							'lbl_CurrentGmail.Text = String.Format(currentUser, CType(service.Info, Profile).EmailAddress)
+						End Sub
                     )
                 Catch ex As OperationCanceledException
                     Console.WriteLine("Canceled Exception")
@@ -166,36 +167,36 @@ Public Class Frm_Settings
             Sub()
                 'Retrieve the Google Drive Info being used by the user
                 If Directory.Exists(Application.StartupPath & "\Drive Token") Then
-                    Using uploader As New DriveUploader()
-                        Dim user As User = CType(uploader.Info, User)
+					'Using uploader As New DriveUploader()
+					'    Dim user As User = CType(uploader.Info, User)
 
-                        If user IsNot Nothing Then
-                            lbl_CurrentDrive.Text = String.Format(currentUser, user.EmailAddress)
-                            btn_GoogleDrive.Text = "Unlink Google Drive"
-                        Else
-                            lbl_CurrentDrive.Text = String.Format(currentUser, "Unlinked")
-                            btn_GoogleDrive.Text = "Link Google Drive"
-                        End If
-                    End Using
-                Else
+					'    If user IsNot Nothing Then
+					'        lbl_CurrentDrive.Text = String.Format(currentUser, user.EmailAddress)
+					'        btn_GoogleDrive.Text = "Unlink Google Drive"
+					'    Else
+					'        lbl_CurrentDrive.Text = String.Format(currentUser, "Unlinked")
+					'        btn_GoogleDrive.Text = "Link Google Drive"
+					'    End If
+					'End Using
+				Else
                     lbl_CurrentDrive.Text = String.Format(currentUser, "Unlinked")
                     btn_GoogleDrive.Text = "Link Google Drive"
                 End If
 
                 'Retrieve the Google Drive Info being used by the user
                 If Directory.Exists(Application.StartupPath & "\Gmail Token") Then
-                    Using emailer As New Sender()
-                        Dim profile As Profile = CType(emailer.Info, Profile)
+					'Using emailer As New Sender()
+					'    Dim profile As Profile = CType(emailer.Info, Profile)
 
-                        If profile IsNot Nothing Then
-                            lbl_CurrentGmail.Text = String.Format(currentUser, profile.EmailAddress)
-                            btn_Gmail.Text = "Unlink Gmail"
-                        Else
-                            lbl_CurrentGmail.Text = String.Format(currentUser, "Unlinked")
-                            btn_Gmail.Text = "Link Gmail"
-                        End If
-                    End Using
-                Else
+					'    If profile IsNot Nothing Then
+					'        lbl_CurrentGmail.Text = String.Format(currentUser, profile.EmailAddress)
+					'        btn_Gmail.Text = "Unlink Gmail"
+					'    Else
+					'        lbl_CurrentGmail.Text = String.Format(currentUser, "Unlinked")
+					'        btn_Gmail.Text = "Link Gmail"
+					'    End If
+					'End Using
+				Else
                     lbl_CurrentGmail.Text = String.Format(currentUser, "Unlinked")
                     btn_Gmail.Text = "Link Gmail"
                 End If

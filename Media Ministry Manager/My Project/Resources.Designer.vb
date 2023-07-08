@@ -71,6 +71,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property BannerImage() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BannerImage", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
         Friend ReadOnly Property credentials() As Byte()
@@ -147,6 +157,25 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
+        '''</summary>
+        Friend ReadOnly Property DriveShareLink() As String
+            Get
+                Return ResourceManager.GetString("DriveShareLink", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ErrorImage() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ErrorImage", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property HidePasswordIcon() As System.Drawing.Bitmap
@@ -159,9 +188,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property logout_button() As System.Drawing.Bitmap
+        Friend ReadOnly Property Loading_Loop() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("logout button", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Loading_Loop", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -169,9 +198,29 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Media_Ministry_Logo() As System.Drawing.Bitmap
+        Friend ReadOnly Property Loading_Loop_2() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Media Ministry Logo", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Loading_Loop_2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Loading_Loop_3() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Loading_Loop_3", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Logout() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Logout", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -213,6 +262,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to ^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$.
+        '''</summary>
+        Friend ReadOnly Property PhoneRegex() As String
+            Get
+                Return ResourceManager.GetString("PhoneRegex", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &lt;!Doctype html&gt;
         '''&lt;html&gt;
         '''    &lt;head&gt;
@@ -248,15 +306,6 @@ Namespace My.Resources
         Friend ReadOnly Property releaseConnection() As String
             Get
                 Return ResourceManager.GetString("releaseConnection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Data Source=mediaministry.database.windows.net;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
-        '''</summary>
-        Friend ReadOnly Property releaseConnectionAzure() As String
-            Get
-                Return ResourceManager.GetString("releaseConnectionAzure", resourceCulture)
             End Get
         End Property
         

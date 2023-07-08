@@ -12,15 +12,16 @@ Option Strict On
 Option Explicit On
 
 
-
-<Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0"),  _
- Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-Partial Friend NotInheritable Class MySettings
-    Inherits Global.System.Configuration.ApplicationSettingsBase
+Namespace My
     
-    Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
-    
+    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0"),  _
+     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
+    Partial Friend NotInheritable Class MySettings
+        Inherits Global.System.Configuration.ApplicationSettingsBase
+        
+        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
+        
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
     Private Shared addedHandler As Boolean
@@ -35,10 +36,10 @@ Partial Friend NotInheritable Class MySettings
     End Sub
 #End If
 #End Region
-    
-    Public Shared ReadOnly Property [Default]() As MySettings
-        Get
-            
+        
+        Public Shared ReadOnly Property [Default]() As MySettings
+            Get
+                
 #If _MyType = "WindowsForms" Then
                If Not addedHandler Then
                     SyncLock addedHandlerLockObject
@@ -49,105 +50,160 @@ Partial Friend NotInheritable Class MySettings
                     End SyncLock
                 End If
 #End If
-            Return defaultInstance
-        End Get
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property Username() As String
-        Get
-            Return CType(Me("Username"),String)
-        End Get
-        Set
-            Me("Username") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property Password() As String
-        Get
-            Return CType(Me("Password"),String)
-        End Get
-        Set
-            Me("Password") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-    Public Property KeepLoggedIn() As Boolean
-        Get
-            Return CType(Me("KeepLoggedIn"),Boolean)
-        End Get
-        Set
-            Me("KeepLoggedIn") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
-    Public Property CurrentFont() As Global.System.Drawing.Font
-        Get
-            Return CType(Me("CurrentFont"),Global.System.Drawing.Font)
-        End Get
-        Set
-            Me("CurrentFont") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
-    Public Property DefaultFont() As Global.System.Drawing.Font
-        Get
-            Return CType(Me("DefaultFont"),Global.System.Drawing.Font)
-        End Get
-        Set
-            Me("DefaultFont") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E"& _ 
-        "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
-    Public Property releaseConnection() As String
-        Get
-            Return CType(Me("releaseConnection"),String)
-        End Get
-        Set
-            Me("releaseConnection") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout"& _ 
-        "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
-    Public Property debugConnection() As String
-        Get
-            Return CType(Me("debugConnection"),String)
-        End Get
-        Set
-            Me("debugConnection") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString)>  _
-    Public ReadOnly Property Setting() As String
-        Get
-            Return CType(Me("Setting"),String)
-        End Get
-    End Property
-End Class
+                Return defaultInstance
+            End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property CurrentFont() As Global.System.Drawing.Font
+            Get
+                Return CType(Me("CurrentFont"),Global.System.Drawing.Font)
+            End Get
+            Set
+                Me("CurrentFont") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Microsoft Sans Serif, 15.75pt, style=Bold")>  _
+        Public ReadOnly Property DefaultFont() As Global.System.Drawing.Font
+            Get
+                Return CType(Me("DefaultFont"),Global.System.Drawing.Font)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
+        Public ReadOnly Property DefaultCatalog() As String
+            Get
+                Return CType(Me("DefaultCatalog"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("M3AppPassword2499")>  _
+        Public ReadOnly Property DefaultPassword() As String
+            Get
+                Return CType(Me("DefaultPassword"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("M3App")>  _
+        Public ReadOnly Property DefaultUsername() As String
+            Get
+                Return CType(Me("DefaultUsername"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property UpgradeRequired() As Boolean
+            Get
+                Return CType(Me("UpgradeRequired"),Boolean)
+            End Get
+            Set
+                Me("UpgradeRequired") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("-1;John Doe;JohnDoe123;JohnDoe@domain.ext;;1"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property User() As Global.SPPBC.M3Tools.Types.User
+            Get
+                Return CType(Me("User"),Global.SPPBC.M3Tools.Types.User)
+            End Get
+            Set
+                Me("User") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property Username() As String
+            Get
+                Return CType(Me("Username"),String)
+            End Get
+            Set
+                Me("Username") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property Password() As String
+            Get
+                Return CType(Me("Password"),String)
+            End Get
+            Set
+                Me("Password") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E"& _ 
+            "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+        Public Property releaseConnection() As String
+            Get
+                Return CType(Me("releaseConnection"),String)
+            End Get
+            Set
+                Me("releaseConnection") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout"& _ 
+            "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
+        Public Property debugConnection() As String
+            Get
+                Return CType(Me("debugConnection"),String)
+            End Get
+            Set
+                Me("debugConnection") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property KeepLoggedIn() As Boolean
+            Get
+                Return CType(Me("KeepLoggedIn"),Boolean)
+            End Get
+            Set
+                Me("KeepLoggedIn") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Count: {0}")>  _
+        Public ReadOnly Property CountTemplate() As String
+            Get
+                Return CType(Me("CountTemplate"),String)
+            End Get
+        End Property
+    End Class
+End Namespace
 
 Namespace My
     
@@ -157,9 +213,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.MediaMinistry.MySettings
+        Friend ReadOnly Property Settings() As Global.MediaMinistry.My.MySettings
             Get
-                Return Global.MediaMinistry.MySettings.Default
+                Return Global.MediaMinistry.My.MySettings.Default
             End Get
         End Property
     End Module

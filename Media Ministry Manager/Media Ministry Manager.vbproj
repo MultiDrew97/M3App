@@ -28,14 +28,17 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://sppbc.hopto.org/manager/</InstallUrl>
     <UpdateUrl>https://sppbc.hopto.org/manager/</UpdateUrl>
+    <TargetCulture>en-US</TargetCulture>
     <ProductName>Media Ministry Manager</ProductName>
     <PublisherName>Andrew Randle-Warren</PublisherName>
     <SuiteName>Media Ministry</SuiteName>
-    <MinimumRequiredVersion>3.0.0.0</MinimumRequiredVersion>
+    <MinimumRequiredVersion>3.0.708.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>media_ministry_manager.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>3.1.0.%2a</ApplicationVersion>
+    <WebPage>manager.html</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationVersion>3.0.708.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -52,9 +55,9 @@
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -68,8 +71,8 @@
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -90,23 +93,22 @@
     <ManifestCertificateThumbprint>4CCBBE18B23306A98C1AD072286D465463B6FBD9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>M3App.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\App Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>MediaMinistryManager.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>M3App.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -130,115 +132,19 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Apis, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.57.0\lib\net45\Google.Apis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.57.0\lib\net461\Google.Apis.Auth.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.57.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.57.0\lib\net45\Google.Apis.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Drive.v3, Version=1.50.0.2229, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Drive.v3.1.57.0.2859\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Gmail.v1, Version=1.50.0.2202, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Gmail.v1.1.57.0.2650\lib\net45\Google.Apis.Gmail.v1.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.50.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.57.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.1.9, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.4.1\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Compression.LZ4.1.2.16\lib\net46\K4os.Compression.LZ4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.16\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.25.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.25.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MimeKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
-      <HintPath>..\packages\MimeKit.3.4.2\lib\net48\MimeKit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NPOI, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NPOI.OOXML, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.OOXML.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.DirectoryServices" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-  <ItemGroup>
+    <Import Include="ICSharpCode.SharpZipLib" />
+    <Import Include="K4os.Hash.xxHash" />
+    <Import Include="MediaMinistry" />
+    <Import Include="MediaMinistry.My.Resources" />
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="SPPBC.M3Tools.Exceptions" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -265,36 +171,10 @@
     <Compile Include="Custom Objects\Controls\FileLocationField.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Data Tables\Events\CustomersRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Events\InventoryRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Events\ListenersRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Events\OrdersRowChangeEvent.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\CustomersDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\InventoryDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\ListenersDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Rows\OrdersDataRow.vb" />
-    <Compile Include="Custom Objects\Data Tables\Tables\CustomersDataTable.vb">
-      <SubType>Component</SubType>
+    <Compile Include="Custom Objects\Dialogs\CreateFolderDialog.Designer.vb">
+      <DependentUpon>CreateFolderDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\InventoryDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\ListenersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Data Tables\Tables\OrdersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.Designer.vb">
-      <DependentUpon>FileSelectionDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\ListenerSelectionDialog.Designer.vb">
-      <DependentUpon>ListenerSelectionDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\ListenerSelectionDialog.vb">
+    <Compile Include="Custom Objects\Dialogs\CreateFolderDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.Designer.vb">
@@ -303,51 +183,30 @@
     <Compile Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.Designer.vb">
+      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Custom Objects\Exceptions\FormClosedException.vb" />
     <Compile Include="Custom Objects\Exceptions\InvalidStateCodeException.vb" />
     <Compile Include="Custom Objects\Exceptions\PasswordException.vb" />
-    <Compile Include="Custom Objects\Google\Service.vb" />
+    <Compile Include="Custom Objects\Google\DriveUploader.vb" />
     <Compile Include="Custom Objects\Controls\PasswordField.Designer.vb">
       <DependentUpon>PasswordField.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Controls\PasswordField.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Custom Objects\Google\Sender.vb" />
+    <Compile Include="Custom Objects\Google\Service.vb" />
+    <Compile Include="Custom Objects\Types\extensions.vb" />
     <Compile Include="Custom Objects\Utils.vb" />
-    <Compile Include="Custom Objects\Dialogs\Emails\CustomMessageDialog.Designer.vb">
-      <DependentUpon>CustomMessageDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\CustomMessageDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\EmailMinistryDialog.Designer.vb">
-      <DependentUpon>EmailMinistryDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\EmailMinistryDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.Designer.vb">
       <DependentUpon>FolderCreationDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.Designer.vb">
-      <DependentUpon>AddListenerDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\AddListenerDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Email Listeners\frm_ViewListeners.Designer.vb">
-      <DependentUpon>frm_ViewListeners.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Email Listeners\frm_ViewListeners.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.Designer.vb">
-      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Emails\DriveUploadDialog.Designer.vb">
@@ -362,12 +221,6 @@
     <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Customer\DisplayCustomers.Designer.vb">
-      <DependentUpon>DisplayCustomers.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Customer\DisplayCustomers.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.Designer.vb">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
     </Compile>
@@ -380,10 +233,16 @@
     <Compile Include="Custom Objects\Dialogs\Misc\NewUserDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.Designer.vb">
-      <DependentUpon>AdminInfoDialog.vb</DependentUpon>
+    <Compile Include="Forms\Management\CustomersManagement.designer.vb">
+      <DependentUpon>CustomersManagement.vb</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.vb">
+    <Compile Include="Forms\Management\CustomersManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Management\ListenersManagement.designer.vb">
+      <DependentUpon>ListenersManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Management\ListenersManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Misc\LoginForm.Designer.vb">
@@ -421,11 +280,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Custom Objects\Database.vb" />
     <Compile Include="Forms\Misc\MainForm.vb">
       <SubType>Form</SubType>
@@ -440,22 +294,19 @@
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Customers\AddCustomerDialog.Designer.vb">
-      <DependentUpon>AddCustomerDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Customers\AddCustomerDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Custom Objects\Google\DriveUploader.vb" />
     <Compile Include="Custom Objects\Types\Orders\CompletedOrder.vb" />
     <Compile Include="Custom Objects\Types\Orders\CurrentOrder.vb" />
     <Compile Include="Custom Objects\Types\People\Address.vb" />
     <Compile Include="Custom Objects\Types\People\Customer.vb" />
     <Compile Include="Custom Objects\Types\Inventory\Item.vb" />
     <Compile Include="Custom Objects\Types\People\Listener.vb" />
-    <Compile Include="Custom Objects\Google\Sender.vb" />
     <Compile Include="Custom Objects\Types\People\Person.vb" />
     <Compile Include="Custom Objects\Types\Inventory\Product.vb" />
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\MediaMinistrySplash.resx">
@@ -465,23 +316,11 @@
     <EmbeddedResource Include="Custom Objects\Controls\FileLocationField.resx">
       <DependentUpon>FileLocationField.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\FileSelectionDialog.resx">
-      <DependentUpon>FileSelectionDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\ListenerSelectionDialog.resx">
-      <DependentUpon>ListenerSelectionDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\CustomMessageDialog.resx">
-      <DependentUpon>CustomMessageDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\EmailMinistryDialog.resx">
-      <DependentUpon>EmailMinistryDialog.vb</DependentUpon>
+    <EmbeddedResource Include="Custom Objects\Dialogs\CreateFolderDialog.resx">
+      <DependentUpon>CreateFolderDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.resx">
       <DependentUpon>FolderCreationDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\AddListenerDialog.resx">
-      <DependentUpon>AddListenerDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Controls\PasswordField.resx">
       <DependentUpon>PasswordField.vb</DependentUpon>
@@ -489,20 +328,11 @@
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.resx">
       <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Email Listeners\frm_ViewListeners.resx">
-      <DependentUpon>frm_ViewListeners.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\SendEmailsDialog.resx">
-      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\DriveUploadDialog.resx">
       <DependentUpon>DriveUploadDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Products\AddProductDialog.resx">
       <DependentUpon>AddProductDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customer\DisplayCustomers.resx">
-      <DependentUpon>DisplayCustomers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.resx">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
@@ -510,11 +340,18 @@
     <EmbeddedResource Include="Custom Objects\Dialogs\Misc\NewUserDialog.resx">
       <DependentUpon>NewUserDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Misc\AdminInfoDialog.resx">
-      <DependentUpon>AdminInfoDialog.vb</DependentUpon>
+    <EmbeddedResource Include="Custom Objects\Dialogs\SendEmailsDialog.resx">
+      <DependentUpon>SendEmailsDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Management\CustomersManagement.resx">
+      <DependentUpon>CustomersManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Management\ListenersManagement.resx">
+      <DependentUpon>ListenersManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Misc\LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Misc\Settings.resx">
       <DependentUpon>Settings.vb</DependentUpon>
@@ -537,12 +374,12 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Customers\AddCustomerDialog.resx">
-      <DependentUpon>AddCustomerDialog.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="M3App.pfx" />
     <None Include="MediaMinistryManager.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
@@ -550,16 +387,25 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.CustomersDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ListenersDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.OrdersDataTable.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.TemplateList.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="Resources\credentials.json" />
+    <None Include="Resources\version" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -569,15 +415,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Media Ministry Manage Image.JPG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\App Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\logout button.png">
+    <Resource Include="Resources\Logout.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -586,81 +427,59 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NewToolStripMenuItem.Image.png" />
+    <None Include="Resources\BannerImage.JPG" />
+    <Content Include="Resources\ErrorImage.png" />
     <Content Include="Resources\HidePasswordIcon.png" />
+    <Content Include="Resources\Loading-Loop-2.gif" />
+    <Content Include="Resources\Loading-Loop-3.gif" />
+    <Content Include="Resources\Loading-Loop.gif" />
     <Content Include="Resources\ShowPasswordIcon.png" />
-    <Content Include="Resources\version.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BouncyCastle">
-      <Version>1.8.9</Version>
-    </PackageReference>
-    <PackageReference Include="Google.Apis">
-      <Version>1.57.0</Version>
-    </PackageReference>
-    <PackageReference Include="Google.Apis.Auth">
-      <Version>1.57.0</Version>
-    </PackageReference>
-    <PackageReference Include="Google.Apis.Core">
-      <Version>1.57.0</Version>
+    <ProjectReference Include="..\M3Tools\M3Tools.vbproj">
+      <Project>{91021c75-b313-4487-be80-19cce8c79f57}</Project>
+      <Name>M3Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Custom Objects\Components\" />
+    <Folder Include="Custom Objects\Dialogs\Customers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography">
+      <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="Google.Apis.Drive.v3">
-      <Version>1.57.0.2859</Version>
+      <Version>1.60.0.3082</Version>
     </PackageReference>
     <PackageReference Include="Google.Apis.Gmail.v1">
-      <Version>1.57.0.2650</Version>
+      <Version>1.60.0.3084</Version>
     </PackageReference>
     <PackageReference Include="Google.Protobuf">
-      <Version>3.21.9</Version>
-    </PackageReference>
-    <PackageReference Include="K4os.Compression.LZ4">
-      <Version>1.2.16</Version>
+      <Version>3.23.3</Version>
     </PackageReference>
     <PackageReference Include="K4os.Compression.LZ4.Streams">
-      <Version>1.2.16</Version>
+      <Version>1.3.5</Version>
     </PackageReference>
     <PackageReference Include="K4os.Hash.xxHash">
       <Version>1.0.8</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.IdentityModel.Abstractions">
-      <Version>6.25.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.IdentityModel.Logging">
-      <Version>6.25.0</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens">
-      <Version>6.25.0</Version>
+      <Version>6.31.0</Version>
     </PackageReference>
     <PackageReference Include="MimeKit">
-      <Version>3.4.2</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
+      <Version>4.1.0</Version>
     </PackageReference>
     <PackageReference Include="NPOI">
-      <Version>2.5.6</Version>
-    </PackageReference>
-    <PackageReference Include="Portable.BouncyCastle">
-      <Version>1.9.0</Version>
+      <Version>2.6.0</Version>
     </PackageReference>
     <PackageReference Include="SharpZipLib">
-      <Version>1.4.1</Version>
+      <Version>1.4.2</Version>
     </PackageReference>
     <PackageReference Include="SSH.NET">
       <Version>2020.0.2</Version>
     </PackageReference>
-    <PackageReference Include="System.Buffers">
-      <Version>4.5.1</Version>
-    </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions">
-      <Version>4.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.5.5</Version>
-    </PackageReference>
-    <PackageReference Include="System.Numerics.Vectors">
       <Version>4.5.0</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime">
@@ -669,29 +488,34 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>6.0.0</Version>
     </PackageReference>
-    <PackageReference Include="System.Text.Encoding">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Encodings.Web">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Json">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.5.4</Version>
-    </PackageReference>
-    <PackageReference Include="System.ValueTuple">
-      <Version>4.5.0</Version>
-    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Configuration.Install, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\M3Tools\M3Tools.vbproj">
+      <Project>{91021C75-B313-4487-BE80-19CCE8C79F57}</Project>
+      <Name>M3Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>wmic datafile where Name="C:\\Users\\arand\\Source\\Repos\\MultiDrew97\\Side-Projects\\Media Ministry Manager\\bin\\Debug\\Media Ministry Manager.exe" get version &gt; "$(TargetDir)\..\..\Resources\version.txt"</PostBuildEvent>
+    <PostBuildEvent>wmic datafile where Name="D:\\Visual Studio\\Media-Ministry-Manager\\Media Ministry Manager\\bin\\Debug\\Media Ministry Manager.exe" get version &gt; "$(TargetDir)..\..\Resources\version"</PostBuildEvent>
   </PropertyGroup>
 </Project>

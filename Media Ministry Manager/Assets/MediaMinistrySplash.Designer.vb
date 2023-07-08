@@ -38,7 +38,7 @@ Partial Class MediaMinistrySplash
         '
         'spsh_SplashScreen
         '
-        Me.spsh_SplashScreen.BackgroundImage = Global.MediaMinistry.My.Resources.Resources.Media_Ministry_Logo
+        Me.spsh_SplashScreen.BackgroundImage = Global.MediaMinistry.My.Resources.Resources.BannerImage
         Me.spsh_SplashScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.spsh_SplashScreen.ColumnCount = 2
         Me.spsh_SplashScreen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243.0!))

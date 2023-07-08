@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports MediaMinistry.GoogleAPI
 
+' TODO: Add GDrive Tool
 Public Class DriveUploadDialog
     'TODO: Make this look better when uploading files
 
@@ -49,17 +50,17 @@ Public Class DriveUploadDialog
     End Sub
 
     Private Sub Btn_Upload_Click(sender As Object, e As EventArgs) Handles btn_Upload.Click
-        Using uploader As New DriveUploader()
-            Dim parents As New List(Of String) From {uploader.GetFolderID(CType(cbx_Folders.SelectedItem, String))}
+		'Using uploader As New DriveUploader()
+		'    Dim parents As New List(Of String) From {uploader.GetFolderID(CType(cbx_Folders.SelectedItem, String))}
 
-            If chk_Custom.Checked And Not String.IsNullOrWhiteSpace(txt_CustomName.Text) Then
-                uploader.Upload(ofd_SelectAudio.FileName, parents, txt_CustomName.Text)
-            Else
-                uploader.Upload(ofd_SelectAudio.FileName, parents)
-            End If
-        End Using
+		'    If chk_Custom.Checked And Not String.IsNullOrWhiteSpace(txt_CustomName.Text) Then
+		'        uploader.Upload(ofd_SelectAudio.FileName, parents, txt_CustomName.Text)
+		'    Else
+		'        uploader.Upload(ofd_SelectAudio.FileName, parents)
+		'    End If
+		'End Using
 
-        MessageBox.Show("File has been uploaded.", "File Upload", MessageBoxButtons.OK, MessageBoxIcon.Information)
+		MessageBox.Show("File has been uploaded.", "File Upload", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         DialogResult = DialogResult.OK
         Me.Close()
@@ -107,8 +108,8 @@ Public Class DriveUploadDialog
     End Sub
 
     Private Sub LoadFolders()
-        Using uploader As New DriveUploader
-            cbx_Folders.DataSource = uploader.GetFolders()
-        End Using
-    End Sub
+		'Using uploader As New DriveUploader
+		'    cbx_Folders.DataSource = uploader.GetFolders()
+		'End Using
+	End Sub
 End Class

@@ -1,12 +1,13 @@
 ﻿Option Strict On
 
 Imports System.Data.SqlClient
+Imports SPPBC.M3Tools.Types
 
 Public Class PlaceOrderDialog
     Private CustomersTable As DataTable
-    Private Customers As ObjectModel.Collection(Of Types.Customer)
+    Private Customers As ObjectModel.Collection(Of Customer)
     Private ProductsTable As DataTable
-    Private Products As ObjectModel.Collection(Of Types.Product)
+    Private Products As ObjectModel.Collection(Of Product)
 
     Private Sub Frm_PlaceOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadData()
@@ -62,14 +63,14 @@ Public Class PlaceOrderDialog
     Private Sub FillTables()
         Dim row As DataRow
 
-        For Each customer As Types.Customer In Customers
+        For Each customer As Customer In Customers
             row = CustomersTable.NewRow
             row("CustomerID") = customer.Id
             row("Name") = customer.Name
             CustomersTable.Rows.Add(row)
         Next
 
-        For Each product As Types.Product In Products
+        For Each product As Product In Products
             row = ProductsTable.NewRow
             row("ProductID") = product.Id
             row("Name") = product.Name
