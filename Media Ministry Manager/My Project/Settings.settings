@@ -9,7 +9,7 @@
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="DefaultCatalog" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Media Ministry Test</Value>
+      <Value Profile="(Default)">Media Ministry</Value>
     </Setting>
     <Setting Name="DefaultPassword" Type="System.String" Scope="Application">
       <Value Profile="(Default)">M3AppPassword2499</Value>
