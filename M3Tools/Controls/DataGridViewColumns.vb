@@ -6,7 +6,9 @@ Public MustInherit Class DataGridViewImageButtonColumn
 
 	Protected Sub New(cellTemplate As DataGridViewCell)
 		Me.CellTemplate = cellTemplate
-		Width = 22
+		MinimumWidth = 25
+		Width = 25
+		FillWeight = 5
 		Resizable = DataGridViewTriState.False
 	End Sub
 End Class

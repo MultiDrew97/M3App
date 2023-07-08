@@ -3,6 +3,8 @@ Imports SPPBC.M3Tools.Events.Customers
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
+' TODO: Remove old dgc for remove and edit if customs continue to work out. keep until proven
+
 Public Class CustomersDataGrid
 	Public Event EditCustomer As CustomerEventHandler
 	Public Event RemoveCustomer As CustomerEventHandler

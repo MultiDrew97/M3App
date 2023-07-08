@@ -27,10 +27,10 @@ Partial Class CustomersDataGrid
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersDataGrid))
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.dgv_Customers = New System.Windows.Forms.DataGridView()
         Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
         Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
-        Me.chk_SelectAll = New System.Windows.Forms.CheckBox()
         Me.db_Customers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
         Me.dgc_CustomerID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Selection = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -40,11 +40,23 @@ Partial Class CustomersDataGrid
         Me.dgc_Phone = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Join = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgc_Edit = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.dgc_Remove = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.dgc_Edit = New SPPBC.M3Tools.DataGridViewImageButtonEditColumn()
+        Me.dgc_Remove = New SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn()
+        Me.dgc_Edit_Old = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.dgc_Remove_Old = New System.Windows.Forms.DataGridViewImageColumn()
         CType(Me.dgv_Customers, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'chk_SelectAll
+        '
+        Me.chk_SelectAll.AutoSize = True
+        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
+        Me.chk_SelectAll.Name = "chk_SelectAll"
+        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
+        Me.chk_SelectAll.TabIndex = 3
+        Me.chk_SelectAll.TabStop = False
+        Me.chk_SelectAll.UseVisualStyleBackColor = True
         '
         'dgv_Customers
         '
@@ -52,7 +64,7 @@ Partial Class CustomersDataGrid
         Me.dgv_Customers.AllowUserToOrderColumns = True
         Me.dgv_Customers.AutoGenerateColumns = False
         Me.dgv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_Customers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_CustomerID, Me.dgc_Selection, Me.dgc_FirstName, Me.dgc_LastName, Me.dgc_Address, Me.dgc_Phone, Me.dgc_Email, Me.dgc_Join, Me.dgc_Edit, Me.dgc_Remove})
+        Me.dgv_Customers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_CustomerID, Me.dgc_Selection, Me.dgc_FirstName, Me.dgc_LastName, Me.dgc_Address, Me.dgc_Phone, Me.dgc_Email, Me.dgc_Join, Me.dgc_Edit, Me.dgc_Remove, Me.dgc_Edit_Old, Me.dgc_Remove_Old})
         Me.dgv_Customers.ContextMenuStrip = Me.cms_Tools
         Me.dgv_Customers.DataSource = Me.bsCustomers
         Me.dgv_Customers.Dock = System.Windows.Forms.DockStyle.Fill
@@ -71,16 +83,6 @@ Partial Class CustomersDataGrid
         'bsCustomers
         '
         Me.bsCustomers.DataSource = GetType(SPPBC.M3Tools.DataTables.CustomersDataTable)
-        '
-        'chk_SelectAll
-        '
-        Me.chk_SelectAll.AutoSize = True
-        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
-        Me.chk_SelectAll.Name = "chk_SelectAll"
-        Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
-        Me.chk_SelectAll.TabIndex = 3
-        Me.chk_SelectAll.TabStop = False
-        Me.chk_SelectAll.UseVisualStyleBackColor = True
         '
         'db_Customers
         '
@@ -175,14 +177,10 @@ Partial Class CustomersDataGrid
         '
         'dgc_Edit
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(5)
-        Me.dgc_Edit.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgc_Edit.ButtonImage = Nothing
         Me.dgc_Edit.FillWeight = 5.0!
+        Me.dgc_Edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.dgc_Edit.HeaderText = ""
-        Me.dgc_Edit.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
-        Me.dgc_Edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Edit.MinimumWidth = 25
         Me.dgc_Edit.Name = "dgc_Edit"
         Me.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -190,19 +188,47 @@ Partial Class CustomersDataGrid
         '
         'dgc_Remove
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.NullValue = CType(resources.GetObject("DataGridViewCellStyle3.NullValue"), Object)
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(5)
-        Me.dgc_Remove.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgc_Remove.Description = "Remove the listener from the database and stop sending emails"
+        Me.dgc_Remove.ButtonImage = Nothing
         Me.dgc_Remove.FillWeight = 5.0!
+        Me.dgc_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.dgc_Remove.HeaderText = ""
-        Me.dgc_Remove.Image = Global.SPPBC.M3Tools.My.Resources.Resources.delete
-        Me.dgc_Remove.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
         Me.dgc_Remove.MinimumWidth = 25
         Me.dgc_Remove.Name = "dgc_Remove"
         Me.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgc_Remove.Width = 25
+        '
+        'dgc_Edit_Old
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(5)
+        Me.dgc_Edit_Old.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgc_Edit_Old.FillWeight = 5.0!
+        Me.dgc_Edit_Old.HeaderText = ""
+        Me.dgc_Edit_Old.Image = Global.SPPBC.M3Tools.My.Resources.Resources.edit
+        Me.dgc_Edit_Old.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
+        Me.dgc_Edit_Old.MinimumWidth = 25
+        Me.dgc_Edit_Old.Name = "dgc_Edit_Old"
+        Me.dgc_Edit_Old.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgc_Edit_Old.Visible = False
+        Me.dgc_Edit_Old.Width = 25
+        '
+        'dgc_Remove_Old
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.NullValue = CType(resources.GetObject("DataGridViewCellStyle3.NullValue"), Object)
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(5)
+        Me.dgc_Remove_Old.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgc_Remove_Old.Description = "Remove the listener from the database and stop sending emails"
+        Me.dgc_Remove_Old.FillWeight = 5.0!
+        Me.dgc_Remove_Old.HeaderText = ""
+        Me.dgc_Remove_Old.Image = Global.SPPBC.M3Tools.My.Resources.Resources.delete
+        Me.dgc_Remove_Old.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
+        Me.dgc_Remove_Old.MinimumWidth = 25
+        Me.dgc_Remove_Old.Name = "dgc_Remove_Old"
+        Me.dgc_Remove_Old.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgc_Remove_Old.Visible = False
+        Me.dgc_Remove_Old.Width = 25
         '
         'CustomersDataGrid
         '
@@ -232,6 +258,8 @@ Partial Class CustomersDataGrid
     Friend WithEvents dgc_Phone As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgc_Email As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dgc_Join As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dgc_Edit As Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents dgc_Remove As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents dgc_Edit As DataGridViewImageButtonEditColumn
+    Friend WithEvents dgc_Remove As DataGridViewImageButtonDeleteColumn
+    Friend WithEvents dgc_Edit_Old As Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents dgc_Remove_Old As Windows.Forms.DataGridViewImageColumn
 End Class

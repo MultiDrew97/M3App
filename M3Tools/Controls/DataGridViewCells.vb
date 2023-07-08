@@ -5,7 +5,7 @@ Public MustInherit Class DataGridViewImageButtonCell
 
 	Protected _ButtonImage As Drawing.Bitmap
 
-	Property ButtonState As VisualStyles.PushButtonState
+	'Property ButtonState As VisualStyles.PushButtonState
 
 	Protected Sub New(image As Drawing.Bitmap)
 		MyBase.FlatStyle = FlatStyle.Flat
@@ -54,8 +54,9 @@ Public MustInherit Class DataGridViewImageButtonCell
 		Dim ImageArea As New Drawing.Rectangle(ButtonArea.X + WidthDiff, ButtonArea.Y + HeightDiff, ImageWidth, ImageHeight)
 
 		' Because the last step is to paint the button image
-		ButtonRenderer.DrawButton(graphics, ButtonArea, Me._ButtonImage, ImageArea, False, Me.ButtonState)
+		ButtonRenderer.DrawButton(graphics, ButtonArea, Me._ButtonImage, ImageArea, False, VisualStyles.PushButtonState.Normal) ' ButtonState)
 	End Sub
+
 
 	'MustOverride Sub LoadImages()
 End Class
@@ -65,14 +66,6 @@ Public Class DataGridViewImageButtonEditCell
 	Public Sub New()
 		MyBase.New(My.Resources.edit)
 	End Sub
-
-	'Protected Overrides Sub Paint(graphics As Drawing.Graphics, clipBounds As Drawing.Rectangle, cellBounds As Drawing.Rectangle, rowIndex As Integer, elementState As DataGridViewElementStates, value As Object, formattedValue As Object, errorText As String, cellStyle As DataGridViewCellStyle, advancedBorderStyle As DataGridViewAdvancedBorderStyle, paintParts As DataGridViewPaintParts)
-	'	MyBase.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts)
-	'End Sub
-
-	'Public Overrides Sub LoadImages()
-	'	Throw New NotImplementedException()
-	'End Sub
 End Class
 
 Public Class DataGridViewImageButtonDeleteCell
@@ -81,12 +74,4 @@ Public Class DataGridViewImageButtonDeleteCell
 	Public Sub New()
 		MyBase.New(My.Resources.delete)
 	End Sub
-
-	'Protected Overrides Sub Paint(graphics As Drawing.Graphics, clipBounds As Drawing.Rectangle, cellBounds As Drawing.Rectangle, rowIndex As Integer, elementState As DataGridViewElementStates, value As Object, formattedValue As Object, errorText As String, cellStyle As DataGridViewCellStyle, advancedBorderStyle As DataGridViewAdvancedBorderStyle, paintParts As DataGridViewPaintParts)
-	'	MyBase.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts)
-	'End Sub
-
-	'Public Overrides Sub LoadImages()
-	'	Throw New NotImplementedException()
-	'End Sub
 End Class
