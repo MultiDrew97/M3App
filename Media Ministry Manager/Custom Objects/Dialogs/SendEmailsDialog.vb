@@ -172,6 +172,7 @@ Public Class SendEmailsDialog
 			Dim message = gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles) ', New MimeKit.MailboxAddress(My.Settings.User.Name, My.Settings.User.Email))
 			messages.Add(message)
 		Next
+		e.Result = messages
 
 		'Dim message As MimeKit.MimeMessage
 		'For Each listener In details.Recipients

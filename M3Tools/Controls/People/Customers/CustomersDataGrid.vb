@@ -27,6 +27,7 @@ Public Class CustomersDataGrid
 			Return CType(dgv_Customers.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
+			dgv_Customers.AutoGenerateColumns = False
 			dgv_Customers.DataSource = value
 		End Set
 	End Property

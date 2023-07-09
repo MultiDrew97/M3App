@@ -24,7 +24,9 @@ Partial Class SendEmailsDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
+		Me.components = New System.ComponentModel.Container()
+		Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
+		Dim User1 As SPPBC.M3Tools.Types.User = New SPPBC.M3Tools.Types.User()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.btn_Send = New System.Windows.Forms.Button()
 		Me.btn_Cancel = New System.Windows.Forms.Button()
@@ -198,9 +200,29 @@ Partial Class SendEmailsDialog
 		'
 		'dbListeners
 		'
-		Me.dbListeners.InitialCatalog = "Media Ministry Test"
-		Me.dbListeners.Password = "M3AppPassword2499"
-		Me.dbListeners.Username = "M3App"
+		MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
+		MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
+	"=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+		MySettings1.KeepLoggedIn = False
+		MySettings1.Password = ""
+		MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
+	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+		MySettings1.SettingsKey = ""
+		MySettings1.UpgradeRequired = True
+		User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
+		User1.Email = "JohnDoe@domain.ext"
+		User1.FirstName = "John"
+		User1.Id = -1
+		User1.LastName = "Doe"
+		User1.Name = "John Doe"
+		User1.Password = Nothing
+		User1.Salt = New System.Guid("ed29f422-7a25-4840-9339-13741f2378d6")
+		User1.Username = "JohnDoe123"
+		MySettings1.User = User1
+		MySettings1.Username = ""
+		Me.dbListeners.InitialCatalog = MySettings1.DefaultCatalog
+		Me.dbListeners.Password = MySettings1.DefaultPassword
+		Me.dbListeners.Username = MySettings1.DefaultUsername
 		'
 		'SendEmailsDialog
 		'

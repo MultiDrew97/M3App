@@ -32,13 +32,13 @@
     <ProductName>Media Ministry Manager</ProductName>
     <PublisherName>Andrew Randle-Warren</PublisherName>
     <SuiteName>Media Ministry</SuiteName>
-    <MinimumRequiredVersion>3.0.708.0</MinimumRequiredVersion>
+    <MinimumRequiredVersion>4.0.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>manager.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>20</ApplicationRevision>
-    <ApplicationVersion>3.0.708.%2a</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -512,7 +512,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
+      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

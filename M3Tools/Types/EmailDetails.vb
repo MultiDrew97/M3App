@@ -12,7 +12,7 @@ Namespace Types
 		''' The list of any drive links that may have been selected to be sent
 		''' </summary>
 		''' <returns></returns>
-		Property DriveLinks As GTools.Types.FileCollection 'List(Of String)
+		Property DriveLinks As New GTools.Types.FileCollection 'List(Of String)
 
 		''' <summary>
 		''' The list of any local files that were selected to be sent

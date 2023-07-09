@@ -24,10 +24,10 @@
       <Value Profile="(Default)">-1;John Doe;JohnDoe123;JohnDoe@domain.ext;;1</Value>
     </Setting>
     <Setting Name="Username" Roaming="true" Type="System.String" Scope="User">
-      <Value Profile="(Default)">arandlemiller97</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Password" Roaming="true" Type="System.String" Scope="User">
-      <Value Profile="(Default)">JasmineLove2697</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="releaseConnection" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
@@ -36,7 +36,7 @@
       <Value Profile="(Default)">Data Source=sppbc.hopto.org;Initial Catalog="Media Ministry Test";Connect Timeout=30;Encrypt=True;Authentication="Sql Password";TrustServerCertificate=True;</Value>
     </Setting>
     <Setting Name="KeepLoggedIn" Roaming="true" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CountTemplate" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Count: {0}</Value>

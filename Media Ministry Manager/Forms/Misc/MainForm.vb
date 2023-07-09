@@ -16,6 +16,7 @@ Public Class Frm_Main
 	Private Sub Reload() Handles Me.Load
 		tss_Feedback.Text = "What would you like to do?"
 		tss_Feedback.ForeColor = SystemColors.WindowText
+		Me.Focus()
 	End Sub
 
 	Private Sub MangeProducts(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.ManageProducts

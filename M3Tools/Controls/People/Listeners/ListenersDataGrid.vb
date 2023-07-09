@@ -27,6 +27,7 @@ Public Class ListenersDataGrid
 			Return CType(dgv_Listeners.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
+			dgv_Listeners.AutoGenerateColumns = False
 			dgv_Listeners.DataSource = value
 		End Set
 	End Property

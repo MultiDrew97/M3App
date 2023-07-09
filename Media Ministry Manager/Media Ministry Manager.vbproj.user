@@ -4,7 +4,7 @@
     <PublishUrlHistory>ftp://miller-sppbc/var/www/sppbc/manager/|sftp://miller-sppbc/var/www/sppbc/manager/|ftp://miller-sppbc:22/var/www/sppbc/manager/|ftp://1.1.1.1/var/www/sppbc/manager/|ftp://192.168.0.13/var/www/sppbc/manager/</PublishUrlHistory>
     <InstallUrlHistory>https://sppbc.hopto.org/manager/|http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory>http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://192.168.1.62/Media Ministry Manager/</UpdateUrlHistory>
+    <UpdateUrlHistory>https://sppbc.hopto.org/manager/|http://sppbc.hopto.org/manager/|https://sppbc.hopto.org/Manager/|http://sppbc.hopto.org/Manager/|http://192.168.1.62/Media Ministry Manager/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
