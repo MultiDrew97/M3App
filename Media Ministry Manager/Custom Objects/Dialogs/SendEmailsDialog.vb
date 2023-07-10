@@ -9,7 +9,7 @@ Public Class SendEmailsDialog
 	Private Event ProgressReset(total As Integer)
 	Public Event PrepBody()
 	'TODO: Make email sending more straight forward
-	Const DriveLinkHtml = "<a href=""{0}"">{1}</a>"
+	Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
 
 	ReadOnly Property FileCount As Integer
 		Get
@@ -140,7 +140,13 @@ Public Class SendEmailsDialog
 
 		Dim details = CType(e.Result, EmailDetails)
 
-		Using body As New SPPBC.M3Tools.Dialogs.EmailBodySelection()
+		Using body As New SPPBC.M3Tools.Dialogs.EmailBodySelection(New TemplateList() From {
+																   New Template() With {
+																   .Name = "Sermon",
+																   .Text = My.Resources.newSermon,
+																   .Subject = "New Sermon"
+																   },
+				New Template() With {.Name = "Reciept", .Text = My.Resources.receipt, .Subject = "Thank you"}})
 			Dim res = body.ShowDialog()
 			If Not res = DialogResult.OK Then
 				RaiseEvent EmailsCancelled()

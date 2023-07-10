@@ -59,12 +59,21 @@ Namespace Dialogs
 		End Sub
 
 		Private Sub BodySelectorLoaded(sender As Object, e As EventArgs) Handles MyBase.Load
-			ts_Templates.AddRange(
-				{
-				New Types.Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail, .Subject = "New Sermon"},
-				New Types.Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail, .Subject = "Thank you"}
-				})
+			'ts_Templates.AddRange(
+			'	{
+			'	New Types.Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail, .Subject = "New Sermon"},
+			'	New Types.Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail, .Subject = "Thank you"}
+			'	})
 			ts_Templates.Reload()
+		End Sub
+
+		Sub New(templates As Types.TemplateList)
+
+			' This call is required by the designer.
+			InitializeComponent()
+
+			' Add any initialization after the InitializeComponent() call.
+			ts_Templates.AddRange(templates)
 		End Sub
 	End Class
 End Namespace

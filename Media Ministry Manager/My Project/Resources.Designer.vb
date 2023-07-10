@@ -243,17 +243,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to &lt;!Doctype html&gt;
+        '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         '''&lt;html&gt;
-        '''    &lt;head&gt;
-        '''        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot;&gt;
-        '''    &lt;/head&gt;
-        '''    &lt;body&gt;
-        '''        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
+        '''  &lt;head&gt;
+        '''    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot; /&gt;
+        '''  &lt;/head&gt;
+        '''  &lt;body&gt;
+        '''    &lt;div&gt;
+        '''      &lt;p&gt;Blessings To You, {0}&lt;/p&gt;
         '''
-        '''        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
-        '''        &lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
-        '''        &lt;p&gt;You may give [rest of string was truncated]&quot;;.
+        '''
+        '''      &lt;p&gt;
+        '''        Welcome to the new &lt;strong&gt;BK &amp; AR Miller Ministries Email Listening&lt;/strong&gt;, formerly St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for being a subscriber.
+        '''        Over the last year I suffered a major stroke, but thanks be to God, I am still here and alive!
+        '''        My prayer is t [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property newSermon() As String
             Get

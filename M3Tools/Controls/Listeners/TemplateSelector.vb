@@ -31,8 +31,6 @@ Public Class TemplateSelector
 
 
 	Sub Reload()
-		bsTemplates.Add(New Types.Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail})
-		bsTemplates.Add(New Types.Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail})
 		cbx_TemplateSelection.SelectedIndex = -1
 	End Sub
 
