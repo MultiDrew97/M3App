@@ -30,13 +30,13 @@ Namespace GTools
 			End Get
 		End Property
 
-		Overrides Sub Authorize(Optional ct As CancellationToken = Nothing)
+		Overrides Sub Authorize(username As String, Optional ct As CancellationToken = Nothing)
+			MyBase.Authorize(username, ct)
 			' Create Drive API service.
 			LoadCreds("user", __scopes, If(IsNothing(ct), CancellationToken.None, ct))
 
 			__service = New DriveService(__init)
 
-			MyBase.Authorize(ct)
 		End Sub
 
 		''' <summary>

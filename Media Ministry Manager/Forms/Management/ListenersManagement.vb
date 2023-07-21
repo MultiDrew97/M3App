@@ -9,7 +9,8 @@ Public Class ListenersManagement
 
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		mms_Main.ToggleViewItem("Listeners")
-		gt_Email.Authorize()
+		gt_Email.Authorize(My.Settings.Username)
+		gd_Drive.Authorize(My.Settings.Username)
 		Reload()
 	End Sub
 

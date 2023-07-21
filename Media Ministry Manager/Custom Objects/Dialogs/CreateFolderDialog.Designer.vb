@@ -78,10 +78,6 @@ Partial Class CreateFolderDialog
 		Me.dt_DriveHeirarchy.Username = Global.MediaMinistry.My.MySettings.Default.Username
 		Me.dt_DriveHeirarchy.WithChildren = False
 		'
-		'gdt_GDrive
-		'
-		Me.gdt_GDrive.Username = Global.MediaMinistry.My.MySettings.Default.Username
-		'
 		'ip_FolderName
 		'
 		Me.ip_FolderName.AutoSize = True

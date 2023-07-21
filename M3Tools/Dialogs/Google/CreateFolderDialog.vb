@@ -52,7 +52,7 @@ Public Class CreateFolderDialog
 	Private Sub LoadDialog(sender As Object, e As EventArgs) Handles Me.Load
 		UseWaitCursor = True
 
-		gdt_GDrive.Authorize()
+		gdt_GDrive.Authorize(Username)
 
 		dt_DriveHeirarchy.Reload()
 

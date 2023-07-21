@@ -19,13 +19,12 @@ Namespace GTools
 
 		Private ReadOnly DefaultSender As New MailboxAddress("Elder Bryon Miller", "me")
 
-		Overrides Sub Authorize(Optional ct As CancellationToken = Nothing)
+		Overrides Sub Authorize(username As String, Optional ct As CancellationToken = Nothing)
+			MyBase.Authorize(username, ct)
 			' Create Gmail API service
 			LoadCreds("me", __scopes, If(IsNothing(ct), CancellationToken.None, ct))
 
 			__service = New GmailService(__init)
-
-			MyBase.Authorize(ct)
 		End Sub
 
 		''' <summary>

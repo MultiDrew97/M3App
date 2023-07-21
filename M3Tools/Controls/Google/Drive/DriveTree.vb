@@ -39,7 +39,7 @@ Public Class DriveTree
 
 	<DefaultValue(True)>
 	<Description("Whether the tree should include the children of folders")>
-	Public Property WithChildren As Boolean
+	Public Property WithChildren As Boolean = True
 
 	Public Sub FillTable(treeNodes As GTools.Types.FileCollection)
 		UseWaitCursor = True
@@ -174,7 +174,7 @@ Public Class DriveTree
 		End Using
 	End Sub
 
-	Public Shadows Sub Load()
-		gdt_GDrive.Authorize()
+	Public Shadows Sub Load(username As String)
+		gdt_GDrive.Authorize(username)
 	End Sub
 End Class

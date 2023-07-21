@@ -19,15 +19,15 @@ Public Class CreateFolderDialog
 		End Get
 	End Property
 
-	Public Property Username As String
-		Get
-			Return gdt_GDrive.Username
-		End Get
-		Set(value As String)
-			gdt_GDrive.Username = value
-			dt_DriveHeirarchy.Username = value
-		End Set
-	End Property
+	'Public Property Username As String
+	'	Get
+	'		Return gdt_GDrive.Username
+	'	End Get
+	'	Set(value As String)
+	'		gdt_GDrive.Username = value
+	'		dt_DriveHeirarchy.Username = value
+	'	End Set
+	'End Property
 
 	Private Sub Create(sender As Object, e As EventArgs) Handles btn_Create.Click
 		bw_GatherInfo.RunWorkerAsync(dt_DriveHeirarchy.SelectedNode)
@@ -52,7 +52,7 @@ Public Class CreateFolderDialog
 	Private Sub LoadDialog(sender As Object, e As EventArgs) Handles Me.Load
 		UseWaitCursor = True
 
-		gdt_GDrive.Authorize()
+		gdt_GDrive.Authorize(My.Settings.Username)
 
 		dt_DriveHeirarchy.Reload()
 

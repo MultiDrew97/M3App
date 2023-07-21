@@ -25,8 +25,6 @@ Partial Class SendEmailsDialog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
-		Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
-		Dim User1 As SPPBC.M3Tools.Types.User = New SPPBC.M3Tools.Types.User()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.btn_Send = New System.Windows.Forms.Button()
 		Me.btn_Cancel = New System.Windows.Forms.Button()
@@ -120,7 +118,6 @@ Partial Class SendEmailsDialog
 		Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
 		Me.gdt_Files.TabIndex = 4
 		Me.gdt_Files.Username = Global.MediaMinistry.My.MySettings.Default.Username
-		Me.gdt_Files.WithChildren = False
 		'
 		'tp_LocalFiles
 		'
@@ -196,33 +193,13 @@ Partial Class SendEmailsDialog
 		'
 		'gmt_Gmail
 		'
-		Me.gmt_Gmail.Username = Global.MediaMinistry.My.MySettings.Default.Username
+		'Me.gmt_Gmail.Username = Global.MediaMinistry.My.Settings.Username
 		'
 		'dbListeners
 		'
-		MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
-		MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
-	"=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-		MySettings1.KeepLoggedIn = False
-		MySettings1.Password = ""
-		MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
-	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-		MySettings1.SettingsKey = ""
-		MySettings1.UpgradeRequired = True
-		User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
-		User1.Email = "JohnDoe@domain.ext"
-		User1.FirstName = "John"
-		User1.Id = -1
-		User1.LastName = "Doe"
-		User1.Name = "John Doe"
-		User1.Password = Nothing
-		User1.Salt = New System.Guid("ed29f422-7a25-4840-9339-13741f2378d6")
-		User1.Username = "JohnDoe123"
-		MySettings1.User = User1
-		MySettings1.Username = ""
-		Me.dbListeners.InitialCatalog = MySettings1.DefaultCatalog
-		Me.dbListeners.Password = MySettings1.DefaultPassword
-		Me.dbListeners.Username = MySettings1.DefaultUsername
+		Me.dbListeners.InitialCatalog = "Media Ministry"
+		Me.dbListeners.Password = "M3AppPassword2499"
+		Me.dbListeners.Username = "M3App"
 		'
 		'SendEmailsDialog
 		'

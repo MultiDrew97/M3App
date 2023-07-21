@@ -23,11 +23,14 @@ Partial Class ListenersManagement
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
+		Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
+		Dim User1 As SPPBC.M3Tools.Types.User = New SPPBC.M3Tools.Types.User()
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
 		Me.dlc_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
 		Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)
 		Me.gt_Email = New SPPBC.M3Tools.GTools.GmailTool(Me.components)
 		Me.dbListeners = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
+		Me.gd_Drive = New SPPBC.M3Tools.GTools.GdriveTool(Me.components)
 		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
@@ -54,15 +57,31 @@ Partial Class ListenersManagement
 		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
 		Me.bsListeners.Filter = ""
 		'
-		'gt_Email
-		'
-		Me.gt_Email.Username = Global.MediaMinistry.My.MySettings.Default.Username
-		'
 		'dbListeners
 		'
-		Me.dbListeners.InitialCatalog = Global.MediaMinistry.My.MySettings.Default.DefaultCatalog
-		Me.dbListeners.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbListeners.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
+		MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
+	"=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+		MySettings1.KeepLoggedIn = False
+		MySettings1.Password = ""
+		MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
+	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+		MySettings1.SettingsKey = ""
+		MySettings1.UpgradeRequired = True
+		User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
+		User1.Email = "JohnDoe@domain.ext"
+		User1.FirstName = "John"
+		User1.Id = -1
+		User1.LastName = "Doe"
+		User1.Name = "John Doe"
+		User1.Password = Nothing
+		User1.Salt = New System.Guid("6288e21e-be9a-4d4b-ad56-fe81509bb135")
+		User1.Username = "JohnDoe123"
+		MySettings1.User = User1
+		MySettings1.Username = ""
+		Me.dbListeners.InitialCatalog = MySettings1.DefaultCatalog
+		Me.dbListeners.Password = MySettings1.DefaultPassword
+		Me.dbListeners.Username = MySettings1.DefaultUsername
 		'
 		'ListenersManagement
 		'
@@ -89,4 +108,5 @@ Partial Class ListenersManagement
 	Friend WithEvents gt_Email As SPPBC.M3Tools.GTools.GmailTool
 	Friend WithEvents bsListeners As BindingSource
 	Friend WithEvents dbListeners As SPPBC.M3Tools.Database.ListenerDatabase
+	Friend WithEvents gd_Drive As SPPBC.M3Tools.GTools.GdriveTool
 End Class

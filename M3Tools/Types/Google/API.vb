@@ -10,7 +10,7 @@ Namespace GTools
 		<Category("User")>
 		<SettingsBindable(True)>
 		<Description("The username of the currently logged in user")>
-		Public Property Username As String
+		Friend Property Username As String
 
 		Friend __init As New BaseClientService.Initializer() With {
 			.ApplicationName = "Media Ministry Manager"
@@ -46,9 +46,9 @@ Namespace GTools
 		''' Authorize with Google Drive based on the username passed
 		''' </summary>
 		''' <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
-		Public Overridable Sub Authorize(Optional ct As Threading.CancellationToken = Nothing)
+		Public Overridable Sub Authorize(username As String, Optional ct As Threading.CancellationToken = Nothing)
 			' Place general authorization logic here
-
+			Me.Username = username
 		End Sub
 	End Class
 End Namespace
