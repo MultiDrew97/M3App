@@ -110,7 +110,7 @@ Partial Class EditOrderDialog
         '
         'db_Orders
         '
-        Me.db_Orders.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+        Me.db_Orders.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Orders.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Orders.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '

@@ -60,7 +60,7 @@ Public Class CustomersManagement
 	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.UpdateCustomer
 		'Dim res = CustomerDialogs.EditCustomer(e.Customer)
 		UseWaitCursor = True
-		dbCustomers.UpdateCustomer(e.Customer)
+		dbCustomers.UpdateCustomer(e.Customer.Id, e.Customer.FirstName, e.Customer.LastName, e.Customer.Address, e.Customer.PhoneNumber, e.Customer.Email)
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 

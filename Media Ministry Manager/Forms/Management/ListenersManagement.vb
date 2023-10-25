@@ -78,7 +78,7 @@ Public Class ListenersManagement
 	End Sub
 
 	Private Sub AddListener(sender As Object, e As ListenerEventArgs) Handles mms_Main.AddListener, dlc_Listeners.AddListener
-		dbListeners.AddListener(e.Listener)
+		dbListeners.AddListener(e.Listener.Name, e.Listener.Email)
 		RaiseEvent ListenerAdded(Me, e)
 	End Sub
 

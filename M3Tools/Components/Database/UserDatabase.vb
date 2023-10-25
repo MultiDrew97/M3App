@@ -6,6 +6,8 @@ Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class UserDatabase
+		Private Const path As String = "users"
+
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
 		Public Property Username As String
@@ -85,30 +87,30 @@ Namespace Database
 		''' <param name="auth">The credentials to use for logging in the user</param>
 		''' <returns>The user if successful, otherwise Nothing</returns>
 		Public Function Login(auth As Auth) As User
-			Return dbConnection.Consume(Of User)(Method.Post, "/users/login", JSON.ConvertToJSON(auth)).Result
+			Return dbConnection.Consume(Of User)(Method.Post, $"/{path}/login", JSON.ConvertToJSON(auth)).Result
 		End Function
 
 		Public Function GetUser(userID As Integer) As User
-			Return dbConnection.Consume(Of User)(M3API.Method.Get, $"/users/{userID}").Result
+			Return dbConnection.Consume(Of User)(M3API.Method.Get, $"/{path}/{userID}").Result
 		End Function
 
 		Function GetUsers() As UserCollection
-			Return dbConnection.Consume(Of UserCollection)(M3API.Method.Get, $"/users").Result
+			Return dbConnection.Consume(Of UserCollection)(M3API.Method.Get, $"/{path}").Result
 		End Function
 
-		Private Structure ColumnNames
-			Shared ReadOnly Property ID As String = "UserID"
-			Shared ReadOnly Property FirstName As String = "FirstName"
-			Shared ReadOnly Property LastName As String = "LastName"
-			Shared ReadOnly Property Email As String = "Email"
-			Shared ReadOnly Property Username As String = "Username"
-			Shared ReadOnly Property Password As String = "Password"
-			Shared ReadOnly Property Role As String = "AccountRole"
-			Shared ReadOnly Property Salt As String = "Salt"
-			Shared ReadOnly Property LastLogin As String = "LastLogin"
-			Shared ReadOnly Property Joined As String = "Joined"
+		'Private Structure ColumnNames
+		'	Shared ReadOnly Property ID As String = "UserID"
+		'	Shared ReadOnly Property FirstName As String = "FirstName"
+		'	Shared ReadOnly Property LastName As String = "LastName"
+		'	Shared ReadOnly Property Email As String = "Email"
+		'	Shared ReadOnly Property Username As String = "Username"
+		'	Shared ReadOnly Property Password As String = "Password"
+		'	Shared ReadOnly Property Role As String = "AccountRole"
+		'	Shared ReadOnly Property Salt As String = "Salt"
+		'	Shared ReadOnly Property LastLogin As String = "LastLogin"
+		'	Shared ReadOnly Property Joined As String = "Joined"
 
-			Shared ReadOnly Property Message As String = "Message"
-		End Structure
+		'	Shared ReadOnly Property Message As String = "Message"
+		'End Structure
 	End Class
 End Namespace

@@ -297,7 +297,7 @@ Partial Class DisplayOrdersCtrl
 		'
 		'db_Orders
 		'
-		Me.db_Orders.InitialCatalog = "Media Ministry Test"
+		Me.db_Orders.BaseUrl = "Media Ministry Test"
 		Me.db_Orders.Password = "M3AppPassword2499"
 		Me.db_Orders.Username = "M3App"
 		'

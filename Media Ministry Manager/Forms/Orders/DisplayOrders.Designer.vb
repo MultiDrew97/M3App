@@ -46,7 +46,7 @@ Partial Class Frm_DisplayOrders
 		'
 		'db_Orders
 		'
-		Me.db_Orders.InitialCatalog = "Media Ministry"
+		Me.db_Orders.BaseUrl = "Media Ministry"
 		Me.db_Orders.Password = "M3AppPassword2499"
 		Me.db_Orders.Username = "M3App"
 		'

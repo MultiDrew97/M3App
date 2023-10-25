@@ -1,13 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports SPPBC.M3Tools.Events
-Imports SPPBC.M3Tools.Types
-'Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	' TODO: Revamp this area as well
 	Public NotInheritable Class ListenerDatabase
-		Private ReadOnly tableName As String = "Listeners"
+		Private Const path As String = "listeners"
+
 		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
@@ -45,15 +43,11 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Sub AddListener(listener As Types.Listener)
-			AddListener(listener.Name, listener.Email)
-		End Sub
-
 		Public Sub AddListener(name As String, email As String)
-			AddListener(New SqlParameter("Name", name), New SqlParameter("Email", email))
+			AddListener(New Types.Listener(-1, name, email))
 		End Sub
 
-		Private Sub AddListener(ParamArray params As SqlParameter())
+		Private Sub AddListener(listener As Types.Listener)
 			Throw New NotImplementedException("AddListener")
 		End Sub
 
@@ -62,11 +56,7 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			RemoveListener(New SqlParameter("ListenerID", listenerID))
-		End Sub
-
-		Private Sub RemoveListener(ParamArray param As SqlParameter())
-			Throw New NotImplementedException("RemoveListener")
+			dbConnection.Consume(Of Object)(M3API.Method.Delete, $"/{path}/{listenerID}")
 		End Sub
 
 		Public Sub UpdateListener(listenerID As Integer, fName As String, lName As String, email As String)
@@ -82,32 +72,27 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateListener(listener As Types.Listener)
-			UpdateListener(New SqlParameter("ListenerID", listener.Id), New SqlParameter("Name", listener.Name), New SqlParameter("Email", listener.Email))
-		End Sub
-
-		Private Sub UpdateListener(ParamArray params As SqlParameter())
 			Throw New NotImplementedException("UpdateListener")
 		End Sub
 
 		Public Function GetListeners() As Types.ListenerCollection
-			Return dbConnection.Consume(Of ListenerCollection)(M3API.Method.Get, $"/listeners").Result
+			Return dbConnection.Consume(Of Types.ListenerCollection)(M3API.Method.Get, $"/{path}").Result
 		End Function
 
-		Public Function GetListener(listenerID As Integer) As Listener
+		Public Function GetListener(listenerID As Integer) As Types.Listener
 			If Not Utils.ValidID(listenerID) Then
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Return dbConnection.Consume(Of Listener)(M3API.Method.Get, $"/listeners/{listenerID}").Result
+			Return dbConnection.Consume(Of Types.Listener)(M3API.Method.Get, $"/{path}/{listenerID}").Result
 		End Function
 
-		Private Structure ColumnNames
-			Shared ReadOnly Property ID As String = "ListenerID"
-			Shared ReadOnly Property Name As String = "Name"
-			Shared ReadOnly Property Email As String = "Email"
-			Shared ReadOnly Property Joined As String = "Joined"
-
-			Shared ReadOnly Property Message As String = "Message"
-		End Structure
+		'Private Structure ColumnNames
+		'	Shared ReadOnly Property ID As String = "ListenerID"
+		'	Shared ReadOnly Property Name As String = "Name"
+		'	Shared ReadOnly Property Email As String = "Email"
+		'	Shared ReadOnly Property Joined As String = "Joined"
+		'	Shared ReadOnly Property Message As String = "Message"
+		'End Structure
 	End Class
 End Namespace

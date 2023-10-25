@@ -87,7 +87,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("M3AppPassword2499")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("password")>  _
         Public ReadOnly Property DefaultPassword() As String
             Get
                 Return CType(Me("DefaultPassword"),String)
@@ -96,7 +96,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("M3App")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("username")>  _
         Public ReadOnly Property DefaultUsername() As String
             Get
                 Return CType(Me("DefaultUsername"),String)

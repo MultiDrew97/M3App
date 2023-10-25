@@ -63,7 +63,7 @@ Namespace Dialogs
 		Private Sub ImportListeners(sender As Object, e As DoWorkEventArgs) Handles bw_ImportListeners.DoWork
 			For Each listener As Types.Listener In Listeners
 				Try
-					dbListeners.AddListener(listener)
+					dbListeners.AddListener(listener.Name, listener.Email)
 					RaiseEvent ListenerAdded(Me, New ListenerEventArgs(listener, M3Tools.Events.EventType.Added))
 					bsListeners.Remove(listener)
 				Catch ex As Exception

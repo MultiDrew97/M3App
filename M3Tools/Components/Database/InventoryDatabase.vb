@@ -1,10 +1,11 @@
-﻿Imports System.Collections.ObjectModel
-Imports SPPBC.M3Tools.Types
+﻿Imports SPPBC.M3Tools.Types
 Imports System.Data.SqlClient
 Imports System.ComponentModel
 
 Namespace Database
 	Public NotInheritable Class InventoryDatabase
+		Private Const path As String = "inventory"
+
 		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
@@ -47,11 +48,11 @@ Namespace Database
 			End Set
 		End Property
 		Public Function GetItem(itemID As Integer) As Item
-			Return dbConnection.Consume(Of Item)(M3API.Method.Get, $"/inventory/{itemID}").Result
+			Return dbConnection.Consume(Of Item)(M3API.Method.Get, $"/{path}/{itemID}").Result
 		End Function
 
 		Public Function GetItems() As ItemCollection
-			Return dbConnection.Consume(Of ItemCollection)(M3API.Method.Get, $"/inventory").Result
+			Return dbConnection.Consume(Of ItemCollection)(M3API.Method.Get, $"/{path}").Result
 		End Function
 
 		Public Sub AddItem(product As Item)

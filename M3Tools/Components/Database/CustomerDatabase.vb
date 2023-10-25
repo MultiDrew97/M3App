@@ -1,12 +1,10 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Data.SqlClient
-Imports MathNet.Numerics.LinearAlgebra.Factorization
-Imports SPPBC.M3Tools.Events
+﻿Imports System.ComponentModel
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class CustomerDatabase
+		Private Const path As String = "customers"
+
 		'The username to use for the database connection
 		<EditorBrowsable()>
 		<SettingsBindable(True)>
@@ -50,9 +48,14 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Sub AddCustomer(customer As Customer)
-			AddCustomer(customer.FirstName, customer.LastName, customer.Address, customer.PhoneNumber, customer.Email)
+		Public Sub AddCustomer(
+				   fName As String, lName As String,
+				   Optional addrStreet As String = Nothing, Optional addrCity As String = Nothing,
+				   Optional addrState As String = Nothing, Optional addrZip As String = Nothing,
+				   Optional phone As String = Nothing, Optional email As String = Nothing)
+			AddCustomer(fName, lName, New Address(addrStreet, addrCity, addrState, addrZip), phone, email)
 		End Sub
+
 
 		Public Sub AddCustomer(
 				   fName As String, lName As String,
@@ -76,27 +79,14 @@ Namespace Database
 
 			'date string that holds the command to get the date for when the person joined
 			'Dim dateString = "SELECT CONVERT(VARCHAR(10), GETDATE(), 111)"
-			AddCustomer(fName, lName, address?.Street, address?.City, address?.State, address?.ZipCode, phone, email)
+			AddCustomer(New Customer(-1, fName, lName, address, phone, email))
 		End Sub
-
-		Public Sub AddCustomer(
-				   fName As String, lName As String,
-				   Optional addrStreet As String = Nothing, Optional addrCity As String = Nothing,
-				   Optional addrState As String = Nothing, Optional addrZip As String = Nothing,
-				   Optional phone As String = Nothing, Optional email As String = Nothing)
-			AddCustomer(
-				New SqlParameter("FirstName", fName), New SqlParameter("LastName", lName),
-				New SqlParameter("Street", addrStreet), New SqlParameter("City", addrCity),
-				New SqlParameter("State", addrState), New SqlParameter("Zip", addrZip),
-				New SqlParameter("Phone", phone), New SqlParameter("Email", email))
-		End Sub
-
-		Private Sub AddCustomer(ParamArray params As SqlParameter())
+		Public Sub AddCustomer(customer As Customer)
 			Throw New NotImplementedException("AddCustomer")
 		End Sub
 
 		Public Function GetCustomers() As CustomerCollection
-			Return dbConnection.Consume(Of CustomerCollection)(M3API.Method.Get, $"/customers").Result
+			Return dbConnection.Consume(Of CustomerCollection)(M3API.Method.Get, $"/{path}").Result
 		End Function
 
 		Public Function GetCustomer(customerID As Integer) As Customer
@@ -104,36 +94,18 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Return dbConnection.Consume(Of Customer)(M3API.Method.Get, $"/customers/{customerID}").Result
+			Return dbConnection.Consume(Of Customer)(M3API.Method.Get, $"/{path}/{customerID}").Result
 		End Function
 
 		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
-			UpdateCustomer(customerID, fName, lName, Address.Parse(street, city, state, zipCode), phone, email)
+			UpdateCustomer(customerID, fName, lName, New Address(street, city, state, zipCode), phone, email)
 		End Sub
 
 		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, addr As Address, phone As String, email As String)
-			UpdateCustomer(customerID, $"{fName} {lName}", addr, phone, email)
+			UpdateCustomer(New Customer(customerID, fName, lName, addr, phone, email))
 		End Sub
 
-		Public Sub UpdateCustomer(customerID As Integer, name As String, addr As Address, phone As String, email As String)
-			UpdateCustomer(New Customer(customerID, name, addr, phone, email))
-		End Sub
-
-		Public Sub UpdateCustomer(customer As Customer)
-			UpdateCustomer(
-				New SqlParameter("CustomerID", customer.Id),
-				New SqlParameter("FirstName", customer.FirstName),
-				New SqlParameter("LastName", customer.LastName),
-				New SqlParameter("Street", customer.Address?.Street),
-				New SqlParameter("City", customer.Address?.City),
-				New SqlParameter("State", customer.Address?.State),
-				New SqlParameter("ZipCode", customer.Address?.ZipCode),
-				New SqlParameter("Phone", customer.PhoneNumber),
-				New SqlParameter("Email", customer.Email)
-			)
-		End Sub
-
-		Public Sub UpdateCustomer(ParamArray params As SqlParameter())
+		Private Sub UpdateCustomer(customer As Customer)
 			Throw New NotImplementedException("UpdateCustomer")
 		End Sub
 
@@ -141,19 +113,19 @@ Namespace Database
 			Throw New NotImplementedException("RemoveCustomer")
 		End Sub
 
-		Private Structure ColumnNames
-			Shared ReadOnly Property ID As String = "CustomerID"
-			Shared ReadOnly Property FirstName As String = "FirstName"
-			Shared ReadOnly Property LastName As String = "LastName"
-			Shared ReadOnly Property Street As String = "Street"
-			Shared ReadOnly Property City As String = "City"
-			Shared ReadOnly Property State As String = "State"
-			Shared ReadOnly Property Zip As String = "ZipCode"
-			Shared ReadOnly Property Email As String = "Email"
-			Shared ReadOnly Property Phone As String = "PhoneNumber"
-			Shared ReadOnly Property Joined As String = "JoinDate"
+		'Private Structure ColumnNames
+		'	Shared ReadOnly Property ID As String = "CustomerID"
+		'	Shared ReadOnly Property FirstName As String = "FirstName"
+		'	Shared ReadOnly Property LastName As String = "LastName"
+		'	Shared ReadOnly Property Street As String = "Street"
+		'	Shared ReadOnly Property City As String = "City"
+		'	Shared ReadOnly Property State As String = "State"
+		'	Shared ReadOnly Property Zip As String = "ZipCode"
+		'	Shared ReadOnly Property Email As String = "Email"
+		'	Shared ReadOnly Property Phone As String = "PhoneNumber"
+		'	Shared ReadOnly Property Joined As String = "JoinDate"
 
-			Shared ReadOnly Property Message As String = "Message"
-		End Structure
+		'	Shared ReadOnly Property Message As String = "Message"
+		'End Structure
 	End Class
 End Namespace

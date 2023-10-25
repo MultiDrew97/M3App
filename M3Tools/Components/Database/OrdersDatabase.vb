@@ -5,7 +5,8 @@ Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class OrdersDatabase
-		Private ReadOnly tableName As String = "Orders"
+		Private Const path As String = "orders"
+
 		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
@@ -33,9 +34,9 @@ Namespace Database
 
 		'The initial catalog to use for the database connection
 		<Bindable(True)>
-		<Description("The initial catalog to use for the database connection")>
+		<Description("The url to use for the database connection")>
 		<SettingsBindable(True)>
-		Public Property InitialCatalog As String
+		Public Property BaseUrl As String
 			Get
 				Return dbConnection.BaseUrl
 			End Get
