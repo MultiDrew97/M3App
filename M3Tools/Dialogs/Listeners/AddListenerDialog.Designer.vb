@@ -93,7 +93,7 @@
             '
             'dbListeners
             '
-            Me.dbListeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+            Me.dbListeners.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
             Me.dbListeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
             Me.dbListeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
             '

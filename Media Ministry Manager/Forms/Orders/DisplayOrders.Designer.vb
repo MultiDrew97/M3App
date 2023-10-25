@@ -35,8 +35,8 @@ Partial Class Frm_DisplayOrders
 		'
 		Me.lbl_NoOrders.AutoSize = True
 		Me.lbl_NoOrders.BackColor = System.Drawing.SystemColors.AppWorkspace
-		Me.lbl_NoOrders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.Settings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.lbl_NoOrders.Font = Global.MediaMinistry.My.Settings.Default.CurrentFont
+		Me.lbl_NoOrders.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.MediaMinistry.My.MySettings.Default, "CurrentFont", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.lbl_NoOrders.Font = Global.MediaMinistry.My.MySettings.Default.CurrentFont
 		Me.lbl_NoOrders.Location = New System.Drawing.Point(257, 322)
 		Me.lbl_NoOrders.Name = "lbl_NoOrders"
 		Me.lbl_NoOrders.Size = New System.Drawing.Size(728, 48)

@@ -1,5 +1,5 @@
 ﻿Namespace Database
-    Partial Class ProductDatabase
+    Partial Class InventoryDatabase
         Inherits System.ComponentModel.Component
 
         <System.Diagnostics.DebuggerNonUserCode()>

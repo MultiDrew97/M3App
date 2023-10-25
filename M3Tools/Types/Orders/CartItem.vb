@@ -1,6 +1,6 @@
 ﻿Namespace Types
 	Public Class CartItem
-		Private Property Product As Product
+		Private Property Product As Item
 		Public Property Quantity As Integer
 
 		ReadOnly Property ItemTotal As Double
@@ -28,10 +28,10 @@
 		End Property
 
 		Public Sub New()
-			Me.New(New Product(), 0)
+			Me.New(New Item(), 0)
 		End Sub
 
-		Public Sub New(product As Product, quantity As Integer)
+		Public Sub New(product As Item, quantity As Integer)
 			Me.Product = product
 			Me.Quantity = quantity
 		End Sub

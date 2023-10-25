@@ -132,7 +132,7 @@
             '
             'dbCustomers
             '
-            Me.dbCustomers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+            Me.dbCustomers.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
             Me.dbCustomers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
             Me.dbCustomers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
             '

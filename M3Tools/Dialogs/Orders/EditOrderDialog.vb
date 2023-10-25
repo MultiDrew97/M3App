@@ -69,7 +69,7 @@ Public Class EditOrderDialog
 		End If
 
 		gi_CustomerName.Text = CurrentOrder.Customer.Name
-		pcb_Items.SelectedValue = CurrentOrder.Product.Id
+		pcb_Items.SelectedValue = CurrentOrder.Item.Id
 		qnc_Quantity.Quantity = CurrentOrder.Quantity
 
 		UpdatedOrder = CurrentOrder.Clone
@@ -88,7 +88,7 @@ Public Class EditOrderDialog
 			Return True
 		End If
 
-		If UpdatedOrder.Product.Id <> CurrentOrder.Product.Id Then
+		If UpdatedOrder.Item.Id <> CurrentOrder.Item.Id Then
 			Return True
 		End If
 

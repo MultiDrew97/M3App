@@ -28,7 +28,7 @@ Partial Class ProductsComboBox
 		Me.bsItems = New System.Windows.Forms.BindingSource(Me.components)
 		Me.lbl_Items = New System.Windows.Forms.Label()
 		Me.bw_LoadItems = New System.ComponentModel.BackgroundWorker()
-		Me.db_Products = New SPPBC.M3Tools.Database.ProductDatabase(Me.components)
+		Me.db_Products = New SPPBC.M3Tools.Database.InventoryDatabase(Me.components)
 		Me.TableLayoutPanel1.SuspendLayout()
 		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
@@ -62,7 +62,7 @@ Partial Class ProductsComboBox
 		'
 		'bsItems
 		'
-		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.Types.Product)
+		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.Types.Item)
 		'
 		'lbl_Items
 		'
@@ -79,7 +79,7 @@ Partial Class ProductsComboBox
 		'
 		'db_Products
 		'
-		Me.db_Products.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+		Me.db_Products.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
 		Me.db_Products.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
 		Me.db_Products.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 		'
@@ -104,6 +104,6 @@ Partial Class ProductsComboBox
 	Friend WithEvents lbl_Items As Windows.Forms.Label
 	Friend WithEvents cbx_Items As Windows.Forms.ComboBox
 	Friend WithEvents bw_LoadItems As ComponentModel.BackgroundWorker
-	Friend WithEvents db_Products As Database.ProductDatabase
+	Friend WithEvents db_Products As Database.InventoryDatabase
 	Friend WithEvents bsItems As Windows.Forms.BindingSource
 End Class

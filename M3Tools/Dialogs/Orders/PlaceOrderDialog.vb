@@ -53,7 +53,7 @@ Public Class PlaceOrderDialog
 	End Sub
 
 	Private Sub AddToCart(sender As Object, e As EventArgs) Handles btn_AddCart.Click
-		cc_Cart.Add(CType(pcb_Items.SelectedItem, Types.Product), qnc_Quantity.Quantity)
+		cc_Cart.Add(CType(pcb_Items.SelectedItem, Types.Item), qnc_Quantity.Quantity)
 
 		RaiseEvent CartItemAdded()
 	End Sub

@@ -197,7 +197,7 @@ Partial Class SendEmailsDialog
 		'
 		'dbListeners
 		'
-		Me.dbListeners.InitialCatalog = "Media Ministry"
+		Me.dbListeners.BaseUrl = "Media Ministry"
 		Me.dbListeners.Password = "M3AppPassword2499"
 		Me.dbListeners.Username = "M3App"
 		'

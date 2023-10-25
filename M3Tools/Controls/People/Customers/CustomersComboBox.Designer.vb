@@ -79,7 +79,7 @@ Partial Class CustomersComboBox
 		'
 		'db_Customers
 		'
-		Me.db_Customers.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+		Me.db_Customers.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
 		Me.db_Customers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
 		Me.db_Customers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
 		'

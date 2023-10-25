@@ -6,9 +6,17 @@ Namespace Types
 	Public Class User
 		Inherits Person
 
+		<Text.Json.Serialization.JsonPropertyName("username")>
 		Public Property Username As String
+
+		<Text.Json.Serialization.JsonPropertyName("password")>
+		<Text.Json.Serialization.JsonIgnore>
 		Public Property Password As Byte()
+
+		<Text.Json.Serialization.JsonPropertyName("salt")>
 		Public Property Salt As Guid
+
+		<Text.Json.Serialization.JsonPropertyName("accountRole")>
 		Public Property AccountRole As AccountRole
 
 		Public ReadOnly Property IsAdmin As Boolean

@@ -46,7 +46,7 @@
 		'
 		'db_Listeners
 		'
-		Me.db_Listeners.InitialCatalog = "Media Ministry"
+		Me.db_Listeners.BaseUrl = "Media Ministry"
 		Me.db_Listeners.Password = "M3AppPassword2499"
 		Me.db_Listeners.Username = "M3App"
 

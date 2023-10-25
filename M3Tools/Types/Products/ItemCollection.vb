@@ -2,8 +2,8 @@
 Imports System.ComponentModel
 
 Namespace Types
-	Public Class ProductCollection
-		Inherits DBEntryCollection(Of Product)
+	Public Class ItemCollection
+		Inherits DBEntryCollection(Of Item)
 
 		'Default Overloads ReadOnly Property Item(listenerID As Integer) As Listener
 		'	Get
@@ -15,7 +15,7 @@ Namespace Types
 			MyBase.New()
 		End Sub
 
-		Sub New(products As IList(Of Product))
+		Sub New(products As IList(Of Item))
 			MyBase.New(products)
 		End Sub
 

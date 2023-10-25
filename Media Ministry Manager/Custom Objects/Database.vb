@@ -190,13 +190,13 @@ Public Class Database
 		myCmd.ExecuteNonQuery()
 	End Sub
 
-	Public Function GetProductInfo(itemID As Integer) As Product
+	Public Function GetProductInfo(itemID As Integer) As Item
 		myCmd.Parameters.AddWithValue("ItemID", itemID)
 		myCmd.CommandText = "SELECT ItemName, Stock, Price, Available FROM INVENTORY WHERE ItemID = @ItemID"
 
 		Using myReader = myCmd.ExecuteReader
 			Do While myReader.Read
-				Return New Product(itemID, myReader.GetString(0), myReader.GetInt32(1), CDec(myReader.GetSqlMoney(2)), myReader.GetBoolean(3))
+				Return New Item(itemID, myReader.GetString(0), myReader.GetInt32(1), CDec(myReader.GetSqlMoney(2)), myReader.GetBoolean(3))
 			Loop
 		End Using
 
@@ -211,14 +211,14 @@ Public Class Database
 		myCmd.ExecuteNonQuery()
 	End Sub
 
-	Public Function GetProducts() As Collection(Of Product)
-		Dim products As New Collection(Of Product)
+	Public Function GetProducts() As Collection(Of Item)
+		Dim products As New Collection(Of Item)
 
 		myCmd.CommandText = "SELECT ItemID, ItemName, Stock, Price, Available FROM Inventory"
 
 		Using myReader = myCmd.ExecuteReader
 			Do While myReader.Read
-				products.Add(New Product(myReader.GetInt32(0), myReader.GetString(1), myReader.GetInt32(2), CDec(myReader.GetSqlMoney(3)), myReader.GetBoolean(4)))
+				products.Add(New Item(myReader.GetInt32(0), myReader.GetString(1), myReader.GetInt32(2), CDec(myReader.GetSqlMoney(3)), myReader.GetBoolean(4)))
 			Loop
 		End Using
 
@@ -233,7 +233,7 @@ Public Class Database
 		myCmd.ExecuteNonQuery()
 	End Sub
 
-	Public Sub AddNewProduct(product As Product)
+	Public Sub AddNewProduct(product As Item)
 		AddNewProduct(product.Name, product.Stock, product.Price)
 	End Sub
 

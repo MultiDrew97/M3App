@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports SPPBC.M3Tools.Events
+Imports SPPBC.M3Tools.Types
 'Imports SPPBC.M3Tools.Types
 
 Namespace Database
@@ -34,12 +36,12 @@ Namespace Database
 		<Bindable(True)>
 		<Description("The initial catalog to use for the database connection")>
 		<SettingsBindable(True)>
-		Public Property InitialCatalog As String
+		Public Property BaseUrl As String
 			Get
-				Return dbConnection.InitialCatalog
+				Return dbConnection.BaseUrl
 			End Get
 			Set(value As String)
-				dbConnection.InitialCatalog = value
+				dbConnection.BaseUrl = value
 			End Set
 		End Property
 
@@ -52,13 +54,7 @@ Namespace Database
 		End Sub
 
 		Private Sub AddListener(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect()
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddListener]"
-				cmd.Parameters.AddRange(params)
-
-				cmd.ExecuteNonQuery()
-			End Using
+			Throw New NotImplementedException("AddListener")
 		End Sub
 
 		Public Sub RemoveListener(listenerID As Integer)
@@ -70,13 +66,7 @@ Namespace Database
 		End Sub
 
 		Private Sub RemoveListener(ParamArray param As SqlParameter())
-			Using cmd = dbConnection.Connect()
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_RemoveListener]"
-				cmd.Parameters.AddRange(param)
-
-				cmd.ExecuteNonQuery()
-			End Using
+			Throw New NotImplementedException("RemoveListener")
 		End Sub
 
 		Public Sub UpdateListener(listenerID As Integer, fName As String, lName As String, email As String)
@@ -96,75 +86,19 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateListener(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect()
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateListener]"
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.Parameters.AddRange(params)
-
-				cmd.ExecuteNonQuery()
-			End Using
+			Throw New NotImplementedException("UpdateListener")
 		End Sub
 
 		Public Function GetListeners() As Types.ListenerCollection
-			Dim listeners As New Types.ListenerCollection
-
-			Using cmd = dbConnection.Connect()
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
-
-				Using reader = cmd.ExecuteReader
-					Do While reader.Read()
-						listeners.Add(New Types.Listener(
-							CInt(reader(ColumnNames.ID)),
-							CStr(reader(ColumnNames.Name)),
-							CStr(reader(ColumnNames.Email))
-						))
-					Loop
-				End Using
-			End Using
-
-			Return listeners
+			Return dbConnection.Consume(Of ListenerCollection)(M3API.Method.Get, $"/listeners").Result
 		End Function
 
-		Public Function GetListener(emailAddress As String) As Types.Listener
-			Return GetListener(ColumnSelection.Email, New SqlParameter("EmailAddress", emailAddress))
-		End Function
-
-		Public Function GetListener(listenerID As Integer) As Types.Listener
+		Public Function GetListener(listenerID As Integer) As Listener
 			If Not Utils.ValidID(listenerID) Then
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Return GetListener(ColumnSelection.ID, New SqlParameter("ListenerID", listenerID))
-		End Function
-
-		Private Function GetListener(column As ColumnSelection, ParamArray params As SqlParameter()) As Types.Listener
-			Using cmd = dbConnection.Connect()
-				Dim cmdText As String = "WHERE {0}={1}"
-
-				Select Case column
-					Case ColumnSelection.Email
-						cmdText = "WHERE Email=@EmailAddress"
-					Case ColumnSelection.ID
-						cmdText = "WHERE ListenerID=@ListenerID"
-					Case Else
-						Throw New ArgumentException()
-				End Select
-
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] {cmdText}"
-				cmd.Parameters.AddRange(params)
-
-				Using reader = cmd.ExecuteReaderAsync().Result
-					Do While reader.Read()
-						Return New Types.Listener(
-							CInt(reader(ColumnNames.ID)),
-							CStr(reader(ColumnNames.Name)),
-							CStr(reader(ColumnNames.Email))
-						)
-					Loop
-				End Using
-			End Using
-
-			Return Nothing
+			Return dbConnection.Consume(Of Listener)(M3API.Method.Get, $"/listeners/{listenerID}").Result
 		End Function
 
 		Private Structure ColumnNames

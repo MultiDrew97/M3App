@@ -28,7 +28,7 @@ Partial Class QuantityNudCtrl
 		Me.nud_Quantity = New System.Windows.Forms.NumericUpDown()
 		Me.bw_LoadItems = New System.ComponentModel.BackgroundWorker()
 		Me.bsItems = New System.Windows.Forms.BindingSource(Me.components)
-		Me.db_Products = New SPPBC.M3Tools.Database.ProductDatabase(Me.components)
+		Me.db_Products = New SPPBC.M3Tools.Database.InventoryDatabase(Me.components)
 		Me.TableLayoutPanel1.SuspendLayout()
 		CType(Me.nud_Quantity, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.bsItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,7 +70,7 @@ Partial Class QuantityNudCtrl
 		'
 		'db_Products
 		'
-		Me.db_Products.InitialCatalog = "Media Ministry"
+		Me.db_Products.BaseUrl = "Media Ministry"
 		Me.db_Products.Password = "M3AppPassword2499"
 		Me.db_Products.Username = "M3App"
 		'
@@ -95,6 +95,6 @@ Partial Class QuantityNudCtrl
 	Friend WithEvents lbl_Items As Windows.Forms.Label
 	Friend WithEvents bw_LoadItems As ComponentModel.BackgroundWorker
 	Friend WithEvents bsItems As Windows.Forms.BindingSource
-	Friend WithEvents db_Products As Database.ProductDatabase
+	Friend WithEvents db_Products As Database.InventoryDatabase
 	Friend WithEvents nud_Quantity As Windows.Forms.NumericUpDown
 End Class

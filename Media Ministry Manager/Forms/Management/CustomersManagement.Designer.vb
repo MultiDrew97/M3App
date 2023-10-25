@@ -295,7 +295,7 @@ Partial Class CustomersManagement
 		'
 		'dbCustomers
 		'
-		Me.dbCustomers.InitialCatalog = Global.MediaMinistry.My.MySettings.Default.DefaultCatalog
+		Me.dbCustomers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
 		Me.dbCustomers.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
 		Me.dbCustomers.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
 		'

@@ -78,10 +78,10 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry")>  _
-        Public ReadOnly Property DefaultCatalog() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:3000/api")>  _
+        Public ReadOnly Property DefaultUrl() As String
             Get
-                Return CType(Me("DefaultCatalog"),String)
+                Return CType(Me("DefaultUrl"),String)
             End Get
         End Property
         

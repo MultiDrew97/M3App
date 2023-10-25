@@ -59,29 +59,9 @@ Partial Class ListenersManagement
 		'
 		'dbListeners
 		'
-		MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
-		MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
-	"=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-		MySettings1.KeepLoggedIn = False
-		MySettings1.Password = ""
-		MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
-	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-		MySettings1.SettingsKey = ""
-		MySettings1.UpgradeRequired = True
-		User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
-		User1.Email = "JohnDoe@domain.ext"
-		User1.FirstName = "John"
-		User1.Id = -1
-		User1.LastName = "Doe"
-		User1.Name = "John Doe"
-		User1.Password = Nothing
-		User1.Salt = New System.Guid("6288e21e-be9a-4d4b-ad56-fe81509bb135")
-		User1.Username = "JohnDoe123"
-		MySettings1.User = User1
-		MySettings1.Username = ""
-		Me.dbListeners.InitialCatalog = MySettings1.DefaultCatalog
-		Me.dbListeners.Password = MySettings1.DefaultPassword
-		Me.dbListeners.Username = MySettings1.DefaultUsername
+		Me.dbListeners.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.dbListeners.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbListeners.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
 		'
 		'ListenersManagement
 		'

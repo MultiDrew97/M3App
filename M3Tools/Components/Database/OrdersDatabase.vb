@@ -37,30 +37,15 @@ Namespace Database
 		<SettingsBindable(True)>
 		Public Property InitialCatalog As String
 			Get
-				Return dbConnection.InitialCatalog
+				Return dbConnection.BaseUrl
 			End Get
 			Set(value As String)
-				dbConnection.InitialCatalog = value
+				dbConnection.BaseUrl = value
 			End Set
 		End Property
 
 		Public Function GetOrders() As OrderCollection
-			Dim orders As New OrderCollection()
-
-			Using cmd = dbConnection.Connect
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}]"
-
-				Using reader = cmd.ExecuteReader
-					Do While reader.Read
-						orders.Add(New Order(CInt(reader(ColumnNames.ID)), CInt(reader(ColumnNames.Customer)),
-											 CInt(reader(ColumnNames.Item)), CInt(reader(ColumnNames.Quantity)),
-											 CDec(reader(ColumnNames.Total)), CDate(reader(ColumnNames.PlacedDate)),
-											 Utils.TryDateCast(reader(ColumnNames.CompletedDate))))
-					Loop
-				End Using
-			End Using
-
-			Return orders
+			Return dbConnection.Consume(Of OrderCollection)(M3API.Method.Get, $"/orders").Result
 		End Function
 
 		Public Function GetCompletedOrders() As OrderCollection
@@ -84,19 +69,11 @@ Namespace Database
 		End Sub
 
 		Private Sub AddOrder(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddOrder]"
-				cmd.CommandType = CommandType.StoredProcedure
-
-				cmd.Parameters.AddRange(params)
-
-				' TODO: Verify if a return should happen
-				cmd.ExecuteNonQueryAsync()
-			End Using
+			Throw New NotImplementedException("AddOrder")
 		End Sub
 
 		Public Sub UpdateOrder(order As Order)
-			UpdateOrder(order.Id, order.Product.Id, order.Quantity)
+			UpdateOrder(order.Id, order.Item.Id, order.Quantity)
 		End Sub
 
 		Public Sub UpdateOrder(orderID As Integer, itemID As Integer, quantity As Integer)
@@ -112,15 +89,7 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateOrder(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect
-				cmd.Parameters.AddRange(params)
-
-				cmd.CommandText = $"UPDATE [{My.Settings.Schema}].[{tableName}] SET QUANTITY=@Quantity, ItemID=@ItemID WHERE OrderID = @OrderID"
-
-				cmd.ExecuteNonQuery()
-
-				'Throw New Exceptions.DatabaseException("Update Order not implemented yet")
-			End Using
+			Throw New NotImplementedException("UpdateOrder")
 		End Sub
 
 		Public Sub CancelOrder(orderID As Integer)
@@ -132,13 +101,7 @@ Namespace Database
 		End Sub
 
 		Private Sub CancelOrder(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_CancelOrder]"
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.Parameters.AddRange(params)
-
-				cmd.ExecuteNonQueryAsync()
-			End Using
+			Throw New NotImplementedException("CancelOrder")
 		End Sub
 
 		Public Sub CompleteOrder(orderID As Integer)
@@ -150,13 +113,7 @@ Namespace Database
 		End Sub
 
 		Private Sub CompleteOrder(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_CompleteOrder]"
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.Parameters.AddRange(params)
-
-				cmd.ExecuteNonQueryAsync()
-			End Using
+			Throw New NotImplementedException("CompleteOrder")
 		End Sub
 
 		Public Function GetOrderById(orderID As Integer) As Order
@@ -164,47 +121,15 @@ Namespace Database
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
 
-			Using cmd = dbConnection.Connect()
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE OrderID=@OrderID"
-				cmd.Parameters.AddWithValue("OrderID", orderID)
-
-				Using reader = cmd.ExecuteReader()
-					If Not reader.Read() Then
-						Throw New Exceptions.OrderNotFoundException($"No order with OrderID '{orderID}' was found")
-					End If
-
-					Return New Order(CInt(reader(ColumnNames.ID)), CInt(reader(ColumnNames.Customer)),
-											 CInt(reader(ColumnNames.Item)), CInt(reader(ColumnNames.Quantity)),
-											 CDec(reader(ColumnNames.Total)), CDate(reader(ColumnNames.PlacedDate)),
-											 Utils.TryDateCast(reader(ColumnNames.CompletedDate)))
-				End Using
-			End Using
-
-			Throw New Exceptions.ConnectionException("Failed to connect to database")
+			Return dbConnection.Consume(Of Order)(M3API.Method.Get, $"/orders/{orderID}").Result
 		End Function
 
 		Public Function GetOrderByCustomer(customerID As Integer) As OrderCollection
-			Dim orders As New OrderCollection()
 			If customerID < 0 Then
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
 
-			Using cmd = dbConnection.Connect()
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{tableName}] WHERE CustomerID=@CustomerID"
-				cmd.Parameters.AddWithValue("CustomerID", customerID)
-
-				Using reader = cmd.ExecuteReader()
-					While reader.Read()
-						orders.Add(New Order(CInt(reader(ColumnNames.ID)), CInt(reader(ColumnNames.Customer)),
-											 CInt(reader(ColumnNames.Item)), CInt(reader(ColumnNames.Quantity)),
-											 CDec(reader(ColumnNames.Total)), CDate(reader(ColumnNames.PlacedDate)),
-											 Utils.TryDateCast(reader(ColumnNames.CompletedDate))))
-					End While
-
-				End Using
-			End Using
-
-			Return orders
+			Throw New NotImplementedException("GetOrderByCustomer")
 		End Function
 
 

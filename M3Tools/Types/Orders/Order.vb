@@ -5,15 +5,15 @@ Namespace Types
         Inherits DBEntry
 
 		Public Property Customer As Person
-		Public Property Product As Item
+		Public Property Item As Item
 		Public Property Quantity As Integer
-        Public Property OrderTotal As Double
-        Public Property OrderDate As Date
-        Public Property CompletedDate As Date
+		Public Property OrderTotal As Double
+		Public Property OrderDate As Date
+		Public Property CompletedDate As Date
 
-        Public Sub New()
-            Me.New(-1, -1, -1, 0, 0, Date.Now)
-        End Sub
+		Public Sub New()
+			Me.New(-1, -1, -1, 0, 0, Date.Now)
+		End Sub
 
 		''' <summary>
 		''' New CurrentOrder Object
@@ -43,21 +43,8 @@ Namespace Types
 				Exit Sub
 			End If
 
-			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
-				Using cmd = db.Connect
-					cmd.CommandText = $"SELECT FirstName, LastName, Email, JoinDate FROM [{My.Settings.Schema}].[Customers] WHERE CustomerID=@CustomerID"
-					cmd.CommandType = CommandType.Text
-
-					cmd.Parameters.AddWithValue("CustomerID", customerID)
-
-					Using reader = cmd.ExecuteReader
-						If Not reader.Read() Then
-							Throw New Exceptions.CustomerNotFoundException($"Unable to find customer with ID {customerID}")
-						End If
-
-						Me.Customer = New Customer(customerID, CStr(reader("FirstName")), CStr(reader("LastName")), TryCast(reader("Email"), String), Utils.TryDateCast(reader("JoinDate")))
-					End Using
-				End Using
+			Using c As New Database.CustomerDatabase
+				Customer = c.GetCustomer(customerID)
 			End Using
 		End Sub
 
@@ -70,21 +57,8 @@ Namespace Types
 				Exit Sub
 			End If
 
-			Using db As New Database.Database(My.Settings.DefaultUsername, My.Settings.DefaultPassword, My.Settings.DefaultCatalog)
-				Using cmd = db.Connect
-					cmd.CommandText = $"SELECT ItemName FROM [{My.Settings.Schema}].[Items] WHERE ItemID=@ItemID"
-					cmd.CommandType = CommandType.Text
-
-					cmd.Parameters.AddWithValue("ItemID", itemID)
-
-					Using reader = cmd.ExecuteReader
-						If Not reader.Read() Then
-							Throw New Exceptions.ItemNotFoundException($"Unable to find Item with ID {itemID}")
-						End If
-
-						Me.Product = New Product(itemID, CStr(reader("ItemName")))
-					End Using
-				End Using
+			Using i As New Database.InventoryDatabase
+				Item = i.GetItem(itemID)
 			End Using
 		End Sub
 
@@ -101,7 +75,7 @@ Namespace Types
 		'End Sub
 
 		Public Function Clone() As Order
-			Return New Order(Id, Customer.Id, Product.Id, Quantity, OrderTotal, OrderDate, CompletedDate)
+			Return New Order(Id, Customer.Id, Item.Id, Quantity, OrderTotal, OrderDate, CompletedDate)
 		End Function
 	End Class
 End Namespace

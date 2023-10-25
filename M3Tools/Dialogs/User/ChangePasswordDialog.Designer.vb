@@ -93,7 +93,7 @@ Partial Class ChangePasswordDialog
         '
         'db_Users
         '
-        Me.db_Users.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+        Me.db_Users.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Users.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Users.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '

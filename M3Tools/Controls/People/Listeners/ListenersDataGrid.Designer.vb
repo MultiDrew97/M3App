@@ -80,7 +80,7 @@ Partial Class ListenersDataGrid
         '
         'db_Listeners
         '
-        Me.db_Listeners.InitialCatalog = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+        Me.db_Listeners.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '

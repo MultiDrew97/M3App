@@ -23,6 +23,7 @@ Partial Class Frm_Login
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
+		Dim MySettings8 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_Login))
 		Me.bw_SaveSettings = New System.ComponentModel.BackgroundWorker()
 		Me.tt_Info = New System.Windows.Forms.ToolTip(Me.components)
@@ -66,9 +67,19 @@ Partial Class Frm_Login
 		'
 		'dbUsers
 		'
-		Me.dbUsers.InitialCatalog = Global.MediaMinistry.My.MySettings.Default.DefaultCatalog
-		Me.dbUsers.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbUsers.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		MySettings8.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
+		MySettings8.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
+	"=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+		MySettings8.KeepLoggedIn = False
+		MySettings8.Password = ""
+		MySettings8.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
+	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+		MySettings8.SettingsKey = ""
+		MySettings8.UpgradeRequired = True
+		MySettings8.Username = ""
+		Me.dbUsers.BaseUrl = MySettings8.DefaultUrl
+		Me.dbUsers.Password = "password"
+		Me.dbUsers.Username = "username"
 		'
 		'lsd_LoadScreen
 		'

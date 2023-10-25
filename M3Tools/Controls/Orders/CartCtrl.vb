@@ -24,7 +24,7 @@ Public Class CartCtrl
 		End Get
 	End Property
 
-	Public Sub Add(item As Types.Product, quantity As Integer)
+	Public Sub Add(item As Types.Item, quantity As Integer)
 		Me.Add(New Types.CartItem(item, quantity))
 	End Sub
 

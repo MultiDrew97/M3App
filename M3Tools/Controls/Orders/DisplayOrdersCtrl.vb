@@ -73,7 +73,7 @@ Public Class DisplayOrdersCtrl
 
 		For Each order In orders
 			_orders.AddOrdersRow(
-				order.Id, order.Customer.Name, order.Product.Name,
+				order.Id, order.Customer.Name, order.Item.Name,
 				order.Quantity, order.OrderTotal, order.OrderDate, order.CompletedDate)
 		Next
 

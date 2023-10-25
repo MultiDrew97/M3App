@@ -115,6 +115,7 @@
     <Compile Include="Components\Database\Database.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\Database\JSON.vb" />
     <Compile Include="Components\Database\ListenerDatabase.Designer.vb">
       <DependentUpon>ListenerDatabase.vb</DependentUpon>
     </Compile>
@@ -127,10 +128,10 @@
     <Compile Include="Components\Database\OrdersDatabase.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Database\ProductDatabase.Designer.vb">
-      <DependentUpon>ProductDatabase.vb</DependentUpon>
+    <Compile Include="Components\Database\InventoryDatabase.Designer.vb">
+      <DependentUpon>InventoryDatabase.vb</DependentUpon>
     </Compile>
-    <Compile Include="Components\Database\ProductDatabase.vb">
+    <Compile Include="Components\Database\InventoryDatabase.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Database\UserDatabase.Designer.vb">
@@ -244,6 +245,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Exceptions\Products\ProductNotFoundException.vb" />
+    <Compile Include="Types\Auth.vb" />
     <Compile Include="Types\Events\CustomerEvents.vb" />
     <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.vb">
       <DependentUpon>EditCustomerDialog.vb</DependentUpon>
@@ -486,7 +488,7 @@
     <Compile Include="Types\extensions.vb" />
     <Compile Include="Types\Orders\OrderCollection.vb" />
     <Compile Include="Types\People\UserCollection.vb" />
-    <Compile Include="Types\Products\ProductCollection.vb" />
+    <Compile Include="Types\Products\ItemCollection.vb" />
     <Compile Include="Types\Templates.vb" />
     <Compile Include="Types\Google\API.vb">
       <SubType>Component</SubType>
@@ -503,7 +505,6 @@
     </Compile>
     <Compile Include="Types\Google\Drive\File.vb" />
     <Compile Include="Types\Products\Item.vb" />
-    <Compile Include="Types\Products\Product.vb" />
     <Compile Include="Types\Orders\CompletedOrder.vb" />
     <Compile Include="Types\Orders\Order.vb" />
     <Compile Include="Types\People\AccountRole.vb" />
@@ -552,8 +553,8 @@
     <EmbeddedResource Include="Components\Database\OrdersDatabase.resx">
       <DependentUpon>OrdersDatabase.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Database\ProductDatabase.resx">
-      <DependentUpon>ProductDatabase.vb</DependentUpon>
+    <EmbeddedResource Include="Components\Database\InventoryDatabase.resx">
+      <DependentUpon>InventoryDatabase.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Database\UserDatabase.resx">
       <DependentUpon>UserDatabase.vb</DependentUpon>
@@ -799,7 +800,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

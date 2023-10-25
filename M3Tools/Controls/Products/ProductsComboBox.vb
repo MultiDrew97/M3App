@@ -54,7 +54,7 @@ Public Class ProductsComboBox
 
 		End Try
 
-		For Each item In db_Products.GetProducts()
+		For Each item In db_Products.GetItems()
 			'Dim var As DataTables.ItemsDataRow = CType(CType(bsItems.AddNew(), DataRowView).Row, DataTables.ItemsDataRow)
 			'var.ItemArray = {item.Id, item.Name, item.Stock, item.Price, item.Available}
 			'Console.WriteLine(var.ItemArray)

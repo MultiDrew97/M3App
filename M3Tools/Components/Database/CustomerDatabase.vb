@@ -1,13 +1,12 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports MathNet.Numerics.LinearAlgebra.Factorization
 Imports SPPBC.M3Tools.Events
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
 	Public NotInheritable Class CustomerDatabase
-		Private Const TableName As String = "Customers"
-
 		'The username to use for the database connection
 		<EditorBrowsable()>
 		<SettingsBindable(True)>
@@ -42,12 +41,12 @@ Namespace Database
 		<Bindable(True)>
 		<SettingsBindable(True)>
 		<Description("The initial catalog to use for the database connection")>
-		Public Property InitialCatalog As String
+		Public Property BaseUrl As String
 			Get
-				Return dbConnection.InitialCatalog
+				Return dbConnection.BaseUrl
 			End Get
 			Set(value As String)
-				dbConnection.InitialCatalog = value
+				dbConnection.BaseUrl = value
 			End Set
 		End Property
 
@@ -93,39 +92,11 @@ Namespace Database
 		End Sub
 
 		Private Sub AddCustomer(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect()
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_AddCustomer]"
-				cmd.Parameters.AddRange(params)
-
-				cmd.ExecuteNonQuery()
-			End Using
+			Throw New NotImplementedException("AddCustomer")
 		End Sub
 
 		Public Function GetCustomers() As CustomerCollection
-			Dim customers As New CustomerCollection()
-
-			Using cmd = dbConnection.Connect
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}]"
-
-				Using reader = cmd.ExecuteReader
-
-					Do While reader.Read()
-						customers.Add(New Customer(
-							CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(reader(ColumnNames.LastName)),
-							New Address(
-								TryCast(reader(ColumnNames.Street), String), TryCast(reader(ColumnNames.City), String),
-								TryCast(reader(ColumnNames.State), String), TryCast(reader(ColumnNames.Zip), String)
-								),
-							TryCast(reader(ColumnNames.Phone), String), TryCast(reader(ColumnNames.Email), String), CDate(reader(ColumnNames.Joined))
-						))
-					Loop
-
-
-				End Using
-			End Using
-
-			Return customers
+			Return dbConnection.Consume(Of CustomerCollection)(M3API.Method.Get, $"/customers").Result
 		End Function
 
 		Public Function GetCustomer(customerID As Integer) As Customer
@@ -133,27 +104,7 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Using cmd = dbConnection.Connect()
-				cmd.Parameters.AddWithValue("CustomerID", customerID)
-
-				cmd.CommandText = $"SELECT * FROM [{My.Settings.Schema}].[{TableName}] WHERE CustomerID = @CustomerID"
-
-				Using reader = cmd.ExecuteReader()
-					If Not reader.Read() Then
-						Throw New Exceptions.CustomerNotFoundException()
-					End If
-
-					Return New Customer(
-							CInt(reader(ColumnNames.ID)), CStr(reader(ColumnNames.FirstName)), CStr(reader(ColumnNames.LastName)),
-							New Address(
-								TryCast(reader(ColumnNames.Street), String), TryCast(reader(ColumnNames.City), String),
-								TryCast(reader(ColumnNames.State), String), TryCast(reader(ColumnNames.Zip), String)
-								),
-							TryCast(reader(ColumnNames.Phone), String), TryCast(reader(ColumnNames.Email), String), CDate(reader(ColumnNames.Joined))
-						)
-
-				End Using
-			End Using
+			Return dbConnection.Consume(Of Customer)(M3API.Method.Get, $"/customers/{customerID}").Result
 		End Function
 
 		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
@@ -183,23 +134,11 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateCustomer(ParamArray params As SqlParameter())
-			Using cmd = dbConnection.Connect
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_UpdateCustomer]"
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.Parameters.AddRange(params)
-
-				cmd.ExecuteNonQuery()
-			End Using
+			Throw New NotImplementedException("UpdateCustomer")
 		End Sub
 
 		Public Sub RemoveCustomer(customerID As Integer)
-			Using cmd = dbConnection.Connect()
-				cmd.CommandText = $"[{My.Settings.Schema}].[sp_RemoveCustomer]"
-				cmd.CommandType = CommandType.StoredProcedure
-				cmd.Parameters.AddWithValue("CustomerID", customerID)
-
-				cmd.ExecuteNonQuery()
-			End Using
+			Throw New NotImplementedException("RemoveCustomer")
 		End Sub
 
 		Private Structure ColumnNames

@@ -4,7 +4,7 @@ Imports SPPBC.M3Tools.Types
 
 Public Class Frm_DisplayInventory
 	Private ReadOnly ProductsTable As New SPPBC.M3Tools.DataTables.ItemsDataTable
-	Private Products As ObjectModel.Collection(Of Product)
+	Private Inventory As New ItemCollection()
 	Private Tooled As Boolean = False
 
 	Private Sub ViewInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -56,19 +56,19 @@ Public Class Frm_DisplayInventory
 
 	Private Sub LoadData()
 		Using db As New Database
-			Products = db.GetProducts
+			'Inventory = db.GetProducts
 		End Using
 	End Sub
 
 	Private Sub FillTable()
 		Dim row As DataRow
-		For Each product As Product In Products
+		For Each item As Item In Inventory
 			row = ProductsTable.NewRow
-			row("ItemID") = product.Id
-			row("ItemName") = product.Name
-			row("Stock") = product.Stock
-			row("Price") = product.Price
-			row("Available") = product.Available
+			row("ItemID") = item.Id
+			row("ItemName") = item.Name
+			row("Stock") = item.Stock
+			row("Price") = item.Price
+			row("Available") = item.Available
 			ProductsTable.Rows.Add(row)
 		Next
 	End Sub
