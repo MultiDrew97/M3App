@@ -75,8 +75,8 @@ Namespace Database
 			Throw New NotImplementedException("UpdateListener")
 		End Sub
 
-		Public Function GetListeners() As Types.ListenerCollection
-			Return dbConnection.Consume(Of Types.ListenerCollection)(M3API.Method.Get, $"/{path}").Result
+		Public Function GetListeners() As Types.DBEntryCollection(Of Types.Listener)
+			Return dbConnection.Consume(Of Types.DBEntryCollection(Of Types.Listener))(M3API.Method.Get, $"/{path}").Result
 		End Function
 
 		Public Function GetListener(listenerID As Integer) As Types.Listener

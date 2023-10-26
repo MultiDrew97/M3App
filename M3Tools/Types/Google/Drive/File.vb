@@ -1,6 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 
-Namespace GTools.Types
+Namespace Types.GTools
 	Public Class File
 		Public ReadOnly Id As String
 		Public Property Name As String

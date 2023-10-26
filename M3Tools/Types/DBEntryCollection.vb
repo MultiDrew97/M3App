@@ -67,7 +67,6 @@ Namespace Types
 
 		Public ReadOnly Property SupportsSorting As Boolean Implements IBindingList.SupportsSorting
 			Get
-				Throw New NotImplementedException("SupportsSorting DBCollection")
 				Return True
 			End Get
 		End Property
@@ -97,7 +96,7 @@ Namespace Types
 		End Sub
 
 		Public Sub RemoveFilter() Implements IBindingListView.RemoveFilter
-			Throw New NotImplementedException()
+			Filter = ""
 		End Sub
 
 		Public Sub ApplySort([property] As PropertyDescriptor, direction As ListSortDirection) Implements IBindingList.ApplySort
@@ -126,8 +125,13 @@ Namespace Types
 
 		Default Overloads ReadOnly Property Item(id As Integer) As T
 			Get
-				Throw New NotImplementedException("Item DBEntryCollection")
-				Return GetItem(id)
+				For Each curr In Items
+					If curr.Id = id Then
+						Return curr
+					End If
+				Next
+
+				Throw New Exceptions.ItemNotFoundException()
 			End Get
 		End Property
 
@@ -164,15 +168,5 @@ Namespace Types
 				Add(param)
 			Next
 		End Sub
-
-		Public Function GetItem(id As Integer) As T
-			For Each curr In Items
-				If curr.Id = id Then
-					Return curr
-				End If
-			Next
-
-			Throw New Exceptions.ItemNotFoundException()
-		End Function
 	End Class
 End Namespace

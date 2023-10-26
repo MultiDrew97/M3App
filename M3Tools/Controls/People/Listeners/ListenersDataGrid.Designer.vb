@@ -73,14 +73,14 @@ Partial Class ListenersDataGrid
         '
         Me.cms_Tools.Name = "cms_Tools"
         Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
-        '
-        'bsListeners
-        '
-        Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
-        '
-        'db_Listeners
-        '
-        Me.db_Listeners.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
+		'
+		'bsListeners
+		'
+		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.DBEntryCollection(Of Types.Listener))
+		'
+		'db_Listeners
+		'
+		Me.db_Listeners.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
         Me.db_Listeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
         Me.db_Listeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
         '

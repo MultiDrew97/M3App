@@ -1,4 +1,4 @@
-﻿Namespace GTools
+﻿Namespace Types.GTools
 	Public Interface IGoogleService(Of T)
 		''' <summary>
 		''' Gets the account information for the current user.

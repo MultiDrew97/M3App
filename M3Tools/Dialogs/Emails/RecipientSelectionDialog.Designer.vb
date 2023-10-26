@@ -47,7 +47,7 @@
 		'
 		'bsListeners
 		'
-		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
+		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.DBEntryCollection(Of Types.Listener))
 		CType(Me.bsListeners, System.ComponentModel.ISupportInitialize).EndInit()
 
 	End Sub

@@ -73,9 +73,9 @@
 			End Get
 		End Property
 
-		Public ReadOnly Property Listeners As Types.ListenerCollection
+		Public ReadOnly Property Listeners As Types.DBEntryCollection(Of Types.Listener)
 			Get
-				Dim col As New Types.ListenerCollection
+				Dim col As New Types.DBEntryCollection(Of Types.Listener)
 
 				For Each row As ListenersDataRow In Rows
 					col.Add(row.Listener)
@@ -94,7 +94,7 @@
 
 		Public Event ListenersDataRowDeleted As ListenersDataRowChangeEventHandler
 
-		Public Sub AddRange(list As Types.ListenerCollection)
+		Public Sub AddRange(list As Types.DBEntryCollection(Of Types.Listener))
 			For Each listener In list
 				AddListenersRow(listener)
 			Next

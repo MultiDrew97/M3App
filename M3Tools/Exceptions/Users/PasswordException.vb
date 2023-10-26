@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class PasswordException
+	<Serializable>
+	Public Class PasswordException
         Inherits UserException
 
         Public Sub New()

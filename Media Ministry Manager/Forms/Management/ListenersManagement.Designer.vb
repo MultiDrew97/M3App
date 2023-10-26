@@ -54,7 +54,7 @@ Partial Class ListenersManagement
 		'
 		'bsListeners
 		'
-		Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
+		Me.bsListeners.DataSource = GetType(DBEntryCollection(Of Listener))
 		Me.bsListeners.Filter = ""
 		'
 		'dbListeners

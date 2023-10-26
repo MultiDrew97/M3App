@@ -66,7 +66,7 @@ Namespace Database
 
 			res = CType(req.GetResponseAsync().Result, Net.HttpWebResponse)
 
-			Return Task.FromResult(M3API.JSON.ConvertFromJSON(Of T)(New IO.StreamReader(res.GetResponseStream).ReadToEnd))
+			Return Task.FromResult(JSON.ConvertFromJSON(Of T)(New IO.StreamReader(res.GetResponseStream).ReadToEnd))
 		End Function
 	End Class
 End Namespace

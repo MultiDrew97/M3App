@@ -160,6 +160,7 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.g.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MediaMinistrySplash.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileLocationField.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CreateFolderDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FolderCreationDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PasswordField.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.RecieptTypeDialog.resources
@@ -185,6 +186,8 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.xml
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.CodeAnalysisLog.xml
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.lastcodeanalysissucceeded
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\BouncyCastle.Cryptography.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Enums.NET.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Enums.NET.pdb
@@ -249,4 +252,3 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CreateFolderDialog.resources

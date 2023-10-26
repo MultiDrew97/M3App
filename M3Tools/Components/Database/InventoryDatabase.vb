@@ -47,52 +47,33 @@ Namespace Database
 				dbConnection.BaseUrl = value
 			End Set
 		End Property
+
 		Public Function GetItem(itemID As Integer) As Item
 			Return dbConnection.Consume(Of Item)(M3API.Method.Get, $"/{path}/{itemID}").Result
 		End Function
 
-		Public Function GetItems() As ItemCollection
-			Return dbConnection.Consume(Of ItemCollection)(M3API.Method.Get, $"/{path}").Result
+		Public Function GetItems() As DBEntryCollection(Of Item)
+			Return dbConnection.Consume(Of DBEntryCollection(Of Item))(Method.Get, $"/{path}").Result
 		End Function
 
-		Public Sub AddItem(product As Item)
-			AddItem(product.Name, product.Stock, product.Price)
-		End Sub
-
 		Public Sub AddItem(itemName As String, stock As Integer, price As Double)
-			AddItem(
-				New SqlParameter("ItemName", itemName),
-				New SqlParameter("Stock", stock),
-				New SqlParameter("Price", price),
-				New SqlParameter("Available", If(stock > 0, 1, 0))
-			)
+			AddItem(New Item(-1, itemName, stock, price, True))
 		End Sub
 
-		Private Sub AddItem(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("AddItem")
-		End Sub
-
-
-		Public Sub UpdateItem(item As Item)
-			UpdateItem(item.Id, item.Name, item.Stock, item.Price, item.Available)
+		Public Sub AddItem(item As Item)
+			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(item))
 		End Sub
 
 		Public Sub UpdateItem(itemID As Integer, itemName As String, stock As Integer, price As Double, available As Boolean)
-			UpdateItem(New SqlParameter("ItemID", itemID), New SqlParameter("ItemName", itemName),
-							New SqlParameter("Stock", stock), New SqlParameter("Price", price),
-							New SqlParameter("Available", If(available, 1, 0)))
+			UpdateItem(New Item(itemID, itemName, stock, price, available))
 		End Sub
 
-		Private Sub UpdateItem(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("UpdateItem")
+		Public Sub UpdateItem(item As Item)
+			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{item.Id}", JSON.ConvertToJSON(item)).Wait()
 		End Sub
 
 		Public Sub RemoveItem(itemID As Integer)
-			RemoveItem(New SqlParameter("ItemID", itemID))
-		End Sub
-
-		Private Sub RemoveItem(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("RemoveItem")
+			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{itemID}").Wait()
 		End Sub
 
 		Private Sub ChangeAvailability(ParamArray params As SqlParameter())

@@ -1,6 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 
-Namespace Types
+Namespace Types.GTools
 	Public Class EmailDetails
 		''' <summary>
 		''' The contents of the email
@@ -12,7 +12,7 @@ Namespace Types
 		''' The list of any drive links that may have been selected to be sent
 		''' </summary>
 		''' <returns></returns>
-		Property DriveLinks As New GTools.Types.FileCollection 'List(Of String)
+		Property DriveLinks As New FileCollection 'List(Of String)
 
 		''' <summary>
 		''' The list of any local files that were selected to be sent
@@ -24,7 +24,7 @@ Namespace Types
 		''' The list of reciepients of the email
 		''' </summary>
 		''' <returns></returns>
-		Property Recipients As New ListenerCollection
+		Property Recipients As New DBEntryCollection(Of Listener)
 
 		''' <summary>
 		''' The list of links to be added to the email body

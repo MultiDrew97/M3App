@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports SPPBC.M3Tools.Types
+Imports SPPBC.M3Tools.Types.GTools
 
 Public Class SendEmailsDialog
 	Private Event EmailsSending()
@@ -76,10 +76,11 @@ Public Class SendEmailsDialog
 		Dim details = CType(e.Argument, EmailDetails)
 
 		For Each node In gdt_Files.GetSelectedNodes()
-			details.DriveLinks.Add(New SPPBC.M3Tools.GTools.Types.File(node.Name, node.Text, "")) 'String.Format(My.Resources.DriveShareLink, node.Name))
+			' TODO: Uncomment after build
+			details.DriveLinks.Add(New File(node.Name, node.Text, "")) 'String.Format(My.Resources.DriveShareLink, node.Name))
 		Next
 
-		For Each file As SPPBC.M3Tools.GTools.Types.File In fu_Receipts.Files
+		For Each file As File In fu_Receipts.Files
 			details.LocalFiles.Add(file.Name)
 		Next
 

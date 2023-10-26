@@ -23,6 +23,8 @@ Partial Class Frm_Login
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
+        Dim User1 As SPPBC.M3Tools.Types.User = New SPPBC.M3Tools.Types.User()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_Login))
         Me.bw_SaveSettings = New System.ComponentModel.BackgroundWorker()
         Me.tt_Info = New System.Windows.Forms.ToolTip(Me.components)
@@ -36,6 +38,7 @@ Partial Class Frm_Login
         Me.chk_KeepLoggedIn = New System.Windows.Forms.CheckBox()
         Me.btn_Login = New System.Windows.Forms.Button()
         Me.lf_Login = New SPPBC.M3Tools.LoginFields()
+        Me.CustomerDatabase1 = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
         Me.ss_Feedback.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,16 +66,36 @@ Partial Class Frm_Login
         Me.ss_Feedback.Size = New System.Drawing.Size(384, 22)
         Me.ss_Feedback.TabIndex = 5
         Me.ss_Feedback.Text = "StatusStrip1"
-		'
-		'dbUsers
-		'
-		Me.dbUsers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbUsers.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbUsers.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
-		'
-		'lsd_LoadScreen
-		'
-		Me.lsd_LoadScreen.Image = CType(resources.GetObject("lsd_LoadScreen.Image"), System.Drawing.Bitmap)
+        '
+        'dbUsers
+        '
+        MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
+        MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
+    "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+        MySettings1.KeepLoggedIn = False
+        MySettings1.Password = ""
+        MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
+    "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
+        MySettings1.SettingsKey = ""
+        MySettings1.UpgradeRequired = True
+        User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
+        User1.Email = "JohnDoe@domain.ext"
+        User1.FirstName = "John"
+        User1.Id = -1
+        User1.LastName = "Doe"
+        User1.Name = "John Doe"
+        User1.Password = Nothing
+        User1.Salt = New System.Guid("5c58ade9-59a2-4948-941e-1d08f7720c24")
+        User1.Username = "JohnDoe123"
+        MySettings1.User = User1
+        MySettings1.Username = ""
+        Me.dbUsers.BaseUrl = MySettings1.DefaultUrl
+        Me.dbUsers.Password = MySettings1.DefaultPassword
+        Me.dbUsers.Username = MySettings1.DefaultUsername
+        '
+        'lsd_LoadScreen
+        '
+        Me.lsd_LoadScreen.Image = CType(resources.GetObject("lsd_LoadScreen.Image"), System.Drawing.Bitmap)
         Me.lsd_LoadScreen.LoadText = ""
         '
         'llb_ForgotPassword
@@ -86,7 +109,7 @@ Partial Class Frm_Login
         Me.llb_ForgotPassword.Location = New System.Drawing.Point(53, 267)
         Me.llb_ForgotPassword.Name = "llb_ForgotPassword"
         Me.llb_ForgotPassword.Size = New System.Drawing.Size(129, 20)
-        Me.llb_ForgotPassword.TabIndex = 9
+        Me.llb_ForgotPassword.TabIndex = 3
         Me.llb_ForgotPassword.TabStop = True
         Me.llb_ForgotPassword.Text = "Forgot Password"
         Me.llb_ForgotPassword.Visible = False
@@ -102,7 +125,7 @@ Partial Class Frm_Login
         Me.llb_SignUp.Location = New System.Drawing.Point(231, 268)
         Me.llb_SignUp.Name = "llb_SignUp"
         Me.llb_SignUp.Size = New System.Drawing.Size(66, 20)
-        Me.llb_SignUp.TabIndex = 8
+        Me.llb_SignUp.TabIndex = 4
         Me.llb_SignUp.TabStop = True
         Me.llb_SignUp.Text = "Sign Up"
         Me.llb_SignUp.Visible = False
@@ -119,7 +142,7 @@ Partial Class Frm_Login
         Me.chk_KeepLoggedIn.Location = New System.Drawing.Point(57, 158)
         Me.chk_KeepLoggedIn.Name = "chk_KeepLoggedIn"
         Me.chk_KeepLoggedIn.Size = New System.Drawing.Size(119, 23)
-        Me.chk_KeepLoggedIn.TabIndex = 6
+        Me.chk_KeepLoggedIn.TabIndex = 1
         Me.chk_KeepLoggedIn.TabStop = False
         Me.chk_KeepLoggedIn.Text = "Remember Me"
         Me.chk_KeepLoggedIn.UseVisualStyleBackColor = False
@@ -131,7 +154,7 @@ Partial Class Frm_Login
         Me.btn_Login.Location = New System.Drawing.Point(155, 221)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(76, 29)
-        Me.btn_Login.TabIndex = 7
+        Me.btn_Login.TabIndex = 2
         Me.btn_Login.Text = "Log In"
         Me.btn_Login.UseVisualStyleBackColor = True
         '
@@ -146,12 +169,18 @@ Partial Class Frm_Login
         Me.lf_Login.Padding = New System.Windows.Forms.Padding(10)
         Me.lf_Login.Password = Nothing
         Me.lf_Login.Size = New System.Drawing.Size(320, 144)
-        Me.lf_Login.TabIndex = 10
+        Me.lf_Login.TabIndex = 0
         Me.lf_Login.Username = Nothing
-        '
-        'Frm_Login
-        '
-        Me.AcceptButton = Me.btn_Login
+		'
+		'CustomerDatabase1
+		'
+		Me.CustomerDatabase1.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.CustomerDatabase1.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.CustomerDatabase1.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		'
+		'Frm_Login
+		'
+		Me.AcceptButton = Me.btn_Login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
@@ -188,4 +217,5 @@ Partial Class Frm_Login
 	Friend WithEvents chk_KeepLoggedIn As CheckBox
 	Friend WithEvents btn_Login As Button
 	Friend WithEvents lf_Login As SPPBC.M3Tools.LoginFields
+	Friend WithEvents CustomerDatabase1 As CustomerDatabase
 End Class

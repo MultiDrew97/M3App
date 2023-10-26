@@ -61,16 +61,16 @@ Public Class UploadFileDialog
 		Dim fileParts() As String
 		Dim fileExt As String
 		Files.Clear()
-		For Each file As GTools.Types.File In bsFiles.List 'fu_FileUpload.Files
+		For Each file As Types.GTools.File In bsFiles.List 'fu_FileUpload.Files
 			fileParts = file.Name.Split("."c)
 			fileExt = fileParts(fileParts.Length - 1)
-			Files.Add(New GTools.Types.File("", file.Name, fileExt))
+			Files.Add(New Types.GTools.File("", file.Name, fileExt))
 		Next
 	End Sub
 
 	Private Sub SetParents(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadFiles.RunWorkerCompleted
 		Dim selectedParentId = dt_DriveHeirarchy.SelectedNode.Name
-		For Each file As GTools.Types.File In Files
+		For Each file As Types.GTools.File In Files
 			If file.Parents Is Nothing Then
 				file.Parents = If(selectedParentId.Equals("main"), Nothing, New Collection(Of String)({selectedParentId}))
 			Else
@@ -87,7 +87,7 @@ Public Class UploadFileDialog
 	Private Sub UploadFiles(sender As Object, e As DoWorkEventArgs) Handles bw_UploadFiles.DoWork
 		Dim fileName As String
 		Try
-			For Each file As GTools.Types.File In Files
+			For Each file As Types.GTools.File In Files
 				fileName = InputBox($"What would you like to call this file? (default: {Utils.DefaultFileName(file.Name)})", "File Name", Utils.DefaultFileName(file.Name))
 				gdt_GDrive.UploadFile(file, fileName, __permission)
 			Next

@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class LoginException
+	<Serializable>
+	Public Class LoginException
         Inherits UserException
 
         Public Sub New()

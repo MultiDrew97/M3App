@@ -1,6 +1,4 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
@@ -45,15 +43,15 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Function GetOrders() As OrderCollection
-			Return dbConnection.Consume(Of OrderCollection)(M3API.Method.Get, $"/orders").Result
+		Public Function GetOrders() As DBEntryCollection(Of Order)
+			Return dbConnection.Consume(Of DBEntryCollection(Of Order))(Method.Get, $"/{path}").Result
 		End Function
 
-		Public Function GetCompletedOrders() As OrderCollection
+		Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
 			' TODO: Test this to make sure it works properly
 			Return CType(GetOrders().Where(Function(order As Order) As Boolean
 											   Return order.CompletedDate.Year > 2000
-										   End Function), OrderCollection)
+										   End Function), DBEntryCollection(Of Order))
 		End Function
 
 		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
@@ -65,19 +63,14 @@ Namespace Database
 				Throw New ArgumentException("Quantity values must be greater than or equal to 1")
 			End If
 
-			'insert the order into the ORDERS table
-			AddOrder({New SqlParameter("CustomerID", customerID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity)})
+			AddOrder(New Order(-1, customerID, itemID, quantity))
 		End Sub
 
-		Private Sub AddOrder(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("AddOrder")
+		Public Sub AddOrder(order As Order)
+			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(order)).Wait()
 		End Sub
 
-		Public Sub UpdateOrder(order As Order)
-			UpdateOrder(order.Id, order.Item.Id, order.Quantity)
-		End Sub
-
-		Public Sub UpdateOrder(orderID As Integer, itemID As Integer, quantity As Integer)
+		Public Sub UpdateOrder(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer)
 			If Not Utils.ValidID(orderID) OrElse Not Utils.ValidID(itemID) Then
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
@@ -86,11 +79,11 @@ Namespace Database
 				Throw New ArgumentException($"Quantity values must be greater than or equal to 1")
 			End If
 
-			UpdateOrder(New SqlParameter("OrderID", orderID), New SqlParameter("ItemID", itemID), New SqlParameter("Quantity", quantity))
+			UpdateOrder(New Order(orderID, customerID, itemID, quantity))
 		End Sub
 
-		Private Sub UpdateOrder(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("UpdateOrder")
+		Public Sub UpdateOrder(order As Order)
+			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{order.Id}", JSON.ConvertToJSON(order)).Wait()
 		End Sub
 
 		Public Sub CancelOrder(orderID As Integer)
@@ -98,11 +91,7 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			CancelOrder(New SqlParameter("OrderID", orderID))
-		End Sub
-
-		Private Sub CancelOrder(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("CancelOrder")
+			RemoveOrder(orderID, False)
 		End Sub
 
 		Public Sub CompleteOrder(orderID As Integer)
@@ -110,11 +99,11 @@ Namespace Database
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
 
-			CompleteOrder(New SqlParameter("OrderID", orderID))
+			RemoveOrder(orderID, True)
 		End Sub
 
-		Private Sub CompleteOrder(ParamArray params As SqlParameter())
-			Throw New NotImplementedException("CompleteOrder")
+		Private Sub RemoveOrder(orderID As Integer, completed As Boolean)
+			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{orderID}?force={completed}").Wait()
 		End Sub
 
 		Public Function GetOrderById(orderID As Integer) As Order
@@ -125,26 +114,15 @@ Namespace Database
 			Return dbConnection.Consume(Of Order)(M3API.Method.Get, $"/orders/{orderID}").Result
 		End Function
 
-		Public Function GetOrderByCustomer(customerID As Integer) As OrderCollection
+		' TODO: Likely create a custom API path to search by customerID instead of orderID
+		Public Function GetOrderByCustomer(customerID As Integer) As DBEntryCollection(Of Order)
 			If customerID < 0 Then
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
 
-			Throw New NotImplementedException("GetOrderByCustomer")
+			Return CType(GetOrders().Where(Function(order As Order)
+											   Return order.Customer.Id = customerID
+										   End Function), DBEntryCollection(Of Order))
 		End Function
-
-
-
-		Private Structure ColumnNames
-			Shared ReadOnly Property ID As String = "OrderID"
-			Shared ReadOnly Property Customer As String = "CustomerID"
-			Shared ReadOnly Property Item As String = "ItemID"
-			Shared ReadOnly Property Quantity As String = "Quantity"
-			Shared ReadOnly Property Total As String = "OrderTotal"
-			Shared ReadOnly Property PlacedDate As String = "OrderDate"
-			Shared ReadOnly Property CompletedDate As String = "CompletedDate"
-
-			Shared ReadOnly Property Message As String = "Message"
-		End Structure
 	End Class
 End Namespace

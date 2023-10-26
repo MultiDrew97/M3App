@@ -7,12 +7,16 @@ Namespace Types
 		Public Property Customer As Person
 		Public Property Item As Item
 		Public Property Quantity As Integer
-		Public Property OrderTotal As Double
+		Public ReadOnly Property OrderTotal As Double
+			Get
+				Return Item.Price * Quantity
+			End Get
+		End Property
 		Public Property OrderDate As Date
 		Public Property CompletedDate As Date
 
 		Public Sub New()
-			Me.New(-1, -1, -1, 0, 0, Date.Now)
+			Me.New(-1, -1, -1, 0)
 		End Sub
 
 		''' <summary>
@@ -22,13 +26,11 @@ Namespace Types
 		''' <param name="customerID"></param>
 		''' <param name="itemID"></param>
 		''' <param name="quantity"></param>
-		''' <param name="orderTotal"></param>
 		''' <param name="orderDate"></param>
-		Public Sub New(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer, orderTotal As Double, orderDate As Date, Optional completedDate As Date = Nothing)
+		Public Sub New(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer, Optional orderDate As Date = Nothing, Optional completedDate As Date = Nothing)
 			MyBase.New(orderID)
 			Me.Quantity = quantity
-			Me.OrderTotal = orderTotal
-			Me.OrderDate = orderDate
+			Me.OrderDate = If(orderDate.Year < 2000, Date.Now, orderDate)
 			Me.CompletedDate = completedDate
 			GetCustomer(customerID)
 			GetItem(itemID)
@@ -75,7 +77,7 @@ Namespace Types
 		'End Sub
 
 		Public Function Clone() As Order
-			Return New Order(Id, Customer.Id, Item.Id, Quantity, OrderTotal, OrderDate, CompletedDate)
+			Return New Order(Id, Customer.Id, Item.Id, Quantity, OrderDate, CompletedDate)
 		End Function
 	End Class
 End Namespace

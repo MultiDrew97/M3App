@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class CustomerNotFoundException
+	<Serializable>
+	Public Class CustomerNotFoundException
         Inherits Exception
 
         Public Sub New()

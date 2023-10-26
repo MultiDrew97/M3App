@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class MissingInfoException
+	<Serializable>
+	Public Class MissingInfoException
         Inherits Exception
 
         Public Sub New()

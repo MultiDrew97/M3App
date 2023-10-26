@@ -15,7 +15,7 @@ Public Class RecipientSelectionDialog
 		End Get
 	End Property
 
-	Public ReadOnly Property List As Types.ListenerCollection
+	Public ReadOnly Property List As Types.DBEntryCollection(Of Types.Listener)
 		Get
 			Return _dialog.Selection
 		End Get
@@ -30,7 +30,7 @@ Public Class RecipientSelectionDialog
 	'	End Set
 	'End Property
 
-	Function ShowDialog(list As Types.ListenerCollection) As DialogResult
+	Function ShowDialog(list As Types.DBEntryCollection(Of Types.Listener)) As DialogResult
 		bsListeners.Clear()
 		For Each item In list
 			bsListeners.Add(item)

@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 Imports Google.Apis.Gmail.v1
 Imports MimeKit
+Imports SPPBC.M3Tools.Types.GTools
 
 Namespace GTools
 	Public Class GmailTool
@@ -27,14 +28,15 @@ Namespace GTools
 			__service = New GmailService(__init)
 		End Sub
 
-		''' <summary>
-		''' Perform cleanup for this component
-		''' </summary>
-		Public Sub Close() Implements IDisposable.Dispose
-			Dispose(True)
-		End Sub
 
-		Function Create([to] As MailboxAddress, content As M3Tools.Types.EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
+		'''' <summary>
+		'''' Perform cleanup for this component
+		'''' </summary>
+		'Public Overloads Sub Dispose(disposing As Boolean) Implements IDisposable.Dispose
+		'	Dispose(disposing)
+		'End Sub
+
+		Function Create([to] As MailboxAddress, content As EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
 			Dim email As New MimeMessage() With {
 				.Sender = If(from, DefaultSender),
 				.Subject = content.Subject,
@@ -59,26 +61,26 @@ Namespace GTools
 		''' <param name="bodyType">The type of body the email will have. Default html</param>
 		''' <returns></returns>
 		Function Create([to] As MailboxAddress, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
-			Return Create([to], New M3Tools.Types.EmailContent(subject, body, bodyType), from)
+			Return Create([to], New EmailContent(subject, body, bodyType), from)
 		End Function
 
 		Function Create([to] As M3Tools.Types.Listener, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return Create(New MailboxAddress([to].Name, [to].Email), subject, body, bodyType, from)
 		End Function
 
-		Function Create([to] As M3Tools.Types.Listener, content As M3Tools.Types.EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function Create([to] As M3Tools.Types.Listener, content As EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return Create(New MailboxAddress([to].Name, [to].Email), content, from)
 		End Function
 
 		Function CreateWithAttachment([to] As M3Tools.Types.Listener, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
-			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), New M3Tools.Types.EmailContent(subject, body, bodyType), files, from)
+			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), New EmailContent(subject, body, bodyType), files, from)
 		End Function
 
-		Function CreateWithAttachment([to] As M3Tools.Types.Listener, content As M3Tools.Types.EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function CreateWithAttachment([to] As M3Tools.Types.Listener, content As EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), content, files, from)
 		End Function
 
-		Function CreateWithAttachment([to] As MailboxAddress, content As M3Tools.Types.EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function CreateWithAttachment([to] As MailboxAddress, content As EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
 			Dim email As MimeMessage = Create([to], content, from)
 
 			Dim multipart As New Multipart From {
@@ -112,7 +114,7 @@ Namespace GTools
 		''' <param name="bodyType">The type of body the email will have. Default html</param>
 		''' <returns>Returns an Email to be sent</returns>
 		Function CreateWithAttachment([to] As MailboxAddress, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
-			Return CreateWithAttachment([to], New M3Tools.Types.EmailContent(subject, body, bodyType), files, from)
+			Return CreateWithAttachment([to], New EmailContent(subject, body, bodyType), files, from)
 		End Function
 
 		''' <summary>

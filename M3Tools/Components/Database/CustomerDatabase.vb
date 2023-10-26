@@ -81,12 +81,13 @@ Namespace Database
 			'Dim dateString = "SELECT CONVERT(VARCHAR(10), GETDATE(), 111)"
 			AddCustomer(New Customer(-1, fName, lName, address, phone, email))
 		End Sub
+
 		Public Sub AddCustomer(customer As Customer)
-			Throw New NotImplementedException("AddCustomer")
+			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(customer)).Wait()
 		End Sub
 
-		Public Function GetCustomers() As CustomerCollection
-			Return dbConnection.Consume(Of CustomerCollection)(M3API.Method.Get, $"/{path}").Result
+		Public Function GetCustomers() As DBEntryCollection(Of Customer)
+			Return dbConnection.Consume(Of DBEntryCollection(Of Customer))(Method.Get, $"/{path}").Result
 		End Function
 
 		Public Function GetCustomer(customerID As Integer) As Customer
@@ -94,7 +95,7 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Return dbConnection.Consume(Of Customer)(M3API.Method.Get, $"/{path}/{customerID}").Result
+			Return dbConnection.Consume(Of Customer)(Method.Get, $"/{path}/{customerID}").Result
 		End Function
 
 		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
@@ -106,26 +107,11 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateCustomer(customer As Customer)
-			Throw New NotImplementedException("UpdateCustomer")
+			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{customer.Id}", JSON.ConvertToJSON(customer)).Wait()
 		End Sub
 
 		Public Sub RemoveCustomer(customerID As Integer)
-			Throw New NotImplementedException("RemoveCustomer")
+			dbConnection.Consume(Of Object)(Method.Delete, $"/{path}/{customerID}").Wait()
 		End Sub
-
-		'Private Structure ColumnNames
-		'	Shared ReadOnly Property ID As String = "CustomerID"
-		'	Shared ReadOnly Property FirstName As String = "FirstName"
-		'	Shared ReadOnly Property LastName As String = "LastName"
-		'	Shared ReadOnly Property Street As String = "Street"
-		'	Shared ReadOnly Property City As String = "City"
-		'	Shared ReadOnly Property State As String = "State"
-		'	Shared ReadOnly Property Zip As String = "ZipCode"
-		'	Shared ReadOnly Property Email As String = "Email"
-		'	Shared ReadOnly Property Phone As String = "PhoneNumber"
-		'	Shared ReadOnly Property Joined As String = "JoinDate"
-
-		'	Shared ReadOnly Property Message As String = "Message"
-		'End Structure
 	End Class
 End Namespace

@@ -1,7 +1,5 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports SPPBC.M3Tools.GTools.Types
 
 Public Class FileUpload
 
@@ -37,13 +35,13 @@ Public Class FileUpload
 			If Duplicate(file) Then
 				Continue For
 			End If
-			bsFiles.Add(New File("", file, file.Split("."c)(1)))
+			bsFiles.Add(New Types.GTools.File("", file, file.Split("."c)(1)))
 		Next
 	End Sub
 
 	Private Function Duplicate(fileName As String) As Boolean
 		' TODO: Find how to simplify
-		For Each file As File In bsFiles.List
+		For Each file As Types.GTools.File In bsFiles.List
 			If file.Name = fileName Then
 				Return True
 			End If

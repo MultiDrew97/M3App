@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class RoleException
+	<Serializable>
+	Public Class RoleException
         Inherits UserException
 
         Public Sub New()

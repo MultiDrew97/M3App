@@ -2,7 +2,6 @@
 
 Imports System.ComponentModel
 Imports System.Data.SqlClient
-Imports SPPBC.M3Tools.Utils
 
 Public Class Frm_Login
 	Private Event BeginLogin()
@@ -18,29 +17,7 @@ Public Class Frm_Login
 			Return
 		End If
 
-		'Try
 		PerformLogin(sender, e)
-
-		'If Not IsNothing(My.Settings.User) Then
-		'	Frm_Main.Show()
-		'	bw_SaveSettings.RunWorkerAsync()
-		'End If
-		'Catch ex As Exception
-		'	'loginSuccess = False
-		'	While True
-		'		Try
-		'			If MessageBox.Show(ex.Message, "Login Failed", MessageBoxButtons.RetryCancel) = DialogResult.Cancel Then
-		'				Exit While
-		'			End If
-
-		'			TryLogin()
-		'		Catch
-		'			Continue While
-		'		End Try
-		'	End While
-
-		'	Reset()
-		'End Try
 	End Sub
 
 
@@ -85,7 +62,13 @@ Public Class Frm_Login
 	Private Sub TryLogin(Optional username As String = Nothing, Optional password As String = Nothing)
 		Try
 			RaiseEvent BeginLogin()
-			My.Settings.User = dbUsers.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
+			Dim user = dbUsers.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
+
+			If user Is Nothing Then
+				Throw New Exception("Unable to login. Please try again or contact system support.")
+			End If
+
+			My.Settings.User = user
 		Catch ex As Exception
 			Select Case ex.GetType()
 				Case GetType(RoleException)
@@ -108,15 +91,12 @@ Public Class Frm_Login
 		Try
 			TryLogin(If(lf_Login.Username, Nothing), If(lf_Login.Password, Nothing))
 
-			If My.Settings.User Is Nothing Then
-				Throw New Exception("Unable to login. Please try again or contact system support.")
-			End If
-
 			bw_SaveSettings.RunWorkerAsync()
 			Frm_Main.Show()
 		Catch ex As Exception
 			' TODO: Clear this up
-			Dim message As String = ""
+			Dim message As String
+
 			Select Case ex.GetType()
 				Case GetType(RoleException)
 					message = "Only admins can use this application. If this is an error, please contact support"

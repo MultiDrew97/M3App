@@ -102,9 +102,9 @@ Namespace DataTables
 			End Get
 		End Property
 
-		Public ReadOnly Property Customers As Types.CustomerCollection
+		Public ReadOnly Property Customers As Types.DBEntryCollection(Of Types.Customer)
 			Get
-				Dim col As New Types.CustomerCollection
+				Dim col As New Types.DBEntryCollection(Of Types.Customer)
 
 				For Each row As CustomersDataRow In Rows
 					col.Add(row.Customer)
@@ -122,7 +122,7 @@ Namespace DataTables
 
         Public Event CustomersDataRowDeleted As CustomersDataRowChangeEventHandler
 
-		Public Sub AddRange(list As Types.CustomerCollection)
+		Public Sub AddRange(list As Types.DBEntryCollection(Of Types.Customer))
 			For Each customer In list
 				AddCustomersRow(customer)
 			Next

@@ -1,6 +1,7 @@
 ﻿Option Strict On
 Imports SPPBC.M3Tools.Types.Extensions
 
+' TODO: Add JSON parsing decorators like in User model
 Namespace Types
 	Public Class Customer
 		Inherits Person

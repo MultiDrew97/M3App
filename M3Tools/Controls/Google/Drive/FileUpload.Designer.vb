@@ -107,11 +107,11 @@ Partial Class FileUpload
         'bsFiles
         '
         Me.bsFiles.AllowNew = True
-        Me.bsFiles.DataSource = GetType(SPPBC.M3Tools.GTools.Types.FileCollection)
-        '
-        'dgc_File
-        '
-        Me.dgc_File.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.bsFiles.DataSource = GetType(Types.GTools.FileCollection)
+		'
+		'dgc_File
+		'
+		Me.dgc_File.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgc_File.DataPropertyName = "Name"
         Me.dgc_File.HeaderText = "File"
         Me.dgc_File.MinimumWidth = 300

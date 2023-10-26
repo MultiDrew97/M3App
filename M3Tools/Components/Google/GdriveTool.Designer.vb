@@ -1,6 +1,6 @@
 ﻿Namespace GTools
 	Partial Class GdriveTool
-		Inherits API
+		Inherits Types.GTools.API
 
 		<System.Diagnostics.DebuggerNonUserCode()>
 		Public Sub New(ByVal container As System.ComponentModel.IContainer)

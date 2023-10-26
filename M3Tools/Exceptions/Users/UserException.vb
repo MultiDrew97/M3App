@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class UserException
+	<Serializable>
+	Public Class UserException
         Inherits Exception
 
         Public Sub New()

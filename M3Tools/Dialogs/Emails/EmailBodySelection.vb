@@ -41,9 +41,9 @@ Namespace Dialogs
 			End Get
 		End Property
 
-		ReadOnly Property Content As Types.EmailContent
+		ReadOnly Property Content As Types.GTools.EmailContent
 			Get
-				Return New Types.EmailContent(Subject, Body, BodyType)
+				Return New Types.GTools.EmailContent(Subject, Body, BodyType)
 			End Get
 		End Property
 

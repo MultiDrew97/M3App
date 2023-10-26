@@ -3,7 +3,7 @@ Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Services
 Imports Google.Apis.Util.Store
 
-Namespace GTools
+Namespace Types.GTools
 	Public Class API
 		Inherits Component
 

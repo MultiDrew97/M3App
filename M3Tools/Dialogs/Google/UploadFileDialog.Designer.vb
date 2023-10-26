@@ -119,14 +119,14 @@ Partial Class UploadFileDialog
         Me.fu_FileUpload.Name = "fu_FileUpload"
         Me.fu_FileUpload.Size = New System.Drawing.Size(257, 113)
         Me.fu_FileUpload.TabIndex = 0
-        '
-        'bsFiles
-        '
-        Me.bsFiles.DataSource = GetType(SPPBC.M3Tools.GTools.Types.FileCollection)
-        '
-        'dt_DriveHeirarchy
-        '
-        Me.dt_DriveHeirarchy.Checkboxes = False
+		'
+		'bsFiles
+		'
+		Me.bsFiles.DataSource = GetType(Types.GTools.FileCollection)
+		'
+		'dt_DriveHeirarchy
+		'
+		Me.dt_DriveHeirarchy.Checkboxes = False
         Me.dt_DriveHeirarchy.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dt_DriveHeirarchy.Location = New System.Drawing.Point(0, 0)
         Me.dt_DriveHeirarchy.Name = "dt_DriveHeirarchy"

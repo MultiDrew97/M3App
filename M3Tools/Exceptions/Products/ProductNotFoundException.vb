@@ -1,4 +1,5 @@
 ﻿Namespace Exceptions
+	<Serializable>
 	Public Class ProductNotFoundException
 		Inherits Exception
 

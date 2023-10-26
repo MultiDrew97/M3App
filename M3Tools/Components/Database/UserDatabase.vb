@@ -1,7 +1,4 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.ComponentModel
-Imports System.Data.SqlClient
-Imports SPPBC.M3Tools.M3API
+﻿Imports System.ComponentModel
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
@@ -49,36 +46,24 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Function CreateUser(username As String, password As String, Optional role As AccountRole = AccountRole.User) As Boolean
-			Return CreateUser({
-				New SqlParameter("Username", username) With {.Direction = ParameterDirection.Input},
-				New SqlParameter("Password", password) With {.Direction = ParameterDirection.Input},
-				New SqlParameter("AccountRole", role) With {.Direction = ParameterDirection.Input}
-			})
-		End Function
+		Public Sub CreateUser(fName As String, lName As String, email As String, username As String, password As String, Optional role As AccountRole = AccountRole.User)
+			CreateUser(New User(-1, fName, lName, email, username, password, String.Empty, role))
+		End Sub
 
-		Public Function CreateUser(params As SqlParameter()) As Boolean
-			Throw New NotImplementedException("CreateUser")
-		End Function
+		Public Sub CreateUser(user As User)
+			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(user)).Wait()
+		End Sub
 
 		Public Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
-			Return ChangePassword(New SqlParameter("Username", username), New SqlParameter("OldPassword", oldPassword), New SqlParameter("NewPassword", newPassword))
-		End Function
-
-		Public Function ChangePassword(ParamArray params As SqlParameter()) As Boolean
 			Throw New NotImplementedException("ChangePassword")
 		End Function
 
-		Public Sub CloseAccount(username As String)
-			CloseAccount(New SqlParameter("Username", username))
-		End Sub
-
-		Private Sub CloseAccount(param As SqlParameter)
-			Throw New NotImplementedException("CloseAccount")
+		Public Sub CloseAccount(userID As Integer)
+			dbConnection.Consume(Of Object)(Method.Delete, $"/{path}/{userID}")
 		End Sub
 
 		Public Function Login(username As String, password As String) As User
-			Return Me.Login(New Auth(username, password))
+			Return Login(New Auth(username, password))
 		End Function
 
 		''' <summary>
@@ -91,11 +76,11 @@ Namespace Database
 		End Function
 
 		Public Function GetUser(userID As Integer) As User
-			Return dbConnection.Consume(Of User)(M3API.Method.Get, $"/{path}/{userID}").Result
+			Return dbConnection.Consume(Of User)(Method.Get, $"/{path}/{userID}").Result
 		End Function
 
-		Function GetUsers() As UserCollection
-			Return dbConnection.Consume(Of UserCollection)(M3API.Method.Get, $"/{path}").Result
+		Function GetUsers() As DBEntryCollection(Of User)
+			Return dbConnection.Consume(Of DBEntryCollection(Of User))(Method.Get, $"/{path}").Result
 		End Function
 
 		'Private Structure ColumnNames

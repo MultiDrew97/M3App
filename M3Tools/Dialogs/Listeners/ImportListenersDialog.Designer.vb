@@ -102,14 +102,14 @@
             Me.chk_Headers.TabIndex = 3
             Me.chk_Headers.Text = "Contains Headers"
             Me.chk_Headers.UseVisualStyleBackColor = True
-            '
-            'bsListeners
-            '
-            Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.ListenerCollection)
-            '
-            'gi_FileName
-            '
-            Me.gi_FileName.AutoSize = True
+			'
+			'bsListeners
+			'
+			Me.bsListeners.DataSource = GetType(SPPBC.M3Tools.Types.DBEntryCollection(Of Types.Listener))
+			'
+			'gi_FileName
+			'
+			Me.gi_FileName.AutoSize = True
             Me.gi_FileName.Enabled = False
             Me.gi_FileName.LabelText = "Import File:"
             Me.gi_FileName.Location = New System.Drawing.Point(39, 29)

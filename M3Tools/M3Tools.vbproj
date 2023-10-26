@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="SPPBC.M3Tools.M3API" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -467,7 +468,6 @@
     <Compile Include="Exceptions\Google\UploadException.vb" />
     <Compile Include="Exceptions\InvalidStateCodeException.vb" />
     <Compile Include="Exceptions\Listeners\ListenerNotFoundException.vb" />
-    <Compile Include="Exceptions\NotYetImplementedException.vb" />
     <Compile Include="Exceptions\Orders\OrderNotFoundException.vb" />
     <Compile Include="Exceptions\Users\LoginException.vb" />
     <Compile Include="Exceptions\Users\MissingInfoException.vb" />
@@ -486,16 +486,12 @@
     <Compile Include="Types\EmailDetails.vb" />
     <Compile Include="Types\Events\ProductEvents.vb" />
     <Compile Include="Types\extensions.vb" />
-    <Compile Include="Types\Orders\OrderCollection.vb" />
-    <Compile Include="Types\People\UserCollection.vb" />
-    <Compile Include="Types\Products\ItemCollection.vb" />
     <Compile Include="Types\Templates.vb" />
     <Compile Include="Types\Google\API.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\Orders\CartItem.vb" />
     <Compile Include="Types\Orders\CartItemCollection.vb" />
-    <Compile Include="Types\People\CustomerCollection.vb" />
     <Compile Include="Types\DBEntryCollection.vb" />
     <Compile Include="UpdateService.Designer.vb">
       <DependentUpon>UpdateService.vb</DependentUpon>
@@ -505,13 +501,11 @@
     </Compile>
     <Compile Include="Types\Google\Drive\File.vb" />
     <Compile Include="Types\Products\Item.vb" />
-    <Compile Include="Types\Orders\CompletedOrder.vb" />
     <Compile Include="Types\Orders\Order.vb" />
     <Compile Include="Types\People\AccountRole.vb" />
     <Compile Include="Types\People\Address.vb" />
     <Compile Include="Types\People\Customer.vb" />
     <Compile Include="Types\People\Listener.vb" />
-    <Compile Include="Types\People\ListenerCollection.vb" />
     <Compile Include="Types\People\Person.vb" />
     <Compile Include="Types\People\User.vb" />
     <Compile Include="Types\Google\Service.vb" />
@@ -800,7 +794,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

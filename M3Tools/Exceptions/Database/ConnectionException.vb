@@ -1,5 +1,6 @@
 ﻿Namespace Exceptions
-    Public Class ConnectionException
+	<Serializable>
+	Public Class ConnectionException
         Inherits DatabaseException
 
         Public Sub New()
