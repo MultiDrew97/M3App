@@ -1,7 +1,6 @@
 ﻿Option Strict On
 Imports SPPBC.M3Tools.Types.Extensions
 
-' TODO: Add JSON parsing decorators like in User model
 Namespace Types
 	Public Class Customer
 		Inherits Person
@@ -9,6 +8,7 @@ Namespace Types
 		Private __joined As Date
 		Private __phone As String
 
+		<Text.Json.Serialization.JsonPropertyName("phoneNumber")>
 		Public Property PhoneNumber As String
 			Get
 				Return __phone
@@ -17,7 +17,11 @@ Namespace Types
 				__phone = value.FormatPhone()
 			End Set
 		End Property
+
+		<Text.Json.Serialization.JsonPropertyName("address")>
 		Public Property Address As Address
+
+		<Text.Json.Serialization.JsonPropertyName("joined")>
 		Public Property Joined As Object
 			Get
 				If __joined.Year < 1950 OrElse IsNothing(__joined) Then

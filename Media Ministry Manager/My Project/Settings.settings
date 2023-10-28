@@ -21,7 +21,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="User" Roaming="true" Type="SPPBC.M3Tools.Types.User" Scope="User">
-      <Value Profile="(Default)">-1;John Doe;JohnDoe123;JohnDoe@domain.ext;;1</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Username" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

@@ -52,7 +52,7 @@ Public Class Frm_Login
 	End Sub
 
 	Private Sub NewUser(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_SignUp.LinkClicked
-		Using create = New SPPBC.M3Tools.Dialogs.CreateAccountDialog()
+		Using create = New CreateAccountDialog()
 			If create.ShowDialog = DialogResult.OK Then
 				Reset()
 			End If

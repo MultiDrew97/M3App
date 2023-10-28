@@ -5,9 +5,14 @@ Namespace Types
 		Inherits DBEntry
 
 		Private __email As MimeKit.MailboxAddress
+
+		<Text.Json.Serialization.JsonPropertyName("firstName")>
 		Public Property FirstName As String
+
+		<Text.Json.Serialization.JsonPropertyName("lastName")>
 		Public Property LastName As String
 
+		<Text.Json.Serialization.JsonPropertyName("email")>
 		Public Property Email As String
 			Get
 				Return If(String.IsNullOrWhiteSpace(__email.Address), Nothing, __email.Address)
@@ -17,6 +22,7 @@ Namespace Types
 			End Set
 		End Property
 
+		<Text.Json.Serialization.JsonPropertyName("name")>
 		Public Property Name As String
 			Get
 				Return CType(IIf(IsNothing(LastName), FirstName, String.Join(" "c, {FirstName, LastName})), String)

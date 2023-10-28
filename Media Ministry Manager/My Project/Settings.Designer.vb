@@ -117,19 +117,18 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("-1;John Doe;JohnDoe123;JohnDoe@domain.ext;;1"),  _
-         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
-        Public Property User() As Global.SPPBC.M3Tools.Types.User
-            Get
-                Return CType(Me("User"),Global.SPPBC.M3Tools.Types.User)
-            End Get
-            Set
-                Me("User") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>
+		Public Property User() As SPPBC.M3Tools.Types.User
+			Get
+				Return CType(Me("User"), SPPBC.M3Tools.Types.User)
+			End Get
+			Set
+				Me("User") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute(""),  _
          Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _

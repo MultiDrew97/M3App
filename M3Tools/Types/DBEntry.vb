@@ -5,6 +5,8 @@ Namespace Types
 	Public MustInherit Class DBEntry
 		'Private _id As Integer
 
+		' FIXME: Fix so that ID values can be properly parsed when getting db responses
+		<Text.Json.Serialization.JsonPropertyName("id")>
 		Property Id As Integer
 		'	Get
 		'		Return _id

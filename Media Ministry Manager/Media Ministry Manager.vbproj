@@ -16,7 +16,7 @@
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>ftp://miller-sppbc/var/www/sppbc/manager/</PublishUrl>
+    <PublishUrl>ftp://miller-sppbc/var/www/sppbc/m3app/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>

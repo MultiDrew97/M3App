@@ -3,9 +3,16 @@ Namespace Types
 	Public Class Item
 		Inherits DBEntry
 
+		<Text.Json.Serialization.JsonPropertyName("itemName")>
 		Public Property Name As String
+
+		<Text.Json.Serialization.JsonPropertyName("stock")>
 		Public Property Stock As Integer
+
+		<Text.Json.Serialization.JsonPropertyName("price")>
 		Public Property Price As Double
+
+		<Text.Json.Serialization.JsonPropertyName("available")>
 		Public Property Available As Boolean
 
 		Public Sub New()

@@ -19,6 +19,7 @@ Namespace Types
 		<Text.Json.Serialization.JsonPropertyName("accountRole")>
 		Public Property AccountRole As AccountRole
 
+		<Text.Json.Serialization.JsonIgnore>
 		Public ReadOnly Property IsAdmin As Boolean
 			Get
 				Return AccountRole = AccountRole.Admin

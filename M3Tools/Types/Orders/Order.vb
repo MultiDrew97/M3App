@@ -4,15 +4,26 @@ Namespace Types
     Public Class Order
         Inherits DBEntry
 
+		<Text.Json.Serialization.JsonPropertyName("customer")>
 		Public Property Customer As Person
+
+		<Text.Json.Serialization.JsonPropertyName("item")>
 		Public Property Item As Item
+
+		<Text.Json.Serialization.JsonPropertyName("quantity")>
 		Public Property Quantity As Integer
+
+		<Text.Json.Serialization.JsonPropertyName("total")>
 		Public ReadOnly Property OrderTotal As Double
 			Get
 				Return Item.Price * Quantity
 			End Get
 		End Property
+
+		<Text.Json.Serialization.JsonPropertyName("ordered")>
 		Public Property OrderDate As Date
+
+		<Text.Json.Serialization.JsonPropertyName("completed")>
 		Public Property CompletedDate As Date
 
 		Public Sub New()
