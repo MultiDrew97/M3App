@@ -1,14 +1,27 @@
 ﻿Namespace Types
 	Public Class Auth
 		<Text.Json.Serialization.JsonPropertyName("username")>
-		Property Username As String
+		Public Property Username As String
 
+		'<Text.Json.Serialization.JsonIgnore>
 		<Text.Json.Serialization.JsonPropertyName("password")>
-		Property Password As String
+		Public Property Password As Byte()
 
-		Public Sub New(Optional username As String = "", Optional password As String = "")
+		<Text.Json.Serialization.JsonPropertyName("salt")>
+		Public Property Salt As Guid
+
+		<Text.Json.Serialization.JsonPropertyName("role")>
+		Public Property Role As AccountRole
+
+		Public Sub New(Optional username As String = "JohnDoe123", Optional password As String = Nothing, Optional salt As Guid = Nothing, Optional role As AccountRole = AccountRole.User)
+			Me.New(username, Text.Encoding.UTF8.GetBytes(If(password, $"Welcome{username}")), If(salt = Nothing, Guid.Empty, salt), role)
+		End Sub
+
+		Private Sub New(username As String, password As Byte(), salt As Guid, role As AccountRole)
 			Me.Username = username
 			Me.Password = password
+			Me.Salt = salt
+			Me.Role = role
 		End Sub
 	End Class
 End Namespace

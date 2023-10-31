@@ -1,7 +1,10 @@
 ﻿Option Strict On
 Namespace Types
 	Public Class Item
-		Inherits DBEntry
+		Inherits DbEntry
+
+		<Text.Json.Serialization.JsonPropertyName("itemID")>
+		Overrides Property Id As Integer
 
 		<Text.Json.Serialization.JsonPropertyName("itemName")>
 		Public Property Name As String

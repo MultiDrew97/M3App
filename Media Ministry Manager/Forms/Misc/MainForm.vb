@@ -87,7 +87,7 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub Logout() Handles mms_Main.Logout
-		Utils.Logout()
+		Utils.LogOff()
 		Me.Close()
 	End Sub
 

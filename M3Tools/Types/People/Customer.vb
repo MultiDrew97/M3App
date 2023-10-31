@@ -8,6 +8,9 @@ Namespace Types
 		Private __joined As Date
 		Private __phone As String
 
+		<Text.Json.Serialization.JsonPropertyName("customerID")>
+		Overrides Property Id As Integer
+
 		<Text.Json.Serialization.JsonPropertyName("phoneNumber")>
 		Public Property PhoneNumber As String
 			Get

@@ -61,8 +61,8 @@ Namespace Dialogs
 
         Private Sub TryCreateAccount()
             Try
-                db_Users.CreateUser(uf_Username.Username, pf_Password.Password)
-            Catch ex As CreationException
+				'db_Users.CreateUser(uf_Username.Username, pf_Password.Password)
+			Catch ex As CreationException
                 Throw New CreationException("Creation Failed", ex)
             End Try
         End Sub

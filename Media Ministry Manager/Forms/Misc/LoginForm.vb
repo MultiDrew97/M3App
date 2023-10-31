@@ -64,6 +64,8 @@ Public Class Frm_Login
 			RaiseEvent BeginLogin()
 			Dim user = dbUsers.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
 
+			Console.WriteLine(user.ToString)
+
 			If user Is Nothing Then
 				Throw New Exception("Unable to login. Please try again or contact system support.")
 			End If

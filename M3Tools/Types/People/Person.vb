@@ -2,7 +2,9 @@
 Namespace Types
 	' TODO: Potentially return to MustInherit
 	Public MustInherit Class Person
-		Inherits DBEntry
+		Inherits DbEntry
+
+		Dim _id As Integer = -1
 
 		Private __email As MimeKit.MailboxAddress
 
@@ -35,18 +37,10 @@ Namespace Types
 			End Set
 		End Property
 
-		Public Sub New()
-			Me.New(-1, "John", "Doe", "johndoe@domain.ext")
-		End Sub
-
-		Public Sub New(id As Integer, fName As String, lName As String, Optional email As String = Nothing)
-			Me.New(id, $"{fName} {lName}", email)
-		End Sub
-
 		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)
 			MyBase.New(id)
 			Me.Name = name.Trim()
-			Me.Email = email.Trim()
+			Me.Email = If(email, String.Empty).Trim()
 		End Sub
 
 		'Public Overrides Sub UpdateID(newID As Integer)

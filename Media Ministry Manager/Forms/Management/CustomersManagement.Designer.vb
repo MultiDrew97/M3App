@@ -303,15 +303,15 @@ Partial Class CustomersManagement
 	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
 		MySettings1.SettingsKey = ""
 		MySettings1.UpgradeRequired = True
-		User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
+		User1.Login.Role = SPPBC.M3Tools.Types.AccountRole.User
 		User1.Email = "JohnDoe@domain.ext"
 		User1.FirstName = "John"
 		User1.Id = -1
 		User1.LastName = "Doe"
 		User1.Name = "John Doe"
-		User1.Password = Nothing
-		User1.Salt = New System.Guid("063137a9-b58b-4c32-b713-eef802e7dd34")
-		User1.Username = "JohnDoe123"
+		User1.Login.Password = Nothing
+		User1.Login.Salt = New System.Guid("063137a9-b58b-4c32-b713-eef802e7dd34")
+		User1.Login.Username = "JohnDoe123"
 		MySettings1.User = User1
 		MySettings1.Username = ""
 		Me.dbCustomers.BaseUrl = MySettings1.DefaultUrl

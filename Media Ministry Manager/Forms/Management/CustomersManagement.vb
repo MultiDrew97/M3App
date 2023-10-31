@@ -21,7 +21,7 @@ Public Class CustomersManagement
 	End Sub
 
 	Private Sub Logout() Handles mms_Main.Logout
-		Utils.Logout()
+		Utils.LogOff()
 		Tooled = True
 		Me.Close()
 	End Sub

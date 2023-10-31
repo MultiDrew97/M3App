@@ -4,6 +4,9 @@ Namespace Types
     Public Class Listener
 		Inherits Person
 
+		<Text.Json.Serialization.JsonPropertyName("listenerID")>
+		Overrides Property Id As Integer
+
 		Public Sub New()
 			Me.New(-1, "John Doe", "johndoe@domain.ext")
 		End Sub

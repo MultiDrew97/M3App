@@ -5,14 +5,16 @@ Namespace M3API
 		''' <summary>
 		''' The options used when serializing a object to JSON string
 		''' </summary>
-		Private Shared ReadOnly serializationOptions As New JsonSerializerOptions With {
+		Private Shared ReadOnly options As New JsonSerializerOptions(JsonSerializerDefaults.Web) With {
 										   .PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
 										   .WriteIndented = True,
 										   .ReadCommentHandling = JsonCommentHandling.Skip,
 										   .DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-										   .IgnoreNullValues = True,
-										   .PropertyNameCaseInsensitive = True
-	}
+										   .NumberHandling = Serialization.JsonNumberHandling.AllowReadingFromString,
+										   .PropertyNameCaseInsensitive = True,
+										   .AllowTrailingCommas = True,
+										   .DefaultIgnoreCondition = Serialization.JsonIgnoreCondition.WhenWritingNull
+								}
 
 		''' <summary>
 		''' Converts a JSON string to the respective object type given the type parameter
@@ -25,7 +27,9 @@ Namespace M3API
 				Return Nothing
 			End If
 
-			Return JsonSerializer.Deserialize(Of T)(json, serializationOptions)
+			Console.WriteLine(json)
+
+			Return JsonSerializer.Deserialize(Of T)(json, options)
 		End Function
 
 		''' <summary>
@@ -38,7 +42,7 @@ Namespace M3API
 				Return ""
 			End If
 
-			Return JsonSerializer.Serialize(obj, serializationOptions)
+			Return JsonSerializer.Serialize(obj, options)
 		End Function
 	End Class
 

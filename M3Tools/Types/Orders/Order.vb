@@ -2,7 +2,10 @@
 Namespace Types
     ' TODO: Consolidate CurrentOrder and CompletedOrder
     Public Class Order
-        Inherits DBEntry
+		Inherits DbEntry
+
+		<Text.Json.Serialization.JsonPropertyName("orderID")>
+		Overrides Property Id As Integer
 
 		<Text.Json.Serialization.JsonPropertyName("customer")>
 		Public Property Customer As Person

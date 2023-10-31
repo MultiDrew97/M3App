@@ -28,7 +28,7 @@ Namespace Helpers
 			Loop While My.Application.OpenForms.Count > 0 And attempts < 3
 		End Sub
 
-		Shared Sub Logout()
+		Shared Sub LogOff()
 			My.Settings.Username = ""
 			My.Settings.Password = ""
 			My.Settings.KeepLoggedIn = False
@@ -37,12 +37,11 @@ Namespace Helpers
 		End Sub
 
 		Shared Sub SpecialClose(sender As Object)
-			Dim temp As New MainMenuStrip()
-			If Not sender.GetType() = temp.GetType Then
-				Frm_Main.Show()
+			If sender.GetType() = GetType(MainMenuStrip) Then
+				Return
 			End If
 
-			temp.Dispose()
+			Frm_Main.Show()
 		End Sub
 	End Structure
 End Namespace

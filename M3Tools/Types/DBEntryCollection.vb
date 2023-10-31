@@ -2,7 +2,7 @@
 Imports System.ComponentModel
 
 Namespace Types
-	Public Class DBEntryCollection(Of T As DBEntry)
+	Public Class DBEntryCollection(Of T As DbEntry)
 		Inherits Collection(Of T)
 		Implements IBindingListView
 

@@ -78,16 +78,16 @@ Partial Class Frm_Login
     "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
         MySettings1.SettingsKey = ""
         MySettings1.UpgradeRequired = True
-        User1.AccountRole = SPPBC.M3Tools.Types.AccountRole.User
-        User1.Email = "JohnDoe@domain.ext"
+		User1.Login.Role = SPPBC.M3Tools.Types.AccountRole.User
+		User1.Email = "JohnDoe@domain.ext"
         User1.FirstName = "John"
         User1.Id = -1
         User1.LastName = "Doe"
         User1.Name = "John Doe"
-        User1.Password = Nothing
-        User1.Salt = New System.Guid("5c58ade9-59a2-4948-941e-1d08f7720c24")
-        User1.Username = "JohnDoe123"
-        MySettings1.User = User1
+		User1.Login.Password = Nothing
+		User1.Login.Salt = New System.Guid("5c58ade9-59a2-4948-941e-1d08f7720c24")
+		User1.Login.Username = "JohnDoe123"
+		MySettings1.User = User1
         MySettings1.Username = ""
         Me.dbUsers.BaseUrl = MySettings1.DefaultUrl
         Me.dbUsers.Password = MySettings1.DefaultPassword

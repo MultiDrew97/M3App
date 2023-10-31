@@ -223,9 +223,6 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Op
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXml4Net.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXmlFormats.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXmlFormats.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.dll
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\BouncyCastle.Crypto.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\ICSharpCode.SharpZipLib.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\ICSharpCode.SharpZipLib.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SixLabors.Fonts.dll
@@ -252,3 +249,9 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.pdb
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Core.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Core.pdb
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.CodeDom.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.AccessControl.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.Cryptography.Xml.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.Principal.Windows.dll

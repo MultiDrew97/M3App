@@ -24,7 +24,7 @@ Public Class Frm_DisplayOrders
     End Sub
 
     Private Sub Logout() Handles mms_Strip.Logout
-        Utils.Logout()
+        Utils.LogOff()
         Me.Close()
     End Sub
 
@@ -35,15 +35,15 @@ Public Class Frm_DisplayOrders
     Private Sub ViewCustomers(sender As Object, e As EventArgs) Handles mms_Strip.ManageCustomers
         Dim customers As New CustomersManagement()
         customers.Show()
-        Utils.SpecialClose(sender)
-        Me.Close()
+		'Utils.SpecialClose(sender)
+		Me.Close()
     End Sub
 
     Private Sub ViewProducts(sender As Object, e As EventArgs) Handles mms_Strip.ManageProducts
         Dim products As New Frm_DisplayInventory()
         products.Show()
-        Utils.SpecialClose(sender)
-        Me.Close()
+		'Utils.SpecialClose(sender)
+		Me.Close()
     End Sub
 
     Private Sub ViewListeners(sender As Object, e As EventArgs) Handles mms_Strip.ManageListeners
