@@ -1,7 +1,7 @@
 ﻿Option Strict On
 
 Namespace Types
-    Public Class Listener
+	Public Class Listener
 		Inherits Person
 
 		<Text.Json.Serialization.JsonPropertyName("listenerID")>

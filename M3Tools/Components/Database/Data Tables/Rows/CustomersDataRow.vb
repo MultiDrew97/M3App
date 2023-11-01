@@ -68,7 +68,7 @@
 
 		Public ReadOnly Property Customer As Types.Customer
 			Get
-				Return New Types.Customer(CustomerID, FirstName, LastName, Types.Address.Parse(Address), PhoneNumber, Email, JoinDate)
+				Return New Types.Customer(CustomerID, FirstName, LastName, Types.Address.Parse(Address), PhoneNumber, Email, JoinDate.ToLongDateString)
 			End Get
 		End Property
 

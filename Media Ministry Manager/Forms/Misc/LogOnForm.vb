@@ -33,13 +33,12 @@ Public Class LogOnForm
 	End Sub
 
 	Private Sub SaveSettings(sender As Object, e As DoWorkEventArgs) Handles bw_SaveSettings.DoWork
-		My.Settings.KeepLoggedIn = chk_KeepLoggedIn.Checked
+		' TODO: Determine better way to handle this
+		My.Settings.KeepLoggedIn = If(Not chk_KeepLoggedIn.Checked, My.Settings.KeepLoggedIn, chk_KeepLoggedIn.Checked)
 		My.Settings.Username = If(lf_Login.Username, My.Settings.Username)
+		' FIXME: Prevent this from saving password as plain text
 		My.Settings.Password = If(lf_Login.Password, My.Settings.Password)
 		My.Settings.Save()
-
-		'M3ToolsSettings.CurrentUser = My.Settings.Username
-		'M3ToolsSettings.Save()
 	End Sub
 
 	Private Sub SettingsSaved(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_SaveSettings.RunWorkerCompleted
@@ -99,17 +98,17 @@ Public Class LogOnForm
 			lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.")
 			lf_Login.ClearPassword()
 			lf_Login.Focus("p")
-		Catch
-			lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
-			lf_Login.ClearPassword()
-			lf_Login.Focus("p")
+			'Catch
+			'	lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
+			'	lf_Login.ClearPassword()
+			'	lf_Login.Focus("p")
 		Finally
 			RaiseEvent EndLogin()
 		End Try
 	End Sub
 
 	Private Sub ForgotPassword(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_ForgotPassword.LinkClicked
-		Using forgot = New SPPBC.M3Tools.ChangePasswordDialog()
+		Using forgot = New ChangePasswordDialog()
 			If forgot.ShowDialog = DialogResult.OK Then
 				Reset()
 			End If
@@ -117,7 +116,7 @@ Public Class LogOnForm
 	End Sub
 
 	Private Sub CreateAccount(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llb_SignUp.LinkClicked
-		Using create = New SPPBC.M3Tools.Dialogs.CreateAccountDialog()
+		Using create = New CreateAccountDialog()
 			If create.ShowDialog = DialogResult.OK Then
 				Reset()
 			End If

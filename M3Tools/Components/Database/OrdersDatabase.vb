@@ -67,7 +67,7 @@ Namespace Database
 		End Sub
 
 		Public Sub AddOrder(order As Order)
-			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(order)).Wait()
+			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(order))
 		End Sub
 
 		Public Sub UpdateOrder(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer)
@@ -83,7 +83,7 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateOrder(order As Order)
-			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{order.Id}", JSON.ConvertToJSON(order)).Wait()
+			dbConnection.Consume(Method.Put, $"/{path}/{order.Id}", JSON.ConvertToJSON(order))
 		End Sub
 
 		Public Sub CancelOrder(orderID As Integer)
@@ -103,7 +103,7 @@ Namespace Database
 		End Sub
 
 		Private Sub RemoveOrder(orderID As Integer, completed As Boolean)
-			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{orderID}?force={completed}").Wait()
+			dbConnection.Consume(Method.Put, $"/{path}/{orderID}?force={completed}")
 		End Sub
 
 		Public Function GetOrderById(orderID As Integer) As Order

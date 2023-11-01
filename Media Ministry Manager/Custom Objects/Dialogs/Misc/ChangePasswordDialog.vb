@@ -3,8 +3,6 @@
 Imports System.Data.SqlClient
 
 Public Class ChangePasswordDialog
-    ReadOnly _connection As New SqlConnectionStringBuilder(My.Settings.releaseConnection)
-
 	Private Sub UpdatePassword(sender As Object, e As EventArgs) Handles btn_ChangePassword.Click
 		Try
 			If Not PasswordCheck() Then
@@ -27,7 +25,7 @@ Public Class ChangePasswordDialog
 			'End If
 		Catch ex As SqlException
 			Console.WriteLine("Failed to update user password: " & ex.Message)
-		Catch passEx As PasswordMisMatchException
+		Catch passEx As PasswordMismatchException
 			tss_UserFeedback.Text = "Passwords did not match try again"
 			tss_UserFeedback.ForeColor = Color.Red
 			Console.WriteLine("Passwords did not match: " & passEx.Message)
@@ -44,6 +42,6 @@ Public Class ChangePasswordDialog
 	End Sub
 
 	Private Sub ChangePasswordLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		_connection.InitialCatalog = "master"
+
 	End Sub
 End Class

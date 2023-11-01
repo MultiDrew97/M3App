@@ -14,11 +14,14 @@ Namespace Types
 		<Text.Json.Serialization.JsonPropertyName("zipCode")>
 		Public Property ZipCode As String
 
-		Public Sub New()
-			Me.New("123 Main St", "City", "ST", "12345")
-		End Sub
+		Public Shared ReadOnly Property None As Address
+			Get
+				Return New Address()
+			End Get
+		End Property
 
-		Public Sub New(street As String, city As String, state As String, zipCode As String)
+		<Text.Json.Serialization.JsonConstructor>
+		Public Sub New(Optional street As String = "123 Main St", Optional city As String = "City", Optional state As String = "ST", Optional zipCode As String = "12345")
 			Me.Street = street
 			Me.City = city
 			Me.State = state

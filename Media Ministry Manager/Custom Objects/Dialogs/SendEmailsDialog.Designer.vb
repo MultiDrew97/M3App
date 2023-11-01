@@ -24,9 +24,8 @@ Partial Class SendEmailsDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+		Me.components = New System.ComponentModel.Container()
+		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btn_Send = New System.Windows.Forms.Button()
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.tc_EmailTypes = New System.Windows.Forms.TabControl()
@@ -109,31 +108,20 @@ Partial Class SendEmailsDialog
         Me.tp_GDrive.TabIndex = 0
         Me.tp_GDrive.Text = "Google Drive"
         Me.tp_GDrive.UseVisualStyleBackColor = True
-        '
-        'gdt_Files
-        '
-        MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
-        MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
-    "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-        MySettings1.KeepLoggedIn = True
-        MySettings1.Password = "JasmineLove2697"
-        MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
-    "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-        MySettings1.SettingsKey = ""
-        MySettings1.UpgradeRequired = True
-        MySettings1.User = Nothing
-        MySettings1.Username = "arandlemiller97"
-        Me.gdt_Files.DataBindings.Add(New System.Windows.Forms.Binding("Username", MySettings1, "Username", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
+		'
+		'gdt_Files
+		'
+		Me.gdt_Files.DataBindings.Add(New System.Windows.Forms.Binding("Username", Global.MediaMinistry.My.MySettings.Default, "Username", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gdt_Files.Location = New System.Drawing.Point(0, 0)
         Me.gdt_Files.Name = "gdt_Files"
         Me.gdt_Files.Size = New System.Drawing.Size(403, 272)
         Me.gdt_Files.TabIndex = 4
-        Me.gdt_Files.Username = MySettings1.Username
-        '
-        'tp_LocalFiles
-        '
-        Me.tp_LocalFiles.Controls.Add(Me.fu_Receipts)
+		Me.gdt_Files.Username = Global.MediaMinistry.My.MySettings.Default.Username
+		'
+		'tp_LocalFiles
+		'
+		Me.tp_LocalFiles.Controls.Add(Me.fu_Receipts)
         Me.tp_LocalFiles.Location = New System.Drawing.Point(4, 22)
         Me.tp_LocalFiles.Name = "tp_LocalFiles"
         Me.tp_LocalFiles.Size = New System.Drawing.Size(403, 272)
@@ -202,16 +190,16 @@ Partial Class SendEmailsDialog
         Me.tsp_Progress.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.tsp_Progress.Name = "tsp_Progress"
         Me.tsp_Progress.Size = New System.Drawing.Size(100, 16)
-        '
-        'dbListeners
-        '
-        Me.dbListeners.BaseUrl = "Media Ministry"
-        Me.dbListeners.Password = "M3AppPassword2499"
-        Me.dbListeners.Username = "M3App"
-        '
-        'SendEmailsDialog
-        '
-        Me.AcceptButton = Me.btn_Send
+		'
+		'dbListeners
+		'
+		Me.dbListeners.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.dbListeners.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbListeners.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		'
+		'SendEmailsDialog
+		'
+		Me.AcceptButton = Me.btn_Send
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btn_Cancel

@@ -24,10 +24,10 @@ Public Class DisplayListenersCtrl
 
 	Public Sub Reload()
 		tsl_Count.Text = String.Format(CountTemplate, ldg_Listeners.Listeners.Count)
+		'RaiseEvent RefreshDisplay()
 	End Sub
 
 	Private Sub RefreshView() Handles ldg_Listeners.RefreshDisplay
-		RaiseEvent RefreshDisplay()
 	End Sub
 
 	Private Sub NewListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click

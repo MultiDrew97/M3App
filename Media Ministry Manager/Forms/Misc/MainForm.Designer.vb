@@ -22,6 +22,7 @@ Partial Class MainForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.btn_OrderManagement = New System.Windows.Forms.Button()
         Me.btn_ProductManagement = New System.Windows.Forms.Button()
@@ -33,6 +34,9 @@ Partial Class MainForm
         Me.pnl_Controls = New System.Windows.Forms.Panel()
         Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
         Me.wb_Updater = New System.Windows.Forms.WebBrowser()
+        Me.dbCustomer = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
+        Me.dbListener = New SPPBC.M3Tools.Database.ListenerDatabase(Me.components)
+        Me.dbInventory = New SPPBC.M3Tools.Database.InventoryDatabase(Me.components)
         Me.ss_Queries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -82,9 +86,6 @@ Partial Class MainForm
         Me.tss_Feedback.Size = New System.Drawing.Size(151, 17)
         Me.tss_Feedback.Text = "What would you like to do?"
         '
-        'bw_ChangedSizes
-        '
-        '
         'btn_EmailMinistry
         '
         Me.btn_EmailMinistry.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
@@ -123,10 +124,28 @@ Partial Class MainForm
         Me.wb_Updater.TabIndex = 8
         Me.wb_Updater.Url = New System.Uri("", System.UriKind.Relative)
         Me.wb_Updater.Visible = False
-        '
-        'MainForm
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+		'
+		'dbCustomer
+		'
+		Me.dbCustomer.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.dbCustomer.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbCustomer.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		'
+		'dbListener
+		'
+		Me.dbListener.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.dbListener.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbListener.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		'
+		'dbInventory
+		'
+		Me.dbInventory.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.dbInventory.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbInventory.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		'
+		'MainForm
+		'
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(272, 322)
@@ -160,4 +179,7 @@ Partial Class MainForm
     Friend WithEvents wb_Updater As WebBrowser
     Friend WithEvents pnl_Controls As Panel
     Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
+    Friend WithEvents dbCustomer As CustomerDatabase
+    Friend WithEvents dbListener As ListenerDatabase
+    Friend WithEvents dbInventory As InventoryDatabase
 End Class

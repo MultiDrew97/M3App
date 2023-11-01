@@ -40,7 +40,7 @@
     </NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -54,8 +54,8 @@
     </NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -97,6 +97,7 @@
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="SPPBC.M3Tools.M3API" />
+    <Import Include="SPPBC.M3Tools.Types.Extensions" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -146,10 +147,10 @@
     </Compile>
     <Compile Include="Controls\DataGridViewCells.vb" />
     <Compile Include="Controls\DataGridViewColumns.vb" />
-    <Compile Include="Controls\Listeners\TemplateSelector.Designer.vb">
+    <Compile Include="Controls\People\Listeners\TemplateSelector.Designer.vb">
       <DependentUpon>TemplateSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Listeners\TemplateSelector.vb">
+    <Compile Include="Controls\People\Listeners\TemplateSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\LoadingScreen.Designer.vb">
@@ -249,6 +250,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Exceptions\Customers\InvalidStateCodeException.vb" />
+    <Compile Include="Exceptions\Database\ApiException.vb" />
+    <Compile Include="Exceptions\Database\AuthorizationException.vb" />
+    <Compile Include="Exceptions\Database\PathNotFoundException.vb" />
     <Compile Include="Exceptions\FormClosedException.vb" />
     <Compile Include="Exceptions\Products\ProductNotFoundException.vb" />
     <Compile Include="Types\Auth.vb" />
@@ -557,7 +561,7 @@
     <EmbeddedResource Include="Components\Database\UserDatabase.resx">
       <DependentUpon>UserDatabase.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Listeners\TemplateSelector.resx">
+    <EmbeddedResource Include="Controls\People\Listeners\TemplateSelector.resx">
       <DependentUpon>TemplateSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LoadingScreen.resx">

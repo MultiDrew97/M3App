@@ -59,7 +59,7 @@ Namespace Database
 		End Sub
 
 		Public Sub CreateUser(user As User)
-			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(user)).Wait()
+			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(user))
 		End Sub
 
 		Public Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
@@ -67,11 +67,11 @@ Namespace Database
 		End Function
 
 		Public Sub CloseAccount(userID As Integer)
-			dbConnection.Consume(Of Object)(Method.Delete, $"/{path}/{userID}")
+			dbConnection.Consume(Method.Delete, $"/{path}/{userID}")
 		End Sub
 
 		Public Function Login(username As String, password As String) As User
-			Return Login(New Auth(username, Convert.ToBase64String(Text.Encoding.UTF8.GetBytes(password))))
+			Return Login(New Auth(username, password))
 		End Function
 
 		''' <summary>

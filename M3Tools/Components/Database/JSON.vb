@@ -7,10 +7,10 @@ Namespace M3API
 		''' </summary>
 		Private Shared ReadOnly options As New JsonSerializerOptions(JsonSerializerDefaults.Web) With {
 										   .PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+										   .PropertyNameCaseInsensitive = True,
 										   .WriteIndented = True,
 										   .ReadCommentHandling = JsonCommentHandling.Skip,
 										   .DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-										   .PropertyNameCaseInsensitive = True,
 										   .AllowTrailingCommas = True,
 										   .DefaultIgnoreCondition = Serialization.JsonIgnoreCondition.WhenWritingNull,
 										   .NumberHandling = Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals
@@ -41,7 +41,7 @@ Namespace M3API
 			End If
 
 			Return JsonSerializer.Serialize(obj, options)
-        End Function
+		End Function
 	End Class
 
 	Public Enum Method

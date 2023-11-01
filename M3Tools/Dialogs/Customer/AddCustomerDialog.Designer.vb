@@ -1,28 +1,28 @@
 ﻿Namespace Dialogs
-	<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-	Partial Class AddCustomerDialog
-		Inherits System.Windows.Forms.Form
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+    Partial Class AddCustomerDialog
+        Inherits System.Windows.Forms.Form
 
-		'Form overrides dispose to clean up the component list.
-		<System.Diagnostics.DebuggerNonUserCode()>
-		Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-			Try
-				If disposing AndAlso components IsNot Nothing Then
-					components.Dispose()
-				End If
-			Finally
-				MyBase.Dispose(disposing)
-			End Try
-		End Sub
+        'Form overrides dispose to clean up the component list.
+        <System.Diagnostics.DebuggerNonUserCode()>
+        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+            Try
+                If disposing AndAlso components IsNot Nothing Then
+                    components.Dispose()
+                End If
+            Finally
+                MyBase.Dispose(disposing)
+            End Try
+        End Sub
 
-		'Required by the Windows Form Designer
-		Private components As System.ComponentModel.IContainer
+        'Required by the Windows Form Designer
+        Private components As System.ComponentModel.IContainer
 
-		'NOTE: The following procedure is required by the Windows Form Designer
-		'It can be modified using the Windows Form Designer.  
-		'Do not modify it using the code editor.
-		<System.Diagnostics.DebuggerStepThrough()>
-		Private Sub InitializeComponent()
+        'NOTE: The following procedure is required by the Windows Form Designer
+        'It can be modified using the Windows Form Designer.  
+        'Do not modify it using the code editor.
+        <System.Diagnostics.DebuggerStepThrough()>
+        Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.btn_Cancel = New System.Windows.Forms.Button()
@@ -161,9 +161,11 @@
             Me.pn_PhoneNumber.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.pn_PhoneNumber.Location = New System.Drawing.Point(43, 153)
             Me.pn_PhoneNumber.Margin = New System.Windows.Forms.Padding(6)
+            Me.pn_PhoneNumber.MaximumSize = New System.Drawing.Size(0, 50)
+            Me.pn_PhoneNumber.MinimumSize = New System.Drawing.Size(100, 50)
             Me.pn_PhoneNumber.Name = "pn_PhoneNumber"
             Me.pn_PhoneNumber.PhoneNumber = ""
-            Me.pn_PhoneNumber.Size = New System.Drawing.Size(112, 242)
+            Me.pn_PhoneNumber.Size = New System.Drawing.Size(100, 50)
             Me.pn_PhoneNumber.TabIndex = 3
             '
             'gi_EmailAddress
@@ -192,6 +194,7 @@
             '
             'af_Address
             '
+            Me.af_Address.Address = Nothing
             Me.af_Address.AutoSize = True
             Me.af_Address.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.af_Address.BackColor = System.Drawing.Color.LightGray
@@ -258,20 +261,20 @@
 
         End Sub
         Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-		Friend WithEvents btn_Cancel As System.Windows.Forms.Button
-		Friend WithEvents btn_Create As System.Windows.Forms.Button
-		Friend WithEvents ep_InputError As Windows.Forms.ErrorProvider
-		Friend WithEvents af_Address As AddressField
-		Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
-		Friend WithEvents tss_Feedback As Windows.Forms.ToolStripStatusLabel
-		Friend WithEvents tc_Creation As Windows.Forms.TabControl
-		Friend WithEvents tp_Basic As Windows.Forms.TabPage
-		Friend WithEvents gi_FirstName As GenericInputPair
-		Friend WithEvents gi_LastName As GenericInputPair
-		Friend WithEvents pn_PhoneNumber As PhoneNumberField
-		Friend WithEvents gi_EmailAddress As GenericInputPair
-		Friend WithEvents tp_Address As Windows.Forms.TabPage
-		Friend WithEvents tp_Summary As Windows.Forms.TabPage
-		Friend WithEvents pg_Summary As Windows.Forms.PropertyGrid
-	End Class
+        Friend WithEvents btn_Cancel As System.Windows.Forms.Button
+        Friend WithEvents btn_Create As System.Windows.Forms.Button
+        Friend WithEvents ep_InputError As Windows.Forms.ErrorProvider
+        Friend WithEvents af_Address As AddressField
+        Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
+        Friend WithEvents tss_Feedback As Windows.Forms.ToolStripStatusLabel
+        Friend WithEvents tc_Creation As Windows.Forms.TabControl
+        Friend WithEvents tp_Basic As Windows.Forms.TabPage
+        Friend WithEvents gi_FirstName As GenericInputPair
+        Friend WithEvents gi_LastName As GenericInputPair
+        Friend WithEvents pn_PhoneNumber As PhoneNumberField
+        Friend WithEvents gi_EmailAddress As GenericInputPair
+        Friend WithEvents tp_Address As Windows.Forms.TabPage
+        Friend WithEvents tp_Summary As Windows.Forms.TabPage
+        Friend WithEvents pg_Summary As Windows.Forms.PropertyGrid
+    End Class
 End Namespace

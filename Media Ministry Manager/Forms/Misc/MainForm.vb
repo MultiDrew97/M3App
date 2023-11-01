@@ -1,13 +1,8 @@
 ﻿Option Strict On
 
-Imports System.ComponentModel
-Imports System.Drawing.Imaging
-Imports System.IO
-Imports System.Text
 Imports MediaMinistry.Helpers
 
 Public Class MainForm
-	' TODO: Add functionality for menu strip items here or figure out how to truley centralize in control
 	Private Sub Reload() Handles Me.Load
 		tss_Feedback.Text = "What would you like to do?"
 		tss_Feedback.ForeColor = SystemColors.WindowText
@@ -38,69 +33,29 @@ Public Class MainForm
 		Me.Close()
 	End Sub
 
-	'Private Sub FormSizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-	'	If firstTime Then
-	'		firstTime = False
-	'		Return
-	'	End If
-
-	'	' TODO: Determine proper way to do this
-
-	'	If Me.Size = WindowSizes.max Then
-	'		GrowToMax()
-	'	Else
-	'		BackToNormal()
-	'	End If
-
-
-	'	'bw_ChangedSizes.RunWorkerAsync(size)
-	'End Sub
-
-	Private Sub GrowToMax()
-		'Hide normal size menu buttons
-		btn_CustomerManagement.Hide()
-		btn_OrderManagement.Hide()
-		btn_ProductManagement.Hide()
-		btn_EmailMinistry.Hide()
-
-		'show max size menu options
-		'tctl_MaxOption.Show()
-
-		'tctl size
-		'1366, 667
-	End Sub
-
-	Private Sub BackToNormal()
-		'show normal size menu buttons
-		btn_CustomerManagement.Show()
-		btn_OrderManagement.Show()
-		btn_ProductManagement.Show()
-		btn_EmailMinistry.Show()
-
-		'hide max size menu options
-		'tctl_MaxOption.Hide()
-	End Sub
-
 	Private Sub Logout() Handles mms_Main.Logout
-		Helpers.Utils.LogOff()
+		Utils.LogOff()
 		Me.Close()
 	End Sub
 
 	Private Sub ExitApp() Handles mms_Main.ExitApplication, mms_Main.UpdateAvailable
-		Helpers.Utils.CloseOpenForms()
+		Utils.CloseOpenForms()
+	End Sub
+
+	Private Sub AddCustomer(sender As Object, e As Customers.CustomerEventArgs) Handles mms_Main.AddCustomer
+		dbCustomer.AddCustomer(e.Customer)
+	End Sub
+
+	Private Sub AddListener(sender As Object, e As Listeners.ListenerEventArgs) Handles mms_Main.AddListener
+		dbListener.AddListener(e.Listener)
+	End Sub
+
+	Private Sub AddCustomer(sender As Object, e As Inventory.InventoryEventArgs) Handles mms_Main.AddItem
+		dbInventory.AddItem(e.Item)
 	End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.ViewSettings
 		Dim settings As New SettingsForm()
 		settings.Show()
-	End Sub
-
-	Private Sub UpdateSizes(sender As Object, e As DoWorkEventArgs) Handles bw_ChangedSizes.DoWork
-		Select Case CStr(e.Argument)
-			Case "b"
-				GrowToMax()
-			Case "s"
-				BackToNormal()
-		End Select
 	End Sub
 End Class

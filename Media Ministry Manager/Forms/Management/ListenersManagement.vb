@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports MediaMinistry.Helpers
 Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class ListenersManagement
@@ -80,6 +79,7 @@ Public Class ListenersManagement
 	Private Sub AddListener(sender As Object, e As ListenerEventArgs) Handles mms_Main.AddListener, dlc_Listeners.AddListener
 		dbListeners.AddListener(e.Listener.Name, e.Listener.Email)
 		RaiseEvent ListenerAdded(Me, e)
+		Reload()
 	End Sub
 
 	Private Sub SendWelcom(sender As Object, e As ListenerEventArgs) Handles Me.ListenerAdded

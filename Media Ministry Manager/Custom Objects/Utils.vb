@@ -37,6 +37,7 @@ Namespace Helpers
 		End Sub
 
 		Shared Sub SpecialClose(sender As Object)
+			' TODO: Figure out better way to do this
 			If sender Is Nothing OrElse sender.GetType() = GetType(MainMenuStrip) Then
 				Return
 			End If

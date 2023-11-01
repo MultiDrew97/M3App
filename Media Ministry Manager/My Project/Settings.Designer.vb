@@ -156,32 +156,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E"& _ 
-            "ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
-        Public Property releaseConnection() As String
-            Get
-                Return CType(Me("releaseConnection"),String)
-            End Get
-            Set
-                Me("releaseConnection") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout"& _ 
-            "=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;")>  _
-        Public Property debugConnection() As String
-            Get
-                Return CType(Me("debugConnection"),String)
-            End Get
-            Set
-                Me("debugConnection") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
          Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
         Public Property KeepLoggedIn() As Boolean

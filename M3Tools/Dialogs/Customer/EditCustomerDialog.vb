@@ -21,13 +21,7 @@ Namespace Dialogs
 
 		Public ReadOnly Property NewInfo As Types.Customer
 			Get
-				Return New Types.Customer() With {
-					.Id = Customer.Id,
-					.Name = $"{FirstName} {LastName}".Trim(),
-					.Email = Email,
-					.Address = Address,
-					.PhoneNumber = Phone
-				}
+				Return New Types.Customer(Customer.Id, FirstName, LastName, Address, Email, Phone)
 			End Get
 		End Property
 
@@ -76,7 +70,7 @@ Namespace Dialogs
 
 		Private Sub FinishDialog(sender As Object, e As EventArgs) Handles OK_Button.Click
 			If Not ValidChangesDetected() Then
-				MessageBox.Show("There were errors in your edits. Please review and try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error)
+				MessageBox.Show("There were errors in your edits. Please review And try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error)
 				Return
 			End If
 
@@ -111,15 +105,15 @@ Namespace Dialogs
 			End If
 
 			If Email <> Customer.Email AndAlso (String.IsNullOrWhiteSpace(Email) OrElse Regex.IsMatch(Email, My.Resources.EmailRegex2)) Then
-					Return True
-				End If
+				Return True
+			End If
 
-				If Address <> Customer.Address AndAlso af_Address.IsValidAddress() Then
-					Return True
-				End If
+			If Address <> Customer.Address AndAlso af_Address.IsValidAddress() Then
+				Return True
+			End If
 
-				Return False
-        End Function
+			Return False
+		End Function
 
 		Private Sub LoadCustomer(sender As Object, e As DoWorkEventArgs)
 			If Customer.Id < 0 Then
@@ -137,11 +131,11 @@ Namespace Dialogs
 
 		'Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs)
 		'	If e.Cancelled Then
-		'		Dim answer = MessageBox.Show("Unable to retrieve customer. Would you like to try again?", "Customer Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+		'		Dim answer = MessageBox.Show("Unable to retrieve customer. Would you Like to try again?", "Customer Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
 
 		'		If answer = DialogResult.Yes Then
 		'			While bw_LoadCustomer.IsBusy
-		'				Console.WriteLine("LoadCustomers Background worker not finished...")
+		'				Console.WriteLine("LoadCustomers Background worker Not finished...")
 		'				Utils.Wait()
 		'			End While
 

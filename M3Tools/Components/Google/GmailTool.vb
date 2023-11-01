@@ -64,19 +64,19 @@ Namespace GTools
 			Return Create([to], New EmailContent(subject, body, bodyType), from)
 		End Function
 
-		Function Create([to] As M3Tools.Types.Listener, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function Create([to] As Types.Listener, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return Create(New MailboxAddress([to].Name, [to].Email), subject, body, bodyType, from)
 		End Function
 
-		Function Create([to] As M3Tools.Types.Listener, content As EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function Create([to] As Types.Listener, content As EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return Create(New MailboxAddress([to].Name, [to].Email), content, from)
 		End Function
 
-		Function CreateWithAttachment([to] As M3Tools.Types.Listener, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function CreateWithAttachment([to] As Types.Listener, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), New EmailContent(subject, body, bodyType), files, from)
 		End Function
 
-		Function CreateWithAttachment([to] As M3Tools.Types.Listener, content As EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function CreateWithAttachment([to] As Types.Listener, content As EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), content, files, from)
 		End Function
 

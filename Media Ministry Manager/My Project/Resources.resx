@@ -147,7 +147,7 @@
     <value>&lt;!Doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.herbivore.site/manager/css/emails.css"&gt;
     &lt;/head&gt;
     &lt;body&gt;
 
@@ -180,7 +180,7 @@
     <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
+    &lt;link rel="stylesheet" href="https://sppbc.herbivore.site/manager/css/emails.css" /&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;div&gt;
@@ -278,7 +278,7 @@
     <value>&lt;!Doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.herbivore.site/manager/css/emails.css"&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;p&gt;Blessings To You {0},&lt;/p&gt;

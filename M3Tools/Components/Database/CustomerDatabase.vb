@@ -83,7 +83,7 @@ Namespace Database
 		End Sub
 
 		Public Sub AddCustomer(customer As Customer)
-			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(customer)).Wait()
+			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(customer))
 		End Sub
 
 		Public Function GetCustomers() As DBEntryCollection(Of Customer)
@@ -107,11 +107,11 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateCustomer(customer As Customer)
-			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{customer.Id}", JSON.ConvertToJSON(customer)).Wait()
+			dbConnection.Consume(Method.Put, $"/{path}/{customer.Id}", JSON.ConvertToJSON(customer))
 		End Sub
 
 		Public Sub RemoveCustomer(customerID As Integer)
-			dbConnection.Consume(Of Object)(Method.Delete, $"/{path}/{customerID}").Wait()
+			dbConnection.Consume(Method.Delete, $"/{path}/{customerID}")
 		End Sub
 	End Class
 End Namespace

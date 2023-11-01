@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Data.SqlClient
 
 Namespace Database
 	' TODO: Revamp this area as well
@@ -43,12 +42,16 @@ Namespace Database
 			End Set
 		End Property
 
+		Public Sub AddListener(firstName As String, lastName As String, email As String)
+			AddListener(New Types.Listener(-1, firstName, lastName, email))
+		End Sub
+
 		Public Sub AddListener(name As String, email As String)
 			AddListener(New Types.Listener(-1, name, email))
 		End Sub
 
-		Private Sub AddListener(listener As Types.Listener)
-			Throw New NotImplementedException("AddListener")
+		Public Sub AddListener(listener As Types.Listener)
+			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(listener))
 		End Sub
 
 		Public Sub RemoveListener(listenerID As Integer)
@@ -56,7 +59,7 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			dbConnection.Consume(Of Object)(M3API.Method.Delete, $"/{path}/{listenerID}")
+			dbConnection.Consume(Method.Delete, $"/{path}/{listenerID}")
 		End Sub
 
 		Public Sub UpdateListener(listenerID As Integer, fName As String, lName As String, email As String)
@@ -76,7 +79,7 @@ Namespace Database
 		End Sub
 
 		Public Function GetListeners() As Types.DBEntryCollection(Of Types.Listener)
-			Return dbConnection.Consume(Of Types.DBEntryCollection(Of Types.Listener))(M3API.Method.Get, $"/{path}").Result
+			Return dbConnection.Consume(Of Types.DBEntryCollection(Of Types.Listener))(Method.Get, $"/{path}").Result
 		End Function
 
 		Public Function GetListener(listenerID As Integer) As Types.Listener
@@ -84,15 +87,7 @@ Namespace Database
 				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
 			End If
 
-			Return dbConnection.Consume(Of Types.Listener)(M3API.Method.Get, $"/{path}/{listenerID}").Result
+			Return dbConnection.Consume(Of Types.Listener)(Method.Get, $"/{path}/{listenerID}").Result
 		End Function
-
-		'Private Structure ColumnNames
-		'	Shared ReadOnly Property ID As String = "ListenerID"
-		'	Shared ReadOnly Property Name As String = "Name"
-		'	Shared ReadOnly Property Email As String = "Email"
-		'	Shared ReadOnly Property Joined As String = "Joined"
-		'	Shared ReadOnly Property Message As String = "Message"
-		'End Structure
 	End Class
 End Namespace

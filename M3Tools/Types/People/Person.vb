@@ -1,6 +1,5 @@
 ﻿Option Strict On
 Namespace Types
-	' TODO: Potentially return to MustInherit
 	Public MustInherit Class Person
 		Inherits DbEntry
 		Private __email As MimeKit.MailboxAddress
@@ -24,20 +23,36 @@ Namespace Types
 		<Text.Json.Serialization.JsonPropertyName("name")>
 		Public Property Name As String
 			Get
-				Return CType(IIf(IsNothing(LastName), FirstName, String.Join(" "c, {FirstName, LastName})), String)
+				Return String.Join(" "c, FirstName, LastName).Trim()
 			End Get
 			Set(name As String)
-				' TODO: Look into better parsing name data
-				Dim parts = name.Split(" "c)
-				FirstName = parts(0)
-				LastName = String.Join(" ", parts.Skip(1))
+				ParseName(name)
 			End Set
 		End Property
 
 		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)
 			MyBase.New(id)
-			Me.Name = name.Trim()
+			ParseName(name)
 			Me.Email = If(email, String.Empty).Trim()
+		End Sub
+
+		Public Sub New(id As Integer, fName As String, lName As String, Optional email As String = Nothing)
+			MyBase.New(id)
+			Me.FirstName = fName.Trim()
+			Me.LastName = lName.Trim()
+			Me.Email = If(email, String.Empty).Trim()
+		End Sub
+
+		Private Sub ParseName(name As String)
+			' TODO: Look into better parsing name data
+			Dim parts = name.Trim().Split(" "c)
+			FirstName = parts(0)
+
+			Try
+				LastName = parts(1)
+			Catch
+				LastName = Nothing
+			End Try
 		End Sub
 
 		'Public Overrides Sub UpdateID(newID As Integer)

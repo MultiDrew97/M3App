@@ -168,7 +168,7 @@ Partial Class CustomersDataGrid
         'dgc_Join
         '
         Me.dgc_Join.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Join.DataPropertyName = "JoinDate"
+        Me.dgc_Join.DataPropertyName = "Joined"
         Me.dgc_Join.FillWeight = 20.0!
         Me.dgc_Join.HeaderText = "Joined"
         Me.dgc_Join.MinimumWidth = 75

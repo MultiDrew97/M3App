@@ -52,8 +52,12 @@
 			Return ssf_State.StateCode
 		End Get
 		Set(value As String)
-			If value?.Length >= 2 Then
-				value = value.Substring(0, 2)
+			If (String.IsNullOrWhiteSpace(value)) Then
+				Return
+			End If
+
+			If value?.Length > 2 Then
+				value = Utils.StateCodeToState(value)
 			End If
 
 			ssf_State.StateCode = value
@@ -80,52 +84,67 @@
 		End Get
 	End Property
 
-	Private Function ValidateValue(value As String) As Boolean
-		If Not AllEmpty() AndAlso String.IsNullOrWhiteSpace(value) Then
-			Return False
-		End If
+	Private ReadOnly Property ValidateValue(text As String) As Boolean
+		Get
+			If Not AllEmpty() AndAlso String.IsNullOrWhiteSpace(text) Then
+				Return False
+			End If
 
-		Return True
-	End Function
+			Return True
+		End Get
+	End Property
 
-	Private Function ValidStreet() As Boolean
-		If Not ValidateValue(Street) Then
-			ep_InvalidAddress.SetError(if_Address1, "A valid street address is required, or you can enter an empty address")
-			Return False
-		End If
+	Private ReadOnly Property ValidStreet As Boolean
+		Get
+			If Not ValidateValue(Street) Then
+				ep_InvalidAddress.SetError(if_Address1, "A valid street address is required, or you can enter an empty address")
+				Return False
+			End If
 
-		ep_InvalidAddress.SetError(if_Address1, String.Empty)
-		Return True
-	End Function
-	Private Function ValidCity() As Boolean
-		If Not ValidateValue(City) Then
-			ep_InvalidAddress.SetError(if_City, "A valid city is required, or you can enter an empty address")
-			Return False
-		End If
+			ep_InvalidAddress.SetError(if_Address1, String.Empty)
+			Return True
+		End Get
+	End Property
 
-		ep_InvalidAddress.SetError(if_City, String.Empty)
-		Return True
-	End Function
-	Private Function ValidState() As Boolean
-		If Not ValidateValue(State) Then
-			ep_InvalidAddress.SetError(ssf_State, "A valid state code is required, or you can enter an empty address")
-			Return False
-		End If
+	Private ReadOnly Property ValidCity As Boolean
+		Get
+			If Not ValidateValue(City) Then
+				ep_InvalidAddress.SetError(if_City, "A valid city is required, or you can enter an empty address")
+				Return False
+			End If
 
-		ep_InvalidAddress.SetError(ssf_State, String.Empty)
-		Return True
-	End Function
-	Private Function ValidZip() As Boolean
-		If Not ValidateValue(ZipCode) Then
-			ep_InvalidAddress.SetError(if_ZipCode, "A valid zip code is required, or you can enter an empty address")
-			Return False
-		End If
+			ep_InvalidAddress.SetError(if_City, String.Empty)
+			Return True
+		End Get
+	End Property
 
-		ep_InvalidAddress.SetError(if_ZipCode, String.Empty)
-		Return True
-	End Function
+	Private ReadOnly Property ValidState As Boolean
+		Get
+			If Not ValidateValue(State) Then
+				ep_InvalidAddress.SetError(ssf_State, "A valid state code is required, or you can enter an empty address")
+				Return False
+			End If
 
-	Private Function AllEmpty() As Boolean
-		Return Street <> "" AndAlso City <> "" AndAlso State <> "" AndAlso ZipCode <> ""
-	End Function
+			ep_InvalidAddress.SetError(ssf_State, String.Empty)
+			Return True
+		End Get
+	End Property
+
+	Private ReadOnly Property ValidZip() As Boolean
+		Get
+			If Not ValidateValue(ZipCode) Then
+				ep_InvalidAddress.SetError(if_ZipCode, "A valid zip code is required, or you can enter an empty address")
+				Return False
+			End If
+
+			ep_InvalidAddress.SetError(if_ZipCode, String.Empty)
+			Return True
+		End Get
+	End Property
+
+	Private ReadOnly Property AllEmpty As Boolean
+		Get
+			Return Not (Street <> "" AndAlso City <> "" AndAlso State <> "" AndAlso ZipCode <> "")
+		End Get
+	End Property
 End Class

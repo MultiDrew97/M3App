@@ -43,7 +43,6 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
-		Console.WriteLine(My.Settings.Username)
 		gmt_Gmail.Authorize(My.Settings.Username)
 		gdt_Files.Load(My.Settings.Username)
 	End Sub

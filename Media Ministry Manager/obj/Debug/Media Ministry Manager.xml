@@ -126,12 +126,12 @@ Media Ministry Manager
   Looks up a localized string similar to &lt;!Doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;p&gt;Blessings To You {0},&lt;/p&gt;
 
-		&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday&apos;s Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Message within 2 [rest of string was truncated]&quot;;.
+		&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday&apos;s Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Mes [rest of string was truncated]&quot;;.
 </summary>
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.newSermon">
@@ -139,7 +139,7 @@ Media Ministry Manager
   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot; /&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;div&gt;
@@ -149,7 +149,7 @@ Media Ministry Manager
       &lt;p&gt;
         Welcome to the new &lt;strong&gt;BK &amp; AR Miller Ministries Email Listening&lt;/strong&gt;, formerly St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for being a subscriber.
         Over the last year I suffered a major stroke, but thanks be to God, I am still here and alive!
-        My prayer is t [rest of string was truncated]&quot;;.
+        M [rest of string was truncated]&quot;;.
 </summary>
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.PhoneRegex">
@@ -162,7 +162,7 @@ Media Ministry Manager
   Looks up a localized string similar to &lt;!Doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot;&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;&gt;
     &lt;/head&gt;
     &lt;body&gt;
 
@@ -179,8 +179,7 @@ Media Ministry Manager
 		&lt;hr&gt;
 		
 		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-		St. Paul Primitive Baptist Church&lt;br&gt;
-		Email [rest of string was truncated]&quot;;.
+		St. Paul Primitive Baptist Church [rest of string was truncated]&quot;;.
 </summary>
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.ShowPasswordIcon">

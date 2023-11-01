@@ -1,17 +1,30 @@
 ﻿Public Class ReceiptTypeDialog
+	Public Enum ReceiptType
+		Tithes
+		Love
+		Offering
+		Other
+	End Enum
 
-	Public Shared Amount As Double
-	Public Shared Type As String
+	Public ReadOnly Property Amount As Double
+		Get
+			Return nud_Amount.Value
+		End Get
+	End Property
+
+	Public Property ReceiptOption As ReceiptType
+
+	Public ReadOnly Property OtherOption As String
+		Get
+			Return txt_Other.Text
+		End Get
+	End Property
 
 	Private Sub Btn_Ok_Click(sender As Object, e As EventArgs) Handles btn_Ok.Click
-		If rdo_Other.Checked Then
-			If String.IsNullOrWhiteSpace(txt_Other.Text) Then
-				MessageBox.Show("You must enter something that says what this receipt is for. Please enter a value or select a preset type.", "Select Type", MessageBoxButtons.OK, MessageBoxIcon.Error)
-			End If
+		If rdo_Other.Checked AndAlso String.IsNullOrWhiteSpace(txt_Other.Text) Then
+			MessageBox.Show("You must enter something that says what this receipt is for. Please enter a value or select a preset type.", "Select Type", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			Return
 		End If
-
-		Type = txt_Other.Text
-		Amount = nud_Amount.Value
 
 		Me.DialogResult = DialogResult.OK
 		Me.Close()
@@ -29,19 +42,20 @@
 			Me.Size = New Size(440, 368)
 		End If
 
+		ReceiptOption = ReceiptType.OTHER
 		lbl_Other.Visible = rdo_Other.Checked
 		txt_Other.Visible = rdo_Other.Checked
 	End Sub
 
 	Private Sub TithesCheckedChanged(sender As Object, e As EventArgs) Handles rdo_Tithes.CheckedChanged
-		Type = "Tithes"
+		ReceiptOption = ReceiptType.TITHES
 	End Sub
 
 	Private Sub LoveOfferingCheckedChanged(sender As Object, e As EventArgs) Handles rdo_LoveOffering.CheckedChanged
-		Type = "Love Offering"
+		ReceiptOption = ReceiptType.LOVE
 	End Sub
 
 	Private Sub OfferingCheckedChanged(sender As Object, e As EventArgs) Handles rdo_Offering.CheckedChanged
-		Type = "Offering"
+		ReceiptOption = ReceiptType.OFFERING
 	End Sub
 End Class

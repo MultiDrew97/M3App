@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-'Imports System.Globalization
 
 Namespace Types
 	<TypeConverter(GetType(Converters.UserConverter))>
@@ -16,6 +15,13 @@ Namespace Types
 		Public ReadOnly Property IsAdmin As Boolean
 			Get
 				Return Login.Role = AccountRole.Admin
+			End Get
+		End Property
+
+		<Text.Json.Serialization.JsonIgnore>
+		Shadows ReadOnly Property ToString() As String
+			Get
+				Return String.Join(";", Id, Name, Login.Username, Email, Login.Salt, CInt(Login.Role))
 			End Get
 		End Property
 
@@ -42,12 +48,6 @@ Namespace Types
 			MyBase.New(id, name, email)
 			Me.Login = login
 		End Sub
-
-		Shadows ReadOnly Property ToString() As String
-			Get
-				Return String.Join(";", Id, Name, Login.Username, Email, Login.Salt, CInt(Login.Role))
-			End Get
-		End Property
 
 		'Public Overrides Sub UpdateID(newID As Integer)
 		'	If newID = Id Then

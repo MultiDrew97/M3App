@@ -10,7 +10,7 @@ Namespace Types.GTools
 		<Category("User")>
 		<SettingsBindable(True)>
 		<Description("The username of the currently logged in user")>
-		Friend Property Username As String
+		Public Property Username As String
 
 		Friend __init As New BaseClientService.Initializer() With {
 			.ApplicationName = "Media Ministry Manager"

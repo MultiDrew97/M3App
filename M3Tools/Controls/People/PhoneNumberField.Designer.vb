@@ -49,6 +49,7 @@ Partial Class PhoneNumberField
         'txt_PhoneNumber
         '
         Me.txt_PhoneNumber.AllowPromptAsInput = False
+        Me.txt_PhoneNumber.BeepOnError = True
         Me.txt_PhoneNumber.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         Me.txt_PhoneNumber.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_PhoneNumber.Location = New System.Drawing.Point(3, 23)
@@ -57,6 +58,7 @@ Partial Class PhoneNumberField
         Me.txt_PhoneNumber.Size = New System.Drawing.Size(94, 20)
         Me.txt_PhoneNumber.TabIndex = 1
         Me.txt_PhoneNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txt_PhoneNumber.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals
         '
         'lbl_PhoneNumber
         '

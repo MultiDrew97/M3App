@@ -51,13 +51,7 @@ Namespace Dialogs
 
 		ReadOnly Property Customer As Customer
 			Get
-				Return New Customer() With {
-					.FirstName = FirstName,
-					.LastName = LastName,
-					.Address = Address,
-					.PhoneNumber = Phone,
-					.Email = Email
-				}
+				Return New Customer(-1, FirstName, LastName, Address, Email, Phone)
 			End Get
 		End Property
 
@@ -68,6 +62,51 @@ Namespace Dialogs
 					.Email = Email,
 					.Address = Address
 				}
+			End Get
+		End Property
+
+		Private ReadOnly Property ValidName As Boolean
+			Get
+				Return ValidFirstName() And ValidLastName()
+			End Get
+		End Property
+
+		Private ReadOnly Property ValidFirstName As Boolean
+			Get
+				If String.IsNullOrWhiteSpace(FirstName) Then
+					ep_InputError.SetError(gi_FirstName, "A first name is required")
+					Return False
+				End If
+
+				Return True
+			End Get
+		End Property
+
+		Private ReadOnly Property ValidLastName As Boolean
+			Get
+				If String.IsNullOrWhiteSpace(LastName) Then
+					ep_InputError.SetError(gi_LastName, "A last name is required")
+					Return False
+				End If
+
+				Return True
+			End Get
+		End Property
+
+		Private ReadOnly Property ValidEmail As Boolean
+			Get
+				If String.IsNullOrWhiteSpace(Email) OrElse Not Regex.IsMatch(Email, My.Resources.EmailRegex2) Then
+					ep_InputError.SetError(gi_EmailAddress, "No valid email address provided")
+					Return False
+				End If
+
+				Return True
+			End Get
+		End Property
+
+		Private ReadOnly Property ValidCustomer As Boolean
+			Get
+				Return ValidName() AndAlso ValidEmail() AndAlso af_Address.IsValidAddress() AndAlso pn_PhoneNumber.ValidPhone()
 			End Get
 		End Property
 
@@ -97,6 +136,8 @@ Namespace Dialogs
 						Return
 					End If
 
+					RaiseEvent CustomerAdded(Me, New CustomerEventArgs(Customer, M3Tools.Events.EventType.Added))
+
 					DialogResult = DialogResult.OK
 					Me.Close()
 				Case Else
@@ -123,68 +164,6 @@ Namespace Dialogs
 				''		- Zip Code: Customer Zip Code
 				pg_Summary.SelectedObject = CustomerDisplay
 			End If
-		End Sub
-
-		Private Function ValidName() As Boolean
-			Return ValidFirstName() And ValidLastName()
-		End Function
-
-		Private Function ValidFirstName() As Boolean
-			If String.IsNullOrWhiteSpace(FirstName) Then
-				ep_InputError.SetError(gi_FirstName, "A first name is required")
-				Return False
-			End If
-
-			Return True
-		End Function
-
-		Private Function ValidLastName() As Boolean
-			If String.IsNullOrWhiteSpace(LastName) Then
-				ep_InputError.SetError(gi_LastName, "A last name is required")
-				Return False
-			End If
-
-			Return True
-		End Function
-
-		Private Function ValidEmail() As Boolean
-			If Not String.IsNullOrWhiteSpace(Email) Then
-				If Not Regex.IsMatch(Email, My.Resources.EmailRegex2) Then
-					ep_InputError.SetError(gi_EmailAddress, "Email address is not in a proper format. Either")
-					Return False
-				Else
-					Return True
-				End If
-				Return False
-			End If
-
-			Return False
-		End Function
-
-		Private Function ValidAddress() As Boolean
-			Return af_Address.IsValidAddress()
-		End Function
-
-		Private Function ValidPhone() As Boolean
-			Return pn_PhoneNumber.ValidPhone()
-		End Function
-
-		Private Function ValidCustomer() As Boolean
-			Return ValidName() AndAlso ValidEmail() AndAlso ValidAddress() AndAlso ValidPhone()
-		End Function
-
-		Private Sub TryCreate()
-			Try
-				If Not (ValidName() AndAlso ValidEmail() AndAlso ValidAddress()) Then
-					Throw New ArgumentException("Invalid Customer Information")
-				End If
-				Dim customer As New Customer(-1, FirstName, LastName, Address, Phone, Email)
-
-				' dbCustomers.AddCustomer(customer)
-				RaiseEvent CustomerAdded(Me, New CustomerEventArgs(customer, M3Tools.Events.EventType.Added))
-			Catch ex As Exception
-				Throw New Exceptions.CreationException("Failed to create the customer. Please try again.", ex)
-			End Try
 		End Sub
 
 		Private Class DisplayCustomer

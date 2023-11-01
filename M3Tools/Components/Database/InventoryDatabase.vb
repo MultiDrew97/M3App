@@ -61,7 +61,7 @@ Namespace Database
 		End Sub
 
 		Public Sub AddItem(item As Item)
-			dbConnection.Consume(Of Object)(Method.Post, $"/{path}", JSON.ConvertToJSON(item))
+			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(item))
 		End Sub
 
 		Public Sub UpdateItem(itemID As Integer, itemName As String, stock As Integer, price As Double, available As Boolean)
@@ -69,27 +69,15 @@ Namespace Database
 		End Sub
 
 		Public Sub UpdateItem(item As Item)
-			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{item.Id}", JSON.ConvertToJSON(item)).Wait()
+			dbConnection.Consume(Method.Put, $"/{path}/{item.Id}", JSON.ConvertToJSON(item))
 		End Sub
 
 		Public Sub RemoveItem(itemID As Integer)
-			dbConnection.Consume(Of Object)(Method.Put, $"/{path}/{itemID}").Wait()
+			dbConnection.Consume(Method.Put, $"/{path}/{itemID}")
 		End Sub
 
 		Private Sub ChangeAvailability(ParamArray params As SqlParameter())
 			Throw New NotImplementedException("ChangeAvailablity")
 		End Sub
-
-
-
-		Private Structure ColumnNames
-			Shared ReadOnly Property ID As String = "ItemID"
-			Shared ReadOnly Property Name As String = "ItemName"
-			Shared ReadOnly Property Stock As String = "Stock"
-			Shared ReadOnly Property Price As String = "Price"
-			Shared ReadOnly Property Available As String = "Available"
-
-			Shared ReadOnly Property Message As String = "Message"
-		End Structure
 	End Class
 End Namespace
