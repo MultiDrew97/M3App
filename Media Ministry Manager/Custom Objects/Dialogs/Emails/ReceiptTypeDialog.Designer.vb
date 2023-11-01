@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class RecieptTypeDialog
+Partial Class ReceiptTypeDialog
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -193,11 +193,11 @@ Partial Class RecieptTypeDialog
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "RecieptTypeDialog"
-        Me.ShowInTaskbar = False
+		Me.Name = "ReceiptTypeDialog"
+		Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "RecieptTypeDialog"
-        Me.gbx_RecieptOptions.ResumeLayout(False)
+		Me.Text = "Receipt Type"
+		Me.gbx_RecieptOptions.ResumeLayout(False)
         Me.gbx_RecieptOptions.PerformLayout()
         CType(Me.nud_Amount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

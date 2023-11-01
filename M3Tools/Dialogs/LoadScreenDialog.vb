@@ -44,6 +44,16 @@ Public Class LoadScreenDialog
 		End Set
 	End Property
 
+	<DefaultValue(False)>
+	Public Property TopMost As Boolean
+		Get
+			Return LoadingScreen.TopMost
+		End Get
+		Set(value As Boolean)
+			LoadingScreen.TopMost = value
+		End Set
+	End Property
+
 	Private Sub DialogClosed(sender As Object, e As EventArgs) Handles LoadScreen.DialogClosing
 		'LoadScreen.Close()
 		'__loadScreen = Nothing

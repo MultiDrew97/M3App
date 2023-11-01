@@ -47,16 +47,15 @@ Namespace Database
 		End Property
 
 		Public Sub CreateUser(fName As String, lName As String, email As String, username As String, password As String, Optional role As AccountRole = AccountRole.User)
-			CreateUser(New User() With {
+			' FIXME: Revert to working order when finished with debugging
+			CreateUser(New User With {
 				.FirstName = fName,
 				.LastName = lName,
 				.Email = email,
-				.Login = New Auth() With {
-					.Username = username,
-					.Password = Text.Encoding.UTF8.GetBytes(password),
+				.Login = New Auth(username) With {
 					.Role = role
 				}
-			})
+			}) '.Password = Text.Encoding.UTF8.GetBytes(password),
 		End Sub
 
 		Public Sub CreateUser(user As User)
@@ -72,7 +71,7 @@ Namespace Database
 		End Sub
 
 		Public Function Login(username As String, password As String) As User
-			Return Login(New Auth(username, password))
+			Return Login(New Auth(username, Convert.ToBase64String(Text.Encoding.UTF8.GetBytes(password))))
 		End Function
 
 		''' <summary>
@@ -81,7 +80,6 @@ Namespace Database
 		''' <param name="auth">The credentials to use for logging in the user</param>
 		''' <returns>The user if successful, otherwise Nothing</returns>
 		Public Function Login(auth As Auth) As User
-			Console.WriteLine(Text.Encoding.UTF8.GetChars(auth.Password))
 			Return dbConnection.Consume(Of User)(Method.Post, $"/{path}/login", JSON.ConvertToJSON(auth)).Result
 		End Function
 

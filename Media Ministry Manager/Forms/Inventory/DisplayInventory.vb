@@ -3,60 +3,42 @@ Imports MediaMinistry.Helpers
 
 Public Class Frm_DisplayInventory
 	Private ReadOnly ProductsTable As New SPPBC.M3Tools.DataTables.ItemsDataTable
-	Private Inventory As New DBEntryCollection(Of Item)
+	Private ReadOnly Inventory As New DBEntryCollection(Of Item)
 	Private Tooled As Boolean = False
 
 	Private Sub ViewInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		Refresh()
+		Reload()
 		bsProducts.DataSource = ProductsTable
 	End Sub
 
 	Private Sub Btn_AddProduct_Click(sender As Object, e As EventArgs) Handles btn_AddProduct.Click
 		If AddProductDialog.ShowDialog() = DialogResult.OK Then
-			Refresh()
+			Reload()
 		End If
 	End Sub
 
-	Private Shadows Sub Refresh()
+	Private Sub Reload()
 		ProductsTable.Clear()
-		LoadData()
+		' TODO: Load items
 		FillTable()
 	End Sub
 
 	Private Sub Frm_ViewInventory_Closed(sender As Object, e As EventArgs) Handles Me.Closed
 		If Not Tooled Then
-			Dim frm As New Frm_Main
+			Dim frm As New MainForm
 			frm.Show()
 		End If
 	End Sub
 
 	Private Sub Dgv_Inventory_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Inventory.CellEndEdit
-		Dim column As String = dgv_Inventory.Columns(e.ColumnIndex).DataPropertyName
-		Dim value As String = CStr(dgv_Inventory.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
-
-		Dim itemID As Integer = CInt(ProductsTable.Rows(e.RowIndex)("ItemID"))
-
-		Using db As New Database
-			db.UpdateInventory(itemID, column, value)
-		End Using
+		' TODO: Update Item
 	End Sub
 
 	Private Sub Dgv_Inventory_UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Inventory.UserDeletingRow
-		Dim itemID As Integer = CInt(CType(e.Row.DataBoundItem, DataRowView)("ItemID"))
-		Dim available As Boolean = CBool(CType(e.Row.DataBoundItem, DataRowView)("Available"))
-
-		Using db As New Database
-			db.ChangeAvailability(itemID, Not available)
-		End Using
+		' TODO: Verify if to force deleting item
 
 		e.Cancel = True
-		Refresh()
-	End Sub
-
-	Private Sub LoadData()
-		Using db As New Database
-			'Inventory = db.GetProducts
-		End Using
+		Reload()
 	End Sub
 
 	Private Sub FillTable()
@@ -81,7 +63,7 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub RefreshToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshToolStripMenuItem.Click
-		Refresh()
+		Reload()
 	End Sub
 
 	Private Sub Dgv_Inventory_MouseDown(sender As Object, e As MouseEventArgs) Handles dgv_Inventory.MouseDown
@@ -101,16 +83,9 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub AvailabilityToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AvailabilityToolStripMenuItem.Click
-		For Each row As DataGridViewRow In dgv_Inventory.SelectedRows
-			Dim itemID As Integer = CInt(CType(row.DataBoundItem, DataRowView)("ItemID"))
-			Dim available As Boolean = CBool(CType(row.DataBoundItem, DataRowView)("Available"))
+		' TODO: Modify availablity for items
 
-			Using db As New Database
-				db.ChangeAvailability(itemID, Not available)
-			End Using
-
-			Refresh()
-		Next
+		Reload()
 	End Sub
 
 	Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
@@ -122,7 +97,7 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-		Utils.CloseOpenForms()
+		Helpers.Utils.CloseOpenForms()
 	End Sub
 
 	Private Sub CustomerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewCustomerToolStripMenuItem.Click
@@ -156,21 +131,14 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub CustomersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewCustomersToolStripMenuItem.Click
-		Dim customers As New CustomersManagement
+		Dim customers As New CustomersManagement()
 		customers.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
-	Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-		Dim products As New Frm_DisplayInventory
-		products.Show()
-		Tooled = True
-		Me.Close()
-	End Sub
-
 	Private Sub OrdersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewOrdersToolStripMenuItem.Click
-		Dim orders As New Frm_DisplayOrders
+		Dim orders As New OrderManagement()
 		orders.Show()
 		Tooled = True
 		Me.Close()
@@ -184,7 +152,7 @@ Public Class Frm_DisplayInventory
 	End Sub
 
 	Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
-		Dim settings As New Frm_Settings()
+		Dim settings As New SettingsForm()
 		settings.Show()
 	End Sub
 End Class

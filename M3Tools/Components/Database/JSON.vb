@@ -10,10 +10,10 @@ Namespace M3API
 										   .WriteIndented = True,
 										   .ReadCommentHandling = JsonCommentHandling.Skip,
 										   .DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-										   .NumberHandling = Serialization.JsonNumberHandling.AllowReadingFromString,
 										   .PropertyNameCaseInsensitive = True,
 										   .AllowTrailingCommas = True,
-										   .DefaultIgnoreCondition = Serialization.JsonIgnoreCondition.WhenWritingNull
+										   .DefaultIgnoreCondition = Serialization.JsonIgnoreCondition.WhenWritingNull,
+										   .NumberHandling = Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals
 								}
 
 		''' <summary>
@@ -24,10 +24,8 @@ Namespace M3API
 		''' <returns></returns>
 		Shared Function ConvertFromJSON(Of T)(json As String) As T
 			If (String.IsNullOrWhiteSpace(json)) Then
-				Return Nothing
+				Throw New JsonException("No JSON was present")
 			End If
-
-			Console.WriteLine(json)
 
 			Return JsonSerializer.Deserialize(Of T)(json, options)
 		End Function
@@ -43,7 +41,7 @@ Namespace M3API
 			End If
 
 			Return JsonSerializer.Serialize(obj, options)
-		End Function
+        End Function
 	End Class
 
 	Public Enum Method

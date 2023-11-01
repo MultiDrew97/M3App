@@ -7,7 +7,7 @@ Public Class SendEmailsDialog
 	Private Event EmailsCancelled()
 	Private Event ProgressMade()
 	Private Event ProgressReset(total As Integer)
-	Public Event PrepBody()
+
 	'TODO: Make email sending more straight forward
 	Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
 
@@ -54,23 +54,23 @@ Public Class SendEmailsDialog
 		UseWaitCursor = False
 	End Sub
 
-	Private Sub NewFolder(sender As Object, e As EventArgs)
-		Using newFolder As New SPPBC.M3Tools.CreateFolderDialog()
-			Dim res = newFolder.ShowDialog()
-			If res = DialogResult.OK Then
-				Reload()
-			End If
-		End Using
-	End Sub
+	'Private Sub NewFolder(sender As Object, e As EventArgs)
+	'	Using newFolder As New SPPBC.M3Tools.CreateFolderDialog()
+	'		Dim res = newFolder.ShowDialog()
+	'		If res = DialogResult.OK Then
+	'			Reload()
+	'		End If
+	'	End Using
+	'End Sub
 
-	Private Sub NewUpload(sender As Object, e As EventArgs)
-		Using newUpload As New SPPBC.M3Tools.UploadFileDialog()
-			Dim res = newUpload.ShowDialog()
-			If res = DialogResult.OK Then
-				Reload()
-			End If
-		End Using
-	End Sub
+	'Private Sub NewUpload(sender As Object, e As EventArgs)
+	'	Using newUpload As New SPPBC.M3Tools.UploadFileDialog()
+	'		Dim res = newUpload.ShowDialog()
+	'		If res = DialogResult.OK Then
+	'			Reload()
+	'		End If
+	'	End Using
+	'End Sub
 
 	Private Sub GatherFiles(sender As Object, e As DoWorkEventArgs) Handles bw_GatherFiles.DoWork
 		Dim details = CType(e.Argument, EmailDetails)
@@ -142,7 +142,7 @@ Public Class SendEmailsDialog
 
 		Dim details = CType(e.Result, EmailDetails)
 
-		Using body As New SPPBC.M3Tools.Dialogs.EmailBodySelection(New TemplateList() From {
+		Using body As New EmailBodySelection(New TemplateList() From {
 																   New Template() With {
 																   .Name = "Sermon",
 																   .Text = My.Resources.newSermon,

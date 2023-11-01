@@ -3,24 +3,20 @@
 Imports System.ComponentModel
 Imports System.Data.SqlClient
 
-Public Class Frm_Login
+Public Class LogOnForm
 	Private Event BeginLogin()
 	Private Event EndLogin()
 
 	' TODO: Potentially consolidate these function
 	Private Sub Showing(sender As Object, e As EventArgs) Handles Me.Shown
 		' TODO: Use PerformLogin sub instead
-		chk_KeepLoggedIn.Checked = My.Settings.KeepLoggedIn
-
-		If Not chk_KeepLoggedIn.Checked Then
+		If Not My.Settings.KeepLoggedIn Then
 			Reset()
 			Return
 		End If
 
-		PerformLogin(sender, e)
+		btn_Login.PerformClick()
 	End Sub
-
-
 
 	Private Sub TimerTicking(sender As Object, e As EventArgs) Handles tmr_LoginTimer.Tick
 		lsd_LoadScreen.LoadText = "Failed to connect to server in time. Please try again or contact system support."
@@ -62,15 +58,7 @@ Public Class Frm_Login
 	Private Sub TryLogin(Optional username As String = Nothing, Optional password As String = Nothing)
 		Try
 			RaiseEvent BeginLogin()
-			Dim user = dbUsers.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
-
-			Console.WriteLine(user.ToString)
-
-			If user Is Nothing Then
-				Throw New Exception("Unable to login. Please try again or contact system support.")
-			End If
-
-			My.Settings.User = user
+			My.Settings.User = dbUsers.Login(If(username, My.Settings.Username), If(password, My.Settings.Password))
 		Catch ex As Exception
 			Select Case ex.GetType()
 				Case GetType(RoleException)
@@ -84,7 +72,7 @@ Public Class Frm_Login
 				Case GetType(ArgumentException), GetType(SqlException)
 					Throw New ConnectionException(ex.Message, ex)
 				Case Else
-					Throw New Exception(ex.Message, ex)
+					Throw New NotImplementedException(ex.Message, ex)
 			End Select
 		End Try
 	End Sub
@@ -94,34 +82,27 @@ Public Class Frm_Login
 			TryLogin(If(lf_Login.Username, Nothing), If(lf_Login.Password, Nothing))
 
 			bw_SaveSettings.RunWorkerAsync()
-			Frm_Main.Show()
-		Catch ex As Exception
-			' TODO: Clear this up
-			Dim message As String
-
-			Select Case ex.GetType()
-				Case GetType(RoleException)
-					message = "Only admins can use this application. If this is an error, please contact support"
-				Case GetType(UsernameException)
-					message = "We couldn't find an account with that username. Please try again or contact support."
-				Case GetType(PasswordException)
-					message = "Incorrect password. Please try again or reset your password"
-				Case GetType(DatabaseException)
-					message = "Unknown database error. Please try again or contact support."
-				Case Else
-					message = ex.Message
-			End Select
-
-			If message.ToLower().Contains("username") Then
-				lf_Login.Clear()
-				lf_Login.Focus()
-			Else
-				lf_Login.ClearPassword()
-				lf_Login.Focus("p")
-			End If
-
-			'lsd_LoadScreen.Image = My.Resources.ErrorImage
-			lsd_LoadScreen.ShowError(message)
+			MainForm.Show()
+		Catch role As RoleException
+			lsd_LoadScreen.ShowError("Only admins can use this application. If this is an error, please contact support")
+			lf_Login.ClearPassword()
+			lf_Login.Focus("p")
+		Catch username As UsernameException
+			lsd_LoadScreen.ShowError("We couldn't find an account with that username. Please try again or contact support.")
+			lf_Login.Clear()
+			lf_Login.Focus()
+		Catch password As PasswordException
+			lf_Login.ClearPassword()
+			lf_Login.Focus("p")
+			lsd_LoadScreen.ShowError("Incorrect password. Please try again or reset your password")
+		Catch database As DatabaseException
+			lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.")
+			lf_Login.ClearPassword()
+			lf_Login.Focus("p")
+		Catch
+			lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
+			lf_Login.ClearPassword()
+			lf_Login.Focus("p")
 		Finally
 			RaiseEvent EndLogin()
 		End Try

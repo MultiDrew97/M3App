@@ -26,7 +26,7 @@ Namespace Dialogs
                 If ValidUsername() And ValidPassword() And PasswordMatch() Then
                     TryCreateAccount()
                 End If
-            Catch ex As PasswordMisMatchException
+            Catch ex As PasswordMismatchException
                 cpf_Confirm.Clear()
                 cpf_Confirm.Focus()
             Catch ex As PasswordException

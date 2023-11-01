@@ -5,11 +5,11 @@ Imports SPPBC.M3Tools.Types
 
 Public Class PlaceOrderDialog
     Private CustomersTable As DataTable
-    Private Customers As ObjectModel.Collection(Of Customer)
-    Private ProductsTable As DataTable
-    Private Products As ObjectModel.Collection(Of Item)
+	Private ReadOnly Customers As ObjectModel.Collection(Of Customer)
+	Private ProductsTable As DataTable
+	Private ReadOnly Products As ObjectModel.Collection(Of Item)
 
-    Private Sub Frm_PlaceOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+	Private Sub Frm_PlaceOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadData()
 
         bsCustomers.DataSource = CustomersTable
@@ -24,28 +24,22 @@ Public Class PlaceOrderDialog
         Me.Close()
     End Sub
 
-    Private Sub Btn_AddOrder_Click(sender As Object, e As EventArgs) Handles btn_AddOrder.Click
-        Try
-            Using db = New Database(My.Settings.Username, My.Settings.Password)
-                db.AddOrder(CInt(CustomersTable.Rows(cbx_Name.SelectedIndex)("CustomerID")), CInt(ProductsTable.Rows(cbx_ItemName.SelectedIndex)("ProductID")), CType(nud_Quantity.Value, Integer))
-            End Using
+	Private Sub Btn_AddOrder_Click(sender As Object, e As EventArgs) Handles btn_AddOrder.Click
+		Try
+			' TODO: Add new order
 
-            tss_AddOrder.ForeColor = SystemColors.WindowText
-            tss_AddOrder.Text = "The order was successfully added for " & cbx_Name.Text
+			tss_AddOrder.ForeColor = SystemColors.WindowText
+			tss_AddOrder.Text = "The order was successfully added for " & cbx_Name.Text
 
-            DialogResult = DialogResult.OK
-            Me.Close()
-        Catch ex As SqlException
-            tss_AddOrder.Text = "The order could not be added. Please try again"
-            tss_AddOrder.ForeColor = Color.Red
-        End Try
-    End Sub
+			DialogResult = DialogResult.OK
+			Me.Close()
+		Catch ex As SqlException
+			tss_AddOrder.Text = "The order could not be added. Please try again"
+			tss_AddOrder.ForeColor = Color.Red
+		End Try
+	End Sub
 
-    Private Shadows Sub Refresh()
-        GenerateTables()
-    End Sub
-
-    Private Sub GenerateTables()
+	Private Sub GenerateTables()
         CustomersTable = New DataTable
         ProductsTable = New DataTable
 
@@ -92,12 +86,9 @@ Public Class PlaceOrderDialog
     'End Sub
 
     Private Sub LoadData()
-        Using db As New Database
-            Customers = db.GetCustomers
-            Products = db.GetProducts
-        End Using
+		' TODO: Load orders
 
-        GenerateTables()
+		GenerateTables()
     End Sub
 
 

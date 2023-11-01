@@ -17,7 +17,7 @@ Public Class CustomersManagement
 			Return
 		End If
 
-		Frm_Main.Show()
+		MainForm.Show()
 	End Sub
 
 	Private Sub Logout() Handles mms_Main.Logout
@@ -31,14 +31,14 @@ Public Class CustomersManagement
 	End Sub
 
 	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
-		Dim orders As New Frm_DisplayOrders
+		Dim orders As New OrderManagement()
 		orders.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
-		Dim products As New Frm_DisplayInventory
+		Dim products As New InventoryManagement()
 		products.Show()
 		Tooled = True
 		Me.Close()
@@ -52,7 +52,7 @@ Public Class CustomersManagement
 	End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.ViewSettings
-		Using settings As New Frm_Settings()
+		Using settings As New SettingsForm()
 			settings.Show()
 		End Using
 	End Sub

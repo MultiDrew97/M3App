@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports System.Globalization
+'Imports System.Globalization
 
 Namespace Types
 	<TypeConverter(GetType(Converters.UserConverter))>
@@ -19,10 +19,9 @@ Namespace Types
 			End Get
 		End Property
 
-		'Public Sub New()
-		'	' TODO: Add constructor options like other objects
-		'	Me.New(-1, "John", "Doe", Nothing, "JohnDoe123", "JohnDoe123!", Guid.Empty, AccountRole.User)
-		'End Sub
+		Public Sub New()
+			Me.New(-1)
+		End Sub
 
 		Public Sub New(Optional id As Integer = -1, Optional fName As String = "John", Optional lName As String = "Doe",
 					   Optional email As String = Nothing, Optional username As String = "JohnDoe123",
@@ -65,41 +64,41 @@ End Namespace
 Namespace Types.Converters
 	Friend Class UserConverter
 		Inherits TypeConverter
+		'ReadOnly fields As New Dictionary(Of String, Integer) From {
+		'	{"ID", 0}, {"FirstName", 1}, {"LastName", 2},
+		'	{"Email", 3}, {"Username", 4}, {"Password", 5},
+		'	{"Salt", 6}, {"Role", 7}
+		'}
 
 		Public Overrides Function CanConvertFrom(context As ITypeDescriptorContext, sourceType As Type) As Boolean
 			Return sourceType = GetType(String)
 		End Function
 
-		Public Overrides Function ConvertFrom(context As ITypeDescriptorContext, culture As CultureInfo, value As Object) As Object
-			Dim dict As New Dictionary(Of String, Integer) From {
-				{"ID", 0}, {"FirstName", 1}, {"LastName", 2},
-				{"Email", 3}, {"Username", 4}, {"Password", 5},
-				{"Salt", 6}, {"Role", 7}
-			}
-			If value.GetType = GetType(String) Then
-				Dim parts() As String = CStr(value).Split(";"c)
-				Dim guid As Guid
+		Public Overloads Function ConvertFrom(context As ITypeDescriptorContext, culture As Globalization.CultureInfo, value As String) As Object
+			'If Not value.GetType = GetType(String) Then
+			'	Return MyBase.ConvertFrom(context, culture, value)
+			'	'Dim parts() As String = CStr(value).Split(";"c)
+			'	'Dim guid As Guid
 
-				Dim success = Guid.TryParse(parts(4), guid)
+			'	'Dim success = Guid.TryParse(parts(4), guid)
 
-				' FIXME: Determine better way to parse a user from string after refactoring User constructors
-				Dim user As New User(CInt(parts(dict("ID"))), parts(dict("FirstName")), parts(dict("LastName")), parts(dict("Email")),
-									 parts(dict("Username")), parts(dict("Password")), Guid.Parse(parts(dict("Salt"))),
-									 CType(CInt(parts(dict("Role"))), AccountRole))
+			'	'' FIXME: Determine better way to parse a user from string after refactoring User constructors
+			'	'Dim user As New User(CInt(parts(fields("ID"))), parts(fields("FirstName")), parts(fields("LastName")), parts(fields("Email")),
+			'	'					 parts(fields("Username")), parts(fields("Password")), Guid.Parse(parts(fields("Salt"))),
+			'	'					 CType(CInt(parts(fields("Role"))), AccountRole))
 
-				Return user
-			End If
+			'	'Return user
+			'End If
 
-			Return MyBase.ConvertFrom(context, culture, value)
+			Return JSON.ConvertFromJSON(Of User)(value)
 		End Function
 
-		Public Overrides Function ConvertTo(context As ITypeDescriptorContext, culture As CultureInfo, value As Object, destinationType As Type) As Object
-			If destinationType = GetType(String) Then
-				Dim user = CType(value, User)
-				Return user.ToString
+		Public Overrides Function ConvertTo(context As ITypeDescriptorContext, culture As Globalization.CultureInfo, value As Object, destinationType As Type) As Object
+			If Not destinationType = GetType(String) Then
+				Return MyBase.ConvertTo(context, culture, value, destinationType)
 			End If
 
-			Return MyBase.ConvertTo(context, culture, value, destinationType)
+			Return JSON.ConvertToJSON(value)
 		End Function
 	End Class
 End Namespace

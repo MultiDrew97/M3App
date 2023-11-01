@@ -368,7 +368,7 @@ Partial Class Frm_DisplayInventory
 		'
 		Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
 		Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
-		Me.SettingsToolStripMenuItem.Text = "MySettings"
+		Me.SettingsToolStripMenuItem.Text = "Settings"
 		'
 		'ToolStripSeparator2
 		'

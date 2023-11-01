@@ -30,7 +30,7 @@ Namespace Database
 		<SettingsBindable(True)>
 		<DefaultValue("")>
 		<Description("The password to use with the API calls")>
-		Property Password As String
+		Friend Property Password As String
 
 		<SettingsBindable(True)>
 		<DefaultValue("")>
@@ -49,7 +49,7 @@ Namespace Database
 			Me.BaseUrl = baseUrl
 		End Sub
 
-		Friend Function Consume(Of T)(method As M3API.Method, path As String, Optional payload As String = Nothing) As Task(Of T)
+		Friend Function Consume(Of T)(method As Method, path As String, Optional payload As String = Nothing) As Task(Of T)
 			Dim req As Net.HttpWebRequest, res As Net.HttpWebResponse
 
 			req = CType(Net.WebRequest.Create(BaseUrl + path), Net.HttpWebRequest)

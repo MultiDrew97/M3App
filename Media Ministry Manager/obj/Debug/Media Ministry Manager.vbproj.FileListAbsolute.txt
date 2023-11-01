@@ -154,32 +154,6 @@ E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\D
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.xml
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.dll.config
 E:\Development\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.TrustInfo.xml
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.AssemblyReference.cache
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.SuggestedBindingRedirects.cache
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe.config
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.g.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MediaMinistrySplash.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileLocationField.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CreateFolderDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FolderCreationDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PasswordField.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.RecieptTypeDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.DriveUploadDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.AddProductDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ChangePasswordDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.NewUserDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SendEmailsDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CustomersManagement.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ListenersManagement.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_Login.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_Settings.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayOrders.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_Main.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PlaceOrderDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayInventory.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Resources.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.GenerateResource.cache
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.CoreCompileInputs.cache
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.config
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.exe.manifest
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media Ministry Manager.application
@@ -217,6 +191,8 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Microso
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MimeKit.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\MimeKit.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Newtonsoft.Json.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Core.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Core.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OOXML.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OOXML.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.OpenXml4Net.dll
@@ -229,10 +205,14 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SixLabo
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SixLabors.ImageSharp.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Renci.SshNet.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Buffers.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.CodeDom.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.IO.Pipelines.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Memory.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Numerics.Vectors.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.AccessControl.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.Cryptography.Xml.dll
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.Principal.Windows.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Encoding.CodePages.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Encodings.Web.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Text.Json.dll
@@ -242,6 +222,32 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\SPPBC.M3Tools.dll.config
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.AssemblyReference.cache
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.SuggestedBindingRedirects.cache
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe.config
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.g.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MediaMinistrySplash.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FileLocationField.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CreateFolderDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.FolderCreationDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PasswordField.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ReceiptTypeDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.DriveUploadDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.AddProductDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ChangePasswordDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.NewUserDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SendEmailsDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CustomersManagement.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ListenersManagement.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.LogOnForm.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SettingsForm.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayOrders.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MainForm.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PlaceOrderDialog.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayInventory.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Resources.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.GenerateResource.cache
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.CoreCompileInputs.cache
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.TrustInfo.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe.manifest
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.application
@@ -249,9 +255,3 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.exe
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.xml
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Core.dll
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\NPOI.Core.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.CodeDom.dll
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.AccessControl.dll
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.Cryptography.Xml.dll
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\System.Security.Principal.Windows.dll

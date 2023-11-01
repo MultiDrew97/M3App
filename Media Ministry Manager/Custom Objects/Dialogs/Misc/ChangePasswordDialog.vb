@@ -5,10 +5,10 @@ Imports System.Data.SqlClient
 Public Class ChangePasswordDialog
     ReadOnly _connection As New SqlConnectionStringBuilder(My.Settings.releaseConnection)
 
-    Private Sub Btn_ChangePassword_Click(sender As Object, e As EventArgs) Handles btn_ChangePassword.Click
-        Try
+	Private Sub UpdatePassword(sender As Object, e As EventArgs) Handles btn_ChangePassword.Click
+		Try
 			If Not PasswordCheck() Then
-				Throw New FormatException(String.Format("Password: {0}\nConfirm: {1}", txt_Password.Text, txt_ConfirmPassword.Text))
+				Throw New FormatException($"Password: {txt_Password.Text} \n Confirm: {txt_ConfirmPassword.Text}")
 			End If
 
 
@@ -26,24 +26,24 @@ Public Class ChangePasswordDialog
 			'    Me.Close()
 			'End If
 		Catch ex As SqlException
-            Console.WriteLine("Failed to update user password: " & ex.Message)
-        Catch passEx As Exceptions.PasswordMisMatchException
-            tss_UserFeedback.Text = "Passwords did not match try again"
-            tss_UserFeedback.ForeColor = Color.Red
-            Console.WriteLine("Passwords did not match: " & passEx.Message)
-        End Try
-    End Sub
+			Console.WriteLine("Failed to update user password: " & ex.Message)
+		Catch passEx As PasswordMisMatchException
+			tss_UserFeedback.Text = "Passwords did not match try again"
+			tss_UserFeedback.ForeColor = Color.Red
+			Console.WriteLine("Passwords did not match: " & passEx.Message)
+		End Try
+	End Sub
 
-    Private Function PasswordCheck() As Boolean
-        Return txt_Password.Text.Equals(txt_ConfirmPassword.Text)
-    End Function
+	Private Function PasswordCheck() As Boolean
+		Return txt_Password.Text.Equals(txt_ConfirmPassword.Text)
+	End Function
 
-    Private Sub Btn_Cancel_Click(sender As Object, e As EventArgs) Handles btn_Cancel.Click
-        DialogResult = DialogResult.Cancel
-        Me.Close()
-    End Sub
+	Private Sub CancelPasswordChange(sender As Object, e As EventArgs) Handles btn_Cancel.Click
+		DialogResult = DialogResult.Cancel
+		Me.Close()
+	End Sub
 
-    Private Sub Frm_ChangePassword_Load(sender As Object, e As EventArgs) Handles Me.Load
-        _connection.InitialCatalog = "master"
-    End Sub
+	Private Sub ChangePasswordLoaded(sender As Object, e As EventArgs) Handles Me.Load
+		_connection.InitialCatalog = "master"
+	End Sub
 End Class

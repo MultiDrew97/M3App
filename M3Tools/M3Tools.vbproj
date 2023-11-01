@@ -248,6 +248,8 @@
     <Compile Include="Dialogs\Emails\RecipientSelectionDialog.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Exceptions\Customers\InvalidStateCodeException.vb" />
+    <Compile Include="Exceptions\FormClosedException.vb" />
     <Compile Include="Exceptions\Products\ProductNotFoundException.vb" />
     <Compile Include="Types\Auth.vb" />
     <Compile Include="Types\Events\CustomerEvents.vb" />
@@ -469,13 +471,12 @@
     <Compile Include="Exceptions\Google\FileException.vb" />
     <Compile Include="Exceptions\Google\FolderException.vb" />
     <Compile Include="Exceptions\Google\UploadException.vb" />
-    <Compile Include="Exceptions\InvalidStateCodeException.vb" />
     <Compile Include="Exceptions\Listeners\ListenerNotFoundException.vb" />
     <Compile Include="Exceptions\Orders\OrderNotFoundException.vb" />
     <Compile Include="Exceptions\Users\LoginException.vb" />
     <Compile Include="Exceptions\Users\MissingInfoException.vb" />
     <Compile Include="Exceptions\Users\PasswordException.vb" />
-    <Compile Include="Exceptions\Users\PasswordMisMatchException.vb" />
+    <Compile Include="Exceptions\Users\PasswordMismatchException.vb" />
     <Compile Include="Exceptions\Users\RoleException.vb" />
     <Compile Include="Exceptions\Users\UserException.vb" />
     <Compile Include="Exceptions\Users\UsernameException.vb" />
@@ -800,7 +801,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

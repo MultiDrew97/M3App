@@ -23,9 +23,7 @@ Partial Class CustomersManagement
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersManagement))
-		Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
-		Dim User1 As SPPBC.M3Tools.Types.User = New SPPBC.M3Tools.Types.User()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersManagement))
 		Me.ss_CustomerView = New System.Windows.Forms.StatusStrip()
 		Me.tss_CustomersView = New System.Windows.Forms.ToolStripStatusLabel()
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
@@ -294,29 +292,9 @@ Partial Class CustomersManagement
 		'
 		'dbCustomers
 		'
-		MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
-		MySettings1.debugConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry Test"";Connect Timeout" &
-	"=30;Encrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-		MySettings1.KeepLoggedIn = False
-		MySettings1.Password = ""
-		MySettings1.releaseConnection = "Data Source=sppbc.hopto.org;Initial Catalog=""Media Ministry"";Connect Timeout=30;E" &
-	"ncrypt=True;Authentication=""Sql Password"";TrustServerCertificate=True;"
-		MySettings1.SettingsKey = ""
-		MySettings1.UpgradeRequired = True
-		User1.Login.Role = SPPBC.M3Tools.Types.AccountRole.User
-		User1.Email = "JohnDoe@domain.ext"
-		User1.FirstName = "John"
-		User1.Id = -1
-		User1.LastName = "Doe"
-		User1.Name = "John Doe"
-		User1.Login.Password = Nothing
-		User1.Login.Salt = New System.Guid("063137a9-b58b-4c32-b713-eef802e7dd34")
-		User1.Login.Username = "JohnDoe123"
-		MySettings1.User = User1
-		MySettings1.Username = ""
-		Me.dbCustomers.BaseUrl = MySettings1.DefaultUrl
-		Me.dbCustomers.Password = MySettings1.DefaultPassword
-		Me.dbCustomers.Username = MySettings1.DefaultUsername
+		Me.dbCustomers.BaseUrl = MediaMinistry.My.MySettings.Default.DefaultUrl
+		Me.dbCustomers.Password = MediaMinistry.My.MySettings.Default.DefaultPassword
+		Me.dbCustomers.Username = MediaMinistry.My.MySettings.Default.DefaultUsername
 		'
 		'CustomersManagement
 		'

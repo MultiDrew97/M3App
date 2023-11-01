@@ -33,15 +33,15 @@ Namespace Helpers
 			My.Settings.Password = ""
 			My.Settings.KeepLoggedIn = False
 			My.Settings.Save()
-			Frm_Login.Show()
+			LogOnForm.Show()
 		End Sub
 
 		Shared Sub SpecialClose(sender As Object)
-			If sender.GetType() = GetType(MainMenuStrip) Then
+			If sender Is Nothing OrElse sender.GetType() = GetType(MainMenuStrip) Then
 				Return
 			End If
 
-			Frm_Main.Show()
+			MainForm.Show()
 		End Sub
 	End Structure
 End Namespace

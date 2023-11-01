@@ -148,15 +148,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
-        '''</summary>
-        Friend ReadOnly Property debugConnection() As String
-            Get
-                Return ResourceManager.GetString("debugConnection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
         '''</summary>
         Friend ReadOnly Property DriveShareLink() As String
@@ -300,15 +291,6 @@ Namespace My.Resources
         Friend ReadOnly Property receipt() As String
             Get
                 Return ResourceManager.GetString("receipt", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
-        '''</summary>
-        Friend ReadOnly Property releaseConnection() As String
-            Get
-                Return ResourceManager.GetString("releaseConnection", resourceCulture)
             End Get
         End Property
         

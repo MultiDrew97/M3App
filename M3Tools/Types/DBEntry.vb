@@ -3,13 +3,10 @@ Imports System.ComponentModel
 
 Namespace Types
 	Public MustInherit Class DbEntry
+		<Text.Json.Serialization.JsonIgnore>
 		MustOverride Property Id As Integer
 
-		Public Sub New()
-			Me.New(-1)
-		End Sub
-
-		Public Sub New(id As Integer)
+		Public Sub New(Optional id As Integer = -1)
 			Me.Id = id
 		End Sub
 

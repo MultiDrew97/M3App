@@ -20,17 +20,17 @@ Public Class ListenersManagement
 			Return
 		End If
 
-		Frm_Main.Show()
+		MainForm.Show()
 	End Sub
 
 	Private Sub Logout() Handles mms_Main.Logout
-		Utils.LogOff()
+		Helpers.Utils.LogOff()
 		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ExitApplication() Handles mms_Main.ExitApplication, mms_Main.UpdateAvailable
-		Utils.CloseOpenForms()
+		Helpers.Utils.CloseOpenForms()
 	End Sub
 
 	Private Sub ManageCustomers(sender As Object, e As EventArgs) Handles mms_Main.ManageCustomers
@@ -41,28 +41,28 @@ Public Class ListenersManagement
 	End Sub
 
 	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles mms_Main.ManageOrders
-		Dim orders As New Frm_DisplayOrders()
+		Dim orders As New OrderManagement()
 		orders.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ManageProducts(sender As Object, e As EventArgs) Handles mms_Main.ManageProducts
-		Dim products As New Frm_DisplayInventory()
+		Dim products As New InventoryManagement()
 		products.Show()
 		Tooled = True
 		Me.Close()
 	End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.ViewSettings
-		Dim settings As New Frm_Settings()
+		Dim settings As New SettingsForm()
 		settings.ShowDialog()
 	End Sub
 
 	Private Sub SendEmails() Handles dlc_Listeners.SendEmails
 		Using emails As New SendEmailsDialog()
 			UseWaitCursor = True
-			Dim res = emails.ShowDialog
+			emails.ShowDialog()
 			UseWaitCursor = False
 		End Using
 	End Sub

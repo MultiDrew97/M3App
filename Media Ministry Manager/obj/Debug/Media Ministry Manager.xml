@@ -86,11 +86,6 @@ Media Ministry Manager
 &lt;/html&gt;.
 </summary>
 </member>
-<member name="P:MediaMinistry.My.Resources.Resources.debugConnection">
-<summary>
-  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry Test&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;;TrustServerCertificate=True;.
-</summary>
-</member>
 <member name="P:MediaMinistry.My.Resources.Resources.DriveShareLink">
 <summary>
   Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
@@ -186,11 +181,6 @@ Media Ministry Manager
 		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
 		St. Paul Primitive Baptist Church&lt;br&gt;
 		Email [rest of string was truncated]&quot;;.
-</summary>
-</member>
-<member name="P:MediaMinistry.My.Resources.Resources.releaseConnection">
-<summary>
-  Looks up a localized string similar to Data Source=sppbc.hopto.org;Initial Catalog=&quot;Media Ministry&quot;;Connect Timeout=30;Encrypt=True;Authentication=&quot;Sql Password&quot;.
 </summary>
 </member>
 <member name="P:MediaMinistry.My.Resources.Resources.ShowPasswordIcon">

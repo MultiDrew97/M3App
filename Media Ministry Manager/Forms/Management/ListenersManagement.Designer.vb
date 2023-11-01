@@ -23,8 +23,6 @@ Partial Class ListenersManagement
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
-		Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
-		Dim User1 As SPPBC.M3Tools.Types.User = New SPPBC.M3Tools.Types.User()
 		Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
 		Me.dlc_Listeners = New SPPBC.M3Tools.DisplayListenersCtrl()
 		Me.bsListeners = New System.Windows.Forms.BindingSource(Me.components)

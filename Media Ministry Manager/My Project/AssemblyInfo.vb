@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Media Ministry Manager")>
 <Assembly: AssemblyDescription("This is a program that will be used to keep track of people signing up and requesting media ministry products")>
-<Assembly: AssemblyCompany("St. Paul Primitive Baptist Church")>
+<Assembly: AssemblyCompany("SPPBC")>
 <Assembly: AssemblyProduct("Media Ministry Manager")>
 <Assembly: AssemblyCopyright("Copyright ©  2019")>
 <Assembly: AssemblyTrademark("")>

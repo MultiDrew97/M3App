@@ -3,9 +3,6 @@ Namespace Types
 	' TODO: Potentially return to MustInherit
 	Public MustInherit Class Person
 		Inherits DbEntry
-
-		Dim _id As Integer = -1
-
 		Private __email As MimeKit.MailboxAddress
 
 		<Text.Json.Serialization.JsonPropertyName("firstName")>
@@ -20,7 +17,7 @@ Namespace Types
 				Return If(String.IsNullOrWhiteSpace(__email.Address), Nothing, __email.Address)
 			End Get
 			Set(value As String)
-				__email = New MimeKit.MailboxAddress(Name, If(Not String.IsNullOrWhiteSpace(value), value, ""))
+				__email = New MimeKit.MailboxAddress(Name, If(value, ""))
 			End Set
 		End Property
 

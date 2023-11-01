@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Frm_Settings
+Partial Class SettingsForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class Frm_Settings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Frm_Settings))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SettingsForm))
         Me.btn_Save = New System.Windows.Forms.Button()
         Me.btn_Default = New System.Windows.Forms.Button()
         Me.tc_Settings = New System.Windows.Forms.TabControl()
@@ -213,7 +213,7 @@ Partial Class Frm_Settings
         'bw_CheckServices
         '
         '
-        'Frm_Settings
+        'SettingsForm
         '
         Me.AcceptButton = Me.btn_Save
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
@@ -231,7 +231,7 @@ Partial Class Frm_Settings
         Me.MaximumSize = New System.Drawing.Size(800, 800)
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(500, 500)
-        Me.Name = "Frm_Settings"
+        Me.Name = "SettingsForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Media Ministry Manager"
         Me.tc_Settings.ResumeLayout(False)

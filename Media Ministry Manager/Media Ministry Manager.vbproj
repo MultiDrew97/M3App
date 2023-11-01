@@ -182,10 +182,10 @@
     <Compile Include="Custom Objects\Dialogs\CreateFolderDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.Designer.vb">
-      <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
+    <Compile Include="Custom Objects\Dialogs\Emails\ReceiptTypeDialog.Designer.vb">
+      <DependentUpon>ReceiptTypeDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.vb">
+    <Compile Include="Custom Objects\Dialogs\Emails\ReceiptTypeDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.Designer.vb">
@@ -194,18 +194,12 @@
     <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Exceptions\FormClosedException.vb" />
-    <Compile Include="Custom Objects\Exceptions\InvalidStateCodeException.vb" />
-    <Compile Include="Custom Objects\Exceptions\PasswordException.vb" />
-    <Compile Include="Custom Objects\Google\DriveUploader.vb" />
     <Compile Include="Custom Objects\Controls\PasswordField.Designer.vb">
       <DependentUpon>PasswordField.vb</DependentUpon>
     </Compile>
     <Compile Include="Custom Objects\Controls\PasswordField.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Google\Sender.vb" />
-    <Compile Include="Custom Objects\Google\Service.vb" />
     <Compile Include="Custom Objects\Types\extensions.vb" />
     <Compile Include="Custom Objects\Utils.vb" />
     <Compile Include="Custom Objects\Dialogs\Emails\FolderCreationDialog.Designer.vb">
@@ -244,16 +238,28 @@
     <Compile Include="Forms\Management\CustomersManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Management\InventoryManagement.Designer.vb">
+      <DependentUpon>InventoryManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Management\InventoryManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Management\ListenersManagement.designer.vb">
       <DependentUpon>ListenersManagement.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Management\ListenersManagement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Misc\LoginForm.Designer.vb">
-      <DependentUpon>LoginForm.vb</DependentUpon>
+    <Compile Include="Forms\Management\OrderManagement.Designer.vb">
+      <DependentUpon>OrderManagement.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Misc\LoginForm.vb">
+    <Compile Include="Forms\Management\OrderManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Misc\LogOnForm.Designer.vb">
+      <DependentUpon>LogOnForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Misc\LogOnForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Misc\Settings.designer.vb">
@@ -285,7 +291,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Database.vb" />
     <Compile Include="Forms\Misc\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -299,14 +304,6 @@
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Custom Objects\Types\Orders\CompletedOrder.vb" />
-    <Compile Include="Custom Objects\Types\Orders\CurrentOrder.vb" />
-    <Compile Include="Custom Objects\Types\People\Address.vb" />
-    <Compile Include="Custom Objects\Types\People\Customer.vb" />
-    <Compile Include="Custom Objects\Types\Inventory\Item.vb" />
-    <Compile Include="Custom Objects\Types\People\Listener.vb" />
-    <Compile Include="Custom Objects\Types\People\Person.vb" />
-    <Compile Include="Custom Objects\Types\Inventory\Product.vb" />
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -330,8 +327,8 @@
     <EmbeddedResource Include="Custom Objects\Controls\PasswordField.resx">
       <DependentUpon>PasswordField.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\RecieptTypeDialog.resx">
-      <DependentUpon>RecieptTypeDialog.vb</DependentUpon>
+    <EmbeddedResource Include="Custom Objects\Dialogs\Emails\ReceiptTypeDialog.resx">
+      <DependentUpon>ReceiptTypeDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Emails\DriveUploadDialog.resx">
       <DependentUpon>DriveUploadDialog.vb</DependentUpon>
@@ -354,8 +351,8 @@
     <EmbeddedResource Include="Forms\Management\ListenersManagement.resx">
       <DependentUpon>ListenersManagement.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Misc\LoginForm.resx">
-      <DependentUpon>LoginForm.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Misc\LogOnForm.resx">
+      <DependentUpon>LogOnForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Misc\Settings.resx">
@@ -441,7 +438,6 @@
     <Content Include="Resources\ShowPasswordIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Custom Objects\Components\" />
     <Folder Include="Custom Objects\Dialogs\Customers\" />
   </ItemGroup>
   <ItemGroup>
@@ -515,7 +511,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

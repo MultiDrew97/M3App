@@ -6,13 +6,8 @@ Imports System.IO
 Imports System.Text
 Imports MediaMinistry.Helpers
 
-Public Class Frm_Main
+Public Class MainForm
 	' TODO: Add functionality for menu strip items here or figure out how to truley centralize in control
-	Structure WindowSizes
-		Shared normal As New Size(413, 452)
-		Shared max As New Size(1382, 744)
-	End Structure
-
 	Private Sub Reload() Handles Me.Load
 		tss_Feedback.Text = "What would you like to do?"
 		tss_Feedback.ForeColor = SystemColors.WindowText
@@ -20,13 +15,13 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub MangeProducts(sender As Object, e As EventArgs) Handles btn_ProductManagement.Click, mms_Main.ManageProducts
-		Dim products As New Frm_DisplayInventory()
+		Dim products As New InventoryManagement()
 		products.Show()
 		Me.Close()
 	End Sub
 
 	Private Sub ManageOrders(sender As Object, e As EventArgs) Handles btn_OrderManagement.Click, mms_Main.ManageOrders
-		Dim orders As New Frm_DisplayOrders()
+		Dim orders As New OrderManagement()
 		orders.Show()
 		Me.Close()
 	End Sub
@@ -87,16 +82,16 @@ Public Class Frm_Main
 	End Sub
 
 	Private Sub Logout() Handles mms_Main.Logout
-		Utils.LogOff()
+		Helpers.Utils.LogOff()
 		Me.Close()
 	End Sub
 
 	Private Sub ExitApp() Handles mms_Main.ExitApplication, mms_Main.UpdateAvailable
-		Utils.CloseOpenForms()
+		Helpers.Utils.CloseOpenForms()
 	End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.ViewSettings
-		Dim settings As New Frm_Settings()
+		Dim settings As New SettingsForm()
 		settings.Show()
 	End Sub
 
