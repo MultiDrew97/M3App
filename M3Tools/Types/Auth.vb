@@ -5,7 +5,7 @@
 
 		'<Text.Json.Serialization.JsonIgnore>
 		<Text.Json.Serialization.JsonPropertyName("password")>
-		Public Property Password As Byte()
+		Public Property Password As String
 
 		<Text.Json.Serialization.JsonPropertyName("salt")>
 		Public Property Salt As Guid
@@ -18,14 +18,18 @@
 		End Sub
 
 		Public Sub New(Optional username As String = "JohnDoe123", Optional password As String = Nothing, Optional salt As Guid = Nothing, Optional role As AccountRole = AccountRole.User)
-			Me.New(username, Text.Encoding.UTF8.GetBytes(If(password, $"Welcome{username}!")), If(salt = Nothing, Guid.Empty, salt), role)
+			Me.Username = username
+			Me.Password = If(password IsNot Nothing, password.ToBase64String(), Nothing)
+			Me.Salt = If(Not IsNothing(salt), salt, Guid.Empty)
+			Me.Role = role
+			'Me.New(username, Text.Encoding.UTF8.GetBytes(If(password, $"Welcome{username}!")), If(salt = Nothing, Guid.Empty, salt), role)
 		End Sub
 
-		Public Sub New(username As String, password As Byte(), salt As Guid, role As AccountRole)
-			Me.Username = username
-			Me.Password = password
-			Me.Salt = salt
-			Me.Role = role
-		End Sub
+		'Public Sub New(username As String, password As Byte(), Optional salt As Guid = Nothing, Optional role As AccountRole = AccountRole.User)
+		'	Me.Username = username
+		'	Me.Password = password
+		'	Me.Salt = salt
+		'	Me.Role = role
+		'End Sub
 	End Class
 End Namespace

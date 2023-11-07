@@ -140,9 +140,9 @@ Partial Class LogOnForm
 		'
 		'dbUsers
 		'
-		Me.dbUsers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbUsers.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbUsers.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		Me.dbUsers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbUsers.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbUsers.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
 		'
 		'lsd_LoadScreen
 		'

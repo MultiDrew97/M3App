@@ -8,14 +8,14 @@
     <Setting Name="DefaultFont" Type="System.Drawing.Font" Scope="Application">
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
-    <Setting Name="DefaultUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://localhost:3000/api</Value>
+    <Setting Name="BaseUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://sppbc.herbivore.site/api</Value>
     </Setting>
-    <Setting Name="DefaultPassword" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">password</Value>
+    <Setting Name="ApiPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G</Value>
     </Setting>
-    <Setting Name="DefaultUsername" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">username</Value>
+    <Setting Name="ApiUsername" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Preachy2034</Value>
     </Setting>
     <Setting Name="UpgradeRequired" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -24,16 +24,19 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Username" Roaming="true" Type="System.String" Scope="User">
-      <Value Profile="(Default)">arandlemiller97</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Password" Roaming="true" Type="System.String" Scope="User">
-      <Value Profile="(Default)">JasmineLove2697</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="KeepLoggedIn" Roaming="true" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CountTemplate" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Count: {0}</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

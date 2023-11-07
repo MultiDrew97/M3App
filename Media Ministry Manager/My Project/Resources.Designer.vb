@@ -94,7 +94,7 @@ Namespace My.Resources
         '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         '''&lt;html&gt;
         '''&lt;head&gt;
-        '''&lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot;
+        '''&lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;
         '''&lt;/head&gt;
         '''&lt;body&gt;
         '''
@@ -121,7 +121,7 @@ Namespace My.Resources
         '''  Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         '''&lt;html&gt;
         '''&lt;head&gt;
-        '''&lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot;
+        '''&lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;
         '''&lt;/head&gt;
         '''&lt;body&gt;
         '''

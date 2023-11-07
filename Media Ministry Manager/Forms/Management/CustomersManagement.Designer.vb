@@ -292,9 +292,9 @@ Partial Class CustomersManagement
 		'
 		'dbCustomers
 		'
-		Me.dbCustomers.BaseUrl = MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbCustomers.Password = MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbCustomers.Username = MediaMinistry.My.MySettings.Default.DefaultUsername
+		Me.dbCustomers.BaseUrl = MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbCustomers.Password = MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbCustomers.Username = MediaMinistry.My.MySettings.Default.ApiUsername
 		'
 		'CustomersManagement
 		'

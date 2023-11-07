@@ -98,10 +98,10 @@ Public Class LogOnForm
 			lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.")
 			lf_Login.ClearPassword()
 			lf_Login.Focus("p")
-			'Catch
-			'	lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
-			'	lf_Login.ClearPassword()
-			'	lf_Login.Focus("p")
+		Catch
+			lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
+			lf_Login.ClearPassword()
+			lf_Login.Focus("p")
 		Finally
 			RaiseEvent EndLogin()
 		End Try

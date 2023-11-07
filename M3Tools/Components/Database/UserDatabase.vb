@@ -71,7 +71,12 @@ Namespace Database
 		End Sub
 
 		Public Function Login(username As String, password As String) As User
+			'Return Login($"{{username: '{username}', password: '{password.ToBase64String()}'}}")
 			Return Login(New Auth(username, password))
+		End Function
+
+		Public Function Login(auth As String) As User
+			Return dbConnection.Consume(Of User)(Method.Post, $"/{path}/login", auth).Result
 		End Function
 
 		''' <summary>

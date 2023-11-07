@@ -78,28 +78,28 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:3000/api")>  _
-        Public ReadOnly Property DefaultUrl() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("https://sppbc.herbivore.site/api")>  _
+        Public ReadOnly Property BaseUrl() As String
             Get
-                Return CType(Me("DefaultUrl"),String)
+                Return CType(Me("BaseUrl"),String)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("password")>  _
-        Public ReadOnly Property DefaultPassword() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G")>  _
+        Public ReadOnly Property ApiPassword() As String
             Get
-                Return CType(Me("DefaultPassword"),String)
+                Return CType(Me("ApiPassword"),String)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("username")>  _
-        Public ReadOnly Property DefaultUsername() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Preachy2034")>  _
+        Public ReadOnly Property ApiUsername() As String
             Get
-                Return CType(Me("DefaultUsername"),String)
+                Return CType(Me("ApiUsername"),String)
             End Get
         End Property
         
@@ -130,7 +130,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("arandlemiller97"),  _
+         Global.System.Configuration.DefaultSettingValueAttribute(""),  _
          Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
         Public Property Username() As String
             Get
@@ -143,7 +143,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("JasmineLove2697"),  _
+         Global.System.Configuration.DefaultSettingValueAttribute(""),  _
          Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
         Public Property Password() As String
             Get
@@ -156,7 +156,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True"),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False"),  _
          Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
         Public Property KeepLoggedIn() As Boolean
             Get
@@ -174,6 +174,18 @@ Namespace My
             Get
                 Return CType(Me("CountTemplate"),String)
             End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Setting() As String
+            Get
+                Return CType(Me("Setting"),String)
+            End Get
+            Set
+                Me("Setting") = value
+            End Set
         End Property
     End Class
 End Namespace

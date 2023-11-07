@@ -127,21 +127,21 @@ Partial Class MainForm
 		'
 		'dbCustomer
 		'
-		Me.dbCustomer.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbCustomer.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbCustomer.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		Me.dbCustomer.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbCustomer.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbCustomer.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
 		'
 		'dbListener
 		'
-		Me.dbListener.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbListener.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbListener.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		Me.dbListener.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbListener.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbListener.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
 		'
 		'dbInventory
 		'
-		Me.dbInventory.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbInventory.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbInventory.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		Me.dbInventory.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbInventory.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbInventory.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
 		'
 		'MainForm
 		'

@@ -61,9 +61,9 @@ Partial Class ListenersManagement
 		'
 		'dbListeners
 		'
-		Me.dbListeners.BaseUrl = Global.MediaMinistry.My.MySettings.Default.DefaultUrl
-		Me.dbListeners.Password = Global.MediaMinistry.My.MySettings.Default.DefaultPassword
-		Me.dbListeners.Username = Global.MediaMinistry.My.MySettings.Default.DefaultUsername
+		Me.dbListeners.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbListeners.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbListeners.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
 		'
 		'gd_Drive
 		'
