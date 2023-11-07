@@ -17,14 +17,19 @@ Namespace My
 		Protected Overrides Function OnInitialize(commandLineArgs As ReadOnlyCollection(Of String)) As Boolean
 			'Me.MinimumSplashScreenDisplayTime = 5000
 
+			' TODO: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
+#If DEBUG Then
+			Settings.BaseUrl = "http://localhost:3000/api"
+			Settings.ApiPassword = "password"
+			Settings.ApiUsername = "username"
+#End If
+
 			' Bring in the settings from previous version
 			If Settings.UpgradeRequired Then
 				Console.WriteLine("Upgrade required")
 				Settings.Upgrade()
 				Settings.UpgradeRequired = False
 				Settings.Save()
-			Else
-				Console.WriteLine("No upgrade required")
 			End If
 
 			' TODO: May have to figure out a way to transfer Google API tokens

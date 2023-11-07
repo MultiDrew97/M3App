@@ -76,31 +76,40 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("https://sppbc.herbivore.site/api")>  _
-        Public ReadOnly Property BaseUrl() As String
+        Public Property BaseUrl() As String
             Get
                 Return CType(Me("BaseUrl"),String)
             End Get
+            Set
+                Me("BaseUrl") = value
+            End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G")>  _
-        Public ReadOnly Property ApiPassword() As String
+        Public Property ApiPassword() As String
             Get
                 Return CType(Me("ApiPassword"),String)
             End Get
+            Set
+                Me("ApiPassword") = value
+            End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Preachy2034")>  _
-        Public ReadOnly Property ApiUsername() As String
+        Public Property ApiUsername() As String
             Get
                 Return CType(Me("ApiUsername"),String)
             End Get
+            Set
+                Me("ApiUsername") = value
+            End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
