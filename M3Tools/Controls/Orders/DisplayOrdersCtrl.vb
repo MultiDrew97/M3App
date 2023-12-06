@@ -67,7 +67,7 @@ Public Class DisplayOrdersCtrl
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)
 			e.Cancel = True
-			Return
+			Exit Sub
 		End Try
 		_orders.Clear()
 

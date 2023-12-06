@@ -64,14 +64,10 @@ Namespace Database
 				End Using
 			End If
 
-			'Using res = 
 			VerifyResponse(CType(req.GetResponseAsync().Result, Net.HttpWebResponse))
-
-			'End Using
 		End Sub
 
 		Friend Function Consume(Of T)(method As Method, path As String, Optional payload As String = Nothing) As Task(Of T)
-			Console.WriteLine(payload)
 			Return Me.Consume(Of T)(method, path, If(Not String.IsNullOrWhiteSpace(payload), Text.Encoding.UTF8.GetBytes(payload), Nothing))
 		End Function
 
@@ -82,7 +78,6 @@ Namespace Database
 			req.Method = method.ToString.ToUpper
 			req.Accept = "application/json"
 			req.Headers.Add(Net.HttpRequestHeader.Authorization, $"Basic {Auth}")
-			Console.WriteLine(req.Headers.GetValues("Authorization"))
 
 			If payload IsNot Nothing Then
 				req.ContentType = "application/json"

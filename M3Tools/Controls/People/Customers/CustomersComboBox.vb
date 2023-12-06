@@ -46,8 +46,6 @@ Public Class CustomersComboBox
 
 	Private Sub LoadItems(sender As Object, e As DoWorkEventArgs) Handles bw_LoadItems.DoWork
 		RaiseEvent LoadBegin()
-		'Dim items = db_Products.GetProducts()
-		'_items.Clear()
 		Try
 			bsCustomers.Clear()
 		Catch
@@ -55,12 +53,7 @@ Public Class CustomersComboBox
 		End Try
 
 		For Each customer In db_Customers.GetCustomers
-			'Dim var As DataTables.ItemsDataRow = CType(CType(bsItems.AddNew(), DataRowView).Row, DataTables.ItemsDataRow)
-			'var.ItemArray = {item.Id, item.Name, item.Stock, item.Price, item.Available}
-			'Console.WriteLine(var.ItemArray)
 			bsCustomers.Add(customer)
-			'bsItems.Add(DataTables.ItemsDataRow())
-			'_items.AddItemsRow(item.Id, item.Name, item.Stock, item.Price, item.Available)
 		Next
 	End Sub
 
@@ -69,10 +62,6 @@ Public Class CustomersComboBox
 	End Sub
 
 	Private Sub ItemsLoaded(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_LoadItems.RunWorkerCompleted
-		'cbx_Items.DataSource = bsItems
-		'cbx_Items.DisplayMember = "ItemName"
-		'cbx_Items.ValueMember = "ItemID"
-		'cbx_Items.Refresh()
 		bsCustomers.ResetBindings(False)
 		RaiseEvent LoadEnd()
 	End Sub

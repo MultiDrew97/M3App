@@ -23,12 +23,8 @@ Namespace Database
 		Public Property Password As String
 			Get
 				Return dbConnection.Password
-				'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
 			End Get
 			Set(value As String)
-				'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
-				'Console.WriteLine(temp)
-				'__connectionString.Password = temp
 				dbConnection.Password = value
 			End Set
 		End Property
@@ -47,15 +43,14 @@ Namespace Database
 		End Property
 
 		Public Sub CreateUser(fName As String, lName As String, email As String, username As String, password As String, Optional role As AccountRole = AccountRole.User)
-			' FIXME: Revert to working order when finished with debugging
 			CreateUser(New User With {
 				.FirstName = fName,
 				.LastName = lName,
 				.Email = email,
-				.Login = New Auth(username) With {
+				.Login = New Auth(username, password) With {
 					.Role = role
 				}
-			}) '.Password = Text.Encoding.UTF8.GetBytes(password),
+			})
 		End Sub
 
 		Public Sub CreateUser(user As User)

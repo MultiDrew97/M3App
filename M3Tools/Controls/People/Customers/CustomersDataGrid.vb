@@ -158,7 +158,7 @@ Public Class CustomersDataGrid
 				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
-				Exit Sub
+				Continue For
 			End Try
 		Next
 

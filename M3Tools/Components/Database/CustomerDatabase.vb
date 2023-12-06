@@ -25,12 +25,8 @@ Namespace Database
 		Public Property Password As String
 			Get
 				Return dbConnection.Password
-				'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
 			End Get
 			Set(value As String)
-				'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
-				'Console.WriteLine(temp)
-				'__connectionString.Password = temp
 				dbConnection.Password = value
 			End Set
 		End Property
