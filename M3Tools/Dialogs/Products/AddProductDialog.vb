@@ -5,12 +5,12 @@ Namespace Dialogs
 
 		Public ReadOnly Property Item As Types.Item
 
-		Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+		Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Next.Click
 			Me.DialogResult = System.Windows.Forms.DialogResult.OK
 			Me.Close()
 		End Sub
 
-		Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+		Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Cancel.Click
 			Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
 			Me.Close()
 		End Sub
