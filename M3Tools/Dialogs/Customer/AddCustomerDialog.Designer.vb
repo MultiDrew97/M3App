@@ -32,14 +32,14 @@
             Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
             Me.tc_Creation = New System.Windows.Forms.TabControl()
             Me.tp_Basic = New System.Windows.Forms.TabPage()
+            Me.tp_Address = New System.Windows.Forms.TabPage()
+            Me.tp_Summary = New System.Windows.Forms.TabPage()
+            Me.pg_Summary = New System.Windows.Forms.PropertyGrid()
             Me.gi_FirstName = New SPPBC.M3Tools.GenericInputPair()
             Me.gi_LastName = New SPPBC.M3Tools.GenericInputPair()
             Me.pn_PhoneNumber = New SPPBC.M3Tools.PhoneNumberField()
             Me.gi_EmailAddress = New SPPBC.M3Tools.GenericInputPair()
-            Me.tp_Address = New System.Windows.Forms.TabPage()
             Me.af_Address = New SPPBC.M3Tools.AddressField()
-            Me.tp_Summary = New System.Windows.Forms.TabPage()
-            Me.pg_Summary = New System.Windows.Forms.PropertyGrid()
             Me.TableLayoutPanel1.SuspendLayout()
             CType(Me.ep_InputError, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.StatusStrip1.SuspendLayout()
@@ -129,6 +129,41 @@
             Me.tp_Basic.TabIndex = 0
             Me.tp_Basic.Text = "Basics"
             '
+            'tp_Address
+            '
+            Me.tp_Address.Controls.Add(Me.af_Address)
+            Me.tp_Address.Location = New System.Drawing.Point(4, 22)
+            Me.tp_Address.Name = "tp_Address"
+            Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
+            Me.tp_Address.Size = New System.Drawing.Size(587, 278)
+            Me.tp_Address.TabIndex = 1
+            Me.tp_Address.Text = "Address"
+            Me.tp_Address.UseVisualStyleBackColor = True
+            '
+            'tp_Summary
+            '
+            Me.tp_Summary.Controls.Add(Me.pg_Summary)
+            Me.tp_Summary.Location = New System.Drawing.Point(4, 22)
+            Me.tp_Summary.Name = "tp_Summary"
+            Me.tp_Summary.Padding = New System.Windows.Forms.Padding(3)
+            Me.tp_Summary.Size = New System.Drawing.Size(587, 278)
+            Me.tp_Summary.TabIndex = 2
+            Me.tp_Summary.Text = "Summary"
+            Me.tp_Summary.UseVisualStyleBackColor = True
+            '
+            'pg_Summary
+            '
+            Me.pg_Summary.CanShowVisualStyleGlyphs = False
+            Me.pg_Summary.CommandsVisibleIfAvailable = False
+            Me.pg_Summary.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.pg_Summary.Enabled = False
+            Me.pg_Summary.HelpVisible = False
+            Me.pg_Summary.Location = New System.Drawing.Point(3, 3)
+            Me.pg_Summary.Name = "pg_Summary"
+            Me.pg_Summary.Size = New System.Drawing.Size(581, 272)
+            Me.pg_Summary.TabIndex = 0
+            Me.pg_Summary.ToolbarVisible = False
+            '
             'gi_FirstName
             '
             Me.gi_FirstName.AutoSize = True
@@ -164,7 +199,6 @@
             Me.pn_PhoneNumber.MaximumSize = New System.Drawing.Size(0, 50)
             Me.pn_PhoneNumber.MinimumSize = New System.Drawing.Size(100, 50)
             Me.pn_PhoneNumber.Name = "pn_PhoneNumber"
-            Me.pn_PhoneNumber.PhoneNumber = ""
             Me.pn_PhoneNumber.Size = New System.Drawing.Size(100, 50)
             Me.pn_PhoneNumber.TabIndex = 3
             '
@@ -180,17 +214,6 @@
             Me.gi_EmailAddress.Size = New System.Drawing.Size(258, 40)
             Me.gi_EmailAddress.TabIndex = 4
             Me.gi_EmailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-            '
-            'tp_Address
-            '
-            Me.tp_Address.Controls.Add(Me.af_Address)
-            Me.tp_Address.Location = New System.Drawing.Point(4, 22)
-            Me.tp_Address.Name = "tp_Address"
-            Me.tp_Address.Padding = New System.Windows.Forms.Padding(3)
-            Me.tp_Address.Size = New System.Drawing.Size(587, 278)
-            Me.tp_Address.TabIndex = 1
-            Me.tp_Address.Text = "Address"
-            Me.tp_Address.UseVisualStyleBackColor = True
             '
             'af_Address
             '
@@ -209,26 +232,6 @@
             Me.af_Address.Street = ""
             Me.af_Address.TabIndex = 5
             Me.af_Address.ZipCode = ""
-            '
-            'tp_Summary
-            '
-            Me.tp_Summary.Controls.Add(Me.pg_Summary)
-            Me.tp_Summary.Location = New System.Drawing.Point(4, 22)
-            Me.tp_Summary.Name = "tp_Summary"
-            Me.tp_Summary.Padding = New System.Windows.Forms.Padding(3)
-            Me.tp_Summary.Size = New System.Drawing.Size(587, 278)
-            Me.tp_Summary.TabIndex = 2
-            Me.tp_Summary.Text = "Summary"
-            Me.tp_Summary.UseVisualStyleBackColor = True
-            '
-            'pg_Summary
-            '
-            Me.pg_Summary.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.pg_Summary.Enabled = False
-            Me.pg_Summary.Location = New System.Drawing.Point(3, 3)
-            Me.pg_Summary.Name = "pg_Summary"
-            Me.pg_Summary.Size = New System.Drawing.Size(581, 272)
-            Me.pg_Summary.TabIndex = 0
             '
             'AddCustomerDialog
             '

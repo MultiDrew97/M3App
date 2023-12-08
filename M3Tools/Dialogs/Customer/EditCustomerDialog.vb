@@ -45,10 +45,10 @@ Namespace Dialogs
 
 		Public Property Phone As String
 			Get
-				Return PhoneNumberField1.PhoneNumber
+				Return PhoneNumberField1.Text
 			End Get
 			Set(value As String)
-				PhoneNumberField1.PhoneNumber = value
+				PhoneNumberField1.Text = value
 			End Set
 		End Property
 		Public Property Email As String

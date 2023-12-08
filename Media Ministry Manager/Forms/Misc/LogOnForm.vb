@@ -92,13 +92,13 @@ Public Class LogOnForm
 			lf_Login.Focus()
 		Catch password As PasswordException
 			lf_Login.ClearPassword()
-			lf_Login.Focus("p")
 			lsd_LoadScreen.ShowError("Incorrect password. Please try again or reset your password")
+			lf_Login.Focus("p")
 		Catch database As DatabaseException
 			lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.")
 			lf_Login.ClearPassword()
 			lf_Login.Focus("p")
-		Catch
+		Catch ex As Exception
 			lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
 			lf_Login.ClearPassword()
 			lf_Login.Focus("p")

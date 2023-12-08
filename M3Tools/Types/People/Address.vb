@@ -2,15 +2,20 @@
 Namespace Types
 	Public Class Address
 
+		<ComponentModel.Browsable(True)>
+		<ComponentModel.Category("Contact")>
 		<Text.Json.Serialization.JsonPropertyName("street")>
 		Public Property Street As String
 
+		<ComponentModel.Category("Contact")>
 		<Text.Json.Serialization.JsonPropertyName("city")>
 		Public Property City As String
 
+		<ComponentModel.Category("Contact")>
 		<Text.Json.Serialization.JsonPropertyName("state")>
 		Public Property State As String
 
+		<ComponentModel.Category("Contact")>
 		<Text.Json.Serialization.JsonPropertyName("zipCode")>
 		Public Property ZipCode As String
 

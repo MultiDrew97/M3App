@@ -1,9 +1,9 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 Imports SPPBC.M3Tools.Types
 Imports SPPBC.M3Tools.Events.Customers
+
 ' TODO: Cleanup this dialog box
 Namespace Dialogs
 	Public Class AddCustomerDialog
@@ -36,10 +36,7 @@ Namespace Dialogs
 
 		Private ReadOnly Property Phone As String
 			Get
-				Dim phoneArr = pn_PhoneNumber.PhoneNumber.Where(Function(currentChar As Char) As Boolean
-																	Return Not Regex.IsMatch(currentChar, "[\s()-]")
-																End Function)
-				Return String.Join("", phoneArr)
+				Return pn_PhoneNumber.Text
 			End Get
 		End Property
 
@@ -162,7 +159,8 @@ Namespace Dialogs
 				''		- City: Customer City
 				''		- State: Customer State
 				''		- Zip Code: Customer Zip Code
-				pg_Summary.SelectedObject = CustomerDisplay
+				pg_Summary.SelectedObject = Customer
+				pg_Summary.ExpandAllGridItems()
 			End If
 		End Sub
 

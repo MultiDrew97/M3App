@@ -102,7 +102,7 @@
             Me.PhoneNumberField1.MaximumSize = New System.Drawing.Size(0, 50)
             Me.PhoneNumberField1.MinimumSize = New System.Drawing.Size(100, 50)
             Me.PhoneNumberField1.Name = "PhoneNumberField1"
-            Me.PhoneNumberField1.PhoneNumber = ""
+            Me.PhoneNumberField1.Text = ""
             Me.PhoneNumberField1.Size = New System.Drawing.Size(229, 50)
             Me.PhoneNumberField1.TabIndex = 2
             '

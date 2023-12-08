@@ -4,12 +4,15 @@ Namespace Types
 		Inherits DbEntry
 		Private __email As MimeKit.MailboxAddress
 
+		<ComponentModel.Category("Basics")>
 		<Text.Json.Serialization.JsonPropertyName("firstName")>
 		Public Property FirstName As String
 
+		<ComponentModel.Category("Basics")>
 		<Text.Json.Serialization.JsonPropertyName("lastName")>
 		Public Property LastName As String
 
+		<ComponentModel.Category("Contact")>
 		<Text.Json.Serialization.JsonPropertyName("email")>
 		Public Property Email As String
 			Get
@@ -20,6 +23,7 @@ Namespace Types
 			End Set
 		End Property
 
+		<ComponentModel.Browsable(False)>
 		<Text.Json.Serialization.JsonPropertyName("name")>
 		Public Property Name As String
 			Get

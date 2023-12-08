@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 
 Public Class PhoneNumberField
-	Public Property PhoneNumber As String
+	Public Overrides Property Text As String
 		Get
 			Return txt_PhoneNumber.Text
 		End Get
@@ -17,9 +17,9 @@ Public Class PhoneNumberField
 	End Property
 
 	Private Function ValidatePhone() As Boolean
-		If Not (String.IsNullOrWhiteSpace(PhoneNumber) OrElse Regex.IsMatch(PhoneNumber, "\d{7,10}") OrElse Regex.IsMatch(PhoneNumber, My.Resources.PhoneRegex)) Then
+		If Not (String.IsNullOrWhiteSpace(Text) OrElse Regex.IsMatch(Text, "\d{7,10}") OrElse Not txt_PhoneNumber.MaskCompleted) Then
 			'  Set error provider for phone number control
-			ep_InvalidPhone.SetError(txt_PhoneNumber, "Either a valid number or no number is required")
+			ep_InvalidPhone.SetError(txt_PhoneNumber, "Invalid phone number")
 			Return False
 		End If
 
