@@ -26,7 +26,7 @@ Namespace Types
 		End Property
 
 		<Text.Json.Serialization.JsonConstructor>
-		Public Sub New(Optional street As String = "123 Main St", Optional city As String = "City", Optional state As String = "ST", Optional zipCode As String = "12345")
+		Public Sub New(Optional street As String = Nothing, Optional city As String = Nothing, Optional state As String = Nothing, Optional zipCode As String = Nothing)
 			Me.Street = street
 			Me.City = city
 			Me.State = state

@@ -146,22 +146,7 @@ Namespace Dialogs
 		Private Sub PageChanged(sender As Object, e As EventArgs) Handles Me.PageChangedEvent, tc_Creation.SelectedIndexChanged
 			btn_Cancel.Text = If(tc_Creation.SelectedIndex <= tp_Basic.TabIndex, "Cancel", "Back")
 			btn_Create.Text = If(tc_Creation.SelectedIndex >= tp_Summary.TabIndex, "Create", "Next")
-
-			If tc_Creation.SelectedIndex = tp_Summary.TabIndex Then
-				' TODO: Create custom summary page for this. No controls provide desired look and feel
-
-				'' Summary
-				''	* Basics
-				''		- Name:	Customer Name
-				''		- Email: Customer Email
-				'' * Address
-				''		- Street: Customer Street Address
-				''		- City: Customer City
-				''		- State: Customer State
-				''		- Zip Code: Customer Zip Code
-				pg_Summary.SelectedObject = Customer
-				pg_Summary.ExpandAllGridItems()
-			End If
+			sc_Summary.Display = If(tc_Creation.SelectedIndex = tp_Summary.TabIndex, Customer, Nothing)
 		End Sub
 
 		Private Class DisplayCustomer
