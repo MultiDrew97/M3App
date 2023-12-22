@@ -72,7 +72,7 @@ Namespace Database
 		End Function
 
 		Private Function Consume(Of T)(method As Method, path As String, Optional payload As Byte() = Nothing) As Task(Of T)
-			Dim req As Net.HttpWebRequest ', res As Net.HttpWebResponse
+			Dim req As Net.HttpWebRequest
 
 			req = CType(Net.WebRequest.Create(BaseUrl + path), Net.HttpWebRequest)
 			req.Method = method.ToString.ToUpper

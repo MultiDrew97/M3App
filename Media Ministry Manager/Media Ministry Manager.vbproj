@@ -331,6 +331,9 @@
     <EmbeddedResource Include="Forms\Management\CustomersManagement.resx">
       <DependentUpon>CustomersManagement.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Management\InventoryManagement.resx">
+      <DependentUpon>InventoryManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Management\ListenersManagement.resx">
       <DependentUpon>ListenersManagement.vb</DependentUpon>
     </EmbeddedResource>

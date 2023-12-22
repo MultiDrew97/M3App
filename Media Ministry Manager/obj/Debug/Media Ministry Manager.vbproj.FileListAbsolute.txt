@@ -232,6 +232,7 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMi
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.NewUserDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SendEmailsDialog.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.CustomersManagement.resources
+D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.InventoryManagement.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ListenersManagement.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.LogOnForm.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SettingsForm.resources

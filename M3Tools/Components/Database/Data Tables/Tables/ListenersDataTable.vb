@@ -1,6 +1,7 @@
 ﻿Namespace DataTables
-    <Serializable>
-    Public Class ListenersDataTable
+	<Serializable>
+	<Obsolete("No longer needed. Use ListenersDataGrid Component instead for designer and DBEntryCollection in Types namespace for collections.")>
+	Public Class ListenersDataTable
         Inherits TypedTableBase(Of ListenersDataRow)
 
         Public Delegate Sub ListenersDataRowChangeEventHandler(ByVal sender As Object, ByVal e As ListenersRowChangeEvent)

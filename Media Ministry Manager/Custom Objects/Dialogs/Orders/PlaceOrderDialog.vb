@@ -7,7 +7,7 @@ Public Class PlaceOrderDialog
     Private CustomersTable As DataTable
 	Private ReadOnly Customers As ObjectModel.Collection(Of Customer)
 	Private ProductsTable As DataTable
-	Private ReadOnly Products As ObjectModel.Collection(Of Item)
+	Private ReadOnly Products As ObjectModel.Collection(Of Product)
 
 	Private Sub Frm_PlaceOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadData()
@@ -64,7 +64,7 @@ Public Class PlaceOrderDialog
             CustomersTable.Rows.Add(row)
         Next
 
-        For Each product As Item In Products
+        For Each product As Product In Products
             row = ProductsTable.NewRow
             row("ProductID") = product.Id
             row("Name") = product.Name

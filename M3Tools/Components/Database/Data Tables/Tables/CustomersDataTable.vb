@@ -1,8 +1,6 @@
-﻿Imports System.Text.RegularExpressions
-Imports SPPBC.M3Tools.Types
-
-Namespace DataTables
+﻿Namespace DataTables
 	<Serializable>
+	<Obsolete("No longer needed. Use CustomersDataGrid Component instead for designer and DBEntryCollection in Types namespace for collections.")>
 	Public Class CustomersDataTable
 		Inherits TypedTableBase(Of CustomersDataRow)
 
@@ -140,53 +138,15 @@ Namespace DataTables
 							customer.PhoneNumber, customer.Email, customer.Joined)
 		End Sub
 
-		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As Address, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
+		Private Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
+			Return AddCustomersRow(CustomerID, FirstName, LastName, New Types.Address(Street, City, State, ZipCode), PhoneNumber, Email, JoinDate)
+		End Function
+
+		Public Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Address As Types.Address, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
 			Dim CustomersDataRow As CustomersDataRow = CType(Me.NewRow, CustomersDataRow)
 			CustomersDataRow.ItemArray = {CustomerID, FirstName, LastName, Address, PhoneNumber.FormatPhone, Email, JoinDate}
 			Me.Rows.Add(CustomersDataRow)
 			Return CustomersDataRow
-		End Function
-
-		Private Function AddCustomersRow(CustomerID As Integer, FirstName As String, LastName As String, Street As String, City As String, State As String, ZipCode As String, PhoneNumber As String, Email As String, JoinDate As Date) As CustomersDataRow
-			Return AddCustomersRow(CustomerID, FirstName, LastName, New Address(Street, City, State, ZipCode), PhoneNumber, Email, JoinDate)
-		End Function
-
-		Private Function ParseDate(value As Date) As Object
-			If value.Year < 1950 Then
-				Return Nothing
-			End If
-
-			Return value
-		End Function
-
-		Private Function ParsePhone(value As String) As Object
-			Dim phoneInt As Long = Nothing
-			If value Is Nothing Then
-				Return Nothing
-			End If
-
-			Dim filteredPhone = value.Where(Function(currentChar As Char) As Boolean
-												Return Not Regex.IsMatch(currentChar, "[\s()-]")
-											End Function)
-
-			Dim phoneStr = String.Join("", filteredPhone)
-
-			If phoneStr.Length > 10 Then
-				phoneStr.Remove(10)
-			End If
-
-			Try
-				phoneInt = Long.Parse(phoneStr)
-			Catch ex As Exception
-				Return Nothing
-			End Try
-
-			Dim result As Object = Nothing
-			If Not (phoneInt > 999999999 AndAlso phoneInt <= 9999999999) Then
-				Return Nothing
-			End If
-
-			Return phoneInt
 		End Function
 
 		Public Function FindByID(ByVal ID As Integer) As CustomersDataRow
@@ -222,14 +182,6 @@ Namespace DataTables
 			MyBase.Columns.Add(Me.LastName)
 			Me.Address = New DataColumn("Address", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Address)
-			'Me.Street = New DataColumn("Street", GetType(String), Nothing, MappingType.Element)
-			'         MyBase.Columns.Add(Me.Street)
-			'         Me.City = New DataColumn("City", GetType(String), Nothing, MappingType.Element)
-			'         MyBase.Columns.Add(Me.City)
-			'         Me.State = New DataColumn("State", GetType(String), Nothing, MappingType.Element)
-			'         MyBase.Columns.Add(Me.State)
-			'         Me.ZipCode = New DataColumn("ZipCode", GetType(String), Nothing, MappingType.Element)
-			'         MyBase.Columns.Add(Me.ZipCode)
 			Me.PhoneNumber = New DataColumn("PhoneNumber", GetType(String), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.PhoneNumber)
 			Me.Email = New DataColumn("Email", GetType(String), Nothing, MappingType.Element)
@@ -248,14 +200,6 @@ Namespace DataTables
 			Me.LastName.MaxLength = 50
 			Me.Address.AllowDBNull = True
 			Me.Address.MaxLength = 10000
-			'Me.Street.AllowDBNull = True
-			'         Me.Street.MaxLength = 50
-			'         Me.City.AllowDBNull = True
-			'         Me.City.MaxLength = 50
-			'         Me.State.AllowDBNull = True
-			'         Me.State.MaxLength = 50
-			'         Me.ZipCode.AllowDBNull = True
-			'         Me.ZipCode.MaxLength = 50
 			Me.PhoneNumber.MaxLength = 15
 			Me.PhoneNumber.AllowDBNull = False
 			Me.Email.AllowDBNull = True

@@ -23,7 +23,7 @@ Namespace Types
 			End Set
 		End Property
 
-		<ComponentModel.Browsable(False)>
+		'<ComponentModel.Browsable(False)>
 		<Text.Json.Serialization.JsonPropertyName("name")>
 		Public Property Name As String
 			Get

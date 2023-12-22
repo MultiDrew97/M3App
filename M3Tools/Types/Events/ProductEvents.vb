@@ -4,10 +4,10 @@
 	Public Class InventoryEventArgs
 		Inherits BaseArgs
 
-		Public Property Item As Types.Item
+		Public Property Product As Types.Product
 
-		Public Sub New(product As Types.Item, Optional eventType As EventType = Nothing)
-			Me.Item = product
+		Public Sub New(product As Types.Product, Optional eventType As EventType = Nothing)
+			Me.Product = product
 			Me.EventType = eventType
 		End Sub
 	End Class

@@ -62,7 +62,7 @@ Partial Class ProductsComboBox
 		'
 		'bsItems
 		'
-		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.Types.Item)
+		Me.bsItems.DataSource = GetType(SPPBC.M3Tools.Types.Product)
 		'
 		'lbl_Items
 		'

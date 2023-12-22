@@ -25,12 +25,8 @@ Namespace Database
 		Public Property Password As String
 			Get
 				Return dbConnection.Password
-				'Return If(__connectionString.Password <> String.Empty, __mask, String.Empty)
 			End Get
 			Set(value As String)
-				'Dim temp = If(value <> String.Empty And value <> __mask, value, My.Settings.DefaultPassword)
-				'Console.WriteLine(temp)
-				'__connectionString.Password = temp
 				dbConnection.Password = value
 			End Set
 		End Property
@@ -48,31 +44,31 @@ Namespace Database
 			End Set
 		End Property
 
-		Public Function GetItem(itemID As Integer) As Item
-			Return dbConnection.Consume(Of Item)(M3API.Method.Get, $"/{path}/{itemID}").Result
+		Public Function GetProduct(itemID As Integer) As Product
+			Return dbConnection.Consume(Of Product)(M3API.Method.Get, $"/{path}/{itemID}").Result
 		End Function
 
-		Public Function GetItems() As DBEntryCollection(Of Item)
-			Return dbConnection.Consume(Of DBEntryCollection(Of Item))(Method.Get, $"/{path}").Result
+		Public Function GetProducts() As DBEntryCollection(Of Product)
+			Return dbConnection.Consume(Of DBEntryCollection(Of Product))(Method.Get, $"/{path}").Result
 		End Function
 
-		Public Sub AddItem(itemName As String, stock As Integer, price As Double)
-			AddItem(New Item(-1, itemName, stock, price, True))
+		Public Sub AddProduct(itemName As String, stock As Integer, price As Double)
+			AddProduct(New Product(-1, itemName, stock, price, True))
 		End Sub
 
-		Public Sub AddItem(item As Item)
+		Public Sub AddProduct(item As Product)
 			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(item))
 		End Sub
 
-		Public Sub UpdateItem(itemID As Integer, itemName As String, stock As Integer, price As Double, available As Boolean)
-			UpdateItem(New Item(itemID, itemName, stock, price, available))
+		Public Sub UpdateProduct(itemID As Integer, itemName As String, stock As Integer, price As Double, available As Boolean)
+			UpdateProduct(New Product(itemID, itemName, stock, price, available))
 		End Sub
 
-		Public Sub UpdateItem(item As Item)
+		Public Sub UpdateProduct(item As Product)
 			dbConnection.Consume(Method.Put, $"/{path}/{item.Id}", JSON.ConvertToJSON(item))
 		End Sub
 
-		Public Sub RemoveItem(itemID As Integer)
+		Public Sub RemoveProduct(itemID As Integer)
 			dbConnection.Consume(Method.Put, $"/{path}/{itemID}")
 		End Sub
 

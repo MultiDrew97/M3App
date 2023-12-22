@@ -1,20 +1,20 @@
 ﻿Namespace DataTables
 	<Serializable>
-	Public Class ItemsDataTable
-		Inherits TypedTableBase(Of ItemsDataRow)
+	<Obsolete("No longer needed. Use ProductsDataGrid Component instead for designer and DBEntryCollection in Types namespace for collections.")>
+	Public Class ProductsDataTable
+		Inherits TypedTableBase(Of ProductsDataRow)
 
-		Public Delegate Sub ItemsDataRowChangeEventHandler(sender As Object, e As ItemsRowChangeEvent)
+		Public Delegate Sub ProductsDataRowChangeEventHandler(ByVal sender As Object, ByVal e As ProductsRowChangeEvent)
 
 		Private ItemID As DataColumn
-		Private ItemName As DataColumn
+		Private Name As DataColumn
 		Private Stock As DataColumn
 		Private Price As DataColumn
 		Private Available As DataColumn
 
-		<CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")>
 		Public Sub New()
 			MyBase.New
-			Me.TableName = "Items"
+			Me.TableName = "Products"
 			Me.BeginInit()
 			Me.InitClass()
 			Me.EndInit()
@@ -51,9 +51,9 @@
 			End Get
 		End Property
 
-		Public ReadOnly Property ItemNameColumn() As DataColumn
+		Public ReadOnly Property NameColumn() As DataColumn
 			Get
-				Return Me.ItemName
+				Return Me.Name
 			End Get
 		End Property
 
@@ -81,48 +81,71 @@
 			End Get
 		End Property
 
-		Default Public ReadOnly Property Item(index As Integer) As ItemsDataRow
+		Default Public ReadOnly Property Item(index As Integer) As ProductsDataRow
 			Get
-				Return CType(Me.Rows(index), ItemsDataRow)
+				Return CType(Me.Rows(index), ProductsDataRow)
 			End Get
 		End Property
 
-		Public Event ItemsDataRowChanging As ItemsDataRowChangeEventHandler
+		Public ReadOnly Property Products As Types.DBEntryCollection(Of Types.Product)
+			Get
+				Dim col As New Types.DBEntryCollection(Of Types.Product)
 
-		Public Event ItemsDataRowChanged As ItemsDataRowChangeEventHandler
+				For Each row As ProductsDataRow In Rows
+					col.Add(row.Product)
+				Next
 
-		Public Event ItemsDataRowDeleting As ItemsDataRowChangeEventHandler
+				Return col
+			End Get
+		End Property
 
-		Public Event ItemsDataRowDeleted As ItemsDataRowChangeEventHandler
+		Public Event ProductsDataRowChanging As ProductsDataRowChangeEventHandler
 
-		Public Sub AddItemsRow(ByVal row As ItemsDataRow)
-			AddItemsRow(CInt(row("ItemID")), CStr(row("ItemName")), CInt(row("Stock")), CDec(row("Price")), CBool(row("Available")))
+		Public Event ProductsDataRowChanged As ProductsDataRowChangeEventHandler
+
+		Public Event ProductsDataRowDeleting As ProductsDataRowChangeEventHandler
+
+		Public Event ProductsDataRowDeleted As ProductsDataRowChangeEventHandler
+
+		Public Sub AddRange(list As Types.DBEntryCollection(Of Types.Product))
+			For Each product In list
+				AddProductsRow(product)
+			Next
 		End Sub
 
-		Public Function AddItemsRow(ItemID As Integer, ItemName As String, Stock As Integer, Price As Double, Available As Boolean) As ItemsDataRow
-			Dim ItemsDataRow As ItemsDataRow = CType(Me.NewRow, ItemsDataRow)
-			ItemsDataRow.ItemArray = {ItemID, ItemName, Stock, Price, Available}
-			Me.Rows.Add(ItemsDataRow)
-			Return ItemsDataRow
+		Public Sub AddProductsRow(ByVal product As Types.Product)
+			AddProductsRow(product.Id, product.Name, product.Stock, product.Price, product.Available)
+		End Sub
+
+		Public Sub AddProductsRow(ByVal row As ProductsDataRow)
+			Throw New NotImplementedException("AddItemsRow(row)")
+			'AddItemsRow(CInt(row("ItemID")), CStr(row("Name")), CInt(row("Stock")), CDec(row("Price")), CBool(row("Available")))
+		End Sub
+
+		Public Function AddProductsRow(ItemID As Integer, Name As String, Stock As Integer, Price As Double, Available As Boolean) As ProductsDataRow
+			Dim ProductsDataRow As ProductsDataRow = CType(Me.NewRow, ProductsDataRow)
+			ProductsDataRow.ItemArray = {ItemID, Name, Stock, Price, Available}
+			Me.Rows.Add(ProductsDataRow)
+			Return ProductsDataRow
 		End Function
 
-		Public Function FindByID(ID As Integer) As ItemsDataRow
-			Return CType(Me.Rows.Find(New Object() {ID}), ItemsDataRow)
+		Public Function FindByID(ID As Integer) As ProductsDataRow
+			Return CType(Me.Rows.Find(New Object() {ID}), ProductsDataRow)
 		End Function
 
 		Public Overrides Function Clone() As DataTable
-			Dim cln As ItemsDataTable = CType(MyBase.Clone, ItemsDataTable)
+			Dim cln As ProductsDataTable = CType(MyBase.Clone, ProductsDataTable)
 			cln.InitVars()
 			Return cln
 		End Function
 
 		Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-			Return New ItemsDataTable()
+			Return New ProductsDataTable()
 		End Function
 
 		Friend Sub InitVars()
 			Me.ItemID = MyBase.Columns("OrderID")
-			Me.ItemName = MyBase.Columns("ItemName")
+			Me.Name = MyBase.Columns("Name")
 			Me.Stock = MyBase.Columns("Stock")
 			Me.Price = MyBase.Columns("Price")
 			Me.Available = MyBase.Columns("Available")
@@ -131,8 +154,8 @@
 		Private Sub InitClass()
 			Me.ItemID = New DataColumn("ItemID", GetType(Integer), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.ItemID)
-			Me.ItemName = New DataColumn("ItemName", GetType(String), Nothing, MappingType.Element)
-			MyBase.Columns.Add(Me.ItemName)
+			Me.Name = New DataColumn("Name", GetType(String), Nothing, MappingType.Element)
+			MyBase.Columns.Add(Me.Name)
 			Me.Stock = New DataColumn("Stock", GetType(Integer), Nothing, MappingType.Element)
 			MyBase.Columns.Add(Me.Stock)
 			Me.Price = New DataColumn("Price", GetType(Double), Nothing, MappingType.Element)
@@ -143,53 +166,53 @@
 			Me.ItemID.AllowDBNull = False
 			Me.ItemID.ReadOnly = True
 			Me.ItemID.Unique = True
-			Me.ItemName.AllowDBNull = False
-			Me.ItemName.MaxLength = 100
+			Me.Name.AllowDBNull = False
+			Me.Name.MaxLength = 100
 			Me.Stock.AllowDBNull = False
 			Me.Available.AllowDBNull = False
 		End Sub
 
-		Public Function NewItemsDataRow() As ItemsDataRow
-			Return CType(Me.NewRow, ItemsDataRow)
+		Public Function NewProductsDataRow() As ProductsDataRow
+			Return CType(Me.NewRow, ProductsDataRow)
 		End Function
 
 		Protected Overrides Function NewRowFromBuilder(builder As DataRowBuilder) As DataRow
-			Return New ItemsDataRow(builder)
+			Return New ProductsDataRow(builder)
 		End Function
 
 		Protected Overrides Function GetRowType() As Type
-			Return GetType(ItemsDataRow)
+			Return GetType(ProductsDataRow)
 		End Function
 
 		Protected Overrides Sub OnRowChanged(e As DataRowChangeEventArgs)
 			MyBase.OnRowChanged(e)
-			If ((Me.ItemsDataRowChangedEvent) IsNot Nothing) Then
-				RaiseEvent ItemsDataRowChanged(Me, New ItemsRowChangeEvent(CType(e.Row, ItemsDataRow), e.Action))
-			End If
+			'If ((Me.ProductsDataRowChanged) IsNot Nothing) Then
+			RaiseEvent ProductsDataRowChanged(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'End If
 		End Sub
 
 		Protected Overrides Sub OnRowChanging(e As DataRowChangeEventArgs)
 			MyBase.OnRowChanging(e)
-			If ((Me.ItemsDataRowChangingEvent) IsNot Nothing) Then
-				RaiseEvent ItemsDataRowChanging(Me, New ItemsRowChangeEvent(CType(e.Row, ItemsDataRow), e.Action))
-			End If
+			'If ((Me.ProductsDataRowChanging) IsNot Nothing) Then
+			RaiseEvent ProductsDataRowChanging(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'End If
 		End Sub
 
 		Protected Overrides Sub OnRowDeleted(e As DataRowChangeEventArgs)
 			MyBase.OnRowDeleted(e)
-			If ((Me.ItemsDataRowDeletedEvent) IsNot Nothing) Then
-				RaiseEvent ItemsDataRowDeleted(Me, New ItemsRowChangeEvent(CType(e.Row, ItemsDataRow), e.Action))
-			End If
+			'If ((Me.ProductsDataRowDeleted) IsNot Nothing) Then
+			RaiseEvent ProductsDataRowDeleted(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'End If
 		End Sub
 
 		Protected Overrides Sub OnRowDeleting(e As DataRowChangeEventArgs)
 			MyBase.OnRowDeleting(e)
-			If ((Me.ItemsDataRowDeletingEvent) IsNot Nothing) Then
-				RaiseEvent ItemsDataRowDeleting(Me, New ItemsRowChangeEvent(CType(e.Row, ItemsDataRow), e.Action))
-			End If
+			'If ((Me.ProductsDataRowDeleting) IsNot Nothing) Then
+			RaiseEvent ProductsDataRowDeleting(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'End If
 		End Sub
 
-		Public Sub RemoveItemsRow(row As ItemsDataRow)
+		Public Sub RemoveItemsRow(row As ProductsDataRow)
 			Me.Rows.Remove(row)
 		End Sub
 

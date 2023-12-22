@@ -2,7 +2,7 @@
 
 Namespace Types
 	Public MustInherit Class DbEntry
-		<ComponentModel.Category("Contact")>
+
 		<Text.Json.Serialization.JsonIgnore>
 		MustOverride Property Id As Integer
 

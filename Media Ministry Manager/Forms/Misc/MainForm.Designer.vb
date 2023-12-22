@@ -23,6 +23,7 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.btn_OrderManagement = New System.Windows.Forms.Button()
         Me.btn_ProductManagement = New System.Windows.Forms.Button()
@@ -53,7 +54,6 @@ Partial Class MainForm
         '
         'btn_ProductManagement
         '
-        Me.btn_ProductManagement.Enabled = False
         Me.btn_ProductManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_ProductManagement.Location = New System.Drawing.Point(24, 160)
         Me.btn_ProductManagement.Name = "btn_ProductManagement"
@@ -124,28 +124,39 @@ Partial Class MainForm
         Me.wb_Updater.TabIndex = 8
         Me.wb_Updater.Url = New System.Uri("", System.UriKind.Relative)
         Me.wb_Updater.Visible = False
-		'
-		'dbCustomer
-		'
-		Me.dbCustomer.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
-		Me.dbCustomer.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
-		Me.dbCustomer.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
-		'
-		'dbListener
-		'
-		Me.dbListener.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
-		Me.dbListener.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
-		Me.dbListener.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
-		'
-		'dbInventory
-		'
-		Me.dbInventory.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
-		Me.dbInventory.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
-		Me.dbInventory.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
-		'
-		'MainForm
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        '
+        'dbCustomer
+        '
+        MySettings1.ApiPassword = "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G"
+        MySettings1.ApiUsername = "Preachy2034"
+        MySettings1.BaseUrl = "https://sppbc.herbivore.site/api"
+        MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
+        MySettings1.KeepLoggedIn = False
+        MySettings1.Password = ""
+        MySettings1.Setting = ""
+        MySettings1.SettingsKey = ""
+        MySettings1.UpgradeRequired = True
+        MySettings1.User = Nothing
+        MySettings1.Username = ""
+        Me.dbCustomer.BaseUrl = MySettings1.BaseUrl
+        Me.dbCustomer.Password = MySettings1.ApiPassword
+        Me.dbCustomer.Username = MySettings1.ApiUsername
+        '
+        'dbListener
+        '
+        Me.dbListener.BaseUrl = MySettings1.BaseUrl
+        Me.dbListener.Password = MySettings1.ApiPassword
+        Me.dbListener.Username = MySettings1.ApiUsername
+        '
+        'dbInventory
+        '
+        Me.dbInventory.BaseUrl = MySettings1.BaseUrl
+        Me.dbInventory.Password = MySettings1.ApiPassword
+        Me.dbInventory.Username = MySettings1.ApiUsername
+        '
+        'MainForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(272, 322)

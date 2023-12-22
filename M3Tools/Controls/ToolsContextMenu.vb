@@ -4,7 +4,7 @@ Public Class ToolsContextMenu
 	Event RefreshView()
 	Event RemoveRows()
 	Event SendEmails()
-	Event EditPerson()
+	Event EditSelected()
 
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs) Handles ts_Remove.Click
 		Dim res = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -45,6 +45,6 @@ Public Class ToolsContextMenu
 	End Sub
 
 	Private Sub EditClicked(sender As Object, e As EventArgs) Handles ts_Edit.Click
-		RaiseEvent EditPerson()
+		RaiseEvent EditSelected()
 	End Sub
 End Class

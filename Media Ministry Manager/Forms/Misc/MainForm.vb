@@ -44,15 +44,23 @@ Public Class MainForm
 
 	Private Sub AddCustomer(sender As Object, e As Customers.CustomerEventArgs) Handles mms_Main.AddCustomer
 		dbCustomer.AddCustomer(e.Customer)
+		MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
 	End Sub
 
 	Private Sub AddListener(sender As Object, e As Listeners.ListenerEventArgs) Handles mms_Main.AddListener
 		dbListener.AddListener(e.Listener)
+		MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
 	End Sub
 
-	Private Sub AddCustomer(sender As Object, e As Inventory.InventoryEventArgs) Handles mms_Main.AddItem
-		dbInventory.AddItem(e.Item)
+	Private Sub AddCustomer(sender As Object, e As Inventory.InventoryEventArgs) Handles mms_Main.AddProduct
+		dbInventory.AddProduct(e.Product)
+		MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
 	End Sub
+
+	'Private Sub AddOrder(sender As Object, e As Orders.OrderEventArgs) Handles mms_Main.AddOrder
+	'	dbOrder.AddOrder(e.Order)
+	'	MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+	'End Sub
 
 	Private Sub ViewSettings() Handles mms_Main.ViewSettings
 		Dim settings As New SettingsForm()

@@ -1,22 +1,19 @@
-﻿Imports SPPBC.M3Tools.Events
-Imports SPPBC.M3Tools.Events.Customers
+﻿Imports SPPBC.M3Tools.Events.Inventory
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
-' TODO: Remove old dgc for remove and edit if customs continue to work out. keep until proven
-
-Public Class CustomersDataGrid
-	Public Event EditCustomer As CustomerEventHandler
-	Public Event RemoveCustomer As CustomerEventHandler
+Public Class InventoryDataGrid
+	Public Event EditProduct As InventoryEventHandler
+	Public Event RemoveProduct As InventoryEventHandler
 	Public Event RefreshDisplay()
 
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
-			Return SelectedCustomers.Count
+			Return SelectedProducts.Count
 		End Get
 	End Property
 
-	Public ReadOnly Property Customers As IList
+	Public ReadOnly Property Products As IList
 		Get
 			Return DataSource.List
 		End Get
@@ -24,22 +21,22 @@ Public Class CustomersDataGrid
 
 	Public Property DataSource As BindingSource
 		Get
-			Return CType(dgv_Customers.DataSource, BindingSource)
+			Return CType(dgv_Inventory.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
-			dgv_Customers.AutoGenerateColumns = False
-			dgv_Customers.DataSource = value
+			dgv_Inventory.AutoGenerateColumns = False
+			dgv_Inventory.DataSource = value
 		End Set
 	End Property
 
-	Public ReadOnly Property SelectedCustomers As IList
+	Public ReadOnly Property SelectedProducts As IList
 		Get
-			If CustomersSelectable Then
+			If ProductsSelectable Then
 				If chk_SelectAll.Checked Then
-					Return dgv_Customers.Rows
+					Return dgv_Inventory.Rows
 				End If
 
-				For Each row As DataGridViewRow In dgv_Customers.Rows
+				For Each row As DataGridViewRow In dgv_Inventory.Rows
 					If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
 						row.Selected = False
 						Continue For
@@ -49,7 +46,7 @@ Public Class CustomersDataGrid
 				Next
 			End If
 
-			Return dgv_Customers.SelectedRows
+			Return dgv_Inventory.SelectedRows
 		End Get
 	End Property
 
@@ -82,10 +79,10 @@ Public Class CustomersDataGrid
 	<DefaultValue(False)>
 	Property AllowAdding As Boolean
 		Get
-			Return dgv_Customers.AllowUserToAddRows
+			Return dgv_Inventory.AllowUserToAddRows
 		End Get
 		Set(value As Boolean)
-			dgv_Customers.AllowUserToAddRows = value
+			dgv_Inventory.AllowUserToAddRows = value
 		End Set
 	End Property
 
@@ -102,15 +99,15 @@ Public Class CustomersDataGrid
 	<DefaultValue(False)>
 	Property AllowColumnReordering As Boolean
 		Get
-			Return dgv_Customers.AllowUserToOrderColumns
+			Return dgv_Inventory.AllowUserToOrderColumns
 		End Get
 		Set(value As Boolean)
-			dgv_Customers.AllowUserToOrderColumns = value
+			dgv_Inventory.AllowUserToOrderColumns = value
 		End Set
 	End Property
 
 	<DefaultValue(True)>
-	Property CustomersSelectable As Boolean
+	Property ProductsSelectable As Boolean
 		Get
 			Return dgc_Selection.Visible
 		End Get
@@ -120,26 +117,26 @@ Public Class CustomersDataGrid
 		End Set
 	End Property
 
-	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Customers.CellContentClick
+	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Inventory.CellContentClick
 		If e.ColumnIndex <> dgc_Edit.Index AndAlso e.ColumnIndex <> dgc_Remove.Index Then
 			Return
 		End If
 
-		Dim row = dgv_Customers.Rows(e.RowIndex)
-		Dim customer = CType(row.DataBoundItem, Types.Customer)
+		Dim row = dgv_Inventory.Rows(e.RowIndex)
+		Dim product = CType(row.DataBoundItem, Types.Product)
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
-				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer))
+				RaiseEvent EditProduct(Me, New InventoryEventArgs(product))
 			Case dgc_Remove.DisplayIndex
-				DeleteCustomer(Me, New DataGridViewRowCancelEventArgs(row))
+				DeleteProduct(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
 
-	Private Sub DeleteCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
-		Dim customer = CType(e.Row.DataBoundItem, Types.Customer)
+	Private Sub DeleteProduct(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Inventory.UserDeletingRow
+		Dim product = CType(e.Row.DataBoundItem, Types.Product)
 
-		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer, EventType.Deleted))
+		RaiseEvent RemoveProduct(Me, New InventoryEventArgs(product))
 	End Sub
 
 	Public Sub RemoveSelectedRows() Handles cms_Tools.RemoveRows
@@ -147,14 +144,14 @@ Public Class CustomersDataGrid
 			Return
 		End If
 
-		Dim customer As Types.Customer
+		Dim product As Types.Product
 		Dim failed As Integer = 0
-		Dim total As Integer = dgv_Customers.SelectedRows.Count
+		Dim total As Integer = dgv_Inventory.SelectedRows.Count
 
-		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
+		For Each row As DataGridViewRow In dgv_Inventory.SelectedRows
 			Try
-				customer = CType(row.DataBoundItem, Types.Customer)
-				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
+				product = CType(row.DataBoundItem, Types.Product)
+				RaiseEvent RemoveProduct(Me, New InventoryEventArgs(product))
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
 				Continue For
@@ -162,19 +159,20 @@ Public Class CustomersDataGrid
 		Next
 
 		If failed > 0 Then
-			MessageBox.Show($"Failed to remove {failed} customer{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
+			MessageBox.Show($"Failed to remove {failed} product{If(failed > 1, "s", "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End If
 
 		If total - failed > 0 Then
-			MessageBox.Show($"Successfully removed {total - failed} customer{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show($"Successfully removed {total - failed} product{If(total - failed > 1, "s", "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
 	End Sub
 
-	Private Sub SelectAllCustomers(sender As Object, e As EventArgs) Handles chk_SelectAll.CheckedChanged
-		For Each row As DataGridViewRow In dgv_Customers.Rows
+	Private Sub SelectAllProducts(sender As Object, e As EventArgs) Handles chk_SelectAll.CheckedChanged
+		For Each row As DataGridViewRow In dgv_Inventory.Rows
 			row.Cells(dgc_Selection.DisplayIndex).Value = chk_SelectAll.Checked
 		Next
-		dgv_Customers.Invalidate()
+
+		dgv_Inventory.Invalidate()
 	End Sub
 
 	Private Sub ToolsOpened(sender As Object, e As EventArgs) Handles cms_Tools.Opened
@@ -187,7 +185,7 @@ Public Class CustomersDataGrid
 			Return
 		End If
 
-		For Each row As DataGridViewRow In SelectedCustomers
+		For Each row As DataGridViewRow In SelectedProducts
 			CellClicked(Me, New DataGridViewCellEventArgs(dgc_Edit.Index, row.Index))
 		Next
 	End Sub

@@ -57,22 +57,24 @@ Public Class CustomersManagement
 		End Using
 	End Sub
 
-	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.UpdateCustomer
-		'Dim res = CustomerDialogs.EditCustomer(e.Customer)
+	Private Sub UpdateCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.UpdateCustomer
 		UseWaitCursor = True
 		dbCustomers.UpdateCustomer(e.Customer.Id, e.Customer.FirstName, e.Customer.LastName, e.Customer.Address, e.Customer.PhoneNumber, e.Customer.Email)
+		MessageBox.Show($"Successfully updated customer", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
 	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.AddCustomer, mms_Main.AddCustomer
 		UseWaitCursor = True
 		dbCustomers.AddCustomer(e.Customer)
+		MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
 	Private Sub RemoveCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.RemoveCustomer
 		UseWaitCursor = True
 		dbCustomers.RemoveCustomer(e.Customer.Id)
+		MessageBox.Show($"Successfully removed customer", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 

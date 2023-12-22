@@ -183,7 +183,7 @@ Public Class ListenersDataGrid
 		cms_Tools.ToggleEdit(SelectedRowsCount > 0)
 	End Sub
 
-	Private Sub EditPerson() Handles cms_Tools.EditPerson
+	Private Sub EditPerson() Handles cms_Tools.EditSelected
 		If SelectedRowsCount < 1 Then
 			Return
 		End If

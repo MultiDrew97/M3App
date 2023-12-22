@@ -1,6 +1,7 @@
 ﻿Namespace DataTables
-    <Serializable>
-    Public Class OrdersDataTable
+	<Serializable>
+	<Obsolete("No longer needed. Use OrdersDataGrid Component instead for designer and DBEntryCollection in Types namespace for collections.")>
+	Public Class OrdersDataTable
         Inherits TypedTableBase(Of OrdersDataRow)
 
         Public Delegate Sub OrdersDataRowChangeEventHandler(ByVal sender As Object, ByVal e As OrdersRowChangeEvent)

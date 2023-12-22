@@ -60,7 +60,9 @@ Public Class MainMenuStrip
 	''' <summary>
 	''' Occurs when a product is successfully added
 	''' </summary>
-	Public Event AddItem As Inventory.InventoryEventHandler
+	Public Event AddProduct As Inventory.InventoryEventHandler
+
+	' TODO: Create the Orders based events here as well
 
 	''' <summary>
 	''' The location to save the installer for the application when updating
@@ -80,25 +82,26 @@ Public Class MainMenuStrip
 
 	Private Sub CreateCustomer(sender As Object, e As EventArgs) Handles tsmi_NewCustomer.Click
 		' TODO: Determine better process to decouple this functionality from M3Tools API
-		Using create As New Dialogs.AddCustomerDialog
+		Using create As New Dialogs.AddCustomerDialog()
 			Dim res = create.ShowDialog()
+
 			If Not res = DialogResult.OK Then
 				Return
 			End If
-
 
 			RaiseEvent AddCustomer(Me, New Customers.CustomerEventArgs(create.Customer))
 		End Using
 	End Sub
 
 	Private Sub CreateProduct(sender As Object, e As EventArgs) Handles tsmi_NewProduct.Click
-		Using newProduct As New Dialogs.AddProductDialog()
-			Dim res = newProduct.ShowDialog()
+		Using create As New Dialogs.AddProductDialog()
+			Dim res = create.ShowDialog()
+
 			If Not res = DialogResult.OK Then
 				Return
 			End If
 
-			RaiseEvent AddItem(Me, New Inventory.InventoryEventArgs(newProduct.Item, EventType.Added))
+			RaiseEvent AddProduct(Me, New Inventory.InventoryEventArgs(create.Product))
 		End Using
 	End Sub
 

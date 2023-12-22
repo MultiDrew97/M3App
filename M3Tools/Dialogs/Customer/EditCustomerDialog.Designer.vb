@@ -23,7 +23,6 @@
 		'Do not modify it using the code editor.
 		<System.Diagnostics.DebuggerStepThrough()>
 		Private Sub InitializeComponent()
-            Me.components = New System.ComponentModel.Container()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.OK_Button = New System.Windows.Forms.Button()
             Me.Cancel_Button = New System.Windows.Forms.Button()
@@ -32,7 +31,6 @@
             Me.PhoneNumberField1 = New SPPBC.M3Tools.PhoneNumberField()
             Me.gi_LastName = New SPPBC.M3Tools.GenericInputPair()
             Me.gi_FirstName = New SPPBC.M3Tools.GenericInputPair()
-            Me.dbCustomers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -102,8 +100,7 @@
             Me.PhoneNumberField1.MaximumSize = New System.Drawing.Size(0, 50)
             Me.PhoneNumberField1.MinimumSize = New System.Drawing.Size(100, 50)
             Me.PhoneNumberField1.Name = "PhoneNumberField1"
-            Me.PhoneNumberField1.Text = ""
-            Me.PhoneNumberField1.Size = New System.Drawing.Size(229, 50)
+            Me.PhoneNumberField1.Size = New System.Drawing.Size(100, 50)
             Me.PhoneNumberField1.TabIndex = 2
             '
             'gi_LastName
@@ -130,12 +127,6 @@
             Me.gi_FirstName.TabIndex = 0
             Me.gi_FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
             '
-            'dbCustomers
-            '
-            Me.dbCustomers.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-            Me.dbCustomers.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-            Me.dbCustomers.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-            '
             'EditCustomerDialog
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -153,7 +144,7 @@
             Me.Name = "EditCustomerDialog"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-            Me.Text = "Update Customer"
+            Me.Text = "Edit {0}"
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
@@ -162,9 +153,8 @@
         Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 		Friend WithEvents OK_Button As System.Windows.Forms.Button
 		Friend WithEvents Cancel_Button As System.Windows.Forms.Button
-		Friend WithEvents dbCustomers As Database.CustomerDatabase
-		Friend WithEvents gi_FirstName As GenericInputPair
-		Friend WithEvents gi_LastName As GenericInputPair
+        Friend WithEvents gi_FirstName As GenericInputPair
+        Friend WithEvents gi_LastName As GenericInputPair
 		Friend WithEvents PhoneNumberField1 As PhoneNumberField
 		Friend WithEvents gi_Email As GenericInputPair
 		Friend WithEvents af_Address As AddressField

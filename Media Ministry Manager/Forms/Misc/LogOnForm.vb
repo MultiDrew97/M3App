@@ -7,9 +7,29 @@ Public Class LogOnForm
 	Private Event BeginLogin()
 	Private Event EndLogin()
 
+	Private Property Username As String
+		Get
+			Return lf_Login.Username
+		End Get
+		Set(value As String)
+			lf_Login.Username = value
+		End Set
+	End Property
+
+	Private Property Password As String
+		Get
+			Return lf_Login.Password
+		End Get
+		Set(value As String)
+			lf_Login.Password = value
+		End Set
+	End Property
+
 	' TODO: Potentially consolidate these function
+	' TODO: Figure out more secure way to store login info
 	Private Sub Showing(sender As Object, e As EventArgs) Handles Me.Shown
 		' TODO: Use PerformLogin sub instead
+		Username = My.Settings.Username
 		If Not My.Settings.KeepLoggedIn Then
 			Reset()
 			Return
@@ -78,7 +98,9 @@ Public Class LogOnForm
 
 	Private Sub PerformLogin(sender As Object, e As EventArgs) Handles btn_Login.Click
 		Try
-			TryLogin(If(lf_Login.Username, Nothing), If(lf_Login.Password, Nothing))
+			'TryLogin(If(Username, Nothing), If(Password, Nothing))
+			RaiseEvent BeginLogin()
+			My.Settings.User = dbUsers.Login(If(Username, My.Settings.Username), If(Password, My.Settings.Password))
 
 			bw_SaveSettings.RunWorkerAsync()
 			MainForm.Show()
@@ -92,14 +114,14 @@ Public Class LogOnForm
 			lf_Login.Focus()
 		Catch password As PasswordException
 			lf_Login.ClearPassword()
-            lsd_LoadScreen.ShowError("Incorrect password. Please try again or reset your password")
-            lf_Login.Focus("p")
-        Catch database As DatabaseException
-            lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.")
-            lf_Login.ClearPassword()
-            lf_Login.Focus("p")
-        Catch ex As Exception
-            lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
+			lsd_LoadScreen.ShowError("Incorrect password provided. Please try again or reset your password")
+			lf_Login.Focus("p")
+		Catch database As DatabaseException
+			lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.")
+			lf_Login.ClearPassword()
+			lf_Login.Focus("p")
+		Catch ex As Exception
+			lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.")
 			lf_Login.ClearPassword()
 			lf_Login.Focus("p")
 		Finally

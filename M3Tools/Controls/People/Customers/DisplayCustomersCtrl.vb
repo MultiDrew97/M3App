@@ -58,8 +58,6 @@ Public Class DisplayCustomersCtrl
 		'End Using
 	End Sub
 
-
-
 	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
 		Throw New NotImplementedException("Import Customers")
 	End Sub
@@ -83,6 +81,6 @@ Public Class DisplayCustomersCtrl
 			Return
 		End If
 
-		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(e.Customer))
+		RaiseEvent RemoveCustomer(Me, e)
 	End Sub
 End Class

@@ -52,16 +52,6 @@ Namespace Dialogs
 			End Get
 		End Property
 
-		Private ReadOnly Property CustomerDisplay As DisplayCustomer
-			Get
-				Return New DisplayCustomer() With {
-					.Name = CustomerName,
-					.Email = Email,
-					.Address = Address
-				}
-			End Get
-		End Property
-
 		Private ReadOnly Property ValidName As Boolean
 			Get
 				Return ValidFirstName() And ValidLastName()
@@ -107,28 +97,27 @@ Namespace Dialogs
 			End Get
 		End Property
 
-
 		Private Sub PreviousStep(sender As Object, e As EventArgs) Handles btn_Cancel.Click
 			Select Case tc_Creation.SelectedIndex
-				Case 0 ' tp_Basic.TabIndex
+				Case tp_Basics.TabIndex
 					Dim res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
 					If Not res = DialogResult.Yes Then
-						Return
+						Exit Sub
 					End If
 
 					DialogResult = DialogResult.Cancel
 					Close()
 				Case Else
-					tc_Creation.SelectedIndex = tc_Creation.SelectedIndex - 1
-					RaiseEvent PageChangedEvent(Me, New EventArgs())
+					tc_Creation.SelectedIndex -= 1
+					RaiseEvent PageChangedEvent(Me, e)
 			End Select
 		End Sub
 
 		Private Sub NextStep(sender As Object, e As EventArgs) Handles btn_Create.Click
 			Select Case tc_Creation.SelectedIndex
 				Case tp_Summary.TabIndex
-					If Not ValidCustomer() Then
+					If Not ValidCustomer Then
 						MessageBox.Show("There were errors in your customer submission. Please try again.", "Customer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 						Return
 					End If
@@ -136,42 +125,17 @@ Namespace Dialogs
 					RaiseEvent CustomerAdded(Me, New CustomerEventArgs(Customer, M3Tools.Events.EventType.Added))
 
 					DialogResult = DialogResult.OK
-					Me.Close()
+					Close()
 				Case Else
 					tc_Creation.SelectedIndex += 1
-					RaiseEvent PageChangedEvent(Me, New EventArgs())
+					RaiseEvent PageChangedEvent(Me, e)
 			End Select
 		End Sub
 
 		Private Sub PageChanged(sender As Object, e As EventArgs) Handles Me.PageChangedEvent, tc_Creation.SelectedIndexChanged
-			btn_Cancel.Text = If(tc_Creation.SelectedIndex <= tp_Basic.TabIndex, "Cancel", "Back")
+			btn_Cancel.Text = If(tc_Creation.SelectedIndex <= tp_Basics.TabIndex, "Cancel", "Back")
 			btn_Create.Text = If(tc_Creation.SelectedIndex >= tp_Summary.TabIndex, "Create", "Next")
 			sc_Summary.Display = If(tc_Creation.SelectedIndex = tp_Summary.TabIndex, Customer, Nothing)
 		End Sub
-
-		Private Class DisplayCustomer
-			<Category("Basics")>
-			Property Name As String
-			<Category("Basics")>
-			Property Email As String
-
-			<Category("Address")>
-			Property Street As String
-			<Category("Address")>
-			Property City As String
-			<Category("Address")>
-			Property State As String
-			<Category("Address")>
-			Property ZipCode As String
-
-			WriteOnly Property Address As Address
-				Set(value As Address)
-					Me.Street = value?.Street
-					Me.City = value?.City
-					Me.State = value?.State
-					Me.ZipCode = value?.ZipCode
-				End Set
-			End Property
-		End Class
 	End Class
 End Namespace

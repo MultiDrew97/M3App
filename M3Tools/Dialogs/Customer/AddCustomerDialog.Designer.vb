@@ -31,7 +31,7 @@
 			Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
 			Me.tss_Feedback = New System.Windows.Forms.ToolStripStatusLabel()
 			Me.tc_Creation = New System.Windows.Forms.TabControl()
-			Me.tp_Basic = New System.Windows.Forms.TabPage()
+			Me.tp_Basics = New System.Windows.Forms.TabPage()
 			Me.tp_Address = New System.Windows.Forms.TabPage()
 			Me.tp_Summary = New System.Windows.Forms.TabPage()
 			Me.gi_FirstName = New SPPBC.M3Tools.GenericInputPair()
@@ -44,7 +44,7 @@
 			CType(Me.ep_InputError, System.ComponentModel.ISupportInitialize).BeginInit()
 			Me.StatusStrip1.SuspendLayout()
 			Me.tc_Creation.SuspendLayout()
-			Me.tp_Basic.SuspendLayout()
+			Me.tp_Basics.SuspendLayout()
 			Me.tp_Address.SuspendLayout()
 			Me.tp_Summary.SuspendLayout()
 			Me.SuspendLayout()
@@ -103,7 +103,7 @@
 			'
 			'tc_Creation
 			'
-			Me.tc_Creation.Controls.Add(Me.tp_Basic)
+			Me.tc_Creation.Controls.Add(Me.tp_Basics)
 			Me.tc_Creation.Controls.Add(Me.tp_Address)
 			Me.tc_Creation.Controls.Add(Me.tp_Summary)
 			Me.tc_Creation.Dock = System.Windows.Forms.DockStyle.Top
@@ -117,17 +117,17 @@
 			'
 			'tp_Basic
 			'
-			Me.tp_Basic.BackColor = System.Drawing.Color.LightGray
-			Me.tp_Basic.Controls.Add(Me.gi_FirstName)
-			Me.tp_Basic.Controls.Add(Me.gi_LastName)
-			Me.tp_Basic.Controls.Add(Me.pn_PhoneNumber)
-			Me.tp_Basic.Controls.Add(Me.gi_EmailAddress)
-			Me.tp_Basic.Location = New System.Drawing.Point(4, 22)
-			Me.tp_Basic.Name = "tp_Basic"
-			Me.tp_Basic.Padding = New System.Windows.Forms.Padding(3)
-			Me.tp_Basic.Size = New System.Drawing.Size(587, 278)
-			Me.tp_Basic.TabIndex = 0
-			Me.tp_Basic.Text = "Basics"
+			Me.tp_Basics.BackColor = System.Drawing.Color.LightGray
+			Me.tp_Basics.Controls.Add(Me.gi_FirstName)
+			Me.tp_Basics.Controls.Add(Me.gi_LastName)
+			Me.tp_Basics.Controls.Add(Me.pn_PhoneNumber)
+			Me.tp_Basics.Controls.Add(Me.gi_EmailAddress)
+			Me.tp_Basics.Location = New System.Drawing.Point(4, 22)
+			Me.tp_Basics.Name = "tp_Basic"
+			Me.tp_Basics.Padding = New System.Windows.Forms.Padding(3)
+			Me.tp_Basics.Size = New System.Drawing.Size(587, 278)
+			Me.tp_Basics.TabIndex = 0
+			Me.tp_Basics.Text = "Basics"
 			'
 			'tp_Address
 			'
@@ -250,8 +250,8 @@
 			Me.StatusStrip1.ResumeLayout(False)
 			Me.StatusStrip1.PerformLayout()
 			Me.tc_Creation.ResumeLayout(False)
-			Me.tp_Basic.ResumeLayout(False)
-			Me.tp_Basic.PerformLayout()
+			Me.tp_Basics.ResumeLayout(False)
+			Me.tp_Basics.PerformLayout()
 			Me.tp_Address.ResumeLayout(False)
 			Me.tp_Address.PerformLayout()
 			Me.tp_Summary.ResumeLayout(False)
@@ -267,7 +267,7 @@
         Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
         Friend WithEvents tss_Feedback As Windows.Forms.ToolStripStatusLabel
         Friend WithEvents tc_Creation As Windows.Forms.TabControl
-        Friend WithEvents tp_Basic As Windows.Forms.TabPage
+        Friend WithEvents tp_Basics As Windows.Forms.TabPage
         Friend WithEvents gi_FirstName As GenericInputPair
         Friend WithEvents gi_LastName As GenericInputPair
         Friend WithEvents pn_PhoneNumber As PhoneNumberField

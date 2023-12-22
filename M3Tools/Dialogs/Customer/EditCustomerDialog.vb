@@ -74,8 +74,6 @@ Namespace Dialogs
 				Return
 			End If
 
-			'dbCustomers.UpdateCustomer(Customer.Id, FirstName, LastName, Address, Phone, Email)
-
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
 		End Sub
@@ -92,6 +90,7 @@ Namespace Dialogs
 			Address = Customer.Address
 			Phone = Customer.PhoneNumber
 			Email = Customer.Email
+			Text = String.Format(Text, Customer.Name)
 		End Sub
 
 		Private Function ValidChangesDetected() As Boolean
@@ -114,20 +113,6 @@ Namespace Dialogs
 
 			Return False
 		End Function
-
-		Private Sub LoadCustomer(sender As Object, e As DoWorkEventArgs)
-			If Customer.Id < 0 Then
-				e.Cancel = True
-				Return
-			End If
-
-			Try
-				_customer = dbCustomers.GetCustomer(Customer.Id)
-			Catch ex As Exception
-				Console.WriteLine(ex.Message)
-				e.Cancel = True
-			End Try
-		End Sub
 
 		'Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs)
 		'	If e.Cancelled Then

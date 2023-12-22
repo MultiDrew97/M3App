@@ -1,10 +1,11 @@
 ﻿Option Strict On
 Namespace Types
-	Public Class Item
+	Public Class Product
 		Inherits DbEntry
 
+		<ComponentModel.Browsable(False)>
 		<Text.Json.Serialization.JsonPropertyName("itemID")>
-		Overrides Property Id As Integer
+		Public Overrides Property Id As Integer
 
 		<Text.Json.Serialization.JsonPropertyName("itemName")>
 		Public Property Name As String
@@ -19,14 +20,10 @@ Namespace Types
 		Public Property Available As Boolean
 
 		Public Sub New()
-			Me.New(1, "New Product", 0, 0, True)
+			Me.New(-1)
 		End Sub
 
-		Public Sub New(id As Integer, name As String)
-			Me.New(id, name, 0, 0, True)
-		End Sub
-
-		Public Sub New(id As Integer, name As String, stock As Integer, price As Double, available As Boolean)
+		Public Sub New(id As Integer, Optional name As String = "New Product", Optional stock As Integer = 0, Optional price As Double = 0, Optional available As Boolean = False)
 			Me.Id = id
 			Me.Name = name
 			Me.Stock = stock
@@ -35,7 +32,7 @@ Namespace Types
 		End Sub
 
 		Public Function Display() As String
-			Return $"{Id}) {Name} ({Price}) {If(Available, "Available", "Not Available")}"
+			Return $"{Id}) {Name} ({Price:c}) {If(Available, "Available", "Not Available")}"
 		End Function
 
 		Public Overrides Function ToString() As String

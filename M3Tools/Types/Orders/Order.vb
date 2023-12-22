@@ -11,7 +11,7 @@ Namespace Types
 		Public Property Customer As Person
 
 		<Text.Json.Serialization.JsonPropertyName("item")>
-		Public Property Item As Item
+		Public Property Item As Product
 
 		<Text.Json.Serialization.JsonPropertyName("quantity")>
 		Public Property Quantity As Integer
@@ -74,7 +74,7 @@ Namespace Types
 			End If
 
 			Using i As New Database.InventoryDatabase
-				Item = i.GetItem(itemID)
+				Item = i.GetProduct(itemID)
 			End Using
 		End Sub
 

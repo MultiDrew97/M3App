@@ -20,4 +20,18 @@ Namespace Types.Extensions
 			Return Text.Encoding.UTF8.GetString(Convert.FromBase64String(value))
 		End Function
 	End Module
+
+	Module DoubleExtensions
+		<Extension()>
+		Public Function FormatPrice(value As Double) As String
+			Return $"{value:c}"
+		End Function
+	End Module
+
+	Module DecimalExtensions
+		<Extension()>
+		Public Function FormatPrice(value As Decimal) As String
+			Return $"{value:c}"
+		End Function
+	End Module
 End Namespace

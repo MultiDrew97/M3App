@@ -44,7 +44,7 @@ Namespace Types
 		'End Property
 
 		Public Sub New()
-			Me.New(-1, "John", "Doe", Nothing, "johndoe@domain.ext", "123-456-7890", Date.Now.ToLongDateString)
+			Me.New(-1)
 		End Sub
 
 		Public Sub New(Optional customerID As Integer = -1, Optional firstName As String = "John", Optional lastName As String = "Doe",

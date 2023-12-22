@@ -2,8 +2,8 @@
 Imports MediaMinistry.Helpers
 
 Public Class Frm_DisplayInventory
-	Private ReadOnly ProductsTable As New SPPBC.M3Tools.DataTables.ItemsDataTable
-	Private ReadOnly Inventory As New DBEntryCollection(Of Item)
+	Private ReadOnly ProductsTable As New SPPBC.M3Tools.DataTables.ProductsDataTable
+	Private ReadOnly Inventory As New DBEntryCollection(Of Product)
 	Private Tooled As Boolean = False
 
 	Private Sub ViewInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,7 +43,7 @@ Public Class Frm_DisplayInventory
 
 	Private Sub FillTable()
 		Dim row As DataRow
-		For Each item As SPPBC.M3Tools.Types.Item In Inventory
+		For Each item As SPPBC.M3Tools.Types.Product In Inventory
 			row = ProductsTable.NewRow
 			row("ItemID") = item.Id
 			row("ItemName") = item.Name
