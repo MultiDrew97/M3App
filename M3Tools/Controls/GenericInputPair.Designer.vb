@@ -38,9 +38,9 @@ Partial Class GenericInputPair
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(308, 46)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(300, 45)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'lbl_InputLabel
@@ -49,16 +49,17 @@ Partial Class GenericInputPair
         Me.lbl_InputLabel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbl_InputLabel.Location = New System.Drawing.Point(3, 0)
         Me.lbl_InputLabel.Name = "lbl_InputLabel"
-        Me.lbl_InputLabel.Size = New System.Drawing.Size(302, 13)
+        Me.lbl_InputLabel.Size = New System.Drawing.Size(294, 22)
         Me.lbl_InputLabel.TabIndex = 0
         Me.lbl_InputLabel.Text = "Label1"
+        Me.lbl_InputLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
         'txt_Input
         '
         Me.txt_Input.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_Input.Location = New System.Drawing.Point(3, 16)
+        Me.txt_Input.Location = New System.Drawing.Point(3, 25)
         Me.txt_Input.Name = "txt_Input"
-        Me.txt_Input.Size = New System.Drawing.Size(302, 20)
+        Me.txt_Input.Size = New System.Drawing.Size(294, 20)
         Me.txt_Input.TabIndex = 1
         '
         'GenericInputPair
@@ -67,8 +68,10 @@ Partial Class GenericInputPair
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.MaximumSize = New System.Drawing.Size(0, 45)
+        Me.MinimumSize = New System.Drawing.Size(300, 45)
         Me.Name = "GenericInputPair"
-        Me.Size = New System.Drawing.Size(308, 46)
+        Me.Size = New System.Drawing.Size(300, 45)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)

@@ -74,7 +74,7 @@ Partial Class EditOrderDialog
         'gi_CustomerName
         '
         Me.gi_CustomerName.AutoSize = True
-        Me.gi_CustomerName.LabelText = "Customer Name"
+        Me.gi_CustomerName.Label = "Customer Name"
         Me.gi_CustomerName.Location = New System.Drawing.Point(24, 25)
         Me.gi_CustomerName.Mask = ""
         Me.gi_CustomerName.Name = "gi_CustomerName"

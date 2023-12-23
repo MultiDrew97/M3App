@@ -14,7 +14,7 @@ Namespace Types
 		Public Property Stock As Integer
 
 		<Text.Json.Serialization.JsonPropertyName("price")>
-		Public Property Price As Double
+		Public Property Price As Decimal
 
 		<Text.Json.Serialization.JsonPropertyName("available")>
 		Public Property Available As Boolean
@@ -23,7 +23,7 @@ Namespace Types
 			Me.New(-1)
 		End Sub
 
-		Public Sub New(id As Integer, Optional name As String = "New Product", Optional stock As Integer = 0, Optional price As Double = 0, Optional available As Boolean = False)
+		Public Sub New(id As Integer, Optional name As String = "New Product", Optional stock As Integer = 0, Optional price As Decimal = 0, Optional available As Boolean = False)
 			Me.Id = id
 			Me.Name = name
 			Me.Stock = stock
@@ -32,11 +32,11 @@ Namespace Types
 		End Sub
 
 		Public Function Display() As String
-			Return $"{Id}) {Name} ({Price:c}) {If(Available, "Available", "Not Available")}"
+			Return $"{Id}) {Name} ({Price.FormatPrice}) {If(Available, "Available", "Not Available")}"
 		End Function
 
 		Public Overrides Function ToString() As String
-			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Stock, Price, If(Available, "Available", "Not Available"))
+			Return String.Join(My.Settings.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice, If(Available, "Available", "Not Available"))
 		End Function
 	End Class
 End Namespace

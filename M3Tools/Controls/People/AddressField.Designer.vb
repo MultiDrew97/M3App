@@ -58,7 +58,7 @@ Partial Class AddressField
         '
         Me.if_Address1.AutoSize = True
         Me.if_Address1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.if_Address1.LabelText = "Address 1"
+        Me.if_Address1.Label = "Address 1"
         Me.if_Address1.Location = New System.Drawing.Point(6, 6)
         Me.if_Address1.Margin = New System.Windows.Forms.Padding(6)
         Me.if_Address1.Mask = ""
@@ -72,7 +72,7 @@ Partial Class AddressField
         '
         Me.if_City.AutoSize = True
         Me.if_City.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.if_City.LabelText = "City"
+        Me.if_City.Label = "City"
         Me.if_City.Location = New System.Drawing.Point(6, 67)
         Me.if_City.Margin = New System.Windows.Forms.Padding(6)
         Me.if_City.Mask = ""
@@ -97,7 +97,7 @@ Partial Class AddressField
         '
         Me.if_Address2.AutoSize = True
         Me.if_Address2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.if_Address2.LabelText = "Address 2"
+        Me.if_Address2.Label = "Address 2"
         Me.if_Address2.Location = New System.Drawing.Point(396, 6)
         Me.if_Address2.Margin = New System.Windows.Forms.Padding(6)
         Me.if_Address2.Mask = ""
@@ -111,7 +111,7 @@ Partial Class AddressField
         '
         Me.if_ZipCode.AutoSize = True
         Me.if_ZipCode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.if_ZipCode.LabelText = "Zip Code"
+        Me.if_ZipCode.Label = "Zip Code"
         Me.if_ZipCode.Location = New System.Drawing.Point(396, 67)
         Me.if_ZipCode.Margin = New System.Windows.Forms.Padding(6)
         Me.if_ZipCode.Mask = "99999"

@@ -6,7 +6,6 @@ Namespace Database
 	Public NotInheritable Class InventoryDatabase
 		Private Const path As String = "inventory"
 
-		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
 		Public Property Username As String
@@ -52,7 +51,7 @@ Namespace Database
 			Return dbConnection.Consume(Of DBEntryCollection(Of Product))(Method.Get, $"/{path}").Result
 		End Function
 
-		Public Sub AddProduct(itemName As String, stock As Integer, price As Double)
+		Public Sub AddProduct(itemName As String, stock As Integer, price As Decimal)
 			AddProduct(New Product(-1, itemName, stock, price, True))
 		End Sub
 
@@ -60,7 +59,7 @@ Namespace Database
 			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(item))
 		End Sub
 
-		Public Sub UpdateProduct(itemID As Integer, itemName As String, stock As Integer, price As Double, available As Boolean)
+		Public Sub UpdateProduct(itemID As Integer, itemName As String, stock As Integer, price As Decimal, available As Boolean)
 			UpdateProduct(New Product(itemID, itemName, stock, price, available))
 		End Sub
 

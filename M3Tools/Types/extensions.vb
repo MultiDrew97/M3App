@@ -24,14 +24,14 @@ Namespace Types.Extensions
 	Module DoubleExtensions
 		<Extension()>
 		Public Function FormatPrice(value As Double) As String
-			Return $"{value:c}"
+			Return $"{value:C2}"
 		End Function
 	End Module
 
 	Module DecimalExtensions
 		<Extension()>
 		Public Function FormatPrice(value As Decimal) As String
-			Return $"{value:c}"
+			Return $"{value:C2}"
 		End Function
 	End Module
 End Namespace

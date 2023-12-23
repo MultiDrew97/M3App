@@ -81,7 +81,7 @@ Partial Class CreateFolderDialog
 		'ip_FolderName
 		'
 		Me.ip_FolderName.AutoSize = True
-		Me.ip_FolderName.LabelText = "Folder Name"
+		Me.ip_FolderName.Label = "Folder Name"
 		Me.ip_FolderName.Location = New System.Drawing.Point(12, 12)
 		Me.ip_FolderName.Mask = ""
 		Me.ip_FolderName.Name = "ip_FolderName"

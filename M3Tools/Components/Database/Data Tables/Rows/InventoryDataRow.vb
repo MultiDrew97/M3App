@@ -1,12 +1,12 @@
 ﻿Namespace DataTables
-	Public Class ProductsDataRow
+	Public Class InventoryDataRow
 		Inherits DataRow
 
-		Private ReadOnly tableItems As ProductsDataTable
+		Private ReadOnly tableItems As InventoryDataTable
 
 		Friend Sub New(ByVal rb As DataRowBuilder)
 			MyBase.New(rb)
-			Me.tableItems = CType(Me.Table, ProductsDataTable)
+			Me.tableItems = CType(Me.Table, InventoryDataTable)
 		End Sub
 
 		Public ReadOnly Property ItemID As Integer
@@ -32,7 +32,7 @@
 			End Set
 		End Property
 
-		Public Property Price() As Double
+		Public Property Price() As Decimal
 			Get
 				Return CDec(Me(Me.tableItems.PriceColumn))
 			End Get

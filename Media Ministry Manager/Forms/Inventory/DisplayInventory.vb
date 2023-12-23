@@ -2,7 +2,7 @@
 Imports MediaMinistry.Helpers
 
 Public Class Frm_DisplayInventory
-	Private ReadOnly ProductsTable As New SPPBC.M3Tools.DataTables.ProductsDataTable
+	Private ReadOnly ProductsTable As New SPPBC.M3Tools.DataTables.InventoryDataTable
 	Private ReadOnly Inventory As New DBEntryCollection(Of Product)
 	Private Tooled As Boolean = False
 

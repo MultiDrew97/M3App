@@ -5,7 +5,6 @@ Namespace Database
 	Public NotInheritable Class OrdersDatabase
 		Private Const path As String = "orders"
 
-		<EditorBrowsable()>
 		<Description("The username to use for the database connection")>
 		<SettingsBindable(True)>
 		Public Property Username As String
@@ -17,7 +16,6 @@ Namespace Database
 			End Set
 		End Property
 
-		'The password to use for the database connection
 		<PasswordPropertyText(True)>
 		<SettingsBindable(True)>
 		<Description("The password to use for the database connection")>
@@ -30,7 +28,6 @@ Namespace Database
 			End Set
 		End Property
 
-		'The initial catalog to use for the database connection
 		<Bindable(True)>
 		<Description("The url to use for the database connection")>
 		<SettingsBindable(True)>

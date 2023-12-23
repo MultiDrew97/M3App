@@ -1,18 +1,18 @@
 ﻿Namespace DataTables
-    Public Class ProductsRowChangeEvent
-        Inherits EventArgs
+	Public Class InventoryRowChangeEvent
+		Inherits EventArgs
 
-        Private eventRow As ProductsDataRow
+		Private eventRow As InventoryDataRow
 
-        Private eventAction As DataRowAction
+		Private eventAction As DataRowAction
 
-        Public Sub New(row As ProductsDataRow, action As DataRowAction)
-            MyBase.New
-            Me.eventRow = row
-            Me.eventAction = action
-        End Sub
+		Public Sub New(row As InventoryDataRow, action As DataRowAction)
+			MyBase.New
+			Me.eventRow = row
+			Me.eventAction = action
+		End Sub
 
-        Public ReadOnly Property Row() As ProductsDataRow
+		Public ReadOnly Property Row() As InventoryDataRow
             Get
                 Return Me.eventRow
             End Get

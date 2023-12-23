@@ -23,7 +23,6 @@ Partial Class CustomersManagement
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim MySettings1 As MediaMinistry.My.MySettings = New MediaMinistry.My.MySettings()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomersManagement))
         Me.ss_CustomerView = New System.Windows.Forms.StatusStrip()
         Me.tss_CustomersView = New System.Windows.Forms.ToolStripStatusLabel()
@@ -166,27 +165,16 @@ Partial Class CustomersManagement
         'bsCustomers
         '
         Me.bsCustomers.Filter = "[Name] like '%f%'"
-        '
-        'dbCustomers
-        '
-        MySettings1.ApiPassword = "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G"
-        MySettings1.ApiUsername = "Preachy2034"
-        MySettings1.BaseUrl = "https://sppbc.herbivore.site/api"
-        MySettings1.CurrentFont = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold)
-        MySettings1.KeepLoggedIn = False
-        MySettings1.Password = ""
-        MySettings1.Setting = ""
-        MySettings1.SettingsKey = ""
-        MySettings1.UpgradeRequired = True
-        MySettings1.User = Nothing
-        MySettings1.Username = ""
-        Me.dbCustomers.BaseUrl = MySettings1.BaseUrl
-        Me.dbCustomers.Password = MySettings1.ApiPassword
-        Me.dbCustomers.Username = MySettings1.ApiUsername
-        '
-        'CustomersManagement
-        '
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+		'
+		'dbCustomers
+		'
+		Me.dbCustomers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
+		Me.dbCustomers.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
+		Me.dbCustomers.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
+		'
+		'CustomersManagement
+		'
+		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSize = True
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.ClientSize = New System.Drawing.Size(574, 459)

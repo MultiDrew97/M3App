@@ -111,7 +111,7 @@
 			'
 			Me.gi_FileName.AutoSize = True
             Me.gi_FileName.Enabled = False
-            Me.gi_FileName.LabelText = "Import File:"
+            Me.gi_FileName.Label = "Import File:"
             Me.gi_FileName.Location = New System.Drawing.Point(39, 29)
             Me.gi_FileName.Mask = ""
             Me.gi_FileName.Name = "gi_FileName"

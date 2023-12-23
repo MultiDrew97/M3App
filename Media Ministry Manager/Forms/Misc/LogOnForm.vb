@@ -25,11 +25,20 @@ Public Class LogOnForm
 		End Set
 	End Property
 
+	Private Property KeepLoggedIn As Boolean
+		Get
+			Return chk_KeepLoggedIn.Checked
+		End Get
+		Set(value As Boolean)
+			chk_KeepLoggedIn.Checked = value
+		End Set
+	End Property
+
 	' TODO: Potentially consolidate these function
 	' TODO: Figure out more secure way to store login info
 	Private Sub Showing(sender As Object, e As EventArgs) Handles Me.Shown
-		' TODO: Use PerformLogin sub instead
 		Username = My.Settings.Username
+
 		If Not My.Settings.KeepLoggedIn Then
 			Reset()
 			Return
@@ -45,7 +54,7 @@ Public Class LogOnForm
 	End Sub
 
 	Private Sub Reset()
-		chk_KeepLoggedIn.Checked = False
+		KeepLoggedIn = False
 		lf_Login.Clear()
 		tss_UserFeedback.Text = "Please enter your log-in information"
 		tss_UserFeedback.ForeColor = Color.Black
@@ -54,7 +63,7 @@ Public Class LogOnForm
 
 	Private Sub SaveSettings(sender As Object, e As DoWorkEventArgs) Handles bw_SaveSettings.DoWork
 		' TODO: Determine better way to handle this
-		My.Settings.KeepLoggedIn = If(Not chk_KeepLoggedIn.Checked, My.Settings.KeepLoggedIn, chk_KeepLoggedIn.Checked)
+		My.Settings.KeepLoggedIn = If(Not KeepLoggedIn, My.Settings.KeepLoggedIn, KeepLoggedIn)
 		My.Settings.Username = If(lf_Login.Username, My.Settings.Username)
 		' FIXME: Prevent this from saving password as plain text
 		My.Settings.Password = If(lf_Login.Password, My.Settings.Password)

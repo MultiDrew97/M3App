@@ -1,10 +1,10 @@
 ﻿Namespace DataTables
 	<Serializable>
 	<Obsolete("No longer needed. Use ProductsDataGrid Component instead for designer and DBEntryCollection in Types namespace for collections.")>
-	Public Class ProductsDataTable
-		Inherits TypedTableBase(Of ProductsDataRow)
+	Public Class InventoryDataTable
+		Inherits TypedTableBase(Of InventoryDataRow)
 
-		Public Delegate Sub ProductsDataRowChangeEventHandler(ByVal sender As Object, ByVal e As ProductsRowChangeEvent)
+		Public Delegate Sub InventoryDataRowChangeEventHandler(ByVal sender As Object, ByVal e As InventoryRowChangeEvent)
 
 		Private ItemID As DataColumn
 		Private Name As DataColumn
@@ -14,7 +14,7 @@
 
 		Public Sub New()
 			MyBase.New
-			Me.TableName = "Products"
+			Me.TableName = "Inventory"
 			Me.BeginInit()
 			Me.InitClass()
 			Me.EndInit()
@@ -81,17 +81,17 @@
 			End Get
 		End Property
 
-		Default Public ReadOnly Property Item(index As Integer) As ProductsDataRow
+		Default Public ReadOnly Property Item(index As Integer) As InventoryDataRow
 			Get
-				Return CType(Me.Rows(index), ProductsDataRow)
+				Return CType(Me.Rows(index), InventoryDataRow)
 			End Get
 		End Property
 
-		Public ReadOnly Property Products As Types.DBEntryCollection(Of Types.Product)
+		Public ReadOnly Property Inventory As Types.DBEntryCollection(Of Types.Product)
 			Get
 				Dim col As New Types.DBEntryCollection(Of Types.Product)
 
-				For Each row As ProductsDataRow In Rows
+				For Each row As InventoryDataRow In Rows
 					col.Add(row.Product)
 				Next
 
@@ -99,52 +99,52 @@
 			End Get
 		End Property
 
-		Public Event ProductsDataRowChanging As ProductsDataRowChangeEventHandler
+		Public Event InventoryDataRowChanging As InventoryDataRowChangeEventHandler
 
-		Public Event ProductsDataRowChanged As ProductsDataRowChangeEventHandler
+		Public Event InventoryDataRowChanged As InventoryDataRowChangeEventHandler
 
-		Public Event ProductsDataRowDeleting As ProductsDataRowChangeEventHandler
+		Public Event InventoryDataRowDeleting As InventoryDataRowChangeEventHandler
 
-		Public Event ProductsDataRowDeleted As ProductsDataRowChangeEventHandler
+		Public Event InventoryDataRowDeleted As InventoryDataRowChangeEventHandler
 
 		Public Sub AddRange(list As Types.DBEntryCollection(Of Types.Product))
 			For Each product In list
-				AddProductsRow(product)
+				AddInventoryRow(product)
 			Next
 		End Sub
 
-		Public Sub AddProductsRow(ByVal product As Types.Product)
-			AddProductsRow(product.Id, product.Name, product.Stock, product.Price, product.Available)
+		Public Sub AddInventoryRow(ByVal product As Types.Product)
+			AddInventoryRow(product.Id, product.Name, product.Stock, product.Price, product.Available)
 		End Sub
 
-		Public Sub AddProductsRow(ByVal row As ProductsDataRow)
+		Public Sub AddInventoryRow(ByVal row As InventoryDataRow)
 			Throw New NotImplementedException("AddItemsRow(row)")
 			'AddItemsRow(CInt(row("ItemID")), CStr(row("Name")), CInt(row("Stock")), CDec(row("Price")), CBool(row("Available")))
 		End Sub
 
-		Public Function AddProductsRow(ItemID As Integer, Name As String, Stock As Integer, Price As Double, Available As Boolean) As ProductsDataRow
-			Dim ProductsDataRow As ProductsDataRow = CType(Me.NewRow, ProductsDataRow)
+		Public Function AddInventoryRow(ItemID As Integer, Name As String, Stock As Integer, Price As Decimal, Available As Boolean) As InventoryDataRow
+			Dim ProductsDataRow As InventoryDataRow = CType(Me.NewRow, InventoryDataRow)
 			ProductsDataRow.ItemArray = {ItemID, Name, Stock, Price, Available}
 			Me.Rows.Add(ProductsDataRow)
 			Return ProductsDataRow
 		End Function
 
-		Public Function FindByID(ID As Integer) As ProductsDataRow
-			Return CType(Me.Rows.Find(New Object() {ID}), ProductsDataRow)
+		Public Function FindByID(ID As Integer) As InventoryDataRow
+			Return CType(Me.Rows.Find(New Object() {ID}), InventoryDataRow)
 		End Function
 
 		Public Overrides Function Clone() As DataTable
-			Dim cln As ProductsDataTable = CType(MyBase.Clone, ProductsDataTable)
+			Dim cln As InventoryDataTable = CType(MyBase.Clone, InventoryDataTable)
 			cln.InitVars()
 			Return cln
 		End Function
 
 		Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-			Return New ProductsDataTable()
+			Return New InventoryDataTable()
 		End Function
 
 		Friend Sub InitVars()
-			Me.ItemID = MyBase.Columns("OrderID")
+			Me.ItemID = MyBase.Columns("ItemID")
 			Me.Name = MyBase.Columns("Name")
 			Me.Stock = MyBase.Columns("Stock")
 			Me.Price = MyBase.Columns("Price")
@@ -172,47 +172,47 @@
 			Me.Available.AllowDBNull = False
 		End Sub
 
-		Public Function NewProductsDataRow() As ProductsDataRow
-			Return CType(Me.NewRow, ProductsDataRow)
+		Public Function NewProductsDataRow() As InventoryDataRow
+			Return CType(Me.NewRow, InventoryDataRow)
 		End Function
 
 		Protected Overrides Function NewRowFromBuilder(builder As DataRowBuilder) As DataRow
-			Return New ProductsDataRow(builder)
+			Return New InventoryDataRow(builder)
 		End Function
 
 		Protected Overrides Function GetRowType() As Type
-			Return GetType(ProductsDataRow)
+			Return GetType(InventoryDataRow)
 		End Function
 
 		Protected Overrides Sub OnRowChanged(e As DataRowChangeEventArgs)
 			MyBase.OnRowChanged(e)
 			'If ((Me.ProductsDataRowChanged) IsNot Nothing) Then
-			RaiseEvent ProductsDataRowChanged(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			RaiseEvent InventoryDataRowChanged(Me, New InventoryRowChangeEvent(CType(e.Row, InventoryDataRow), e.Action))
 			'End If
 		End Sub
 
 		Protected Overrides Sub OnRowChanging(e As DataRowChangeEventArgs)
 			MyBase.OnRowChanging(e)
-			'If ((Me.ProductsDataRowChanging) IsNot Nothing) Then
-			RaiseEvent ProductsDataRowChanging(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'If ((Me.InventoryDataRowChanging) IsNot Nothing) Then
+			RaiseEvent InventoryDataRowChanging(Me, New InventoryRowChangeEvent(CType(e.Row, InventoryDataRow), e.Action))
 			'End If
 		End Sub
 
 		Protected Overrides Sub OnRowDeleted(e As DataRowChangeEventArgs)
 			MyBase.OnRowDeleted(e)
-			'If ((Me.ProductsDataRowDeleted) IsNot Nothing) Then
-			RaiseEvent ProductsDataRowDeleted(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'If ((Me.InventoryDataRowDeleted) IsNot Nothing) Then
+			RaiseEvent InventoryDataRowDeleted(Me, New InventoryRowChangeEvent(CType(e.Row, InventoryDataRow), e.Action))
 			'End If
 		End Sub
 
 		Protected Overrides Sub OnRowDeleting(e As DataRowChangeEventArgs)
 			MyBase.OnRowDeleting(e)
-			'If ((Me.ProductsDataRowDeleting) IsNot Nothing) Then
-			RaiseEvent ProductsDataRowDeleting(Me, New ProductsRowChangeEvent(CType(e.Row, ProductsDataRow), e.Action))
+			'If ((Me.InventoryDataRowDeleting) IsNot Nothing) Then
+			RaiseEvent InventoryDataRowDeleting(Me, New InventoryRowChangeEvent(CType(e.Row, InventoryDataRow), e.Action))
 			'End If
 		End Sub
 
-		Public Sub RemoveItemsRow(row As ProductsDataRow)
+		Public Sub RemoveInventoryRow(row As InventoryDataRow)
 			Me.Rows.Remove(row)
 		End Sub
 

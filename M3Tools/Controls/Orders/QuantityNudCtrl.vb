@@ -21,6 +21,16 @@
 		End Set
 	End Property
 
+	<ComponentModel.DefaultValue("Quantity")>
+	Public Property Label As String
+		Get
+			Return lbl_Quantity.Text
+		End Get
+		Set(value As String)
+			lbl_Quantity.Text = value
+		End Set
+	End Property
+
 	<ComponentModel.DefaultValue(0)>
 	Property Quantity As Integer
 		Get

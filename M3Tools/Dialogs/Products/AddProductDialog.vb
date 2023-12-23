@@ -3,36 +3,36 @@ Imports SPPBC.M3Tools.Events.Inventory
 
 Namespace Dialogs
 	Public Class AddProductDialog
-		Public Event ItemAdded As InventoryEventHandler
+		' Public Event ItemAdded As InventoryEventHandler
 		Private Event PageChangedEvent As EventHandler
 
 		Private ReadOnly Property ItemName As String
 			Get
-				Return txt_Name.Text
+				Return gi_Name.Text
 			End Get
 		End Property
 
-		Private ReadOnly Property ItemStock As Integer
+		Private ReadOnly Property Stock As Integer
 			Get
-				Return CInt(nud_Stock.Value)
+				Return nud_Stock.Quantity
 			End Get
 		End Property
-		Private ReadOnly Property ItemPrice As Double
+		Private ReadOnly Property Price As Decimal
 			Get
-				Return CDec(txt_Price.Text)
+				Return pi_Price.Price
 			End Get
 		End Property
-		Private ReadOnly Property ItemAvailable As Boolean
+		Private ReadOnly Property Available As Boolean
 			Get
-				Return ItemPrice > 0 Or chk_Available.Checked
+				Return Price > 0 Or chk_Available.Checked
 			End Get
 		End Property
 
-		Private ReadOnly Property ItemDescription As String
-			Get
-				Return rtb_Description.Text
-			End Get
-		End Property
+		'Private ReadOnly Property Description As String
+		'	Get
+		'		Return rtb_Description.Text
+		'	End Get
+		'End Property
 
 		Private ReadOnly Property ValidProduct() As Boolean
 			Get
@@ -42,7 +42,7 @@ Namespace Dialogs
 
 		Public ReadOnly Property Product As Types.Product
 			Get
-				Return New Types.Product(-1, ItemName, ItemStock, ItemPrice, ItemAvailable)
+				Return New Types.Product(-1, ItemName, Stock, Price, Available)
 			End Get
 		End Property
 
@@ -71,7 +71,7 @@ Namespace Dialogs
 						Return
 					End If
 
-					RaiseEvent ItemAdded(Me, New InventoryEventArgs(Product, M3Tools.Events.EventType.Added))
+					'RaiseEvent ItemAdded(Me, New InventoryEventArgs(Product))
 
 					DialogResult = DialogResult.OK
 					Close()
@@ -85,6 +85,10 @@ Namespace Dialogs
 			btn_Cancel.Text = If(tc_Creation.SelectedIndex <= tp_Basics.TabIndex, "Cancel", "Back")
 			btn_Create.Text = If(tc_Creation.SelectedIndex >= tp_Summary.TabIndex, "Create", "Next")
 			sc_Summary.Display = If(tc_Creation.SelectedIndex = tp_Summary.TabIndex, Product, Nothing)
+		End Sub
+
+		Private Sub QuantityNudCtrl1_Load(sender As Object, e As EventArgs) Handles nud_Stock.Load
+
 		End Sub
 	End Class
 End Namespace

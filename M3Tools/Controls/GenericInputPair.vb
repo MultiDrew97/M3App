@@ -5,7 +5,7 @@ Public Class GenericInputPair
 
 	<DefaultValue("Label1")>
 	<RefreshProperties(RefreshProperties.Repaint)>
-	Public Property LabelText As String
+	Public Property Label As String
 		Get
 			Return lbl_InputLabel.Text
 		End Get
@@ -82,6 +82,8 @@ Public Class GenericInputPair
 
 	Private Sub InputGotFocus(sender As Object, e As EventArgs) Handles txt_Input.GotFocus
 		If txt_Input.Text <> Placeholder Then
+			txt_Input.Select(txt_Input.Text.Length, 0)
+			txt_Input.ScrollToCaret()
 			Return
 		End If
 
@@ -98,7 +100,7 @@ Public Class GenericInputPair
 		txt_Input.ForeColor = Drawing.SystemColors.ControlDark
 	End Sub
 
-	Private Sub GenericInputPair_Load(sender As Object, e As EventArgs) Handles Me.Load
+	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
 		Text = If(Text <> "", Text, Placeholder)
 		txt_Input.ForeColor = If(Text <> "", Drawing.SystemColors.WindowText, Drawing.SystemColors.ControlDark)
 	End Sub

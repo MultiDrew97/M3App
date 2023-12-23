@@ -84,7 +84,7 @@
             'gi_Email
             '
             Me.gi_Email.AutoSize = True
-            Me.gi_Email.LabelText = "Email"
+            Me.gi_Email.Label = "Email"
             Me.gi_Email.Location = New System.Drawing.Point(257, 64)
             Me.gi_Email.Mask = ""
             Me.gi_Email.Name = "gi_Email"
@@ -106,7 +106,7 @@
             'gi_LastName
             '
             Me.gi_LastName.AutoSize = True
-            Me.gi_LastName.LabelText = "Last Name"
+            Me.gi_LastName.Label = "Last Name"
             Me.gi_LastName.Location = New System.Drawing.Point(257, 12)
             Me.gi_LastName.Mask = ""
             Me.gi_LastName.Name = "gi_LastName"
@@ -118,7 +118,7 @@
             'gi_FirstName
             '
             Me.gi_FirstName.AutoSize = True
-            Me.gi_FirstName.LabelText = "First Name"
+            Me.gi_FirstName.Label = "First Name"
             Me.gi_FirstName.Location = New System.Drawing.Point(12, 12)
             Me.gi_FirstName.Mask = ""
             Me.gi_FirstName.Name = "gi_FirstName"

@@ -2,7 +2,7 @@
 
 Namespace Dialogs
 	Public Class EditProductDialog
-
+		' TODO: Figure out better way to manage state of editted value for all edit dialogs
 		Private _product As Types.Product
 		' Private _newInfo As Types.Customer
 
@@ -42,11 +42,11 @@ Namespace Dialogs
 			End Set
 		End Property
 
-		Private Property ProductPrice As Double
+		Private Property ProductPrice As Decimal
 			Get
 				Return pi_Price.Price
 			End Get
-			Set(value As Double)
+			Set(value As Decimal)
 				pi_Price.Price = value
 			End Set
 		End Property
@@ -66,8 +66,6 @@ Namespace Dialogs
 				Return
 			End If
 
-			'dbCustomers.UpdateCustomer(Customer.Id, FirstName, LastName, Address, Phone, Email)
-
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
 		End Sub
@@ -79,7 +77,7 @@ Namespace Dialogs
 
 		Private Sub ProductUpdated() Handles Me.ProductChanged
 			'_newInfo = Product.Clone()
-			Name = Product.Name
+			ProductName = Product.Name
 			ProductStock = Product.Stock
 			ProductPrice = Product.Price
 			Available = Product.Available

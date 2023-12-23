@@ -67,7 +67,7 @@
             'gi_Email
             '
             Me.gi_Email.AutoSize = True
-            Me.gi_Email.LabelText = "Email Address"
+            Me.gi_Email.Label = "Email Address"
             Me.gi_Email.Location = New System.Drawing.Point(33, 100)
             Me.gi_Email.Mask = ""
             Me.gi_Email.Name = "gi_Email"
@@ -79,7 +79,7 @@
             'gi_Name
             '
             Me.gi_Name.AutoSize = True
-            Me.gi_Name.LabelText = "Name"
+            Me.gi_Name.Label = "Name"
             Me.gi_Name.Location = New System.Drawing.Point(33, 39)
             Me.gi_Name.Mask = ""
             Me.gi_Name.Name = "gi_Name"

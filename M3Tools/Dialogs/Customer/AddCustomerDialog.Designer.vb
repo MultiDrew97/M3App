@@ -154,7 +154,7 @@
 			'gi_FirstName
 			'
 			Me.gi_FirstName.AutoSize = True
-			Me.gi_FirstName.LabelText = "* First Name"
+			Me.gi_FirstName.Label = "* First Name"
 			Me.gi_FirstName.Location = New System.Drawing.Point(43, 79)
 			Me.gi_FirstName.Margin = New System.Windows.Forms.Padding(6)
 			Me.gi_FirstName.Mask = ""
@@ -167,7 +167,7 @@
 			'gi_LastName
 			'
 			Me.gi_LastName.AutoSize = True
-			Me.gi_LastName.LabelText = "* Last Name"
+			Me.gi_LastName.Label = "* Last Name"
 			Me.gi_LastName.Location = New System.Drawing.Point(299, 79)
 			Me.gi_LastName.Margin = New System.Windows.Forms.Padding(6)
 			Me.gi_LastName.Mask = ""
@@ -192,7 +192,7 @@
 			'gi_EmailAddress
 			'
 			Me.gi_EmailAddress.AutoSize = True
-			Me.gi_EmailAddress.LabelText = "Email Address"
+			Me.gi_EmailAddress.Label = "Email Address"
 			Me.gi_EmailAddress.Location = New System.Drawing.Point(285, 153)
 			Me.gi_EmailAddress.Margin = New System.Windows.Forms.Padding(6)
 			Me.gi_EmailAddress.Mask = ""
