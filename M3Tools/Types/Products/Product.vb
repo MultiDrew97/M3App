@@ -23,8 +23,8 @@ Namespace Types
 			Me.New(-1)
 		End Sub
 
-		Public Sub New(id As Integer, Optional name As String = "New Product", Optional stock As Integer = 0, Optional price As Decimal = 0, Optional available As Boolean = False)
-			Me.Id = id
+		Public Sub New(productID As Integer, Optional name As String = "New Product", Optional stock As Integer = 0, Optional price As Decimal = 0, Optional available As Boolean = False)
+			Me.Id = productID
 			Me.Name = name
 			Me.Stock = stock
 			Me.Price = price

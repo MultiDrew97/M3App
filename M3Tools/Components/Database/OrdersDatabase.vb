@@ -53,7 +53,7 @@ Namespace Database
 
 		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
 			If Not Utils.ValidID(customerID) Or Not Utils.ValidID(itemID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid OrderID provided")
 			End If
 
 			If quantity < 1 Then
@@ -69,7 +69,7 @@ Namespace Database
 
 		Public Sub UpdateOrder(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer)
 			If Not Utils.ValidID(orderID) OrElse Not Utils.ValidID(itemID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid OrderID provided")
 			End If
 
 			If quantity < 1 Then
@@ -85,7 +85,7 @@ Namespace Database
 
 		Public Sub CancelOrder(orderID As Integer)
 			If Not Utils.ValidID(orderID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid OrderID provided")
 			End If
 
 			RemoveOrder(orderID, False)

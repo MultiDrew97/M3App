@@ -4,13 +4,7 @@ Public Class ReciepientSelection
 
 	ReadOnly Property Selection As Types.DBEntryCollection(Of Types.Listener)
 		Get
-			Dim list As New Types.DBEntryCollection(Of Types.Listener)()
-
-			For Each listener As DataGridViewRow In ldg_Listeners.SelectedListeners
-				list.Add(CType(listener.DataBoundItem, Types.Listener))
-			Next
-
-			Return list
+			Return CType(ldg_Listeners.SelectedListeners, Types.DBEntryCollection(Of Types.Listener))
 		End Get
 	End Property
 

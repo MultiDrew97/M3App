@@ -31,7 +31,7 @@ Public Class InventoryDataGrid
 
 	Public ReadOnly Property SelectedProducts As IList
 		Get
-			If ProductsSelectable Then
+			If InventorySelectable Then
 				If chk_SelectAll.Checked Then
 					Return dgv_Inventory.Rows
 				End If
@@ -107,7 +107,7 @@ Public Class InventoryDataGrid
 	End Property
 
 	<DefaultValue(True)>
-	Property ProductsSelectable As Boolean
+	Property InventorySelectable As Boolean
 		Get
 			Return dgc_Selection.Visible
 		End Get
@@ -128,7 +128,7 @@ Public Class InventoryDataGrid
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
 				RaiseEvent EditProduct(Me, New InventoryEventArgs(product))
-			Case dgc_Remove.DisplayIndex
+			Case dgc_Remove.Index
 				DeleteProduct(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
 	End Sub
@@ -144,16 +144,15 @@ Public Class InventoryDataGrid
 			Return
 		End If
 
-		Dim product As Types.Product
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Inventory.SelectedRows.Count
 
 		For Each row As DataGridViewRow In dgv_Inventory.SelectedRows
 			Try
-				product = CType(row.DataBoundItem, Types.Product)
-				RaiseEvent RemoveProduct(Me, New InventoryEventArgs(product))
+				DeleteProduct(Me, New DataGridViewRowCancelEventArgs(row))
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
+				failed += 1
 				Continue For
 			End Try
 		Next

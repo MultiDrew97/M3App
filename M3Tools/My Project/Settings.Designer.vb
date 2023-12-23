@@ -56,62 +56,6 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("M3App")>  _
-        Public ReadOnly Property DefaultUsername() As String
-            Get
-                Return CType(Me("DefaultUsername"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("M3AppPassword2499")>  _
-        Public ReadOnly Property DefaultPassword() As String
-            Get
-                Return CType(Me("DefaultPassword"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Media Ministry Test")>  _
-        Public ReadOnly Property DefaultCatalog() As String
-            Get
-                Return CType(Me("DefaultCatalog"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=sppbc.hopto.org;Persist Security Info=True;Connect Timeout=30;Encrypt"& _ 
-            "=True;TrustServerCertificate=True;Authentication=""Sql Password""")>  _
-        Public ReadOnly Property DefaultConnectionString() As String
-            Get
-                Return CType(Me("DefaultConnectionString"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("m3")>  _
-        Public ReadOnly Property Schema() As String
-            Get
-                Return CType(Me("Schema"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
-        Public ReadOnly Property MinID() As Integer
-            Get
-                Return CType(Me("MinID"),Integer)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute(";")>  _
         Public ReadOnly Property ObjectDelimiter() As String
             Get

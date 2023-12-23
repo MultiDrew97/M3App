@@ -9,7 +9,7 @@ Public Class DisplayOrdersCtrl
 	Private Event ShowCompletedChanged()
 	Public Event DataChanged()
 
-	Private ReadOnly _orders As New DataTables.OrdersDataTable()
+	'Private ReadOnly _orders As New Types.DBEntryCollection(Of Types.Order)
 	Private _showCompleted As Boolean = False
 	Private Confirmed As Boolean = False
 
@@ -32,11 +32,14 @@ Public Class DisplayOrdersCtrl
 		End Set
 	End Property
 
-	Public ReadOnly Property IsEmpty As Boolean
-		Get
-			Return _orders.Rows.Count = 0
-		End Get
-	End Property
+	'Property DataSource As BindingSource
+	'	Get
+	'		Return odg_Orders.DataSource
+	'	End Get
+	'	Set(value As BindingSource)
+	'		odg_Orders.DataSource = value
+	'	End Set
+	'End Property
 
 	Public Sub FulfilOrder()
 		Dim orderID As Integer
@@ -61,27 +64,21 @@ Public Class DisplayOrdersCtrl
 	End Sub
 
 	Private Sub LoadOrders(sender As Object, e As DoWorkEventArgs) Handles bw_LoadOrders.DoWork
-		Dim orders As Types.DBEntryCollection(Of Types.Order)
 		Try
-			orders = db_Orders.GetOrders()
+			' TODO: Figure out how to sort the table to sort by order date
+			' DdataSource.Clear()
+			For Each order In db_Orders.GetOrders()
+				'DataSource.Add(order)
+			Next
 		Catch ex As Exception
 			Console.WriteLine(ex.Message)
 			e.Cancel = True
 			Exit Sub
 		End Try
-		_orders.Clear()
-
-		For Each order In orders
-			_orders.AddOrdersRow(
-				order.Id, order.Customer.Name, order.Item.Name,
-				order.Quantity, order.OrderTotal, order.OrderDate, order.CompletedDate)
-		Next
-
-		' TODO: Figure out how to sort the table to sort by order date
 	End Sub
 
 	Private Sub ControlLoaded(sender As Object, e As EventArgs) Handles Me.Load
-		bsOrders.DataSource = _orders
+
 	End Sub
 
 	Public Sub Reload() Handles ts_Refresh.Click
@@ -98,13 +95,11 @@ Public Class DisplayOrdersCtrl
 	End Sub
 
 	Private Sub CellClicked(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_Orders.CellContentClick
-		Dim orderID As Integer
 		If (e.RowIndex < 0) Then
 			Exit Sub
 		End If
 
-		orderID = CInt(_orders.Rows(e.RowIndex)("OrderID"))
-		ToolButtonsClicked(e.ColumnIndex, orderID)
+		'ToolButtonsClicked(e.ColumnIndex, DataSource(e.RowIndex).Id)
 	End Sub
 
 	Private Sub UserDeletingRow(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Orders.UserDeletingRow

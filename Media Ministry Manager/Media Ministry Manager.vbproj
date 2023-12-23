@@ -139,8 +139,6 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <!-- <Import Include="ICSharpCode.SharpZipLib" />
-    <Import Include="K4os.Hash.xxHash" /> -->
     <Import Include="MediaMinistry" />
     <Import Include="MediaMinistry.My.Resources" />
     <Import Include="Microsoft.VisualBasic" />
@@ -202,6 +200,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Custom Objects\Types\extensions.vb" />
+    <Compile Include="Custom Objects\Types\ListenerCollection.vb" />
     <Compile Include="Custom Objects\Utils.vb" />
     <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.Designer.vb">
       <DependentUpon>AddProductDialog.vb</DependentUpon>
@@ -251,22 +250,16 @@
     <Compile Include="Forms\Misc\LogOnForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Misc\Settings.designer.vb">
-      <DependentUpon>Settings.vb</DependentUpon>
+    <Compile Include="Forms\Misc\SettingsForm.designer.vb">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Misc\Settings.vb">
+    <Compile Include="Forms\Misc\SettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Orders\DisplayOrders.Designer.vb">
       <DependentUpon>DisplayOrders.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Orders\DisplayOrders.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\DisplayInventory.Designer.vb">
-      <DependentUpon>DisplayInventory.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\DisplayInventory.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Custom Objects\Dialogs\Orders\PlaceOrderDialog.Designer.vb">
@@ -295,8 +288,8 @@
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -341,9 +334,6 @@
       <DependentUpon>LogOnForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Misc\Settings.resx">
-      <DependentUpon>Settings.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Orders\DisplayOrders.resx">
       <DependentUpon>DisplayOrders.vb</DependentUpon>
     </EmbeddedResource>
@@ -352,9 +342,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Objects\Dialogs\Orders\PlaceOrderDialog.resx">
       <DependentUpon>PlaceOrderDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\DisplayInventory.resx">
-      <DependentUpon>DisplayInventory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -375,16 +362,22 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="My Project\DataSources\MediaMinistry.Types.ListenerCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.CustomersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ListenersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.OrdersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Listener.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Product.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.TemplateList.datasource" />
     <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="Resources\credentials.json" />
@@ -452,7 +445,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="System" />
+    <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />

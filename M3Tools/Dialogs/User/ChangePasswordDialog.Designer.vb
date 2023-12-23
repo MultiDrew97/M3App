@@ -89,17 +89,11 @@ Partial Class ChangePasswordDialog
         Me.ConfirmPasswordField1.MinimumSize = New System.Drawing.Size(300, 50)
         Me.ConfirmPasswordField1.Name = "ConfirmPasswordField1"
         Me.ConfirmPasswordField1.Size = New System.Drawing.Size(300, 62)
-        Me.ConfirmPasswordField1.TabIndex = 3
-        '
-        'db_Users
-        '
-        Me.db_Users.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-        Me.db_Users.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-        Me.db_Users.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-        '
-        'ChangePasswordDialog
-        '
-        Me.AcceptButton = Me.btn_Reset
+		Me.ConfirmPasswordField1.TabIndex = 3
+		'
+		'ChangePasswordDialog
+		'
+		Me.AcceptButton = Me.btn_Reset
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btn_Cancel

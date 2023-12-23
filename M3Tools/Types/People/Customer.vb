@@ -12,7 +12,7 @@ Namespace Types
 
 		<ComponentModel.Category("Contact")>
 		<Text.Json.Serialization.JsonPropertyName("phoneNumber")>
-		Public Property PhoneNumber As String
+		Public Property Phone As String
 			Get
 				Return __phone
 			End Get
@@ -47,7 +47,7 @@ Namespace Types
 			Me.New(-1)
 		End Sub
 
-		Public Sub New(Optional customerID As Integer = -1, Optional firstName As String = "John", Optional lastName As String = "Doe",
+		Public Sub New(customerID As Integer, Optional firstName As String = "John", Optional lastName As String = "Doe",
 					   Optional address As Address = Nothing, Optional email As String = "johndoe@domain.ext", Optional phoneNumber As String = "1234567890",
 					   Optional joined As String = Nothing)
 			Me.New(customerID, $"{firstName} {lastName}", address, phoneNumber, email, If(String.IsNullOrWhiteSpace(joined), Nothing, Date.Parse(joined)))
@@ -55,7 +55,7 @@ Namespace Types
 
 		Private Sub New(id As Integer, name As String, address As Address, phone As String, email As String, join As Date)
 			MyBase.New(id, name, email)
-			Me.PhoneNumber = phone
+			Me.Phone = phone
 			Me.Address = If(address, Address.None)
 			Me.Joined = join
 		End Sub
@@ -67,7 +67,7 @@ Namespace Types
 			'Phone Number
 			Return $"{Name} ({Email}){vbCrLf}
 					{Address}{vbCrLf}
-					{PhoneNumber}"
+					{Phone}"
 		End Function
 
 		Public Function Display() As String
@@ -75,7 +75,7 @@ Namespace Types
 			'Street
 			'City, ST ZipCode
 			'Phone Number
-			Return $"{Id}) {Name} (e: {Email} p: {PhoneNumber}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
+			Return $"{Id}) {Name} (e: {Email} p: {Phone}){vbCrLf}{vbCrLf}{Address.Display}{vbCrLf}"
 		End Function
 	End Class
 End Namespace

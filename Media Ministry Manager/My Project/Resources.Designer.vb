@@ -148,6 +148,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &lt;a href=&quot;&quot;{0}&quot;&quot; class=&quot;&quot;drive-link&quot;&quot;&gt;{1}&lt;/a&gt;.
+        '''</summary>
+        Friend ReadOnly Property DriveLinkHtml() As String
+            Get
+                Return ResourceManager.GetString("DriveLinkHtml", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
         '''</summary>
         Friend ReadOnly Property DriveShareLink() As String

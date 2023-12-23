@@ -34,16 +34,9 @@ Namespace Types
 			End Set
 		End Property
 
-		Public Sub New(id As Integer, name As String, Optional email As String = Nothing)
+		Protected Friend Sub New(Optional id As Integer = -1, Optional name As String = "John Doe", Optional email As String = "JohnDoe@domain.ext")
 			MyBase.New(id)
 			ParseName(name)
-			Me.Email = If(email, String.Empty).Trim()
-		End Sub
-
-		Public Sub New(id As Integer, fName As String, lName As String, Optional email As String = Nothing)
-			MyBase.New(id)
-			Me.FirstName = fName.Trim()
-			Me.LastName = lName.Trim()
 			Me.Email = If(email, String.Empty).Trim()
 		End Sub
 
@@ -58,19 +51,6 @@ Namespace Types
 				LastName = Nothing
 			End Try
 		End Sub
-
-		'Public Overrides Sub UpdateID(newID As Integer)
-		'	' TODO: Verify this
-		'	If newID = Id Then
-		'		Return
-		'	End If
-
-		'	Using conn As New Database.ProductDatabase
-		'		Dim newProduct = conn.GetProduct(newID)
-
-		'		' TODO: Finish implementing updates
-		'	End Using
-		'End Sub
 
 		Overloads Shared Operator =(ls As Person, rs As Person) As Boolean
 			Return ls.Id = rs.Id And ls.Name.Equals(rs.Name) And ls.Email.Equals(rs.Email)

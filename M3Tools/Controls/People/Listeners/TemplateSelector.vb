@@ -55,7 +55,7 @@ Public Class TemplateSelector
 		bsTemplates.Add(template)
 	End Sub
 
-	Public Sub AddRange(templates As IList(Of Types.Template))
+	Public Sub AddRange(templates As Types.TemplateList)
 		For Each template In templates
 			AddTemplate(template)
 		Next

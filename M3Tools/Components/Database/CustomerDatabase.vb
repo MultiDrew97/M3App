@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports SPPBC.M3Tools.Events
 Imports SPPBC.M3Tools.Types
 
 Namespace Database
@@ -53,24 +54,6 @@ Namespace Database
 				   fName As String, lName As String,
 				   Optional address As Address = Nothing,
 				   Optional phone As String = Nothing, Optional email As String = Nothing)
-
-			'used string.format due to enormous query strings and concatination, allowing for easy expansion
-			'SELECT CONVERT(VARCHAR(10), getdate(), 101) is a query found online that gets just the date of getdate().
-			'source = https://tableplus.io/blog/2018/09/ms-sql-server-how-to-get-date-only-from-datetime-value.html
-
-			'Style	How it’s displayed
-			'101    mm/dd/yyyy
-			'102    yyyy.mm.dd
-			'103    dd/mm/yyyy
-			'104    dd.mm.yyyy
-			'105    dd-mm-yyyy
-			'110    mm-dd-yyyy
-			'111    yyyy/mm/dd
-			'106    dd mon yyyy
-			'107    Mon dd, yyyy
-
-			'date string that holds the command to get the date for when the person joined
-			'Dim dateString = "SELECT CONVERT(VARCHAR(10), GETDATE(), 111)"
 			AddCustomer(New Customer(-1, fName, lName, address, phone, email))
 		End Sub
 
@@ -84,7 +67,7 @@ Namespace Database
 
 		Public Function GetCustomer(customerID As Integer) As Customer
 			If Not Utils.ValidID(customerID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid CustomerID provided")
 			End If
 
 			Return dbConnection.Consume(Of Customer)(Method.Get, $"/{path}/{customerID}").Result
@@ -99,10 +82,18 @@ Namespace Database
 		End Sub
 
 		Private Sub UpdateCustomer(customer As Customer)
+			If Not Utils.ValidID(customer.Id) Then
+				Throw New ArgumentException($"Invalid CustomerID provided")
+			End If
+
 			dbConnection.Consume(Method.Put, $"/{path}/{customer.Id}", JSON.ConvertToJSON(customer))
 		End Sub
 
 		Public Sub RemoveCustomer(customerID As Integer)
+			If Not Utils.ValidID(customerID) Then
+				Throw New ArgumentException($"Invalid CustomerID provided")
+			End If
+
 			dbConnection.Consume(Method.Delete, $"/{path}/{customerID}")
 		End Sub
 	End Class

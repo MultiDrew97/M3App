@@ -59,7 +59,7 @@ Public Class CustomersManagement
 
 	Private Sub UpdateCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.UpdateCustomer
 		UseWaitCursor = True
-		dbCustomers.UpdateCustomer(e.Customer.Id, e.Customer.FirstName, e.Customer.LastName, e.Customer.Address, e.Customer.PhoneNumber, e.Customer.Email)
+		dbCustomers.UpdateCustomer(e.Customer.Id, e.Customer.FirstName, e.Customer.LastName, e.Customer.Address, e.Customer.Phone, e.Customer.Email)
 		MessageBox.Show($"Successfully updated customer", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub

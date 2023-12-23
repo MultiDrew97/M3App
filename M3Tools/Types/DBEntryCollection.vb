@@ -1,12 +1,14 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
 
+
 Namespace Types
-	Public Class DBEntryCollection(Of T As DbEntry)
+	Public MustInherit Class DBEntryCollection(Of T As DbEntry)
 		Inherits Collection(Of T)
 		Implements IBindingListView
 
-		Private _filter As String
+		Private _filter As String = ""
+		Private ReadOnly _listDescription As New ListSortDescriptionCollection
 
 		Public Property Filter As String Implements IBindingListView.Filter
 			Get
@@ -19,7 +21,7 @@ Namespace Types
 
 		Public ReadOnly Property SortDescriptions As ListSortDescriptionCollection Implements IBindingListView.SortDescriptions
 			Get
-				Throw New NotImplementedException()
+				Return _listDescription
 			End Get
 		End Property
 
@@ -73,26 +75,28 @@ Namespace Types
 
 		Public ReadOnly Property IsSorted As Boolean Implements IBindingList.IsSorted
 			Get
-				Throw New NotImplementedException()
+				' TODO: Figure out sorting
+				Return False
 			End Get
 		End Property
 
 		Public ReadOnly Property SortProperty As PropertyDescriptor Implements IBindingList.SortProperty
 			Get
-				Throw New NotImplementedException()
+
+				Throw New NotImplementedException("SortProperty")
 			End Get
 		End Property
 
 		Public ReadOnly Property SortDirection As ListSortDirection Implements IBindingList.SortDirection
 			Get
-				Throw New NotImplementedException()
+				Throw New NotImplementedException("SortDirection")
 			End Get
 		End Property
 
 		Public Event ListChanged As ListChangedEventHandler Implements IBindingList.ListChanged
 
 		Public Sub ApplySort(sorts As ListSortDescriptionCollection) Implements IBindingListView.ApplySort
-			Throw New NotImplementedException()
+			Throw New NotImplementedException("ApplySort")
 		End Sub
 
 		Public Sub RemoveFilter() Implements IBindingListView.RemoveFilter
@@ -100,27 +104,27 @@ Namespace Types
 		End Sub
 
 		Public Sub ApplySort([property] As PropertyDescriptor, direction As ListSortDirection) Implements IBindingList.ApplySort
-			Throw New NotImplementedException()
+			Throw New NotImplementedException("ApplySort")
 		End Sub
 
 		Public Sub AddIndex([property] As PropertyDescriptor) Implements IBindingList.AddIndex
-			Throw New NotImplementedException()
+			Throw New NotImplementedException("AddIndex")
 		End Sub
 
 		Public Sub RemoveIndex([property] As PropertyDescriptor) Implements IBindingList.RemoveIndex
-			Throw New NotImplementedException()
+			Throw New NotImplementedException("RemoveIndex")
 		End Sub
 
 		Public Sub RemoveSort() Implements IBindingList.RemoveSort
-			Throw New NotImplementedException()
+			Throw New NotImplementedException("RemoveSort")
 		End Sub
 
 		Public Function AddNew() As Object Implements IBindingList.AddNew
-			Throw New NotImplementedException()
+			Return CType(New Object(), T)
 		End Function
 
 		Public Function Find([property] As PropertyDescriptor, key As Object) As Integer Implements IBindingList.Find
-			Throw New NotImplementedException()
+			Throw New NotImplementedException("Find")
 		End Function
 
 		Default Overloads ReadOnly Property Item(id As Integer) As T
@@ -144,8 +148,8 @@ Namespace Types
 		End Sub
 
 		Overloads Function Contains(id As Integer) As Boolean
-			For Each listener In Items
-				If listener.Id = id Then
+			For Each current In Items
+				If current.Id = id Then
 					Return True
 				End If
 			Next
@@ -154,8 +158,8 @@ Namespace Types
 		End Function
 
 		Overloads Function Contains(search As T) As Boolean
-			For Each listener In Items
-				If listener = search Then
+			For Each current In Items
+				If current = search Then
 					Return True
 				End If
 			Next

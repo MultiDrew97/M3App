@@ -30,7 +30,7 @@ Namespace Types
 		Public Property CompletedDate As Date
 
 		Public Sub New()
-			Me.New(-1, -1, -1, 0)
+			Me.New(-1)
 		End Sub
 
 		''' <summary>
@@ -41,7 +41,7 @@ Namespace Types
 		''' <param name="itemID"></param>
 		''' <param name="quantity"></param>
 		''' <param name="orderDate"></param>
-		Public Sub New(orderID As Integer, customerID As Integer, itemID As Integer, quantity As Integer, Optional orderDate As Date = Nothing, Optional completedDate As Date = Nothing)
+		Public Sub New(orderID As Integer, Optional customerID As Integer = -1, Optional itemID As Integer = -1, Optional quantity As Integer = 0, Optional orderDate As Date = Nothing, Optional completedDate As Date = Nothing)
 			MyBase.New(orderID)
 			Me.Quantity = quantity
 			Me.OrderDate = If(orderDate.Year < 2000, Date.Now, orderDate)

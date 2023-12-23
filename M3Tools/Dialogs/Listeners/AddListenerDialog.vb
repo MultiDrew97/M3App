@@ -27,10 +27,7 @@ Namespace Dialogs
 
 		ReadOnly Property Listener As Types.Listener
 			Get
-				Return New Types.Listener() With {
-					.Name = ListenerName,
-					.Email = ListenerEmail
-				}
+				Return New Types.Listener(-1, ListenerName, ListenerEmail)
 			End Get
 		End Property
 
@@ -39,8 +36,6 @@ Namespace Dialogs
 				Return
 			End If
 
-			'dbListeners.AddListener(Me.Listener)
-			'RaiseEvent ListenerAdded(Me, New Listeners.ListenerEventArgs(Me.Listener, EventType.Added))
 			Me.DialogResult = DialogResult.OK
 			Me.Close()
 		End Sub

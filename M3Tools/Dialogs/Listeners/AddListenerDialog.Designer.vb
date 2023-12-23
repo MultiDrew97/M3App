@@ -90,36 +90,33 @@
             Me.gi_Email.Size = New System.Drawing.Size(308, 46)
             Me.gi_Email.TabIndex = 2
             Me.gi_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-            '
-            'dbListeners
-            '
-            Me.dbListeners.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-            Me.dbListeners.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-            Me.dbListeners.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-            '
-            'AddListenerDialog
-            '
-            Me.AcceptButton = Me.btn_Create
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.CancelButton = Me.btn_Cancel
-            Me.ClientSize = New System.Drawing.Size(332, 190)
-            Me.Controls.Add(Me.gi_Email)
-            Me.Controls.Add(Me.gi_Name)
-            Me.Controls.Add(Me.TableLayoutPanel1)
-            Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-            Me.MaximizeBox = False
-            Me.MinimizeBox = False
-            Me.Name = "AddListenerDialog"
-            Me.ShowInTaskbar = False
-            Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-            Me.Text = "New Listener"
-            Me.TableLayoutPanel1.ResumeLayout(False)
-            Me.ResumeLayout(False)
-            Me.PerformLayout()
+			'
+			'dbListeners
+			'
+			'
+			'AddListenerDialog
+			'
+			Me.AcceptButton = Me.btn_Create
+			Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+			Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+			Me.CancelButton = Me.btn_Cancel
+			Me.ClientSize = New System.Drawing.Size(332, 190)
+			Me.Controls.Add(Me.gi_Email)
+			Me.Controls.Add(Me.gi_Name)
+			Me.Controls.Add(Me.TableLayoutPanel1)
+			Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+			Me.MaximizeBox = False
+			Me.MinimizeBox = False
+			Me.Name = "AddListenerDialog"
+			Me.ShowInTaskbar = False
+			Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+			Me.Text = "New Listener"
+			Me.TableLayoutPanel1.ResumeLayout(False)
+			Me.ResumeLayout(False)
+			Me.PerformLayout()
 
-        End Sub
-        Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+		End Sub
+		Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
 		Friend WithEvents btn_Create As System.Windows.Forms.Button
 		Friend WithEvents btn_Cancel As System.Windows.Forms.Button
 		Friend WithEvents gi_Name As GenericInputPair

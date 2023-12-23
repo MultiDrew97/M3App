@@ -139,7 +139,7 @@ Public Class CustomersDataGrid
 	Private Sub DeleteCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
 		Dim customer = CType(e.Row.DataBoundItem, Types.Customer)
 
-		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer, EventType.Deleted))
+		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
 	End Sub
 
 	Public Sub RemoveSelectedRows() Handles cms_Tools.RemoveRows
@@ -147,16 +147,15 @@ Public Class CustomersDataGrid
 			Return
 		End If
 
-		Dim customer As Types.Customer
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Customers.SelectedRows.Count
 
 		For Each row As DataGridViewRow In dgv_Customers.SelectedRows
 			Try
-				customer = CType(row.DataBoundItem, Types.Customer)
-				RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
+				DeleteCustomer(Me, New DataGridViewRowCancelEventArgs(row))
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
+				failed += 1
 				Continue For
 			End Try
 		Next

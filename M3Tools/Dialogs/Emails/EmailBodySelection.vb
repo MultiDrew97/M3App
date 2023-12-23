@@ -4,10 +4,10 @@ Namespace Dialogs
 	Public Class EmailBodySelection
 		Private ReadOnly Property Subject As String
 			Get
-				Select Case TabControl1.SelectedTab.Name
-					Case tp_Templates.Name
+				Select Case TabControl1.SelectedIndex
+					Case tp_Templates.TabIndex
 						Return ts_Templates.TemplateSubject
-					Case tp_Custom.Name
+					Case tp_Custom.TabIndex
 						Return CustomEmail1.Subject
 					Case Else
 						Return Nothing
@@ -17,10 +17,10 @@ Namespace Dialogs
 
 		Private ReadOnly Property Body As String
 			Get
-				Select Case TabControl1.SelectedTab.Name
-					Case tp_Templates.Name
+				Select Case TabControl1.SelectedIndex
+					Case tp_Templates.TabIndex
 						Return ts_Templates.TemplateValue
-					Case tp_Custom.Name
+					Case tp_Custom.TabIndex
 						Return CustomEmail1.Body
 					Case Else
 						Return Nothing
@@ -28,13 +28,13 @@ Namespace Dialogs
 			End Get
 		End Property
 
-		Private ReadOnly Property BodyType As String
+		Private ReadOnly Property BodyType As Types.GTools.EmailType
 			Get
-				Select Case TabControl1.SelectedTab.Name
-					Case tp_Templates.Name
-						Return "html"
-					Case tp_Custom.Name
-						Return "plain"
+				Select Case TabControl1.SelectedIndex
+					Case tp_Templates.TabIndex
+						Return Types.GTools.EmailType.HTML
+					Case tp_Custom.TabIndex
+						Return Types.GTools.EmailType.PLAIN
 					Case Else
 						Return Nothing
 				End Select
@@ -45,6 +45,12 @@ Namespace Dialogs
 			Get
 				Return New Types.GTools.EmailContent(Subject, Body, BodyType)
 			End Get
+		End Property
+
+		WriteOnly Property Templates As Types.TemplateList
+			Set(templates As Types.TemplateList)
+				ts_Templates.AddRange(templates)
+			End Set
 		End Property
 
 
@@ -58,22 +64,8 @@ Namespace Dialogs
 			Me.Close()
 		End Sub
 
-		Private Sub BodySelectorLoaded(sender As Object, e As EventArgs) Handles MyBase.Load
-			'ts_Templates.AddRange(
-			'	{
-			'	New Types.Template() With {.Name = "Sermon", .Text = My.Resources.DefaultSermonEmail, .Subject = "New Sermon"},
-			'	New Types.Template() With {.Name = "Reciept", .Text = My.Resources.DefaultReceiptEmail, .Subject = "Thank you"}
-			'	})
+		Private Sub Reload() Handles MyBase.Load
 			ts_Templates.Reload()
-		End Sub
-
-		Sub New(templates As Types.TemplateList)
-
-			' This call is required by the designer.
-			InitializeComponent()
-
-			' Add any initialization after the InitializeComponent() call.
-			ts_Templates.AddRange(templates)
 		End Sub
 	End Class
 End Namespace

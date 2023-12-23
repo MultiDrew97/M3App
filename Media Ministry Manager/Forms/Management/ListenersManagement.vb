@@ -4,6 +4,7 @@ Imports SPPBC.M3Tools.Events.Listeners
 Public Class ListenersManagement
 
 	Private Event ListenerAdded As ListenerEventHandler
+	Private Event ListenerDBModified As ListenerEventHandler
 	Private Tooled As Boolean = False
 
 	Private Sub Loading(sender As Object, e As EventArgs) Handles Me.Load
@@ -66,20 +67,16 @@ Public Class ListenersManagement
 		End Using
 	End Sub
 
-	Private Sub FilterChanged(value As String) Handles dlc_Listeners.FilterChanged
-		bsListeners.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
-	End Sub
-
 	Private Sub RemoveListener(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.RemoveListener
 		UseWaitCursor = True
 		dbListeners.RemoveListener(e.Listener.Id)
-		Reload()
+		RaiseEvent ListenerDBModified(Me, e)
 	End Sub
 
 	Private Sub AddListener(sender As Object, e As ListenerEventArgs) Handles mms_Main.AddListener, dlc_Listeners.AddListener
+		UseWaitCursor = True
 		dbListeners.AddListener(e.Listener.Name, e.Listener.Email)
 		RaiseEvent ListenerAdded(Me, e)
-		Reload()
 	End Sub
 
 	Private Sub SendWelcom(sender As Object, e As ListenerEventArgs) Handles Me.ListenerAdded
@@ -87,17 +84,19 @@ Public Class ListenersManagement
 		Dim subject = "Welcome to the Ministry"
 		Dim body = String.Format(newListener, e.Listener.Name.Trim)
 		Dim message = gt_Email.Create(e.Listener, subject, body)
-
+#If Not DEBUG Then
 		gt_Email.Send(message)
+#End If
+		RaiseEvent ListenerDBModified(Me, e)
 	End Sub
 
 	Private Sub UpdateListener(sender As Object, e As ListenerEventArgs) Handles dlc_Listeners.UpdateListener
 		UseWaitCursor = True
 		dbListeners.UpdateListener(e.Listener)
-		Reload()
+		RaiseEvent ListenerDBModified(Me, e)
 	End Sub
 
-	Private Sub Reload() Handles dlc_Listeners.RefreshDisplay, Me.ListenerAdded
+	Private Sub Reload() Handles dlc_Listeners.RefreshDisplay, Me.ListenerDBModified
 		UseWaitCursor = True
 		bsListeners.Clear()
 		For Each listener In dbListeners.GetListeners()

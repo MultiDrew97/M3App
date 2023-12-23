@@ -9,7 +9,7 @@ Public Class SendEmailsDialog
 	Private Event ProgressReset(total As Integer)
 
 	'TODO: Make email sending more straight forward
-	Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
+	'Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
 
 	ReadOnly Property FileCount As Integer
 		Get
@@ -20,7 +20,8 @@ Public Class SendEmailsDialog
 	Private Sub BeginSending(sender As Object, e As EventArgs) Handles btn_Send.Click
 		RaiseEvent EmailsSending()
 
-		Dim details As New EmailDetails()
+		' FIXME: Verify this still works before pushing update
+		Dim details As IEmailDetails = CType(New Object(), IEmailDetails)
 
 		If Not FileCount > 0 Then
 			Dim res = MessageBox.Show("Are you wanting to send an email with no attachments?", "No File Selected", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -72,7 +73,7 @@ Public Class SendEmailsDialog
 	'End Sub
 
 	Private Sub GatherFiles(sender As Object, e As DoWorkEventArgs) Handles bw_GatherFiles.DoWork
-		Dim details = CType(e.Argument, EmailDetails)
+		Dim details = CType(e.Argument, IEmailDetails)
 
 		For Each node In gdt_Files.GetSelectedNodes()
 			' TODO: Uncomment after build
@@ -96,14 +97,13 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub PrepEmails(sender As Object, e As DoWorkEventArgs) Handles bw_PrepEmails.DoWork
-		Dim details = CType(e.Argument, EmailDetails)
-		'Dim links As New List(Of String)
+		Dim details = CType(e.Argument, IEmailDetails)
 
 		For Each file In details.DriveLinks
 			Select Case details.EmailContents.BodyType
-				Case "plain"
+				Case EmailType.PLAIN
 					details.SendingLinks.Add(String.Format(DriveShareLink, file.Id))
-				Case "html"
+				Case EmailType.HTML
 					details.SendingLinks.Add(String.Format(DriveLinkHtml, String.Format(DriveShareLink, file.Id), file.Name))
 				Case Else
 			End Select
@@ -122,7 +122,7 @@ Public Class SendEmailsDialog
 	End Sub
 
 	Private Sub GatherReceipients(sender As Object, e As DoWorkEventArgs) Handles bw_GatherReceipients.DoWork
-		Dim details = CType(e.Argument, EmailDetails)
+		Dim details = CType(e.Argument, IEmailDetails)
 		Dim res = rsd_Selection.ShowDialog(dbListeners.GetListeners())
 		If Not res = DialogResult.OK Then
 			e.Cancel = True
@@ -139,15 +139,16 @@ Public Class SendEmailsDialog
 			Return
 		End If
 
-		Dim details = CType(e.Result, EmailDetails)
+		Dim details = CType(e.Result, IEmailDetails)
 
-		Using body As New EmailBodySelection(New TemplateList() From {
-																   New Template() With {
-																   .Name = "Sermon",
-																   .Text = My.Resources.newSermon,
-																   .Subject = "New Sermon"
-																   },
-				New Template() With {.Name = "Reciept", .Text = My.Resources.receipt, .Subject = "Thank you"}})
+		' TODO: Figure out how to make this simplier
+		Using body As New EmailBodySelection() With
+			{
+				.Templates = New TemplateList() From {
+					New Template("Sermon", My.Resources.newSermon, "New Sermon"),
+					New Template("Reciept", My.Resources.receipt, "Thank you")
+				}
+			}
 			Dim res = body.ShowDialog()
 			If Not res = DialogResult.OK Then
 				RaiseEvent EmailsCancelled()
@@ -162,13 +163,14 @@ Public Class SendEmailsDialog
 
 	Private Sub SendEmails(sender As Object, e As DoWorkEventArgs) Handles bw_SendEmails.DoWork
 		Dim messages As New List(Of MimeKit.MimeMessage)
-		Dim details = CType(e.Argument, EmailDetails)
+		Dim details = CType(e.Argument, IEmailDetails)
+
 		For Each listener In details.Recipients
 			Dim body As String
 			Select Case details.EmailContents.BodyType
-				Case "plain"
+				Case EmailType.PLAIN
 					body = $"Hello {listener.Name}, {vbCrLf}{vbCrLf}{details.EmailContents.Body}{vbCrLf}{vbCrLf}{String.Join(vbCrLf, details.SendingLinks)}"
-				Case "html"
+				Case EmailType.HTML
 					body = String.Format(details.EmailContents.Body, listener.Name, String.Join("<br />", details.SendingLinks))
 				Case Else
 					e.Cancel = True
@@ -176,7 +178,7 @@ Public Class SendEmailsDialog
 			End Select
 
 			' TODO: Make login screen store the user info instead of just username and password to use for sender info
-			Dim message = gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles) ', New MimeKit.MailboxAddress(My.Settings.User.Name, My.Settings.User.Email))
+			Dim message = gmt_Gmail.CreateWithAttachment(listener, details.EmailContents, details.LocalFiles)
 			messages.Add(message)
 		Next
 		e.Result = messages

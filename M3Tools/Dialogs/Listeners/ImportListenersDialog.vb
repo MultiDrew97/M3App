@@ -1,16 +1,12 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.FileIO
-Imports SPPBC.M3Tools.Events.Listeners
 
 Namespace Dialogs
 	Public Class ImportListenersDialog
-		Public Event ListenerAdded As ListenerEventHandler
-
-		Public ReadOnly Property Listeners As IList
+		Public ReadOnly Property Listeners As Types.DBEntryCollection(Of Types.Listener)
 			Get
-				' TODO: Fix this to properly manage list contents
-				Return ldg_Listeners.Listeners
+				Return CType(ldg_Listeners.Listeners, Types.DBEntryCollection(Of Types.Listener))
 			End Get
 		End Property
 
@@ -20,12 +16,8 @@ Namespace Dialogs
 				Return
 			End If
 
-			If bw_ImportListeners.IsBusy Then
-				Return
-			End If
-
-			UseWaitCursor = True
-			bw_ImportListeners.RunWorkerAsync()
+			DialogResult = DialogResult.OK
+			Me.Close()
 		End Sub
 
 		Private Sub Cancel(sender As Object, e As EventArgs) Handles btn_Cancel.Click
@@ -60,35 +52,6 @@ Namespace Dialogs
 			Return dict
 		End Function
 
-		Private Sub ImportListeners(sender As Object, e As DoWorkEventArgs) Handles bw_ImportListeners.DoWork
-			For Each listener As Types.Listener In Listeners
-				Try
-					dbListeners.AddListener(listener.Name, listener.Email)
-					RaiseEvent ListenerAdded(Me, New ListenerEventArgs(listener, M3Tools.Events.EventType.Added))
-					bsListeners.Remove(listener)
-				Catch ex As Exception
-					Console.Error.WriteLine(ex.Message)
-					Throw New NotImplementedException("ImportListeners exception block")
-				End Try
-			Next
-		End Sub
-
-		Private Sub ListenersImported(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_ImportListeners.RunWorkerCompleted
-			UseWaitCursor = False
-			If bsListeners.Count > 0 Then
-				MessageBox.Show("Some listeners couldn't be imported. Please check list for failed additions", "Failed Imports", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				Return
-			End If
-
-			Dim res = MessageBox.Show("Would you like to import more listeners?", "Additional Imports", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-			If Not res = DialogResult.Yes Then
-				Me.DialogResult = DialogResult.OK
-				Me.Close()
-				Return
-			End If
-		End Sub
-
 		Private Sub ClearList(sender As Object, e As EventArgs) Handles btn_Clear.Click
 			Dim res = MessageBox.Show("Are you sure you want to clear the list of imports?", "Clear Import List", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -104,6 +67,7 @@ Namespace Dialogs
 			Dim files = CType(e.Argument, String())
 			Dim colDict As New Dictionary(Of String, Integer) From {{"Name", 0}, {"Email", 1}}
 			Dim csvReader As TextFieldParser
+			'Dim listeners As New Types.DBEntryCollection(Of Types.Listener)
 
 			For Each file In ofd_ImportFile.FileNames
 				csvReader = New TextFieldParser(file) With {
@@ -121,10 +85,7 @@ Namespace Dialogs
 
 				While Not csvReader.EndOfData
 					Dim fields = csvReader.ReadFields()
-					Dim listener = New Types.Listener() With {
-									.Name = fields(colDict("Name")),
-									.Email = fields(colDict("Email"))
-									}
+					Dim listener = New Types.Listener(-1, fields(colDict("Name")), fields(colDict("Email")))
 
 					If bsListeners.Contains(listener) Then
 						Continue While
@@ -133,11 +94,20 @@ Namespace Dialogs
 					bsListeners.Add(listener)
 				End While
 			Next
+
+			' e.Result = listeners
 		End Sub
 
 		Private Sub FilesParsed(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw_ParseFiles.RunWorkerCompleted
-			'ldg_Listeners.Invalidate()
-			'ldg_Listeners.Select()
+			If e.Error IsNot Nothing Then
+				Throw e.Error
+			End If
+
+			If e.Cancelled Then
+				Return
+			End If
+
+			bsListeners.DataSource = CType(e.Result, Types.DBEntryCollection(Of Types.Listener))
 		End Sub
 	End Class
 End Namespace

@@ -34,6 +34,7 @@ Public Class ListenersDataGrid
 
 	Public ReadOnly Property SelectedListeners As IList
 		Get
+			' TODO: Simplify this later
 			If ListenersSelectable Then
 				If chk_SelectAll.Checked Then
 					Return dgv_Listeners.Rows
@@ -147,16 +148,15 @@ Public Class ListenersDataGrid
 			Return
 		End If
 
-		Dim listener As Types.Listener
 		Dim failed As Integer = 0
 		Dim total As Integer = dgv_Listeners.SelectedRows.Count
 
 		For Each row As DataGridViewRow In dgv_Listeners.SelectedRows
 			Try
-				listener = CType(row.DataBoundItem, Types.Listener)
-				RaiseEvent RemoveListener(Me, New ListenerEventArgs(listener))
+				DeleteListener(Me, New DataGridViewRowCancelEventArgs(row))
 			Catch ex As Exception
 				Console.WriteLine(ex.Message)
+				failed += 1
 				Exit Sub
 			End Try
 		Next

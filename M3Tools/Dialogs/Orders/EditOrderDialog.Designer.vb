@@ -106,17 +106,11 @@ Partial Class EditOrderDialog
         Me.pcb_Items.SelectedItem = Nothing
         Me.pcb_Items.SelectedValue = Nothing
         Me.pcb_Items.Size = New System.Drawing.Size(200, 42)
-        Me.pcb_Items.TabIndex = 3
-        '
-        'db_Orders
-        '
-        Me.db_Orders.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-        Me.db_Orders.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-        Me.db_Orders.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-        '
-        'EditOrderDialog
-        '
-        Me.AcceptButton = Me.OK_Button
+		Me.pcb_Items.TabIndex = 3
+		'
+		'EditOrderDialog
+		'
+		Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button

@@ -6,7 +6,7 @@ Public Class Frm_DisplayOrders
 	Private Sub ViewLoading(sender As Object, e As EventArgs) Handles Me.Load
 		doc_Orders.Reload()
 		mms_Strip.ToggleViewItem("Orders")
-		lbl_NoOrders.Visible = doc_Orders.IsEmpty
+		'lbl_NoOrders.Visible = doc_Orders.Count
 	End Sub
 
 	Private Sub ViewClosed(sender As Object, e As EventArgs) Handles Me.Closed
@@ -50,8 +50,6 @@ Public Class Frm_DisplayOrders
 	End Sub
 
 	Private Sub DataUpdated() Handles doc_Orders.DataChanged
-		Invoke(Sub()
-				   lbl_NoOrders.Visible = doc_Orders.IsEmpty
-			   End Sub)
+		'lbl_NoOrders.Visible = doc_Orders.IsEmpty
 	End Sub
 End Class

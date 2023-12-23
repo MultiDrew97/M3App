@@ -29,11 +29,11 @@ Namespace Types
 			Me.New(-1)
 		End Sub
 
-		Public Sub New(Optional id As Integer = -1, Optional fName As String = "John", Optional lName As String = "Doe",
+		Public Sub New(userID As Integer, Optional fName As String = "John", Optional lName As String = "Doe",
 					   Optional email As String = Nothing, Optional username As String = "JohnDoe123",
 					   Optional password As String = Nothing, Optional salt As Guid = Nothing,
 					   Optional accountRole As AccountRole = AccountRole.User)
-			Me.New(id, $"{fName} {lName}", email, New Auth(username, password, salt, accountRole))
+			Me.New(userID, $"{fName} {lName}", email, New Auth(username, password, salt, accountRole))
 		End Sub
 
 		'Public Sub New(id As Integer, name As String, username As String, email As String, password As Byte(), salt As String, accountRole As AccountRole)

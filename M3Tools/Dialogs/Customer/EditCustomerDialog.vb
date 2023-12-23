@@ -88,7 +88,7 @@ Namespace Dialogs
 			FirstName = Customer.FirstName
 			LastName = Customer.LastName
 			Address = Customer.Address
-			Phone = Customer.PhoneNumber
+			Phone = Customer.Phone
 			Email = Customer.Email
 			Text = String.Format(Text, Customer.Name)
 		End Sub
@@ -157,7 +157,7 @@ Namespace Dialogs
 			Dim phoneStr = String.Join("", Phone.Where(Function(currentChar As Char) As Boolean
 														   Return Not Regex.IsMatch(currentChar, "[\s()-]")
 													   End Function))
-			Dim currentStr = String.Join("", _customer.PhoneNumber.Where(Function(currentChar As Char) As Boolean
+			Dim currentStr = String.Join("", _customer.Phone.Where(Function(currentChar As Char) As Boolean
 																			 Return Not Regex.IsMatch(currentChar, "[\s()-]")
 																		 End Function))
 

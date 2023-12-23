@@ -235,11 +235,9 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMi
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.InventoryManagement.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.ListenersManagement.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.LogOnForm.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.SettingsForm.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayOrders.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.MainForm.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.PlaceOrderDialog.resources
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Frm_DisplayInventory.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\MediaMinistry.Resources.resources
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.GenerateResource.cache
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\obj\Debug\Media Ministry Manager.vbproj.CoreCompileInputs.cache

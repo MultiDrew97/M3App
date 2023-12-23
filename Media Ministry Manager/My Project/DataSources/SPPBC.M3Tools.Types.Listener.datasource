@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="CustomerCollection" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>SPPBC.M3Tools.Types.CustomerCollection, SPPBC.M3Tools, Version=1.0.410.2201, Culture=neutral, PublicKeyToken=null</TypeInfo>
+<GenericObjectDataSource DisplayName="Listener" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>SPPBC.M3Tools.Types.Listener, SPPBC.M3Tools, Version=1.0.410.2201, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

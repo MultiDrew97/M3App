@@ -77,12 +77,6 @@ Partial Class ProductsComboBox
 		'bw_LoadItems
 		'
 		'
-		'db_Products
-		'
-		Me.db_Products.BaseUrl = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultCatalog
-		Me.db_Products.Password = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultPassword
-		Me.db_Products.Username = Global.SPPBC.M3Tools.My.MySettings.Default.DefaultUsername
-		'
 		'ProductsComboBox
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

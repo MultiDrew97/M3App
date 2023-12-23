@@ -3,11 +3,9 @@ Imports System.Windows.Forms
 Imports SPPBC.M3Tools.Events.Listeners
 
 Public Class DisplayListenersCtrl
-	Public Event ListenerAdded As ListenerEventHandler
 	Public Event RemoveListener As ListenerEventHandler
 	Public Event UpdateListener As ListenerEventHandler
 	Public Event AddListener As ListenerEventHandler
-	Public Event FilterChanged(value As String)
 	Public Event RefreshDisplay()
 	Public Event SendEmails()
 
@@ -24,10 +22,10 @@ Public Class DisplayListenersCtrl
 
 	Public Sub Reload()
 		tsl_Count.Text = String.Format(CountTemplate, ldg_Listeners.Listeners.Count)
-		'RaiseEvent RefreshDisplay()
 	End Sub
 
 	Private Sub RefreshView() Handles ldg_Listeners.RefreshDisplay
+		RaiseEvent RefreshDisplay()
 	End Sub
 
 	Private Sub NewListener(sender As Object, e As EventArgs) Handles tbtn_AddListener.Click
@@ -54,9 +52,19 @@ Public Class DisplayListenersCtrl
 				Return
 			End If
 
+			'Using stream
+			' TODO: Implement this error handling in all ctrl controls in all places an event is raised by me (i.e customer, orders, inventory)
+			' TODO: Properly handle different error types that would prevent listener from being added
 			For Each listener As Types.Listener In import.Listeners
-				RaiseEvent ListenerAdded(Me, New ListenerEventArgs(listener, M3Tools.Events.EventType.Added))
+				Try
+					RaiseEvent AddListener(Me, New ListenerEventArgs(listener))
+				Catch ex As Exception
+					MessageBox.Show($"Unable to add {listener.Name}", "Listeners Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+					Console.WriteLine(ex.Message)
+					' TODO: Write to output file of failed additions
+				End Try
 			Next
+			'End Using
 		End Using
 	End Sub
 

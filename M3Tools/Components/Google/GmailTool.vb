@@ -36,19 +36,8 @@ Namespace GTools
 		'	Dispose(disposing)
 		'End Sub
 
-		Function Create([to] As MailboxAddress, content As EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
-			Dim email As New MimeMessage() With {
-				.Sender = If(from, DefaultSender),
-				.Subject = content.Subject,
-				.Body = New TextPart(content.BodyType) With {
-					.Text = content.Body
-				}
-			}
-
-			email.To.Add([to])
-
-			Return email
-
+		Function Create([to] As Types.Listener, subject As String, body As String, Optional bodyType As EmailType = Nothing, Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return Create(New MailboxAddress([to].Name, [to].Email), subject, body, bodyType, from)
 		End Function
 
 		''' <summary>
@@ -60,19 +49,45 @@ Namespace GTools
 		''' <param name="from">Who the email is being sent from</param>
 		''' <param name="bodyType">The type of body the email will have. Default html</param>
 		''' <returns></returns>
-		Function Create([to] As MailboxAddress, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
+		Function Create([to] As MailboxAddress, subject As String, body As String, Optional bodyType As EmailType = Nothing, Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return Create([to], New EmailContent(subject, body, bodyType), from)
-		End Function
-
-		Function Create([to] As Types.Listener, subject As String, body As String, Optional bodyType As String = "html", Optional from As MailboxAddress = Nothing) As MimeMessage
-			Return Create(New MailboxAddress([to].Name, [to].Email), subject, body, bodyType, from)
 		End Function
 
 		Function Create([to] As Types.Listener, content As EmailContent, Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return Create(New MailboxAddress([to].Name, [to].Email), content, from)
 		End Function
 
-		Function CreateWithAttachment([to] As Types.Listener, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+		Private Function Create([to] As MailboxAddress, content As EmailContent, from As MailboxAddress) As MimeMessage
+			Dim bodyType As String
+
+			Select Case (content.BodyType)
+				Case EmailType.PLAIN
+					bodyType = "plain"
+				Case EmailType.HTML
+					bodyType = "html"
+				Case Else
+					Throw New ArgumentException($"{content.BodyType} is not a valid body type.")
+			End Select
+
+			Dim email As New MimeMessage() With {
+				.Sender = If(from, DefaultSender),
+				.Subject = content.Subject,
+				.Body = New TextPart(bodyType) With {
+					.Text = content.Body
+				}
+			}
+
+			email.To.Add([to])
+
+			Return email
+		End Function
+
+
+		Function CreateWithAttachment([to] As MailboxAddress, subject As String, body As String, bodyType As EmailType, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+			Return CreateWithAttachment([to], New EmailContent(subject, body, bodyType), files, from)
+		End Function
+
+		Function CreateWithAttachment([to] As Types.Listener, subject As String, body As String, bodyType As EmailType, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
 			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), New EmailContent(subject, body, bodyType), files, from)
 		End Function
 
@@ -80,7 +95,15 @@ Namespace GTools
 			Return CreateWithAttachment(New MailboxAddress([to].Name, [to].Email), content, files, from)
 		End Function
 
-		Function CreateWithAttachment([to] As MailboxAddress, content As EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
+		''' <summary>
+		''' Create an email that contains attachements to be sent to a email box
+		''' </summary>
+		''' <param name="[to]">The MailBox Address to send to</param>
+		''' <param name="content">The content of the email to be sent</param>
+		''' <param name="files">The files to attach to the email</param>
+		''' <param name="from">The email address to send from</param>
+		''' <returns>Returns an Email to be sent</returns>
+		Private Function CreateWithAttachment([to] As MailboxAddress, content As EmailContent, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
 			Dim email As MimeMessage = Create([to], content, from)
 
 			Dim multipart As New Multipart From {
@@ -101,20 +124,6 @@ Namespace GTools
 			email.Body = multipart
 
 			Return email
-		End Function
-
-		''' <summary>
-		''' Create an email that contains attachements to be sent to a email box
-		''' </summary>
-		''' <param name="[to]">The MailBox Address to send to</param>
-		''' <param name="subject">The subject of the email to be sent</param>
-		''' <param name="body">The body portion of the email to be sent</param>
-		''' <param name="files">The files to attach to the email</param>
-		''' <param name="from">The email address to </param>
-		''' <param name="bodyType">The type of body the email will have. Default html</param>
-		''' <returns>Returns an Email to be sent</returns>
-		Function CreateWithAttachment([to] As MailboxAddress, subject As String, body As String, bodyType As String, files As IList(Of String), Optional from As MailboxAddress = Nothing) As MimeMessage
-			Return CreateWithAttachment([to], New EmailContent(subject, body, bodyType), files, from)
 		End Function
 
 		''' <summary>

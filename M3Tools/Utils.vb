@@ -265,7 +265,7 @@ Public Structure Utils
 	End Function
 
 	Shared Function ValidID(id As Integer) As Boolean
-		Return id >= My.Settings.MinID
+		Return id >= 1
 	End Function
 
 	Shared Function TryDateCast(value As Object) As Date

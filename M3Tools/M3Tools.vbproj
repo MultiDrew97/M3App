@@ -469,26 +469,6 @@
     <Compile Include="Controls\People\Users\UsernameField.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Database\Data Tables\Events\CustomersRowChangeEvent.vb" />
-    <Compile Include="Components\Database\Data Tables\Events\InventoryRowChangeEvent.vb" />
-    <Compile Include="Components\Database\Data Tables\Events\ListenersRowChangeEvent.vb" />
-    <Compile Include="Components\Database\Data Tables\Events\OrdersRowChangeEvent.vb" />
-    <Compile Include="Components\Database\Data Tables\Rows\CustomersDataRow.vb" />
-    <Compile Include="Components\Database\Data Tables\Rows\InventoryDataRow.vb" />
-    <Compile Include="Components\Database\Data Tables\Rows\ListenersDataRow.vb" />
-    <Compile Include="Components\Database\Data Tables\Rows\OrdersDataRow.vb" />
-    <Compile Include="Components\Database\Data Tables\Tables\CustomersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Database\Data Tables\Tables\InventoryDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Database\Data Tables\Tables\ListenersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Database\Data Tables\Tables\OrdersDataTable.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Dialogs\User\LoginDialog.Designer.vb">
       <DependentUpon>LoginDialog.vb</DependentUpon>
     </Compile>

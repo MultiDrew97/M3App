@@ -41,7 +41,7 @@ Namespace Database
 		End Property
 
 		Public Sub AddListener(firstName As String, lastName As String, email As String)
-			AddListener(New Types.Listener(-1, firstName, lastName, email))
+			AddListener($"{firstName} {lastName}", email)
 		End Sub
 
 		Public Sub AddListener(name As String, email As String)
@@ -54,7 +54,7 @@ Namespace Database
 
 		Public Sub RemoveListener(listenerID As Integer)
 			If Not Utils.ValidID(listenerID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid ListenerID provided")
 			End If
 
 			dbConnection.Consume(Method.Delete, $"/{path}/{listenerID}")
@@ -66,7 +66,7 @@ Namespace Database
 
 		Public Sub UpdateListener(listenerID As Integer, name As String, email As String)
 			If Not Utils.ValidID(listenerID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid ListenerID provided")
 			End If
 
 			UpdateListener(New Types.Listener(listenerID, name, email))
@@ -82,7 +82,7 @@ Namespace Database
 
 		Public Function GetListener(listenerID As Integer) As Types.Listener
 			If Not Utils.ValidID(listenerID) Then
-				Throw New ArgumentException($"ID values must be greater than or equal to {My.Settings.MinID}")
+				Throw New ArgumentException($"Invalid ListenerID provided")
 			End If
 
 			Return dbConnection.Consume(Of Types.Listener)(Method.Get, $"/{path}/{listenerID}").Result
