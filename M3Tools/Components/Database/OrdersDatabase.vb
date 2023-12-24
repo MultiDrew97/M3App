@@ -46,9 +46,10 @@ Namespace Database
 
 		Public Function GetCompletedOrders() As DBEntryCollection(Of Order)
 			' TODO: Test this to make sure it works properly
-			Return CType(GetOrders().Where(Function(order As Order) As Boolean
-											   Return order.CompletedDate.Year > 2000
-										   End Function), DBEntryCollection(Of Order))
+			Throw New NotImplementedException("GetCompletedOrders")
+			'Return CType(GetOrders().Where(Function(order As Order) As Boolean
+			'								   Return order.CompletedDate.Year > 2000
+			'							   End Function), DBEntryCollection(Of Order))
 		End Function
 
 		Public Sub AddOrder(customerID As Integer, itemID As Integer, quantity As Integer)
@@ -116,10 +117,10 @@ Namespace Database
 			If customerID < 0 Then
 				Throw New ArgumentException("ID values must be greater than or equal to 0")
 			End If
-
-			Return CType(GetOrders().Where(Function(order As Order)
-											   Return order.Customer.Id = customerID
-										   End Function), DBEntryCollection(Of Order))
+			Throw New NotImplementedException("GetOrderByCustomer")
+			'Return CType(GetOrders().Where(Function(order As Order)
+			'								   Return order.Customer.Id = customerID
+			'							   End Function), DBEntryCollection(Of Order))
 		End Function
 	End Class
 End Namespace

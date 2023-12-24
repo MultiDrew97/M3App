@@ -21,14 +21,13 @@ Public Class ListenersDataGrid
 		End Get
 	End Property
 
-	<Description("Data Source to use for Data Grid")>
+	<Description("Data Source to use for data grid.")>
 	Public Property DataSource As BindingSource
 		Get
-			Return CType(dgv_Listeners.DataSource, BindingSource)
+			Return CType(bsListeners.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
-			dgv_Listeners.AutoGenerateColumns = False
-			dgv_Listeners.DataSource = value
+			bsListeners.DataSource = value
 		End Set
 	End Property
 
@@ -41,12 +40,7 @@ Public Class ListenersDataGrid
 				End If
 
 				For Each row As DataGridViewRow In dgv_Listeners.Rows
-					If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
-						row.Selected = False
-						Continue For
-					End If
-
-					row.Selected = True
+					row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
 				Next
 			End If
 

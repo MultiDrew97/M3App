@@ -200,7 +200,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Custom Objects\Types\extensions.vb" />
-    <Compile Include="Custom Objects\Types\ListenerCollection.vb" />
     <Compile Include="Custom Objects\Utils.vb" />
     <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.Designer.vb">
       <DependentUpon>AddProductDialog.vb</DependentUpon>
@@ -362,6 +361,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="My Project\DataSources\MediaMinistry.Types.CustomerCollection.datasource" />
     <None Include="My Project\DataSources\MediaMinistry.Types.ListenerCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.CustomersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
@@ -370,6 +370,7 @@
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
+    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CustomersCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Listener.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />
@@ -470,7 +471,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

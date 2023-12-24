@@ -22,18 +22,16 @@ Partial Class DisplayCustomersCtrl
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
-        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-        Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
-        Me.cms_Tools = New SPPBC.M3Tools.ToolsContextMenu()
-        Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
-        Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
-        Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
-        Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
-        Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
+		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+		Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
+		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
+		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
+		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
+		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+		Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
+		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
+		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
 		Me.ToolStripContainer1.SuspendLayout()
@@ -66,22 +64,14 @@ Partial Class DisplayCustomersCtrl
 		'cdg_Customers
 		'
 		Me.cdg_Customers.AllowColumnReordering = True
-		Me.cdg_Customers.ContextMenuStrip = Me.cms_Tools
 		Me.cdg_Customers.CustomersSelectable = False
 		Me.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.cdg_Customers.Filter = Nothing
 		Me.cdg_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.cdg_Customers.Location = New System.Drawing.Point(0, 0)
 		Me.cdg_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
 		Me.cdg_Customers.Name = "cdg_Customers"
 		Me.cdg_Customers.Size = New System.Drawing.Size(748, 525)
 		Me.cdg_Customers.TabIndex = 1
-		'
-		'cms_Tools
-		'
-		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-		Me.cms_Tools.Name = "cms_Tools"
-		Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
 		'
 		'ts_CustomerTools
 		'
@@ -161,13 +151,12 @@ Partial Class DisplayCustomersCtrl
 
 	End Sub
 	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
-    Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
-    Friend WithEvents cdg_Customers As CustomersDataGrid
-    Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
-    Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
-    Friend WithEvents tbtn_Import As Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
-    Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
-    Friend WithEvents cms_Tools As ToolsContextMenu
+	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
+	Friend WithEvents cdg_Customers As CustomersDataGrid
+	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
+	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
+	Friend WithEvents tbtn_Import As Windows.Forms.ToolStripButton
+	Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+	Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
+	Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
 End Class

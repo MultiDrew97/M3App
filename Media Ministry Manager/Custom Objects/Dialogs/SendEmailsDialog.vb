@@ -165,7 +165,7 @@ Public Class SendEmailsDialog
 		Dim messages As New List(Of MimeKit.MimeMessage)
 		Dim details = CType(e.Argument, IEmailDetails)
 
-		For Each listener In details.Recipients
+		For Each listener As Listener In details.Recipients
 			Dim body As String
 			Select Case details.EmailContents.BodyType
 				Case EmailType.PLAIN

@@ -89,7 +89,7 @@ Public Class MainMenuStrip
 				Return
 			End If
 
-			RaiseEvent AddCustomer(Me, New Customers.CustomerEventArgs(create.Customer))
+			RaiseEvent AddCustomer(Me, New Customers.CustomerEventArgs(create.Customer, M3Tools.Events.EventType.Added))
 		End Using
 	End Sub
 
@@ -101,7 +101,7 @@ Public Class MainMenuStrip
 				Return
 			End If
 
-			RaiseEvent AddProduct(Me, New Inventory.InventoryEventArgs(create.Product))
+			RaiseEvent AddProduct(Me, New Inventory.InventoryEventArgs(create.Product, M3Tools.Events.EventType.Added))
 		End Using
 	End Sub
 
@@ -112,7 +112,7 @@ Public Class MainMenuStrip
 				Return
 			End If
 
-			RaiseEvent AddListener(Me, New Listeners.ListenerEventArgs(create.Listener))
+			RaiseEvent AddListener(Me, New Listeners.ListenerEventArgs(create.Listener, M3Tools.Events.EventType.Added))
 		End Using
 	End Sub
 

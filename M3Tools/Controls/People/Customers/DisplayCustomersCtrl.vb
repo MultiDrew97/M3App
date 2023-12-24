@@ -35,7 +35,7 @@ Public Class DisplayCustomersCtrl
 				Return
 			End If
 
-			RaiseEvent AddCustomer(Me, New CustomerEventArgs(add.Customer))
+			RaiseEvent AddCustomer(Me, New CustomerEventArgs(add.Customer, M3Tools.Events.EventType.Added))
 		End Using
 	End Sub
 
@@ -70,7 +70,7 @@ Public Class DisplayCustomersCtrl
 				Return
 			End If
 
-			RaiseEvent UpdateCustomer(Me, New CustomerEventArgs(edit.NewInfo))
+			RaiseEvent UpdateCustomer(Me, New CustomerEventArgs(edit.NewInfo, M3Tools.Events.EventType.Updated))
 		End Using
 	End Sub
 
@@ -82,5 +82,9 @@ Public Class DisplayCustomersCtrl
 		End If
 
 		RaiseEvent RemoveCustomer(Me, e)
+	End Sub
+
+	Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
+
 	End Sub
 End Class

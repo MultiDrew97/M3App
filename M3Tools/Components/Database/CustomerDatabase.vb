@@ -61,8 +61,8 @@ Namespace Database
 			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(customer))
 		End Sub
 
-		Public Function GetCustomers() As DBEntryCollection(Of Customer)
-			Return dbConnection.Consume(Of DBEntryCollection(Of Customer))(Method.Get, $"/{path}").Result
+		Public Function GetCustomers() As CustomersCollection
+			Return dbConnection.Consume(Of CustomersCollection)(Method.Get, $"/{path}").Result
 		End Function
 
 		Public Function GetCustomer(customerID As Integer) As Customer

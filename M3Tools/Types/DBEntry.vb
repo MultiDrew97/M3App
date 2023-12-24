@@ -1,4 +1,5 @@
 ﻿Option Strict On
+Imports System.ComponentModel
 
 Namespace Types
 	Public MustInherit Class DbEntry

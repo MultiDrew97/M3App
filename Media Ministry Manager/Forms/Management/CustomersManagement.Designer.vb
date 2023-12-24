@@ -28,7 +28,7 @@ Partial Class CustomersManagement
         Me.tss_CustomersView = New System.Windows.Forms.ToolStripStatusLabel()
         Me.mms_Main = New SPPBC.M3Tools.MainMenuStrip()
         Me.dcc_Customers = New SPPBC.M3Tools.DisplayCustomersCtrl()
-        Me.bsCustomers = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsCustomers = New SPPBC.M3Tools.Types.CustomersBindingSource()
         Me.dbCustomers = New SPPBC.M3Tools.Database.CustomerDatabase(Me.components)
 		Me.ss_StatusView.SuspendLayout()
 		CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,10 +73,6 @@ Partial Class CustomersManagement
 		Me.dcc_Customers.Size = New System.Drawing.Size(784, 415)
 		Me.dcc_Customers.TabIndex = 7
 		'
-		'bsCustomers
-		'
-		Me.bsCustomers.Filter = "[Name] like '%f%'"
-		'
 		'dbCustomers
 		'
 		Me.dbCustomers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
@@ -117,6 +113,6 @@ Partial Class CustomersManagement
 	Friend WithEvents JoinDate As DataGridViewTextBoxColumn
 	Friend WithEvents mms_Main As SPPBC.M3Tools.MainMenuStrip
 	Friend WithEvents dcc_Customers As SPPBC.M3Tools.DisplayCustomersCtrl
-	Friend WithEvents bsCustomers As BindingSource
 	Friend WithEvents dbCustomers As SPPBC.M3Tools.Database.CustomerDatabase
+	Friend WithEvents bsCustomers As CustomersBindingSource
 End Class

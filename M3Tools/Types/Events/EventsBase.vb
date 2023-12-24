@@ -23,6 +23,6 @@
 		None
 		Added
 		Deleted
-		Editted
+		Updated
 	End Enum
 End Namespace

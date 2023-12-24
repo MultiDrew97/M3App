@@ -52,11 +52,11 @@ Partial Class ListenersManagement
         Me.dlc_Listeners.Name = "dlc_Listeners"
         Me.dlc_Listeners.Size = New System.Drawing.Size(784, 437)
         Me.dlc_Listeners.TabIndex = 1
-        '
-        'bsListeners
-        '
-        Me.bsListeners.DataSource = GetType(MediaMinistry.Types.ListenerCollection)
-        Me.bsListeners.Filter = ""
+		'
+		'bsListeners
+		'
+		Me.bsListeners.DataSource = GetType(ListenerCollection)
+		Me.bsListeners.Filter = ""
         '
         'gt_Email
         '

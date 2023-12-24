@@ -286,6 +286,10 @@
     <Compile Include="Exceptions\FormClosedException.vb" />
     <Compile Include="Exceptions\Products\ProductNotFoundException.vb" />
     <Compile Include="Types\Auth.vb" />
+    <Compile Include="Types\CustomersBindingSource.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Types\People\CustomersCollection.vb" />
     <Compile Include="Types\Events\CustomerEvents.vb" />
     <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.vb">
       <DependentUpon>EditCustomerDialog.vb</DependentUpon>
@@ -504,6 +508,7 @@
     <Compile Include="Types\EmailDetails.vb" />
     <Compile Include="Types\Events\ProductEvents.vb" />
     <Compile Include="Types\extensions.vb" />
+    <Compile Include="Types\ListenerCollection.vb" />
     <Compile Include="Types\Templates.vb" />
     <Compile Include="Types\Google\API.vb">
       <SubType>Component</SubType>

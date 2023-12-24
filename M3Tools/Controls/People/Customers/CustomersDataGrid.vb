@@ -22,13 +22,13 @@ Public Class CustomersDataGrid
 		End Get
 	End Property
 
+	<Description("Data Source to use for data grid.")>
 	Public Property DataSource As BindingSource
 		Get
-			Return CType(dgv_Customers.DataSource, BindingSource)
+			Return CType(bsCustomers.DataSource, Types.CustomersBindingSource)
 		End Get
 		Set(value As BindingSource)
-			dgv_Customers.AutoGenerateColumns = False
-			dgv_Customers.DataSource = value
+			bsCustomers.DataSource = value
 		End Set
 	End Property
 
@@ -40,12 +40,7 @@ Public Class CustomersDataGrid
 				End If
 
 				For Each row As DataGridViewRow In dgv_Customers.Rows
-					If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
-						row.Selected = False
-						Continue For
-					End If
-
-					row.Selected = True
+					row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
 				Next
 			End If
 
@@ -56,14 +51,21 @@ Public Class CustomersDataGrid
 	<DefaultValue("")>
 	Property Filter As String
 		Get
+			'If (DataSource Is Nothing) Then
+			'	Return ""
+			'End If
+
 			Return DataSource.Filter
 		End Get
 		Set(value As String)
+			'If (DataSource Is Nothing) Then
+			'	Return
+			'End If
+
 			' TODO: Fix bug and flesh out
-			If value <> "" Then
-				DataSource.Filter = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
-				Return
-			End If
+			'If value <> "" Then
+			'	value = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
+			'End If
 
 			DataSource.Filter = value
 		End Set
@@ -130,7 +132,7 @@ Public Class CustomersDataGrid
 
 		Select Case e.ColumnIndex
 			Case dgc_Edit.Index
-				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer))
+				RaiseEvent EditCustomer(Me, New CustomerEventArgs(customer, M3Tools.Events.EventType.Updated))
 			Case dgc_Remove.DisplayIndex
 				DeleteCustomer(Me, New DataGridViewRowCancelEventArgs(row))
 		End Select
@@ -139,7 +141,7 @@ Public Class CustomersDataGrid
 	Private Sub DeleteCustomer(sender As Object, e As DataGridViewRowCancelEventArgs) Handles dgv_Customers.UserDeletingRow
 		Dim customer = CType(e.Row.DataBoundItem, Types.Customer)
 
-		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer))
+		RaiseEvent RemoveCustomer(Me, New CustomerEventArgs(customer, M3Tools.Events.EventType.Deleted))
 	End Sub
 
 	Public Sub RemoveSelectedRows() Handles cms_Tools.RemoveRows

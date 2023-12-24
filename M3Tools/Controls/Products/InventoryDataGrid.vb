@@ -19,13 +19,13 @@ Public Class InventoryDataGrid
 		End Get
 	End Property
 
+	<Description("Data Source to use for data grid.")>
 	Public Property DataSource As BindingSource
 		Get
-			Return CType(dgv_Inventory.DataSource, BindingSource)
+			Return CType(bsInventory.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
-			dgv_Inventory.AutoGenerateColumns = False
-			dgv_Inventory.DataSource = value
+			bsInventory.DataSource = value
 		End Set
 	End Property
 
@@ -37,12 +37,7 @@ Public Class InventoryDataGrid
 				End If
 
 				For Each row As DataGridViewRow In dgv_Inventory.Rows
-					If Not CBool(row.Cells(dgc_Selection.DisplayIndex).Value) Then
-						row.Selected = False
-						Continue For
-					End If
-
-					row.Selected = True
+					row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
 				Next
 			End If
 
