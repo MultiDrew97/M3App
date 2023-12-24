@@ -2,6 +2,16 @@
 	Public Class CustomersCollection
 		Inherits DBEntryCollection(Of Customer)
 
+		Overloads ReadOnly Property List As IList(Of Customer)
+			Get
+				If (String.IsNullOrEmpty(Filter)) Then
+					Return Me.Items
+				End If
+
+				Return FilteredData
+			End Get
+		End Property
+
 		Overrides Sub ApplyFilter()
 			If String.IsNullOrEmpty(Filter) Then
 				_filteredData = Items

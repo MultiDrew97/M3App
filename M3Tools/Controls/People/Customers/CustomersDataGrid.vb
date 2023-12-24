@@ -10,28 +10,35 @@ Public Class CustomersDataGrid
 	Public Event RemoveCustomer As CustomerEventHandler
 	Public Event RefreshDisplay()
 
+	<Browsable(False)>
 	Public ReadOnly Property SelectedRowsCount As Integer
 		Get
 			Return SelectedCustomers.Count
 		End Get
 	End Property
 
+	<Browsable(False)>
 	Public ReadOnly Property Customers As IList
 		Get
 			Return DataSource.List
 		End Get
 	End Property
 
+	'<RefreshProperties(RefreshProperties.Repaint)>
+	'<AttributeProvider(GetType(IListSource))>
+	<DefaultValue(GetType(Object))>
 	<Description("Data Source to use for data grid.")>
 	Public Property DataSource As BindingSource
 		Get
-			Return CType(bsCustomers.DataSource, Types.CustomersBindingSource)
+			Return CType(dgv_Customers.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
-			bsCustomers.DataSource = value
+			'dgv_Customers.AutoGenerateColumns = False
+			dgv_Customers.DataSource = value
 		End Set
 	End Property
 
+	<Browsable(False)>
 	Public ReadOnly Property SelectedCustomers As IList
 		Get
 			If CustomersSelectable Then
@@ -51,21 +58,21 @@ Public Class CustomersDataGrid
 	<DefaultValue("")>
 	Property Filter As String
 		Get
-			'If (DataSource Is Nothing) Then
-			'	Return ""
+			'If DataSource Is Nothing Then
+			'	Return String.Empty
 			'End If
 
-			Return DataSource.Filter
+			Return If(DataSource?.Filter, "")
 		End Get
 		Set(value As String)
-			'If (DataSource Is Nothing) Then
+			'If DataSource Is Nothing Then
 			'	Return
 			'End If
 
 			' TODO: Fix bug and flesh out
-			'If value <> "" Then
-			'	value = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
-			'End If
+			If value <> "" Then
+				value = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
+			End If
 
 			DataSource.Filter = value
 		End Set

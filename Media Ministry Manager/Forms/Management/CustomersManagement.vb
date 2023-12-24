@@ -26,7 +26,7 @@ Public Class CustomersManagement
 		Me.Close()
 	End Sub
 
-	Private Sub ExitApplication() Handles mms_Main.ExitApplication, mms_Main.UpdateAvailable
+	Private Sub ExitApplication() Handles mms_Main.UpdateAvailable, mms_Main.ExitApplication
 		Utils.CloseOpenForms()
 	End Sub
 
@@ -64,7 +64,7 @@ Public Class CustomersManagement
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
-	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles dcc_Customers.AddCustomer, mms_Main.AddCustomer
+	Private Sub AddCustomer(sender As Object, e As CustomerEventArgs) Handles mms_Main.AddCustomer, dcc_Customers.AddCustomer
 		UseWaitCursor = True
 		dbCustomers.AddCustomer(e.Customer)
 		MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -78,7 +78,7 @@ Public Class CustomersManagement
 		RaiseEvent CustomerDBModified(Me, e)
 	End Sub
 
-	Private Sub Reload() Handles dcc_Customers.RefreshDisplay, Me.CustomerDBModified
+	Private Sub Reload() Handles Me.CustomerDBModified, dcc_Customers.RefreshDisplay
 		UseWaitCursor = True
 		bsCustomers.Clear()
 		For Each customer In dbCustomers.GetCustomers()

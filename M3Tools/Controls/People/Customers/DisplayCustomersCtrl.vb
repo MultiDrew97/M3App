@@ -8,8 +8,11 @@ Public Class DisplayCustomersCtrl
 	Public Event RemoveCustomer As CustomerEventHandler
 	Public Event RefreshDisplay()
 
+	<DefaultValue("")>
 	Public Property CountTemplate As String
 
+	<DefaultValue(GetType(Object))>
+	<Description("Data Source to use for data grid.")>
 	Public Property DataSource As BindingSource
 		Get
 			Return cdg_Customers.DataSource

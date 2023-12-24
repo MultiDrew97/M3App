@@ -33,7 +33,6 @@ Namespace Types
 		Public ReadOnly Property FilteredData As IList(Of T)
 			Get
 				Return _filteredData
-				Throw New NotImplementedException("FilteredData")
 			End Get
 		End Property
 
@@ -88,7 +87,7 @@ Namespace Types
 		Public Shadows ReadOnly Property SupportsSorting As Boolean Implements IBindingList.SupportsSorting
 			Get
 				' TODO: Figure out sorting
-				Return True
+				Return False
 			End Get
 		End Property
 

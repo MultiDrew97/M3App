@@ -24,7 +24,6 @@ Partial Class DisplayCustomersCtrl
 	Private Sub InitializeComponent()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
 		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-		Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
 		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
 		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
@@ -32,6 +31,7 @@ Partial Class DisplayCustomersCtrl
 		Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
 		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
 		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
+		Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
 		Me.ToolStripContainer1.SuspendLayout()
@@ -60,18 +60,6 @@ Partial Class DisplayCustomersCtrl
 		'ToolStripContainer1.TopToolStripPanel
 		'
 		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
-		'
-		'cdg_Customers
-		'
-		Me.cdg_Customers.AllowColumnReordering = True
-		Me.cdg_Customers.CustomersSelectable = False
-		Me.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.cdg_Customers.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.cdg_Customers.Location = New System.Drawing.Point(0, 0)
-		Me.cdg_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.cdg_Customers.Name = "cdg_Customers"
-		Me.cdg_Customers.Size = New System.Drawing.Size(748, 525)
-		Me.cdg_Customers.TabIndex = 1
 		'
 		'ts_CustomerTools
 		'
@@ -130,6 +118,20 @@ Partial Class DisplayCustomersCtrl
 		Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
 		Me.tbtn_Refresh.Text = "Refresh"
 		'
+		'cdg_Customers
+		'
+		Me.cdg_Customers.AllowColumnReordering = True
+		Me.cdg_Customers.AutoSize = True
+		Me.cdg_Customers.CustomersSelectable = False
+		Me.cdg_Customers.DataSource = Nothing
+		Me.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.cdg_Customers.Location = New System.Drawing.Point(0, 0)
+		Me.cdg_Customers.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.cdg_Customers.MinimumSize = New System.Drawing.Size(600, 500)
+		Me.cdg_Customers.Name = "cdg_Customers"
+		Me.cdg_Customers.Size = New System.Drawing.Size(748, 525)
+		Me.cdg_Customers.TabIndex = 0
+		'
 		'DisplayCustomersCtrl
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -141,6 +143,7 @@ Partial Class DisplayCustomersCtrl
 		Me.Name = "DisplayCustomersCtrl"
 		Me.Size = New System.Drawing.Size(748, 550)
 		Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
+		Me.ToolStripContainer1.ContentPanel.PerformLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
 		Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
 		Me.ToolStripContainer1.ResumeLayout(False)
@@ -152,11 +155,11 @@ Partial Class DisplayCustomersCtrl
 	End Sub
 	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
 	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
-	Friend WithEvents cdg_Customers As CustomersDataGrid
 	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
 	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
 	Friend WithEvents tbtn_Import As Windows.Forms.ToolStripButton
 	Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
 	Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
 	Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
+	Friend WithEvents cdg_Customers As CustomersDataGrid
 End Class
