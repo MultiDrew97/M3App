@@ -399,4 +399,8 @@
     <value>&lt;a href=""{0}"" class=""drive-link""&gt;{1}&lt;/a&gt;</value>
     <comment>The html format of the share link for easy clicking</comment>
   </data>
+  <data name="CountTemplate" xml:space="preserve">
+    <value>Count: {0}</value>
+    <comment>The template for displaying the count of entries</comment>
+  </data>
 </root>

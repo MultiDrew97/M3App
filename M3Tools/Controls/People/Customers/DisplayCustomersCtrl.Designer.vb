@@ -23,43 +23,51 @@ Partial Class DisplayCustomersCtrl
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisplayCustomersCtrl))
-		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
+		Me.BottomToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+		Me.TopToolStripPanel = New System.Windows.Forms.ToolStripPanel()
 		Me.ts_CustomerTools = New System.Windows.Forms.ToolStrip()
 		Me.tbtn_AddCustomer = New System.Windows.Forms.ToolStripButton()
 		Me.tbtn_Import = New System.Windows.Forms.ToolStripButton()
 		Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
 		Me.tsl_Count = New System.Windows.Forms.ToolStripLabel()
 		Me.txt_Filter = New System.Windows.Forms.ToolStripTextBox()
-		Me.tbtn_Refresh = New System.Windows.Forms.ToolStripButton()
+		Me.RightToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+		Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+		Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
+		Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
 		Me.cdg_Customers = New SPPBC.M3Tools.CustomersDataGrid()
+		Me.ts_CustomerTools.SuspendLayout()
 		Me.ToolStripContainer1.ContentPanel.SuspendLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
 		Me.ToolStripContainer1.SuspendLayout()
-		Me.ts_CustomerTools.SuspendLayout()
 		Me.SuspendLayout()
 		'
-		'ToolStripContainer1
+		'tbtn_Refresh
 		'
-		Me.ToolStripContainer1.BottomToolStripPanelVisible = False
+		Me.tbtn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+		Me.tbtn_Refresh.Enabled = False
+		Me.tbtn_Refresh.Image = CType(resources.GetObject("tbtn_Refresh.Image"), System.Drawing.Image)
+		Me.tbtn_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
+		Me.tbtn_Refresh.Name = "tbtn_Refresh"
+		Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
+		Me.tbtn_Refresh.Text = "Refresh"
 		'
-		'ToolStripContainer1.ContentPanel
+		'BottomToolStripPanel
 		'
-		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.cdg_Customers)
-		Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(748, 525)
-		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.ToolStripContainer1.LeftToolStripPanelVisible = False
-		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-		Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-		Me.ToolStripContainer1.Name = "ToolStripContainer1"
-		Me.ToolStripContainer1.RightToolStripPanelVisible = False
-		Me.ToolStripContainer1.Size = New System.Drawing.Size(748, 550)
-		Me.ToolStripContainer1.TabIndex = 9
-		Me.ToolStripContainer1.Text = "ToolStripContainer1"
+		Me.BottomToolStripPanel.Location = New System.Drawing.Point(0, 0)
+		Me.BottomToolStripPanel.Name = "BottomToolStripPanel"
+		Me.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+		Me.BottomToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+		Me.BottomToolStripPanel.Size = New System.Drawing.Size(0, 0)
 		'
-		'ToolStripContainer1.TopToolStripPanel
+		'TopToolStripPanel
 		'
-		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
+		Me.TopToolStripPanel.Location = New System.Drawing.Point(0, 0)
+		Me.TopToolStripPanel.Name = "TopToolStripPanel"
+		Me.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+		Me.TopToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+		Me.TopToolStripPanel.Size = New System.Drawing.Size(0, 0)
 		'
 		'ts_CustomerTools
 		'
@@ -68,7 +76,7 @@ Partial Class DisplayCustomersCtrl
 		Me.ts_CustomerTools.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbtn_AddCustomer, Me.tbtn_Import, Me.ToolStripSeparator2, Me.tsl_Count, Me.txt_Filter})
 		Me.ts_CustomerTools.Location = New System.Drawing.Point(3, 0)
 		Me.ts_CustomerTools.Name = "ts_CustomerTools"
-		Me.ts_CustomerTools.Size = New System.Drawing.Size(244, 25)
+		Me.ts_CustomerTools.Size = New System.Drawing.Size(275, 25)
 		Me.ts_CustomerTools.TabIndex = 9
 		'
 		'tbtn_AddCustomer
@@ -108,15 +116,49 @@ Partial Class DisplayCustomersCtrl
 		Me.txt_Filter.Name = "txt_Filter"
 		Me.txt_Filter.Size = New System.Drawing.Size(100, 25)
 		'
-		'tbtn_Refresh
+		'RightToolStripPanel
 		'
-		Me.tbtn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.tbtn_Refresh.Enabled = False
-		Me.tbtn_Refresh.Image = CType(resources.GetObject("tbtn_Refresh.Image"), System.Drawing.Image)
-		Me.tbtn_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.tbtn_Refresh.Name = "tbtn_Refresh"
-		Me.tbtn_Refresh.Size = New System.Drawing.Size(36, 36)
-		Me.tbtn_Refresh.Text = "Refresh"
+		Me.RightToolStripPanel.Location = New System.Drawing.Point(0, 0)
+		Me.RightToolStripPanel.Name = "RightToolStripPanel"
+		Me.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+		Me.RightToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+		Me.RightToolStripPanel.Size = New System.Drawing.Size(0, 0)
+		'
+		'LeftToolStripPanel
+		'
+		Me.LeftToolStripPanel.Location = New System.Drawing.Point(0, 0)
+		Me.LeftToolStripPanel.Name = "LeftToolStripPanel"
+		Me.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+		Me.LeftToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+		Me.LeftToolStripPanel.Size = New System.Drawing.Size(0, 0)
+		'
+		'ContentPanel
+		'
+		Me.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.ContentPanel.Size = New System.Drawing.Size(748, 525)
+		'
+		'ToolStripContainer1
+		'
+		Me.ToolStripContainer1.BottomToolStripPanelVisible = False
+		'
+		'ToolStripContainer1.ContentPanel
+		'
+		Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.cdg_Customers)
+		Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(748, 525)
+		Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.ToolStripContainer1.LeftToolStripPanelVisible = False
+		Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+		Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+		Me.ToolStripContainer1.Name = "ToolStripContainer1"
+		Me.ToolStripContainer1.RightToolStripPanelVisible = False
+		Me.ToolStripContainer1.Size = New System.Drawing.Size(748, 550)
+		Me.ToolStripContainer1.TabIndex = 9
+		Me.ToolStripContainer1.Text = "ToolStripContainer1"
+		'
+		'ToolStripContainer1.TopToolStripPanel
+		'
+		Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ts_CustomerTools)
 		'
 		'cdg_Customers
 		'
@@ -142,24 +184,30 @@ Partial Class DisplayCustomersCtrl
 		Me.Margin = New System.Windows.Forms.Padding(5)
 		Me.Name = "DisplayCustomersCtrl"
 		Me.Size = New System.Drawing.Size(748, 550)
+		Me.ts_CustomerTools.ResumeLayout(False)
+		Me.ts_CustomerTools.PerformLayout()
 		Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
 		Me.ToolStripContainer1.ContentPanel.PerformLayout()
 		Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
 		Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
 		Me.ToolStripContainer1.ResumeLayout(False)
 		Me.ToolStripContainer1.PerformLayout()
-		Me.ts_CustomerTools.ResumeLayout(False)
-		Me.ts_CustomerTools.PerformLayout()
 		Me.ResumeLayout(False)
 
 	End Sub
-	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
+
 	Friend WithEvents tbtn_Refresh As Windows.Forms.ToolStripButton
+	Friend WithEvents BottomToolStripPanel As Windows.Forms.ToolStripPanel
+	Friend WithEvents TopToolStripPanel As Windows.Forms.ToolStripPanel
 	Friend WithEvents ts_CustomerTools As Windows.Forms.ToolStrip
 	Friend WithEvents tbtn_AddCustomer As Windows.Forms.ToolStripButton
 	Friend WithEvents tbtn_Import As Windows.Forms.ToolStripButton
 	Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
 	Friend WithEvents tsl_Count As Windows.Forms.ToolStripLabel
 	Friend WithEvents txt_Filter As Windows.Forms.ToolStripTextBox
+	Friend WithEvents RightToolStripPanel As Windows.Forms.ToolStripPanel
+	Friend WithEvents LeftToolStripPanel As Windows.Forms.ToolStripPanel
+	Friend WithEvents ContentPanel As Windows.Forms.ToolStripContentPanel
+	Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
 	Friend WithEvents cdg_Customers As CustomersDataGrid
 End Class

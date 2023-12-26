@@ -32,6 +32,11 @@ Media Ministry Manager
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:MediaMinistry.My.Resources.Resources.CountTemplate">
+<summary>
+  Looks up a localized string similar to Count: {0}.
+</summary>
+</member>
 <member name="P:MediaMinistry.My.Resources.Resources.credentials">
 <summary>
   Looks up a localized resource of type System.Byte[].

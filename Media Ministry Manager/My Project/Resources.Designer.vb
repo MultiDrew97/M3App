@@ -81,6 +81,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Count: {0}.
+        '''</summary>
+        Friend ReadOnly Property CountTemplate() As String
+            Get
+                Return ResourceManager.GetString("CountTemplate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
         Friend ReadOnly Property credentials() As Byte()

@@ -61,7 +61,7 @@ Partial Class MainMenuStrip
 		Me.tsmi_New.Image = CType(resources.GetObject("tsmi_New.Image"), System.Drawing.Image)
 		Me.tsmi_New.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.tsmi_New.Name = "tsmi_New"
-		Me.tsmi_New.Size = New System.Drawing.Size(116, 22)
+		Me.tsmi_New.Size = New System.Drawing.Size(132, 38)
 		Me.tsmi_New.Text = "&New..."
 		'
 		'tsmi_NewCustomer
@@ -86,7 +86,7 @@ Partial Class MainMenuStrip
 		'
 		Me.tsmi_Settings.AccessibleName = "Settings"
 		Me.tsmi_Settings.Name = "tsmi_Settings"
-		Me.tsmi_Settings.Size = New System.Drawing.Size(116, 22)
+		Me.tsmi_Settings.Size = New System.Drawing.Size(132, 38)
 		Me.tsmi_Settings.Text = "Settings"
 		'
 		'toolStripSeparator1
@@ -94,21 +94,21 @@ Partial Class MainMenuStrip
 		Me.toolStripSeparator1.AccessibleName = "Separator"
 		Me.toolStripSeparator1.AccessibleRole = System.Windows.Forms.AccessibleRole.Separator
 		Me.toolStripSeparator1.Name = "toolStripSeparator1"
-		Me.toolStripSeparator1.Size = New System.Drawing.Size(113, 6)
+		Me.toolStripSeparator1.Size = New System.Drawing.Size(129, 6)
 		'
 		'tsmi_Logout
 		'
 		Me.tsmi_Logout.AccessibleName = "Logout"
 		Me.tsmi_Logout.Image = Global.SPPBC.M3Tools.My.Resources.Resources.Logout
 		Me.tsmi_Logout.Name = "tsmi_Logout"
-		Me.tsmi_Logout.Size = New System.Drawing.Size(116, 22)
+		Me.tsmi_Logout.Size = New System.Drawing.Size(132, 38)
 		Me.tsmi_Logout.Text = "&Logout"
 		'
 		'tsmi_Exit
 		'
 		Me.tsmi_Exit.AccessibleName = "Exit"
 		Me.tsmi_Exit.Name = "tsmi_Exit"
-		Me.tsmi_Exit.Size = New System.Drawing.Size(116, 22)
+		Me.tsmi_Exit.Size = New System.Drawing.Size(132, 38)
 		Me.tsmi_Exit.Text = "E&xit"
 		'
 		'tsmi_View
@@ -186,12 +186,12 @@ Partial Class MainMenuStrip
 		'
 		'lsd_Loading
 		'
-		Me.lsd_Loading.Closable = False
 		Me.lsd_Loading.Image = CType(resources.GetObject("lsd_Loading.Image"), System.Drawing.Bitmap)
 		Me.lsd_Loading.LoadText = ""
 		'
 		'MainMenuStrip
 		'
+		Me.ImageScalingSize = New System.Drawing.Size(16, 16)
 		Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_File, Me.tsmi_View, Me.tsmi_Tools})
 		Me.ResumeLayout(False)
 

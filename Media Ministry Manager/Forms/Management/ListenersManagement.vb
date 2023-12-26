@@ -82,7 +82,7 @@ Public Class ListenersManagement
 	Private Sub SendWelcom(sender As Object, e As ListenerEventArgs) Handles Me.ListenerAdded
 		UseWaitCursor = True
 		Dim subject = "Welcome to the Ministry"
-		Dim body = String.Format(newListener, e.Listener.Name.Trim)
+		Dim body = String.Format(My.Resources.newListener, e.Listener.Name.Trim)
 		Dim message = gt_Email.Create(e.Listener, subject, body)
 #If Not DEBUG Then
 		gt_Email.Send(message)

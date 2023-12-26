@@ -2,17 +2,9 @@
 	Public Class ListenerCollection
 		Inherits DBEntryCollection(Of Listener)
 
-		Public Overrides Sub ApplyFilter()
+		Public Overrides Function ApplyFilter(listener As Listener) As Boolean
 			Throw New NotImplementedException("ApplyFilter")
-			_filteredData.Clear()
-
-			If String.IsNullOrWhiteSpace(Filter) Then
-				_filteredData = Items
-			End If
-
-			_filteredData = Items.Where(Function(listener As Listener) As Boolean
-											Return listener.Name.Contains(Filter) OrElse listener.Email.Contains(Filter)
-										End Function).ToList
-		End Sub
+			Return listener.Name.Contains(Filter) OrElse listener.Email.Contains(Filter)
+		End Function
 	End Class
 End Namespace

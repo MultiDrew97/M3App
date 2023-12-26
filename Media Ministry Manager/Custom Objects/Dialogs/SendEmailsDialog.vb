@@ -102,9 +102,9 @@ Public Class SendEmailsDialog
 		For Each file In details.DriveLinks
 			Select Case details.EmailContents.BodyType
 				Case EmailType.PLAIN
-					details.SendingLinks.Add(String.Format(DriveShareLink, file.Id))
+					details.SendingLinks.Add(String.Format(My.Resources.DriveShareLink, file.Id))
 				Case EmailType.HTML
-					details.SendingLinks.Add(String.Format(DriveLinkHtml, String.Format(DriveShareLink, file.Id), file.Name))
+					details.SendingLinks.Add(String.Format(My.Resources.DriveLinkHtml, String.Format(My.Resources.DriveShareLink, file.Id), file.Name))
 				Case Else
 			End Select
 		Next

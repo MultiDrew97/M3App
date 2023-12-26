@@ -8,9 +8,6 @@ Public Class DisplayCustomersCtrl
 	Public Event RemoveCustomer As CustomerEventHandler
 	Public Event RefreshDisplay()
 
-	<DefaultValue("")>
-	Public Property CountTemplate As String
-
 	<DefaultValue(GetType(Object))>
 	<Description("Data Source to use for data grid.")>
 	Public Property DataSource As BindingSource
@@ -22,9 +19,9 @@ Public Class DisplayCustomersCtrl
 		End Set
 	End Property
 
-	Public Sub Reload()
-		tsl_Count.Text = String.Format(CountTemplate, cdg_Customers.Customers.Count)
-	End Sub
+	'Public Sub Reload()
+	'	tsl_Count.Text = String.Format(CountTemplate, cdg_Customers.Customers.Count)
+	'End Sub
 
 	Private Sub RefreshView() Handles cdg_Customers.RefreshDisplay
 		RaiseEvent RefreshDisplay()
@@ -61,9 +58,7 @@ Public Class DisplayCustomersCtrl
 		'End Using
 	End Sub
 
-	Private Sub ImportCustomers(sender As Object, e As EventArgs) Handles tbtn_Import.Click
-		Throw New NotImplementedException("Import Customers")
-	End Sub
+
 
 	Private Sub EditCustomer(sender As Object, e As CustomerEventArgs) Handles cdg_Customers.EditCustomer
 		Using edit As New Dialogs.EditCustomerDialog() With {.Customer = e.Customer}
@@ -85,9 +80,5 @@ Public Class DisplayCustomersCtrl
 		End If
 
 		RaiseEvent RemoveCustomer(Me, e)
-	End Sub
-
-	Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
-
 	End Sub
 End Class

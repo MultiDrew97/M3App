@@ -33,7 +33,7 @@ Public Class CustomersDataGrid
 			Return CType(dgv_Customers.DataSource, BindingSource)
 		End Get
 		Set(value As BindingSource)
-			'dgv_Customers.AutoGenerateColumns = False
+			dgv_Customers.AutoGenerateColumns = False
 			dgv_Customers.DataSource = value
 		End Set
 	End Property
@@ -58,22 +58,9 @@ Public Class CustomersDataGrid
 	<DefaultValue("")>
 	Property Filter As String
 		Get
-			'If DataSource Is Nothing Then
-			'	Return String.Empty
-			'End If
-
-			Return If(DataSource?.Filter, "")
+			Return DataSource?.Filter
 		End Get
 		Set(value As String)
-			'If DataSource Is Nothing Then
-			'	Return
-			'End If
-
-			' TODO: Fix bug and flesh out
-			If value <> "" Then
-				value = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')"
-			End If
-
 			DataSource.Filter = value
 		End Set
 	End Property
@@ -200,7 +187,7 @@ Public Class CustomersDataGrid
 		Next
 	End Sub
 
-	Private Sub RefreshView() Handles cms_Tools.RefreshView
-		RaiseEvent RefreshDisplay()
-	End Sub
+    Private Sub RefreshView() Handles cms_Tools.RefreshView
+        RaiseEvent RefreshDisplay()
+    End Sub
 End Class
