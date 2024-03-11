@@ -73,12 +73,12 @@ Namespace Database
 			Return dbConnection.Consume(Of Customer)(Method.Get, $"/{path}/{customerID}").Result
 		End Function
 
-		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, phone As String, email As String)
-			UpdateCustomer(customerID, fName, lName, New Address(street, city, state, zipCode), phone, email)
+		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, street As String, city As String, state As String, zipCode As String, email As String, phone As String)
+			UpdateCustomer(customerID, fName, lName, New Address(street, city, state, zipCode), email, phone)
 		End Sub
 
-		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, addr As Address, phone As String, email As String)
-			UpdateCustomer(New Customer(customerID, fName, lName, addr, phone, email))
+		Public Sub UpdateCustomer(customerID As Integer, fName As String, lName As String, addr As Address, email As String, phone As String)
+			UpdateCustomer(New Customer(customerID, fName, lName, addr, email, phone))
 		End Sub
 
 		Private Sub UpdateCustomer(customer As Customer)

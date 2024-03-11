@@ -77,6 +77,9 @@
         '
         'tst_Filter
         '
+        Me.tst_Filter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.tst_Filter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList
+        Me.tst_Filter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.tst_Filter.Name = "tst_Filter"
         Me.tst_Filter.Size = New System.Drawing.Size(100, 23)
         Me.tst_Filter.ToolTipText = "Filter {0}"
@@ -103,7 +106,10 @@
         '
         'ToolsToolStrip
         '
+        Me.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsb_New, Me.tsb_Import, Me.tsb_Emails, Me.ToolStripSeparator1, Me.tst_Filter, Me.ToolStripSeparator2, Me.tsl_Count})
+        Me.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.Stretch = True
         Me.ResumeLayout(False)
 
     End Sub

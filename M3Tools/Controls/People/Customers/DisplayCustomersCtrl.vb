@@ -8,16 +8,16 @@ Public Class DisplayCustomersCtrl
 	Public Event RemoveCustomer As CustomerEventHandler
 	Public Event RefreshDisplay()
 
-	<DefaultValue(GetType(Object))>
-	<Description("Data Source to use for data grid.")>
-	Public Property DataSource As BindingSource
-		Get
-			Return cdg_Customers.DataSource
-		End Get
-		Set(value As BindingSource)
-			cdg_Customers.DataSource = value
-		End Set
-	End Property
+	'<DefaultValue(GetType(Object))>
+	'<Description("Data Source to use for data grid.")>
+	'Public Property DataSource As BindingSource
+	'	Get
+	'		Return cdg_Customers.DataSource
+	'	End Get
+	'	Set(value As BindingSource)
+	'		cdg_Customers.DataSource = value
+	'	End Set
+	'End Property
 
 	'Public Sub Reload()
 	'	tsl_Count.Text = String.Format(CountTemplate, cdg_Customers.Customers.Count)
@@ -40,13 +40,13 @@ Public Class DisplayCustomersCtrl
 	End Sub
 
 	Private Sub FilterChanged(sender As Object, e As EventArgs) Handles txt_Filter.TextChanged
-		cdg_Customers.Filter = txt_Filter.Text
+		'cdg_Customers.Filter = txt_Filter.Text
 	End Sub
 
 	Private Sub RemoveRowByToolStrip(sender As Object, e As EventArgs)
 		Dim res = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-		If Not res = DialogResult.Yes OrElse cdg_Customers.SelectedCustomers.Count < 1 Then
+		If Not res = DialogResult.Yes OrElse cdg_Customers.SelectedRows.Count < 1 Then
 			Return
 		End If
 

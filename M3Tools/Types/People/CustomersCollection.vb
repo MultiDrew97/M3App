@@ -2,7 +2,7 @@
 	Public Class CustomersCollection
 		Inherits DBEntryCollection(Of Customer)
 
-		Overrides Function ApplyFilter(customer As Customer) As Boolean
+		Public Overrides Function ApplyFilter(customer As Customer, index As Integer) As Boolean
 			' TODO: Do I want to allow for nothing values?
 			If customer Is Nothing Then
 				Return False

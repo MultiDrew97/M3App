@@ -6,10 +6,9 @@ Imports System.Windows.Forms
 <DefaultEvent("FilterChanged")>
 Public Class ToolsToolStrip
 	Inherits Windows.Forms.ToolStrip
-
 	Public Event Import As EventHandler
 	Public Event Add As EventHandler
-	Public Event Send As EventHandler
+	Public Event Email As EventHandler
 	Public Event FilterChanged As EventHandler(Of String)
 
 	Public WriteOnly Property Count As String
@@ -17,6 +16,9 @@ Public Class ToolsToolStrip
 			tsl_Count.Text = value
 		End Set
 	End Property
+
+	<DefaultValue("")>
+	Public Property ListType As String
 
 	Private Property Filter As String
 		Get
@@ -36,10 +38,20 @@ Public Class ToolsToolStrip
 	End Sub
 
 	Private Sub SendEmails(sender As Object, e As EventArgs) Handles tsb_Emails.Click
-		RaiseEvent Send(sender, e)
+		RaiseEvent Email(sender, e)
 	End Sub
 
 	Private Sub FilterUpdated(sender As Object, e As EventArgs) Handles tst_Filter.TextChanged
 		RaiseEvent FilterChanged(sender, Filter)
+	End Sub
+
+	Private Sub ToolsToolStrip_LayoutCompleted(sender As Object, e As EventArgs) Handles Me.LayoutCompleted
+		If String.IsNullOrEmpty(ListType) Then
+			Return
+		End If
+
+		tsb_New.ToolTipText = String.Format(tsb_New.ToolTipText, ListType)
+		tsb_Import.ToolTipText = String.Format(tsb_Import.ToolTipText, ListType)
+		tst_Filter.ToolTipText = String.Format(tst_Filter.ToolTipText, ListType)
 	End Sub
 End Class
