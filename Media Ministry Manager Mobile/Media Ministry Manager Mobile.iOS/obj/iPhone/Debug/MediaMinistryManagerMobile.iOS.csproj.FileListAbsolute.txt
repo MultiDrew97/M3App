@@ -1,8 +1,0 @@
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\actool\_PartialAppManifest.items
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\actool\_BundleResourceWithLogicalName.items
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\coremlc\_PartialAppManifest.items
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\coremlc\_BundleResourceWithLogicalName.items
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\optimized\
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\MediaMinistryManagerMobile.iOS.csprojAssemblyReference.cache
-C:\Users\arand\Desktop\Side Projects\Old Man's Media Ministry\Media Ministry Manager Mobile\Media Ministry Manager Mobile.iOS\obj\iPhone\Debug\MediaMinistryManagerMobile.iOS.csproj.CoreCompileInputs.cache
