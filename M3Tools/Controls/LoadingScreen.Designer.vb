@@ -70,7 +70,7 @@ Partial Class LoadingScreen
         'LoadingScreen
         '
         Me.AcceptButton = Me.btn_Close
-        Me.ClientSize = New System.Drawing.Size(197, 218)
+        Me.ClientSize = New System.Drawing.Size(193, 214)
         Me.ControlBox = False
         Me.Controls.Add(Me.pic_Load)
         Me.Controls.Add(Me.btn_Close)
@@ -83,6 +83,7 @@ Partial Class LoadingScreen
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.TopMost = True
         CType(Me.pic_Load, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
