@@ -33,141 +33,149 @@ Partial Class CustomersDataGrid
         Me.dgc_Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgc_Edit = New SPPBC.M3Tools.DataGridViewImageButtonEditColumn()
         Me.dgc_Remove = New SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn()
-        CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'chk_SelectAll
-        '
-        Me.chk_SelectAll.AutoSize = True
-        Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
-        Me.chk_SelectAll.Name = "chk_SelectAll"
-        Me.chk_SelectAll.Size = New System.Drawing.Size(28, 27)
-        Me.chk_SelectAll.TabIndex = 3
-        Me.chk_SelectAll.TabStop = False
-        Me.chk_SelectAll.UseVisualStyleBackColor = True
-        '
-        'cms_Tools
-        '
-        Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.cms_Tools.Name = "cms_Tools"
-        Me.cms_Tools.Size = New System.Drawing.Size(207, 118)
-        '
-        'dgc_CustomerID
-        '
-        Me.dgc_CustomerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_CustomerID.DataPropertyName = "CustomerID"
-        Me.dgc_CustomerID.FillWeight = 5.0!
-        Me.dgc_CustomerID.Frozen = True
-        Me.dgc_CustomerID.HeaderText = "CustomerID"
-        Me.dgc_CustomerID.MinimumWidth = 10
-        Me.dgc_CustomerID.Name = "dgc_CustomerID"
-        Me.dgc_CustomerID.ReadOnly = True
-        Me.dgc_CustomerID.Visible = False
-        '
-        'dgc_Selection
-        '
-        Me.dgc_Selection.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgc_Selection.Frozen = True
-        Me.dgc_Selection.HeaderText = ""
-        Me.dgc_Selection.MinimumWidth = 25
-        Me.dgc_Selection.Name = "dgc_Selection"
-        Me.dgc_Selection.ReadOnly = True
-        Me.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgc_Selection.Width = 25
-        '
-        'dgc_Name
-        '
-        Me.dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Name.DataPropertyName = "Name"
-        Me.dgc_Name.FillWeight = 25.0!
-        Me.dgc_Name.HeaderText = "Name"
-        Me.dgc_Name.MinimumWidth = 10
-        Me.dgc_Name.Name = "dgc_Name"
-        Me.dgc_Name.ReadOnly = True
-        '
-        'dgc_Address
-        '
-        Me.dgc_Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Address.DataPropertyName = "Address"
-        Me.dgc_Address.FillWeight = 25.0!
-        Me.dgc_Address.HeaderText = "Address"
-        Me.dgc_Address.MinimumWidth = 10
-        Me.dgc_Address.Name = "dgc_Address"
-        Me.dgc_Address.ReadOnly = True
-        '
-        'dgc_Phone
-        '
-        Me.dgc_Phone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Phone.DataPropertyName = "Phone"
-        Me.dgc_Phone.FillWeight = 25.0!
-        Me.dgc_Phone.HeaderText = "Phone"
-        Me.dgc_Phone.MinimumWidth = 10
-        Me.dgc_Phone.Name = "dgc_Phone"
-        Me.dgc_Phone.ReadOnly = True
-        '
-        'dgc_Email
-        '
-        Me.dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgc_Email.DataPropertyName = "Email"
-        Me.dgc_Email.FillWeight = 25.0!
-        Me.dgc_Email.HeaderText = "Email"
-        Me.dgc_Email.MinimumWidth = 10
-        Me.dgc_Email.Name = "dgc_Email"
-        Me.dgc_Email.ReadOnly = True
-        '
-        'dgc_Edit
-        '
-        Me.dgc_Edit.ButtonImage = Nothing
-        Me.dgc_Edit.FillWeight = 5.0!
-        Me.dgc_Edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dgc_Edit.HeaderText = ""
-        Me.dgc_Edit.MinimumWidth = 25
-        Me.dgc_Edit.Name = "dgc_Edit"
-        Me.dgc_Edit.ReadOnly = True
-        Me.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgc_Edit.ToolTipText = "Edit"
-        Me.dgc_Edit.Width = 25
-        '
-        'dgc_Remove
-        '
-        Me.dgc_Remove.ButtonImage = Nothing
-        Me.dgc_Remove.FillWeight = 5.0!
-        Me.dgc_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dgc_Remove.HeaderText = ""
-        Me.dgc_Remove.MinimumWidth = 25
-        Me.dgc_Remove.Name = "dgc_Remove"
-        Me.dgc_Remove.ReadOnly = True
-        Me.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgc_Remove.ToolTipText = "Remove"
-        Me.dgc_Remove.Width = 25
-        '
-        'CustomersDataGrid
-        '
-        Me.AllowUserToAddRows = False
-        Me.AllowUserToOrderColumns = True
-        Me.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_CustomerID, Me.dgc_Selection, Me.dgc_Name, Me.dgc_Address, Me.dgc_Phone, Me.dgc_Email, Me.dgc_Edit, Me.dgc_Remove})
-        Me.ContextMenuStrip = Me.cms_Tools
-        Me.Controls.Add(Me.chk_SelectAll)
-        Me.DataSource = Me.bsCustomers
-        Me.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.MinimumSize = New System.Drawing.Size(600, 500)
-        Me.ReadOnly = True
-        Me.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Size = New System.Drawing.Size(610, 500)
-        Me.TabIndex = 2
-        CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+		CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.SuspendLayout()
+		'
+		'chk_SelectAll
+		'
+		Me.chk_SelectAll.AutoSize = True
+		Me.chk_SelectAll.Location = New System.Drawing.Point(46, 3)
+		Me.chk_SelectAll.Name = "chk_SelectAll"
+		Me.chk_SelectAll.Size = New System.Drawing.Size(15, 14)
+		Me.chk_SelectAll.TabIndex = 3
+		Me.chk_SelectAll.TabStop = False
+		Me.chk_SelectAll.UseVisualStyleBackColor = True
+		'
+		'cms_Tools
+		'
+		Me.cms_Tools.ImageScalingSize = New System.Drawing.Size(32, 32)
+		Me.cms_Tools.Name = "cms_Tools"
+		Me.cms_Tools.Size = New System.Drawing.Size(133, 70)
+		'
+		'dgc_CustomerID
+		'
+		Me.dgc_CustomerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+		Me.dgc_CustomerID.DataPropertyName = "CustomerID"
+		Me.dgc_CustomerID.FillWeight = 5.0!
+		Me.dgc_CustomerID.Frozen = True
+		Me.dgc_CustomerID.HeaderText = "CustomerID"
+		Me.dgc_CustomerID.MinimumWidth = 10
+		Me.dgc_CustomerID.Name = "dgc_CustomerID"
+		Me.dgc_CustomerID.ReadOnly = True
+		Me.dgc_CustomerID.Visible = False
+		'
+		'dgc_Selection
+		'
+		Me.dgc_Selection.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		Me.dgc_Selection.Frozen = True
+		Me.dgc_Selection.HeaderText = ""
+		Me.dgc_Selection.MinimumWidth = 25
+		Me.dgc_Selection.Name = "dgc_Selection"
+		Me.dgc_Selection.ReadOnly = True
+		Me.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+		Me.dgc_Selection.Width = 25
+		'
+		'dgc_Name
+		'
+		Me.dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		Me.dgc_Name.DataPropertyName = "Name"
+		Me.dgc_Name.FillWeight = 25.0!
+		Me.dgc_Name.Frozen = True
+		Me.dgc_Name.HeaderText = "Name"
+		Me.dgc_Name.MinimumWidth = 10
+		Me.dgc_Name.Name = "dgc_Name"
+		Me.dgc_Name.ReadOnly = True
+		Me.dgc_Name.Width = 123
+		'
+		'dgc_Address
+		'
+		Me.dgc_Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		Me.dgc_Address.DataPropertyName = "Address"
+		Me.dgc_Address.FillWeight = 25.0!
+		Me.dgc_Address.Frozen = True
+		Me.dgc_Address.HeaderText = "Address"
+		Me.dgc_Address.MinimumWidth = 10
+		Me.dgc_Address.Name = "dgc_Address"
+		Me.dgc_Address.ReadOnly = True
+		Me.dgc_Address.Width = 123
+		'
+		'dgc_Phone
+		'
+		Me.dgc_Phone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		Me.dgc_Phone.DataPropertyName = "Phone"
+		Me.dgc_Phone.FillWeight = 25.0!
+		Me.dgc_Phone.Frozen = True
+		Me.dgc_Phone.HeaderText = "Phone"
+		Me.dgc_Phone.MinimumWidth = 10
+		Me.dgc_Phone.Name = "dgc_Phone"
+		Me.dgc_Phone.ReadOnly = True
+		Me.dgc_Phone.Width = 123
+		'
+		'dgc_Email
+		'
+		Me.dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+		Me.dgc_Email.DataPropertyName = "Email"
+		Me.dgc_Email.FillWeight = 25.0!
+		Me.dgc_Email.Frozen = True
+		Me.dgc_Email.HeaderText = "Email"
+		Me.dgc_Email.MinimumWidth = 10
+		Me.dgc_Email.Name = "dgc_Email"
+		Me.dgc_Email.ReadOnly = True
+		Me.dgc_Email.Width = 123
+		'
+		'dgc_Edit
+		'
+		Me.dgc_Edit.ButtonImage = Nothing
+		Me.dgc_Edit.FillWeight = 5.0!
+		Me.dgc_Edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.dgc_Edit.Frozen = True
+		Me.dgc_Edit.HeaderText = ""
+		Me.dgc_Edit.MinimumWidth = 25
+		Me.dgc_Edit.Name = "dgc_Edit"
+		Me.dgc_Edit.ReadOnly = True
+		Me.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.dgc_Edit.ToolTipText = "Edit"
+		Me.dgc_Edit.Width = 25
+		'
+		'dgc_Remove
+		'
+		Me.dgc_Remove.ButtonImage = Nothing
+		Me.dgc_Remove.FillWeight = 5.0!
+		Me.dgc_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.dgc_Remove.Frozen = True
+		Me.dgc_Remove.HeaderText = ""
+		Me.dgc_Remove.MinimumWidth = 25
+		Me.dgc_Remove.Name = "dgc_Remove"
+		Me.dgc_Remove.ReadOnly = True
+		Me.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+		Me.dgc_Remove.ToolTipText = "Remove"
+		Me.dgc_Remove.Width = 25
+		'
+		'CustomersDataGrid
+		'
+		Me.AllowUserToAddRows = False
+		Me.AllowUserToOrderColumns = True
+		Me.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+		Me.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgc_CustomerID, Me.dgc_Selection, Me.dgc_Name, Me.dgc_Address, Me.dgc_Phone, Me.dgc_Email, Me.dgc_Edit, Me.dgc_Remove})
+		Me.ContextMenuStrip = Me.cms_Tools
+		Me.Controls.Add(Me.chk_SelectAll)
+		Me.DataSource = Me.bsCustomers
+		Me.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+		Me.ReadOnly = True
+		Me.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+		Me.Size = New System.Drawing.Size(610, 500)
+		Me.TabIndex = 2
+		CType(Me.bsCustomers, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.ResumeLayout(False)
+		Me.PerformLayout()
 
-    End Sub
+	End Sub
 
-    'Friend WithEvents dgv_Customers As Windows.Forms.DataGridView
-    Friend WithEvents chk_SelectAll As Windows.Forms.CheckBox
+	Friend WithEvents chk_SelectAll As Windows.Forms.CheckBox
     Friend WithEvents cms_Tools As ToolsContextMenu
     Friend WithEvents dgc_Join As Windows.Forms.DataGridViewTextBoxColumn
 	Friend WithEvents bsCustomers As Types.CustomersBindingSource

@@ -24,35 +24,59 @@ Public Class CustomersDataGrid
 		End Get
 	End Property
 
+	''<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+	''<DefaultValue(GetType(BindingSource))>
+	'<RefreshProperties(RefreshProperties.Repaint)>
+	'<AttributeProvider(GetType(IListSource))>
+	'<Description("Data Source to use for data grid.")>
+	'Public Overloads Property DataSource As Types.CustomersCollection
+	'	Get
+	'		Return bsCustomers.DataSource
+	'	End Get
+	'	Set(value As Types.CustomersCollection)
+	'		AutoGenerateColumns = False
+	'		bsCustomers.DataSource = value
+	'	End Set
+	'End Property
+
 	'<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
 	'<DefaultValue(GetType(BindingSource))>
+	'<AttributeProvider(GetType(IListSource))>
 	<RefreshProperties(RefreshProperties.Repaint)>
-	<AttributeProvider(GetType(IListSource))>
 	<Description("Data Source to use for data grid.")>
-	Public Shadows Property DataSource As BindingSource
+	Public Shadows Property DataSource As Object
 		Get
-			Return bsCustomers
+			Return If(MyBase.DataSource, CType(MyBase.DataSource, Types.CustomersBindingSource))
 		End Get
-		Set(value As BindingSource)
+		Set(value As Object)
 			AutoGenerateColumns = False
-			bsCustomers = CType(value, Types.CustomersBindingSource)
+			Select Case True
+				Case TypeOf value Is Types.CustomersBindingSource
+					MyBase.DataSource = value
+				Case TypeOf value Is Types.Customer
+					MyBase.DataSource = New Types.CustomersCollection()
+				Case Else
+					Throw New Exception("CustomerDataGrid - Unknown DataSource Type")
+			End Select
 		End Set
 	End Property
 
 	<Browsable(False)>
 	Public Shadows ReadOnly Property SelectedRows As IList
 		Get
-			If CustomersSelectable Then
-				If chk_SelectAll.Checked Then
-					Return Rows
-				End If
-
-				For Each row As DataGridViewRow In Rows
-					row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
-				Next
+			If Not CustomersSelectable Then
+				Return MyBase.SelectedRows
 			End If
 
+			If chk_SelectAll.Checked Then
+				Return Rows
+			End If
 
+			MyBase.ClearSelection()
+
+			For Each row As DataGridViewRow In Rows
+				row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
+			Next
 
 			Return MyBase.SelectedRows
 		End Get

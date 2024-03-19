@@ -163,10 +163,8 @@ D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Media M
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\BouncyCastle.Cryptography.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Enums.NET.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Enums.NET.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.PlatformServices.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.pdb
-D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Auth.PlatformServices.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Auth.dll
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Auth.pdb
 D:\Visual Studio\Media-Ministry-Manager\Media Ministry Manager\bin\Debug\Google.Apis.Core.dll

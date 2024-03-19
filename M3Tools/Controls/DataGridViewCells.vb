@@ -3,12 +3,10 @@
 Public MustInherit Class DataGridViewImageButtonCell
 	Inherits DataGridViewButtonCell
 
-	Protected _ButtonImage As Drawing.Bitmap
-
-	'Property ButtonState As VisualStyles.PushButtonState
+	Protected ReadOnly _ButtonImage As Drawing.Bitmap
 
 	Protected Sub New(image As Drawing.Bitmap)
-		MyBase.FlatStyle = FlatStyle.Flat
+		MyBase.FlatStyle = FlatStyle.System
 		Me._ButtonImage = image
 	End Sub
 

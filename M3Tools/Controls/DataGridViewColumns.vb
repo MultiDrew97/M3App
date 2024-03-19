@@ -1,7 +1,10 @@
 ﻿Imports System.Windows.Forms
+Imports System.ComponentModel
 
 Public MustInherit Class DataGridViewImageButtonColumn
 	Inherits DataGridViewButtonColumn
+
+	<Bindable(True)>
 	Property ButtonImage As Drawing.Bitmap
 
 	Protected Sub New(cellTemplate As DataGridViewCell)

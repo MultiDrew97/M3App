@@ -1,6 +1,5 @@
 ﻿Imports SPPBC.M3Tools.Events
 Imports SPPBC.M3Tools.Events.Listeners
-Imports SPPBC.M3Tools.Types
 Imports System.ComponentModel
 Imports System.Windows.Forms
 
@@ -34,17 +33,22 @@ Public Class ListenersDataGrid
 	Public ReadOnly Property SelectedListeners As IList
 		Get
 			' TODO: Simplify this later
-			If ListenersSelectable Then
-				If chk_SelectAll.Checked Then
-					Return dgv_Listeners.Rows
-				End If
-
-				For Each row As DataGridViewRow In dgv_Listeners.Rows
-					row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
-				Next
+			If Not ListenersSelectable Then
+				Return dgv_Listeners.SelectedRows
 			End If
 
+			If chk_SelectAll.Checked Then
+				Return dgv_Listeners.Rows
+			End If
+
+			'MyBase.clearselection()
+
+			For Each row As DataGridViewRow In dgv_Listeners.Rows
+				row.Selected = CBool(row.Cells(dgc_Selection.DisplayIndex).Value)
+			Next
+
 			Return dgv_Listeners.SelectedRows
+
 		End Get
 	End Property
 
@@ -53,8 +57,9 @@ Public Class ListenersDataGrid
 			Return DataSource.Filter
 		End Get
 		Set(value As String)
+			Console.WriteLine(value)
 			'TODO: Fix bug and flesh out
-			If value <> "" AndAlso Not (value.Contains("[") OrElse value.Contains("]")) Then
+			If value IsNot Nothing AndAlso value <> "" AndAlso Not (value.Contains("[") OrElse value.Contains("]")) Then
 				DataSource.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'"
 				Return
 			End If

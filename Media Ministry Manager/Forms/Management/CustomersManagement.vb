@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports MediaMinistry.Helpers
 
+' TODO: Figure out why it auto adds the other columns for some reason
+
 Public Class CustomersManagement
 	Private Event CustomerDBModified As Customers.CustomerEventHandler
 	Private Event CustomerAdd As Customers.CustomerEventHandler
@@ -8,7 +10,7 @@ Public Class CustomersManagement
 
 	Private Tooled As Boolean = False
 
-	Private ReadOnly Property BindingSource As BindingSource
+	Private ReadOnly Property BindingSource As CustomersBindingSource
 		Get
 			Return bsCustomers
 		End Get
