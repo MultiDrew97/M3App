@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DefaultNewListenerEmail" xml:space="preserve">
+    <value>&lt;!Doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Blessings To You {0},&lt;/p&gt;
+
+		&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday's Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Message within 24-72hrs. following every Sunday Morning Service.&lt;/p&gt;
+
+		&lt;p&gt;We are now now "Live Streaming" through Facebook Live. An Email Option to choose from is Available for Hearing the Sunday Morning Message or Click a Link to Watch Video of the Pre-Recorded Live Stream on my YouTube Channel [Elder Bryon Miller]. Please Subscribe for easier access of any Service on the YouTube Channel.&lt;/p&gt;
+
+		&lt;p&gt;You may Give an Offering to any of the Ministries of St. Paul Primitive Baptist Church &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-A Special Gift to the Pastor)&lt;/em&gt;.&lt;/p&gt;
+		&lt;p&gt;Select Any of the Available Option Below.&lt;/p&gt;
+
+		&lt;p&gt;Send Cashier's Check or Money Order To:&lt;br&gt;
+		&lt;p class="center"&gt;&lt;strong&gt;Attention: Pastor B. Miller&lt;/strong&gt;&lt;br&gt;
+		ST. PAUL PRIMITIVE BAPTIST CHURCH&lt;br&gt;
+		2209 East 14th Street&lt;br&gt;
+		Austin, TX. 78702&lt;/p&gt;
+		&lt;p&gt;Send Through &lt;a href="https://cash.app/$elderbmiller" target="_blank"&gt;Cash App&lt;/a&gt; or &lt;a href="https://paypal.me/elderbmiller" target="_blank"&gt;Paypal&lt;/a&gt;&lt;/p&gt;
+		&lt;p class="center"&gt;ADD A NOTE, MEMO or MESSAGE&lt;br&gt;
+		St. Paul Primitive Baptist Church&lt;br&gt;
+		&lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-Special Gift to the Pastor).&lt;/em&gt;&lt;/p&gt;
+
+		&lt;p class="center"&gt;&lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;em&gt;(A Personal Email Message of Donation Received will be delivered upon receipt. If you have any questions, Please Contact Elder Bryon Miller personally by:&lt;br&gt;
+		Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
+		Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
+		-Identifying yourself as an Email Subscriber by Last Name &amp; Email Address. Once Verified you will Receive a Call back from Elder Miller. These Processes are in place to Protect your Privacy, Personal Information, the Integrity and Trust of this Ministry &amp; Staff, and the Well-Being of St. Paul PBC)&lt;/em&gt;&lt;/p&gt;
+
+		&lt;p&gt;You may decide at any time that you no longer wish to receive these emails by simply emailing me to be removed from the List. Your Messages will be delivered from:&lt;/p&gt;
+
+		&lt;p class="center"&gt;&lt;em&gt;bryon436@gmail.com&lt;br&gt;
+		pastormiller2209@att.net&lt;/em&gt;&lt;br&gt;&lt;/p&gt;
+
+		&lt;p&gt;&lt;strong&gt;Please Add these Email Addresses to your Contacts.&lt;/strong&gt;&lt;/p&gt;
+
+		&lt;p&gt;&lt;em&gt;If you ever have trouble locating your Messages from this Ministry, always check your Spam Folder before notifying our Technical Services Team by Replying to this Welcome Email Message. Sometimes your Email Provider may not recognize this as safe, especially if you have not added me to your Contacts.&lt;/em&gt;&lt;/p&gt;
+
+		&lt;p&gt;My Prayer is that you enjoy the emails with expectancy as all our Email Listeners.&lt;/p&gt;
+
+		&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
+
+		&lt;p&gt;Be Blessed.&lt;/p&gt;
+
+		&lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+		&lt;hr&gt;
+		
+		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+		St. Paul Primitive Baptist Church&lt;br&gt;
+		Email Listening Ministry&lt;br&gt;
+		2209 East 14th Street&lt;br&gt;
+		Austin, TX. 78702&lt;/p&gt;
+		
+		&lt;div class="center-image"&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+		&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+    <comment>The default template for a new listener email</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BoldOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\bold-text-option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BannerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\BannerImage.JPG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EmailRegex" xml:space="preserve">
+    <value>^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$</value>
+    <comment>The regex for a valid email address</comment>
+  </data>
+  <data name="DefaultReceiptEmail" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+	&lt;p&gt;Greetings {0},&lt;/p&gt;
+
+        &lt;p&gt;Thank you for your blessing of {1:C} for {2}.&lt;/p&gt;
+
+		&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
+
+		&lt;p&gt;Be Blessed.&lt;/p&gt;
+
+		&lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+		&lt;hr&gt;
+		
+		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+		St. Paul Primitive Baptist Church&lt;br&gt;
+		Email Listening Ministry&lt;br&gt;
+		2209 East 14th Street&lt;br&gt;
+		Austin, TX. 78702&lt;/p&gt;
+		
+		&lt;div class="center-image"&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+		&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+    <comment>The default template for a new receipt email</comment>
+  </data>
+  <data name="ErrorImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\images\errorimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LatestAppVersionUri" xml:space="preserve">
+    <value>https://sppbc.hopto.org/manager/version</value>
+    <comment>The uri containing the latest version of the application</comment>
+  </data>
+  <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\loading-loop.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowPasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\images\showpasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FontOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\font.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PasswordRegex" xml:space="preserve">
+    <value>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,}$</value>
+    <comment>The regex for a valid password with at least 1 capital, lower, number and special character</comment>
+  </data>
+  <data name="UnderlineOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\underline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DriveShareLink" xml:space="preserve">
+    <value>https://drive.google.com/file/d/{0}/view?usp=sharing</value>
+    <comment>The link template to share a file from Google Drive</comment>
+  </data>
+  <data name="StrikeThruOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\strikethrough-text-interface-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\Logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DriveLinkAttachment" xml:space="preserve">
+    <value>&lt;p&gt;&lt;a href="{1}"&gt;{0}&lt;/a&gt;&lt;/p&gt;</value>
+    <comment>The formatting for linking a drive file in an email</comment>
+  </data>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Import_Listeners_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\import listeners template.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AppUpdateUri" xml:space="preserve">
+    <value>https://sppbc.hopto.org/manager/setup.exe</value>
+    <comment>The uri where the latest version of the application can be downloaded</comment>
+  </data>
+  <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\configs\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HidePasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\images\hidepasswordicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ItalicOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\italics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewDocumentOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\new-document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DefaultSermonEmail" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
+
+        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href="https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos"&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
+        &lt;p&gt;Also, give us a follow on &lt;a href="https://facebook.com/bryon.miller436"&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
+        &lt;p&gt;You may give an offering to any of the ministries of St. Paul Primitive Baptist Church &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-A Special Gift to the Pastor)&lt;/em&gt;.&lt;/p&gt;
+        &lt;p&gt;Select Any of the Available Option Below.&lt;/p&gt;
+
+        &lt;p&gt;Send Cashier's Check or Money Order To:&lt;/p&gt;
+        &lt;p class="center"&gt;&lt;strong&gt;Attention: Pastor B. Miller&lt;/strong&gt;&lt;br&gt;
+        ST. PAUL PRIMITIVE BAPTIST CHURCH&lt;br&gt;
+        2209 East 14th Street&lt;br&gt;
+        Austin, TX. 78702&lt;/p&gt;
+        &lt;p&gt;Send Through &lt;a href="https://cash.app/$elderbmiller" target="_blank"&gt;Cash App&lt;/a&gt;, &lt;a href="https://www.givelify.com/donate/st-paul-primitive-baptist-curch-austin-tx-2j7wy5ODg4OTA3/donation/amount" target="_blank"&gt;Givelify&lt;/a&gt;, or &lt;a href="https://paypal.me/elderbmiller" target="_blank"&gt;Paypal&lt;/a&gt;&lt;/p&gt;
+        &lt;p class="center"&gt;ADD A NOTE, MEMO or MESSAGE&lt;br&gt;
+        St. Paul Primitive Baptist Church&lt;br&gt;
+        &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-Special Gift to the Pastor).&lt;/em&gt;&lt;/p&gt;
+
+        &lt;p class="center"&gt;&lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;(A personal email message of donation received will be delivered upon receipt. If you have any questions, please contact Elder Bryon Miller personally by:&lt;br&gt;
+        Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
+        Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
+        -Identifying yourself as an Email Subscriber by &lt;em&gt;Last Name&lt;/em&gt; &amp; &lt;em&gt;Email Address&lt;/em&gt;. Once verified you will receive a call back from Elder Miller. These processes are in place to protect your privacy, personal information, the integrity and trust of this Ministry &amp; Staff, and the well-being of St. Paul PBC)&lt;/em&gt;&lt;/p&gt;
+
+        &lt;p&gt;Thank for your support and be blessed.&lt;/p&gt;
+
+        &lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+		&lt;hr&gt;
+		
+        &lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+        St. Paul Primitive Baptist Church&lt;br&gt;
+        Email Listening Ministry&lt;br&gt;
+        2209 East 14th Street&lt;br&gt;
+        Austin, TX. 78702&lt;/p&gt;
+		
+		{1}
+		
+		&lt;div class="center-image"&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+		&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+    <comment>The default template for a new sermon email</comment>
+  </data>
+  <data name="EmailRegex2" xml:space="preserve">
+    <value>^[a-zA-Z0-9_!#$%&amp;’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$</value>
+  </data>
+  <data name="send-email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Images\send-email.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PhoneRegex" xml:space="preserve">
+    <value>^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$</value>
+    <comment>The regex for verifying a phone number. Found at: https://www.regextester.com/17</comment>
+  </data>
+</root>
