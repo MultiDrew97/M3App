@@ -57,6 +57,7 @@ namespace MediaMinistry
         public LoginForm()
         {
             InitializeComponent();
+			Shown += Showing;
 			BeginLogin += LoginBegin;
 			EndLogin += LoginEnd;
 			FormClosing += LoginClosing;
@@ -118,83 +119,41 @@ namespace MediaMinistry
 			}
 		}
 
-        private void TryLogin(string username = null, string password = null)
-        {
-            try
-            {
-                BeginLogin?.Invoke();
-                My.MySettingsProperty.Settings.User = dbUsers.Login(username ?? My.MySettingsProperty.Settings.Username, password ?? My.MySettingsProperty.Settings.Password);
-            }
-            catch (Exception ex)
-            {
-                switch (ex.GetType())
-                {
-                    case var @case when @case == typeof(RoleException):
-                        {
-                            throw new RoleException("Only admins can use this application. If this is an error, please contact support", ex);
-                        }
-                    case var case1 when case1 == typeof(UsernameException):
-                        {
-                            throw new UserException("We couldn't find an account with that username", ex);
-                        }
-                    case var case2 when case2 == typeof(PasswordException):
-                        {
-                            throw new PasswordException("Incorrect password. Please try again or reset your password", ex);
-                        }
-                    case var case3 when case3 == typeof(DatabaseException):
-                        {
-                            throw new DatabaseException("Unknown Error", ex);
-                        }
-                    case var case4 when case4 == typeof(ArgumentException):
-                    case var case5 when case5 == typeof(SqlException):
-                        {
-                            throw new ConnectionException(ex.Message, ex);
-                        }
-
-                    default:
-                        {
-                            throw new NotImplementedException(ex.Message, ex);
-                        }
-                }
-            }
-        }
-
         private void PerformLogin(object sender, EventArgs e)
         {
             try
             {
-                // TryLogin(If(Username, Nothing), If(Password, Nothing))
                 BeginLogin?.Invoke();
                 My.MySettingsProperty.Settings.User = dbUsers.Login(Username ?? My.MySettingsProperty.Settings.Username, Password ?? My.MySettingsProperty.Settings.Password);
 
                 bw_SaveSettings.RunWorkerAsync();
                 My.MyProject.Forms.MainForm.Show();
             }
-            catch (RoleException role)
+            catch (RoleException)
             {
                 lsd_LoadScreen.ShowError("Only admins can use this application. If this is an error, please contact support");
                 lf_Login.ClearPassword();
                 lf_Login.Focus("p");
             }
-            catch (UsernameException username)
+            catch (UsernameException)
             {
                 lsd_LoadScreen.ShowError("We couldn't find an account with that username. Please try again or contact support.");
                 lf_Login.Clear();
                 lf_Login.Focus();
             }
-            catch (PasswordException password)
+            catch (PasswordException)
             {
                 lf_Login.ClearPassword();
                 lsd_LoadScreen.ShowError("Incorrect password provided. Please try again or reset your password");
                 lf_Login.Focus("p");
             }
-            catch (DatabaseException database)
+            catch (DatabaseException)
             {
                 lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.");
                 lf_Login.ClearPassword();
                 lf_Login.Focus("p");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.");
                 lf_Login.ClearPassword();
@@ -228,6 +187,7 @@ namespace MediaMinistry
 
         private void LoginClosing(object sender, CancelEventArgs e)
         {
+			Console.WriteLine("Closing Login form");
             lsd_LoadScreen.Dispose();
         }
 

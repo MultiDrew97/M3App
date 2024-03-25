@@ -190,8 +190,6 @@ namespace MediaMinistry
             Text = "Media Ministry Manager";
             ss_Feedback.ResumeLayout(false);
             ss_Feedback.PerformLayout();
-            Shown += new EventHandler(Showing);
-            Closing += new System.ComponentModel.CancelEventHandler(LoginClosing);
             ResumeLayout(false);
             PerformLayout();
 

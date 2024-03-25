@@ -10,42 +10,25 @@ namespace SPPBC.M3Tools
     {
         private event EventHandler DataChanging;
 
-        private LoadingScreen _LoadScreen;
+        private LoadingScreen _loadScreen;
 
-        private LoadingScreen LoadScreen
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _LoadScreen;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                if (_LoadScreen != null)
-                {
-                    _LoadScreen.DialogClosing -= DialogClosed;
-                }
-
-                _LoadScreen = value;
-                if (_LoadScreen != null)
-                {
-                    _LoadScreen.DialogClosing += DialogClosed;
-                }
-            }
-        }
+		public void Dispose()
+		{
+			if (!Closable) { return; }
+			LoadingScreen.Close();
+			_loadScreen = null;
+		}
 
         private LoadingScreen LoadingScreen
         {
             get
             {
-                if (LoadScreen is null || LoadScreen.IsDisposed)
+                if (_loadScreen is null || _loadScreen.IsDisposed)
                 {
-                    LoadScreen = new LoadingScreen();
+                    _loadScreen = new LoadingScreen();
                 }
 
-                return LoadScreen;
+                return _loadScreen;
             }
         }
 
@@ -104,12 +87,6 @@ namespace SPPBC.M3Tools
             InitializeComponent();
         }
 
-        private void DialogClosed(object sender, EventArgs e)
-        {
-            // LoadScreen.Close()
-            // __loadScreen = Nothing
-        }
-
         public DialogResult ShowDialog()
         {
             LoadingScreen.Show();
@@ -118,7 +95,7 @@ namespace SPPBC.M3Tools
 
         private void DialogDisposed(object sender, EventArgs e)
         {
-            if (LoadScreen is not null)
+            if (LoadingScreen is not null)
             {
                 LoadingScreen.Close();
                 LoadingScreen.Dispose();
