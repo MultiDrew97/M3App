@@ -5,10 +5,10 @@ namespace SPPBC.M3Tools.Types
     public class Listener : Person
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("listenerID")]
-        public override int Id { get; set; }
+		[System.Text.Json.Serialization.JsonPropertyName("listenerID")]
+		public override int Id => base.Id;
 
-		public static Listener None { get; } = new Listener();
+		public static new Listener None => new();
 
         public Listener() : this(-1)
         {

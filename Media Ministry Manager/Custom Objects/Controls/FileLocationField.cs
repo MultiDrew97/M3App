@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MediaMinistry
+namespace M3App
 {
     public partial class FileLocationField
     {

@@ -3,10 +3,12 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using M3App.My;
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Exceptions;
+using SPPBC.M3Tools.My;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class LoginForm
@@ -67,9 +69,9 @@ namespace MediaMinistry
         // TODO: Figure out more secure way to store login info
         private void Showing(object sender, EventArgs e)
         {
-            Username = My.MySettingsProperty.Settings.Username;
+            Username = Settings.Default.Username;
 
-            if (!My.MySettingsProperty.Settings.KeepLoggedIn)
+            if (!Settings.Default.KeepLoggedIn)
             {
                 Reset();
                 return;
@@ -96,12 +98,12 @@ namespace MediaMinistry
 
         private void SaveSettings(object sender, DoWorkEventArgs e)
         {
-            // TODO: Determine better way to handle this
-            My.MySettingsProperty.Settings.KeepLoggedIn = !KeepLoggedIn ? My.MySettingsProperty.Settings.KeepLoggedIn : KeepLoggedIn;
-            My.MySettingsProperty.Settings.Username = lf_Login.Username ?? My.MySettingsProperty.Settings.Username;
+			// TODO: Determine better way to handle this
+			Settings.Default.KeepLoggedIn = !KeepLoggedIn ? Settings.Default.KeepLoggedIn : KeepLoggedIn;
+            Settings.Default.Username = lf_Login.Username ?? Settings.Default.Username;
             // FIXME: Prevent this from saving password as plain text
-            My.MySettingsProperty.Settings.Password = lf_Login.Password ?? My.MySettingsProperty.Settings.Password;
-            My.MySettingsProperty.Settings.Save();
+            Settings.Default.Password = lf_Login.Password ?? Settings.Default.Password;
+            Settings.Default.Save();
         }
 
         private void SettingsSaved(object sender, RunWorkerCompletedEventArgs e)
@@ -124,10 +126,10 @@ namespace MediaMinistry
             try
             {
                 BeginLogin?.Invoke();
-                My.MySettingsProperty.Settings.User = dbUsers.Login(Username ?? My.MySettingsProperty.Settings.Username, Password ?? My.MySettingsProperty.Settings.Password);
+				Settings.Default.User = dbUsers.Login(Username ?? Settings.Default.Username, Password ?? Settings.Default.Password);
 
                 bw_SaveSettings.RunWorkerAsync();
-                My.MyProject.Forms.MainForm.Show();
+                MyProject.Forms.MainForm.Show();
             }
             catch (RoleException)
             {

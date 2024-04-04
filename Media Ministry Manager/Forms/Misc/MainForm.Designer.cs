@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Database;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class MainForm : Form
@@ -37,7 +37,6 @@ namespace MediaMinistry
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            var MySettings1 = new My.MySettings();
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             btn_OrderManagement = new Button();
             btn_OrderManagement.Click += new EventHandler(ManageOrders);
@@ -156,32 +155,21 @@ namespace MediaMinistry
             // 
             // dbCustomer
             // 
-            MySettings1.ApiPassword = "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G";
-            MySettings1.ApiUsername = "Preachy2034";
-            MySettings1.BaseUrl = "https://sppbc.herbivore.site/api";
-            MySettings1.CurrentFont = new Font("Microsoft Sans Serif", 15.75f, FontStyle.Bold);
-            MySettings1.KeepLoggedIn = false;
-            MySettings1.Password = "";
-            MySettings1.Setting = "";
-            MySettings1.SettingsKey = "";
-            MySettings1.UpgradeRequired = true;
-            MySettings1.User = default;
-            MySettings1.Username = "";
-            dbCustomer.BaseUrl = MySettings1.BaseUrl;
-            dbCustomer.Password = MySettings1.ApiPassword;
-            dbCustomer.Username = MySettings1.ApiUsername;
+            dbCustomer.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+            dbCustomer.Password = global::M3App.My.Settings.Default.ApiPassword;
+            dbCustomer.Username = global::M3App.My.Settings.Default.ApiUsername;
             // 
             // dbListener
             // 
-            dbListener.BaseUrl = MySettings1.BaseUrl;
-            dbListener.Password = MySettings1.ApiPassword;
-            dbListener.Username = MySettings1.ApiUsername;
+            dbListener.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+            dbListener.Password = global::M3App.My.Settings.Default.ApiPassword;
+            dbListener.Username = global::M3App.My.Settings.Default.ApiUsername;
             // 
             // dbInventory
             // 
-            dbInventory.BaseUrl = MySettings1.BaseUrl;
-            dbInventory.Password = MySettings1.ApiPassword;
-            dbInventory.Username = MySettings1.ApiUsername;
+            dbInventory.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+            dbInventory.Password = global::M3App.My.Settings.Default.ApiPassword;
+            dbInventory.Username = global::M3App.My.Settings.Default.ApiUsername;
             // 
             // MainForm
             // 

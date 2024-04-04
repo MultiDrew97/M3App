@@ -1,25 +1,56 @@
-﻿
-namespace SPPBC.M3Tools.Types
+﻿namespace SPPBC.M3Tools.Types
 {
-    public abstract class DbEntry
+	public interface IDbEntry
+	{
+		public int Id { get; }
+	}
+
+	/// <summary>
+	/// Interface dictating what is on a database entry
+	/// </summary>
+    public class DbEntry : IDbEntry
     {
+		public static DbEntry None;
 
-        [System.Text.Json.Serialization.JsonIgnore]
-        public abstract int Id { get; set; }
+		/// <summary>
+		/// The database ID
+		/// </summary>
+        public virtual int Id { get; private set; }
 
-        public DbEntry(int id = -1)
-        {
-            Id = id;
-        }
+		/// <inheritdoc/>
+		protected DbEntry(int id)
+		{
+			if (!Utils.ValidID(id))
+			{
+				// TODO: Determine how to handle invalid ID values
+				Id = -1;
+				return;
+				throw new System.ArgumentException();
+			}
 
-        public static bool operator ==(DbEntry ls, DbEntry rs)
-        {
-            return ls.Id == rs.Id;
-        }
+			Id = id;
+		}
 
-        public static bool operator !=(DbEntry ls, DbEntry rs)
-        {
-            return !(ls == rs);
-        }
-    }
+		public static bool operator ==(DbEntry ls, DbEntry rs)
+		{
+			return ls.GetHashCode() == rs.GetHashCode();
+		}
+
+		public static bool operator !=(DbEntry ls, DbEntry rs)
+		{
+			return !(ls == rs);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return this == (DbEntry)obj || base.Equals(obj);
+		}
+
+		public override int GetHashCode()
+		{
+			if (!Utils.ValidID(Id)) return base.GetHashCode();
+
+			return Id;
+		}
+	}
 }

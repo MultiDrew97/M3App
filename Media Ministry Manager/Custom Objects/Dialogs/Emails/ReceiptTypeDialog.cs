@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MediaMinistry
+namespace M3App
 {
     public partial class ReceiptTypeDialog
     {

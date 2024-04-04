@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Exceptions;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class CreateFolderDialog
@@ -76,7 +76,7 @@ namespace MediaMinistry
         {
             UseWaitCursor = true;
 
-            gdt_GDrive.Authorize(My.MySettingsProperty.Settings.Username);
+            gdt_GDrive.Authorize(My.Settings.Default.Username);
 
             dt_DriveHeirarchy.Reload();
 

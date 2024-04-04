@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Exceptions;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class ChangePasswordDialog

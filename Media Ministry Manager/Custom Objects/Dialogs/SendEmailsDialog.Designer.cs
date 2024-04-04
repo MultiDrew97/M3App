@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using SPPBC.M3Tools;
 using SPPBC.M3Tools.Database;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
@@ -135,13 +135,13 @@ namespace MediaMinistry
             // 
             // gdt_Files
             // 
-            gdt_Files.DataBindings.Add(new Binding("Username", My.MySettings.Default, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
+            gdt_Files.DataBindings.Add(new Binding("Username", global::M3App.My.Settings.Default, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
             gdt_Files.Dock = DockStyle.Fill;
             gdt_Files.Location = new Point(0, 0);
             gdt_Files.Name = "gdt_Files";
             gdt_Files.Size = new Size(403, 272);
             gdt_Files.TabIndex = 4;
-            gdt_Files.Username = My.MySettings.Default.Username;
+            gdt_Files.Username = global::M3App.My.Settings.Default.Username;
             // 
             // tp_LocalFiles
             // 
@@ -217,13 +217,13 @@ namespace MediaMinistry
             // 
             // gmt_Gmail
             // 
-            gmt_Gmail.Username = My.MySettings.Default.Username;
+            gmt_Gmail.Username = global::M3App.My.Settings.Default.Username;
             // 
             // dbListeners
             // 
-            dbListeners.BaseUrl = My.MySettings.Default.BaseUrl;
-            dbListeners.Password = My.MySettings.Default.ApiPassword;
-            dbListeners.Username = My.MySettings.Default.ApiUsername;
+            dbListeners.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+            dbListeners.Password = global::M3App.My.Settings.Default.ApiPassword;
+            dbListeners.Username = global::M3App.My.Settings.Default.ApiUsername;
             // 
             // SendEmailsDialog
             // 

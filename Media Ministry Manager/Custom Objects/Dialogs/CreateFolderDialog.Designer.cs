@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class CreateFolderDialog : Form
@@ -87,12 +87,12 @@ namespace MediaMinistry
             // dt_DriveHeirarchy
             // 
             dt_DriveHeirarchy.Checkboxes = false;
-            dt_DriveHeirarchy.DataBindings.Add(new Binding("Username", My.MySettings.Default, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
+            dt_DriveHeirarchy.DataBindings.Add(new Binding("Username", global::M3App.My.Settings.Default, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
             dt_DriveHeirarchy.Location = new Point(12, 69);
             dt_DriveHeirarchy.Name = "dt_DriveHeirarchy";
             dt_DriveHeirarchy.Size = new Size(303, 266);
             dt_DriveHeirarchy.TabIndex = 2;
-            dt_DriveHeirarchy.Username = My.MySettings.Default.Username;
+            dt_DriveHeirarchy.Username = global::M3App.My.Settings.Default.Username;
             dt_DriveHeirarchy.WithChildren = false;
             // 
             // ip_FolderName

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using MediaMinistry.Helpers;
+using M3App.Helpers;
 using SPPBC.M3Tools.Events.Inventory;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class InventoryManagement
@@ -51,7 +51,7 @@ namespace MediaMinistry
 
         private void ManageProducts(object sender, EventArgs e)
         {
-            var customers = new CustomersManagement();
+            var customers = new CustomerManagement();
             customers.Show();
             Tooled = true;
             Close();
@@ -74,7 +74,7 @@ namespace MediaMinistry
         private void AddProduct(object sender, InventoryEventArgs e)
         {
             UseWaitCursor = true;
-            dbInventory.AddProduct(e.Product);
+            dbInventory.AddProduct(e.Value);
             MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             InventoryDBModified.Invoke(this, e);
         }
@@ -82,7 +82,7 @@ namespace MediaMinistry
         private void RemoveProduct(object sender, InventoryEventArgs e)
         {
             UseWaitCursor = true;
-            dbInventory.RemoveProduct(e.Product.Id);
+            dbInventory.RemoveProduct(e.Value.Id);
             MessageBox.Show($"Successfully removed product", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
             InventoryDBModified.Invoke(this, e);
         }
@@ -90,10 +90,15 @@ namespace MediaMinistry
         private void UpdateProduct(object sender, InventoryEventArgs e)
         {
             UseWaitCursor = true;
-            dbInventory.UpdateProduct(e.Product);
+            dbInventory.UpdateProduct(e.Value);
             MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
             InventoryDBModified.Invoke(this, e);
         }
+
+		private void Reload(object sender, InventoryEventArgs e)
+		{
+			Reload(sender, EventArgs.Empty);
+		}
 
         private void Reload(object sender, EventArgs e)
         {
@@ -101,7 +106,6 @@ namespace MediaMinistry
             bsInventory.Clear();
             foreach (var product in dbInventory.GetProducts())
                 bsInventory.Add(product);
-            dic_Inventory.Reload();
             UseWaitCursor = false;
         }
     }

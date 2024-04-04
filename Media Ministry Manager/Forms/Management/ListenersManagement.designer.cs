@@ -6,7 +6,7 @@ using SPPBC.M3Tools.Database;
 using SPPBC.M3Tools.Events.Listeners;
 using SPPBC.M3Tools.Types;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class ListenersManagement : Form
@@ -88,17 +88,17 @@ namespace MediaMinistry
             // 
             // gt_Email
             // 
-            gt_Email.Username = My.MySettings.Default.Username;
+            gt_Email.Username = global::M3App.My.Settings.Default.Username;
             // 
             // dbListeners
             // 
-            dbListeners.BaseUrl = My.MySettings.Default.BaseUrl;
-            dbListeners.Password = My.MySettings.Default.ApiPassword;
-            dbListeners.Username = My.MySettings.Default.ApiUsername;
+            dbListeners.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+            dbListeners.Password = global::M3App.My.Settings.Default.ApiPassword;
+            dbListeners.Username = global::M3App.My.Settings.Default.ApiUsername;
             // 
             // gd_Drive
             // 
-            gd_Drive.Username = My.MySettings.Default.Username;
+            gd_Drive.Username = global::M3App.My.Settings.Default.Username;
             // 
             // ss_StatusView
             // 

@@ -1,18 +1,16 @@
-﻿
-namespace SPPBC.M3Tools.Events.Customers
+﻿namespace SPPBC.M3Tools.Events.Customers
 {
     public delegate void CustomerEventHandler(object sender, CustomerEventArgs e);
-    // Public Delegate Sub EditCustomerEventHandler(sender As Object, e As CustomerEventArgs)
 
-    public class CustomerEventArgs : BaseArgs
+	/// <inheritdoc/>
+	sealed public class CustomerEventArgs : DataEventArgs<Types.Customer>
     {
+		/// <inheritdoc/>
+		public override Types.Customer Value { get; protected set; }
 
-        public Types.Customer Customer { get; set; }
-
-        public CustomerEventArgs(Types.Customer customer, EventType eventType = default)
-        {
-            Customer = customer;
-            EventType = eventType;
-        }
+		/// <inheritdoc/>
+		public CustomerEventArgs(Types.Customer value, EventType type = EventType.None) : base(value, type)
+		{
+		}
     }
 }

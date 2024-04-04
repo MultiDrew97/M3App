@@ -108,6 +108,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DataGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGrid.Designer.cs">
+      <DependentUpon>DataGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
@@ -198,12 +204,6 @@
     <Compile Include="Controls\People\Customers\CustomersDataGrid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.Designer.cs">
-      <DependentUpon>DisplayCustomersCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\People\Customers\DisplayCustomersCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Controls\People\Customers\CustomersComboBox.Designer.cs">
       <DependentUpon>CustomersComboBox.cs</DependentUpon>
     </Compile>
@@ -222,17 +222,11 @@
     <Compile Include="Controls\PriceInput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Products\DisplayInventoryCtrl.Designer.cs">
-      <DependentUpon>DisplayInventoryCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Products\DisplayInventoryCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Controls\Products\InventoryDataGrid.Designer.cs">
       <DependentUpon>InventoryDataGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Products\InventoryDataGrid.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\SummaryCtrl.Designer.cs">
       <DependentUpon>SummaryCtrl.cs</DependentUpon>
@@ -285,9 +279,7 @@
     <Compile Include="Dialogs\Products\EditProductDialog.Designer.cs">
       <DependentUpon>EditProductDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Products\EditProductDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Dialogs\Products\EditProductDialog.cs" />
     <Compile Include="Exceptions\Customers\InvalidStateCodeException.cs" />
     <Compile Include="Exceptions\Database\ApiException.cs" />
     <Compile Include="Exceptions\Database\AuthorizationException.cs" />
@@ -295,6 +287,16 @@
     <Compile Include="Exceptions\FormClosedException.cs" />
     <Compile Include="Exceptions\Products\ProductNotFoundException.cs" />
     <Compile Include="Types\Auth.cs" />
+    <Compile Include="Types\BindingSource.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Types\BindingSource.Designer.cs">
+      <DependentUpon>BindingSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Types\InventoryCollection.cs" />
+    <Compile Include="Types\InventoryBindingSource.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Types\CustomersBindingSource.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -389,9 +391,7 @@
     <Compile Include="Dialogs\Products\AddProductDialog.Designer.cs">
       <DependentUpon>AddProductDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Products\AddProductDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Dialogs\Products\AddProductDialog.cs" />
     <Compile Include="Dialogs\User\ChangePasswordDialog.Designer.cs">
       <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
     </Compile>
@@ -515,7 +515,7 @@
     </Compile>
     <Compile Include="Types\DBEntry.cs" />
     <Compile Include="Types\EmailDetails.cs" />
-    <Compile Include="Types\Events\ProductEvents.cs" />
+    <Compile Include="Types\Events\InventoryEvents.cs" />
     <Compile Include="Types\extensions.cs" />
     <Compile Include="Types\ListenerCollection.cs" />
     <Compile Include="Types\Templates.cs" />
@@ -585,6 +585,9 @@
     <EmbeddedResource Include="Components\Database\UserDatabase.resx">
       <DependentUpon>UserDatabase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataGrid.resx">
+      <DependentUpon>DataGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Listeners\TemplateSelector.resx">
       <DependentUpon>TemplateSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -609,10 +612,6 @@
     <EmbeddedResource Include="Controls\People\Customers\CustomersDataGrid.resx">
       <DependentUpon>CustomersDataGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\People\Customers\DisplayCustomersCtrl.resx">
-      <DependentUpon>DisplayCustomersCtrl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Customers\CustomersComboBox.resx">
       <DependentUpon>CustomersComboBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -621,9 +620,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PriceInput.resx">
       <DependentUpon>PriceInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Products\DisplayInventoryCtrl.resx">
-      <DependentUpon>DisplayInventoryCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Products\InventoryDataGrid.resx">
       <DependentUpon>InventoryDataGrid.cs</DependentUpon>
@@ -753,6 +749,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Types\InventoryBindingSource.resx">
+      <DependentUpon>InventoryBindingSource.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Types\CustomersBindingSource.resx">
       <DependentUpon>CustomersBindingSource.cs</DependentUpon>
     </EmbeddedResource>
@@ -767,17 +766,6 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.cs</LastGenOutput>
     </None>
-    <None Include="My Project\DataSources\SPPBC.M3Tools.GTools.Types.FileCollection.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItem.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CartItemCollection.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Customer.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.CustomersCollection.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Listener.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Order.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.Product.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.TemplateList.datasource" />
-    <None Include="My Project\DataSources\SPPBC.M3Tools.Types.User.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>SPPBC.M3Tools.My</CustomToolNamespace>
@@ -825,29 +813,32 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Drive.v3">
-      <Version>1.67.0.3309</Version>
+      <Version>1.67.0.3373</Version>
     </PackageReference>
     <PackageReference Include="Google.Apis.Gmail.v1">
       <Version>1.67.0.3287</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens">
-      <Version>7.4.0</Version>
+      <Version>7.5.0</Version>
     </PackageReference>
     <PackageReference Include="MimeKit">
       <Version>4.4.0</Version>
     </PackageReference>
     <PackageReference Include="NPOI">
-      <Version>2.6.2</Version>
+      <Version>2.7.0</Version>
     </PackageReference>
     <PackageReference Include="SharpZipLib">
       <Version>1.4.2</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
-      <Version>8.0.2</Version>
+      <Version>8.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

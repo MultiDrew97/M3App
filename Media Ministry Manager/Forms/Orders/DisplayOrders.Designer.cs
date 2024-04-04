@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Database;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class Frm_DisplayOrders : Form
@@ -57,8 +57,8 @@ namespace MediaMinistry
             // 
             lbl_NoOrders.AutoSize = true;
             lbl_NoOrders.BackColor = SystemColors.AppWorkspace;
-            lbl_NoOrders.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
-            lbl_NoOrders.Font = My.MySettings.Default.CurrentFont;
+            lbl_NoOrders.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            lbl_NoOrders.Font = global::M3App.My.Settings.Default.CurrentFont;
             lbl_NoOrders.Location = new Point(257, 322);
             lbl_NoOrders.Name = "lbl_NoOrders";
             lbl_NoOrders.Size = new Size(728, 48);

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     // TODO: Incorporate Gmail and GDrive tools in this page
@@ -26,7 +26,7 @@ namespace MediaMinistry
         private void Frm_Settings_Load(object sender, EventArgs e)
         {
             // Load settings from settings file to display to user
-            Font = My.MySettingsProperty.Settings.CurrentFont;
+            Font = My.Settings.Default.CurrentFont;
             bw_Settings.RunWorkerAsync("l");
             bw_CheckServices.RunWorkerAsync();
         }
@@ -51,7 +51,7 @@ namespace MediaMinistry
             }
             else
             {
-                fd_FontSelector.Font = My.MySettingsProperty.Settings.CurrentFont;
+                fd_FontSelector.Font = My.Settings.Default.CurrentFont;
             }
         }
 
@@ -71,7 +71,7 @@ namespace MediaMinistry
                         // Load the settings of the application
                         Invoke(new Action(() =>
             {
-                fd_FontSelector.Font = My.MySettingsProperty.Settings.CurrentFont;
+                fd_FontSelector.Font = My.Settings.Default.CurrentFont;
                 ChangeFont();
             }));
                         break;
@@ -79,20 +79,20 @@ namespace MediaMinistry
                 case "s":
                     {
                         // Save the settings that have been changed by the user
-                        My.MySettingsProperty.Settings.CurrentFont = fd_FontSelector.Font;
-                        My.MySettingsProperty.Settings.Save();
+                        My.Settings.Default.CurrentFont = fd_FontSelector.Font;
+                        My.Settings.Default.Save();
                         break;
                     }
                 case "d":
                     {
                         // Restore the defaults of the application
-                        My.MySettingsProperty.Settings.CurrentFont = My.MySettingsProperty.Settings.DefaultFont;
+                        My.Settings.Default.CurrentFont = My.Settings.Default.DefaultFont;
                         Invoke(new Action(() =>
             {
-                fd_FontSelector.Font = My.MySettingsProperty.Settings.CurrentFont;
+                fd_FontSelector.Font = My.Settings.Default.CurrentFont;
                 ChangeFont();
             }));
-                        My.MySettingsProperty.Settings.Save();
+                        My.Settings.Default.Save();
                         break;
                     }
             }

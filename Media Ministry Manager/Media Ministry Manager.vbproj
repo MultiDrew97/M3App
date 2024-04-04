@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F19EA4B2-87F9-4520-9C59-8B87DDD59B05}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>MediaMinistry.My.MyApplication</StartupObject>
-    <RootNamespace>MediaMinistry</RootNamespace>
+    <StartupObject>M3App.My.MyApplication</StartupObject>
+    <RootNamespace>M3App</RootNamespace>
     <AssemblyName>Media Ministry Manager</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
@@ -139,7 +139,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Import Include="MediaMinistry" />
+    <Import Include="M3App" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="SPPBC.M3Tools.Database" />
     <Import Include="SPPBC.M3Tools.Dialogs" />
@@ -360,8 +360,8 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-    <None Include="My Project\DataSources\MediaMinistry.Types.CustomerCollection.datasource" />
-    <None Include="My Project\DataSources\MediaMinistry.Types.ListenerCollection.datasource" />
+    <None Include="My Project\DataSources\M3App.Types.CustomerCollection.datasource" />
+    <None Include="My Project\DataSources\M3App.Types.ListenerCollection.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.CustomersDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ItemsDataTable.datasource" />
     <None Include="My Project\DataSources\SPPBC.M3Tools.DataTables.ListenersDataTable.datasource" />

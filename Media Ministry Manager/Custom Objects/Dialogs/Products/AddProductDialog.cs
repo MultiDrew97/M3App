@@ -5,7 +5,7 @@ using static System.Text.RegularExpressions.Regex;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class AddProductDialog

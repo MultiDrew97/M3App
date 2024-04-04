@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using MediaMinistry.Helpers;
+using M3App.Helpers;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class MainForm
@@ -35,7 +35,7 @@ namespace MediaMinistry
 
         private void ManageCustomers(object sender, EventArgs e)
         {
-            var customers = new CustomersManagement();
+            var customers = new CustomerManagement();
             customers.Show();
             Close();
         }
@@ -60,7 +60,7 @@ namespace MediaMinistry
 
         private void AddCustomer(object sender, SPPBC.M3Tools.Events.Customers.CustomerEventArgs e)
         {
-            dbCustomer.AddCustomer(e.Customer);
+            dbCustomer.AddCustomer(e.Value);
             MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -72,7 +72,7 @@ namespace MediaMinistry
 
         private void AddCustomer(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
         {
-            dbInventory.AddProduct(e.Product);
+            dbInventory.AddProduct(e.Value);
             MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

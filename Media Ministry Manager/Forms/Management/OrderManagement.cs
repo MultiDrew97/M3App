@@ -1,5 +1,5 @@
 ﻿
-namespace MediaMinistry
+namespace M3App
 {
     public partial class OrderManagement
     {

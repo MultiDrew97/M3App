@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace MediaMinistry.My
+namespace M3App.My
 {
 
     // The following events are available for MyApplication:
@@ -17,25 +17,23 @@ namespace MediaMinistry.My
         // the time that the splash screen is on screen to 5000 ms (5 seconds)
         protected override bool OnInitialize(ReadOnlyCollection<string> commandLineArgs)
         {
-            // Me.MinimumSplashScreenDisplayTime = 5000
+			MinimumSplashScreenDisplayTime = 5000;
 
-            // TODO: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
-            /* TODO ERROR: Skipped IfDirectiveTrivia
-            #If DEBUG Then
-            */
-            MySettingsProperty.Settings.BaseUrl = "http://localhost:3000/api";
-            MySettingsProperty.Settings.ApiPassword = "password";
-            MySettingsProperty.Settings.ApiUsername = "username";
-            /* TODO ERROR: Skipped EndIfDirectiveTrivia
-            #End If
-            */
-            // Bring in the settings from previous version
-            if (MySettingsProperty.Settings.UpgradeRequired)
+			// TODO: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
+
+#if DEBUG
+			Settings.Default.BaseUrl = "http://localhost:3000/api";
+			Settings.Default.ApiPassword = "password";
+			Settings.Default.ApiUsername = "username";
+			Settings.Default.Save();
+#endif
+			// Bring in the settings from previous version
+			if (Settings.Default.UpgradeRequired)
             {
                 Console.WriteLine("Upgrade required");
-                MySettingsProperty.Settings.Upgrade();
-                MySettingsProperty.Settings.UpgradeRequired = false;
-                MySettingsProperty.Settings.Save();
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
             }
 
             // TODO: May have to figure out a way to transfer Google API tokens

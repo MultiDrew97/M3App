@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using SPPBC.M3Tools;
 
-namespace MediaMinistry.Helpers
+namespace M3App.Helpers
 {
     public struct Utils
     {
@@ -40,10 +40,10 @@ namespace MediaMinistry.Helpers
 
         public static void LogOff()
         {
-            My.MySettingsProperty.Settings.Username = "";
-            My.MySettingsProperty.Settings.Password = "";
-            My.MySettingsProperty.Settings.KeepLoggedIn = false;
-            My.MySettingsProperty.Settings.Save();
+            My.Settings.Default.Username = "";
+            My.Settings.Default.Password = "";
+            My.Settings.Default.KeepLoggedIn = false;
+            My.Settings.Default.Save();
             My.MyProject.Forms.LogOnForm.Show();
         }
 

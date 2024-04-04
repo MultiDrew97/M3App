@@ -10,7 +10,7 @@
 
 using System.Diagnostics;
 
-namespace MediaMinistry.My
+namespace M3App.My
 {
 
     // NOTE: This file is auto-generated; do not modify it directly.  To make changes,

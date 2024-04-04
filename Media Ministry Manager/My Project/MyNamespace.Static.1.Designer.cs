@@ -91,7 +91,7 @@ using Microsoft.VisualBasic;
 /* TODO ERROR: Skipped IfDirectiveTrivia
 #If _MYTYPE <> "Empty" Then
 */
-namespace MediaMinistry.My
+namespace M3App.My
 {
 
     /* TODO ERROR: Skipped IfDirectiveTrivia

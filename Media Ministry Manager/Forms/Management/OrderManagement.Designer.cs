@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class OrderManagement : Form

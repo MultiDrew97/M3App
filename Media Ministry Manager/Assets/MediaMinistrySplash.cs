@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public sealed partial class MediaMinistrySplash

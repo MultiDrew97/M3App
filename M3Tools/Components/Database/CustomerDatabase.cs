@@ -69,9 +69,9 @@ namespace SPPBC.M3Tools.Database
             dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(customer));
         }
 
-        public CustomersCollection GetCustomers()
+        public CustomerCollection GetCustomers()
         {
-            return dbConnection.Consume<CustomersCollection>(Method.Get, $"/{path}").Result;
+            return dbConnection.Consume<CustomerCollection>(Method.Get, $"/{path}").Result;
         }
 
         public Customer GetCustomer(int customerID)

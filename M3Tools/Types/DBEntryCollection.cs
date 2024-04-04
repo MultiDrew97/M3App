@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
+﻿//using System.Data;
 using System.Linq;
 
 namespace SPPBC.M3Tools.Types
 {
-    public abstract class DBEntryCollection<T> : Collection<T>, IBindingListView where T : DbEntry
-    {
+    public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
+	{
 
         private string _filter = "";
         private bool _sorted = false;
-        private readonly ListSortDescriptionCollection _sortDescription = new ListSortDescriptionCollection();
+        private readonly System.ComponentModel.ListSortDescriptionCollection _sortDescription = new System.ComponentModel.ListSortDescriptionCollection();
         // Protected _filteredData As IList(Of T)
         // Private _descriptor As DBEntryPropertyDescriptor
 
+		/// <summary>
+		/// Applies the filter to the list
+		/// </summary>
+		/// <param name="entry">The current entry</param>
+		/// <param name="index">The index of the current entry</param>
+		/// <returns></returns>
         public abstract bool ApplyFilter(T entry, int index);
 
-        public new IList<T> Items
+        public new System.Collections.Generic.IList<T> Items
         {
             get
             {
@@ -31,7 +33,7 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        public new T get_Item(int id)
+        public new T Item(int id)
         {
             // If Not String.IsNullOrEmpty(Filter) Then
             // For Each current In FilteredData
@@ -44,13 +46,13 @@ namespace SPPBC.M3Tools.Types
 
             foreach (var current in Items)
             {
-                if (current.Id == id)
+                if (current.GetHashCode() == id)
                 {
                     return current;
                 }
             }
 
-            throw new Exception($"No entry with ID '{id}'");
+            throw new System.Exception($"No entry with ID '{id}'");
         }
 
 
@@ -62,18 +64,18 @@ namespace SPPBC.M3Tools.Types
             }
             set
             {
-                if (string.Equals(value, _filter, StringComparison.Ordinal))
+                if (string.Equals(value, _filter, System.StringComparison.Ordinal))
                 {
                     return;
                 }
 
                 _filter = value;
 
-                OnChanged(ListChangedType.Reset);
+                OnChanged(System.ComponentModel.ListChangedType.Reset);
             }
         }
 
-        public IList<T> FilteredData
+        public System.Collections.Generic.IList<T> FilteredData
         {
             get
             {
@@ -81,7 +83,7 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        public ListSortDescriptionCollection SortDescriptions
+        public System.ComponentModel.ListSortDescriptionCollection SortDescriptions
         {
             get
             {
@@ -162,184 +164,99 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        public PropertyDescriptor SortProperty
+        public System.ComponentModel.PropertyDescriptor SortProperty
         {
             get
             {
-                throw new NotImplementedException("SortProperty");
+                throw new System.NotImplementedException("SortProperty");
                 // Return _descriptor
             }
         }
 
-        public ListSortDirection SortDirection
+        public System.ComponentModel.ListSortDirection SortDirection
         {
             get
             {
-                return ListSortDirection.Ascending;
+                return System.ComponentModel.ListSortDirection.Ascending;
             }
         }
 
-        public event ListChangedEventHandler ListChanged;
+        public event System.ComponentModel.ListChangedEventHandler ListChanged;
 
-        public void ApplySort(ListSortDescriptionCollection sorts)
+        public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts)
         {
-            throw new NotImplementedException("ApplySort");
+            throw new System.NotImplementedException("ApplySort");
             _sorted = true;
-            OnChanged(ListChangedType.Reset);
+            OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
 
         public void RemoveFilter()
         {
             Filter = string.Empty;
-            OnChanged(ListChangedType.Reset);
+            OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
-        public void ApplySort(PropertyDescriptor @property, ListSortDirection direction)
+        public void ApplySort(System.ComponentModel.PropertyDescriptor @property, System.ComponentModel.ListSortDirection direction)
         {
             // Throw New NotImplementedException("ApplySort")
             string Column = @property.Name;
             switch (direction)
             {
-                case ListSortDirection.Ascending:
+                case System.ComponentModel.ListSortDirection.Ascending:
                     {
                         break;
                     }
 
-                case ListSortDirection.Descending:
+                case System.ComponentModel.ListSortDirection.Descending:
                     {
                         break;
                     }
 
                 default:
                     {
-                        throw new ArgumentException("Invalid sorting direction");
+                        throw new System.ArgumentException("Invalid sorting direction");
                     }
             }
 
             _sorted = true;
-            OnChanged(ListChangedType.Reset);
+            OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
-        public void AddIndex(PropertyDescriptor @property)
+        public void AddIndex(System.ComponentModel.PropertyDescriptor @property)
         {
-            throw new NotImplementedException("AddIndex");
-            OnChanged(ListChangedType.Reset);
+            throw new System.NotImplementedException("AddIndex");
+            OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
-        public void RemoveIndex(PropertyDescriptor @property)
+        public void RemoveIndex(System.ComponentModel.PropertyDescriptor @property)
         {
-            throw new NotImplementedException("RemoveIndex");
-            OnChanged(ListChangedType.Reset);
+            throw new System.NotImplementedException("RemoveIndex");
+            OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
         public void RemoveSort()
         {
-            throw new NotImplementedException("RemoveSort");
+            throw new System.NotImplementedException("RemoveSort");
             _sorted = false;
-            OnChanged(ListChangedType.Reset);
+            OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
         public object AddNew()
         {
-            throw new NotImplementedException("AddNew");
+            throw new System.NotImplementedException("AddNew");
             return (T)new object();
         }
 
-        public int Find(PropertyDescriptor @property, object key)
+        public int Find(System.ComponentModel.PropertyDescriptor @property, object key)
         {
-            throw new NotImplementedException("Find");
+            throw new System.NotImplementedException("Find");
         }
 
-        private void OnChanged(ListChangedType @type = ListChangedType.Reset, int index = -1)
+        private void OnChanged(System.ComponentModel.ListChangedType @type = System.ComponentModel.ListChangedType.Reset, int index = -1)
         {
-            ListChanged?.Invoke(this, new ListChangedEventArgs(type, index));
+            ListChanged?.Invoke(this, new System.ComponentModel.ListChangedEventArgs(type, index));
         }
     }
-
-    // MustInherit Class DBEntryPropertyDescriptor
-    // Inherits PropertyDescriptor
-
-    // Protected Sub New(descr As MemberDescriptor)
-    // MyBase.New(descr)
-    // End Sub
-
-    // Protected Sub New(name As String, attrs() As Attribute)
-    // MyBase.New(name, attrs)
-    // End Sub
-
-    // Protected Sub New(descr As MemberDescriptor, attrs() As Attribute)
-    // MyBase.New(descr, attrs)
-    // End Sub
-    // End Class
 }
-
-
-// Namespace Types
-// Public MustInherit Class DBEntryCollection(Of T As DbEntry)
-// Inherits Windows.Forms.BindingSource
-
-// Private _filter As String = ""
-// Private ReadOnly _innerList As New Collection(Of T)
-// 'Protected _filteredData As IList(Of T)
-// 'Private _descriptor As DBEntryPropertyDescriptor
-
-// MustOverride Function ApplyFilter(entry As T, index As Integer) As Boolean
-
-// Shadows ReadOnly Property List As IList
-// Get
-// If String.IsNullOrEmpty(Filter) Then
-// Return MyBase.List
-// End If
-
-// Return MyBase.List.Cast(Of T).Where(AddressOf ApplyFilter).ToList
-// End Get
-// End Property
-
-// Public Shadows Property Filter As String
-// Get
-// Return _filter
-// End Get
-// Set(value As String)
-// If String.Equals(value, _ filter, StringComparison.Ordinal) Then
-// Return
-// End If
-
-// _filter = value
-// End Set
-// End Property
-
-// Public Shadows ReadOnly Property SupportsAdvancedSorting As Boolean
-// Get
-// Return True
-// End Get
-// End Property
-
-// Public Shadows ReadOnly Property SupportsFiltering As Boolean
-// Get
-// Return True
-// End Get
-// End Property
-
-// Protected Sub New(innerList As Collection(Of T))
-// MyBase.New(innerList, String.Empty)
-// End Sub
-// End Class
-
-// MustInherit Class DBEntryPropertyDescriptor
-// Inherits PropertyDescriptor
-
-// Protected Sub New(descr As MemberDescriptor)
-// MyBase.New(descr)
-// End Sub
-
-// Protected Sub New(name As String, attrs() As Attribute)
-// MyBase.New(name, attrs)
-// End Sub
-
-// Protected Sub New(descr As MemberDescriptor, attrs() As Attribute)
-// MyBase.New(descr, attrs)
-// End Sub
-// End Class
-// End Namespace
 

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class ReceiptTypeDialog : Form
@@ -61,8 +61,8 @@ namespace MediaMinistry
             btn_Ok.Anchor = AnchorStyles.Bottom;
             btn_Ok.AutoSize = true;
             btn_Ok.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_Ok.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
-            btn_Ok.Font = My.MySettings.Default.CurrentFont;
+            btn_Ok.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            btn_Ok.Font = global::M3App.My.Settings.Default.CurrentFont;
             btn_Ok.Location = new Point(239, 266);
             btn_Ok.Name = "btn_Ok";
             btn_Ok.Size = new Size(51, 35);
@@ -74,9 +74,9 @@ namespace MediaMinistry
             btn_Cancel.Anchor = AnchorStyles.Bottom;
             btn_Cancel.AutoSize = true;
             btn_Cancel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_Cancel.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            btn_Cancel.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
             btn_Cancel.DialogResult = DialogResult.Cancel;
-            btn_Cancel.Font = My.MySettings.Default.CurrentFont;
+            btn_Cancel.Font = global::M3App.My.Settings.Default.CurrentFont;
             btn_Cancel.Location = new Point(111, 266);
             btn_Cancel.Name = "btn_Cancel";
             btn_Cancel.Size = new Size(95, 35);
@@ -86,8 +86,8 @@ namespace MediaMinistry
             // txt_Other
             // 
             txt_Other.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txt_Other.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
-            txt_Other.Font = My.MySettings.Default.CurrentFont;
+            txt_Other.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            txt_Other.Font = global::M3App.My.Settings.Default.CurrentFont;
             txt_Other.Location = new Point(61, 257);
             txt_Other.Name = "txt_Other";
             txt_Other.Size = new Size(310, 31);
@@ -98,8 +98,8 @@ namespace MediaMinistry
             // 
             lbl_Other.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lbl_Other.AutoSize = true;
-            lbl_Other.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
-            lbl_Other.Font = My.MySettings.Default.CurrentFont;
+            lbl_Other.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            lbl_Other.Font = global::M3App.My.Settings.Default.CurrentFont;
             lbl_Other.Location = new Point(56, 229);
             lbl_Other.Name = "lbl_Other";
             lbl_Other.Size = new Size(70, 25);
@@ -114,8 +114,8 @@ namespace MediaMinistry
             gbx_RecieptOptions.Controls.Add(rdo_Other);
             gbx_RecieptOptions.Controls.Add(rdo_LoveOffering);
             gbx_RecieptOptions.Controls.Add(rdo_Offering);
-            gbx_RecieptOptions.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
-            gbx_RecieptOptions.Font = My.MySettings.Default.CurrentFont;
+            gbx_RecieptOptions.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            gbx_RecieptOptions.Font = global::M3App.My.Settings.Default.CurrentFont;
             gbx_RecieptOptions.Location = new Point(70, 12);
             gbx_RecieptOptions.Name = "gbx_RecieptOptions";
             gbx_RecieptOptions.Size = new Size(301, 164);
@@ -167,9 +167,9 @@ namespace MediaMinistry
             // 
             // nud_Amount
             // 
-            nud_Amount.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            nud_Amount.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
             nud_Amount.DecimalPlaces = 2;
-            nud_Amount.Font = My.MySettings.Default.CurrentFont;
+            nud_Amount.Font = global::M3App.My.Settings.Default.CurrentFont;
             nud_Amount.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             nud_Amount.Location = new Point(154, 217);
             nud_Amount.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
@@ -184,8 +184,8 @@ namespace MediaMinistry
             // lbl_Amount
             // 
             lbl_Amount.AutoSize = true;
-            lbl_Amount.DataBindings.Add(new Binding("Font", My.MySettings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
-            lbl_Amount.Font = My.MySettings.Default.CurrentFont;
+            lbl_Amount.DataBindings.Add(new Binding("Font", global::M3App.My.Settings.Default, "CurrentFont", true, DataSourceUpdateMode.OnPropertyChanged));
+            lbl_Amount.Font = global::M3App.My.Settings.Default.CurrentFont;
             lbl_Amount.Location = new Point(149, 189);
             lbl_Amount.Name = "lbl_Amount";
             lbl_Amount.Size = new Size(98, 25);

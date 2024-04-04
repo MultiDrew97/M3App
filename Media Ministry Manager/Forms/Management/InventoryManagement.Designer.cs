@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using SPPBC.M3Tools.Database;
 using SPPBC.M3Tools.Events.Inventory;
 
-namespace MediaMinistry
+namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class InventoryManagement : Form
@@ -50,10 +50,6 @@ namespace MediaMinistry
             mms_Main.AddProduct += AddProduct;
             bsInventory = new BindingSource(components);
             dbInventory = new InventoryDatabase(components);
-            dic_Inventory = new SPPBC.M3Tools.DisplayInventoryCtrl();
-            dic_Inventory.AddProduct += AddProduct;
-            dic_Inventory.RemoveProduct += RemoveProduct;
-            dic_Inventory.UpdateProduct += UpdateProduct;
             ss_StatusView = new StatusStrip();
             tss_StatusView = new ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)bsInventory).BeginInit();
@@ -70,19 +66,9 @@ namespace MediaMinistry
             // 
             // dbInventory
             // 
-            dbInventory.BaseUrl = My.MySettings.Default.BaseUrl;
-            dbInventory.Password = My.MySettings.Default.ApiPassword;
-            dbInventory.Username = My.MySettings.Default.ApiUsername;
-            // 
-            // dic_Inventory
-            // 
-            dic_Inventory.CountTemplate = "Count: {0}";
-            dic_Inventory.DataSource = bsInventory;
-            dic_Inventory.Dock = DockStyle.Fill;
-            dic_Inventory.Location = new Point(0, 24);
-            dic_Inventory.Name = "dic_Inventory";
-            dic_Inventory.Size = new Size(800, 437);
-            dic_Inventory.TabIndex = 2;
+            dbInventory.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+            dbInventory.Password = global::M3App.My.Settings.Default.ApiPassword;
+            dbInventory.Username = global::M3App.My.Settings.Default.ApiUsername;
             // 
             // ss_StatusView
             // 
@@ -108,7 +94,6 @@ namespace MediaMinistry
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 461);
             Controls.Add(ss_StatusView);
-            Controls.Add(dic_Inventory);
             Controls.Add(mms_Main);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -129,7 +114,6 @@ namespace MediaMinistry
         internal SPPBC.M3Tools.MainMenuStrip mms_Main;
         internal BindingSource bsInventory;
         internal InventoryDatabase dbInventory;
-        internal SPPBC.M3Tools.DisplayInventoryCtrl dic_Inventory;
         internal StatusStrip ss_StatusView;
         internal ToolStripStatusLabel tss_StatusView;
     }

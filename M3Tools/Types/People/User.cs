@@ -9,7 +9,7 @@ namespace SPPBC.M3Tools.Types
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("userID")]
-        public override int Id { get; set; }
+        public override int Id { get => base.Id; }
 
         [System.Text.Json.Serialization.JsonPropertyName("login")]
         public Auth Login { get; set; }

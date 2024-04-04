@@ -1,11 +1,11 @@
 ﻿
 namespace SPPBC.M3Tools.Types
 {
-    public abstract class Person : DbEntry
+    public class Person : DbEntry
     {
-        private MimeKit.MailboxAddress __email;
+		private MimeKit.MailboxAddress __email;
 
-        [System.ComponentModel.Category("Basics")]
+		[System.ComponentModel.Category("Basics")]
         [System.Text.Json.Serialization.JsonPropertyName("firstName")]
         public string FirstName { get; set; }
 
@@ -41,7 +41,7 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        protected internal Person(int id = -1, string name = "John Doe", string email = "JohnDoe@domain.ext") : base(id)
+		protected Person(int id = -1, string name = null, string email = null) : base(id)
         {
             ParseName(name);
             Email = (email ?? string.Empty).Trim();
@@ -50,7 +50,7 @@ namespace SPPBC.M3Tools.Types
         private void ParseName(string name)
         {
             // TODO: Look into better parsing name data
-            string[] parts = name.Trim().Split(' ');
+            string[] parts = (name ?? string.Empty).Trim().Split(' ');
             FirstName = parts[0];
 
             try
@@ -63,14 +63,31 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        public static bool operator ==(Person ls, Person rs)
-        {
-            return ls.Id == rs.Id & ls.Name.Equals(rs.Name) & ls.Email.Equals(rs.Email);
-        }
+  //      public static bool operator ==(Person ls, Person rs)
+  //      {
+  //          return ls.Id == rs.Id & ls.Name.Equals(rs.Name) & ls.Email.Equals(rs.Email);
+  //      }
 
-        public static bool operator !=(Person ls, Person rs)
-        {
-            return !(ls == rs);
-        }
-    }
+  //      public static bool operator !=(Person ls, Person rs)
+  //      {
+  //          return !(ls == rs);
+  //      }
+
+		//public override bool Equals(object obj)
+		//{
+		//	try
+		//	{
+		//		return (this.GetHashCode() == ((Person)obj).GetHashCode());
+		//	}
+		//	catch
+		//	{
+		//		return base.Equals(obj);
+		//	}
+		//}
+
+		//public override int GetHashCode()
+		//{
+		//	return Utils.ValidID(this.Id) ? this.Id : base.GetHashCode();
+		//}
+	}
 }

@@ -7,7 +7,7 @@ using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Types;
 using SPPBC.M3Tools.Types.GTools;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class SendEmailsDialog
@@ -76,8 +76,8 @@ namespace MediaMinistry
 
         private void Loading(object sender, EventArgs e)
         {
-            gmt_Gmail.Authorize(My.MySettingsProperty.Settings.Username);
-            gdt_Files.Load(My.MySettingsProperty.Settings.Username);
+            gmt_Gmail.Authorize(My.Settings.Default.Username);
+            gdt_Files.Load(My.Settings.Default.Username);
         }
 
         public void Reload()

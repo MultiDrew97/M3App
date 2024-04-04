@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace MediaMinistry.My
+namespace M3App.My
 {
     internal static partial class MyProject
     {
@@ -79,9 +79,9 @@ namespace MediaMinistry.My
 
 
             [EditorBrowsable(EditorBrowsableState.Never)]
-            public CustomersManagement m_CustomersManagement;
+            public CustomerManagement m_CustomersManagement;
 
-            public CustomersManagement CustomersManagement
+            public CustomerManagement CustomersManagement
             {
                 [DebuggerHidden]
                 get

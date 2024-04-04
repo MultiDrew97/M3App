@@ -68,9 +68,9 @@ Partial Class CustomersManagement
 		'
 		'dbCustomers
 		'
-		Me.dbCustomers.BaseUrl = Global.MediaMinistry.My.MySettings.Default.BaseUrl
-		Me.dbCustomers.Password = Global.MediaMinistry.My.MySettings.Default.ApiPassword
-		Me.dbCustomers.Username = Global.MediaMinistry.My.MySettings.Default.ApiUsername
+		Me.dbCustomers.BaseUrl = Global.M3App.My.MySettings.Default.BaseUrl
+		Me.dbCustomers.Password = Global.M3App.My.MySettings.Default.ApiPassword
+		Me.dbCustomers.Username = Global.M3App.My.MySettings.Default.ApiUsername
 		'
 		'ToolStripContainer1
 		'

@@ -4,16 +4,25 @@ using SPPBC.M3Tools.Types.Extensions;
 
 namespace SPPBC.M3Tools.Types
 {
+	/// <summary>
+	/// Class containing customer data
+	/// </summary>
     public class Customer : Person
     {
         // Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
         private string __phone;
 
-        [System.ComponentModel.Browsable(false)]
-        [System.Text.Json.Serialization.JsonPropertyName("customerID")]
-        public override int Id { get; set; }
+		/// <summary>
+		/// An empty instance of a customer
+		/// </summary>
+		public new static Customer None => new();
 
-        [System.ComponentModel.Category("Contact")]
+		/// <inheritdoc />
+		[System.ComponentModel.Browsable(false)]
+		[System.Text.Json.Serialization.JsonPropertyName("customerID")]
+		public override int Id => base.Id;
+
+		[System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("phoneNumber")]
         public string Phone
         {
@@ -49,8 +58,6 @@ namespace SPPBC.M3Tools.Types
 		// End Set
 		// End Property
 
-		public static Customer None { get; } = new Customer();
-
         public Customer() : this(-1)
         {
         }
@@ -59,7 +66,7 @@ namespace SPPBC.M3Tools.Types
         {
         }
 
-        private Customer(int id, string name, Address address, string phone, string email, DateTime @join) : base(id, name, email)
+        private Customer(int customerID, string name, Address address, string phone, string email, DateTime @join) : base(customerID, name, email)
         {
             Phone = phone;
             Address = address ?? Address.None;

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace MediaMinistry.Types.Extensions
+namespace M3App.Types.Extensions
 {
     static class StringExtensions
     {

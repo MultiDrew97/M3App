@@ -2,20 +2,20 @@
 
 namespace SPPBC.M3Tools.Data
 {
-    public class CustomersBindingSource : BindingSource<Types.Customer>
+    public class InventoryBindingSource : BindingSource<Types.Product>
     {
-		private Types.CustomerCollection _customers;
+		private Types.InventoryCollection _inventory;
 
-		public CustomersBindingSource() 
+		public InventoryBindingSource() 
 		{
-			_customers = new Types.CustomerCollection();
-			DataSource = _customers;
+			_inventory = new Types.InventoryCollection();
+			DataSource = _inventory;
 		}
 
 		/// <summary>
 		/// List of customers in the binding source
 		/// </summary>
-        public new IList<Types.Customer> List
+        public new IList<Types.Product> List
         {
             get
             {
@@ -26,11 +26,11 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// The data source for the binding source to bind from
 		/// </summary>
-		public new Types.CustomerCollection DataSource
+		public new Types.InventoryCollection DataSource
 		{
 			get
 			{
-				return (Types.CustomerCollection)base.DataSource;
+				return (Types.InventoryCollection)base.DataSource;
 			}
 			private set
 			{

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using SPPBC.M3Tools.Events.Listeners;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class ListenersManagement
@@ -16,8 +16,8 @@ namespace MediaMinistry
         {
             InitializeComponent();
             mms_Main.ToggleViewItem("Listeners");
-            gt_Email.Authorize(My.MySettingsProperty.Settings.Username);
-            gd_Drive.Authorize(My.MySettingsProperty.Settings.Username);
+            gt_Email.Authorize(My.Settings.Default.Username);
+            gd_Drive.Authorize(My.Settings.Default.Username);
         }
 
         private void ClosingForm(object sender, CancelEventArgs e)
@@ -45,7 +45,7 @@ namespace MediaMinistry
 
         private void ManageCustomers(object sender, EventArgs e)
         {
-            var customers = new CustomersManagement();
+            var customers = new CustomerManagement();
             customers.Show();
             Tooled = true;
             Close();
@@ -113,6 +113,11 @@ namespace MediaMinistry
             dbListeners.UpdateListener(e.Listener);
 			ListenerDBModified.Invoke(this, e);
         }
+
+		private void Reload(object sender, ListenerEventArgs e)
+		{
+			Reload(sender, EventArgs.Empty);
+		}
 
         private void Reload(object sender, EventArgs e)
         {

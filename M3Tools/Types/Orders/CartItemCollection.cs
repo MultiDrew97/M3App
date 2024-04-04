@@ -2,7 +2,7 @@
 
 namespace SPPBC.M3Tools.Types
 {
-    public class CartItemCollection : Collection<CartItem>
-    {
-    }
+	public class CartItemCollection : Collection<CartItem>
+	{
+	}
 }

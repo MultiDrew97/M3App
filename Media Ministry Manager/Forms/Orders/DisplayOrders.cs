@@ -1,7 +1,7 @@
 ﻿using System;
-using MediaMinistry.Helpers;
+using M3App.Helpers;
 
-namespace MediaMinistry
+namespace M3App
 {
 
     public partial class Frm_DisplayOrders
@@ -37,7 +37,7 @@ namespace MediaMinistry
 
         private void ViewCustomers(object sender, EventArgs e)
         {
-            var customers = new CustomersManagement();
+            var customers = new CustomerManagement();
             customers.Show();
             // Utils.SpecialClose(sender)
             Close();
