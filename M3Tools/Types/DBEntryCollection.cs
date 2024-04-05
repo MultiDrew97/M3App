@@ -12,7 +12,7 @@ namespace SPPBC.M3Tools.Types
 
         private string _filter = "";
         private bool _sorted = false;
-        private readonly System.ComponentModel.ListSortDescriptionCollection _sortDescription = new();
+        private System.ComponentModel.ListSortDescriptionCollection _sortDescriptions = new();
 		// Protected _filteredData As IList(Of T)
 		// Private _descriptor As DBEntryPropertyDescriptor
 
@@ -52,6 +52,12 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Gets an item that has the specified ID in the collection
+		/// </summary>
+		/// <param name="id">The ID of the entry to find</param>
+		/// <returns>The entry if found</returns>
+		/// <exception cref="System.ArgumentException">Thrown if the entry doesn't exist in the collection</exception>
         public T Item(int id)
         {
 
@@ -68,8 +74,10 @@ namespace SPPBC.M3Tools.Types
             throw new System.ArgumentException($"No entry with ID '{id}'");
         }
 
-
-        public new string Filter
+		/// <summary>
+		/// Applies a filter to the collection
+		/// </summary>
+        public string Filter
         {
             get
             {
@@ -96,14 +104,22 @@ namespace SPPBC.M3Tools.Types
 			}
 		}*/
 
+		/// <inheritdoc/>
 		public System.ComponentModel.ListSortDescriptionCollection SortDescriptions
         {
             get
             {
-                return _sortDescription;
+                return _sortDescriptions;
             }
+			private set
+			{
+				_sortDescriptions = value;
+			}
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public bool SupportsAdvancedSorting
         {
             get
@@ -112,6 +128,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection supports filtering
+		/// </summary>
         public bool SupportsFiltering
         {
             get
@@ -120,6 +139,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection supports adding new entries
+		/// </summary>
         public bool AllowNew
         {
             get
@@ -128,6 +150,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection allows editing
+		/// </summary>
         public bool AllowEdit
         {
             get
@@ -136,6 +161,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection allows removal
+		/// </summary>
         public bool AllowRemove
         {
             get
@@ -144,6 +172,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection supports change notification
+		/// </summary>
         public bool SupportsChangeNotification
         {
             get
@@ -152,6 +183,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection supports searching
+		/// </summary>
         public bool SupportsSearching
         {
             get
@@ -160,7 +194,10 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        public new bool SupportsSorting
+		/// <summary>
+		/// Whether the collection supports sorting
+		/// </summary>
+        public bool SupportsSorting
         {
             get
             {
@@ -168,14 +205,24 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Whether the collection is currently sorted
+		/// </summary>
         public bool IsSorted
         {
             get
             {
                 return _sorted;
             }
+			private set
+			{
+				_sorted = value;
+			}
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public System.ComponentModel.PropertyDescriptor SortProperty
         {
             get
@@ -185,6 +232,9 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// The direction the collection is sorted
+		/// </summary>
         public System.ComponentModel.ListSortDirection SortDirection
         {
             get
@@ -193,22 +243,40 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// Event that occurs when the collection is changed in any way
+		/// </summary>
         public event System.ComponentModel.ListChangedEventHandler ListChanged;
 
+		/// <summary>
+		/// Applies a sort to the collection based on the sort criteria description provided
+		/// </summary>
+		/// <param name="sorts"></param>
+		/// <exception cref="System.NotImplementedException"></exception>
         public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts)
         {
             throw new System.NotImplementedException("ApplySort");
-            _sorted = true;
+            IsSorted = true;
+			SortDescriptions = sorts;
+
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
-
+		/// <summary>
+		/// Removes the applied filter from the 
+		/// </summary>
         public void RemoveFilter()
         {
             Filter = string.Empty;
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
+		/// <summary>
+		/// Applies a sort to the collection using the provided criteria
+		/// </summary>
+		/// <param name="property">The column to sort on</param>
+		/// <param name="direction">The direction to sort in</param>
+		/// <exception cref="System.ArgumentException">The provided sort direction is not valid</exception>
         public void ApplySort(System.ComponentModel.PropertyDescriptor @property, System.ComponentModel.ListSortDirection direction)
         {
             // Throw New NotImplementedException("ApplySort")
@@ -235,18 +303,32 @@ namespace SPPBC.M3Tools.Types
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="property"></param>
+		/// <exception cref="System.NotImplementedException"></exception>
         public void AddIndex(System.ComponentModel.PropertyDescriptor @property)
         {
             throw new System.NotImplementedException("AddIndex");
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="property"></param>
+		/// <exception cref="System.NotImplementedException"></exception>
         public void RemoveIndex(System.ComponentModel.PropertyDescriptor @property)
         {
             throw new System.NotImplementedException("RemoveIndex");
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
+		/// <summary>
+		/// Removes the applied sort from the collection
+		/// </summary>
+		/// <exception cref="System.NotImplementedException"></exception>
         public void RemoveSort()
         {
             throw new System.NotImplementedException("RemoveSort");
@@ -254,13 +336,30 @@ namespace SPPBC.M3Tools.Types
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
+		/// <summary>
+		/// Create a new entry and return it
+		/// </summary>
+		/// <returns>The new empty entry</returns>
+		/// <exception cref="System.NotImplementedException"></exception>
         public object AddNew()
         {
             throw new System.NotImplementedException("AddNew");
-            return (T)new object();
+			return (T)new object();
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="property"></param>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		/// <exception cref="System.NotImplementedException"></exception>
 		public int Find(System.ComponentModel.PropertyDescriptor @property, object key)
+		{
+			return Find(property, (T)key);
+		}
+
+		private int Find(System.ComponentModel.PropertyDescriptor @property, T key)
 		{
 			throw new System.NotImplementedException("Find");
 		}
