@@ -9,7 +9,7 @@ namespace SPPBC.M3Tools.Data
 	/// Base class for data grid controls used in the app
 	/// </summary>
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
-	public partial class DataGrid<T> : DataGridView where T : Types.IDbEntry
+	public abstract partial class DataGrid<T> : DataGridView where T : Types.IDbEntry
 	{
 		internal event Events.DataEventHandler<T> Add;
 		internal event Events.DataEventHandler<T> Update;
@@ -18,7 +18,46 @@ namespace SPPBC.M3Tools.Data
 
 		public delegate void RefreshDisplayEventHandler();
 
-		protected void RemoveSelectedRows()
+		/// <summary>
+		/// The data used for the data grid
+		/// </summary>
+		// <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+		// <DefaultValue(GetType(BindingSource))>
+		// <AttributeProvider(GetType(IListSource))>
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Description("Data Source to use for data grid.")]
+		public abstract new Data.BindingSource<T> DataSource { get; set; }
+/*		{
+			get
+			{
+				return (Data.BindingSource<T>)base.DataSource;
+			}
+			set
+			{
+				AutoGenerateColumns = false;
+				base.DataSource = value;
+				//switch (true)
+				//{
+				//	case object _ when value is Types.CustomersBindingSource:
+				//		{
+				//			base.DataSource = value;
+				//			break;
+				//		}
+				//	case object _ when value is Types.Customer:
+				//		{
+				//			base.DataSource = new Types.CustomersCollection();
+				//			break;
+				//		}
+
+				//	default:
+				//		{
+				//			throw new Exception("CustomerDataGrid - Unknown DataSource Type");
+				//		}
+				//}
+			}
+		}*/
+
+		private void RemoveSelectedRows()
 		{
 			if (SelectedRows.Count < 1)
 			{
@@ -55,7 +94,7 @@ namespace SPPBC.M3Tools.Data
 
 
 		[DefaultValue(false)]
-		public bool AllowColumnReordering
+		public bool CanReorder
 		{
 			get
 			{
@@ -68,7 +107,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		[DefaultValue(true)]
-		public bool AllowEditting
+		public bool CanEdit
 		{
 			get
 			{
@@ -81,7 +120,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		[DefaultValue(true)]
-		public bool AllowDeleting
+		public bool CanDelete
 		{
 			get
 			{
@@ -94,7 +133,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		[DefaultValue(false)]
-		public bool AllowAdding 
+		public bool CanAdd 
 		{
 			get
 			{
@@ -103,44 +142,6 @@ namespace SPPBC.M3Tools.Data
 			set
 			{
 				base.AllowUserToAddRows = value;
-			}
-		}
-		/// <summary>
-		/// The data used for the data grid
-		/// </summary>
-		// <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-		// <DefaultValue(GetType(BindingSource))>
-		// <AttributeProvider(GetType(IListSource))>
-		[RefreshProperties(RefreshProperties.Repaint)]
-		[Description("Data Source to use for data grid.")]
-		public new Data.BindingSource<T> DataSource
-		{
-			get
-			{
-				return (Data.BindingSource<T>)base.DataSource;
-			}
-			set
-			{
-				AutoGenerateColumns = false;
-				base.DataSource = value;
-				//switch (true)
-				//{
-				//	case object _ when value is Types.CustomersBindingSource:
-				//		{
-				//			base.DataSource = value;
-				//			break;
-				//		}
-				//	case object _ when value is Types.Customer:
-				//		{
-				//			base.DataSource = new Types.CustomersCollection();
-				//			break;
-				//		}
-
-				//	default:
-				//		{
-				//			throw new Exception("CustomerDataGrid - Unknown DataSource Type");
-				//		}
-				//}
 			}
 		}
 

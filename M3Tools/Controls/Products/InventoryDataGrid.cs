@@ -27,7 +27,7 @@ namespace SPPBC.M3Tools
 		}
 
 		[Description("Data Source to use for data grid.")]
-		public Data.InventoryBindingSource DataSource
+		public override Data.BindingSource<Types.Product> DataSource
 		{
 			get
 			{

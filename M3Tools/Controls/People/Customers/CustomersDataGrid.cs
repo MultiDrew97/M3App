@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel;
 using SPPBC.M3Tools.Events;
+using SPPBC.M3Tools.Types;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -28,7 +29,9 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event Events.Customers.CustomerEventHandler UpdateCustomer;
 
-        [Browsable(false)]
+		public override BindingSource<Customer> DataSource { get => bsCustomers; set => bsCustomers = (CustomerBindingSource)value; }
+
+		[Browsable(false)]
         public IList Customers
         {
             get

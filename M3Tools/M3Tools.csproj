@@ -297,7 +297,7 @@
     <Compile Include="Types\InventoryBindingSource.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Types\CustomersBindingSource.cs">
+    <Compile Include="Types\CustomerBindingSource.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\People\CustomersCollection.cs" />
@@ -752,8 +752,8 @@
     <EmbeddedResource Include="Types\InventoryBindingSource.resx">
       <DependentUpon>InventoryBindingSource.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Types\CustomersBindingSource.resx">
-      <DependentUpon>CustomersBindingSource.cs</DependentUpon>
+    <EmbeddedResource Include="Types\CustomerBindingSource.resx">
+      <DependentUpon>CustomerBindingSource.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateService.resx">
       <DependentUpon>UpdateService.cs</DependentUpon>
@@ -843,7 +843,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

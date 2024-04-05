@@ -43,20 +43,11 @@ namespace M3App
             this.ss_StatusView = new System.Windows.Forms.StatusStrip();
             this.tss_CustomersView = new System.Windows.Forms.ToolStripStatusLabel();
             this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
-            this.bsCustomers = new SPPBC.M3Tools.Data.CustomersBindingSource();
+            this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
             this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
             this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
-            this.dataGridViewCheckBoxColumn3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageButtonEditColumn3 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn3 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageButtonEditColumn2 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn2 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.ss_StatusView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
             this.ToolStripContainer1.ContentPanel.SuspendLayout();
@@ -118,14 +109,10 @@ namespace M3App
             // 
             // cdg_Customers
             // 
-            this.cdg_Customers.AllowColumnReordering = true;
+            this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.AllowUserToAddRows = false;
             this.cdg_Customers.AllowUserToOrderColumns = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.cdg_Customers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn3,
-            this.dataGridViewImageButtonEditColumn3,
-            this.dataGridViewImageButtonDeleteColumn3});
             this.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.cdg_Customers.Location = new System.Drawing.Point(0, 0);
@@ -137,84 +124,6 @@ namespace M3App
             this.cdg_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cdg_Customers.Size = new System.Drawing.Size(784, 376);
             this.cdg_Customers.TabIndex = 1;
-            // 
-            // dataGridViewCheckBoxColumn3
-            // 
-            this.dataGridViewCheckBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn3.Frozen = true;
-            this.dataGridViewCheckBoxColumn3.HeaderText = "";
-            this.dataGridViewCheckBoxColumn3.MinimumWidth = 25;
-            this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
-            this.dataGridViewCheckBoxColumn3.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewCheckBoxColumn3.Visible = false;
-            this.dataGridViewCheckBoxColumn3.Width = 25;
-            // 
-            // dataGridViewImageButtonEditColumn3
-            // 
-            this.dataGridViewImageButtonEditColumn3.ButtonImage = null;
-            this.dataGridViewImageButtonEditColumn3.FillWeight = 5F;
-            this.dataGridViewImageButtonEditColumn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonEditColumn3.HeaderText = "";
-            this.dataGridViewImageButtonEditColumn3.MinimumWidth = 25;
-            this.dataGridViewImageButtonEditColumn3.Name = "dataGridViewImageButtonEditColumn3";
-            this.dataGridViewImageButtonEditColumn3.ReadOnly = true;
-            this.dataGridViewImageButtonEditColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonEditColumn3.ToolTipText = "Edit";
-            this.dataGridViewImageButtonEditColumn3.Width = 25;
-            // 
-            // dataGridViewImageButtonDeleteColumn3
-            // 
-            this.dataGridViewImageButtonDeleteColumn3.ButtonImage = null;
-            this.dataGridViewImageButtonDeleteColumn3.FillWeight = 5F;
-            this.dataGridViewImageButtonDeleteColumn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonDeleteColumn3.HeaderText = "";
-            this.dataGridViewImageButtonDeleteColumn3.MinimumWidth = 25;
-            this.dataGridViewImageButtonDeleteColumn3.Name = "dataGridViewImageButtonDeleteColumn3";
-            this.dataGridViewImageButtonDeleteColumn3.ReadOnly = true;
-            this.dataGridViewImageButtonDeleteColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonDeleteColumn3.ToolTipText = "Remove";
-            this.dataGridViewImageButtonDeleteColumn3.Width = 25;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn2.Frozen = true;
-            this.dataGridViewCheckBoxColumn2.HeaderText = "";
-            this.dataGridViewCheckBoxColumn2.MinimumWidth = 25;
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewCheckBoxColumn2.Visible = false;
-            this.dataGridViewCheckBoxColumn2.Width = 25;
-            // 
-            // dataGridViewImageButtonEditColumn2
-            // 
-            this.dataGridViewImageButtonEditColumn2.ButtonImage = null;
-            this.dataGridViewImageButtonEditColumn2.FillWeight = 5F;
-            this.dataGridViewImageButtonEditColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonEditColumn2.HeaderText = "";
-            this.dataGridViewImageButtonEditColumn2.MinimumWidth = 25;
-            this.dataGridViewImageButtonEditColumn2.Name = "dataGridViewImageButtonEditColumn2";
-            this.dataGridViewImageButtonEditColumn2.ReadOnly = true;
-            this.dataGridViewImageButtonEditColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonEditColumn2.ToolTipText = "Edit";
-            this.dataGridViewImageButtonEditColumn2.Width = 25;
-            // 
-            // dataGridViewImageButtonDeleteColumn2
-            // 
-            this.dataGridViewImageButtonDeleteColumn2.ButtonImage = null;
-            this.dataGridViewImageButtonDeleteColumn2.FillWeight = 5F;
-            this.dataGridViewImageButtonDeleteColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonDeleteColumn2.HeaderText = "";
-            this.dataGridViewImageButtonDeleteColumn2.MinimumWidth = 25;
-            this.dataGridViewImageButtonDeleteColumn2.Name = "dataGridViewImageButtonDeleteColumn2";
-            this.dataGridViewImageButtonDeleteColumn2.ReadOnly = true;
-            this.dataGridViewImageButtonDeleteColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonDeleteColumn2.ToolTipText = "Remove";
-            this.dataGridViewImageButtonDeleteColumn2.Width = 25;
             // 
             // ts_Tools
             // 
@@ -229,45 +138,6 @@ namespace M3App
             this.ts_Tools.Stretch = true;
             this.ts_Tools.TabIndex = 2;
             this.ts_Tools.Text = "ToolsToolStrip1";
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn1.Frozen = true;
-            this.dataGridViewCheckBoxColumn1.HeaderText = "";
-            this.dataGridViewCheckBoxColumn1.MinimumWidth = 25;
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewCheckBoxColumn1.Visible = false;
-            this.dataGridViewCheckBoxColumn1.Width = 25;
-            // 
-            // dataGridViewImageButtonEditColumn1
-            // 
-            this.dataGridViewImageButtonEditColumn1.ButtonImage = null;
-            this.dataGridViewImageButtonEditColumn1.FillWeight = 5F;
-            this.dataGridViewImageButtonEditColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonEditColumn1.HeaderText = "";
-            this.dataGridViewImageButtonEditColumn1.MinimumWidth = 25;
-            this.dataGridViewImageButtonEditColumn1.Name = "dataGridViewImageButtonEditColumn1";
-            this.dataGridViewImageButtonEditColumn1.ReadOnly = true;
-            this.dataGridViewImageButtonEditColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonEditColumn1.ToolTipText = "Edit";
-            this.dataGridViewImageButtonEditColumn1.Width = 25;
-            // 
-            // dataGridViewImageButtonDeleteColumn1
-            // 
-            this.dataGridViewImageButtonDeleteColumn1.ButtonImage = null;
-            this.dataGridViewImageButtonDeleteColumn1.FillWeight = 5F;
-            this.dataGridViewImageButtonDeleteColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonDeleteColumn1.HeaderText = "";
-            this.dataGridViewImageButtonDeleteColumn1.MinimumWidth = 25;
-            this.dataGridViewImageButtonDeleteColumn1.Name = "dataGridViewImageButtonDeleteColumn1";
-            this.dataGridViewImageButtonDeleteColumn1.ReadOnly = true;
-            this.dataGridViewImageButtonDeleteColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonDeleteColumn1.ToolTipText = "Remove";
-            this.dataGridViewImageButtonDeleteColumn1.Width = 25;
             // 
             // CustomerManagement
             // 
@@ -305,18 +175,9 @@ namespace M3App
         internal ToolStripStatusLabel tss_CustomersView;
         internal SPPBC.M3Tools.MainMenuStrip mms_Main;
         internal SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
-        internal CustomersBindingSource bsCustomers;
+        internal CustomerBindingSource bsCustomers;
         internal ToolStripContainer ToolStripContainer1;
         internal SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
         internal SPPBC.M3Tools.ToolsToolStrip ts_Tools;
-		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
-		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn2;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn2;
-		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn3;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn3;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn3;
 	}
 }

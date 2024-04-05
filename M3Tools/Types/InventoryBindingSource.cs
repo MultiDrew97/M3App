@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using SPPBC.M3Tools.Types;
 
 namespace SPPBC.M3Tools.Data
 {
     public class InventoryBindingSource : BindingSource<Types.Product>
     {
-		private Types.InventoryCollection _inventory;
+		private readonly Types.InventoryCollection _inventory;
 
 		public InventoryBindingSource() 
 		{
@@ -13,28 +14,18 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// List of customers in the binding source
-		/// </summary>
-        public new IList<Types.Product> List
-        {
-            get
-            {
-                return DataSource.Items;
-            }
-        }
-
-		/// <summary>
 		/// The data source for the binding source to bind from
 		/// </summary>
-		public new Types.InventoryCollection DataSource
+		public override Types.DBEntryCollection<Types.Product> DataSource
 		{
 			get
 			{
-				return (Types.InventoryCollection)base.DataSource;
+				return _inventory;
 			}
-			private set
+			protected set
 			{
-				base.DataSource = value;
+				_inventory.Clear();
+				_inventory.AddRange(value);
 			}
 		}
 

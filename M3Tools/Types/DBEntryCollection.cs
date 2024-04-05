@@ -1,16 +1,32 @@
-﻿//using System.Data;
+﻿using System.Data;
 using System.Linq;
 
 namespace SPPBC.M3Tools.Types
 {
+	/// <summary>
+	/// Base class for database entry collections
+	/// </summary>
+	/// <typeparam name="T">The type of entries in collection</typeparam>
     public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
 	{
 
         private string _filter = "";
         private bool _sorted = false;
-        private readonly System.ComponentModel.ListSortDescriptionCollection _sortDescription = new System.ComponentModel.ListSortDescriptionCollection();
-        // Protected _filteredData As IList(Of T)
-        // Private _descriptor As DBEntryPropertyDescriptor
+        private readonly System.ComponentModel.ListSortDescriptionCollection _sortDescription = new();
+		// Protected _filteredData As IList(Of T)
+		// Private _descriptor As DBEntryPropertyDescriptor
+
+		/// <summary>
+		/// Add a range of values to the collection. Can be shadowed to add any data verification gap
+		/// </summary>
+		/// <param name="collection">The range of values to add to the collection</param>
+		public virtual void AddRange(DBEntryCollection<T> collection)
+		{
+			foreach (T item in collection)
+			{
+				Add(item);
+			}
+		}
 
 		/// <summary>
 		/// Applies the filter to the list
@@ -18,8 +34,11 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="entry">The current entry</param>
 		/// <param name="index">The index of the current entry</param>
 		/// <returns></returns>
-        public abstract bool ApplyFilter(T entry, int index);
+		public abstract bool ApplyFilter(T entry, int index);
 
+		/// <summary>
+		/// List of items currently in the collection
+		/// </summary>
         public new System.Collections.Generic.IList<T> Items
         {
             get
@@ -33,26 +52,20 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        public new T Item(int id)
+        public T Item(int id)
         {
-            // If Not String.IsNullOrEmpty(Filter) Then
-            // For Each current In FilteredData
-            // If current.Id = id Then
-            // Return current
-            // End If
-            // Next
-
-            // End If
 
             foreach (var current in Items)
             {
-                if (current.GetHashCode() == id)
+                if (current.Id != id)
                 {
-                    return current;
+					continue;
                 }
+
+                return current;
             }
 
-            throw new System.Exception($"No entry with ID '{id}'");
+            throw new System.ArgumentException($"No entry with ID '{id}'");
         }
 
 
@@ -72,18 +85,18 @@ namespace SPPBC.M3Tools.Types
                 _filter = value;
 
                 OnChanged(System.ComponentModel.ListChangedType.Reset);
-            }
-        }
+			}
+		}
 
-        public System.Collections.Generic.IList<T> FilteredData
-        {
-            get
-            {
-                return Items.Where(ApplyFilter).ToList();
-            }
-        }
+/*		public System.Collections.Generic.IList<T> FilteredData
+		{
+			get
+			{
+				return Items.Where(ApplyFilter).ToList();
+			}
+		}*/
 
-        public System.ComponentModel.ListSortDescriptionCollection SortDescriptions
+		public System.ComponentModel.ListSortDescriptionCollection SortDescriptions
         {
             get
             {
@@ -151,7 +164,6 @@ namespace SPPBC.M3Tools.Types
         {
             get
             {
-                // TODO: Figure out sorting
                 return true;
             }
         }
@@ -200,7 +212,7 @@ namespace SPPBC.M3Tools.Types
         public void ApplySort(System.ComponentModel.PropertyDescriptor @property, System.ComponentModel.ListSortDirection direction)
         {
             // Throw New NotImplementedException("ApplySort")
-            string Column = @property.Name;
+            // string Column = @property.Name;
             switch (direction)
             {
                 case System.ComponentModel.ListSortDirection.Ascending:
@@ -248,12 +260,17 @@ namespace SPPBC.M3Tools.Types
             return (T)new object();
         }
 
-        public int Find(System.ComponentModel.PropertyDescriptor @property, object key)
-        {
-            throw new System.NotImplementedException("Find");
-        }
+		public int Find(System.ComponentModel.PropertyDescriptor @property, object key)
+		{
+			throw new System.NotImplementedException("Find");
+		}
 
-        private void OnChanged(System.ComponentModel.ListChangedType @type = System.ComponentModel.ListChangedType.Reset, int index = -1)
+		/// <summary>
+		/// Method called when the collection is modified in any way
+		/// </summary>
+		/// <param name="type">The type of collection change that occurred</param>
+		/// <param name="index">The index of the item that was changed</param>
+		internal protected virtual void OnChanged(System.ComponentModel.ListChangedType @type = System.ComponentModel.ListChangedType.Reset, int index = -1)
         {
             ListChanged?.Invoke(this, new System.ComponentModel.ListChangedEventArgs(type, index));
         }

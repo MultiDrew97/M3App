@@ -1,6 +1,6 @@
 ﻿namespace SPPBC.M3Tools.Data
 {
-	public partial class DataGrid<T> : System.Windows.Forms.DataGridView
+	public partial class DataGrid<T> : System.Windows.Forms.DataGridView where T : Types.IDbEntry
 	{
 		/// <summary> 
 		/// Required designer variable.
