@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Collections;
 
 namespace SPPBC.M3Tools.Data
@@ -9,11 +8,11 @@ namespace SPPBC.M3Tools.Data
 	/// Base class for data grid controls used in the app
 	/// </summary>
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
-	public abstract partial class DataGrid<T> : DataGridView where T : Types.IDbEntry
+	public partial class DataGrid<T> : System.Windows.Forms.DataGridView where T : Types.IDbEntry
 	{
-		internal event Events.DataEventHandler<T> Add;
-		internal event Events.DataEventHandler<T> Update;
-		internal event Events.DataEventHandler<T> Remove;
+		internal event Events.DataEventHandler<T> AddEntry;
+		internal event Events.DataEventHandler<T> UpdateEntry;
+		internal event Events.DataEventHandler<T> RemoveEntry;
 		internal event RefreshDisplayEventHandler Reload;
 
 		public delegate void RefreshDisplayEventHandler();
@@ -26,7 +25,7 @@ namespace SPPBC.M3Tools.Data
 		// <AttributeProvider(GetType(IListSource))>
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[Description("Data Source to use for data grid.")]
-		public abstract new Data.BindingSource<T> DataSource { get; set; }
+		public virtual new Data.BindingSource<T> DataSource { get => (Data.BindingSource<T>)base.DataSource; set => base.DataSource = value; }
 /*		{
 			get
 			{
@@ -67,11 +66,11 @@ namespace SPPBC.M3Tools.Data
 			int failed = 0;
 			int total = SelectedRows.Count;
 
-			foreach (DataGridViewRow row in SelectedRows)
+			foreach (System.Windows.Forms.DataGridViewRow row in SelectedRows)
 			{
 				try
 				{
-					DeleteEntry(this, new DataGridViewRowCancelEventArgs(row));
+					DeleteEntry(this, new System.Windows.Forms.DataGridViewRowCancelEventArgs(row));
 				}
 				catch (Exception ex)
 				{
@@ -83,12 +82,12 @@ namespace SPPBC.M3Tools.Data
 
 			if (failed > 0)
 			{
-				MessageBox.Show($"Failed to remove {failed} {(failed > 1 ? "entries" : "entry")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				System.Windows.Forms.MessageBox.Show($"Failed to remove {failed} {(failed > 1 ? "entries" : "entry")}", "Failed Removals", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 			}
 
 			if (total - failed > 0)
 			{
-				MessageBox.Show($"Successfully removed {total - failed} {(total - failed > 1 ? "entries" : "entry")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				System.Windows.Forms.MessageBox.Show($"Successfully removed {total - failed} {(total - failed > 1 ? "entries" : "entry")}", "Successful Removals", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 			}
 		}
 
@@ -162,7 +161,7 @@ namespace SPPBC.M3Tools.Data
 
 				ClearSelection();
 
-				foreach (DataGridViewRow row in Rows)
+				foreach (System.Windows.Forms.DataGridViewRow row in Rows)
 					row.Selected = (bool)row.Cells[dgc_Selection.DisplayIndex].Value;
 
 				return base.SelectedRows;
@@ -192,7 +191,7 @@ namespace SPPBC.M3Tools.Data
 
 		private void SelectAll(object sender, EventArgs e)
 		{
-			foreach (DataGridViewRow row in Rows)
+			foreach (System.Windows.Forms.DataGridViewRow row in Rows)
 				row.Cells[dgc_Selection.Index].Value = chk_SelectAll.Checked;
 			Invalidate();
 		}
@@ -210,11 +209,11 @@ namespace SPPBC.M3Tools.Data
 				return;
 			}
 
-			foreach (DataGridViewRow row in SelectedRows)
-				Update?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)row.DataBoundItem));
+			foreach (System.Windows.Forms.DataGridViewRow row in SelectedRows)
+				UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)row.DataBoundItem));
 		}
 
-		protected virtual void CellClicked(object sender, DataGridViewCellEventArgs e)
+		protected virtual void CellClicked(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
 		{
 			if (e.ColumnIndex != dgc_Edit.Index && e.ColumnIndex != dgc_Remove.Index)
 			{
@@ -225,12 +224,12 @@ namespace SPPBC.M3Tools.Data
 			{
 				case var @edit when @edit == dgc_Edit.Index:
 					{
-						Update?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem));
+						UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem));
 						break;
 					}
 				case var @remove when @remove == dgc_Remove.Index:
 					{
-						Remove?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem));
+						RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem));
 						break;
 					}
 			}
@@ -241,9 +240,9 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected void DeleteEntry(object sender, DataGridViewRowCancelEventArgs e)
+		protected void DeleteEntry(object sender, System.Windows.Forms.DataGridViewRowCancelEventArgs e)
 		{
-			Remove?.Invoke(sender, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem));
+			RemoveEntry?.Invoke(sender, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem));
 		}
 	}
 }

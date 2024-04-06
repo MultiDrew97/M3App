@@ -19,7 +19,7 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// The data source for the binding source to bind from
 		/// </summary>
-		public override Types.DBEntryCollection<Types.Customer> DataSource
+		public new Types.DBEntryCollection<Types.Customer> DataSource
 		{
 			get
 			{

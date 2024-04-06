@@ -78,9 +78,9 @@ namespace SPPBC.M3Tools
 
 			this.cms_Tools.RefreshView += Refresh;
 
-			Add += ParseEvents;
-			Update += ParseEvents;
-			Remove += ParseEvents;
+			AddEntry += ParseEvents;
+			UpdateEntry += ParseEvents;
+			RemoveEntry += ParseEvents;
 		}
 
 		private void ParseEvents(object sender, DataEventArgs<Types.Product> e)

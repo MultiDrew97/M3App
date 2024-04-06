@@ -58,9 +58,9 @@ namespace SPPBC.M3Tools.Data
 			this.cms_Tools.RefreshView += Refresh;
 			LoadColumns();
 
-			Add += ParseEvents;
-			Update += ParseEvents;
-			Remove += ParseEvents;
+			AddEntry += ParseEvents;
+			UpdateEntry += ParseEvents;
+			RemoveEntry += ParseEvents;
 		}
 
 		private void ParseEvents(object sender, DataEventArgs<Types.Customer> e)

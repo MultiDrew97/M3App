@@ -6,7 +6,7 @@ namespace SPPBC.M3Tools.Data
 	/// Custom binding source to be used with the M3 Application
 	/// </summary>
 	/// <typeparam name="T">Data type for the data being used for binding</typeparam>
-	public abstract partial class BindingSource<T> : System.Windows.Forms.BindingSource where T : Types.IDbEntry
+	public partial class BindingSource<T> : System.Windows.Forms.BindingSource where T : Types.IDbEntry
 	{
 		/// <summary>
 		/// The binding source supports filtering
@@ -29,6 +29,6 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// The data source to use for this binding source
 		/// </summary>
-		public abstract new Types.DBEntryCollection<T> DataSource { get; protected set; }
+		public virtual new Types.DBEntryCollection<T> DataSource { get => (Types.DBEntryCollection<T>)base.DataSource; protected set => base.DataSource = value; }
 	}
 }

@@ -8,23 +8,39 @@ namespace SPPBC.M3Tools.Types
     public class Address
     {
 
-        [System.ComponentModel.Browsable(true)]
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[System.ComponentModel.Browsable(true)]
         [System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("street")]
         public string Street { get; set; }
 
-        [System.ComponentModel.Category("Contact")]
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("city")]
         public string City { get; set; }
 
-        [System.ComponentModel.Category("Contact")]
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("state")]
         public string State { get; set; }
 
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         [System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("zipCode")]
         public string ZipCode { get; set; }
 
+		/// <summary>
+		/// Returns an empty address object
+		/// </summary>
         public static Address None
         {
             get
@@ -33,7 +49,14 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="street"></param>
+		/// <param name="city"></param>
+		/// <param name="state"></param>
+		/// <param name="zipCode"></param>
+		[System.Text.Json.Serialization.JsonConstructor]
         public Address(string street = null, string city = null, string state = null, string zipCode = null)
         {
             Street = street;
@@ -42,38 +65,42 @@ namespace SPPBC.M3Tools.Types
             ZipCode = zipCode;
         }
 
-        public static Address Parse(string addrStr)
+
+		/// <summary>
+		/// Parses the information for an address from an address string
+		/// </summary>
+		/// <param name="addrStr">The string to parse</param>
+		/// <returns>The parsed out address object based on the string</returns>
+		/// <exception cref="ArgumentException"></exception>
+		public static Address Parse(string street, string city, string state, string zipCode)
         {
-            string[] addrParts = addrStr.Split(',');
+            if (!(!string.IsNullOrEmpty(street) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(state) || !string.IsNullOrEmpty(zipCode)))
+            {
+                return null;
+            }
+
+            return Parse(string.Join(My.Settings.Default.ObjectDelimiter, new[] { street, city, state, zipCode }));
+        }
+
+        private static Address Parse(string addrStr)
+        {
+            string[] addrParts = addrStr.Split(char.Parse(My.Settings.Default.ObjectDelimiter));
 
             if (addrParts.Count() < 4)
             {
                 throw new ArgumentException($"Unable to parse an address from '{addrStr}'");
             }
 
-            return Parse(addrParts[0], addrParts[1], addrParts[2], addrParts[3]);
+            return new Address(addrParts[0], addrParts[1], addrParts[2], addrParts[3]);
         }
 
-        public static Address Parse(object street, object city, object state, object zipCode)
-        {
-            string streetStr, cityStr, stateStr, zipStr;
-
-            streetStr = street as string;
-            cityStr = city as string;
-            stateStr = state as string;
-            zipStr = zipCode as string;
-
-            if (!(!string.IsNullOrEmpty(streetStr) || !string.IsNullOrEmpty(cityStr) || !string.IsNullOrEmpty(stateStr) || !string.IsNullOrEmpty(zipStr)))
-            {
-                return null;
-            }
-
-            return new Address(streetStr, cityStr, stateStr, zipStr);
-        }
-
+		/// <summary>
+		/// Gives the address in a 
+		/// </summary>
+		/// <returns></returns>
         public override string ToString()
         {
-            return string.Join(My.MySettingsProperty.Settings.ObjectDelimiter, Street, City, State, ZipCode);
+            return string.Join(My.Settings.Default.ObjectDelimiter, Street, City, State, ZipCode);
         }
 
         public string Display()
@@ -82,34 +109,30 @@ namespace SPPBC.M3Tools.Types
             return string.IsNullOrEmpty(Street) | string.IsNullOrEmpty(City) | string.IsNullOrEmpty(State) | string.IsNullOrEmpty(ZipCode) ? "" : $"{string.Join(Constants.vbCrLf, Street.Split(',').Where((currentString) => !string.IsNullOrWhiteSpace(currentString)))}{Constants.vbCrLf}{City}, {State} {ZipCode}";
         }
 
-        public static bool operator ==(Address left, Address right)
+		public override bool Equals(object obj)
+		{
+			return base.Equals(obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+
+		/// <summary>
+		/// Determines if 2 addresses are the same
+		/// </summary>
+		/// <param name="left">The left hand side address</param>
+		/// <param name="right">The right hand side address</param>
+		/// <returns>True if the addresses are the same, otherwise False</returns>
+		public static bool operator ==(Address left, Address right)
         {
-            if (left is null && right is null)
-            {
-                return true;
-            }
-
-            if (left is null & right is not null || left is not null & right is null)
-            {
-                return false;
-            }
-
-            if ((left.Street ?? "") != (right.Street ?? ""))
-            {
-                return false;
-            }
-
-            if ((left.City ?? "") != (right.City ?? ""))
-            {
-                return false;
-            }
-
-            if ((left.State ?? "") != (right.State ?? ""))
-            {
-                return false;
-            }
-
-            if ((left.ZipCode ?? "") != (right.ZipCode ?? ""))
+            if (left is null & right is not null ||
+				left is not null & right is null ||
+				left.Street != right.Street ||
+				left.City != right.City ||
+				left.State != right.State ||
+				left.ZipCode != right.ZipCode)
             {
                 return false;
             }
@@ -117,6 +140,12 @@ namespace SPPBC.M3Tools.Types
             return true;
         }
 
+		/// <summary>
+		/// Determines if 2 address are not the same
+		/// </summary>
+		/// <param name="left">The left hand side address</param>
+		/// <param name="right">The right hand side address</param>
+		/// <returns>True if the addresses are different, otherwise False</returns>
         public static bool operator !=(Address left, Address right)
         {
             return !(left == right);
