@@ -69,9 +69,9 @@ namespace M3App
         // TODO: Figure out more secure way to store login info
         private void Showing(object sender, EventArgs e)
         {
-            Username = Settings.Default.Username;
+            Username = My.Settings.Default.Username;
 
-            if (!Settings.Default.KeepLoggedIn)
+            if (!My.Settings.Default.KeepLoggedIn)
             {
                 Reset();
                 return;
@@ -99,11 +99,11 @@ namespace M3App
         private void SaveSettings(object sender, DoWorkEventArgs e)
         {
 			// TODO: Determine better way to handle this
-			Settings.Default.KeepLoggedIn = !KeepLoggedIn ? Settings.Default.KeepLoggedIn : KeepLoggedIn;
-            Settings.Default.Username = lf_Login.Username ?? Settings.Default.Username;
+			My.Settings.Default.KeepLoggedIn = !KeepLoggedIn ? My.Settings.Default.KeepLoggedIn : KeepLoggedIn;
+            My.Settings.Default.Username = lf_Login.Username ?? My.Settings.Default.Username;
             // FIXME: Prevent this from saving password as plain text
-            Settings.Default.Password = lf_Login.Password ?? Settings.Default.Password;
-            Settings.Default.Save();
+            My.Settings.Default.Password = lf_Login.Password ?? My.Settings.Default.Password;
+            My.Settings.Default.Save();
         }
 
         private void SettingsSaved(object sender, RunWorkerCompletedEventArgs e)
@@ -126,7 +126,7 @@ namespace M3App
             try
             {
                 BeginLogin?.Invoke();
-				Settings.Default.User = dbUsers.Login(Username ?? Settings.Default.Username, Password ?? Settings.Default.Password);
+				My.Settings.Default.User = dbUsers.Login(Username ?? My.Settings.Default.Username, Password ?? My.Settings.Default.Password);
 
                 bw_SaveSettings.RunWorkerAsync();
                 MyProject.Forms.MainForm.Show();
@@ -169,14 +169,15 @@ namespace M3App
 
         private void ForgotPassword(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (var forgot = new ChangePasswordDialog())
-            {
-                if (forgot.ShowDialog() == DialogResult.OK)
-                {
-                    Reset();
-                }
-            }
-        }
+			using var forgot = new ChangePasswordDialog();
+
+			if (forgot.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
+			Reset();
+		}
 
         private void CreateAccount(object sender, LinkLabelLinkClickedEventArgs e)
         {

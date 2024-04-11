@@ -6,18 +6,14 @@ namespace SPPBC.M3Tools
 
     public partial class ToolsContextMenu
     {
-        public event RefreshViewEventHandler RefreshView;
+        public event Events.RefreshViewEventHandler RefreshView;
 
-        public delegate void RefreshViewEventHandler();
-        public event RemoveRowsEventHandler RemoveRows;
+        public event Events.RemoveRowsEventHandler RemoveRows;
 
-        public delegate void RemoveRowsEventHandler();
-        public event SendEmailsEventHandler SendEmails;
+        public event Events.SendEmailsEventHandler SendEmails;
 
-        public delegate void SendEmailsEventHandler();
-        public event EditSelectedEventHandler EditSelected;
+        public event Events.EditSelectedEventHandler EditSelected;
 
-        public delegate void EditSelectedEventHandler();
 
         public ToolsContextMenu()
         {
@@ -38,7 +34,7 @@ namespace SPPBC.M3Tools
 
         private void Reload(object sender, EventArgs e)
         {
-            RefreshView?.Invoke();
+            RefreshView?.Invoke(Parent, e);
         }
 
         private void MenuClosed(object sender, EventArgs e)

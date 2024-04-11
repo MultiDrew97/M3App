@@ -40,7 +40,7 @@ namespace SPPBC.M3Tools.Types
 
 		public override string ToString()
 		{
-			return string.Join(My.MySettingsProperty.Settings.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
+			return string.Join(My.Settings.Default.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
 		}
 	}
 }

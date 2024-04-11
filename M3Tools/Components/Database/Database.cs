@@ -70,11 +70,9 @@ namespace SPPBC.M3Tools.Database
             if (payload is not null)
             {
                 req.ContentType = "application/json";
-                using (var stream = req.GetRequestStream())
-                {
-                    stream.Write(payload, 0, payload.Count());
-                }
-            }
+				using var stream = req.GetRequestStream();
+				stream.Write(payload, 0, payload.Count());
+			}
 
             VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
         }
@@ -96,17 +94,13 @@ namespace SPPBC.M3Tools.Database
             if (payload is not null)
             {
                 req.ContentType = "application/json";
-                using (var stream = req.GetRequestStream())
-                {
-                    stream.Write(payload, 0, payload.Count());
-                }
-            }
+				using var stream = req.GetRequestStream();
+				stream.Write(payload, 0, payload.Count());
+			}
 
-            using (var res = VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result))
-            {
-                return Task.FromResult(JSON.ConvertFromJSON<T>(new System.IO.StreamReader(res.GetResponseStream()).ReadToEnd()));
-            }
-        }
+			using var res = VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
+			return Task.FromResult(JSON.ConvertFromJSON<T>(new System.IO.StreamReader(res.GetResponseStream()).ReadToEnd()));
+		}
 
         private System.Net.HttpWebResponse VerifyResponse(System.Net.HttpWebResponse res)
         {

@@ -38,10 +38,9 @@ namespace SPPBC.M3Tools
             chk_SelectAll.CheckedChanged += new EventHandler(SelectAllListeners);
             bsListeners = new System.Windows.Forms.BindingSource(components);
             cms_Tools = new ToolsContextMenu();
-            cms_Tools.RemoveRows += new ToolsContextMenu.RemoveRowsEventHandler(RemoveSelectedListeners);
+            cms_Tools.RemoveRows += new Events.RemoveRowsEventHandler(RemoveSelectedListeners);
             cms_Tools.Opened += new EventHandler(ToolsOpened);
-            cms_Tools.EditSelected += new ToolsContextMenu.EditSelectedEventHandler(EditPerson);
-            cms_Tools.RefreshView += new ToolsContextMenu.RefreshViewEventHandler(RefreshView);
+            cms_Tools.EditSelected += new Events.EditSelectedEventHandler(EditPerson);
             dgc_Remove = new DataGridViewImageButtonDeleteColumn();
             dgc_Edit = new DataGridViewImageButtonEditColumn();
             dgcEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();

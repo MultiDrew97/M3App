@@ -300,7 +300,7 @@
     <Compile Include="Types\CustomerBindingSource.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Types\People\CustomersCollection.cs" />
+    <Compile Include="Types\CustomersCollection.cs" />
     <Compile Include="Types\Events\CustomerEvents.cs" />
     <Compile Include="Dialogs\Customer\EditCustomerDialog.Designer.cs">
       <DependentUpon>EditCustomerDialog.cs</DependentUpon>
@@ -523,7 +523,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\Orders\CartItem.cs" />
-    <Compile Include="Types\Orders\CartItemCollection.cs" />
+    <Compile Include="Types\CartItemCollection.cs" />
     <Compile Include="Types\DBEntryCollection.cs" />
     <Compile Include="UpdateService.Designer.cs">
       <DependentUpon>UpdateService.cs</DependentUpon>
@@ -771,6 +771,7 @@
       <CustomToolNamespace>SPPBC.M3Tools.My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
     <None Include="Resources\configs\credentials.json" />
   </ItemGroup>
   <ItemGroup>

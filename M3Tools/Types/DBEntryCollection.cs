@@ -7,11 +7,10 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-    public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
+    public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView //where T : IDbEntry
 	{
 
         private string _filter = "";
-        private bool _sorted = false;
         private System.ComponentModel.ListSortDescriptionCollection _sortDescriptions = new();
 		// Protected _filteredData As IList(Of T)
 		// Private _descriptor As DBEntryPropertyDescriptor
@@ -25,7 +24,28 @@ namespace SPPBC.M3Tools.Types
 			foreach (T item in collection)
 			{
 				Add(item);
+				OnChanged(System.ComponentModel.ListChangedType.ItemAdded, IndexOf(item));
 			}
+		}
+
+		/// <summary>
+		/// Finds the index of the item being searched for
+		/// </summary>
+		/// <param name="item">The item being searched for</param>
+		/// <returns>The index of the item if found, otherwise -1</returns>
+		public new int IndexOf(T item)
+		{
+			for (int i = 0; i < Count; i++)
+			{
+				if (Items[i].GetHashCode() != item.GetHashCode())
+				{
+					continue;
+				}
+
+				return i;
+			}
+
+			return -1;
 		}
 
 		/// <summary>
@@ -58,26 +78,28 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="id">The ID of the entry to find</param>
 		/// <returns>The entry if found</returns>
 		/// <exception cref="System.ArgumentException">Thrown if the entry doesn't exist in the collection</exception>
-        public T Item(int id)
+        public new T this[int id]
         {
+			get
+			{
+				foreach (var current in Items)
+				{
+					if (current.GetHashCode() != id)
+					{
+						continue;
+					}
 
-            foreach (var current in Items)
-            {
-                if (current.Id != id)
-                {
-					continue;
-                }
+					return current;
+				}
 
-                return current;
-            }
-
-            throw new System.ArgumentException($"No entry with ID '{id}'");
+				throw new System.ArgumentException($"No entry with ID '{id}'");
+			}
         }
 
 		/// <summary>
 		/// Applies a filter to the collection
 		/// </summary>
-        public string Filter
+		public string Filter
         {
             get
             {
@@ -208,34 +230,24 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// Whether the collection is currently sorted
 		/// </summary>
-        public bool IsSorted
-        {
-            get
-            {
-                return _sorted;
-            }
-			private set
-			{
-				_sorted = value;
-			}
-        }
+        public bool IsSorted { get; protected set; }
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public System.ComponentModel.PropertyDescriptor SortProperty
-        {
-            get
-            {
-                throw new System.NotImplementedException("SortProperty");
-                // Return _descriptor
-            }
-        }
+		public System.ComponentModel.PropertyDescriptor SortProperty
+		{
+			get
+			{
+				throw new System.NotImplementedException("SortProperty");
+				// Return _descriptor
+			}
+		}
 
 		/// <summary>
 		/// The direction the collection is sorted
 		/// </summary>
-        public System.ComponentModel.ListSortDirection SortDirection
+		public System.ComponentModel.ListSortDirection SortDirection
         {
             get
             {
@@ -299,7 +311,7 @@ namespace SPPBC.M3Tools.Types
                     }
             }
 
-            _sorted = true;
+            IsSorted = true;
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 
@@ -332,7 +344,7 @@ namespace SPPBC.M3Tools.Types
         public void RemoveSort()
         {
             throw new System.NotImplementedException("RemoveSort");
-            _sorted = false;
+            IsSorted = false;
             OnChanged(System.ComponentModel.ListChangedType.Reset);
         }
 

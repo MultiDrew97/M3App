@@ -191,7 +191,7 @@ namespace SPPBC.M3Tools
         {
             Types.Listener listener = (Types.Listener)e.Row.DataBoundItem;
 
-            RemoveListener?.Invoke(this, new ListenerEventArgs(listener, EventType.Deleted));
+            RemoveListener?.Invoke(this, new ListenerEventArgs(listener, EventType.Removed));
             MessageBox.Show($"Successfully removed listener", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

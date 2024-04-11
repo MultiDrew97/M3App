@@ -173,7 +173,7 @@ namespace M3App.My
             [EditorBrowsable(EditorBrowsableState.Never)]
             public LoginForm m_LogOnForm;
 
-            public LoginForm LogOnForm
+            public LoginForm LoginForm
             {
                 [DebuggerHidden]
                 get

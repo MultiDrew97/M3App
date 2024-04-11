@@ -1,6 +1,6 @@
 ﻿namespace SPPBC.M3Tools.Events.Customers
 {
-    public delegate void CustomerEventHandler(object sender, CustomerEventArgs e);
+	public delegate void CustomerEventHandler(object sender, CustomerEventArgs e);
 
 	/// <inheritdoc/>
 	sealed public class CustomerEventArgs : DataEventArgs<Types.Customer>

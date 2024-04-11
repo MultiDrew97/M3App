@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using M3App.Helpers;
 using SPPBC.M3Tools.Dialogs;
-using SPPBC.M3Tools.Types;
 using SPPBC.M3Tools.Events.Customers;
 
 namespace M3App
@@ -14,25 +13,40 @@ namespace M3App
 
     public partial class CustomerManagement
     {
-        protected event CustomerEventHandler CustomerDBModified;
+        private event CustomerEventHandler CustomerDBModified;
 
-        private bool Tooled = false;
+		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource; 
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public CustomerManagement()
         {
             InitializeComponent();
+
 			CustomerDBModified += new CustomerEventHandler(Reload);
+			cdg_Customers.Reload += new SPPBC.M3Tools.Events.RefreshViewEventHandler(Reload);
+			cdg_Customers.AddCustomer += new CustomerEventHandler(AddCustomer);
+			cdg_Customers.UpdateCustomer += new CustomerEventHandler(UpdateCustomer);
+			cdg_Customers.RemoveCustomer += new CustomerEventHandler(RemoveCustomer);
+			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
+			mms_Main.ExitApplication += new SPPBC.M3Tools.MainMenuStrip.ExitApplicationEventHandler(ExitApplication);
+			mms_Main.Logout += new SPPBC.M3Tools.MainMenuStrip.LogoutEventHandler(Logout);
+			mms_Main.ViewSettings += new SPPBC.M3Tools.MainMenuStrip.ViewSettingsEventHandler(ViewSettings);
         }
 
         private void Loading(object sender, EventArgs e)
         {
             mms_Main.ToggleViewItem("Customers");
+
+			Reload(sender, e);
         }
 
         private void DisplayClosing(object sender, CancelEventArgs e)
         {
             // TODO: Find easier way
-            if (Tooled)
+			Console.WriteLine(sender);
+            if (sender is null)
             {
                 return;
             }
@@ -43,8 +57,7 @@ namespace M3App
         private void Logout()
         {
             Utils.LogOff();
-            Tooled = true;
-            Close();
+            DisplayClosing(null, null);
         }
 
         private void ExitApplication()
@@ -56,24 +69,21 @@ namespace M3App
         {
             var orders = new OrderManagement();
             orders.Show();
-            Tooled = true;
-            Close();
+			DisplayClosing(null, null);
         }
 
         private void ManageProducts(object sender, EventArgs e)
         {
             var products = new InventoryManagement();
             products.Show();
-            Tooled = true;
-            Close();
+            DisplayClosing(null, null);
         }
 
         private void ManageListeners(object sender, EventArgs e)
         {
             var listeners = new ListenersManagement();
             listeners.Show();
-            Tooled = true;
-            Close();
+            DisplayClosing(null, null);
         }
 
         private void ViewSettings()
@@ -103,21 +113,17 @@ namespace M3App
             UseWaitCursor = true;
             dbCustomers.RemoveCustomer(e.Value.Id);
             MessageBox.Show($"Successfully removed customer", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			CustomerDBModified.Invoke(this, new CustomerEventArgs(e.Value, SPPBC.M3Tools.Events.EventType.Deleted));
+			CustomerDBModified.Invoke(this, new CustomerEventArgs(e.Value, SPPBC.M3Tools.Events.EventType.Removed));
         }
-
-		private void Reload(object sender, CustomerEventArgs e)
-		{
-			Reload(sender, EventArgs.Empty);
-		}
 
         private void Reload(object sender, EventArgs e)
         {
             UseWaitCursor = true;
             bsCustomers.Clear();
             foreach (var customer in dbCustomers.GetCustomers())
-                bsCustomers.Add(customer);
+				bsCustomers.Add(customer);
             ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, cdg_Customers.Customers.Count);
+			bsCustomers.ResetBindings(false);
             UseWaitCursor = false;
         }
 
@@ -135,7 +141,7 @@ namespace M3App
 
         private void FilterChanged(object sender, string filter)
         {
-            bsCustomers.Filter = filter;
+			bsCustomers.Filter = filter;
         }
     }
 }

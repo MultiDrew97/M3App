@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -10,7 +11,7 @@ namespace SPPBC.M3Tools.Data
 		private readonly Types.CustomerCollection _customers;
 
 		/// <inheritdoc/>
-		public CustomerBindingSource() 
+		public CustomerBindingSource() : base()
 		{
 			_customers = new Types.CustomerCollection();
 			DataSource = _customers;
@@ -19,24 +20,8 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// The data source for the binding source to bind from
 		/// </summary>
-		public new Types.DBEntryCollection<Types.Customer> DataSource
-		{
-			get
-			{
-				return _customers;
-			}
-			protected set
-			{
-				_customers.Clear();
-				_customers.AddRange(value);
-			}
-		}
-
-		/// <inheritdoc/>
-		public override string Filter
-		{ 
-			get => base.Filter;
-			set => base.Filter = value;
-		}
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[AttributeProvider(typeof(IListSource))]
+		public new Types.CustomerCollection DataSource { get => (Types.CustomerCollection)base.DataSource; set => base.DataSource = value; }
 	}
 }

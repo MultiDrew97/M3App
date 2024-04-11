@@ -27,7 +27,7 @@ namespace SPPBC.M3Tools
 		}
 
 		[Description("Data Source to use for data grid.")]
-		public override Data.BindingSource<Types.Product> DataSource
+		public new Data.BindingSource<Types.Product> DataSource
 		{
 			get
 			{
@@ -76,8 +76,6 @@ namespace SPPBC.M3Tools
 		{
 			InitializeComponent();
 
-			this.cms_Tools.RefreshView += Refresh;
-
 			AddEntry += ParseEvents;
 			UpdateEntry += ParseEvents;
 			RemoveEntry += ParseEvents;
@@ -88,7 +86,7 @@ namespace SPPBC.M3Tools
 			switch (e.EventType)
 			{
 				case EventType.Added: { AddProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
-				case EventType.Deleted: { UpdateProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
+				case EventType.Removed: { UpdateProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
 				case EventType.Updated: { RemoveProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
 				default: { throw new ArgumentException($""); }
 			}

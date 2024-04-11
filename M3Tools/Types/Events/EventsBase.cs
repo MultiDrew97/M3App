@@ -6,51 +6,81 @@ namespace SPPBC.M3Tools.Events
 	//public delegate void RemoveEventHandler(object sender, BulkActionEventArgs e);
 	//public delegate void AddEventHandler(object sender, BulkActionEventArgs e);
 	//public delegate void EditEventHandler(object sender, BulkActionEventArgs e);
+
 	/// <summary>
 	/// The base event handler for data events
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void DataEventHandler<T>(object sender, DataEventArgs<T> e) where T : Types.IDbEntry;
+	public delegate void DataEventHandler<T>(object sender, DataEventArgs<T> e); //where T : Types.IDbEntry;
+
+	/// <summary>
+	/// When a refresh view event occurs
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	public delegate void RefreshViewEventHandler(object sender, EventArgs e);
+
+	/// <summary>
+	/// When a remove rows event occurs
+	/// </summary>
+	public delegate void RemoveRowsEventHandler();
+
+	/// <summary>
+	/// When a send email event occurs
+	/// </summary>
+	public delegate void SendEmailsEventHandler();
+
+	/// <summary>
+	/// When a edit selected rows event occurs
+	/// </summary>
+	public delegate void EditSelectedEventHandler();
 
 	/// <summary>
 	/// The argument values for the event that occured
 	/// </summary>
 	/// <typeparam name="T">The type of the data being modified</typeparam>
-	public abstract class DataEventArgs<T> : BaseArgs where T : Types.IDbEntry
+	public class DataEventArgs<T> : BaseArgs //where T : Types.IDbEntry
 	{
-		/// <summary>
+		/*/// <summary>
 		/// The row of the data being modified
 		/// </summary>
-		protected DataGridViewRow Row { get; }
+		protected DataGridViewRow Row { get; }*/
 
 		/// <summary>
 		/// The value of the data being modified
 		/// </summary>
-		public abstract T Value { get; protected set; }
+		public virtual T Value { get; protected set; }
 
 		/// <summary>
 		/// Create a new event arguments value
 		/// </summary>
 		/// <param name="value">The value being modified</param>
 		/// <param name="type">The type of event occuring</param>
-		public DataEventArgs(T value, EventType type = EventType.None)
+		public DataEventArgs(T value, EventType type = EventType.None) : base()
 		{
 			Value = value;
 			EventType = type;
 		}
 
-		public static DataEventArgs<T> Parse(T value)
+		/// <summary>
+		/// Creates a DataEventArgs object using the provided values
+		/// </summary>
+		/// <param name="value">The value being modified</param>
+		/// <param name="type">The type of modificaiton occuring</param>
+		/// <returns></returns>
+		public static DataEventArgs<T> Parse(T value, EventType type)
 		{
 			Console.WriteLine(value.GetType());
-			return null;
+			
+			return new(value, type);
 		}
 	}
 
 	/// <summary>
 	/// Base class for all event args
 	/// </summary>
-	public abstract class BaseArgs
+	public abstract class BaseArgs : EventArgs
     {
 		/// <summary>
 		/// The type of even that occured
@@ -70,11 +100,26 @@ namespace SPPBC.M3Tools.Events
     //    }
     //}
 
+	/// <summary>
+	/// The types of events that can occur for data entries
+	/// </summary>
     public enum EventType
     {
+		/// <summary>
+		/// No specific event has occured
+		/// </summary>
         None,
+		/// <summary>
+		/// When an entry is added
+		/// </summary>
         Added,
-        Deleted,
+		/// <summary>
+		/// When an entry is removed
+		/// </summary>
+        Removed,
+		/// <summary>
+		/// When an entry is updated
+		/// </summary>
         Updated
     }
 }

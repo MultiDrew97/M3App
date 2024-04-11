@@ -33,7 +33,7 @@ namespace M3App.My
         [DebuggerStepThrough()]
         protected override void OnCreateMainForm()
         {
-            MainForm = MyProject.Forms.LogOnForm;
+            MainForm = MyProject.Forms.LoginForm;
         }
 
         [DebuggerStepThrough()]

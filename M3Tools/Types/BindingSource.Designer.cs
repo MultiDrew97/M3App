@@ -1,6 +1,6 @@
 ﻿namespace SPPBC.M3Tools.Data
 {
-	partial class BindingSource<T> : System.Windows.Forms.BindingSource where T : Types.IDbEntry
+	public partial class BindingSource<T> : System.Windows.Forms.BindingSource
 	{
 		/// <summary>
 		/// Required designer variable.
