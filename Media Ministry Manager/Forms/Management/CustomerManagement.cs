@@ -24,11 +24,14 @@ namespace M3App
         {
             InitializeComponent();
 
+			ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL);
+
 			CustomerDBModified += new CustomerEventHandler(Reload);
 			cdg_Customers.Reload += new SPPBC.M3Tools.Events.RefreshViewEventHandler(Reload);
-			cdg_Customers.AddCustomer += new CustomerEventHandler(AddCustomer);
+			//cdg_Customers.AddCustomer += new CustomerEventHandler(AddCustomer);
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(UpdateCustomer);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(RemoveCustomer);
+			ts_Tools.AddEntry += new EventHandler(AddCustomer);
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 			mms_Main.ExitApplication += new SPPBC.M3Tools.MainMenuStrip.ExitApplicationEventHandler(ExitApplication);
 			mms_Main.Logout += new SPPBC.M3Tools.MainMenuStrip.LogoutEventHandler(Logout);
@@ -37,7 +40,7 @@ namespace M3App
 
         private void Loading(object sender, EventArgs e)
         {
-            mms_Main.ToggleViewItem("Customers");
+            mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
 
 			Reload(sender, e);
         }
@@ -92,7 +95,12 @@ namespace M3App
 			settings.Show();
 		}
 
-        private void UpdateCustomer(object sender, CustomerEventArgs e)
+		private void UpdateCustomer(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
+		{
+			AddCustomer(sender, e as CustomerEventArgs);
+		}
+
+		private void UpdateCustomer(object sender, CustomerEventArgs e)
         {
             UseWaitCursor = true;
 			dbCustomers.UpdateCustomer(e.Value.Id, e.Value.FirstName, e.Value.LastName, e.Value.Address, e.Value.Email, e.Value.Phone);
@@ -100,15 +108,27 @@ namespace M3App
 			CustomerDBModified.Invoke(this, new CustomerEventArgs(e.Value, SPPBC.M3Tools.Events.EventType.Updated));
         }
 
-        private void AddCustomer(object sender, CustomerEventArgs e)
+		private void AddCustomer(object sender, EventArgs e)
         {
+			using var @add = new AddCustomerDialog();
+
+			if (add.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
             UseWaitCursor = true;
-            dbCustomers.AddCustomer(e.Value);
+			/*dbCustomers.AddCustomer(add.Customer);*/
             MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			CustomerDBModified.Invoke(this, new CustomerEventArgs(e.Value, SPPBC.M3Tools.Events.EventType.Added));
+			CustomerDBModified.Invoke(this, new CustomerEventArgs(add.Customer, SPPBC.M3Tools.Events.EventType.Added));
         }
 
-        private void RemoveCustomer(object sender, CustomerEventArgs e)
+		private void RemoveCustomer(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
+		{
+			AddCustomer(sender, e as CustomerEventArgs);
+		}
+
+		private void RemoveCustomer(object sender, CustomerEventArgs e)
         {
             UseWaitCursor = true;
             dbCustomers.RemoveCustomer(e.Value.Id);
@@ -123,6 +143,8 @@ namespace M3App
             foreach (var customer in dbCustomers.GetCustomers())
 				bsCustomers.Add(customer);
             ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, cdg_Customers.Customers.Count);
+			
+			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsCustomers.ResetBindings(false);
             UseWaitCursor = false;
         }

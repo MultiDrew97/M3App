@@ -60,7 +60,7 @@ namespace M3App
             mms_Main.UpdateAvailable += ExitApp;
             mms_Main.AddCustomer += AddCustomer;
             mms_Main.AddListener += AddListener;
-            mms_Main.AddProduct += AddCustomer;
+            mms_Main.AddProduct += AddProduct;
             mms_Main.ViewSettings += ViewSettings;
             wb_Updater = new WebBrowser();
             dbCustomer = new CustomerDatabase(components);

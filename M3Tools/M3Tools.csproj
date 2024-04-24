@@ -293,6 +293,7 @@
     <Compile Include="Types\BindingSource.Designer.cs">
       <DependentUpon>BindingSource.cs</DependentUpon>
     </Compile>
+    <Compile Include="Types\Events\OrderEvents.cs" />
     <Compile Include="Types\InventoryCollection.cs" />
     <Compile Include="Types\InventoryBindingSource.cs">
       <SubType>Component</SubType>
@@ -844,7 +845,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

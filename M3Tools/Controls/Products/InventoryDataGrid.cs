@@ -76,9 +76,9 @@ namespace SPPBC.M3Tools
 		{
 			InitializeComponent();
 
-			AddEntry += ParseEvents;
-			UpdateEntry += ParseEvents;
-			RemoveEntry += ParseEvents;
+			//AddEntry += new DataEventHandler<Types.Product>(AddProduct.Invoke);
+			UpdateEntry += new DataEventHandler<Types.Product>(UpdateProduct.Invoke);
+			RemoveEntry += new DataEventHandler<Types.Product>(RemoveProduct.Invoke);
 		}
 
 		private void ParseEvents(object sender, DataEventArgs<Types.Product> e)

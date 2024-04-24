@@ -32,122 +32,116 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            if_Address1 = new GenericInputPair();
-            if_City = new GenericInputPair();
-            ssf_State = new StateSelectorField();
-            if_Address2 = new GenericInputPair();
-            if_ZipCode = new GenericInputPair();
-            ep_InvalidAddress = new System.Windows.Forms.ErrorProvider(components);
-            TableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ep_InvalidAddress).BeginInit();
-            SuspendLayout();
-            // 
-            // TableLayoutPanel1
-            // 
-            TableLayoutPanel1.ColumnCount = 3;
-            TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0f));
-            TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0f));
-            TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0f));
-            TableLayoutPanel1.Controls.Add(if_Address1, 0, 0);
-            TableLayoutPanel1.Controls.Add(if_City, 0, 1);
-            TableLayoutPanel1.Controls.Add(ssf_State, 1, 1);
-            TableLayoutPanel1.Controls.Add(if_Address2, 2, 0);
-            TableLayoutPanel1.Controls.Add(if_ZipCode, 2, 1);
-            TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            TableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            TableLayoutPanel1.Name = "TableLayoutPanel1";
-            TableLayoutPanel1.RowCount = 2;
-            TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.0f));
-            TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.0f));
-            TableLayoutPanel1.Size = new System.Drawing.Size(650, 125);
-            TableLayoutPanel1.TabIndex = 0;
-            // 
-            // if_Address1
-            // 
-            if_Address1.AutoSize = true;
-            if_Address1.Dock = System.Windows.Forms.DockStyle.Fill;
-            if_Address1.Label = "Address 1";
-            if_Address1.Location = new System.Drawing.Point(6, 6);
-            if_Address1.Margin = new System.Windows.Forms.Padding(6);
-            if_Address1.Mask = "";
-            if_Address1.Name = "if_Address1";
-            if_Address1.Placeholder = "Address 1";
-            if_Address1.Size = new System.Drawing.Size(248, 49);
-            if_Address1.TabIndex = 0;
-            if_Address1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // if_City
-            // 
-            if_City.AutoSize = true;
-            if_City.Dock = System.Windows.Forms.DockStyle.Fill;
-            if_City.Label = "City";
-            if_City.Location = new System.Drawing.Point(6, 67);
-            if_City.Margin = new System.Windows.Forms.Padding(6);
-            if_City.Mask = "";
-            if_City.Name = "if_City";
-            if_City.Placeholder = "City";
-            if_City.Size = new System.Drawing.Size(248, 52);
-            if_City.TabIndex = 2;
-            if_City.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // ssf_State
-            // 
-            ssf_State.AutoSize = true;
-            ssf_State.Dock = System.Windows.Forms.DockStyle.Fill;
-            ssf_State.Location = new System.Drawing.Point(266, 67);
-            ssf_State.Margin = new System.Windows.Forms.Padding(6);
-            ssf_State.Name = "ssf_State";
-            ssf_State.Size = new System.Drawing.Size(118, 52);
-            ssf_State.StateCode = "";
-            ssf_State.TabIndex = 3;
-            // 
-            // if_Address2
-            // 
-            if_Address2.AutoSize = true;
-            if_Address2.Dock = System.Windows.Forms.DockStyle.Fill;
-            if_Address2.Label = "Address 2";
-            if_Address2.Location = new System.Drawing.Point(396, 6);
-            if_Address2.Margin = new System.Windows.Forms.Padding(6);
-            if_Address2.Mask = "";
-            if_Address2.Name = "if_Address2";
-            if_Address2.Placeholder = "Address 2";
-            if_Address2.Size = new System.Drawing.Size(248, 49);
-            if_Address2.TabIndex = 1;
-            if_Address2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // if_ZipCode
-            // 
-            if_ZipCode.AutoSize = true;
-            if_ZipCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            if_ZipCode.Label = "Zip Code";
-            if_ZipCode.Location = new System.Drawing.Point(396, 67);
-            if_ZipCode.Margin = new System.Windows.Forms.Padding(6);
-            if_ZipCode.Mask = "99999";
-            if_ZipCode.Name = "if_ZipCode";
-            if_ZipCode.Placeholder = "00000";
-            if_ZipCode.Size = new System.Drawing.Size(248, 52);
-            if_ZipCode.TabIndex = 4;
-            if_ZipCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.components = new System.ComponentModel.Container();
+            this.ep_InvalidAddress = new System.Windows.Forms.ErrorProvider(this.components);
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.if_Address1 = new SPPBC.M3Tools.GenericInputPair();
+            this.if_Address2 = new SPPBC.M3Tools.GenericInputPair();
+            this.if_City = new SPPBC.M3Tools.GenericInputPair();
+            this.ssf_State = new SPPBC.M3Tools.StateSelectorField();
+            this.if_ZipCode = new SPPBC.M3Tools.GenericInputPair();
+            ((System.ComponentModel.ISupportInitialize)(this.ep_InvalidAddress)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // ep_InvalidAddress
             // 
-            ep_InvalidAddress.ContainerControl = this;
+            this.ep_InvalidAddress.ContainerControl = this;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.if_Address1);
+            this.flowLayoutPanel1.Controls.Add(this.if_Address2);
+            this.flowLayoutPanel1.Controls.Add(this.if_City);
+            this.flowLayoutPanel1.Controls.Add(this.ssf_State);
+            this.flowLayoutPanel1.Controls.Add(this.if_ZipCode);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(706, 198);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // if_Address1
+            // 
+            this.if_Address1.AutoSize = true;
+            this.if_Address1.Label = "Address 1";
+            this.if_Address1.Location = new System.Drawing.Point(25, 25);
+            this.if_Address1.Margin = new System.Windows.Forms.Padding(25);
+            this.if_Address1.Mask = "";
+            this.if_Address1.MinimumSize = new System.Drawing.Size(300, 45);
+            this.if_Address1.Name = "if_Address1";
+            this.if_Address1.Placeholder = "Address 1";
+            this.if_Address1.Size = new System.Drawing.Size(300, 45);
+            this.if_Address1.TabIndex = 0;
+            this.if_Address1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // if_Address2
+            // 
+            this.if_Address2.AutoSize = true;
+            this.if_Address2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.if_Address2.Label = "Address 2";
+            this.if_Address2.Location = new System.Drawing.Point(375, 25);
+            this.if_Address2.Margin = new System.Windows.Forms.Padding(25);
+            this.if_Address2.Mask = "";
+            this.if_Address2.MinimumSize = new System.Drawing.Size(300, 45);
+            this.if_Address2.Name = "if_Address2";
+            this.if_Address2.Placeholder = "Address 2";
+            this.if_Address2.Size = new System.Drawing.Size(300, 45);
+            this.if_Address2.TabIndex = 1;
+            this.if_Address2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // if_City
+            // 
+            this.if_City.AutoSize = true;
+            this.if_City.Label = "City";
+            this.if_City.Location = new System.Drawing.Point(25, 120);
+            this.if_City.Margin = new System.Windows.Forms.Padding(25);
+            this.if_City.Mask = "";
+            this.if_City.MinimumSize = new System.Drawing.Size(300, 45);
+            this.if_City.Name = "if_City";
+            this.if_City.Placeholder = "City";
+            this.if_City.Size = new System.Drawing.Size(300, 45);
+            this.if_City.TabIndex = 2;
+            this.if_City.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // ssf_State
+            // 
+            this.ssf_State.AutoSize = true;
+            this.ssf_State.Location = new System.Drawing.Point(370, 120);
+            this.ssf_State.Margin = new System.Windows.Forms.Padding(20, 25, 20, 20);
+            this.ssf_State.MinimumSize = new System.Drawing.Size(100, 50);
+            this.ssf_State.Name = "ssf_State";
+            this.ssf_State.Size = new System.Drawing.Size(100, 50);
+            this.ssf_State.StateCode = "";
+            this.ssf_State.TabIndex = 3;
+            // 
+            // if_ZipCode
+            // 
+            this.if_ZipCode.AutoSize = true;
+            this.if_ZipCode.Label = "Zip Code";
+            this.if_ZipCode.Location = new System.Drawing.Point(515, 120);
+            this.if_ZipCode.Margin = new System.Windows.Forms.Padding(25);
+            this.if_ZipCode.Mask = "99999";
+            this.if_ZipCode.MinimumSize = new System.Drawing.Size(150, 45);
+            this.if_ZipCode.Name = "if_ZipCode";
+            this.if_ZipCode.Placeholder = "00000";
+            this.if_ZipCode.Size = new System.Drawing.Size(150, 45);
+            this.if_ZipCode.TabIndex = 4;
+            this.if_ZipCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // AddressField
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoSize = true;
-            Controls.Add(TableLayoutPanel1);
-            MinimumSize = new System.Drawing.Size(650, 125);
-            Name = "AddressField";
-            Size = new System.Drawing.Size(650, 125);
-            TableLayoutPanel1.ResumeLayout(false);
-            TableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)ep_InvalidAddress).EndInit();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(650, 125);
+            this.Name = "AddressField";
+            this.Size = new System.Drawing.Size(706, 198);
+            ((System.ComponentModel.ISupportInitialize)(this.ep_InvalidAddress)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.ResumeLayout(false);
 
         }
 
@@ -156,7 +150,7 @@ namespace SPPBC.M3Tools
         internal GenericInputPair if_City;
         internal GenericInputPair if_ZipCode;
         internal StateSelectorField ssf_State;
-        internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         internal System.Windows.Forms.ErrorProvider ep_InvalidAddress;
-    }
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+	}
 }

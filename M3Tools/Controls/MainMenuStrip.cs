@@ -10,84 +10,117 @@ using SPPBC.M3Tools.Events;
 namespace SPPBC.M3Tools
 {
 
+	public enum MenuItemsCategories
+	{
+		CUSTOMERS,
+		LISTENERS,
+		ORDERS,
+		INVENTORY
+	}
+
 	// TODO: Open Display forms from here and figure out to discern closing type
+	/// <summary>
+	/// The custom Menu strip to be used throughout the application.
+	/// 
+	/// This consolidates similar programming logic to prevent from restating similar code points
+	/// </summary>
 	public partial class MainMenuStrip
 	{
 		private const string toolStripPrefix = "tsmi_";
 
 		/// <summary>
-		/// 	''' Occurs when the Logout menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the Logout menu item is clicked
+		/// </summary>
 		public event LogoutEventHandler Logout;
 
+		/// <summary>
+		/// The event that occurs when the user wishes to logout the application
+		/// </summary>
 		public delegate void LogoutEventHandler();
 
 		/// <summary>
-		/// 	''' Occurs when the ViewCustomer menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the ViewCustomer menu item is clicked
+		/// </summary>
 		public event EventHandler ManageCustomers;
 
 		/// <summary>
-		/// 	''' Occurs when the ViewListener menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the ViewListener menu item is clicked
+		/// </summary>
 		public event EventHandler ManageListeners;
 
 		/// <summary>
-		/// 	''' Occurs when the ViewProducts menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the ViewProducts menu item is clicked
+		/// </summary>
 		public event EventHandler ManageProducts;
 
 		/// <summary>
-		/// 	''' Occurs when the ViewOrders menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the ViewOrders menu item is clicked
+		/// </summary>
 		public event EventHandler ManageOrders;
 
 		/// <summary>
-		/// 	''' Occurs when the Settings menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the Settings menu item is clicked
+		/// </summary>
 		public event ViewSettingsEventHandler ViewSettings;
 
+		/// <summary>
+		/// The handler for when the user wants to look at the application settings
+		/// </summary>
 		public delegate void ViewSettingsEventHandler();
 
 		/// <summary>
-		/// 	''' Occurs when the Exit menu item is clicked
-		/// 	''' </summary>
+		/// Occurs when the Exit menu item is clicked
+		/// </summary>
 		public event ExitApplicationEventHandler ExitApplication;
 
+		/// <summary>
+		/// The handler for when the user wishes to exit the application entirely
+		/// </summary>
 		public delegate void ExitApplicationEventHandler();
 
 		/// <summary>
-		/// 	''' Occurs when the Update menu item is clicked, and an update is available
-		/// 	''' </summary>
+		/// Occurs when the Update menu item is clicked, and an update is available
+		/// </summary>
 		public event UpdateAvailableEventHandler UpdateAvailable;
 
+		/// <summary>
+		/// The handler for when the user wants to manually check for an update
+		/// </summary>
 		public delegate void UpdateAvailableEventHandler();
 
 		/// <summary>
-		/// 	''' Occurs when a customer is successfully added
-		/// 	''' </summary>
+		/// Occurs when a customer is successfully added
+		/// </summary>
 		public event Events.Customers.CustomerEventHandler AddCustomer;
 
 		/// <summary>
-		/// 	''' Occurs when a listener is successfully added
-		/// 	''' </summary>
+		/// Occurs when a listener is successfully added
+		/// </summary>
 		public event Events.Listeners.ListenerEventHandler AddListener;
 
 		/// <summary>
-		/// 	''' Occurs when a product is successfully added
-		/// 	''' </summary>
+		/// Occurs when a product is successfully added
+		/// </summary>
 		public event Events.Inventory.InventoryEventHandler AddProduct;
+
+		/// <summary>
+		/// Occurs when an order is successfully added
+		/// </summary>
+		public event Events.Orders.OrderEventHandler AddOrder;
 
 		// TODO: Create the Orders based events here as well
 
 		/// <summary>
-		/// 	''' The location to save the installer for the application when updating
-		/// 	''' </summary>
+		/// The location to save the installer for the application when updating
+		/// </summary>
 		private readonly string _DownloadLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", "M3");
 
-		private readonly Uri _VersionUri = new Uri(My.Resources.Resources.LatestAppVersionUri);
-		private readonly Uri _UpdateUri = new Uri(My.Resources.Resources.AppUpdateUri);
+		private readonly Uri _VersionUri = new(My.Resources.Resources.LatestAppVersionUri);
+		private readonly Uri _UpdateUri = new(My.Resources.Resources.AppUpdateUri);
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
 		public MainMenuStrip()
 		{
 			InitializeComponent();
@@ -106,17 +139,14 @@ namespace SPPBC.M3Tools
 		private void CreateCustomer(object sender, EventArgs e)
 		{
 			// TODO: Determine better process to decouple this functionality from M3Tools API
-			using (var create = new Dialogs.AddCustomerDialog())
+			using var create = new Dialogs.AddCustomerDialog();
+
+			if (create.ShowDialog() != DialogResult.OK)
 			{
-				var res = create.ShowDialog();
-
-				if (!(res == DialogResult.OK))
-				{
-					return;
-				}
-
-				AddCustomer?.Invoke(this, new Events.Customers.CustomerEventArgs(create.Customer, EventType.Added));
+				return;
 			}
+
+			AddCustomer?.Invoke(this, new Events.Customers.CustomerEventArgs(create.Customer, EventType.Added));
 		}
 
 		private void CreateProduct(object sender, EventArgs e)
@@ -136,16 +166,26 @@ namespace SPPBC.M3Tools
 
 		private void CreateListener(object sender, EventArgs e)
 		{
-			using (var create = new Dialogs.AddListenerDialog())
-			{
-				var res = create.ShowDialog();
-				if (!(res == DialogResult.OK))
-				{
-					return;
-				}
+			using var create = new Dialogs.AddListenerDialog();
 
-				AddListener?.Invoke(this, new Events.Listeners.ListenerEventArgs(create.Listener, EventType.Added));
+			if (create.ShowDialog() != DialogResult.OK)
+			{
+				return;
 			}
+
+			AddListener?.Invoke(this, new Events.Listeners.ListenerEventArgs(create.Listener, EventType.Added));
+		}
+
+		private void CreateOrder(object sender, EventArgs e)
+		{
+			/*using var @create = new NewOrderDialog();
+
+			if (create.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
+			AddOrder?.Invoke(this, new Events.Orders.OrderEventArgs(create.Order, EventType.Added));*/
 		}
 
 		private void UpdateApp(object sender, EventArgs e)
@@ -229,7 +269,7 @@ namespace SPPBC.M3Tools
 		{
 			// ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 			string versionFileLocation = Path.Combine(_DownloadLocation, "version.txt");
-			string versionString = "";
+
 			// Dim latestVersion As Version = Nothing
 			// While latestVersion Is Nothing
 			// wb_Updater.Url = New Uri(My.Resources.LatestAppVersionUri)
@@ -298,6 +338,7 @@ namespace SPPBC.M3Tools
 
 		private void ToggleItem(ToolStripMenuItem parent, params string[] path)
 		{
+			// TODO: Figure out how to simplify this
 			ToolStripMenuItem currentItem;
 
 			switch (path.Length)
@@ -339,9 +380,60 @@ namespace SPPBC.M3Tools
 			throw new Exceptions.MenuException($"Menu item {name} under the parent of {parent.AccessibleName} not found");
 		}
 
-		public void ToggleViewItem(string itemName)
+		/*public void ToggleViewItem(string itemName)
 		{
 			ToggleItem(new[] { "view", itemName });
+		}*/
+
+		/// <summary>
+		/// Toggle hiding an entry in the menu strip based on passed name
+		/// </summary>
+		/// <param name="cat">The category to toggle</param>
+		/// <param name="viewOnly">Whether to only hide the view buttons or all buttons related to category</param>
+		public void ToggleViewItem(MenuItemsCategories cat, bool viewOnly = true)
+		{
+			// TODO: Make this more efficient
+			switch (cat)
+			{
+				case MenuItemsCategories.CUSTOMERS:
+					tsmi_ViewCustomers.Available = !tsmi_ViewCustomers.Available;
+
+					if (!viewOnly) {
+						tsmi_NewCustomer.Available = !tsmi_NewCustomer.Available;
+					}
+
+					break;
+				case MenuItemsCategories.LISTENERS:
+					tsmi_ViewListeners.Available = !tsmi_ViewListeners.Available;
+
+					if (!viewOnly)
+					{
+						tsmi_NewListeners.Available = !tsmi_NewListeners.Available;
+					}
+
+					break;
+				case MenuItemsCategories.ORDERS:
+					tsmi_ViewOrders.Available = !tsmi_ViewOrders.Available;
+
+					if (!viewOnly)
+					{
+						tsmi_NewOrder.Available = !tsmi_NewOrder.Available;
+					}
+
+					break;
+				case MenuItemsCategories.INVENTORY:
+					tsmi_ViewProducts.Available = !tsmi_ViewProducts.Available;
+
+					if (!viewOnly)
+					{
+						tsmi_NewProduct.Available = !tsmi_NewProduct.Available;
+					}
+
+					break;
+				default:
+					break;
+
+			}
 		}
 	}
 }

@@ -5,6 +5,9 @@ using Microsoft.VisualBasic;
 
 namespace SPPBC.M3Tools.Types
 {
+	/// <summary>
+	/// An address used for people
+	/// </summary>
     public class Address
     {
 
@@ -69,7 +72,10 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// Parses the information for an address from an address string
 		/// </summary>
-		/// <param name="addrStr">The string to parse</param>
+		/// <param name="street"></param>
+		/// <param name="city"></param>
+		/// <param name="state"></param>
+		/// <param name="zipCode"></param>
 		/// <returns>The parsed out address object based on the string</returns>
 		/// <exception cref="ArgumentException"></exception>
 		public static Address Parse(string street, string city, string state, string zipCode)
@@ -95,7 +101,7 @@ namespace SPPBC.M3Tools.Types
         }
 
 		/// <summary>
-		/// Gives the address in a 
+		/// Gives the address in a string
 		/// </summary>
 		/// <returns></returns>
         public override string ToString()
@@ -103,17 +109,30 @@ namespace SPPBC.M3Tools.Types
             return string.Join(My.Settings.Default.ObjectDelimiter, Street, City, State, ZipCode);
         }
 
+		/// <summary>
+		/// Returns the address with formatting
+		/// </summary>
+		/// <returns></returns>
         public string Display()
         {
             // If there was not an address supplied, it doesn't apply the formating
             return string.IsNullOrEmpty(Street) | string.IsNullOrEmpty(City) | string.IsNullOrEmpty(State) | string.IsNullOrEmpty(ZipCode) ? "" : $"{string.Join(Constants.vbCrLf, Street.Split(',').Where((currentString) => !string.IsNullOrWhiteSpace(currentString)))}{Constants.vbCrLf}{City}, {State} {ZipCode}";
         }
 
+		/// <summary>
+		/// Determines if an address is the same
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public override bool Equals(object obj)
 		{
-			return base.Equals(obj);
+			return this == obj as Address;
 		}
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <returns></returns>
 		public override int GetHashCode()
 		{
 			return base.GetHashCode();

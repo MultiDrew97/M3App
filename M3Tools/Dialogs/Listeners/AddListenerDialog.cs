@@ -4,11 +4,20 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Dialogs
 {
+	/// <summary>
+	/// A dialog box for adding new listeners to the ministry
+	/// </summary>
     public partial class AddListenerDialog
     {
+		/// <summary>
+		/// The event that occurs when the listener is added
+		/// </summary>
+        // TODO: Do I need this?
+		public event Events.Listeners.ListenerEventHandler ListenerAdded;
 
-        public event Events.Listeners.ListenerEventHandler ListenerAdded;
-
+		/// <summary>
+		/// The name of the new listener
+		/// </summary>
         public string ListenerName
         {
             get
@@ -21,6 +30,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The email of the new listener
+		/// </summary>
         public string ListenerEmail
         {
             get
@@ -33,6 +45,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The new listener
+		/// </summary>
         public Types.Listener Listener
         {
             get
@@ -41,6 +56,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public AddListenerDialog()
         {
             InitializeComponent();

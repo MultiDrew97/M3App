@@ -58,19 +58,34 @@ namespace M3App
             Utils.CloseOpenForms();
         }
 
+		private void AddCustomer(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
+		{
+			AddCustomer(sender, e as SPPBC.M3Tools.Events.Customers.CustomerEventArgs);
+		}
+
         private void AddCustomer(object sender, SPPBC.M3Tools.Events.Customers.CustomerEventArgs e)
         {
             dbCustomer.AddCustomer(e.Value);
             MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void AddListener(object sender, SPPBC.M3Tools.Events.Listeners.ListenerEventArgs e)
+		private void AddListener(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
+		{
+			AddListener(sender, e as SPPBC.M3Tools.Events.Listeners.ListenerEventArgs);
+		}
+
+		private void AddListener(object sender, SPPBC.M3Tools.Events.Listeners.ListenerEventArgs e)
         {
-            dbListener.AddListener(e.Listener);
+            dbListener.AddListener(e.Value);
             MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void AddCustomer(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
+		private void AddProduct(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
+		{
+			AddProduct(sender, e as SPPBC.M3Tools.Events.Inventory.InventoryEventArgs);
+		}
+
+		private void AddProduct(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
         {
             dbInventory.AddProduct(e.Value);
             MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);

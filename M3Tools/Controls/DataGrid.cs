@@ -10,9 +10,21 @@ namespace SPPBC.M3Tools.Data
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
 	public partial class DataGrid<T> : System.Windows.Forms.DataGridView // where T : Types.IDbEntry
 	{
-		internal event Events.DataEventHandler<T> AddEntry;
-		internal event Events.DataEventHandler<T> UpdateEntry;
-		internal event Events.DataEventHandler<T> RemoveEntry;
+		/*/// <summary>
+		/// Event that occurs when adding data
+		/// </summary>*/
+		// TODO: Maybe Remove this later
+		//protected event Events.DataEventHandler<T> AddEntry;
+
+		/// <summary>
+		/// Event that occurs when updating data
+		/// </summary>
+		protected event Events.DataEventHandler<T> UpdateEntry;
+
+		/// <summary>
+		/// Event that occurs when removing data
+		/// </summary>
+		protected event Events.DataEventHandler<T> RemoveEntry;
 
 		/// <summary>
 		/// Issues a reload event for the data grid
@@ -34,15 +46,19 @@ namespace SPPBC.M3Tools.Data
 			}
 		}*/
 
-/*
+
 #pragma warning disable IDE0051 // Remove unused private members
 		private new void OnDataSourceChanged(EventArgs e)
 #pragma warning restore IDE0051 // Remove unused private members
 		{
 			Console.WriteLine("Custom DataSource Changed handler...");
 			AutoGenerateColumns = false;
+			RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(delegate (object sender, System.Windows.Forms.DataGridViewRowsAddedEventArgs ea)
+			{
+				Console.WriteLine(ea.RowCount);
+			});
 			base.OnDataSourceChanged(e);
-		}*/
+		}
 		/*		{
 					get
 					{

@@ -96,6 +96,8 @@ namespace SPPBC.M3Tools.Types
 			}
         }
 
+		public System.Collections.Generic.IList<T> List => Items;
+
 		/// <summary>
 		/// Applies a filter to the collection
 		/// </summary>

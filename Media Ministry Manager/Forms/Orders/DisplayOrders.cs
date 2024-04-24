@@ -14,13 +14,12 @@ namespace M3App
         private void ViewLoading(object sender, EventArgs e)
         {
             doc_Orders.Reload();
-            mms_Strip.ToggleViewItem("Orders");
+            mms_Strip.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.ORDERS);
             // lbl_NoOrders.Visible = doc_Orders.Count
         }
 
         private void ViewClosed(object sender, EventArgs e)
         {
-            mms_Strip.ToggleViewItem("Orders");
             My.MyProject.Forms.MainForm.Show();
         }
 

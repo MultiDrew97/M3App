@@ -25,7 +25,7 @@ namespace SPPBC.M3Tools
 
             // This call is required by the Component Designer.
             InitializeComponent();
-            LayoutCompleted += ToolsToolStrip_LayoutCompleted;
+            LayoutCompleted += UpdateLabelText;
 
         }
 
@@ -55,230 +55,96 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            _tsb_New = new System.Windows.Forms.ToolStripButton();
-            _tsb_New.Click += new EventHandler(AddEntry);
-            _tsb_Import = new System.Windows.Forms.ToolStripButton();
-            _tsb_Import.Click += new EventHandler(ImportEntries);
-            _ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            _tst_Filter = new System.Windows.Forms.ToolStripTextBox();
-            _tst_Filter.TextChanged += new EventHandler(FilterUpdated);
-            _tsb_Emails = new System.Windows.Forms.ToolStripButton();
-            _tsb_Emails.Click += new EventHandler(SendEmails);
-            _tsl_Count = new System.Windows.Forms.ToolStripLabel();
-            _ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            SuspendLayout();
+            this.tsb_New = new System.Windows.Forms.ToolStripButton();
+            this.tsb_Import = new System.Windows.Forms.ToolStripButton();
+            this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tst_Filter = new System.Windows.Forms.ToolStripTextBox();
+            this.tsb_Emails = new System.Windows.Forms.ToolStripButton();
+            this.tsl_Count = new System.Windows.Forms.ToolStripLabel();
+            this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.SuspendLayout();
             // 
             // tsb_New
             // 
-            _tsb_New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            _tsb_New.Image = My.Resources.Resources.NewDocumentOption;
-            _tsb_New.ImageTransparentColor = System.Drawing.Color.Magenta;
-            _tsb_New.Name = "_tsb_New";
-            _tsb_New.Size = new System.Drawing.Size(23, 22);
-            _tsb_New.Text = "New";
-            _tsb_New.ToolTipText = "Add {0}";
+            this.tsb_New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_New.Image = global::SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption;
+            this.tsb_New.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_New.Name = "tsb_New";
+            this.tsb_New.Size = new System.Drawing.Size(23, 22);
+            this.tsb_New.Text = "New";
+            this.tsb_New.ToolTipText = "Add {0}";
+            this.tsb_New.Click += new System.EventHandler(this.Add);
             // 
             // tsb_Import
             // 
-            _tsb_Import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            _tsb_Import.Image = My.Resources.Resources.import;
-            _tsb_Import.ImageTransparentColor = System.Drawing.Color.Magenta;
-            _tsb_Import.Name = "_tsb_Import";
-            _tsb_Import.Size = new System.Drawing.Size(23, 22);
-            _tsb_Import.Text = "Import";
-            _tsb_Import.ToolTipText = "Import {0}";
+            this.tsb_Import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_Import.Image = global::SPPBC.M3Tools.My.Resources.Resources.import;
+            this.tsb_Import.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Import.Name = "tsb_Import";
+            this.tsb_Import.Size = new System.Drawing.Size(23, 22);
+            this.tsb_Import.Text = "Import";
+            this.tsb_Import.ToolTipText = "Import {0}";
+            this.tsb_Import.Click += new System.EventHandler(this.Import);
             // 
             // ToolStripSeparator1
             // 
-            _ToolStripSeparator1.Name = "_ToolStripSeparator1";
-            _ToolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.ToolStripSeparator1.Name = "ToolStripSeparator1";
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // tst_Filter
             // 
-            _tst_Filter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            _tst_Filter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
-            _tst_Filter.Font = new System.Drawing.Font("Segoe UI", 9.0f);
-            _tst_Filter.Name = "_tst_Filter";
-            _tst_Filter.Size = new System.Drawing.Size(100, 23);
-            _tst_Filter.ToolTipText = "Filter {0}";
+            this.tst_Filter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tst_Filter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
+            this.tst_Filter.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tst_Filter.Name = "tst_Filter";
+            this.tst_Filter.Size = new System.Drawing.Size(100, 23);
+            this.tst_Filter.ToolTipText = "Filter {0}";
+            this.tst_Filter.TextChanged += new System.EventHandler(this.Filtered);
             // 
             // tsb_Emails
             // 
-            _tsb_Emails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            _tsb_Emails.Image = My.Resources.Resources.send_email;
-            _tsb_Emails.ImageTransparentColor = System.Drawing.Color.Magenta;
-            _tsb_Emails.Name = "_tsb_Emails";
-            _tsb_Emails.Size = new System.Drawing.Size(23, 22);
-            _tsb_Emails.Text = "Send Emails";
+            this.tsb_Emails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_Emails.Image = global::SPPBC.M3Tools.My.Resources.Resources.send_email;
+            this.tsb_Emails.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Emails.Name = "tsb_Emails";
+            this.tsb_Emails.Size = new System.Drawing.Size(23, 22);
+            this.tsb_Emails.Text = "Send Emails";
+            this.tsb_Emails.Click += new System.EventHandler(this.Emails);
             // 
             // tsl_Count
             // 
-            _tsl_Count.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            _tsl_Count.Name = "_tsl_Count";
-            _tsl_Count.Size = new System.Drawing.Size(0, 0);
+            this.tsl_Count.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsl_Count.Name = "tsl_Count";
+            this.tsl_Count.Size = new System.Drawing.Size(0, 0);
             // 
             // ToolStripSeparator2
             // 
-            _ToolStripSeparator2.Name = "_ToolStripSeparator2";
-            _ToolStripSeparator2.Size = new System.Drawing.Size(6, 6);
+            this.ToolStripSeparator2.Name = "ToolStripSeparator2";
+            this.ToolStripSeparator2.Size = new System.Drawing.Size(6, 6);
             // 
             // ToolsToolStrip
             // 
-            GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            Items.AddRange(new System.Windows.Forms.ToolStripItem[] { _tsb_New, _tsb_Import, _tsb_Emails, _ToolStripSeparator1, _tst_Filter, _ToolStripSeparator2, _tsl_Count });
-            RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            Stretch = true;
-            ResumeLayout(false);
+            this.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsb_New,
+            this.tsb_Import,
+            this.tsb_Emails,
+            this.ToolStripSeparator1,
+            this.tst_Filter,
+            this.ToolStripSeparator2,
+            this.tsl_Count});
+            this.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.Stretch = true;
+            this.ResumeLayout(false);
 
         }
 
-        private System.Windows.Forms.ToolStripButton _tsb_New;
-
-        internal virtual System.Windows.Forms.ToolStripButton tsb_New
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _tsb_New;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                if (_tsb_New != null)
-                {
-                    _tsb_New.Click -= AddEntry;
-                }
-
-                _tsb_New = value;
-                if (_tsb_New != null)
-                {
-                    _tsb_New.Click += AddEntry;
-                }
-            }
-        }
-        private System.Windows.Forms.ToolStripButton _tsb_Import;
-
-        internal virtual System.Windows.Forms.ToolStripButton tsb_Import
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _tsb_Import;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                if (_tsb_Import != null)
-                {
-                    _tsb_Import.Click -= ImportEntries;
-                }
-
-                _tsb_Import = value;
-                if (_tsb_Import != null)
-                {
-                    _tsb_Import.Click += ImportEntries;
-                }
-            }
-        }
-        private System.Windows.Forms.ToolStripSeparator _ToolStripSeparator1;
-
-        internal virtual System.Windows.Forms.ToolStripSeparator ToolStripSeparator1
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _ToolStripSeparator1;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                _ToolStripSeparator1 = value;
-            }
-        }
-        private System.Windows.Forms.ToolStripTextBox _tst_Filter;
-
-        internal virtual System.Windows.Forms.ToolStripTextBox tst_Filter
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _tst_Filter;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                if (_tst_Filter != null)
-                {
-                    _tst_Filter.TextChanged -= FilterUpdated;
-                }
-
-                _tst_Filter = value;
-                if (_tst_Filter != null)
-                {
-                    _tst_Filter.TextChanged += FilterUpdated;
-                }
-            }
-        }
-        private System.Windows.Forms.ToolStripButton _tsb_Emails;
-
-        internal virtual System.Windows.Forms.ToolStripButton tsb_Emails
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _tsb_Emails;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                if (_tsb_Emails != null)
-                {
-                    _tsb_Emails.Click -= SendEmails;
-                }
-
-                _tsb_Emails = value;
-                if (_tsb_Emails != null)
-                {
-                    _tsb_Emails.Click += SendEmails;
-                }
-            }
-        }
-        private System.Windows.Forms.ToolStripLabel _tsl_Count;
-
-        internal virtual System.Windows.Forms.ToolStripLabel tsl_Count
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _tsl_Count;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                _tsl_Count = value;
-            }
-        }
-        private System.Windows.Forms.ToolStripSeparator _ToolStripSeparator2;
-
-        internal virtual System.Windows.Forms.ToolStripSeparator ToolStripSeparator2
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _ToolStripSeparator2;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                _ToolStripSeparator2 = value;
-            }
-        }
+        private System.Windows.Forms.ToolStripButton tsb_New;
+        private System.Windows.Forms.ToolStripButton tsb_Import;
+        private System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
+        private System.Windows.Forms.ToolStripTextBox tst_Filter;
+        private System.Windows.Forms.ToolStripButton tsb_Emails;
+        private System.Windows.Forms.ToolStripLabel tsl_Count;
+        private System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
     }
 }

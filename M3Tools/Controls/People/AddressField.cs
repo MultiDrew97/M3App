@@ -1,8 +1,14 @@
-﻿
+﻿// MAYBE: Use the Address.Display function here instead?
 namespace SPPBC.M3Tools
 {
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
     public partial class AddressField
     {
+		/// <summary>
+		/// The address being displayed
+		/// </summary>
         public Types.Address Address
         {
             get
@@ -18,6 +24,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public string Street
         {
             get
@@ -51,6 +60,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public string City
         {
             get
@@ -63,6 +75,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public string State
         {
             get
@@ -85,6 +100,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public string ZipCode
         {
             get
@@ -102,6 +120,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether the address is valid
+		/// </summary>
         public bool IsValidAddress
         {
             get
@@ -111,12 +132,15 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public AddressField()
         {
             InitializeComponent();
         }
 
-        private bool get_ValidateValue(string text)
+        private bool ValidateValue(string text)
         {
             if (!AllEmpty && string.IsNullOrWhiteSpace(text))
             {
@@ -130,7 +154,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                if (!get_ValidateValue(Street))
+                if (!ValidateValue(Street))
                 {
                     ep_InvalidAddress.SetError(if_Address1, "A valid street address is required, or you can enter an empty address");
                     return false;
@@ -145,7 +169,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                if (!get_ValidateValue(City))
+                if (!ValidateValue(City))
                 {
                     ep_InvalidAddress.SetError(if_City, "A valid city is required, or you can enter an empty address");
                     return false;
@@ -160,7 +184,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                if (!get_ValidateValue(State))
+                if (!ValidateValue(State))
                 {
                     ep_InvalidAddress.SetError(ssf_State, "A valid state code is required, or you can enter an empty address");
                     return false;
@@ -175,7 +199,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                if (!get_ValidateValue(ZipCode))
+                if (!ValidateValue(ZipCode))
                 {
                     ep_InvalidAddress.SetError(if_ZipCode, "A valid zip code is required, or you can enter an empty address");
                     return false;
@@ -193,5 +217,5 @@ namespace SPPBC.M3Tools
                 return !(!string.IsNullOrEmpty(Street) && !string.IsNullOrEmpty(City) && !string.IsNullOrEmpty(State) && !string.IsNullOrEmpty(ZipCode));
             }
         }
-    }
+	}
 }

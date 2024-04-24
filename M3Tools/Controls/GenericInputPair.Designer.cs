@@ -33,63 +33,63 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            lbl_InputLabel = new System.Windows.Forms.Label();
-            txt_Input = new System.Windows.Forms.MaskedTextBox();
-            txt_Input.TextChanged += new EventHandler(InputTextChanged);
-            txt_Input.GotFocus += new EventHandler(InputGotFocus);
-            txt_Input.LostFocus += new EventHandler(InputLostFocus);
-            TableLayoutPanel1.SuspendLayout();
-            SuspendLayout();
+            this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_InputLabel = new System.Windows.Forms.Label();
+            this.txt_Input = new System.Windows.Forms.MaskedTextBox();
+            this.TableLayoutPanel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // TableLayoutPanel1
             // 
-            TableLayoutPanel1.ColumnCount = 1;
-            TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0f));
-            TableLayoutPanel1.Controls.Add(lbl_InputLabel, 0, 0);
-            TableLayoutPanel1.Controls.Add(txt_Input, 0, 1);
-            TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            TableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            TableLayoutPanel1.Name = "TableLayoutPanel1";
-            TableLayoutPanel1.RowCount = 2;
-            TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-            TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-            TableLayoutPanel1.Size = new System.Drawing.Size(300, 45);
-            TableLayoutPanel1.TabIndex = 0;
+            this.TableLayoutPanel1.ColumnCount = 1;
+            this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayoutPanel1.Controls.Add(this.lbl_InputLabel, 0, 0);
+            this.TableLayoutPanel1.Controls.Add(this.txt_Input, 0, 1);
+            this.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.TableLayoutPanel1.Name = "TableLayoutPanel1";
+            this.TableLayoutPanel1.RowCount = 2;
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(225, 45);
+            this.TableLayoutPanel1.TabIndex = 0;
             // 
             // lbl_InputLabel
             // 
-            lbl_InputLabel.AutoSize = true;
-            lbl_InputLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            lbl_InputLabel.Location = new System.Drawing.Point(3, 0);
-            lbl_InputLabel.Name = "lbl_InputLabel";
-            lbl_InputLabel.Size = new System.Drawing.Size(294, 22);
-            lbl_InputLabel.TabIndex = 0;
-            lbl_InputLabel.Text = "Label1";
-            lbl_InputLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lbl_InputLabel.AutoSize = true;
+            this.lbl_InputLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_InputLabel.Location = new System.Drawing.Point(3, 0);
+            this.lbl_InputLabel.Name = "lbl_InputLabel";
+            this.lbl_InputLabel.Size = new System.Drawing.Size(219, 22);
+            this.lbl_InputLabel.TabIndex = 0;
+            this.lbl_InputLabel.Text = "Label1";
+            this.lbl_InputLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // txt_Input
             // 
-            txt_Input.Dock = System.Windows.Forms.DockStyle.Fill;
-            txt_Input.Location = new System.Drawing.Point(3, 25);
-            txt_Input.Name = "txt_Input";
-            txt_Input.Size = new System.Drawing.Size(294, 20);
-            txt_Input.TabIndex = 1;
+            this.txt_Input.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_Input.Location = new System.Drawing.Point(3, 25);
+            this.txt_Input.Name = "txt_Input";
+            this.txt_Input.Size = new System.Drawing.Size(219, 20);
+            this.txt_Input.TabIndex = 1;
+            this.txt_Input.TextChanged += new System.EventHandler(this.InputTextChanged);
+            this.txt_Input.GotFocus += new System.EventHandler(this.InputGotFocus);
+            this.txt_Input.LostFocus += new System.EventHandler(this.InputLostFocus);
             // 
             // GenericInputPair
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoSize = true;
-            Controls.Add(TableLayoutPanel1);
-            MaximumSize = new System.Drawing.Size(0, 45);
-            MinimumSize = new System.Drawing.Size(300, 45);
-            Name = "GenericInputPair";
-            Size = new System.Drawing.Size(300, 45);
-            TableLayoutPanel1.ResumeLayout(false);
-            TableLayoutPanel1.PerformLayout();
-            Load += new EventHandler(Loading);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.Controls.Add(this.TableLayoutPanel1);
+            this.MaximumSize = new System.Drawing.Size(225, 45);
+            this.MinimumSize = new System.Drawing.Size(150, 45);
+            this.Name = "GenericInputPair";
+            this.Size = new System.Drawing.Size(225, 45);
+            this.Load += new System.EventHandler(this.Loading);
+            this.TableLayoutPanel1.ResumeLayout(false);
+            this.TableLayoutPanel1.PerformLayout();
+            this.ResumeLayout(false);
 
         }
 

@@ -46,8 +46,8 @@ namespace M3App
             this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
             this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
-            this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
             this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
+            this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
             this.ss_StatusView.SuspendLayout();
             this.ToolStripContainer1.ContentPanel.SuspendLayout();
             this.ToolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -63,23 +63,23 @@ namespace M3App
             this.ss_StatusView.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ss_StatusView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tss_CustomersView});
-            this.ss_StatusView.Location = new System.Drawing.Point(0, 450);
+            this.ss_StatusView.Location = new System.Drawing.Point(0, 439);
             this.ss_StatusView.Name = "ss_StatusView";
-            this.ss_StatusView.Size = new System.Drawing.Size(784, 11);
+            this.ss_StatusView.Size = new System.Drawing.Size(784, 22);
             this.ss_StatusView.TabIndex = 3;
             // 
             // tss_CustomersView
             // 
             this.tss_CustomersView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tss_CustomersView.Name = "tss_CustomersView";
-            this.tss_CustomersView.Size = new System.Drawing.Size(170, 6);
+            this.tss_CustomersView.Size = new System.Drawing.Size(170, 17);
             this.tss_CustomersView.Text = "Here are the current customers";
             // 
             // mms_Main
             // 
             this.mms_Main.Location = new System.Drawing.Point(0, 0);
             this.mms_Main.Name = "mms_Main";
-            this.mms_Main.Size = new System.Drawing.Size(784, 12);
+            this.mms_Main.Size = new System.Drawing.Size(784, 24);
             this.mms_Main.TabIndex = 6;
             this.mms_Main.Text = "Menu";
             // 
@@ -95,11 +95,11 @@ namespace M3App
             // ToolStripContainer1.ContentPanel
             // 
             this.ToolStripContainer1.ContentPanel.Controls.Add(this.cdg_Customers);
-            this.ToolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 411);
+            this.ToolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 376);
             this.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ToolStripContainer1.Location = new System.Drawing.Point(0, 6);
+            this.ToolStripContainer1.Location = new System.Drawing.Point(0, 24);
             this.ToolStripContainer1.Name = "ToolStripContainer1";
-            this.ToolStripContainer1.Size = new System.Drawing.Size(784, 450);
+            this.ToolStripContainer1.Size = new System.Drawing.Size(784, 415);
             this.ToolStripContainer1.TabIndex = 7;
             this.ToolStripContainer1.Text = "ToolStripContainer1";
             // 
@@ -124,7 +124,7 @@ namespace M3App
             this.cdg_Customers.RowHeadersWidth = 82;
             this.cdg_Customers.RowsCheckable = false;
             this.cdg_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.cdg_Customers.Size = new System.Drawing.Size(784, 411);
+            this.cdg_Customers.Size = new System.Drawing.Size(784, 376);
             this.cdg_Customers.TabIndex = 1;
             // 
             // ts_Tools
@@ -143,10 +143,12 @@ namespace M3App
             // 
             // CustomerManagement
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1568, 922);
+            this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.ToolStripContainer1);
             this.Controls.Add(this.ss_StatusView);
             this.Controls.Add(this.mms_Main);

@@ -21,17 +21,17 @@ namespace SPPBC.M3Tools.Data
 			{ "Join", new("Join", 6) }
 		};*/
 		/// <summary>
-		/// Event that occurs when a customer is added to the database
+		/// Event that occurs when a customer is being added to the database
 		/// </summary>
 		public event Events.Customers.CustomerEventHandler AddCustomer;
 
 		/// <summary>
-		/// Event that occurs when a customer is removed from the database
+		/// Event that occurs when a customer is being removed from the database
 		/// </summary>
 		public event Events.Customers.CustomerEventHandler RemoveCustomer;
 
 		/// <summary>
-		/// Event that occurs when a customer is updated in the database
+		/// Event that occurs when a customer is being updated in the database
 		/// </summary>
 		public event Events.Customers.CustomerEventHandler UpdateCustomer;
 
@@ -87,6 +87,11 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
+			if (DesignMode)
+			{
+				return;
+			}
+
 			this.dgc_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dgc_Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +101,7 @@ namespace SPPBC.M3Tools.Data
 
 			LoadColumns();
 
-			AddEntry += new DataEventHandler<Types.Customer>(ParseEvents);
+			//AddEntry += new DataEventHandler<Types.Customer>(ParseEvents);
 			UpdateEntry += new DataEventHandler<Types.Customer>(ParseEvents);
 			RemoveEntry += new DataEventHandler<Types.Customer>(ParseEvents);
 		}
@@ -108,7 +113,7 @@ namespace SPPBC.M3Tools.Data
 			switch (e.EventType)
 			{
 				case EventType.Added: { AddCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
-				case EventType.Removed: { UpdateCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break;  }
+				case EventType.Removed: { UpdateCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
 				case EventType.Updated: { RemoveCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
 				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
 			}
@@ -188,18 +193,6 @@ namespace SPPBC.M3Tools.Data
 				this.dgc_Join,
 				this.dgc_Edit, this.dgc_Remove
 			});
-		}
-
-		private void ListChanged(object sender, ListChangedEventArgs e)
-		{
-			Console.WriteLine(e.ListChangedType);
-			switch (e.ListChangedType)
-			{
-				case ListChangedType.ItemAdded:
-					Console.WriteLine(((Types.CustomerCollection)DataSource)[e.NewIndex]);
-					Refresh();
-					break;
-			}
 		}
 
 		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;

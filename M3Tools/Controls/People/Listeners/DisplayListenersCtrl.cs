@@ -111,7 +111,7 @@ namespace SPPBC.M3Tools
 
         private void EditListener(object sender, ListenerEventArgs e)
         {
-            using (var edit = new Dialogs.EditListenerDialog(e.Listener))
+            using (var edit = new Dialogs.EditListenerDialog(e.Value))
             {
                 var res = edit.ShowDialog();
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
@@ -13,8 +14,6 @@ namespace SPPBC.M3Tools.Data
 		/// The binding source supports filtering
 		/// </summary>
 		public readonly new bool SupportsFiltering = true;
-
-
 
 		/// <summary>
 		/// List of customers in the binding source

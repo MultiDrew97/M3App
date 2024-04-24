@@ -3,18 +3,40 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
     public abstract class DataGridViewImageButtonCell : DataGridViewButtonCell
     {
-
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         protected readonly System.Drawing.Bitmap _ButtonImage;
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="image">The image to use for the cell</param>
         protected DataGridViewImageButtonCell(System.Drawing.Bitmap image)
         {
             FlatStyle = FlatStyle.System;
             _ButtonImage = image;
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="graphics"></param>
+		/// <param name="clipBounds"></param>
+		/// <param name="cellBounds"></param>
+		/// <param name="rowIndex"></param>
+		/// <param name="elementState"></param>
+		/// <param name="value"></param>
+		/// <param name="formattedValue"></param>
+		/// <param name="errorText"></param>
+		/// <param name="cellStyle"></param>
+		/// <param name="advancedBorderStyle"></param>
+		/// <param name="paintParts"></param>
         protected override void Paint(System.Drawing.Graphics graphics, System.Drawing.Rectangle clipBounds, System.Drawing.Rectangle cellBounds, int rowIndex, DataGridViewElementStates elementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
         {
             // MyBase.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts)
@@ -22,11 +44,9 @@ namespace SPPBC.M3Tools
             // Draw the cell background, if specified.
             if ((paintParts & DataGridViewPaintParts.Background).Equals(DataGridViewPaintParts.Background))
             {
-                using (var CellBackground = new System.Drawing.SolidBrush(cellStyle.BackColor))
-                {
-                    graphics.FillRectangle(CellBackground, cellBounds);
-                }
-            }
+				using var CellBackground = new System.Drawing.SolidBrush(cellStyle.BackColor);
+				graphics.FillRectangle(CellBackground, cellBounds);
+			}
 
             // Draw the cell borders, if specified.
             if ((paintParts & DataGridViewPaintParts.Border).Equals(DataGridViewPaintParts.Border))
@@ -64,17 +84,28 @@ namespace SPPBC.M3Tools
 
         // MustOverride Sub LoadImages()
     }
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
     public class DataGridViewImageButtonEditCell : DataGridViewImageButtonCell
     {
-
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public DataGridViewImageButtonEditCell() : base(My.Resources.Resources.edit)
         {
         }
     }
 
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
     public class DataGridViewImageButtonDeleteCell : DataGridViewImageButtonCell
     {
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public DataGridViewImageButtonDeleteCell() : base(My.Resources.Resources.delete)
         {
         }

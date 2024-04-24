@@ -15,7 +15,7 @@ namespace M3App
         public InventoryManagement()
         {
             InitializeComponent();
-			mms_Main.ToggleViewItem("Products");
+			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.INVENTORY);
 		}
 
         private void DisplayClosing(object sender, CancelEventArgs e)
@@ -71,7 +71,13 @@ namespace M3App
 			settings.Show();
 		}
 
-        private void AddProduct(object sender, InventoryEventArgs e)
+
+		private void AddProduct(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
+		{
+			AddProduct(sender, e as InventoryEventArgs);
+		}
+
+		private void AddProduct(object sender, InventoryEventArgs e)
         {
             UseWaitCursor = true;
             dbInventory.AddProduct(e.Value);

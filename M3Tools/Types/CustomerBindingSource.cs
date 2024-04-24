@@ -23,5 +23,12 @@ namespace SPPBC.M3Tools.Data
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[AttributeProvider(typeof(IListSource))]
 		public new Types.CustomerCollection DataSource { get => (Types.CustomerCollection)base.DataSource; set => base.DataSource = value; }
+
+		public override string Filter
+		{
+			get => _customers?.Filter;
+			set => _customers.Filter = value;
+		}
+
 	}
 }

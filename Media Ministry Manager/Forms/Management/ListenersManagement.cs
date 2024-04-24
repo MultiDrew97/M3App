@@ -15,7 +15,7 @@ namespace M3App
         public ListenersManagement()
         {
             InitializeComponent();
-            mms_Main.ToggleViewItem("Listeners");
+            mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.LISTENERS);
             gt_Email.Authorize(My.Settings.Default.Username);
             gd_Drive.Authorize(My.Settings.Default.Username);
         }
@@ -84,14 +84,14 @@ namespace M3App
         private void RemoveListener(object sender, ListenerEventArgs e)
         {
             UseWaitCursor = true;
-            dbListeners.RemoveListener(e.Listener.Id);
+            dbListeners.RemoveListener(e.Value.Id);
             ListenerDBModified.Invoke(this, e);
         }
 
         private void AddListener(object sender, ListenerEventArgs e)
         {
             UseWaitCursor = true;
-            dbListeners.AddListener(e.Listener.Name, e.Listener.Email);
+            dbListeners.AddListener(e.Value.Name, e.Value.Email);
             ListenerAdded.Invoke(this, e);
         }
 
@@ -110,7 +110,7 @@ namespace M3App
         private void UpdateListener(object sender, ListenerEventArgs e)
         {
             UseWaitCursor = true;
-            dbListeners.UpdateListener(e.Listener);
+            dbListeners.UpdateListener(e.Value);
 			ListenerDBModified.Invoke(this, e);
         }
 

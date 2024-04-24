@@ -1,6 +1,7 @@
 ﻿namespace SPPBC.M3Tools.Events.Inventory
 {
-	public delegate void InventoryEventHandler(object sender, InventoryEventArgs e);
+	public delegate void InventoryEventHandler(object sender, DataEventArgs<Types.Product> e);
+	//public delegate void InventoryEventHandler(object sender, InventoryEventArgs e);
 
 	/// <inheritdoc/>
 	public class InventoryEventArgs : DataEventArgs<Types.Product>

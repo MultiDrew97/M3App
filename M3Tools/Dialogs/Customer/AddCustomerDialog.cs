@@ -7,18 +7,15 @@ using SPPBC.M3Tools.Types;
 // TODO: Cleanup this dialog box
 namespace SPPBC.M3Tools.Dialogs
 {
+	/// <summary>
+	/// The dialog responsible to retrieving new customer info
+	/// </summary>
     public partial class AddCustomerDialog
     {
+		/// <summary>
+		/// The event that occurs when a user is created
+		/// </summary>
         public event CustomerEventHandler CustomerAdded;
-        private event EventHandler PageChangedEvent;
-
-        private string CustomerName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
 
         private string FirstName
         {
@@ -60,6 +57,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The customer being created
+		/// </summary>
         public Customer Customer
         {
             get
@@ -126,6 +126,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public AddCustomerDialog()
         {
             InitializeComponent();
@@ -152,7 +155,6 @@ namespace SPPBC.M3Tools.Dialogs
                 default:
                     {
                         tc_Creation.SelectedIndex -= 1;
-                        PageChangedEvent?.Invoke(this, e);
                         break;
                     }
             }
@@ -180,7 +182,6 @@ namespace SPPBC.M3Tools.Dialogs
                 default:
                     {
                         tc_Creation.SelectedIndex += 1;
-                        PageChangedEvent?.Invoke(this, e);
                         break;
                     }
             }
@@ -192,5 +193,5 @@ namespace SPPBC.M3Tools.Dialogs
             btn_Create.Text = tc_Creation.SelectedIndex >= tp_Summary.TabIndex ? "Create" : "Next";
             sc_Summary.Display = tc_Creation.SelectedIndex == tp_Summary.TabIndex ? Customer : null;
         }
-    }
+	}
 }
