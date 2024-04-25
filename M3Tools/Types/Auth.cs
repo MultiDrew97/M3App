@@ -3,39 +3,56 @@ using SPPBC.M3Tools.Types.Extensions;
 
 namespace SPPBC.M3Tools.Types
 {
+	/// <summary>
+	/// Holds the information for login credentials
+	/// </summary>
     public class Auth
     {
+		/// <summary>
+		/// The username for the login
+		/// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("username")]
         public string Username { get; set; }
 
+		/// <summary>
+		/// The password for the login
+		/// </summary>
         // <Text.Json.Serialization.JsonIgnore>
         [System.Text.Json.Serialization.JsonPropertyName("password")]
         public string Password { get; set; }
 
+		/// <summary>
+		/// The salt used for hashing the password
+		/// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("salt")]
         public Guid Salt { get; set; }
 
+		/// <summary>
+		/// The role the user has in the application
+		/// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("role")]
         public AccountRole Role { get; set; }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public Auth() : this("JohnDoe123", "WelcomeJohnDoe123!")
         {
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <param name="salt"></param>
+		/// <param name="role"></param>
         public Auth(string username = "JohnDoe123", string password = null, Guid salt = default, AccountRole role = AccountRole.User)
         {
             Username = username;
-            Password = password is not null ? password.ToBase64String() : null;
-            Salt = !(salt == null) ? salt : Guid.Empty;
+            Password = password?.ToBase64String();
+			Salt = salt;
             Role = role;
-            // Me.New(username, Text.Encoding.UTF8.GetBytes(If(password, $"Welcome{username}!")), If(salt = Nothing, Guid.Empty, salt), role)
         }
-
-        // Public Sub New(username As String, password As Byte(), Optional salt As Guid = Nothing, Optional role As AccountRole = AccountRole.User)
-        // Me.Username = username
-        // Me.Password = password
-        // Me.Salt = salt
-        // Me.Role = role
-        // End Sub
     }
 }

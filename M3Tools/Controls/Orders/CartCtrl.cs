@@ -7,14 +7,32 @@ namespace SPPBC.M3Tools
 
 	public partial class CartCtrl
 	{
+		/// <summary>
+		/// The event that occurs when an item is added
+		/// </summary>
 		// TODO: Turn into component?
 		public event ItemAddedEventHandler ItemAdded;
 
-		public delegate void ItemAddedEventHandler(double total);
+		/// <summary>
+		/// The event that occurs when an item is updated
+		/// </summary>
 		public event ItemUpdatedEventHandler ItemUpdated;
 
+		/// <summary>
+		/// The event handler that will handle an item being added
+		/// </summary>
+		/// <param name="total"></param>
+		public delegate void ItemAddedEventHandler(double total);
+
+		/// <summary>
+		/// The event handler that will handle an item being updated
+		/// </summary>
+		/// <param name="item"></param>
 		public delegate void ItemUpdatedEventHandler(Types.CartItem item);
 
+		/// <summary>
+		/// The cart of items
+		/// </summary>
 		public BindingList<Types.CartItem> Cart
 		{
 			get
@@ -23,6 +41,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// The subtotal of the cart
+		/// </summary>
 		public double Total
 		{
 			get
@@ -36,11 +57,19 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
 		public CartCtrl()
 		{
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Add an item to the cart
+		/// </summary>
+		/// <param name="item"></param>
+		/// <param name="quantity"></param>
 		public void Add(Types.Product item, int quantity)
 		{
 			Add(new Types.CartItem(item, quantity));
@@ -63,6 +92,10 @@ namespace SPPBC.M3Tools
 			ItemAdded?.Invoke(Total);
 		}
 
+		/// <summary>
+		/// Add a list of cart items
+		/// </summary>
+		/// <param name="items"></param>
 		public void AddRange(params Types.CartItem[] items)
 		{
 			foreach (var item in items)

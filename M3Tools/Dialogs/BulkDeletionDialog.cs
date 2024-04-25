@@ -4,11 +4,16 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// <inheritdoc/>
+	/// </summary>
     public partial class BulkDeletionDialog
     {
         private IEnumerable _items;
 
+		/// <summary>
+		/// The list of items
+		/// </summary>
         public IEnumerable List
         {
             get
@@ -21,6 +26,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public BulkDeletionDialog()
         {
             InitializeComponent();
