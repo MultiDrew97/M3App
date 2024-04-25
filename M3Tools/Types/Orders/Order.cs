@@ -7,7 +7,7 @@ namespace SPPBC.M3Tools.Types
 	{
 
 		[System.Text.Json.Serialization.JsonPropertyName("orderID")]
-		public int Id { get; }
+		public new int Id { get; }
 
 		[System.Text.Json.Serialization.JsonPropertyName("customer")]
 		public Person Customer { get; set; }
@@ -33,7 +33,7 @@ namespace SPPBC.M3Tools.Types
 		[System.Text.Json.Serialization.JsonPropertyName("completed")]
 		public DateTime CompletedDate { get; set; }
 
-		public static Order None { get; } = new Order();
+		public new static Order None { get; } = new();
 
 		public Order() : this(-1)
 		{
@@ -47,6 +47,7 @@ namespace SPPBC.M3Tools.Types
 		/// 		''' <param name="itemID"></param>
 		/// 		''' <param name="quantity"></param>
 		/// 		''' <param name="orderDate"></param>
+		/// <param name="completedDate"></param>
 		public Order(int orderID, int customerID = -1, int itemID = -1, int quantity = 0, DateTime orderDate = default, DateTime completedDate = default): base(orderID)
 		{
 			Quantity = quantity;

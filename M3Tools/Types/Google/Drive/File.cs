@@ -39,7 +39,17 @@ namespace SPPBC.M3Tools.Types.GTools
         {
             return !(left == right);
         }
-    }
+
+		public override bool Equals(object obj)
+		{
+			return this == obj as File || base.Equals(obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+	}
 
     public class Folder : File
     {

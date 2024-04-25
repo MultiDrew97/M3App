@@ -24,7 +24,17 @@ namespace SPPBC.M3Tools.Types
         {
             return !(left == right);
         }
-    }
+
+		public override bool Equals(object obj)
+		{
+			return this == obj as Template || base.Equals(obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+	}
 
     public class TemplateList : List<Template>
     {

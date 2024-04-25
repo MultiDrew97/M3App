@@ -12,6 +12,9 @@ namespace SPPBC.M3Tools
     {
         // Private __username As String
 
+		/// <summary>
+		/// The nodes on the tree
+		/// </summary>
         public TreeNodeCollection Nodes
         {
             get
@@ -20,6 +23,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether to display checkboxes
+		/// </summary>
         [DefaultValue(true)]
         public bool Checkboxes
         {
@@ -33,6 +39,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The currently selected node
+		/// </summary>
         public TreeNode SelectedNode
         {
             get
@@ -41,6 +50,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The username of the user currently logged into the app
+		/// </summary>
         [SettingsBindable(true)]
         public string Username
         {
@@ -54,15 +66,25 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether the tree should include the children of the folders
+		/// </summary>
         [DefaultValue(true)]
         [Description("Whether the tree should include the children of folders")]
         public bool WithChildren { get; set; } = true;
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public DriveTree()
         {
             InitializeComponent();
         }
 
+		/// <summary>
+		/// Fills the table with the provided files
+		/// </summary>
+		/// <param name="treeNodes"></param>
         public void FillTable(FileCollection treeNodes)
         {
             UseWaitCursor = true;
@@ -73,10 +95,10 @@ namespace SPPBC.M3Tools
         }
 
         /// <summary>
-	/// 	''' Takes the file collection and filters out duplicates and places sub files and folders under their proper parent folders.
-	/// 	''' </summary>
-	/// 	''' <param name="folders">The collection of files and folders to filter.</param>
-	/// 	''' <returns>The filtered file collection as a tree node array.</returns>
+		/// Takes the file collection and filters out duplicates and places sub files and folders under their proper parent folders.
+		/// </summary>
+		/// <param name="folders">The collection of files and folders to filter.</param>
+		/// <returns>The filtered file collection as a tree node array.</returns>
         private TreeNode[] ParseNodes(FileCollection folders)
         {
             int i = 0;
@@ -127,10 +149,10 @@ namespace SPPBC.M3Tools
         }
 
         /// <summary>
-	/// 	''' Parses the File Collection into a TreeNode array with proper child node nesting.
-	/// 	''' </summary>
-	/// 	''' <param name="folders">The collections of files that hold the file heirarchy information.</param>
-	/// 	''' <returns>An array of tree nodes, based on the file heirarchy in the file collection.</returns>
+	/// 	Parses the File Collection into a TreeNode array with proper child node nesting.
+	/// 	</summary>
+	/// 	<param name="folders">The collections of files that hold the file heirarchy information.</param>
+	/// 	<returns>An array of tree nodes, based on the file heirarchy in the file collection.</returns>
         private TreeNode[] ParseTree(FileCollection folders)
         {
             var nodes = new Collection<TreeNode>();
@@ -181,6 +203,11 @@ namespace SPPBC.M3Tools
             return null;
         }
 
+		/// <summary>
+		/// Gets all selected nodes in the tree
+		/// </summary>
+		/// <param name="nodes"></param>
+		/// <returns></returns>
         public Collection<TreeNode> GetSelectedNodes(TreeNodeCollection nodes = null)
         {
             // TODO: When checking a folder, check child files and folders as well
@@ -216,6 +243,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Reloads the control
+		/// </summary>
         public void Reload()
         {
             UseWaitCursor = true;
@@ -233,6 +263,10 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// When the control is loaded
+		/// </summary>
+		/// <param name="username"></param>
         public new void Load(string username)
         {
             gdt_GDrive.Authorize(username);

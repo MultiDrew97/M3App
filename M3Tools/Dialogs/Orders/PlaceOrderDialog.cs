@@ -93,7 +93,7 @@ namespace SPPBC.M3Tools
 				{
 					db_Orders.AddOrder(customerID, item.ItemID, item.Quantity);
 				}
-				catch (Exception ex)
+				catch
 				{
 					failedOrders += 1;
 				}

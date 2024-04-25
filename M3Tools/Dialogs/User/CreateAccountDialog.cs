@@ -8,11 +8,14 @@ namespace SPPBC.M3Tools.Dialogs
     public partial class CreateAccountDialog
     {
 
-        private readonly Regex __passwordPattern = new Regex(My.Resources.Resources.PasswordRegex);
+        private readonly Regex __passwordPattern = new(My.Resources.Resources.PasswordRegex);
         private readonly string __usernameEmptyError = "A username is required";
         private readonly string __passwordPatternError = @"Password must contain:\n At least 1 capital letter\n At least 1 lowercase letter\n At least 1 number\n at least 1 special character";
         private readonly string __passwordMisMatchError = "Passwords must match to proceed";
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public CreateAccountDialog()
         {
             InitializeComponent();
@@ -40,17 +43,17 @@ namespace SPPBC.M3Tools.Dialogs
                     TryCreateAccount();
                 }
             }
-            catch (PasswordMismatchException ex)
-            {
+            catch (PasswordMismatchException)
+			{
                 cpf_Confirm.Clear();
                 cpf_Confirm.Focus();
             }
-            catch (PasswordException ex)
+            catch (PasswordException)
             {
                 pf_Password.Clear();
                 pf_Password.Focus();
             }
-            catch (CreationException ex)
+            catch (CreationException)
             {
                 uf_Username.Focus();
             }

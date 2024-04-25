@@ -14,7 +14,7 @@ namespace SPPBC.M3Tools
 	/// 	''' Gets or sets the password field
 	/// 	''' </summary>
 	/// 	''' <returns></returns>
-        public new string Password
+        public string Password
         {
             get
             {
@@ -89,7 +89,7 @@ namespace SPPBC.M3Tools
 	/// 	''' <param name="start"></param>
 	/// 	''' <param name="length"></param>
 	/// 	''' <exception cref="ArgumentOutOfRangeException"></exception>
-        public new void Select(int start, int length)
+        public void Select(int start, int length)
         {
             txt_Password.Select(start, length);
         }
@@ -97,7 +97,7 @@ namespace SPPBC.M3Tools
         /// <summary>
 	/// 	''' Selects all text in the text box.
 	/// 	''' </summary>
-        public new void SelectAll()
+        public void SelectAll()
         {
             // txt_Password.SelectAll()
             Select(0, TextLength);

@@ -76,7 +76,7 @@ namespace SPPBC.M3Tools
             pf_Password.Clear();
         }
 
-        public new bool Focus(string @field = "u")
+        public bool Focus(string @field = "u")
         {
             switch (@field ?? "")
             {

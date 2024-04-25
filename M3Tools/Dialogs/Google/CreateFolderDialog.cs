@@ -10,6 +10,10 @@ namespace SPPBC.M3Tools
     {
         private string __folderName;
         private readonly Collection<string> __parents = new();
+
+		/// <summary>
+		/// The name of the folder being created
+		/// </summary>
         public string FolderName
         {
             get
@@ -22,6 +26,10 @@ namespace SPPBC.M3Tools
             }
         }
 
+
+		/// <summary>
+		/// The parents of the folder being created
+		/// </summary>
         public IList<string> Parents
         {
             get
@@ -30,6 +38,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The username of the current user logged into the app
+		/// </summary>
         public string Username
         {
             get
@@ -43,6 +54,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public CreateFolderDialog()
         {
             InitializeComponent();

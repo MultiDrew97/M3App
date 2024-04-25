@@ -24,6 +24,9 @@ namespace SPPBC.M3Tools.Data
 		[AttributeProvider(typeof(IListSource))]
 		public new Types.CustomerCollection DataSource { get => (Types.CustomerCollection)base.DataSource; set => base.DataSource = value; }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
 		public override string Filter
 		{
 			get => _customers?.Filter;

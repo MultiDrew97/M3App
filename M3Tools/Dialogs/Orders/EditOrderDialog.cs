@@ -10,8 +10,14 @@ namespace SPPBC.M3Tools
 		private Types.Order _order;
 		private Types.Order _changed;
 
+		/// <summary>
+		/// The ID of the order
+		/// </summary>
 		public int OrderID { get; set; }
 
+		/// <summary>
+		/// The info for the current order
+		/// </summary>
 		public Types.Order CurrentOrder
 		{
 			get
@@ -24,6 +30,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// The updated info for the order
+		/// </summary>
 		public Types.Order UpdatedOrder
 		{
 			get
@@ -36,6 +45,10 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="orderID"></param>
 		public EditOrderDialog(int orderID)
 		{
 			// This call is required by the designer.
@@ -77,7 +90,7 @@ namespace SPPBC.M3Tools
 			{
 				CurrentOrder = db_Orders.GetOrderById(OrderID);
 			}
-			catch (Exception ex)
+			catch
 			{
 				e.Cancel = true;
 			}

@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Dialogs
 {
+	/// <summary>
+	/// A dialog for editing the info of a listener
+	/// </summary>
     public partial class EditListenerDialog
     {
         private event ListenerChangedEventHandler ListenerChanged;
@@ -10,8 +13,14 @@ namespace SPPBC.M3Tools.Dialogs
         private delegate void ListenerChangedEventHandler();
         // Private _newInfo As Types.Listener
 
+		/// <summary>
+		/// The original info for the listener
+		/// </summary>
         public Types.Listener Original { get; set; }
 
+		/// <summary>
+		/// The current listener info
+		/// </summary>
         public Types.Listener Listener
         {
             get
@@ -20,6 +29,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The name of the listener
+		/// </summary>
         public string ListenerName
         {
             get
@@ -32,6 +44,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The email of the listener
+		/// </summary>
         public string ListenerEmail
         {
             get
@@ -44,6 +59,10 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="listener"></param>
         public EditListenerDialog(Types.Listener listener)
         {
             // This call is required by the designer.

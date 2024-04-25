@@ -96,6 +96,9 @@ namespace SPPBC.M3Tools.Types
 			}
         }
 
+		/// <summary>
+		/// The list of items in the collection
+		/// </summary>
 		public System.Collections.Generic.IList<T> List => Items;
 
 		/// <summary>

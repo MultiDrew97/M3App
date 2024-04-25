@@ -7,7 +7,11 @@ namespace SPPBC.M3Tools.Types
 
         public override bool ApplyFilter(Listener listener, int index)
         {
-            throw new NotImplementedException("ApplyFilter");
+			if (listener == null)
+			{
+				return false;
+			}
+
             return listener.Name.Contains(Filter) || listener.Email.Contains(Filter);
         }
     }

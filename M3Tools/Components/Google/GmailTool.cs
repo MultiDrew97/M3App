@@ -24,7 +24,7 @@ namespace SPPBC.M3Tools.GTools
 
         Google.Apis.Gmail.v1.Data.Profile IGoogleService<Google.Apis.Gmail.v1.Data.Profile>.UserAccount { get => UserAccount; }
 
-        private readonly MailboxAddress DefaultSender = new MailboxAddress("Elder Bryon Miller", "me");
+        private readonly MailboxAddress DefaultSender = new("Elder Bryon Miller", "me");
 
         public override void Authorize(string username, CancellationToken ct = default)
         {
@@ -48,16 +48,16 @@ namespace SPPBC.M3Tools.GTools
             return Create(new MailboxAddress(to.Name, to.Email), subject, body, bodyType, from);
         }
 
-        /// <summary>
+		/// <summary>
 		/// 		''' Creates an email using the provided information
 		/// 		''' </summary>
-		/// 		''' <param name="[to]">The address to whom the email is being sent to</param>
+		/// 		''' <param name="to">The address to whom the email is being sent to</param>
 		/// 		''' <param name="subject">The subject of the email to be sent</param>
 		/// 		''' <param name="body">The body of the email to be sent</param>
 		/// 		''' <param name="from">Who the email is being sent from</param>
 		/// 		''' <param name="bodyType">The type of body the email will have. Default html</param>
 		/// 		''' <returns></returns>
-        public MimeMessage Create(MailboxAddress to, string subject, string body, EmailType bodyType = default, MailboxAddress @from = null)
+		public MimeMessage Create(MailboxAddress to, string subject, string body, EmailType bodyType = default, MailboxAddress @from = null)
         {
             return Create(to, new EmailContent(subject, body, bodyType), from);
         }
@@ -121,7 +121,7 @@ namespace SPPBC.M3Tools.GTools
         /// <summary>
 		/// 		''' Create an email that contains attachements to be sent to a email box
 		/// 		''' </summary>
-		/// 		''' <param name="[to]">The MailBox Address to send to</param>
+		/// 		''' <param name="to">The MailBox Address to send to</param>
 		/// 		''' <param name="content">The content of the email to be sent</param>
 		/// 		''' <param name="files">The files to attach to the email</param>
 		/// 		''' <param name="from">The email address to send from</param>

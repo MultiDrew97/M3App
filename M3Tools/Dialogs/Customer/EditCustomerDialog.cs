@@ -16,6 +16,9 @@ namespace SPPBC.M3Tools.Dialogs
 
         private delegate void CustomerChangedEventHandler();
 
+		/// <summary>
+		/// The customer being edited
+		/// </summary>
         public Types.Customer Customer
         {
             get
@@ -29,6 +32,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The new info for the customer
+		/// </summary>
         public Types.Customer NewInfo
         {
             get
@@ -37,6 +43,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The customer's first name
+		/// </summary>
         public string FirstName
         {
             get
@@ -49,6 +58,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The customer's last name
+		/// </summary>
         public string LastName
         {
             get
@@ -61,6 +73,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The customer's phone number
+		/// </summary>
         public string Phone
         {
             get
@@ -72,6 +87,10 @@ namespace SPPBC.M3Tools.Dialogs
                 PhoneNumberField1.Text = value;
             }
         }
+
+		/// <summary>
+		/// The email of the customer
+		/// </summary>
         public string Email
         {
             get
@@ -83,6 +102,10 @@ namespace SPPBC.M3Tools.Dialogs
                 gi_Email.Text = value;
             }
         }
+
+		/// <summary>
+		/// The address of the customer
+		/// </summary>
         public Types.Address Address
         {
             get
@@ -95,6 +118,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public EditCustomerDialog()
         {
             InitializeComponent();

@@ -75,7 +75,7 @@ namespace SPPBC.M3Tools
     /// <param name="start"></param>
     /// <param name="length"></param>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public new void Select(int start, int length)
+        public void Select(int start, int length)
         {
             txt_Username.Select(start, length);
         }

@@ -5,7 +5,7 @@ namespace SPPBC.M3Tools
 {
     public class GifBitmap
     {
-        private readonly List<GifFrame> GifFrames = new List<GifFrame>();
+        private readonly List<GifFrame> GifFrames = new();
         private int PlayIndex = 0;
         private readonly System.Windows.Forms.PictureBox __picBox;
         private readonly System.Windows.Forms.Timer __timer;
@@ -56,31 +56,29 @@ namespace SPPBC.M3Tools
             const int PIID_FRAMEDELAY = 0x5100;
             var fd = new System.Drawing.Imaging.FrameDimension(__image.FrameDimensionsList[0]);
             int framecount = __image.GetFrameCount(fd);
-            if (framecount > 1)
-            {
-                byte[] fdv = __image.GetPropertyItem(PIID_FRAMEDELAY).Value;
-                for (int i = 0, loopTo = framecount - 1; i <= loopTo; i++)
-                {
-                    int framedelay = BitConverter.ToInt32(fdv, 4 * i) * 10;
-                    if (framedelay == 0)
-                        framedelay = 90;
-                    try
-                    {
-                        __picBox.Image.SelectActiveFrame(fd, i);
-                        GifFrames.Add(new GifFrame(__image, framedelay));
-                    }
-                    catch (Exception ex)
-                    {
-                        ClearGifFrames();
-                        throw new Exceptions.GifException("An Unexpected Error Occurred Stripping Frame (" + i.ToString() + "}");
-                        break;
-                    }
-                }
-            }
-            else
+            if (framecount <= 1)
             {
                 throw new Exceptions.GifException("The Gif file is not an animated type gif image.");
             }
+
+            byte[] fdv = __image.GetPropertyItem(PIID_FRAMEDELAY).Value;
+            for (int i = 0, loopTo = framecount - 1; i <= loopTo; i++)
+            {
+                int framedelay = BitConverter.ToInt32(fdv, 4 * i) * 10;
+                if (framedelay == 0)
+                    framedelay = 90;
+                try
+                {
+                    __picBox.Image.SelectActiveFrame(fd, i);
+                    GifFrames.Add(new GifFrame(__image, framedelay));
+                }
+                catch
+                {
+                    ClearGifFrames();
+                    throw new Exceptions.GifException("An Unexpected Error Occurred Stripping Frame (" + i.ToString() + "}");
+                }
+            }
+            
         }
 
         private class GifFrame

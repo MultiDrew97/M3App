@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Dialogs
 {
+	/// <summary>
+	/// A control for selecting from templates for email body
+	/// </summary>
     public partial class EmailBodySelection
     {
         private string Subject
@@ -74,6 +77,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The content of the email being sent
+		/// </summary>
         public Types.GTools.EmailContent Content
         {
             get
@@ -82,6 +88,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// The tempates to display
+		/// </summary>
         public Types.TemplateList Templates
         {
             set
@@ -90,6 +99,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public EmailBodySelection()
         {
             InitializeComponent();

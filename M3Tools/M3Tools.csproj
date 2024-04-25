@@ -42,6 +42,8 @@
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -178,12 +180,6 @@
       <DependentUpon>CartCtrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Orders\CartCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Orders\DisplayOrdersCtrl.Designer.cs">
-      <DependentUpon>DisplayOrdersCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Orders\DisplayOrdersCtrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Orders\OrderTotalCtrl.Designer.cs">
@@ -447,12 +443,6 @@
     <Compile Include="Controls\GenericInputPair.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\People\Listeners\DisplayListenersCtrl.Designer.cs">
-      <DependentUpon>DisplayListenersCtrl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\People\Listeners\DisplayListenersCtrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Controls\People\Users\LoginFields.Designer.cs">
       <DependentUpon>LoginFields.cs</DependentUpon>
     </Compile>
@@ -601,9 +591,6 @@
     <EmbeddedResource Include="Controls\Orders\CartCtrl.resx">
       <DependentUpon>CartCtrl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Orders\DisplayOrdersCtrl.resx">
-      <DependentUpon>DisplayOrdersCtrl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Orders\OrderTotalCtrl.resx">
       <DependentUpon>OrderTotalCtrl.cs</DependentUpon>
     </EmbeddedResource>
@@ -719,9 +706,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\GenericInputPair.resx">
       <DependentUpon>GenericInputPair.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\People\Listeners\DisplayListenersCtrl.resx">
-      <DependentUpon>DisplayListenersCtrl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Users\LoginFields.resx">
       <DependentUpon>LoginFields.cs</DependentUpon>
@@ -845,7 +829,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

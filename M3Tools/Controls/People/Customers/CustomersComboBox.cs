@@ -4,19 +4,43 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// A control that displays a list of customers in a combo box
+	/// </summary>
     public partial class CustomersComboBox
     {
+		/// <summary>
+		/// The event that occurs when loading has begun
+		/// </summary>
         public event LoadBeginEventHandler LoadBegin;
-
+		/// <summary>
+		/// The handler for when the control begins to load
+		/// </summary>
         public delegate void LoadBeginEventHandler();
-        public event LoadEndEventHandler LoadEnd;
 
+		/// <summary>
+		/// The event that occurs when loading has completed
+		/// </summary>
+        public event LoadEndEventHandler LoadEnd;
+		/// <summary>
+		/// The handler for when the control finishes loading
+		/// </summary>
         public delegate void LoadEndEventHandler();
+
+		/// <summary>
+		/// The event that occurs when the selected customer changes
+		/// </summary>
         public event SelectedItemChangedEventHandler SelectedItemChanged;
 
+		/// <summary>
+		/// The handler for when a customer selection has changed
+		/// </summary>
+		/// <param name="newValue"></param>
         public delegate void SelectedItemChangedEventHandler(int newValue);
 
+		/// <summary>
+		/// The currently selected customer
+		/// </summary>
         public object SelectedItem
         {
             get
@@ -34,6 +58,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The index in the list for the currently selected customer
+		/// </summary>
         public int SelectedIndex
         {
             get
@@ -51,6 +78,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public object SelectedValue
         {
             get
@@ -68,6 +98,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public CustomersComboBox()
         {
             InitializeComponent();
@@ -100,6 +133,9 @@ namespace SPPBC.M3Tools
             LoadEnd?.Invoke();
         }
 
+		/// <summary>
+		/// Reloads the control
+		/// </summary>
         public void Reload()
         {
             bw_LoadItems.RunWorkerAsync();

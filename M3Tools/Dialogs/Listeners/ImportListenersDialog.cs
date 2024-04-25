@@ -86,7 +86,6 @@ namespace SPPBC.M3Tools.Dialogs
 
         private void ParseFiles(object sender, DoWorkEventArgs e)
         {
-            string[] files = (string[])e.Argument;
             var colDict = new Dictionary<string, int>() { { "Name", 0 }, { "Email", 1 } };
             TextFieldParser csvReader;
             // Dim listeners As New Types.DBEntryCollection(Of Types.Listener)
@@ -105,7 +104,7 @@ namespace SPPBC.M3Tools.Dialogs
                     {
                         colDict = ParseHeaders(string.Join(";", csvReader.ReadFields()).ToLower().Split(';'));
                     }
-                    catch (ArgumentException ex)
+                    catch (ArgumentException)
                     {
                         throw new NotImplementedException("Import Fields Error");
                     }

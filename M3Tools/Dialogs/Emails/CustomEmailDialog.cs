@@ -3,7 +3,9 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// The dialog for creating a new email
+	/// </summary>
     public partial class CustomEmailDialog
     {
         private CustomEmail Email
@@ -14,6 +16,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The subject of the email
+		/// </summary>
         public string Subject
         {
             get
@@ -22,6 +27,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The body of the email
+		/// </summary>
         public string Body
         {
             get
@@ -38,6 +46,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public CustomEmailDialog()
         {
             InitializeComponent();

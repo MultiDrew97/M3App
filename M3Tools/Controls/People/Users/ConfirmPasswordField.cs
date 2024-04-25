@@ -6,8 +6,19 @@ namespace SPPBC.M3Tools
 
     public partial class ConfirmPasswordField
     {
+		/// <summary>
+		/// The event that occurs when the confirm field has lost focus
+		/// </summary>
         public event EventHandler ConfirmLostFocus;
+
+		/// <summary>
+		/// The event that occurs when the confirm field has been changed
+		/// </summary>
         public event EventHandler ConfirmTextChanged;
+
+		/// <summary>
+		/// The value of the confirm field
+		/// </summary>
         public new string Text
         {
             get
@@ -21,9 +32,9 @@ namespace SPPBC.M3Tools
         }
 
         /// <summary>
-    /// Gets the length of text in text control.
-    /// </summary>
-    /// <returns>The number of characters contained in the text of the control.</returns>
+		/// Gets the length of text in text control.
+		/// </summary>
+		/// <returns>The number of characters contained in the text of the control.</returns>
         public int TextLength
         {
             get
@@ -32,6 +43,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether the control is focused
+		/// </summary>
         public override bool Focused
         {
             get
@@ -40,14 +54,9 @@ namespace SPPBC.M3Tools
             }
         }
 
-        public TextBox ConfirmField
-        {
-            get
-            {
-                return txt_ConfirmPassword;
-            }
-        }
-
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public ConfirmPasswordField()
         {
             InitializeComponent();
@@ -91,6 +100,10 @@ namespace SPPBC.M3Tools
             // txtPassword.Select(0, TextLength)
         }
 
+		/// <summary>
+		/// Focus on the confirm field
+		/// </summary>
+		/// <returns></returns>
         public new bool Focus()
         {
             return txt_ConfirmPassword.Focus();

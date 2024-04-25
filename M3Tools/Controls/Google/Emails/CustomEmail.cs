@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 
+// TODO: Use this for all instances of an email being sent instead of how it's being done now
+
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// Holds the information for a custom email that is being sent
+	/// </summary>
     public partial class CustomEmail
     {
         private readonly string[] placeholders = new[] { "Subject...", "Email Body..." };
@@ -14,6 +18,9 @@ namespace SPPBC.M3Tools
             public static string Italics = "Italics";
         }
 
+		/// <summary>
+		/// The subject of the email
+		/// </summary>
         public string Subject
         {
             get
@@ -26,6 +33,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The body of the email
+		/// </summary>
         public string Body
         {
             get
@@ -38,6 +48,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The body of the email in Rich-Text form
+		/// </summary>
         public string RichTextBody
         {
             get
@@ -46,6 +59,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public CustomEmail()
         {
             InitializeComponent();

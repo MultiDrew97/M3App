@@ -7,7 +7,7 @@ namespace SPPBC.M3Tools.Types
 
 		[System.ComponentModel.Browsable(false)]
 		[System.Text.Json.Serialization.JsonPropertyName("itemID")]
-		public int Id { get; }
+		public new int Id { get; }
 
 		[System.Text.Json.Serialization.JsonPropertyName("itemName")]
 		public string Name { get; set; }
