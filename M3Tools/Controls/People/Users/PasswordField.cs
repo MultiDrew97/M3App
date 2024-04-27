@@ -3,11 +3,22 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
-    public partial class PasswordFieldType
+	/// <summary>
+	/// 
+	/// </summary>
+    public partial class PasswordField
     {
+		/// <summary>
+		/// An event fired when the control has recieved focus
+		/// </summary>
         public event EventHandler PasswordGotFocus;
+		/// <summary>
+		/// An event fired when the control has lost focus
+		/// </summary>
         public event EventHandler PasswordLostFocus;
+		/// <summary>
+		/// An event fired when the text has been changed
+		/// </summary>
         public event EventHandler PasswordTextChanged;
 
         /// <summary>
@@ -50,19 +61,10 @@ namespace SPPBC.M3Tools
             }
         }
 
-        /// <summary>
-	/// 	''' Gets the field for the password control
-	/// 	''' </summary>
-	/// 	''' <returns></returns>
-        public TextBox PasswordField
-        {
-            get
-            {
-                return txt_Password;
-            }
-        }
-
-        public PasswordFieldType()
+		/// <summary>
+		/// 
+		/// </summary>
+        public PasswordField()
         {
             InitializeComponent();
         }
@@ -103,6 +105,10 @@ namespace SPPBC.M3Tools
             Select(0, TextLength);
         }
 
+		/// <summary>
+		/// Focuses to the textbox of the control
+		/// </summary>
+		/// <returns></returns>
         public new bool Focus()
         {
             return txt_Password.Focus();

@@ -35,7 +35,7 @@ namespace SPPBC.M3Tools
         {
             spc_UsernamePassword = new System.Windows.Forms.SplitContainer();
             uf_Username = new UsernameField();
-            pf_Password = new PasswordFieldType();
+            pf_Password = new PasswordField();
             pf_Password.PasswordGotFocus += new EventHandler(PasswordGotFocus);
             ((System.ComponentModel.ISupportInitialize)spc_UsernamePassword).BeginInit();
             spc_UsernamePassword.Panel1.SuspendLayout();
@@ -113,6 +113,6 @@ namespace SPPBC.M3Tools
         }
         internal System.Windows.Forms.SplitContainer spc_UsernamePassword;
         internal UsernameField uf_Username;
-        internal PasswordFieldType pf_Password;
+        internal PasswordField pf_Password;
     }
 }

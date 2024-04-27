@@ -4,10 +4,14 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// A control to upload files to Google Drive
+	/// </summary>
     public partial class FileUpload
     {
-
+		/// <summary>
+		/// The list of files being uploaded
+		/// </summary>
         public IList Files
         {
             get
@@ -16,6 +20,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether mulitple files can be uploaded at once
+		/// </summary>
         [DefaultValue(true)]
         public bool MultiSelect
         {
@@ -29,6 +36,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The datasource to bind to the control
+		/// </summary>
         public BindingSource DataSource
         {
             get
@@ -43,6 +53,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public FileUpload()
         {
             InitializeComponent();

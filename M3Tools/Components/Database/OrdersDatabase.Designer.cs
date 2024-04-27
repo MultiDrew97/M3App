@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SPPBC.M3Tools.Database
 {
-    public partial class OrdersDatabase : System.ComponentModel.Component
+    public partial class OrdersDatabase : Database<Types.Order>
     {
 
         [DebuggerNonUserCode()]
@@ -54,25 +54,6 @@ namespace SPPBC.M3Tools.Database
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            _dbConnection = new Database(components);
-
-        }
-
-        private Database _dbConnection;
-
-        internal Database dbConnection
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _dbConnection;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                _dbConnection = value;
-            }
         }
     }
 }

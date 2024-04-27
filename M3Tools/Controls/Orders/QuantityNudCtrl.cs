@@ -4,10 +4,20 @@ namespace SPPBC.M3Tools
 {
     public partial class QuantityNudCtrl
     {
+		/// <summary>
+		/// 
+		/// </summary>
         public event QuantityChangedEventHandler QuantityChanged;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="newQuantity"></param>
         public delegate void QuantityChangedEventHandler(int newQuantity);
 
+		/// <summary>
+		/// The minimum value allowed
+		/// </summary>
         [System.ComponentModel.DefaultValue(0)]
         public int MinimumValue
         {
@@ -21,6 +31,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The maximum value allowed
+		/// </summary>
         [System.ComponentModel.DefaultValue(int.MaxValue)]
         public int MaximumValue
         {
@@ -34,6 +47,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The label shown with the control
+		/// </summary>
         [System.ComponentModel.DefaultValue("Quantity")]
         public string Label
         {
@@ -47,6 +63,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The quantity value selected
+		/// </summary>
         [System.ComponentModel.DefaultValue(0)]
         public int Quantity
         {
@@ -60,6 +79,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public QuantityNudCtrl()
         {
             InitializeComponent();

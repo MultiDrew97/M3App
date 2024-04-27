@@ -9,55 +9,20 @@ namespace SPPBC.M3Tools.Database
 	{
 		private const string path = "orders";
 
-		[Description("The username to use for the database connection")]
-		[SettingsBindable(true)]
-		public string Username
-		{
-			get
-			{
-				return dbConnection.Username;
-			}
-			set
-			{
-				dbConnection.Username = value;
-			}
-		}
-
-		[PasswordPropertyText(true)]
-		[SettingsBindable(true)]
-		[Description("The password to use for the database connection")]
-		public string Password
-		{
-			get
-			{
-				return dbConnection.Password;
-			}
-			set
-			{
-				dbConnection.Password = value;
-			}
-		}
-
-		[Bindable(true)]
-		[Description("The url to use for the database connection")]
-		[SettingsBindable(true)]
-		public string BaseUrl
-		{
-			get
-			{
-				return dbConnection.BaseUrl;
-			}
-			set
-			{
-				dbConnection.BaseUrl = value;
-			}
-		}
-
+		/// <summary>
+		/// Retrieve the complete list of orders from the database
+		/// </summary>
+		/// <returns></returns>
 		public DBEntryCollection<Order> GetOrders()
 		{
-			return dbConnection.Consume<DBEntryCollection<Order>>(Method.Get, $"/{path}").Result;
+			return ExecuteWithResult<DBEntryCollection<Order>>(Method.Get, $"{path}").Result;
 		}
 
+		/// <summary>
+		/// Get the complete list of completed orders from the database
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="NotImplementedException"></exception>
 		public DBEntryCollection<Order> GetCompletedOrders()
 		{
 			// TODO: Test this to make sure it works properly
@@ -67,6 +32,13 @@ namespace SPPBC.M3Tools.Database
 			// End Function), DBEntryCollection(Of Order))
 		}
 
+		/// <summary>
+		/// Add a new order to the database
+		/// </summary>
+		/// <param name="customerID"></param>
+		/// <param name="itemID"></param>
+		/// <param name="quantity"></param>
+		/// <exception cref="ArgumentException"></exception>
 		public void AddOrder(int customerID, int itemID, int quantity)
 		{
 			if (!Utils.ValidID(customerID) | !Utils.ValidID(itemID))
@@ -82,11 +54,23 @@ namespace SPPBC.M3Tools.Database
 			AddOrder(new Order(-1, customerID, itemID, quantity));
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="order"></param>
 		public void AddOrder(Order order)
 		{
-			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(order));
+			Execute(Method.Post, $"{path}", JSON.ConvertToJSON(order));
 		}
 
+		/// <summary>
+		/// Update the order details for a specified order
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <param name="customerID"></param>
+		/// <param name="itemID"></param>
+		/// <param name="quantity"></param>
+		/// <exception cref="ArgumentException"></exception>
 		public void UpdateOrder(int orderID, int customerID, int itemID, int quantity)
 		{
 			if (!Utils.ValidID(orderID) || !Utils.ValidID(itemID))
@@ -102,11 +86,20 @@ namespace SPPBC.M3Tools.Database
 			UpdateOrder(new Order(orderID, customerID, itemID, quantity));
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="order"></param>
 		public void UpdateOrder(Order order)
 		{
-			dbConnection.Consume(Method.Put, $"/{path}/{order.Id}", JSON.ConvertToJSON(order));
+			Execute(Method.Put, $"{path}/{order.Id}", JSON.ConvertToJSON(order));
 		}
 
+		/// <summary>
+		/// Cancel an order based on the provided order ID
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <exception cref="ArgumentException"></exception>
 		public void CancelOrder(int orderID)
 		{
 			if (!Utils.ValidID(orderID))
@@ -117,6 +110,11 @@ namespace SPPBC.M3Tools.Database
 			RemoveOrder(orderID, false);
 		}
 
+		/// <summary>
+		/// Mark an order as complete based on the provided order ID
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <exception cref="ArgumentException"></exception>
 		public void CompleteOrder(int orderID)
 		{
 			if (orderID < 0)
@@ -129,9 +127,15 @@ namespace SPPBC.M3Tools.Database
 
 		private void RemoveOrder(int orderID, bool completed)
 		{
-			dbConnection.Consume(Method.Put, $"/{path}/{orderID}?force={completed}");
+			Execute(Method.Put, $"{path}/{orderID}?force={completed}");
 		}
 
+		/// <summary>
+		/// Retrieve an order by its order ID
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException"></exception>
 		public Order GetOrderById(int orderID)
 		{
 			if (!Utils.ValidID(orderID))
@@ -139,10 +143,17 @@ namespace SPPBC.M3Tools.Database
 				throw new ArgumentException("ID values must be greater than or equal to 0");
 			}
 
-			return dbConnection.Consume<Order>(Method.Get, $"/orders/{orderID}").Result;
+			return ExecuteWithResult<Order>(Method.Get, $"{path}/{orderID}").Result;
 		}
 
 		// TODO: Likely create a custom API path to search by customerID instead of orderID
+		/// <summary>
+		/// Retrieve an order based on the customer whom it's for
+		/// </summary>
+		/// <param name="customerID"></param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="NotImplementedException"></exception>
 		public DBEntryCollection<Order> GetOrderByCustomer(int customerID)
 		{
 			if (customerID < 0)

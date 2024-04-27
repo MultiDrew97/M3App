@@ -248,7 +248,7 @@ namespace SPPBC.M3Tools.Data
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
 			cms_Tools.EditSelected += EditSelected;
-			cms_Tools.RemoveRows += RemoveSelectedRows;
+			cms_Tools.RemoveSelected += RemoveSelectedRows;
 			cms_Tools.RefreshView += Reload;
 		}
 

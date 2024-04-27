@@ -3,11 +3,19 @@ using System.ComponentModel;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class GenericInputPair
     {
+		/// <summary>
+		/// 
+		/// </summary>
         public new event EventHandler TextChanged;
 
+		/// <summary>
+		/// The text that should be shown in the label
+		/// </summary>
         [DefaultValue("Label1")]
         [RefreshProperties(RefreshProperties.Repaint)]
         public string Label
@@ -22,6 +30,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The length of the text in the textbox
+		/// </summary>
         public int TextLength
         {
             get
@@ -30,6 +41,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The mask that should be applied to the textbox
+		/// </summary>
         public string Mask
         {
             get
@@ -42,6 +56,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether to use the password character to obfuscate the text
+		/// </summary>
         [DefaultValue(false)]
         public bool UseSystemPasswordChar
         {
@@ -55,19 +72,31 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The text within the textbox
+		/// </summary>
         [RefreshProperties(RefreshProperties.Repaint)]
         public override string Text
         {
             get
             {
-                return (txt_Input.Text ?? "") != (Placeholder ?? "") ? txt_Input.Text : "";
+                return txt_Input.Text != Placeholder ? txt_Input.Text : "";
             }
             set
             {
-                txt_Input.Text = (value ?? "") != (Placeholder ?? "") && !string.IsNullOrEmpty(value) ? value : Placeholder;
+				if (string.IsNullOrEmpty(value) || value == Placeholder)
+				{
+					txt_Input.Text = Placeholder;
+					return;
+				}
+
+                txt_Input.Text = value;
             }
         }
 
+		/// <summary>
+		/// How the text in the textbox should be aligned
+		/// </summary>
         [RefreshProperties(RefreshProperties.Repaint)]
         public System.Windows.Forms.HorizontalAlignment TextAlign
         {
@@ -82,6 +111,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether the textbox is readonly
+		/// </summary>
         [DefaultValue(false)]
         public bool ReadOnly
         {
@@ -95,10 +127,16 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The placeholder that should be shown in the textbox when empty
+		/// </summary>
         [DefaultValue("Input...")]
         [RefreshProperties(RefreshProperties.Repaint)]
         public string Placeholder { get; set; }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public GenericInputPair()
         {
             InitializeComponent();
@@ -113,7 +151,7 @@ namespace SPPBC.M3Tools
 
         private void InputGotFocus(object sender, EventArgs e)
         {
-            if ((txt_Input.Text ?? "") != (Placeholder ?? ""))
+            if (txt_Input.Text != Placeholder)
             {
                 txt_Input.Select(txt_Input.Text.Length, 0);
                 txt_Input.ScrollToCaret();

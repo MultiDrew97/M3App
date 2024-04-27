@@ -21,23 +21,36 @@ namespace SPPBC.M3Tools.Database
         Price
     }
 
-    internal partial class Database
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+    public partial class Database<T> where T : Types.IDbEntry, new()
     {
+		/// <summary>
+		/// The username to use for the API calls
+		/// </summary>
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The username to use with the API calls")]
-        internal string Username { get; set; }
+        public string Username { protected get; set; }
 
+		/// <summary>
+		/// The password to use for the API calls
+		/// </summary>
         [PasswordPropertyText(true)]
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The password to use with the API calls")]
-        internal string Password { get; set; }
+        public string Password { protected get; set; }
 
+		/// <summary>
+		/// The URL to use for the API calls
+		/// </summary>
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The URL value to use for API calls")]
-        internal string BaseUrl { get; set; }
+        public string BaseUrl { get; set; }
 
         private string Auth
         {
@@ -47,46 +60,40 @@ namespace SPPBC.M3Tools.Database
             }
         }
 
-        // Sub New(username As String, password As String, Optional baseUrl As String = Nothing)
-        // Me.Username = username
-        // Me.Password = password
-        // Me.BaseUrl = baseUrl
-        // End Sub
+		internal void Execute(Method @method, string path, string payload = null)
+		{
+			ExecuteWithResult<object>(@method, path, payload);
+		}
+	
+		/*private void Execute(Method @method, string path, byte[] payload = null)
+		{
+			System.Net.HttpWebRequest req;
 
-        internal void Consume(Method @method, string path, string payload = null)
-        {
-            Consume(@method, path, !string.IsNullOrWhiteSpace(payload) ? System.Text.Encoding.UTF8.GetBytes(payload) : null);
-        }
+			req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(BaseUrl + path);
+			req.Method = @method.ToString().ToUpper();
+			req.Accept = "application/json";
+			req.Headers.Add(System.Net.HttpRequestHeader.Authorization, $"Basic {Auth}");
 
-        private void Consume(Method @method, string path, byte[] payload = null)
-        {
-            System.Net.HttpWebRequest req;
-
-            req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(BaseUrl + path);
-            req.Method = @method.ToString().ToUpper();
-            req.Accept = "application/json";
-            req.Headers.Add(System.Net.HttpRequestHeader.Authorization, $"Basic {Auth}");
-
-            if (payload is not null)
-            {
-                req.ContentType = "application/json";
+			if (payload is not null)
+			{
+				req.ContentType = "application/json";
 				using var stream = req.GetRequestStream();
 				stream.Write(payload, 0, payload.Count());
 			}
 
-            VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
-        }
+			VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
+		}*/
 
-        internal Task<T> Consume<T>(Method @method, string path, string payload = null)
+		internal Task<T> ExecuteWithResult<T>(Method @method, string path, string payload = null)
         {
-            return Consume<T>(@method, path, !string.IsNullOrWhiteSpace(payload) ? System.Text.Encoding.UTF8.GetBytes(payload) : null);
+            return ExecuteWithResult<T>(@method, path, !string.IsNullOrWhiteSpace(payload) ? System.Text.Encoding.UTF8.GetBytes(payload) : null);
         }
 
-        private Task<T> Consume<T>(Method @method, string path, byte[] payload = null)
+        private Task<T> ExecuteWithResult<T>(Method @method, string path, byte[] payload = null)
         {
             System.Net.HttpWebRequest req;
 
-            req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(BaseUrl + path);
+            req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create($"${BaseUrl}/${path}");
             req.Method = @method.ToString().ToUpper();
             req.Accept = "application/json";
             req.Headers.Add(System.Net.HttpRequestHeader.Authorization, $"Basic {Auth}");
@@ -107,22 +114,13 @@ namespace SPPBC.M3Tools.Database
             switch (res.StatusCode)
             {
                 case System.Net.HttpStatusCode.Unauthorized:
-                    {
-                        throw new Exceptions.AuthorizationException(res.StatusDescription);
-                    }
+                    throw new Exceptions.AuthorizationException(res.StatusDescription);
                 case System.Net.HttpStatusCode.NotFound:
-                    {
-                        throw new Exceptions.PathNotFoundException(res.StatusDescription);
-                    }
+                    throw new Exceptions.NotFoundException(res.StatusDescription);
                 case System.Net.HttpStatusCode.Forbidden:
-                    {
-                        throw new Exceptions.ApiException(res.StatusDescription);
-                    }
-
+                    throw new Exceptions.ApiException(res.StatusDescription);
                 default:
-                    {
-                        return res;
-                    }
+                    return res;
             }
         }
     }

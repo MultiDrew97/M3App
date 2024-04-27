@@ -3,15 +3,15 @@
 namespace SPPBC.M3Tools.Exceptions
 {
 	/// <summary>
-	/// An exception related to GIF operations
+	/// An exception related to when an entry is not found
 	/// </summary>
-    [Serializable]
-    public class GifException : Exception
+    public class NotFoundException : Exception
     {
+
 		/// <summary>
 		/// 
 		/// </summary>
-        public GifException() : base()
+        public NotFoundException() : base()
         {
         }
 
@@ -19,7 +19,7 @@ namespace SPPBC.M3Tools.Exceptions
 		/// 
 		/// </summary>
 		/// <param name="message"></param>
-        public GifException(string message) : base(message)
+        public NotFoundException(string message) : base(message)
         {
         }
 
@@ -28,7 +28,7 @@ namespace SPPBC.M3Tools.Exceptions
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>
-        public GifException(string message, Exception innerException) : base(message, innerException)
+        public NotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

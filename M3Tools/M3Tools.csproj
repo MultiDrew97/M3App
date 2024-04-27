@@ -110,6 +110,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Database\CustomerDatabase.Designer.cs">
+      <DependentUpon>CustomerDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Database\Database.Designer.cs">
+      <DependentUpon>Database.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -119,14 +125,8 @@
     <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
     <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
-    <Compile Include="Components\Database\CustomerDatabase.Designer.cs">
-      <DependentUpon>CustomerDatabase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Components\Database\CustomerDatabase.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Database\Database.Designer.cs">
-      <DependentUpon>Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Database\Database.cs">
       <SubType>Component</SubType>
@@ -210,7 +210,7 @@
       <DependentUpon>ListenersDataGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\People\Listeners\ListenersDataGrid.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\PriceInput.Designer.cs">
       <DependentUpon>PriceInput.cs</DependentUpon>
@@ -279,15 +279,17 @@
     <Compile Include="Exceptions\Customers\InvalidStateCodeException.cs" />
     <Compile Include="Exceptions\Database\ApiException.cs" />
     <Compile Include="Exceptions\Database\AuthorizationException.cs" />
-    <Compile Include="Exceptions\Database\PathNotFoundException.cs" />
+    <Compile Include="Exceptions\Database\NotFoundException.cs" />
     <Compile Include="Exceptions\FormClosedException.cs" />
-    <Compile Include="Exceptions\Products\ProductNotFoundException.cs" />
     <Compile Include="Types\Auth.cs" />
     <Compile Include="Types\BindingSource.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\BindingSource.Designer.cs">
       <DependentUpon>BindingSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Types\ListenerBindingSource.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Types\Events\OrderEvents.cs" />
     <Compile Include="Types\InventoryCollection.cs" />
@@ -479,9 +481,7 @@
     <Compile Include="Dialogs\User\LoginDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\MenuException.cs" />
-    <Compile Include="Exceptions\Customers\CustomerNotFoundException.cs" />
     <Compile Include="Exceptions\Database\CreationException.cs" />
     <Compile Include="Exceptions\Database\ConnectionException.cs" />
     <Compile Include="Exceptions\Database\DatabaseException.cs" />
@@ -489,15 +489,11 @@
     <Compile Include="Exceptions\Google\FileException.cs" />
     <Compile Include="Exceptions\Google\FolderException.cs" />
     <Compile Include="Exceptions\Google\UploadException.cs" />
-    <Compile Include="Exceptions\Listeners\ListenerNotFoundException.cs" />
-    <Compile Include="Exceptions\Orders\OrderNotFoundException.cs" />
     <Compile Include="Exceptions\Users\LoginException.cs" />
-    <Compile Include="Exceptions\Users\MissingInfoException.cs" />
     <Compile Include="Exceptions\Users\PasswordException.cs" />
     <Compile Include="Exceptions\Users\PasswordMismatchException.cs" />
     <Compile Include="Exceptions\Users\RoleException.cs" />
     <Compile Include="Exceptions\Users\UserException.cs" />
-    <Compile Include="Exceptions\Users\UsernameException.cs" />
     <Compile Include="GifBitmap.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -734,6 +730,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Types\ListenerBindingSource.resx">
+      <DependentUpon>ListenerBindingSource.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Types\InventoryBindingSource.resx">
       <DependentUpon>InventoryBindingSource.cs</DependentUpon>
     </EmbeddedResource>
@@ -824,6 +823,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Exceptions\Listeners\" />
+    <Folder Include="Exceptions\Orders\" />
+    <Folder Include="Exceptions\Products\" />
     <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

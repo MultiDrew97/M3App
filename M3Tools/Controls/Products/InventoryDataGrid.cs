@@ -9,15 +9,34 @@ using SPPBC.M3Tools.Events.Inventory;
 namespace SPPBC.M3Tools
 {
 
+	/// <summary>
+	/// A control to display a list of inventory items
+	/// </summary>
 	public partial class InventoryDataGrid : Data.DataGrid<Types.Product>
 	{
+		/// <summary>
+		/// An event fired when a new product is added
+		/// </summary>
 		public event InventoryEventHandler AddProduct;
-		public event InventoryEventHandler UpdateProduct;
-		public event InventoryEventHandler RemoveProduct;
-		public event RefreshDisplayEventHandler RefreshDisplay;
 
+		/// <summary>
+		/// An event fired when a product is updated
+		/// </summary>
+		public event InventoryEventHandler UpdateProduct;
+
+		/// <summary>
+		/// An event fired when a product is removed
+		/// </summary>
+		public event InventoryEventHandler RemoveProduct;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void RefreshDisplayEventHandler();
 
+		/// <summary>
+		/// The list of inventory items
+		/// </summary>
 		public IList Products
 		{
 			get
@@ -26,6 +45,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
 		[Description("Data Source to use for data grid.")]
 		public new Data.BindingSource<Types.Product> DataSource
 		{
@@ -39,6 +61,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// The filter to apply to the list of inventory items
+		/// </summary>
 		[DefaultValue("")]
 		public string Filter
 		{
@@ -59,6 +84,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// Whether to allow editing the items. If set to false, the edit column will be hidden
+		/// </summary>
 		[DefaultValue(true)]
 		public bool AllowEditting
 		{
@@ -72,6 +100,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public InventoryDataGrid()
 		{
 			InitializeComponent();
@@ -90,11 +121,6 @@ namespace SPPBC.M3Tools
 				case EventType.Updated: { RemoveProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
 				default: { throw new ArgumentException($""); }
 			}
-		}
-
-		private void RefreshView()
-		{
-			RefreshDisplay?.Invoke();
 		}
 	}
 }

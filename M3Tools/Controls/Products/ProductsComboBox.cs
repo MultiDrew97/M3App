@@ -5,35 +5,54 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace SPPBC.M3Tools
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class ProductsComboBox
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public event LoadBeginEventHandler LoadBegin;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void LoadBeginEventHandler();
+		/// <summary>
+		/// 
+		/// </summary>
 		public event LoadEndEventHandler LoadEnd;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void LoadEndEventHandler();
+		/// <summary>
+		/// 
+		/// </summary>
 		public event SelectedItemChangedEventHandler SelectedItemChanged;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="newValue"></param>
 		public delegate void SelectedItemChangedEventHandler(int newValue);
 
-		public object SelectedItem
+		/// <summary>
+		/// The currently selected inventory item
+		/// </summary>
+		public Types.Product SelectedItem
 		{
 			get
 			{
-				return cbx_Items.SelectedItem;
-			}
-			set
-			{
-				if (value is null)
-				{
-					return;
-				}
-
-				cbx_Items.SelectedItem = value;
+				return cbx_Items.SelectedItem as Types.Product;
 			}
 		}
 
+		/// <summary>
+		/// The currently selected index
+		/// </summary>
 		public int SelectedIndex
 		{
 			get
@@ -42,15 +61,18 @@ namespace SPPBC.M3Tools
 			}
 			set
 			{
-				if (value < 0)
+				if (value < 0 || value > cbx_Items.Items.Count)
 				{
-					return;
+					throw new ArgumentException();
 				}
 
 				cbx_Items.SelectedIndex = value;
 			}
 		}
 
+		/// <summary>
+		/// The currently selected value
+		/// </summary>
 		public object SelectedValue
 		{
 			get
@@ -68,6 +90,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public ProductsComboBox()
 		{
 			InitializeComponent();
@@ -111,6 +136,9 @@ namespace SPPBC.M3Tools
 			LoadEnd?.Invoke();
 		}
 
+		/// <summary>
+		/// Reloads the control
+		/// </summary>
 		public void Reload()
 		{
 			bw_LoadItems.RunWorkerAsync();

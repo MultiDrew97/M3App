@@ -8,11 +8,17 @@ namespace SPPBC.M3Tools
 
     public partial class PermissionsDialog
     {
+		/// <summary>
+		/// The set of permissions
+		/// </summary>
         public Permission Permission { get; set; } = new Permission();
 
         private readonly string[] __roles = new[] { "Owner", "Organizer", "File Organizer", "Writer", "Commenter", "Reader" };
         private readonly string[] __types = new[] { "User", "Group", "Domain", "Anyone" };
 
+		/// <summary>
+		/// 
+		/// </summary>
         public PermissionsDialog()
         {
             InitializeComponent();

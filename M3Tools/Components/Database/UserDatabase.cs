@@ -9,50 +9,15 @@ namespace SPPBC.M3Tools.Database
     {
         private const string path = "users";
 
-        [Description("The username to use for the database connection")]
-        [SettingsBindable(true)]
-        public string Username
-        {
-            get
-            {
-                return dbConnection.Username;
-            }
-            set
-            {
-                dbConnection.Username = value;
-            }
-        }
-
-        [PasswordPropertyText(true)]
-        [SettingsBindable(true)]
-        [Description("The password to use for the database connection")]
-        public string Password
-        {
-            get
-            {
-                return dbConnection.Password;
-            }
-            set
-            {
-                dbConnection.Password = value;
-            }
-        }
-
-        [Bindable(true)]
-        [Description("The initial catalog to use for the database connection")]
-        [SettingsBindable(true)]
-        public string BaseUrl
-        {
-            get
-            {
-                return dbConnection.BaseUrl;
-            }
-            set
-            {
-                dbConnection.BaseUrl = value;
-            }
-        }
-
+		/// <summary>
+		/// Create a new user in the database for the app
+		/// </summary>
+		/// <param name="fName"></param>
+		/// <param name="lName"></param>
+		/// <param name="email"></param>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <param name="role"></param>
         public void CreateUser(string fName, string lName, string email, string username, string password, AccountRole role = AccountRole.User)
         {
             CreateUser(new User()
@@ -64,21 +29,43 @@ namespace SPPBC.M3Tools.Database
             });
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="user"></param>
         public void CreateUser(User user)
         {
-            dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(user));
+            Execute(Method.Post, $"/{path}", JSON.ConvertToJSON(user));
         }
 
+		/// <summary>
+		/// Change the password of the specified user
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="oldPassword"></param>
+		/// <param name="newPassword"></param>
+		/// <returns></returns>
+		/// <exception cref="NotImplementedException"></exception>
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             throw new NotImplementedException("ChangePassword");
         }
 
+		/// <summary>
+		/// Completly delete the specified user's account
+		/// </summary>
+		/// <param name="userID"></param>
         public void CloseAccount(int userID)
         {
-            dbConnection.Consume(Method.Delete, $"/{path}/{userID}");
+            Execute(Method.Delete, $"/{path}/{userID}");
         }
 
+		/// <summary>
+		/// Login a user using the provided login info
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <returns></returns>
         public User Login(string username, string password)
         {
             return Login(new Auth(username, password));
@@ -96,17 +83,26 @@ namespace SPPBC.M3Tools.Database
 
         private User Login(string auth)
         {
-            return dbConnection.Consume<User>(Method.Post, $"/{path}/login", auth).Result;
+            return ExecuteWithResult<User>(Method.Post, $"/{path}/login", auth).Result;
         }
 
+		/// <summary>
+		/// Retrieve a user based on the provided user ID
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <returns></returns>
         public User GetUser(int userID)
         {
-            return dbConnection.Consume<User>(Method.Get, $"/{path}/{userID}").Result;
+            return ExecuteWithResult<User>(Method.Get, $"/{path}/{userID}").Result;
         }
 
-        public DBEntryCollection<User> GetUsers()
+		/// <summary>
+		/// Retrieve the complete list of users in the database
+		/// </summary>
+		/// <returns></returns>
+        private DBEntryCollection<User> GetUsers()
         {
-            return dbConnection.Consume<DBEntryCollection<User>>(Method.Get, $"/{path}").Result;
+            return ExecuteWithResult<DBEntryCollection<User>>(Method.Get, $"/{path}").Result;
         }
 
         // Private Structure ColumnNames

@@ -118,7 +118,7 @@ namespace M3App
                 DialogResult = DialogResult.OK;
                 Close();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 tss_AddProduct.ForeColor = Color.Red;
                 tss_AddProduct.Text = "Product could not be added. Try again.";

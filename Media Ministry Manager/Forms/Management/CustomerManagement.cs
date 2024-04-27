@@ -11,6 +11,9 @@ namespace M3App
     // TODO: Figure out why it auto adds the other columns for some reason
 	// MAYBE: Create a base management class that contains all basic functions for a management form (i.e DataEventHandler<T> Reload)
 
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class CustomerManagement
     {
         private event CustomerEventHandler CustomerDBModified;

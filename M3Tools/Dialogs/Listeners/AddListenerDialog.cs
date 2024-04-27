@@ -10,12 +10,6 @@ namespace SPPBC.M3Tools.Dialogs
     public partial class AddListenerDialog
     {
 		/// <summary>
-		/// The event that occurs when the listener is added
-		/// </summary>
-        // TODO: Do I need this?
-		public event Events.Listeners.ListenerEventHandler ListenerAdded;
-
-		/// <summary>
 		/// The name of the new listener
 		/// </summary>
         public string ListenerName

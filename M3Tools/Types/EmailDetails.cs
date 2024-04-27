@@ -3,12 +3,15 @@ using System.Collections.ObjectModel;
 
 namespace SPPBC.M3Tools.Types.GTools
 {
+	/// <summary>
+	/// Contains the info for an email being sent out
+	/// </summary>
     public interface IEmailDetails
     {
         /// <summary>
-		/// 		''' The contents of the email
-		/// 		''' </summary>
-		/// 		''' <returns></returns>
+		/// The contents of the email
+		/// </summary>
+		/// <returns></returns>
         EmailContent EmailContents { get; set; }
 
         /// <summary>
@@ -44,6 +47,9 @@ namespace SPPBC.M3Tools.Types.GTools
         // End Sub
     }
 
+	/// <summary>
+	/// The content of the email being sent
+	/// </summary>
     public class EmailContent
     {
         /// <summary>
@@ -64,6 +70,12 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// 		''' <returns></returns>
         public EmailType BodyType { get; set; }
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="subject"></param>
+		/// <param name="body"></param>
+		/// <param name="type"></param>
         public EmailContent(string subject = "", string body = "", EmailType @type = default)
         {
             Subject = subject;
@@ -72,9 +84,18 @@ namespace SPPBC.M3Tools.Types.GTools
         }
     }
 
+	/// <summary>
+	/// The type of email body being sent
+	/// </summary>
     public enum EmailType
     {
+		/// <summary>
+		/// The email will contain an HTML body
+		/// </summary>
         HTML,
+		/// <summary>
+		/// The email will contain a Plain Text body
+		/// </summary>
         PLAIN
     }
 }

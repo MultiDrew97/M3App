@@ -6,7 +6,7 @@ namespace SPPBC.M3Tools
 {
 
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class PasswordFieldType : UserControl
+    public partial class PasswordField : UserControl
     {
 
         // UserControl overrides dispose to clean up the component list.

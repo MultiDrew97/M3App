@@ -7,6 +7,9 @@ namespace SPPBC.M3Tools
     public partial class PriceInput
     {
 
+		/// <summary>
+		/// What the label should say
+		/// </summary>
         [System.ComponentModel.DefaultValue("Price")]
         public string Label
         {
@@ -20,6 +23,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The price to display
+		/// </summary>
         [System.ComponentModel.DefaultValue(0)]
         public decimal Price
         {
@@ -33,6 +39,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public PriceInput()
         {
             InitializeComponent();

@@ -34,23 +34,30 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            wb_Updater = new System.Windows.Forms.WebBrowser();
+            this.components = new System.ComponentModel.Container();
+            this.wb_Updater = new System.Windows.Forms.WebBrowser();
+            this.tmr_updateTimer = new System.Windows.Forms.Timer(this.components);
             // 
             // wb_Updater
             // 
-            wb_Updater.Location = new System.Drawing.Point(332, 324);
-            wb_Updater.MinimumSize = new System.Drawing.Size(20, 20);
-            wb_Updater.Name = "wb_Updater";
-            wb_Updater.Size = new System.Drawing.Size(45, 36);
-            wb_Updater.TabIndex = 6;
-            wb_Updater.Visible = false;
+            this.wb_Updater.Location = new System.Drawing.Point(332, 324);
+            this.wb_Updater.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wb_Updater.Name = "wb_Updater";
+            this.wb_Updater.Size = new System.Drawing.Size(45, 36);
+            this.wb_Updater.TabIndex = 6;
+            this.wb_Updater.Visible = false;
+            // 
+            // tmr_updateTimer
+            // 
+            this.tmr_updateTimer.Tick += new System.EventHandler(this.OnTick);
             // 
             // UpdateService
             // 
-            ServiceName = "UpdateService";
+            this.ServiceName = "UpdateService";
 
         }
 
         internal System.Windows.Forms.WebBrowser wb_Updater;
-    }
+		private System.Windows.Forms.Timer tmr_updateTimer;
+	}
 }

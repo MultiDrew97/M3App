@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.CompilerServices;
+using SPPBC.M3Tools.Data;
 using SPPBC.M3Tools.Events;
 using SPPBC.M3Tools.Events.Listeners;
 
@@ -11,253 +10,127 @@ namespace SPPBC.M3Tools
 
     public partial class ListenersDataGrid
     {
-        public event ListenerEventHandler EditListener;
-        public event ListenerEventHandler RemoveListener;
-        public event RefreshDisplayEventHandler RefreshDisplay;
+		/// <summary>
+		/// An event fired when a listener is added
+		/// </summary>
+		public event ListenerEventHandler AddListener;
 
+		/// <summary>
+		/// An event fired when a listener is updated
+		/// </summary>
+        public event ListenerEventHandler UpdateListener;
+
+		/// <summary>
+		/// An event fired when a listener is removed
+		/// </summary>
+        public event ListenerEventHandler RemoveListener;
+
+		/// <summary>
+		/// 
+		/// </summary>
         public delegate void RefreshDisplayEventHandler();
 
-        public int SelectedRowsCount
-        {
-            get
-            {
-                return SelectedListeners.Count;
-            }
-        }
-
+		/// <summary>
+		/// The complete list of listeners being shown
+		/// </summary>
         public IList Listeners
         {
             get
             {
-                return DataSource.List;
+                return base.Rows;
             }
         }
 
+		/// <summary>
+		/// The data source used for the control
+		/// </summary>
         [Description("Data Source to use for data grid.")]
-        public BindingSource DataSource
-        {
-            get
-            {
-                return (BindingSource)bsListeners.DataSource;
-            }
-            set
-            {
-                bsListeners.DataSource = value;
-            }
-        }
+		public new object DataSource
+		{
+			get
+			{
+				if (DesignMode)
+				{
+					return typeof(ListenerBindingSource);
+				}
 
-        public IList SelectedListeners
-        {
-            get
-            {
-                // TODO: Simplify this later
-                if (!ListenersSelectable)
-                {
-                    return dgv_Listeners.SelectedRows;
-                }
+				return (ListenerBindingSource)base.DataSource;
+			}
+			set => base.DataSource = value;
+		}
 
-                if (chk_SelectAll.Checked)
-                {
-                    return dgv_Listeners.Rows;
-                }
-
-                // MyBase.clearselection()
-
-                foreach (DataGridViewRow row in dgv_Listeners.Rows)
-                    row.Selected = Conversions.ToBoolean(row.Cells[dgc_Selection.DisplayIndex].Value);
-
-                return dgv_Listeners.SelectedRows;
-
-            }
-        }
-
-        public string Filter
-        {
-            get
-            {
-                return DataSource.Filter;
-            }
-            set
-            {
-                Console.WriteLine(value);
-                // TODO: Fix bug and flesh out
-                if (value is not null && !string.IsNullOrEmpty(value) && !(value.Contains("[") || value.Contains("]")))
-                {
-                    DataSource.Filter = $"[Name] like '%{value}%' OR [Email] like '%{value}%'";
-                    return;
-                }
-
-                DataSource.Filter = value;
-            }
-        }
-
-        [DefaultValue(true)]
-        public bool AllowEditting
-        {
-            get
-            {
-                return dgc_Edit.Visible;
-            }
-            set
-            {
-                dgc_Edit.Visible = value;
-            }
-        }
-
-        [DefaultValue(false)]
-        public bool AllowAdding
-        {
-            get
-            {
-                return dgv_Listeners.AllowUserToAddRows;
-            }
-            set
-            {
-                dgv_Listeners.AllowUserToAddRows = value;
-            }
-        }
-
-        [DefaultValue(true)]
-        public bool AllowDeleting
-        {
-            get
-            {
-                return dgc_Remove.Visible;
-            }
-            set
-            {
-                dgc_Remove.Visible = value;
-            }
-        }
-
-        [DefaultValue(false)]
-        public bool AllowColumnReordering
-        {
-            get
-            {
-                return dgv_Listeners.AllowUserToOrderColumns;
-            }
-            set
-            {
-                dgv_Listeners.AllowUserToOrderColumns = value;
-            }
-        }
-
-        [DefaultValue(true)]
-        public bool ListenersSelectable
-        {
-            get
-            {
-                return dgc_Selection.Visible;
-            }
-            set
-            {
-                dgc_Selection.Visible = value;
-                chk_SelectAll.Visible = value;
-            }
-        }
-
+		/// <summary>
+		/// 
+		/// </summary>
         public ListenersDataGrid()
         {
             InitializeComponent();
-        }
 
-        private void CellClicked(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex != dgc_Edit.Index && e.ColumnIndex != dgc_Remove.Index)
-            {
-                return;
-            }
+			dgc_ListenerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
-            var row = dgv_Listeners.Rows[e.RowIndex];
-            Types.Listener listener = (Types.Listener)row.DataBoundItem;
+			LoadColumns();
 
-            switch (e.ColumnIndex)
-            {
-                case var @case when @case == dgc_Edit.Index:
-                    {
-                        EditListener?.Invoke(this, new ListenerEventArgs(listener));
-                        break;
-                    }
-                case var case1 when case1 == dgc_Remove.Index:
-                    {
-                        DeleteListener(this, new DataGridViewRowCancelEventArgs(row));
-                        break;
-                    }
-            }
-        }
+			//AddEntry += new DataEventHandler<Types.Listener>(ParseEvents);
+			UpdateEntry += new DataEventHandler<Types.Listener>(ParseEvents);
+			RemoveEntry += new DataEventHandler<Types.Listener>(ParseEvents);
+		}
 
-        private void DeleteListener(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            Types.Listener listener = (Types.Listener)e.Row.DataBoundItem;
+		private void ParseEvents(object sender, DataEventArgs<Types.Listener> e)
+		{
+			Console.WriteLine("Parsing DataGrid Event");
+			Console.WriteLine("Sender: {0}\nEvent Type: {1}\nValue: {2}", sender, e.EventType, e.Value);
+			switch (e.EventType)
+			{
+				case EventType.Added: { AddListener?.Invoke(sender, (ListenerEventArgs)e); break; }
+				case EventType.Removed: { UpdateListener?.Invoke(sender, (ListenerEventArgs)e); break; }
+				case EventType.Updated: { RemoveListener?.Invoke(sender, (ListenerEventArgs)e); break; }
+				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
+			}
+		}
 
-            RemoveListener?.Invoke(this, new ListenerEventArgs(listener, EventType.Removed));
-            MessageBox.Show($"Successfully removed listener", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+		private new void LoadColumns()
+		{
+			base.LoadColumns();
 
-        public void RemoveSelectedListeners()
-        {
-            if (SelectedRowsCount < 1)
-            {
-                return;
-            }
+			// 
+			// dgc_Email
+			// 
+			dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			dgc_Email.DataPropertyName = "Email";
+			dgc_Email.FillWeight = 50.0f;
+			dgc_Email.HeaderText = "Email";
+			dgc_Email.Name = "dgc_Email";
+			// 
+			// dgc_Name
+			// 
+			dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			dgc_Name.DataPropertyName = "Name";
+			dgc_Name.FillWeight = 50.0f;
+			dgc_Name.HeaderText = "Name";
+			dgc_Name.Name = "dgc_Name";
+			// 
+			// dgc_ListenerID
+			// 
+			dgc_ListenerID.DataPropertyName = "Id";
+			dgc_ListenerID.FillWeight = 5.0f;
+			dgc_ListenerID.Frozen = true;
+			dgc_ListenerID.HeaderText = "ListenerID";
+			dgc_ListenerID.Name = "dgc_ListenerID";
+			dgc_ListenerID.ReadOnly = true;
+			dgc_ListenerID.Visible = false;
 
-            int failed = 0;
-            int total = dgv_Listeners.SelectedRows.Count;
+			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+			{
+				dgc_Selection,
+				dgc_ListenerID, dgc_Name, dgc_Email,
+				dgc_Edit, dgc_Remove
+			});
+		}
 
-            foreach (DataGridViewRow row in dgv_Listeners.SelectedRows)
-            {
-                try
-                {
-                    DeleteListener(this, new DataGridViewRowCancelEventArgs(row));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    failed += 1;
-                    return;
-                }
-            }
-
-            if (failed > 0)
-            {
-                MessageBox.Show($"Failed to remove {failed} listener{(failed > 1 ? "s" : "")}", "Failed Removals", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (total - failed > 0)
-            {
-                MessageBox.Show($"Successfully removed {total - failed} listener{(total - failed > 1 ? "s" : "")}", "Successful Removals", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void SelectAllListeners(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in dgv_Listeners.Rows)
-                row.Cells[dgc_Selection.DisplayIndex].Value = chk_SelectAll.Checked;
-
-            dgv_Listeners.Invalidate();
-        }
-
-        private void ToolsOpened(object sender, EventArgs e)
-        {
-            cms_Tools.ToggleRemove(SelectedRowsCount > 0);
-            cms_Tools.ToggleEdit(SelectedRowsCount > 0);
-        }
-
-        private void EditPerson()
-        {
-            if (SelectedRowsCount < 1)
-            {
-                return;
-            }
-
-            foreach (DataGridViewRow row in SelectedListeners)
-                CellClicked(this, new DataGridViewCellEventArgs(dgc_Edit.Index, row.Index));
-        }
-
-        private void RefreshView()
-        {
-            RefreshDisplay?.Invoke();
-        }
-    }
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ListenerID;
+	}
 }

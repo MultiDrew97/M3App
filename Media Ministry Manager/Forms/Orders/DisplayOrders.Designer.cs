@@ -48,8 +48,6 @@ namespace M3App
             mms_Strip.ManageProducts += ViewProducts;
             mms_Strip.ManageListeners += ViewListeners;
             mms_Strip.ViewSettings += ViewSettings;
-            doc_Orders = new SPPBC.M3Tools.DisplayOrdersCtrl();
-            doc_Orders.DataChanged += DataUpdated;
             ((System.ComponentModel.ISupportInitialize)bsOrders).BeginInit();
             SuspendLayout();
             // 
@@ -82,18 +80,6 @@ namespace M3App
             mms_Strip.TabIndex = 6;
             mms_Strip.Text = "Menu";
             // 
-            // doc_Orders
-            // 
-            doc_Orders.Dock = DockStyle.Fill;
-            doc_Orders.Filter = null;
-            doc_Orders.Location = new Point(0, 38);
-            doc_Orders.Margin = new Padding(1);
-            doc_Orders.MinimumSize = new Size(650, 425);
-            doc_Orders.Name = "doc_Orders";
-            doc_Orders.ShowCompleted = false;
-            doc_Orders.Size = new Size(1248, 645);
-            doc_Orders.TabIndex = 5;
-            // 
             // Frm_DisplayOrders
             // 
             AutoScaleDimensions = new SizeF(6.0f, 13.0f);
@@ -101,7 +87,6 @@ namespace M3App
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(1248, 683);
             Controls.Add(lbl_NoOrders);
-            Controls.Add(doc_Orders);
             Controls.Add(mms_Strip);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = mms_Strip;
@@ -124,6 +109,5 @@ namespace M3App
         internal SPPBC.M3Tools.Database.OrdersDatabase db_Orders;
         internal BindingSource bsOrders;
         internal SPPBC.M3Tools.MainMenuStrip mms_Strip;
-        internal SPPBC.M3Tools.DisplayOrdersCtrl doc_Orders;
     }
 }

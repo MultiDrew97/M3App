@@ -1,8 +1,14 @@
 ﻿
 namespace SPPBC.M3Tools
 {
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class SummaryCtrl
     {
+		/// <summary>
+		/// The data to display in the summary
+		/// </summary>
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.Category("Data")]
         public object Display
@@ -22,6 +28,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public SummaryCtrl()
         {
             InitializeComponent();

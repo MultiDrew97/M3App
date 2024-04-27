@@ -2,8 +2,14 @@
 
 namespace SPPBC.M3Tools
 {
+	/// <summary>
+	/// A field for selecting the location for a file
+	/// </summary>
     public partial class FileLocationField
     {
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         public FileLocationField()
         {
             InitializeComponent();

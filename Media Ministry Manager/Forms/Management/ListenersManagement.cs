@@ -4,8 +4,8 @@ using SPPBC.M3Tools.Events.Listeners;
 
 namespace M3App
 {
-
-    public partial class ListenersManagement
+	// TODO: Mimic CustomerManagement
+	public partial class ListenersManagement
     {
 
         private event ListenerEventHandler ListenerAdded;
@@ -125,7 +125,6 @@ namespace M3App
             bsListeners.Clear();
             foreach (var listener in dbListeners.GetListeners())
                 bsListeners.Add(listener);
-            dlc_Listeners.Reload();
             UseWaitCursor = false;
         }
     }

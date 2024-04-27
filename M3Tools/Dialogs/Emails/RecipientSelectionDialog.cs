@@ -11,15 +11,15 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                if (_dialog is null)
-                {
-                    _dialog = new ReciepientSelection() { DataSource = bsListeners };
-                }
+                _dialog ??= new ReciepientSelection() { DataSource = (Data.ListenerBindingSource)bsListeners };
 
                 return _dialog;
             }
         }
 
+		/// <summary>
+		/// The list of recipients selected
+		/// </summary>
         public Types.DBEntryCollection<Types.Listener> List
         {
             get
@@ -28,15 +28,11 @@ namespace SPPBC.M3Tools
             }
         }
 
-        // Public Property DataSource As BindingSource
-        // Get
-        // Return Dialog.DataSource
-        // End Get
-        // Set(value As BindingSource)
-        // Dialog.DataSource = value
-        // End Set
-        // End Property
-
+		/// <summary>
+		/// Shows the selection dialog to the user
+		/// </summary>
+		/// <param name="list"></param>
+		/// <returns></returns>
         public DialogResult ShowDialog(Types.DBEntryCollection<Types.Listener> list)
         {
             bsListeners.Clear();

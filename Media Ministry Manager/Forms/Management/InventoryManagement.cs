@@ -6,7 +6,7 @@ using SPPBC.M3Tools.Events.Inventory;
 
 namespace M3App
 {
-
+	// TODO: Mimic CustomerManagement
     public partial class InventoryManagement
     {
         private event InventoryEventHandler InventoryDBModified;

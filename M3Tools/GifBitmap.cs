@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace SPPBC.M3Tools
 {
+	/// <summary>
+	/// A bitmap for a GIF file
+	/// </summary>
     public class GifBitmap
     {
         private readonly List<GifFrame> GifFrames = new();
@@ -11,6 +14,12 @@ namespace SPPBC.M3Tools
         private readonly System.Windows.Forms.Timer __timer;
         private System.Drawing.Bitmap __image;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="timer"></param>
+		/// <param name="picBox"></param>
+		/// <param name="image"></param>
         public GifBitmap(ref System.Windows.Forms.Timer timer, ref System.Windows.Forms.PictureBox picBox, System.Drawing.Bitmap image)
         {
             __timer = timer;
@@ -37,6 +46,9 @@ namespace SPPBC.M3Tools
             PlayIndex = 0;
         }
 
+		/// <summary>
+		/// Tick the internal timer to step through the frames
+		/// </summary>
         public void Tick()
         {
             __timer.Interval = GifFrames[PlayIndex].Delay;
@@ -46,6 +58,9 @@ namespace SPPBC.M3Tools
                 PlayIndex = 0;
         }
 
+		/// <summary>
+		/// Toggle pausing the GIF
+		/// </summary>
         public void Toggle()
         {
             __timer.Enabled = !__timer.Enabled;

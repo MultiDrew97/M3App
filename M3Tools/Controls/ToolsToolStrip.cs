@@ -5,23 +5,59 @@ using System.Windows.Forms;
 namespace SPPBC.M3Tools
 {
 
+	/// <summary>
+	/// The different tool buttons in the tool strip
+	/// </summary>
 	public enum ToolButtons
 	{
+		/// <summary>
+		/// Add an entry
+		/// </summary>
 		ADD,
+		/// <summary>
+		/// Import entries
+		/// </summary>
 		IMPORT,
+		/// <summary>
+		/// Send emails
+		/// </summary>
 		EMAIL,
+		/// <summary>
+		/// Apply a filter to the data
+		/// </summary>
 		FILTER,
+		/// <summary>
+		/// The number of entries
+		/// </summary>
 		COUNT
 	}
 
+	/// <summary>
+	/// A tool strip containing similar functionality for all data components
+	/// </summary>
     [DefaultEvent("FilterChanged")]
     public partial class ToolsToolStrip : ToolStrip
     {
+		/// <summary>
+		/// Event fired when importing entries
+		/// </summary>
         public event EventHandler ImportEntries;
+		/// <summary>
+		/// Event fired when adding entries
+		/// </summary>
         public event EventHandler AddEntry;
+		/// <summary>
+		/// Event fire when wanting to send emails
+		/// </summary>
         public event EventHandler SendEmails;
+		/// <summary>
+		/// Event fired when wanting to filter the data
+		/// </summary>
         public event EventHandler<string> FilterChanged;
 
+		/// <summary>
+		/// The text to display in the data counter
+		/// </summary>
         public string Count
         {
             set
@@ -30,6 +66,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The type of the list
+		/// </summary>
         [DefaultValue("")]
         public string ListType { get; set; }
 

@@ -7,19 +7,25 @@ namespace SPPBC.M3Tools
     public partial class ReciepientSelection
     {
 
+		/// <summary>
+		/// The current selection of recipients
+		/// </summary>
         public Types.DBEntryCollection<Types.Listener> Selection
         {
             get
             {
-                return (Types.DBEntryCollection<Types.Listener>)ldg_Listeners.SelectedListeners;
+                return (Types.DBEntryCollection<Types.Listener>)ldg_Listeners.SelectedRows;
             }
         }
 
-        public BindingSource DataSource
+		/// <summary>
+		/// The data source for the control
+		/// </summary>
+        public Data.ListenerBindingSource DataSource
         {
             get
             {
-                return ldg_Listeners.DataSource;
+                return ldg_Listeners.DataSource as Data.ListenerBindingSource;
             }
             set
             {
@@ -27,6 +33,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public ReciepientSelection()
         {
             InitializeComponent();

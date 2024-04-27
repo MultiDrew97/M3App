@@ -8,6 +8,9 @@ namespace SPPBC.M3Tools.Dialogs
 {
     public partial class ImportListenersDialog
     {
+		/// <summary>
+		/// The list of listeners being imported
+		/// </summary>
         public Types.DBEntryCollection<Types.Listener> Listeners
         {
             get
@@ -16,6 +19,9 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		/// <summary>
+		/// A dialog to be used to import listeners into the database
+		/// </summary>
         public ImportListenersDialog()
         {
             InitializeComponent();

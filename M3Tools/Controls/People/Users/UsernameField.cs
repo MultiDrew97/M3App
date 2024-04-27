@@ -3,10 +3,18 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// The control for retrieving username input from user
+	/// </summary>
     public partial class UsernameField
     {
+		/// <summary>
+		/// Event fired when control losses focus
+		/// </summary>
         public event EventHandler UsernameLostFocus;
+		/// <summary>
+		/// Event fired when username text is changed
+		/// </summary>
         public event EventHandler UsernameTextChanged;
         /// <summary>
     /// Gets the length of text in the username control
@@ -48,14 +56,9 @@ namespace SPPBC.M3Tools
             }
         }
 
-        public TextBox ConfirmField
-        {
-            get
-            {
-                return txt_Username;
-            }
-        }
-
+		/// <summary>
+		/// 
+		/// </summary>
         public UsernameField()
         {
             InitializeComponent();

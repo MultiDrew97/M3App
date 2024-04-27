@@ -5,7 +5,9 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class PlaceOrderDialog
 	{
 		private event CartItemAddedEventHandler CartItemAdded;
@@ -14,6 +16,9 @@ namespace SPPBC.M3Tools
 
 		// Private ReadOnly Property Cart As New Collection(Of Types.CartItem)
 
+		/// <summary>
+		/// The total for the order
+		/// </summary>
 		public double OrderTotal
 		{
 			get
@@ -27,6 +32,9 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public PlaceOrderDialog()
 		{
 			InitializeComponent();

@@ -8,15 +8,17 @@ namespace SPPBC.M3Tools
 
     public partial class LoadScreenDialog
     {
-        private event EventHandler DataChanging;
-
         private LoadingScreen _loadScreen;
 
-		public void Dispose()
+		/// <summary>
+		/// 
+		/// </summary>
+		public new void Dispose()
 		{
 			if (!Closable) { return; }
 			LoadingScreen.Close();
 			_loadScreen = null;
+			base.Dispose();
 		}
 
         private LoadingScreen LoadingScreen
@@ -32,6 +34,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The text to dispaly
+		/// </summary>
         public string LoadText
         {
             get
@@ -44,6 +49,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The image to display
+		/// </summary>
         public System.Drawing.Bitmap Image
         {
             get
@@ -56,6 +64,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether the loading screen is closable yet
+		/// </summary>
         [DefaultValue(false)]
         public bool Closable
         {
@@ -69,6 +80,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether it should be the top most form in the application
+		/// </summary>
         [DefaultValue(false)]
         public bool TopMost
         {
@@ -82,11 +96,18 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public LoadScreenDialog()
         {
             InitializeComponent();
         }
 
+		/// <summary>
+		/// Show the loading screen
+		/// </summary>
+		/// <returns></returns>
         public DialogResult ShowDialog()
         {
             LoadingScreen.Show();
@@ -102,6 +123,10 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Update the loading screen to show the error image and message
+		/// </summary>
+		/// <param name="message"></param>
         public void ShowError(string message)
         {
             Image = My.Resources.Resources.ErrorImage;

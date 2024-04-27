@@ -79,11 +79,10 @@ namespace SPPBC.M3Tools
             // 
             // ldg_Listeners
             // 
-            ldg_Listeners.AllowColumnReordering = true;
-            ldg_Listeners.AllowDeleting = false;
-            ldg_Listeners.AllowEditting = false;
+            ldg_Listeners.CanReorder = true;
+            ldg_Listeners.CanDelete = false;
+            ldg_Listeners.CanEdit = false;
             ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Top;
-            ldg_Listeners.Filter = null;
             ldg_Listeners.Location = new System.Drawing.Point(0, 0);
             ldg_Listeners.MinimumSize = new System.Drawing.Size(400, 200);
             ldg_Listeners.Name = "ldg_Listeners";

@@ -11,9 +11,8 @@ namespace M3App
             InitializeComponent();
         }
         // TODO: Add eventhandler for when data is updated to show/hide empty message
-        private void ViewLoading(object sender, EventArgs e)
-        {
-            doc_Orders.Reload();
+        private void ViewLoading(object sender, EventArgs e) 
+		{
             mms_Strip.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.ORDERS);
             // lbl_NoOrders.Visible = doc_Orders.Count
         }

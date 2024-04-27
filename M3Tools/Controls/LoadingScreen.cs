@@ -3,18 +3,31 @@
 namespace SPPBC.M3Tools
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
     public sealed partial class LoadingScreen
     {
 
         // NOTE: This form can easily be set as the splash screen for the application by going to the "Application" tab
         // of the Project Designer ("Properties" under the "Project" menu).
+		/// <summary>
+		/// Event fired when text is changed
+		/// </summary>
         public event EventHandler TextChange;
+
+		/// <summary>
+		/// Event fired when the loading screen is closable
+		/// </summary>
         public event EventHandler ClosableChanged;
         internal event EventHandler DialogClosing;
 
         private bool __closable = false;
         // Private __gifBitmap As GifBitmap
 
+		/// <summary>
+		/// The text to display in the loading screen
+		/// </summary>
         public string LoadText
         {
             get
@@ -28,6 +41,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Whether the loading screen is closable
+		/// </summary>
         public bool Closable
         {
             get
@@ -41,6 +57,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The image to show in the loading screen
+		/// </summary>
         public System.Drawing.Bitmap Image
         {
             get
@@ -60,6 +79,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public LoadingScreen()
         {
             InitializeComponent();
@@ -83,6 +105,11 @@ namespace SPPBC.M3Tools
         // '__gifBitmap = New GifBitmap(tmr_Timer, pic_Loading) ', My.Resources.Loading_Loop_3)
         // End Sub
 
+		/// <summary>
+		/// Close the loading screen
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         public void CloseScreen(object sender, EventArgs e)
         {
             Close();

@@ -3,6 +3,9 @@
 namespace SPPBC.M3Tools
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class SelectReceipient
     {
         private ReciepientSelection __dialog;
@@ -24,6 +27,10 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// Shows the selection dialog
+		/// </summary>
+		/// <returns></returns>
         public DialogResult ShowDialog()
         {
             return RecipientSelection.ShowDialog();

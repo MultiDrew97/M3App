@@ -38,6 +38,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public LoginDialog()
         {
             InitializeComponent();

@@ -39,7 +39,7 @@ namespace SPPBC.M3Tools
             btn_Reset = new System.Windows.Forms.Button();
             btn_Reset.Click += new EventHandler(OK_Button_Click);
             TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            pf_Password = new PasswordFieldType();
+            pf_Password = new PasswordField();
             ConfirmPasswordField1 = new ConfirmPasswordField();
             db_Users = new Database.UserDatabase(components);
             TableLayoutPanel1.SuspendLayout();
@@ -129,6 +129,6 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.Button btn_Reset;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         internal ConfirmPasswordField ConfirmPasswordField1;
-        internal PasswordFieldType pf_Password;
+        internal PasswordField pf_Password;
     }
 }

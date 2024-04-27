@@ -13,7 +13,9 @@ namespace SPPBC.M3Tools.GTools
         private readonly string[] __scopes = new[] { GmailService.Scope.GmailCompose };
         private GmailService __service;
 
-
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         protected Google.Apis.Gmail.v1.Data.Profile UserAccount
         {
             get
@@ -26,6 +28,11 @@ namespace SPPBC.M3Tools.GTools
 
         private readonly MailboxAddress DefaultSender = new("Elder Bryon Miller", "me");
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="ct"></param>
         public override void Authorize(string username, CancellationToken ct = default)
         {
             base.Authorize(username, ct);
@@ -43,6 +50,15 @@ namespace SPPBC.M3Tools.GTools
         // Dispose(disposing)
         // End Sub
 
+		/// <summary>
+		/// Create an email to be sent
+		/// </summary>
+		/// <param name="to"></param>
+		/// <param name="subject"></param>
+		/// <param name="body"></param>
+		/// <param name="bodyType"></param>
+		/// <param name="from"></param>
+		/// <returns></returns>
         public MimeMessage Create(Types.Listener to, string subject, string body, EmailType bodyType = default, MailboxAddress @from = null)
         {
             return Create(new MailboxAddress(to.Name, to.Email), subject, body, bodyType, from);
@@ -62,6 +78,13 @@ namespace SPPBC.M3Tools.GTools
             return Create(to, new EmailContent(subject, body, bodyType), from);
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="to"></param>
+		/// <param name="content"></param>
+		/// <param name="from"></param>
+		/// <returns></returns>
         public MimeMessage Create(Types.Listener to, EmailContent content, MailboxAddress @from = null)
         {
             return Create(new MailboxAddress(to.Name, to.Email), content, from);
@@ -102,17 +125,44 @@ namespace SPPBC.M3Tools.GTools
             return email;
         }
 
-
+		/// <summary>
+		/// Create an email to be sent that contains attachement(s)
+		/// </summary>
+		/// <param name="to"></param>
+		/// <param name="subject"></param>
+		/// <param name="body"></param>
+		/// <param name="bodyType"></param>
+		/// <param name="files"></param>
+		/// <param name="from"></param>
+		/// <returns></returns>
         public MimeMessage CreateWithAttachment(MailboxAddress to, string subject, string body, EmailType bodyType, IList<string> files, MailboxAddress @from = null)
         {
             return CreateWithAttachment(to, new EmailContent(subject, body, bodyType), files, from);
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="to"></param>
+		/// <param name="subject"></param>
+		/// <param name="body"></param>
+		/// <param name="bodyType"></param>
+		/// <param name="files"></param>
+		/// <param name="from"></param>
+		/// <returns></returns>
         public MimeMessage CreateWithAttachment(Types.Listener to, string subject, string body, EmailType bodyType, IList<string> files, MailboxAddress @from = null)
         {
             return CreateWithAttachment(new MailboxAddress(to.Name, to.Email), new EmailContent(subject, body, bodyType), files, from);
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="to"></param>
+		/// <param name="content"></param>
+		/// <param name="files"></param>
+		/// <param name="from"></param>
+		/// <returns></returns>
         public MimeMessage CreateWithAttachment(Types.Listener to, EmailContent content, IList<string> files, MailboxAddress @from = null)
         {
             return CreateWithAttachment(new MailboxAddress(to.Name, to.Email), content, files, from);

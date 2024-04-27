@@ -1,7 +1,8 @@
 ﻿
 namespace M3App
 {
-    public partial class OrderManagement
+	// TODO: Mimic CustomerManagement
+	public partial class OrderManagement
     {
         public OrderManagement()
         {

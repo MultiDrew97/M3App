@@ -1,8 +1,16 @@
 ﻿
 namespace SPPBC.M3Tools.Events.Listeners
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
     public delegate void ListenerEventHandler(object sender, ListenerEventArgs e);
 
+	/// <summary>
+	/// 
+	/// </summary>
     public class ListenerEventArgs : DataEventArgs<Types.Listener>
     {
 

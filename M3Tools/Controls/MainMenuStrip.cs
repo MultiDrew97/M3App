@@ -9,12 +9,26 @@ using SPPBC.M3Tools.Events;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// The different categories contained in the menu strip
+	/// </summary>
 	public enum MenuItemsCategories
 	{
+		/// <summary>
+		/// Customer based functions
+		/// </summary>
 		CUSTOMERS,
+		/// <summary>
+		/// Listener based functions
+		/// </summary>
 		LISTENERS,
+		/// <summary>
+		/// Order based functions
+		/// </summary>
 		ORDERS,
+		/// <summary>
+		/// Inventory based function
+		/// </summary>
 		INVENTORY
 	}
 

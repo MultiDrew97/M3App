@@ -56,6 +56,9 @@ namespace M3App
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public LoginForm()
         {
             InitializeComponent();
@@ -84,7 +87,7 @@ namespace M3App
         {
             lsd_LoadScreen.LoadText = "Failed to connect to server in time. Please try again or contact system support.";
             lsd_LoadScreen.Closable = true;
-            lf_Login.PasswordField.Clear();
+            lf_Login.Clear(SPPBC.M3Tools.Field.Password);
         }
 
         private void Reset()
@@ -93,7 +96,7 @@ namespace M3App
             lf_Login.Clear();
             tss_UserFeedback.Text = "Please enter your log-in information";
             tss_UserFeedback.ForeColor = Color.Black;
-            lf_Login.UsernameField.Focus();
+            lf_Login.Focus();
         }
 
         private void SaveSettings(object sender, DoWorkEventArgs e)
@@ -134,8 +137,8 @@ namespace M3App
             catch (RoleException)
             {
                 lsd_LoadScreen.ShowError("Only admins can use this application. If this is an error, please contact support");
-                lf_Login.ClearPassword();
-                lf_Login.Focus("p");
+                lf_Login.Clear(SPPBC.M3Tools.Field.Password);
+                lf_Login.Focus(SPPBC.M3Tools.Field.Password);
             }
             catch (UsernameException)
             {
@@ -145,21 +148,21 @@ namespace M3App
             }
             catch (PasswordException)
             {
-                lf_Login.ClearPassword();
+                lf_Login.Clear(SPPBC.M3Tools.Field.Password);
                 lsd_LoadScreen.ShowError("Incorrect password provided. Please try again or reset your password");
-                lf_Login.Focus("p");
+                lf_Login.Focus(SPPBC.M3Tools.Field.Password);
             }
             catch (DatabaseException)
             {
                 lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.");
-                lf_Login.ClearPassword();
-                lf_Login.Focus("p");
+                lf_Login.Clear(SPPBC.M3Tools.Field.Password);
+                lf_Login.Focus(SPPBC.M3Tools.Field.Password);
             }
             catch (Exception)
             {
                 lsd_LoadScreen.ShowError("Unknown error occurred. Please try again or contact support.");
-                lf_Login.ClearPassword();
-                lf_Login.Focus("p");
+                lf_Login.Clear(SPPBC.M3Tools.Field.Password);
+                lf_Login.Focus(SPPBC.M3Tools.Field.Password);
             }
             finally
             {

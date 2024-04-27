@@ -2,6 +2,28 @@
 
 namespace SPPBC.M3Tools
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum Field
+	{
+		/// <summary>
+		/// The username field
+		/// </summary>
+		Username,
+		/// <summary>
+		/// The password field
+		/// </summary>
+		Password,
+		/// <summary>
+		/// Both fields
+		/// </summary>
+		Both
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class LoginFields
     {
         /// <summary>
@@ -36,22 +58,9 @@ namespace SPPBC.M3Tools
             }
         }
 
-        public UsernameField UsernameField
-        {
-            get
-            {
-                return uf_Username;
-            }
-        }
-
-        public PasswordFieldType PasswordField
-        {
-            get
-            {
-                return pf_Password;
-            }
-        }
-
+		/// <summary>
+		/// 
+		/// </summary>
         public LoginFields()
         {
             InitializeComponent();
@@ -60,42 +69,42 @@ namespace SPPBC.M3Tools
         /// <summary>
 	/// 	''' Clears all text from the username and password fields
 	/// 	''' </summary>
-        public void Clear()
+        public void Clear(Field field = Field.Both)
         {
-            ClearUsername();
-            ClearPassword();
+			switch (field)
+			{
+				case Field.Username:
+					uf_Username.Clear();
+					break;
+				case Field.Password:
+					pf_Password.Clear();
+					break;
+				default:
+					uf_Username.Clear();
+					pf_Password.Clear();
+					break;
+			}
         }
 
-        public void ClearUsername()
+		/// <summary>
+		/// Focus on one of the fields
+		/// </summary>
+		/// <param name="field"></param>
+		/// <returns></returns>
+        public bool Focus(Field @field = Field.Username)
         {
-            uf_Username.Clear();
-        }
-
-        public void ClearPassword()
-        {
-            pf_Password.Clear();
-        }
-
-        public bool Focus(string @field = "u")
-        {
-            switch (@field ?? "")
+            switch (@field)
             {
-                case "u":
-                    {
-                        return UsernameField.Focus();
-                    }
-                case "p":
-                    {
-                        return PasswordField.Focus();
-                    }
+                case Field.Username: return uf_Username.Focus();
+                case Field.Password: return pf_Password.Focus();
+				case Field.Both:
+				default: throw new ArgumentException($"'${field}' is not a valid value");
             }
-
-            return default;
         }
 
         private void PasswordGotFocus(object sender, EventArgs e)
         {
-            PasswordField.SelectAll();
+            pf_Password.SelectAll();
         }
     }
 }

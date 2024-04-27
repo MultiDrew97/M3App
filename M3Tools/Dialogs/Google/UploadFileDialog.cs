@@ -6,13 +6,20 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
+// TODO: Clean this up better
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class UploadFileDialog
     {
         // Private ReadOnly __files As New GTools.Types.FileCollection
         private Google.Apis.Drive.v3.Data.Permission __permission;
+
+		/// <summary>
+		/// The list of files to be uploaded
+		/// </summary>
         public IList Files // GTools.Types.FileCollection
         {
             get
@@ -25,11 +32,19 @@ namespace SPPBC.M3Tools
             // End Set
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public UploadFileDialog()
         {
             InitializeComponent();
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         public void Loading(object sender, EventArgs e)
         {
             dt_DriveHeirarchy.Reload();
@@ -37,31 +52,30 @@ namespace SPPBC.M3Tools
 
         private void Upload(object sender, EventArgs e)
         {
-            if (dt_DriveHeirarchy.SelectedNode is not null)
-            {
-                if (chk_DefaultPermissions.Checked)
-                {
-                    __permission = null;
-                }
-                else
-                {
-                    using (var permissions = new PermissionsDialog())
-                    {
-                        if (permissions.ShowDialog() == DialogResult.OK)
-                        {
-                            Console.WriteLine(permissions.Permission.Role);
-                            Console.WriteLine(permissions.Permission.Type);
-                            __permission = permissions.Permission;
-                        }
-                    }
-                }
-            }
+			if (dt_DriveHeirarchy.SelectedNode == null)
+			{
+                MessageBox.Show("You must select a parent folder.", "New Upload", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
-            // bw_LoadFiles.RunWorkerAsync()
+            if (chk_DefaultPermissions.Checked)
+            {
+                __permission = null;
+            }
             else
             {
-                MessageBox.Show("You must select a parent folder.", "New Upload", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+				using var permissions = new PermissionsDialog();
+
+				if (permissions.ShowDialog() != DialogResult.OK)
+				{
+					return;
+				}
+				Console.WriteLine(permissions.Permission.Role);
+				Console.WriteLine(permissions.Permission.Type);
+				__permission = permissions.Permission;
+			}
+
+            // bw_LoadFiles.RunWorkerAsync()
         }
 
         private void Cancel(object sender, EventArgs e)

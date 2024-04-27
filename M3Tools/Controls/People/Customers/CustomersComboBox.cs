@@ -13,6 +13,7 @@ namespace SPPBC.M3Tools
 		/// The event that occurs when loading has begun
 		/// </summary>
         public event LoadBeginEventHandler LoadBegin;
+
 		/// <summary>
 		/// The handler for when the control begins to load
 		/// </summary>
@@ -38,10 +39,11 @@ namespace SPPBC.M3Tools
 		/// <param name="newValue"></param>
         public delegate void SelectedItemChangedEventHandler(int newValue);
 
+
 		/// <summary>
 		/// The currently selected customer
 		/// </summary>
-        public object SelectedItem
+		public object SelectedItem
         {
             get
             {

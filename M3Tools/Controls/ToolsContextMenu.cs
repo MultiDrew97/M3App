@@ -3,18 +3,34 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class ToolsContextMenu
     {
+		/// <summary>
+		/// An event fired when the view should be refreshed
+		/// </summary>
         public event Events.RefreshViewEventHandler RefreshView;
 
-        public event Events.RemoveRowsEventHandler RemoveRows;
+		/// <summary>
+		/// An event fired when an entry should be removed
+		/// </summary>
+        public event Events.RemoveRowsEventHandler RemoveSelected;
 
+		/// <summary>
+		/// An event fired when an email should be sent out
+		/// </summary>
         public event Events.SendEmailsEventHandler SendEmails;
 
+		/// <summary>
+		/// An event fired when an entry should be editted
+		/// </summary>
         public event Events.EditSelectedEventHandler EditSelected;
 
-
+		/// <summary>
+		/// 
+		/// </summary>
         public ToolsContextMenu()
         {
             InitializeComponent();
@@ -29,7 +45,7 @@ namespace SPPBC.M3Tools
                 return;
             }
 
-            RemoveRows?.Invoke();
+            RemoveSelected?.Invoke();
         }
 
         private void Reload(object sender, EventArgs e)
@@ -42,11 +58,19 @@ namespace SPPBC.M3Tools
             ts_Remove.Enabled = false;
         }
 
+		/// <summary>
+		/// Toggle whether the remove button is enabled
+		/// </summary>
+		/// <param name="enable"></param>
         public void ToggleRemove(bool enable)
         {
             ts_Remove.Enabled = enable;
         }
 
+		/// <summary>
+		/// Toggle whether the send emails button is enabled
+		/// </summary>
+		/// <param name="enable"></param>
         public void ToggleSend(bool enable)
         {
             if (!ts_Send.Visible)
@@ -57,6 +81,10 @@ namespace SPPBC.M3Tools
             ts_Send.Enabled = enable;
         }
 
+		/// <summary>
+		/// Toggle whether the edit button should be enabled
+		/// </summary>
+		/// <param name="enable"></param>
         public void ToggleEdit(bool enable)
         {
             ts_Edit.Enabled = enable;

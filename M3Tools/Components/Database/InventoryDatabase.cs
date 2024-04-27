@@ -10,90 +10,74 @@ namespace SPPBC.M3Tools.Database
 	{
 		private const string path = "inventory";
 
-		[Description("The username to use for the database connection")]
-		[SettingsBindable(true)]
-		public string Username
-		{
-			get
-			{
-				return dbConnection.Username;
-			}
-			set
-			{
-				dbConnection.Username = value;
-			}
-		}
-
-		// The password to use for the database connection
-		[PasswordPropertyText(true)]
-		[SettingsBindable(true)]
-		[Description("The password to use for the database connection")]
-		public string Password
-		{
-			get
-			{
-				return dbConnection.Password;
-			}
-			set
-			{
-				dbConnection.Password = value;
-			}
-		}
-
-		// The initial catalog to use for the database connection
-		[Bindable(true)]
-		[Description("The initial catalog to use for the database connection")]
-		[SettingsBindable(true)]
-		public string BaseUrl
-		{
-			get
-			{
-				return dbConnection.BaseUrl;
-			}
-			set
-			{
-				dbConnection.BaseUrl = value;
-			}
-		}
-
+		/// <summary>
+		/// Retrieve a product with the specified item ID
+		/// </summary>
+		/// <param name="itemID"></param>
+		/// <returns></returns>
 		public Product GetProduct(int itemID)
 		{
-			return dbConnection.Consume<Product>(Method.Get, $"/{path}/{itemID}").Result;
+			return ExecuteWithResult<Product>(Method.Get, $"{path}/{itemID}").Result;
 		}
 
+		/// <summary>
+		/// Retrieve the complete list of inventory items
+		/// </summary>
+		/// <returns></returns>
 		public DBEntryCollection<Product> GetProducts()
 		{
-			return dbConnection.Consume<DBEntryCollection<Product>>(Method.Get, $"/{path}").Result;
+			return ExecuteWithResult<DBEntryCollection<Product>>(Method.Get, $"{path}").Result;
 		}
 
+		/// <summary>
+		/// Add a new product to the database
+		/// </summary>
+		/// <param name="itemName"></param>
+		/// <param name="stock"></param>
+		/// <param name="price"></param>
 		public void AddProduct(string itemName, int stock, decimal price)
 		{
 			AddProduct(new Product(-1, itemName, stock, price, true));
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="item"></param>
 		public void AddProduct(Product item)
 		{
-			dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(item));
+			Execute(Method.Post, $"{path}", JSON.ConvertToJSON(item));
 		}
 
+		/// <summary>
+		/// Update an inventory item's information
+		/// </summary>
+		/// <param name="itemID"></param>
+		/// <param name="itemName"></param>
+		/// <param name="stock"></param>
+		/// <param name="price"></param>
+		/// <param name="available"></param>
 		public void UpdateProduct(int itemID, string itemName, int stock, decimal price, bool available)
 		{
 			UpdateProduct(new Product(itemID, itemName, stock, price, available));
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="item"></param>
 		public void UpdateProduct(Product item)
 		{
-			dbConnection.Consume(Method.Put, $"/{path}/{item.Id}", JSON.ConvertToJSON(item));
+			Execute(Method.Put, $"{path}/{item.Id}", JSON.ConvertToJSON(item));
 		}
 
+		/// <summary>
+		/// Remove a product from the database
+		/// </summary>
+		/// <param name="itemID"></param>
 		public void RemoveProduct(int itemID)
 		{
-			dbConnection.Consume(Method.Put, $"/{path}/{itemID}");
-		}
-
-		private void ChangeAvailability(params SqlParameter[] @params)
-		{
-			throw new NotImplementedException("ChangeAvailablity");
+			Execute(Method.Put, $"{path}/{itemID}");
 		}
 	}
 }

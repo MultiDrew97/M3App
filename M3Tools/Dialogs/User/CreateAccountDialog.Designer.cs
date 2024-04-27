@@ -42,7 +42,7 @@ namespace SPPBC.M3Tools.Dialogs
             cpf_Confirm = new ConfirmPasswordField();
             cpf_Confirm.ConfirmLostFocus += new EventHandler(Cpf_Confirm_ConfirmLostFocus);
             cpf_Confirm.ConfirmTextChanged += new EventHandler(Cpf_Confirm_ConfirmTextChanged);
-            pf_Password = new PasswordFieldType();
+            pf_Password = new PasswordField();
             pf_Password.PasswordLostFocus += new EventHandler(Pf_Password_PasswordLostFocus);
             pf_Password.PasswordTextChanged += new EventHandler(Pf_Password_PasswordTextChanged);
             uf_Username = new UsernameField();
@@ -154,7 +154,7 @@ namespace SPPBC.M3Tools.Dialogs
         internal System.Windows.Forms.Button btn_Cancel;
         internal System.Windows.Forms.Button btn_Create;
         internal UsernameField uf_Username;
-        internal PasswordFieldType pf_Password;
+        internal PasswordField pf_Password;
         internal ConfirmPasswordField cpf_Confirm;
         internal Database.UserDatabase db_Users;
         internal System.Windows.Forms.ErrorProvider ep_FieldError;

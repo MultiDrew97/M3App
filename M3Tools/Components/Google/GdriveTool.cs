@@ -8,17 +8,31 @@ using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools.GTools
 {
-
+	/// <summary>
+	/// The permission to apply to files/folders
+	/// </summary>
     public struct Roles
     {
+		/// <summary>
+		/// Grants READ access permissions
+		/// </summary>
         public static string Reader = "reader";
     }
 
+	/// <summary>
+	/// How the file/folders should be shared
+	/// </summary>
     public struct ShareType
     {
+		/// <summary>
+		/// Anyone can access the files/folders
+		/// </summary>
         public static string Anyone = "anyone";
     }
 
+	/// <summary>
+	/// The class that handles all Google Drive API calls
+	/// </summary>
     public partial class GdriveTool : API, IDisposable, IGoogleService<Google.Apis.Drive.v3.Data.User>
     {
 
@@ -31,6 +45,9 @@ namespace SPPBC.M3Tools.GTools
             Type = ShareType.Anyone
         };
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
         protected Google.Apis.Drive.v3.Data.User UserAccount
         {
             get
@@ -41,6 +58,11 @@ namespace SPPBC.M3Tools.GTools
 
         Google.Apis.Drive.v3.Data.User IGoogleService<Google.Apis.Drive.v3.Data.User>.UserAccount { get => UserAccount; }
 
+		/// <summary>
+		/// Authorizes the application to use their account in the API calls
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="ct"></param>
         public override void Authorize(string username, CancellationToken ct = default)
         {
             base.Authorize(username, ct);

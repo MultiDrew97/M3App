@@ -1,5 +1,10 @@
 ﻿namespace SPPBC.M3Tools.Events.Inventory
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	public delegate void InventoryEventHandler(object sender, DataEventArgs<Types.Product> e);
 	//public delegate void InventoryEventHandler(object sender, InventoryEventArgs e);
 

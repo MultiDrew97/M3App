@@ -5,62 +5,12 @@ using SPPBC.M3Tools.Types;
 
 namespace SPPBC.M3Tools.Database
 {
-    public sealed partial class CustomerDatabase
+	/// <summary>
+	/// The customer based database API calls
+	/// </summary>
+    public partial class CustomerDatabase
     {
         private const string path = "customers";
-
-		/// <summary>
-		/// The username to use for the database connection
-		/// </summary>
-        [SettingsBindable(true)]
-        [Description("The username to use for the database connection")]
-        public string Username
-        {
-            get
-            {
-                return dbConnection.Username;
-            }
-            set
-            {
-                dbConnection.Username = value;
-            }
-        }
-
-		/// <summary>
-		/// The password to use for the database connection
-		/// </summary>
-        [PasswordPropertyText(true)]
-        [SettingsBindable(true)]
-        [Description("The password to use for the database connection")]
-        public string Password
-        {
-            get
-            {
-                return dbConnection.Password;
-            }
-            set
-            {
-                dbConnection.Password = value;
-            }
-        }
-
-		/// <summary>
-		/// The URL to use for making database calls
-		/// </summary>
-        [Bindable(true)]
-        [SettingsBindable(true)]
-        [Description("The initial catalog to use for the database connection")]
-        public string BaseUrl
-        {
-            get
-            {
-                return dbConnection.BaseUrl;
-            }
-            set
-            {
-                dbConnection.BaseUrl = value;
-            }
-        }
 
 		/// <summary>
 		/// Add a customer to the database
@@ -97,7 +47,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="customer"></param>
         public void AddCustomer(Customer customer)
         {
-            dbConnection.Consume(Method.Post, $"/{path}", JSON.ConvertToJSON(customer));
+            Execute(Method.Post, $"{path}", JSON.ConvertToJSON(customer));
         }
 
 		/// <summary>
@@ -106,7 +56,7 @@ namespace SPPBC.M3Tools.Database
 		/// <returns></returns>
         public CustomerCollection GetCustomers()
         {
-            return dbConnection.Consume<CustomerCollection>(Method.Get, $"/{path}").Result;
+            return ExecuteWithResult<CustomerCollection>(Method.Get, $"{path}").Result;
         }
 
 		/// <summary>
@@ -122,7 +72,7 @@ namespace SPPBC.M3Tools.Database
                 throw new ArgumentException($"Invalid CustomerID provided");
             }
 
-            return dbConnection.Consume<Customer>(Method.Get, $"/{path}/{customerID}").Result;
+            return ExecuteWithResult<Customer>(Method.Get, $"{path}/{customerID}").Result;
         }
 
 		/// <summary>
@@ -163,7 +113,7 @@ namespace SPPBC.M3Tools.Database
                 throw new ArgumentException($"Invalid CustomerID provided");
             }
 
-            dbConnection.Consume(Method.Put, $"/{path}/{customer.Id}", JSON.ConvertToJSON(customer));
+            Execute(Method.Put, $"{path}/{customer.Id}", JSON.ConvertToJSON(customer));
         }
 
 		/// <summary>
@@ -178,7 +128,7 @@ namespace SPPBC.M3Tools.Database
                 throw new ArgumentException($"Invalid CustomerID provided");
             }
 
-            dbConnection.Consume(Method.Delete, $"/{path}/{customerID}");
+            Execute(Method.Delete, $"{path}/{customerID}");
         }
     }
 }

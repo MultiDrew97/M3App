@@ -2,8 +2,14 @@
 
 namespace SPPBC.M3Tools
 {
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class StateSelectorField
     {
+		/// <summary>
+		/// The selected state code
+		/// </summary>
         public string StateCode
         {
             get
@@ -21,6 +27,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public StateSelectorField()
         {
             InitializeComponent();

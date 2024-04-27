@@ -42,7 +42,7 @@ namespace SPPBC.M3Tools.Types.GTools
         }
 
 		/// <summary>
-		/// 	Authorize with Google Drive based on the username passed
+		/// Authorize with Google API on behalf of the specified user
 		/// </summary>
 		/// <param name="username">The username of the current user using the app itself</param>
 		/// <param name="ct">The cancellation token in case the authorization needs to be canceled</param>

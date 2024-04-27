@@ -3,21 +3,39 @@
 namespace SPPBC.M3Tools.Types
 {
 	// TODO: Consolidate CurrentOrder and CompletedOrder
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Order : DbEntry
 	{
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("orderID")]
 		public new int Id { get; }
 
+		/// <summary>
+		/// The customer the order was placed for
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("customer")]
 		public Person Customer { get; set; }
 
+		/// <summary>
+		/// The item the order was placed for
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("item")]
 		public Product Item { get; set; }
 
+		/// <summary>
+		/// How many of the item the customer wanted
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("quantity")]
 		public int Quantity { get; set; }
 
+		/// <summary>
+		/// The subtotal for the order
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("total")]
 		public double OrderTotal
 		{
@@ -27,14 +45,26 @@ namespace SPPBC.M3Tools.Types
 			}
 		}
 
+		/// <summary>
+		/// The date the order was placed
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("ordered")]
 		public DateTime OrderDate { get; set; }
 
+		/// <summary>
+		/// The date the order was fulfilled
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("completed")]
 		public DateTime CompletedDate { get; set; }
 
+		/// <summary>
+		/// An empty instance of an Order object
+		/// </summary>
 		public new static Order None { get; } = new();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Order() : this(-1)
 		{
 		}
@@ -99,6 +129,10 @@ namespace SPPBC.M3Tools.Types
 		// End Using
 		// End Sub
 
+		/// <summary>
+		/// Clones a copy of the current Order object
+		/// </summary>
+		/// <returns></returns>
 		public Order Clone()
 		{
 			return new Order(Id, Customer.Id, Item.Id, Quantity, OrderDate, CompletedDate);

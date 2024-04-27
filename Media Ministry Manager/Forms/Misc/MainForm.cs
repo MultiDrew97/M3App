@@ -8,6 +8,9 @@ namespace M3App
 
     public partial class MainForm
     {
+		/// <summary>
+		/// 
+		/// </summary>
         public MainForm()
         {
             InitializeComponent();

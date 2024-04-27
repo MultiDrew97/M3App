@@ -10,7 +10,7 @@ namespace SPPBC.M3Tools
 	/// General utils struct for general application function.
 	/// Was made partial to encourage extending the struct for other potential uses
 	/// </summary>
-	public partial struct Utils
+	public readonly partial struct Utils
 	{
 		/// <summary>
 		/// Dictionary of states to sift through for state code conversions
@@ -118,6 +118,11 @@ namespace SPPBC.M3Tools
 
 			};
 
+		/// <summary>
+		/// Converts a normal unsecure string to a secure string
+		/// </summary>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		public static SecureString ToSecureString(string password)
 		{
 			var secureString = new SecureString();
@@ -130,6 +135,11 @@ namespace SPPBC.M3Tools
 			return secureString;
 		}
 
+		/// <summary>
+		/// Parses for a file's default upload name
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <returns></returns>
 		public static string DefaultFileName(string fileName)
 		{
 			return fileName.Split(@"\\".ToCharArray())[fileName.Split(@"\\".ToCharArray()).Length - 1].Split(".".ToCharArray())[0] + " " + System.DateTime.UtcNow.ToString("MM/dd/yyyy");
@@ -150,6 +160,11 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// Converts a secure strin to an unsecure string
+		/// </summary>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		public static string ToUnsecureString(SecureString password)
 		{
 			System.IntPtr returnValue = System.IntPtr.Zero;
@@ -165,6 +180,12 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// Converts 2 character state code to it's full state name
+		/// </summary>
+		/// <param name="stateCode"></param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException"></exception>
 		public static string StateCodeToState(string stateCode)
 		{
 			try
@@ -177,6 +198,12 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// Converts a state's full name to it's 2 character state code
+		/// </summary>
+		/// <param name="state"></param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException"></exception>
 		public static string StateToStateCode(string state)
 		{
 			foreach (var statePair in States)
@@ -187,9 +214,14 @@ namespace SPPBC.M3Tools
 				return statePair.Key;
 			}
 
-			throw new System.ArgumentException($"'{state}' not a valid state");
+			throw new ArgumentException($"'{state}' not a valid state");
 		}
 
+		/// <summary>
+		/// Checks whether the provided value is a valid email address
+		/// </summary>
+		/// <param name="email"></param>
+		/// <returns></returns>
 		public static bool ValidEmail(string email)
 		{
 			try
@@ -202,11 +234,21 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// Checks whether the provided value is a valid database entry ID
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public static bool ValidID(int id)
 		{
 			return id >= 1;
 		}
 
+		/// <summary>
+		/// Tries to cast the provided value as an instance of a DateTime object
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public static DateTime TryDateCast(object value)
 		{
 			try
@@ -219,6 +261,11 @@ namespace SPPBC.M3Tools
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="value"></param>
 		public static void PrintConsole(string title, object value)
 		{
 			Console.WriteLine($"------------------------ {title} ------------------------");

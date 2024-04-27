@@ -48,11 +48,6 @@ namespace M3App
             mms_Main.ManageProducts += ManageProducts;
             mms_Main.ViewSettings += ViewSettings;
             mms_Main.AddListener += AddListener;
-            dlc_Listeners = new SPPBC.M3Tools.DisplayListenersCtrl();
-            dlc_Listeners.SendEmails += SendEmails;
-            dlc_Listeners.RemoveListener += RemoveListener;
-            dlc_Listeners.AddListener += AddListener;
-            dlc_Listeners.UpdateListener += UpdateListener;
             bsListeners = new BindingSource(components);
             gt_Email = new SPPBC.M3Tools.GTools.GmailTool(components);
             dbListeners = new ListenerDatabase(components);
@@ -70,16 +65,6 @@ namespace M3App
             mms_Main.Size = new Size(784, 24);
             mms_Main.TabIndex = 0;
             mms_Main.Text = "MainMenuStrip1";
-            // 
-            // dlc_Listeners
-            // 
-            dlc_Listeners.CountTemplate = "Count: {0}";
-            dlc_Listeners.DataSource = bsListeners;
-            dlc_Listeners.Dock = DockStyle.Fill;
-            dlc_Listeners.Location = new Point(0, 24);
-            dlc_Listeners.Name = "dlc_Listeners";
-            dlc_Listeners.Size = new Size(784, 437);
-            dlc_Listeners.TabIndex = 1;
             // 
             // bsListeners
             // 
@@ -124,7 +109,6 @@ namespace M3App
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 461);
             Controls.Add(ss_StatusView);
-            Controls.Add(dlc_Listeners);
             Controls.Add(mms_Main);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = My.Resources.Resources.App_Icon;
@@ -147,7 +131,6 @@ namespace M3App
         }
 
         internal SPPBC.M3Tools.MainMenuStrip mms_Main;
-        internal SPPBC.M3Tools.DisplayListenersCtrl dlc_Listeners;
         internal SPPBC.M3Tools.GTools.GmailTool gt_Email;
         internal BindingSource bsListeners;
         internal SPPBC.M3Tools.Database.ListenerDatabase dbListeners;

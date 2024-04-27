@@ -62,22 +62,6 @@ namespace SPPBC.M3Tools.Data
             {
                 return base.Rows;
             }
-        }  
-
-		/// <summary>
-		/// Whether the data grid allows adding
-		/// </summary>
-        [DefaultValue(false)]
-        public bool AllowAdding
-        {
-            get
-            {
-                return AllowUserToAddRows;
-            }
-            set
-            {
-                AllowUserToAddRows = value;
-            }
         }
 
 		/// <summary>
@@ -126,7 +110,7 @@ namespace SPPBC.M3Tools.Data
 			// dgc_CustomerID
 			// 
 			this.dgc_CustomerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dgc_CustomerID.DataPropertyName = "CustomerID";
+			this.dgc_CustomerID.DataPropertyName = "Id";
 			this.dgc_CustomerID.FillWeight = 5F;
 			this.dgc_CustomerID.Frozen = true;
 			this.dgc_CustomerID.HeaderText = "CustomerID";

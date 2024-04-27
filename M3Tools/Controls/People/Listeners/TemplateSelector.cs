@@ -4,7 +4,9 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class TemplateSelector
     {
         // TODO: Create template management system for this later
@@ -17,6 +19,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The name of the currently selected template
+		/// </summary>
         [ReadOnly(true)]
         public string TemplateName
         {
@@ -26,6 +31,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// The value of the currently selected template
+		/// </summary>
         [ReadOnly(true)]
         public string TemplateValue
         {
@@ -34,6 +42,10 @@ namespace SPPBC.M3Tools
                 return Conversions.ToString(cbx_TemplateSelection.SelectedValue);
             }
         }
+
+		/// <summary>
+		/// The subject for the currently selected template
+		/// </summary>
         public string TemplateSubject
         {
             get
@@ -42,12 +54,18 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public TemplateSelector()
         {
             InitializeComponent();
         }
 
 
+		/// <summary>
+		/// Reloads the control
+		/// </summary>
         public void Reload()
         {
             cbx_TemplateSelection.SelectedIndex = -1;
@@ -74,11 +92,19 @@ namespace SPPBC.M3Tools
 
         }
 
+		/// <summary>
+		/// Add a template to the list
+		/// </summary>
+		/// <param name="template"></param>
         public void AddTemplate(Types.Template template)
         {
             bsTemplates.Add(template);
         }
 
+		/// <summary>
+		/// Add a range of templates to the list
+		/// </summary>
+		/// <param name="templates"></param>
         public void AddRange(Types.TemplateList templates)
         {
             foreach (var template in templates)

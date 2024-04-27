@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SPPBC.M3Tools.Database
 {
-    public partial class UserDatabase : System.ComponentModel.Component
+    public partial class UserDatabase : Database<Types.User>
     {
 
         [DebuggerNonUserCode()]
@@ -47,32 +47,13 @@ namespace SPPBC.M3Tools.Database
         // Required by the Component Designer
         private System.ComponentModel.IContainer components;
 
-        // NOTE: The following procedure is required by the Component Designer
-        // It can be modified using the Component Designer.
-        // Do not modify it using the code editor.
-        [DebuggerStepThrough()]
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-            _dbConnection = new Database(components);
-
-        }
-
-        private Database _dbConnection;
-
-        internal Database dbConnection
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return _dbConnection;
-            }
-
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            set
-            {
-                _dbConnection = value;
-            }
-        }
+		// NOTE: The following procedure is required by the Component Designer
+		// It can be modified using the Component Designer.
+		// Do not modify it using the code editor.
+		[DebuggerStepThrough()]
+		private void InitializeComponent()
+		{
+			components = new System.ComponentModel.Container();
+		}
     }
 }

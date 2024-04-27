@@ -2,7 +2,7 @@
 
 namespace SPPBC.M3Tools.Database
 {
-    internal partial class Database : System.ComponentModel.Component
+    public partial class Database<T> : System.ComponentModel.Component where T : Types.IDbEntry, new()
     {
 
         [DebuggerNonUserCode()]

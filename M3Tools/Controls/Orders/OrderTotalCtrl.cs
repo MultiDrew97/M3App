@@ -7,6 +7,10 @@ namespace SPPBC.M3Tools
         private event TotalChangedEventHandler TotalChanged;
 
         private delegate void TotalChangedEventHandler();
+
+		/// <summary>
+		/// The total cost of the order
+		/// </summary>
         public double Total
         {
             get
@@ -20,6 +24,9 @@ namespace SPPBC.M3Tools
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public OrderTotalCtrl()
         {
             InitializeComponent();

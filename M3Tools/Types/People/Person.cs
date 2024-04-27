@@ -1,18 +1,30 @@
 ﻿
 namespace SPPBC.M3Tools.Types
 {
+	/// <summary>
+	/// 
+	/// </summary>
     public class Person : DbEntry
     {
 		private MimeKit.MailboxAddress __email;
 
+		/// <summary>
+		/// The person's first name
+		/// </summary>
 		[System.ComponentModel.Category("Basics")]
         [System.Text.Json.Serialization.JsonPropertyName("firstName")]
         public string FirstName { get; set; }
 
+		/// <summary>
+		/// The person's last name
+		/// </summary>
         [System.ComponentModel.Category("Basics")]
         [System.Text.Json.Serialization.JsonPropertyName("lastName")]
         public string LastName { get; set; }
 
+		/// <summary>
+		/// The person's email address
+		/// </summary>
         [System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("email")]
         public string Email
@@ -27,7 +39,10 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
-        // <ComponentModel.Browsable(False)>
+		/// <summary>
+		/// The person's whole name
+		/// </summary>
+        // [ComponentModel.Browsable(False)]
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name
         {
@@ -41,6 +56,12 @@ namespace SPPBC.M3Tools.Types
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="name"></param>
+		/// <param name="email"></param>
 		protected Person(int id = -1, string name = null, string email = null) : base(id)
         {
             ParseName(name);
