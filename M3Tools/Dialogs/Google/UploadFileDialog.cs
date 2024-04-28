@@ -120,7 +120,7 @@ namespace SPPBC.M3Tools
             {
                 if (@file.Parents is null)
                 {
-                    @file.Parents = selectedParentId.Equals("main") ? null : new Collection<string>(new[] { selectedParentId });
+                    @file.Parents = selectedParentId.Equals("main") ? null : new Types.GTools.FileCollection() { new Types.GTools.File(selectedParentId) };
                 }
                 else if (selectedParentId.Equals("main"))
                 {
@@ -128,7 +128,7 @@ namespace SPPBC.M3Tools
                 }
                 else
                 {
-                    @file.Parents.Add(dt_DriveHeirarchy.SelectedNode.Name);
+                    @file.Parents.Add(new Types.GTools.File(dt_DriveHeirarchy.SelectedNode.Name));
                 }
             }
             bw_UploadFiles.RunWorkerAsync();

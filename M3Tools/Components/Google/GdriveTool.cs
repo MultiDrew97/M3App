@@ -96,7 +96,7 @@ namespace SPPBC.M3Tools.GTools
             var fileMetadata = new Google.Apis.Drive.v3.Data.File()
             {
                 Name = uploadName, // If(uploadName, Utils.DefaultFileName(file.Name)),
-                Parents = @file.Parents
+                Parents = (IList<string>)@file.Parents
             };
 
             FilesResource.CreateMediaUpload request;
@@ -330,7 +330,7 @@ namespace SPPBC.M3Tools.GTools
                     {
                         Name = @file.Name,
                         FileType = @file.MimeType,
-                        Parents = new System.Collections.ObjectModel.Collection<string>(@file.Parents)
+                        Parents = (FileCollection)@file.Parents
                     });
                 }
 
@@ -360,13 +360,13 @@ namespace SPPBC.M3Tools.GTools
 
                 var result = request.Execute();
 
-                foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
-                    folders.Add(new Folder(folder.Id)
-                    {
-                        Name = folder.Name,
-                        FileType = folder.MimeType,
-                        Parents = folder.Parents is null ? null : new System.Collections.ObjectModel.Collection<string>(folder.Parents)
-                    });
+				foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
+					folders.Add(new Folder(folder.Id)
+					{
+						Name = folder.Name,
+						FileType = folder.MimeType,
+						Parents = (FileCollection)(folder.Parents ?? null) // is null ? null : new System.Collections.ObjectModel.Collection<string>(folder.Parents)
+					});
 
                 pageToken = result.NextPageToken;
             }
@@ -418,7 +418,7 @@ namespace SPPBC.M3Tools.GTools
                                 {
                                     Name = @file.Name,
                                     FileType = @file.MimeType,
-                                    Parents = new System.Collections.ObjectModel.Collection<string>(@file.Parents)
+                                    Parents = (FileCollection)@file.Parents
                                 });
                                 break;
                             }
@@ -429,7 +429,7 @@ namespace SPPBC.M3Tools.GTools
                                 {
                                     Name = @file.Name,
                                     FileType = @file.MimeType,
-                                    Parents = new System.Collections.ObjectModel.Collection<string>(@file.Parents)
+                                    Parents = (FileCollection)@file.Parents
                                 });
                                 break;
                             }

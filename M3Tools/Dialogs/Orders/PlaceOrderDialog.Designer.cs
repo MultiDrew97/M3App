@@ -140,7 +140,6 @@ namespace SPPBC.M3Tools
 			pcb_Items.MinimumSize = new System.Drawing.Size(200, 42);
 			pcb_Items.Name = "pcb_Items";
 			pcb_Items.SelectedIndex = -1;
-			pcb_Items.SelectedItem = null;
 			pcb_Items.SelectedValue = null;
 			pcb_Items.Size = new System.Drawing.Size(200, 42);
 			pcb_Items.TabIndex = 1;

@@ -148,12 +148,11 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             // ldg_Listeners
             // 
-            ldg_Listeners.AllowColumnReordering = true;
-            ldg_Listeners.AllowDeleting = false;
-            ldg_Listeners.AllowEditting = false;
+            ldg_Listeners.CanReorder = true;
+            ldg_Listeners.CanDelete = false;
+            ldg_Listeners.CanEdit = false;
             ldg_Listeners.DataSource = bsListeners;
-            ldg_Listeners.Filter = "";
-            ldg_Listeners.ListenersSelectable = false;
+            ldg_Listeners.RowsCheckable = false;
             ldg_Listeners.Location = new System.Drawing.Point(28, 128);
             ldg_Listeners.MinimumSize = new System.Drawing.Size(350, 100);
             ldg_Listeners.Name = "ldg_Listeners";

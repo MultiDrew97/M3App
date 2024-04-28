@@ -10,6 +10,7 @@ namespace SPPBC.M3Tools
 
     public partial class DriveTree
     {
+		// TODO: Make sure that when a file is checked, as long as not all values are selected, the folder will have the intermediate check
         // Private __username As String
 
 		/// <summary>
@@ -101,13 +102,31 @@ namespace SPPBC.M3Tools
 		/// <returns>The filtered file collection as a tree node array.</returns>
         private TreeNode[] ParseNodes(FileCollection folders)
         {
-            int i = 0;
+			foreach (Folder folder in folders.Cast<Folder>())
+			{
+				if (folder.Parents is null)
+				{
+					// Instance has no parent, thus is standalone
+					continue;
+				}
 
-            // TODO: Convert to for each?
-            do
+				foreach (Folder parent in folder.Parents.Cast<Folder>())
+				{
+					if (parent.Children[folder.Id] is null)
+					{
+						// folder not added to child list yet
+						parent.Children.Add(folder);
+						continue;
+					}
+					
+					((Folder)parent.Children[folder.Id]).Children.AddRange(folder.Children);
+				}
+			}
+            /*do
             {
                 if (folders[i].Parents is null)
                 {
+					// Current folder has no parents to nest under
                     i += 1;
                     continue;
                 }
@@ -143,7 +162,7 @@ namespace SPPBC.M3Tools
                     i += 1;
                 }
             }
-            while (i < folders.Count);
+            while (i < folders.Count);*/
 
             return ParseTree(folders);
         }
@@ -210,7 +229,6 @@ namespace SPPBC.M3Tools
 		/// <returns></returns>
         public Collection<TreeNode> GetSelectedNodes(TreeNodeCollection nodes = null)
         {
-            // TODO: When checking a folder, check child files and folders as well
             var treeNodes = new Collection<TreeNode>();
 
             foreach (TreeNode node in nodes ?? tv_DriveFiles.Nodes)

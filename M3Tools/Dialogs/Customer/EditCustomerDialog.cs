@@ -210,7 +210,7 @@ namespace SPPBC.M3Tools.Dialogs
         private bool CheckChangedValues()
         {
             // TODO: Check to allow empty Nullable fields
-            if (!FirstName.Equals(_customer.FirstName) | (!LastName.Equals(_customer.LastName) && IsValidName()))
+            if (!FirstName.Equals(_customer.FirstName) || (!LastName.Equals(_customer.LastName) && IsValidName()))
             {
                 return true;
             }

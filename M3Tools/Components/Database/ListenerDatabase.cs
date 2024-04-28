@@ -5,7 +5,7 @@ using SPPBC.M3Tools.M3API;
 namespace SPPBC.M3Tools.Database
 {
     // TODO: Revamp this area as well
-    public sealed partial class ListenerDatabase
+    public partial class ListenerDatabase
     {
         private const string path = "listeners";
 
