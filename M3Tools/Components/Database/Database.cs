@@ -93,7 +93,7 @@ namespace SPPBC.M3Tools.Database
         {
             System.Net.HttpWebRequest req;
 
-            req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create($"${BaseUrl}/${path}");
+            req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create($"{BaseUrl}/{path}");
             req.Method = @method.ToString().ToUpper();
             req.Accept = "application/json";
             req.Headers.Add(System.Net.HttpRequestHeader.Authorization, $"Basic {Auth}");

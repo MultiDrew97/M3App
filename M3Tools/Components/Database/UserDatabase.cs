@@ -83,7 +83,7 @@ namespace SPPBC.M3Tools.Database
 
         private User Login(string auth)
         {
-            return ExecuteWithResult<User>(Method.Post, $"/{path}/login", auth).Result;
+            return ExecuteWithResult<User>(Method.Post, $"{path}/login", auth).Result;
         }
 
 		/// <summary>

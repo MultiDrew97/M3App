@@ -28,24 +28,20 @@ namespace M3App
             InitializeComponent();
 
 			ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL);
+			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
 
 			CustomerDBModified += new CustomerEventHandler(Reload);
+
 			cdg_Customers.Reload += new SPPBC.M3Tools.Events.RefreshViewEventHandler(Reload);
-			//cdg_Customers.AddCustomer += new CustomerEventHandler(AddCustomer);
+			cdg_Customers.AddCustomer += new CustomerEventHandler(AddCustomer);
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(UpdateCustomer);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(RemoveCustomer);
+
 			ts_Tools.AddEntry += new EventHandler(AddCustomer);
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 			mms_Main.ExitApplication += new SPPBC.M3Tools.MainMenuStrip.ExitApplicationEventHandler(ExitApplication);
 			mms_Main.Logout += new SPPBC.M3Tools.MainMenuStrip.LogoutEventHandler(Logout);
 			mms_Main.ViewSettings += new SPPBC.M3Tools.MainMenuStrip.ViewSettingsEventHandler(ViewSettings);
-        }
-
-        private void Loading(object sender, EventArgs e)
-        {
-            mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
-
-			Reload(sender, e);
         }
 
         private void DisplayClosing(object sender, CancelEventArgs e)
@@ -100,7 +96,7 @@ namespace M3App
 
 		private void UpdateCustomer(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
-			AddCustomer(sender, e as CustomerEventArgs);
+			UpdateCustomer(sender, e as CustomerEventArgs);
 		}
 
 		private void UpdateCustomer(object sender, CustomerEventArgs e)
@@ -128,7 +124,7 @@ namespace M3App
 
 		private void RemoveCustomer(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
-			AddCustomer(sender, e as CustomerEventArgs);
+			RemoveCustomer(sender, e as CustomerEventArgs);
 		}
 
 		private void RemoveCustomer(object sender, CustomerEventArgs e)
