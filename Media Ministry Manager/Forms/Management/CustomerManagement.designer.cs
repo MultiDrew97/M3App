@@ -39,7 +39,6 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerManagement));
             this.ss_StatusView = new System.Windows.Forms.StatusStrip();
             this.tss_CustomersView = new System.Windows.Forms.ToolStripStatusLabel();
             this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
@@ -153,7 +152,7 @@ namespace M3App
             this.Controls.Add(this.ss_StatusView);
             this.Controls.Add(this.mms_Main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::M3App.My.Resources.Resources.App_Icon;
             this.MainMenuStrip = this.mms_Main;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(800, 500);

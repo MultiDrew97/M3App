@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SPPBC.M3Tools.Database
 {
-    public partial class ListenerDatabase : Database<Types.Listener>
+    public partial class ListenerDatabase : Database
     {
 
         [DebuggerNonUserCode()]

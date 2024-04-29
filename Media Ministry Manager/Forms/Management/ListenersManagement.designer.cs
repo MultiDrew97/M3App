@@ -47,8 +47,8 @@ namespace M3App
             this.ss_StatusView = new System.Windows.Forms.StatusStrip();
             this.tss_StatusView = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
             this.ldg_Listeners = new SPPBC.M3Tools.ListenersDataGrid();
+            this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsListeners)).BeginInit();
             this.ss_StatusView.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -65,6 +65,10 @@ namespace M3App
             this.mms_Main.TabIndex = 0;
             this.mms_Main.Text = "mms_Main";
             // 
+            // bsListeners
+            // 
+            this.bsListeners.Filter = "";
+            // 
             // gt_Email
             // 
             this.gt_Email.Username = global::M3App.My.Settings.Default.Username;
@@ -72,6 +76,8 @@ namespace M3App
             // dbListeners
             // 
             this.dbListeners.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
+			this.dbListeners.Username = global::M3App.My.Settings.Default.ApiUsername;
+			this.dbListeners.Password = global::M3App.My.Settings.Default.ApiPassword;
             // 
             // gd_Drive
             // 
@@ -113,16 +119,27 @@ namespace M3App
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.ts_Tools);
-			//
-			// dbListeners
-			//
-			this.dbListeners.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-			this.dbListeners.Username = global::M3App.My.Settings.Default.ApiUsername;
-			this.dbListeners.Password = global::M3App.My.Settings.Default.ApiPassword;
-			// 
-			// ts_Tools
-			// 
-			this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
+            // 
+            // ldg_Listeners
+            // 
+            this.ldg_Listeners.AllowUserToAddRows = false;
+            this.ldg_Listeners.AllowUserToOrderColumns = true;
+            this.ldg_Listeners.AutoGenerateColumns = false;
+            this.ldg_Listeners.CanReorder = true;
+            this.ldg_Listeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ldg_Listeners.DataSource = this.bsListeners;
+            this.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ldg_Listeners.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.ldg_Listeners.Location = new System.Drawing.Point(0, 0);
+            this.ldg_Listeners.Name = "ldg_Listeners";
+            this.ldg_Listeners.RowTemplate.Height = 28;
+            this.ldg_Listeners.Size = new System.Drawing.Size(784, 390);
+            this.ldg_Listeners.TabIndex = 0;
+			this.ldg_Listeners.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // ts_Tools
+            // 
+            this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
             this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_Tools.ListType = null;
             this.ts_Tools.Location = new System.Drawing.Point(0, 0);
@@ -131,20 +148,6 @@ namespace M3App
             this.ts_Tools.Size = new System.Drawing.Size(784, 25);
             this.ts_Tools.Stretch = true;
             this.ts_Tools.TabIndex = 0;
-			// 
-			// ldg_Listeners
-			// 
-			this.ldg_Listeners.AllowUserToAddRows = false;
-            this.ldg_Listeners.AllowUserToOrderColumns = true;
-            this.ldg_Listeners.CanReorder = true;
-            this.ldg_Listeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ldg_Listeners.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.ldg_Listeners.Location = new System.Drawing.Point(0, 0);
-            this.ldg_Listeners.Name = "ldg_Listeners";
-            this.ldg_Listeners.RowTemplate.Height = 28;
-            this.ldg_Listeners.Size = new System.Drawing.Size(784, 390);
-            this.ldg_Listeners.TabIndex = 0;
             // 
             // ListenersManagement
             // 

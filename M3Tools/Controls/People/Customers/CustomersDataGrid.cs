@@ -85,7 +85,7 @@ namespace SPPBC.M3Tools.Data
 
 			LoadColumns();
 
-			//AddEntry += new DataEventHandler<Types.Customer>(ParseEvents);
+			AddEntry += new DataEventHandler<Types.Customer>(ParseEvents);
 			UpdateEntry += new DataEventHandler<Types.Customer>(ParseEvents);
 			RemoveEntry += new DataEventHandler<Types.Customer>(ParseEvents);
 		}
@@ -97,8 +97,8 @@ namespace SPPBC.M3Tools.Data
 			switch (e.EventType)
 			{
 				case EventType.Added: { AddCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
-				case EventType.Removed: { UpdateCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
-				case EventType.Updated: { RemoveCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
+				case EventType.Removed: { RemoveCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
+				case EventType.Updated: { UpdateCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
 				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
 			}
 		}

@@ -4,7 +4,9 @@ using SPPBC.M3Tools.M3API;
 
 namespace SPPBC.M3Tools.Database
 {
-    // TODO: Revamp this area as well
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class ListenerDatabase
     {
         private const string path = "listeners";
@@ -12,29 +14,8 @@ namespace SPPBC.M3Tools.Database
 		/// <summary>
 		/// Add a new listener to the database
 		/// </summary>
-		/// <param name="firstName"></param>
-		/// <param name="lastName"></param>
-		/// <param name="email"></param>
-        public void AddListener(string firstName, string lastName, string email)
-        {
-            AddListener($"{firstName} {lastName}", email);
-        }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="email"></param>
-        public void AddListener(string name, string email)
-        {
-            AddListener(new Types.Listener(-1, name, email));
-        }
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="listener"></param>
-        public void AddListener(Types.Listener listener)
+		public void AddListener(Types.Listener listener)
         {
             Execute(Method.Post, $"{path}", JSON.ConvertToJSON(listener));
         }
@@ -57,38 +38,9 @@ namespace SPPBC.M3Tools.Database
 		/// <summary>
 		/// Update the info for a listener
 		/// </summary>
-		/// <param name="listenerID"></param>
-		/// <param name="fName"></param>
-		/// <param name="lName"></param>
-		/// <param name="email"></param>
-        public void UpdateListener(int listenerID, string fName, string lName, string email)
-        {
-            UpdateListener(listenerID, $"{fName} {lName}", email);
-        }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="listenerID"></param>
-		/// <param name="name"></param>
-		/// <param name="email"></param>
-		/// <exception cref="ArgumentException"></exception>
-        public void UpdateListener(int listenerID, string name, string email)
-        {
-            if (!Utils.ValidID(listenerID))
-            {
-                throw new ArgumentException($"Invalid ListenerID provided");
-            }
-
-            UpdateListener(new Types.Listener(listenerID, name, email));
-        }
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="listener"></param>
 		/// <exception cref="NotImplementedException"></exception>
-        public void UpdateListener(Types.Listener listener)
+		public void UpdateListener(Types.Listener listener)
         {
             throw new NotImplementedException("UpdateListener");
         }

@@ -66,13 +66,18 @@ namespace SPPBC.M3Tools
         {
             InitializeComponent();
 
+			if (DesignMode)
+			{
+				return;
+			}
+
 			dgc_ListenerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
 			LoadColumns();
 
-			//AddEntry += new DataEventHandler<Types.Listener>(ParseEvents);
+			AddEntry += new DataEventHandler<Types.Listener>(ParseEvents);
 			UpdateEntry += new DataEventHandler<Types.Listener>(ParseEvents);
 			RemoveEntry += new DataEventHandler<Types.Listener>(ParseEvents);
 		}
@@ -83,9 +88,9 @@ namespace SPPBC.M3Tools
 			Console.WriteLine("Sender: {0}\nEvent Type: {1}\nValue: {2}", sender, e.EventType, e.Value);
 			switch (e.EventType)
 			{
-				case EventType.Added: { AddListener?.Invoke(sender, (ListenerEventArgs)e); break; }
-				case EventType.Removed: { UpdateListener?.Invoke(sender, (ListenerEventArgs)e); break; }
-				case EventType.Updated: { RemoveListener?.Invoke(sender, (ListenerEventArgs)e); break; }
+				case EventType.Added: { AddListener?.Invoke(sender, e); break; }
+				case EventType.Removed: { RemoveListener?.Invoke(sender, e); break; }
+				case EventType.Updated: { UpdateListener?.Invoke(sender, e); break; }
 				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
 			}
 		}

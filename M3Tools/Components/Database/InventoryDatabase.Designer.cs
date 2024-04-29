@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SPPBC.M3Tools.Database
 {
-    public partial class InventoryDatabase : Database<Types.Product>
+    public partial class InventoryDatabase : Database
     {
 
         [DebuggerNonUserCode()]

@@ -10,11 +10,11 @@ namespace SPPBC.M3Tools.Data
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
 	public partial class DataGrid<T> : System.Windows.Forms.DataGridView // where T : Types.IDbEntry
 	{
-		/*/// <summary>
-		/// Event that occurs when adding data
-		/// </summary>*/
 		// TODO: Maybe Remove this later
-		//protected event Events.DataEventHandler<T> AddEntry;
+		/// <summary>
+		/// Event that occurs when adding data
+		/// </summary>
+		protected event Events.DataEventHandler<T> AddEntry;
 
 		/// <summary>
 		/// Event that occurs when updating data

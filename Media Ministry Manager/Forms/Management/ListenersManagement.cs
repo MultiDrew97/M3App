@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using SPPBC.M3Tools.Events;
 using SPPBC.M3Tools.Events.Listeners;
 
 namespace M3App
@@ -10,8 +11,6 @@ namespace M3App
 	/// </summary>
 	public partial class ListenersManagement
     {
-
-        private event ListenerEventHandler ListenerAdded;
         private event ListenerEventHandler ListenerDBModified;
 
 		/// <summary>
@@ -27,7 +26,6 @@ namespace M3App
             gd_Drive.Authorize(My.Settings.Default.Username);
 
 			ListenerDBModified += new ListenerEventHandler(Reload);
-			ListenerAdded += new ListenerEventHandler(SendWelcome);
 
 			ldg_Listeners.Reload += new SPPBC.M3Tools.Events.RefreshViewEventHandler(Reload);
 			ldg_Listeners.AddListener += new ListenerEventHandler(AddListener);
@@ -38,6 +36,7 @@ namespace M3App
 			mms_Main.Logout += new SPPBC.M3Tools.MainMenuStrip.LogoutEventHandler(Logout);
 			mms_Main.ViewSettings += new SPPBC.M3Tools.MainMenuStrip.ViewSettingsEventHandler(ViewSettings);
 
+			ts_Tools.AddEntry += new EventHandler(AddListener);
 			ts_Tools.SendEmails += new EventHandler(SendEmails);
 		}
 
@@ -98,18 +97,25 @@ namespace M3App
 			UseWaitCursor = false;
 		}
 
-        private void RemoveListener(object sender, ListenerEventArgs e)
+        private void RemoveListener(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
         {
             UseWaitCursor = true;
             dbListeners.RemoveListener(e.Value.Id);
             ListenerDBModified.Invoke(this, e);
         }
 
-        private void AddListener(object sender, ListenerEventArgs e)
+        private void AddListener(object sender, EventArgs e)
         {
+			using var @add = new SPPBC.M3Tools.Dialogs.AddListenerDialog();
+
+			if (add.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+			{
+				return;
+			}
+
             UseWaitCursor = true;
-            dbListeners.AddListener(e.Value.Name, e.Value.Email);
-            ListenerAdded.Invoke(this, e);
+            dbListeners.AddListener(add.Listener);
+			SendWelcome(sender, new ListenerEventArgs(add.Listener, SPPBC.M3Tools.Events.EventType.Added));
         }
 
         private void SendWelcome(object sender, ListenerEventArgs e)
@@ -124,11 +130,18 @@ namespace M3App
 			ListenerDBModified.Invoke(this, e);
         }
 
-        private void UpdateListener(object sender, ListenerEventArgs e)
+        private void UpdateListener(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
         {
+			using var @edit = new SPPBC.M3Tools.Dialogs.EditListenerDialog(e.Value);
+
+			if (edit.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+			{
+				return;
+			}
+
             UseWaitCursor = true;
-            dbListeners.UpdateListener(e.Value);
-			ListenerDBModified.Invoke(this, e);
+            dbListeners.UpdateListener(edit.Listener);
+			ListenerDBModified.Invoke(this, new ListenerEventArgs(edit.Listener, EventType.Updated));
         }
 
 		private void Reload(object sender, EventArgs e)
@@ -138,6 +151,8 @@ namespace M3App
             foreach (var listener in dbListeners.GetListeners())
                 bsListeners.Add(listener);
 			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, ldg_Listeners.Listeners.Count);
+			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
+			bsListeners.ResetBindings(false);
 			UseWaitCursor = false;
         }
     }

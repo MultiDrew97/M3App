@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SPPBC.M3Tools.Database
 {
-    public partial class OrdersDatabase : Database<Types.Order>
+    public partial class OrdersDatabase : Database
     {
 
         [DebuggerNonUserCode()]
