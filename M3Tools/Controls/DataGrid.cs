@@ -239,11 +239,6 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
-
-			this.dgc_Selection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.dgc_Edit = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-			this.dgc_Remove = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
-
 			LoadColumns();
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
@@ -257,6 +252,10 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		protected internal virtual void LoadColumns()
 		{
+			this.dgc_Selection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.dgc_Edit = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
+			this.dgc_Remove = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
+
 			// 
 			// dgc_Selection
 			// 

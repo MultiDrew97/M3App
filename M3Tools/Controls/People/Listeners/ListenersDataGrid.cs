@@ -71,10 +71,6 @@ namespace SPPBC.M3Tools
 				return;
 			}
 
-			dgc_ListenerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
 			LoadColumns();
 
 			AddEntry += new DataEventHandler<Types.Listener>(ParseEvents);
@@ -98,6 +94,10 @@ namespace SPPBC.M3Tools
 		private new void LoadColumns()
 		{
 			base.LoadColumns();
+
+			dgc_ListenerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
 			// 
 			// dgc_Email

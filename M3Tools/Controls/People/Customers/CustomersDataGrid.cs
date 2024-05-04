@@ -76,13 +76,6 @@ namespace SPPBC.M3Tools.Data
 				return;
 			}
 
-			this.dgc_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Join = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
 			LoadColumns();
 
 			AddEntry += new DataEventHandler<Types.Customer>(ParseEvents);
@@ -106,6 +99,14 @@ namespace SPPBC.M3Tools.Data
 		private new void LoadColumns()
 		{
 			base.LoadColumns();
+
+			dgc_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dgc_Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dgc_Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dgc_Join = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
 			// 
 			// dgc_CustomerID
 			// 
@@ -179,12 +180,12 @@ namespace SPPBC.M3Tools.Data
 			});
 		}
 
-		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
-		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
-		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
-		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		private readonly System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
 	}
 
 }

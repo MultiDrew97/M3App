@@ -24,9 +24,9 @@ namespace SPPBC.M3Tools.Types.GTools
         public string FileType { get; set; }
 
 		/// <summary>
-		/// The list of folders that the file is contained in. Should be assumed as a FolderCollection
+		/// The list of folder IDs that the file is contained in
 		/// </summary>
-        public FileCollection Parents { get; set; }
+        public IList<string> Parents { get; set; }
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -54,12 +54,12 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="name"></param>
 		/// <param name="filetype"></param>
 		/// <param name="parents"></param>
-        public File(string id, string name, string filetype, FileCollection parents = null)
+        public File(string id, string name, string filetype, string[] parents = null)
         {
             Id = id;
             Name = name;
             FileType = filetype;
-            Parents = parents ?? new FileCollection();
+			Parents = parents ?? new string[] { };
         }
 
 		/// <summary>
@@ -130,7 +130,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="name"></param>
 		/// <param name="parents"></param>
 		/// <param name="children"></param>
-        public Folder(string id, string name, FileCollection parents = null, FileCollection children = null) : base(id, name, "folder", parents)
+        public Folder(string id, string name, string[] parents = null, FileCollection children = null) : base(id, name, "folder", parents)
         {
             Children = children ?? new FileCollection();
         }

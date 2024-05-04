@@ -330,7 +330,7 @@ namespace SPPBC.M3Tools.GTools
                     {
                         Name = @file.Name,
                         FileType = @file.MimeType,
-                        Parents = (FileCollection)@file.Parents
+                        Parents = @file.Parents as string[]
                     });
                 }
 
@@ -365,7 +365,7 @@ namespace SPPBC.M3Tools.GTools
 					{
 						Name = folder.Name,
 						FileType = folder.MimeType,
-						Parents = (FileCollection)(folder.Parents ?? null) // is null ? null : new System.Collections.ObjectModel.Collection<string>(folder.Parents)
+						Parents = folder.Parents as string[] ?? null // is null ? null : new System.Collections.ObjectModel.Collection<string>(folder.Parents)
 					});
 
                 pageToken = result.NextPageToken;
@@ -418,7 +418,7 @@ namespace SPPBC.M3Tools.GTools
                                 {
                                     Name = @file.Name,
                                     FileType = @file.MimeType,
-                                    Parents = (FileCollection)@file.Parents
+                                    Parents = @file.Parents as string[]
                                 });
                                 break;
                             }
@@ -429,7 +429,7 @@ namespace SPPBC.M3Tools.GTools
                                 {
                                     Name = @file.Name,
                                     FileType = @file.MimeType,
-                                    Parents = (FileCollection)@file.Parents
+                                    Parents = @file.Parents as string[]
                                 });
                                 break;
                             }

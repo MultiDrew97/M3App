@@ -7,7 +7,7 @@ using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools
 {
-
+	// FIXME: Resolve node nesting bug with not removing the node from the list after nesting it
     public partial class DriveTree
     {
 		// TODO: Make sure that when a file is checked, as long as not all values are selected, the folder will have the intermediate check
@@ -121,6 +121,8 @@ namespace SPPBC.M3Tools
 					
 					((Folder)parent.Children[folder.Id]).Children.AddRange(folder.Children);
 				}
+
+				folders.Remove(folder);
 			}
             /*do
             {
@@ -251,14 +253,7 @@ namespace SPPBC.M3Tools
 
         private async void RefreshTree()
         {
-            if (WithChildren)
-            {
-                FillTable(await gdt_GDrive.GetFoldersWithChildren());
-            }
-            else
-            {
-                FillTable(await gdt_GDrive.GetFolders());
-            }
+			FillTable(await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()));
         }
 
 		/// <summary>
