@@ -55,25 +55,25 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            this.tsb_New = new System.Windows.Forms.ToolStripButton();
+            this.tsb_Add = new System.Windows.Forms.ToolStripButton();
             this.tsb_Import = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tst_Filter = new System.Windows.Forms.ToolStripTextBox();
-            this.tsb_Emails = new System.Windows.Forms.ToolStripButton();
+            this.tsb_Send = new System.Windows.Forms.ToolStripButton();
             this.tsl_Count = new System.Windows.Forms.ToolStripLabel();
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.SuspendLayout();
             // 
             // tsb_New
             // 
-            this.tsb_New.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_New.Image = global::SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption;
-            this.tsb_New.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_New.Name = "tsb_New";
-            this.tsb_New.Size = new System.Drawing.Size(23, 22);
-            this.tsb_New.Text = "New";
-            this.tsb_New.ToolTipText = "Add {0}";
-            this.tsb_New.Click += new System.EventHandler(this.Add);
+            this.tsb_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_Add.Image = global::SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption;
+            this.tsb_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Add.Name = "tsb_New";
+            this.tsb_Add.Size = new System.Drawing.Size(23, 22);
+            this.tsb_Add.Text = "New";
+            this.tsb_Add.ToolTipText = "Add {0}";
+            this.tsb_Add.Click += new System.EventHandler(this.Add);
             // 
             // tsb_Import
             // 
@@ -103,13 +103,13 @@ namespace SPPBC.M3Tools
             // 
             // tsb_Emails
             // 
-            this.tsb_Emails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_Emails.Image = global::SPPBC.M3Tools.My.Resources.Resources.send_email;
-            this.tsb_Emails.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_Emails.Name = "tsb_Emails";
-            this.tsb_Emails.Size = new System.Drawing.Size(23, 22);
-            this.tsb_Emails.Text = "Send Emails";
-            this.tsb_Emails.Click += new System.EventHandler(this.Emails);
+            this.tsb_Send.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_Send.Image = global::SPPBC.M3Tools.My.Resources.Resources.send_email;
+            this.tsb_Send.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Send.Name = "tsb_Emails";
+            this.tsb_Send.Size = new System.Drawing.Size(23, 22);
+            this.tsb_Send.Text = "Send Emails";
+            this.tsb_Send.Click += new System.EventHandler(this.Emails);
             // 
             // tsl_Count
             // 
@@ -126,9 +126,9 @@ namespace SPPBC.M3Tools
             // 
             this.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsb_New,
+            this.tsb_Add,
             this.tsb_Import,
-            this.tsb_Emails,
+            this.tsb_Send,
             this.ToolStripSeparator1,
             this.tst_Filter,
             this.ToolStripSeparator2,
@@ -139,11 +139,11 @@ namespace SPPBC.M3Tools
 
         }
 
-        private System.Windows.Forms.ToolStripButton tsb_New;
+        private System.Windows.Forms.ToolStripButton tsb_Add;
         private System.Windows.Forms.ToolStripButton tsb_Import;
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox tst_Filter;
-        private System.Windows.Forms.ToolStripButton tsb_Emails;
+        private System.Windows.Forms.ToolStripButton tsb_Send;
         private System.Windows.Forms.ToolStripLabel tsl_Count;
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
     }

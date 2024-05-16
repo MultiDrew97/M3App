@@ -43,9 +43,6 @@ namespace M3App
             mms_Main.Logout += Logout;
             mms_Main.ExitApplication += ExitApplication;
             mms_Main.UpdateAvailable += ExitApplication;
-            mms_Main.ManageOrders += ManageOrders;
-            mms_Main.ManageCustomers += ManageProducts;
-            mms_Main.ManageListeners += ManageListeners;
             mms_Main.ViewSettings += ViewSettings;
             mms_Main.AddProduct += AddProduct;
             bsInventory = new BindingSource(components);

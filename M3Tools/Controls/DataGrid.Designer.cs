@@ -67,6 +67,9 @@
 
 		internal System.Windows.Forms.CheckBox chk_SelectAll;
 		internal ToolsContextMenu cms_Tools;
+		protected internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Selection;
+		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
+		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
 
 		#endregion
 	}

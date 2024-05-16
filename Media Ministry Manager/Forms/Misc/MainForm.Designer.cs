@@ -41,7 +41,7 @@ namespace M3App
             btn_OrderManagement = new Button();
             btn_OrderManagement.Click += new EventHandler(ManageOrders);
             btn_ProductManagement = new Button();
-            btn_ProductManagement.Click += new EventHandler(MangeProducts);
+            btn_ProductManagement.Click += new EventHandler(MangeInventory);
             btn_CustomerManagement = new Button();
             btn_CustomerManagement.Click += new EventHandler(ManageCustomers);
             ss_Queries = new StatusStrip();
@@ -51,10 +51,6 @@ namespace M3App
             btn_EmailMinistry.Click += new EventHandler(ManageListeners);
             pnl_Controls = new Panel();
             mms_Main = new SPPBC.M3Tools.MainMenuStrip();
-            mms_Main.ManageProducts += MangeProducts;
-            mms_Main.ManageOrders += ManageOrders;
-            mms_Main.ManageCustomers += ManageCustomers;
-            mms_Main.ManageListeners += ManageListeners;
             mms_Main.Logout += Logout;
             mms_Main.ExitApplication += ExitApp;
             mms_Main.UpdateAvailable += ExitApp;

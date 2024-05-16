@@ -29,14 +29,14 @@ namespace M3App
             My.MyProject.Forms.MainForm.Show();
         }
 
-        private void Logout()
+        private void Logout(object sender, EventArgs e)
         {
             Utils.LogOff();
             Tooled = true;
             Close();
         }
 
-        private void ExitApplication()
+        private void ExitApplication(object sender, EventArgs e)
         {
             Utils.CloseOpenForms();
         }
@@ -65,7 +65,7 @@ namespace M3App
             Close();
         }
 
-        private void ViewSettings()
+        private void ViewSettings(object sender , EventArgs e)
         {
 			using var settings = new SettingsForm();
 			settings.Show();

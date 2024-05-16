@@ -23,7 +23,7 @@ namespace SPPBC.M3Tools.Database
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The username to use with the API calls")]
-        public string Username { protected internal get; set; }
+        public string Username { get; set; }
 
 		/// <summary>
 		/// The password to use for the API calls
@@ -32,7 +32,7 @@ namespace SPPBC.M3Tools.Database
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The password to use with the API calls")]
-        public string Password { protected internal get; set; }
+        public string Password { get; set; }
 
 		/// <summary>
 		/// The URL to use for the API calls

@@ -40,19 +40,17 @@ namespace SPPBC.M3Tools
 	/// </summary>
 	public partial class MainMenuStrip
 	{
-		private const string toolStripPrefix = "tsmi_";
-
 		/// <summary>
 		/// Occurs when the Logout menu item is clicked
 		/// </summary>
-		public event LogoutEventHandler Logout;
+		public event EventHandler Logout;
 
 		/// <summary>
-		/// The event that occurs when the user wishes to logout the application
+		/// Open one of the managment forms
 		/// </summary>
-		public delegate void LogoutEventHandler();
+		public event ManageEventHandler Manage;
 
-		/// <summary>
+		/*/// <summary>
 		/// Occurs when the ViewCustomer menu item is clicked
 		/// </summary>
 		public event EventHandler ManageCustomers;
@@ -70,37 +68,22 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Occurs when the ViewOrders menu item is clicked
 		/// </summary>
-		public event EventHandler ManageOrders;
+		public event EventHandler ManageOrders;*/
 
 		/// <summary>
 		/// Occurs when the Settings menu item is clicked
 		/// </summary>
-		public event ViewSettingsEventHandler ViewSettings;
-
-		/// <summary>
-		/// The handler for when the user wants to look at the application settings
-		/// </summary>
-		public delegate void ViewSettingsEventHandler();
+		public event EventHandler ViewSettings;
 
 		/// <summary>
 		/// Occurs when the Exit menu item is clicked
 		/// </summary>
-		public event ExitApplicationEventHandler ExitApplication;
-
-		/// <summary>
-		/// The handler for when the user wishes to exit the application entirely
-		/// </summary>
-		public delegate void ExitApplicationEventHandler();
+		public event EventHandler ExitApplication;
 
 		/// <summary>
 		/// Occurs when the Update menu item is clicked, and an update is available
 		/// </summary>
-		public event UpdateAvailableEventHandler UpdateAvailable;
-
-		/// <summary>
-		/// The handler for when the user wants to manually check for an update
-		/// </summary>
-		public delegate void UpdateAvailableEventHandler();
+		public event EventHandler UpdateAvailable;
 
 		/// <summary>
 		/// Occurs when a customer is successfully added
@@ -138,16 +121,18 @@ namespace SPPBC.M3Tools
 		public MainMenuStrip()
 		{
 			InitializeComponent();
+
+			tsmi_ViewCustomers.Click += new EventHandler(ChangeView);
 		}
 
 		private void LogoutApplication(object sender, EventArgs e)
 		{
-			Logout?.Invoke();
+			Logout?.Invoke(sender, e);
 		}
 
 		private void Exit(object sender, EventArgs e)
 		{
-			ExitApplication?.Invoke();
+			ExitApplication?.Invoke(sender, e);
 		}
 
 		private void CreateCustomer(object sender, EventArgs e)
@@ -234,27 +219,32 @@ namespace SPPBC.M3Tools
 
 		private void ViewCustomers(object sender, EventArgs e)
 		{
-			ManageCustomers?.Invoke(this, e);
+			Manage?.Invoke(this, new(ManageType.Customers));
 		}
 
 		private void ViewProducts(object sender, EventArgs e)
 		{
-			ManageProducts?.Invoke(this, e);
+			Manage?.Invoke(this, new(ManageType.Inventory));
 		}
 
 		private void ViewOrders(object sender, EventArgs e)
 		{
-			ManageOrders?.Invoke(this, e);
+			Manage?.Invoke(this, new(ManageType.Orders));
 		}
 
 		private void ViewListeners(object sender, EventArgs e)
 		{
-			ManageListeners?.Invoke(this, e);
+			Manage?.Invoke(this, new(ManageType.Listeners));
+		}
+
+		private void ChangeView(object sender, EventArgs e)
+		{
+			Console.WriteLine(sender.ToString());
 		}
 
 		private void ShowSettings(object sender, EventArgs e)
 		{
-			ViewSettings?.Invoke();
+			ViewSettings?.Invoke(sender, e);
 		}
 
 		private void UpdateAppBW(object sender, DoWorkEventArgs e)
@@ -271,7 +261,7 @@ namespace SPPBC.M3Tools
 			try
 			{
 				Process.Start(setupFileLocation);
-				UpdateAvailable?.Invoke();
+				UpdateAvailable?.Invoke(this, e);
 			}
 			catch
 			{
@@ -332,72 +322,6 @@ namespace SPPBC.M3Tools
 
 			return false;
 		}
-
-		private void ToggleItem(params string[] path)
-		{
-			if (string.IsNullOrWhiteSpace(path[0]))
-			{
-				throw new Exceptions.MenuException("Initial path must be passed");
-			}
-			string parentItemName = path[0].Contains(toolStripPrefix) ? path[0] : $"{toolStripPrefix}{path[0]}";
-			ToolStripMenuItem parentItem = (ToolStripMenuItem)Items[parentItemName];
-
-			if (parentItem is null)
-			{
-				throw new Exceptions.MenuException($"Menu item with name {path[0]} not found");
-			}
-
-			ToggleItem(parentItem, path.Skip(1).ToArray());
-		}
-
-		private void ToggleItem(ToolStripMenuItem parent, params string[] path)
-		{
-			// TODO: Figure out how to simplify this
-			ToolStripMenuItem currentItem;
-
-			switch (path.Length)
-			{
-				case 0:
-					{
-						currentItem = parent;
-						break;
-					}
-				case 1:
-					{
-						currentItem = GetChildItem(parent, path[0]);
-						break;
-					}
-
-				default:
-					{
-						currentItem = parent;
-						foreach (string child in path)
-							currentItem = GetChildItem(currentItem, child);
-						break;
-					}
-			}
-
-			currentItem.Available = !currentItem.Available;
-		}
-
-		private ToolStripMenuItem GetChildItem(ToolStripMenuItem parent, string name)
-		{
-			foreach (ToolStripMenuItem item in parent.DropDownItems)
-			{
-				if (item.AccessibleName.Equals(name) | item.Name.Contains(name))
-				{
-					// The current child has the name that is being looked for
-					return item;
-				}
-			}
-
-			throw new Exceptions.MenuException($"Menu item {name} under the parent of {parent.AccessibleName} not found");
-		}
-
-		/*public void ToggleViewItem(string itemName)
-		{
-			ToggleItem(new[] { "view", itemName });
-		}*/
 
 		/// <summary>
 		/// Toggle hiding an entry in the menu strip based on passed name

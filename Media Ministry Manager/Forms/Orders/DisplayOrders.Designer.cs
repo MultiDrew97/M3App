@@ -44,9 +44,6 @@ namespace M3App
             mms_Strip.Logout += Logout;
             mms_Strip.ExitApplication += ExitApplication;
             mms_Strip.UpdateAvailable += ExitApplication;
-            mms_Strip.ManageCustomers += ViewCustomers;
-            mms_Strip.ManageProducts += ViewProducts;
-            mms_Strip.ManageListeners += ViewListeners;
             mms_Strip.ViewSettings += ViewSettings;
             ((System.ComponentModel.ISupportInitialize)bsOrders).BeginInit();
             SuspendLayout();

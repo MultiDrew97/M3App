@@ -31,5 +31,14 @@ namespace SPPBC.M3Tools.My {
                 return ((string)(this["ObjectDelimiter"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(\\d{3})(\\d{3})(\\d{4})")]
+        public string PhoneRegex {
+            get {
+                return ((string)(this["PhoneRegex"]));
+            }
+        }
     }
 }

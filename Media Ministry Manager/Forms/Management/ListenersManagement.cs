@@ -11,8 +11,6 @@ namespace M3App
 	/// </summary>
 	public partial class ListenersManagement
     {
-        private event ListenerEventHandler ListenerDBModified;
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -25,16 +23,15 @@ namespace M3App
             gt_Email.Authorize(My.Settings.Default.Username);
             gd_Drive.Authorize(My.Settings.Default.Username);
 
-			ListenerDBModified += new ListenerEventHandler(Reload);
-
-			ldg_Listeners.Reload += new SPPBC.M3Tools.Events.RefreshViewEventHandler(Reload);
+			ldg_Listeners.Reload += new EventHandler(Reload);
 			ldg_Listeners.AddListener += new ListenerEventHandler(AddListener);
 			ldg_Listeners.UpdateListener += new ListenerEventHandler(UpdateListener);
 			ldg_Listeners.RemoveListener += new ListenerEventHandler(RemoveListener);
 
-			mms_Main.ExitApplication += new SPPBC.M3Tools.MainMenuStrip.ExitApplicationEventHandler(ExitApplication);
-			mms_Main.Logout += new SPPBC.M3Tools.MainMenuStrip.LogoutEventHandler(Logout);
-			mms_Main.ViewSettings += new SPPBC.M3Tools.MainMenuStrip.ViewSettingsEventHandler(ViewSettings);
+			mms_Main.ExitApplication += new EventHandler(ExitApplication);
+			mms_Main.Logout += new EventHandler(Logout);
+			mms_Main.ViewSettings += new EventHandler(ViewSettings);
+			mms_Main.AddListener+= new ListenerEventHandler(AddListener);
 
 			ts_Tools.AddEntry += new EventHandler(AddListener);
 			ts_Tools.SendEmails += new EventHandler(SendEmails);
@@ -51,13 +48,13 @@ namespace M3App
             My.MyProject.Forms.MainForm.Show();
         }
 
-        private void Logout()
+        private void Logout(object sender, EventArgs e)
         {
             Helpers.Utils.LogOff();
             DisplayClosing(null, null);
         }
 
-        private void ExitApplication()
+        private void ExitApplication(object sender, EventArgs e)
         {
             Helpers.Utils.CloseOpenForms();
         }
@@ -83,7 +80,7 @@ namespace M3App
             DisplayClosing(null, null);
         }
 
-        private void ViewSettings()
+        private void ViewSettings(object sender, EventArgs e)
         {
             var settings = new SettingsForm();
             settings.ShowDialog();
@@ -101,7 +98,7 @@ namespace M3App
         {
             UseWaitCursor = true;
             dbListeners.RemoveListener(e.Value.Id);
-            ListenerDBModified.Invoke(this, e);
+            Reload(sender, e);
         }
 
         private void AddListener(object sender, EventArgs e)
@@ -127,7 +124,7 @@ namespace M3App
 			var message = gt_Email.Create(e.Listener, subject, body);
 			gt_Email.Send(message);
 #endif
-			ListenerDBModified.Invoke(this, e);
+			Reload(sender, e);
         }
 
         private void UpdateListener(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
@@ -141,7 +138,7 @@ namespace M3App
 
             UseWaitCursor = true;
             dbListeners.UpdateListener(edit.Listener);
-			ListenerDBModified.Invoke(this, new ListenerEventArgs(edit.Listener, EventType.Updated));
+			Reload(sender, e);
         }
 
 		private void Reload(object sender, EventArgs e)

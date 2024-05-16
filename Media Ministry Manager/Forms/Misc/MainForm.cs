@@ -14,6 +14,8 @@ namespace M3App
         public MainForm()
         {
             InitializeComponent();
+
+			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
         }
         private void Reload()
         {
@@ -22,7 +24,27 @@ namespace M3App
             Focus();
         }
 
-        private void MangeProducts(object sender, EventArgs e)
+		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
+		{
+			switch (e.Manage)
+			{
+				case SPPBC.M3Tools.Events.ManageType.Customers:
+					ManageCustomers(sender, e);
+					break;
+				case SPPBC.M3Tools.Events.ManageType.Listeners:
+					ManageListeners(sender, e);
+					break;
+				case SPPBC.M3Tools.Events.ManageType.Orders:
+					ManageOrders(sender, e);
+					break;
+				case SPPBC.M3Tools.Events.ManageType.Inventory:
+					MangeInventory(sender, e);
+					break;
+					
+			}
+		}
+
+        private void MangeInventory(object sender, EventArgs e)
         {
             var products = new InventoryManagement();
             products.Show();
@@ -50,13 +72,13 @@ namespace M3App
             Close();
         }
 
-        private void Logout()
+        private void Logout(object sender, EventArgs e)
         {
             Utils.LogOff();
             Close();
         }
 
-        private void ExitApp()
+        private void ExitApp(object sender, EventArgs e)
         {
             Utils.CloseOpenForms();
         }
@@ -99,7 +121,7 @@ namespace M3App
 		// MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		// End Sub
 
-		private void ViewSettings()
+		private void ViewSettings(object sender, EventArgs e)
         {
             var settings = new SettingsForm();
             settings.Show();

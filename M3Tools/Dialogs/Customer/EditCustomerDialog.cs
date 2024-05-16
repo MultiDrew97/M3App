@@ -7,121 +7,126 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools.Dialogs
 {
-    public partial class EditCustomerDialog
-    {
-        private Types.Customer _customer;
-        // Private _newInfo As Types.Customer
+	public partial class EditCustomerDialog
+	{
+		private Types.Customer _customer;
+		// Private _newInfo As Types.Customer
 
-        private event CustomerChangedEventHandler CustomerChanged;
+		private event CustomerChangedEventHandler CustomerChanged;
 
-        private delegate void CustomerChangedEventHandler();
+		private delegate void CustomerChangedEventHandler();
 
 		/// <summary>
 		/// The customer being edited
 		/// </summary>
-        public Types.Customer Customer
-        {
-            get
-            {
-                return _customer;
-            }
-            set
-            {
-                _customer = value;
-                CustomerChanged?.Invoke();
-            }
-        }
+		public Types.Customer Customer
+		{
+			get
+			{
+				return _customer;
+			}
+			private set
+			{
+				_customer = value;
+				CustomerChanged?.Invoke();
+			}
+		}
 
 		/// <summary>
 		/// The new info for the customer
 		/// </summary>
-        public Types.Customer NewInfo
-        {
-            get
-            {
-                return new Types.Customer(Customer.Id, FirstName, LastName, Address, Email, Phone);
-            }
-        }
+		public Types.Customer NewInfo
+		{
+			get
+			{
+				return new Types.Customer(Customer.Id, FirstName, LastName, Address, Email, Phone);
+			}
+		}
 
 		/// <summary>
 		/// The customer's first name
 		/// </summary>
-        public string FirstName
-        {
-            get
-            {
-                return gi_FirstName.Text;
-            }
-            set
-            {
-                gi_FirstName.Text = value;
-            }
-        }
+		public string FirstName
+		{
+			get
+			{
+				return gi_FirstName.Text;
+			}
+			set
+			{
+				gi_FirstName.Text = value;
+			}
+		}
 
 		/// <summary>
 		/// The customer's last name
 		/// </summary>
-        public string LastName
-        {
-            get
-            {
-                return gi_LastName.Text;
-            }
-            set
-            {
-                gi_LastName.Text = value;
-            }
-        }
+		public string LastName
+		{
+			get
+			{
+				return gi_LastName.Text;
+			}
+			set
+			{
+				gi_LastName.Text = value;
+			}
+		}
 
 		/// <summary>
 		/// The customer's phone number
 		/// </summary>
-        public string Phone
-        {
-            get
-            {
-                return PhoneNumberField1.Text;
-            }
-            set
-            {
-                PhoneNumberField1.Text = value;
-            }
-        }
+		public string Phone
+		{
+			get
+			{
+				return PhoneNumberField1.Text;
+			}
+			set
+			{
+				PhoneNumberField1.Text = value;
+			}
+		}
 
 		/// <summary>
 		/// The email of the customer
 		/// </summary>
-        public string Email
-        {
-            get
-            {
-                return gi_Email.Text;
-            }
-            set
-            {
-                gi_Email.Text = value;
-            }
-        }
+		public string Email
+		{
+			get
+			{
+				return gi_Email.Text;
+			}
+			set
+			{
+				gi_Email.Text = value;
+			}
+		}
 
 		/// <summary>
 		/// The address of the customer
 		/// </summary>
-        public Types.Address Address
-        {
-            get
-            {
-                return af_Address.Address;
-            }
-            set
-            {
-                af_Address.Address = value;
-            }
-        }
+		public Types.Address Address
+		{
+			get
+			{
+				return af_Address.Address;
+			}
+			set
+			{
+				af_Address.Address = value;
+			}
+		}
+
+		public EditCustomerDialog(Types.Customer customer) : this()
+		{
+			this.Customer = customer;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public EditCustomerDialog()
+        protected EditCustomerDialog()
         {
             InitializeComponent();
         }

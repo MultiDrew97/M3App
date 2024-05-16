@@ -80,9 +80,10 @@ namespace SPPBC.M3Tools
 
         private void BoldText(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-            int fontStyle = GetCurrentFontStyle();
+#if DEBUG
+			MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+#else
+			int fontStyle = GetCurrentFontStyle();
 
             if (!rtb_Body.SelectionFont.Bold)
             {
@@ -94,6 +95,7 @@ namespace SPPBC.M3Tools
             }
 
             rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, (System.Drawing.FontStyle)fontStyle);
+#endif
         }
 
         private void BoldShortcut(object sender, EventArgs e)
@@ -122,9 +124,10 @@ namespace SPPBC.M3Tools
 
         private void UnderlineText(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-            int fontStyle = GetCurrentFontStyle();
+#if DEBUG
+			MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+#else
+			int fontStyle = GetCurrentFontStyle();
 
             if (!rtb_Body.SelectionFont.Underline)
             {
@@ -136,14 +139,15 @@ namespace SPPBC.M3Tools
             }
 
             rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, (System.Drawing.FontStyle)fontStyle);
-
+#endif
         }
 
         private void ItalicizeText(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-            int fontStyle = GetCurrentFontStyle();
+#if DEBUG
+			MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+#else
+			int fontStyle = GetCurrentFontStyle();
 
             if (!rtb_Body.SelectionFont.Italic)
             {
@@ -155,6 +159,7 @@ namespace SPPBC.M3Tools
             }
 
             rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, (System.Drawing.FontStyle)fontStyle);
+#endif
         }
 
         private int GetCurrentFontStyle()

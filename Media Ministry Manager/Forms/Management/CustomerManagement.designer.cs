@@ -9,7 +9,7 @@ using SPPBC.M3Tools.Events.Customers;
 namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class CustomerManagement : Form
+    public partial class CustomerManagement : ManagementForm<SPPBC.M3Tools.Types.Customer>
     {
 
         // Form overrides dispose to clean up the component list.
@@ -39,72 +39,36 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ss_StatusView = new System.Windows.Forms.StatusStrip();
-            this.tss_CustomersView = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
             this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
-            this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
+            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
-            this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
-            this.ss_StatusView.SuspendLayout();
-            this.ToolStripContainer1.ContentPanel.SuspendLayout();
-            this.ToolStripContainer1.TopToolStripPanel.SuspendLayout();
-            this.ToolStripContainer1.SuspendLayout();
+            this.toolStripContainer1.ContentPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cdg_Customers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
             this.SuspendLayout();
             // 
-            // ss_StatusView
+            // toolStripContainer1
             // 
-            this.ss_StatusView.BackColor = System.Drawing.SystemColors.Control;
-            this.ss_StatusView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ss_StatusView.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.ss_StatusView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tss_CustomersView});
-            this.ss_StatusView.Location = new System.Drawing.Point(0, 439);
-            this.ss_StatusView.Name = "ss_StatusView";
-            this.ss_StatusView.Size = new System.Drawing.Size(784, 22);
-            this.ss_StatusView.TabIndex = 3;
+            this.toolStripContainer1.BottomToolStripPanelVisible = true;
             // 
-            // tss_CustomersView
+            // toolStripContainer1.ContentPanel
             // 
-            this.tss_CustomersView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tss_CustomersView.Name = "tss_CustomersView";
-            this.tss_CustomersView.Size = new System.Drawing.Size(170, 17);
-            this.tss_CustomersView.Text = "Here are the current customers";
-            // 
-            // mms_Main
-            // 
-            this.mms_Main.Location = new System.Drawing.Point(0, 0);
-            this.mms_Main.Name = "mms_Main";
-            this.mms_Main.Size = new System.Drawing.Size(784, 24);
-            this.mms_Main.TabIndex = 6;
-            this.mms_Main.Text = "Menu";
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.cdg_Customers);
+            this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // dbCustomers
             // 
             this.dbCustomers.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
             this.dbCustomers.Password = global::M3App.My.Settings.Default.ApiPassword;
             this.dbCustomers.Username = global::M3App.My.Settings.Default.ApiUsername;
-            // 
-            // ToolStripContainer1
-            // 
-            // 
-            // ToolStripContainer1.ContentPanel
-            // 
-            this.ToolStripContainer1.ContentPanel.Controls.Add(this.cdg_Customers);
-            this.ToolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 376);
-            this.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ToolStripContainer1.Location = new System.Drawing.Point(0, 24);
-            this.ToolStripContainer1.Name = "ToolStripContainer1";
-            this.ToolStripContainer1.Size = new System.Drawing.Size(784, 415);
-            this.ToolStripContainer1.TabIndex = 7;
-            this.ToolStripContainer1.Text = "ToolStripContainer1";
-            // 
-            // ToolStripContainer1.TopToolStripPanel
-            // 
-            this.ToolStripContainer1.TopToolStripPanel.Controls.Add(this.ts_Tools);
             // 
             // cdg_Customers
             // 
@@ -113,6 +77,14 @@ namespace M3App
             this.cdg_Customers.AutoGenerateColumns = false;
             this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cdg_Customers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewImageButtonEditColumn1,
+            this.dataGridViewImageButtonDeleteColumn1});
             this.cdg_Customers.DataSource = this.bsCustomers;
             this.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -126,61 +98,120 @@ namespace M3App
             this.cdg_Customers.Size = new System.Drawing.Size(784, 376);
             this.cdg_Customers.TabIndex = 1;
             // 
-            // ts_Tools
+            // dataGridViewCheckBoxColumn1
             // 
-            this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
-            this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ts_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.ts_Tools.ListType = null;
-            this.ts_Tools.Location = new System.Drawing.Point(0, 0);
-            this.ts_Tools.Name = "ts_Tools";
-            this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.ts_Tools.Size = new System.Drawing.Size(784, 39);
-            this.ts_Tools.Stretch = true;
-            this.ts_Tools.TabIndex = 2;
-            this.ts_Tools.Text = "ToolsToolStrip1";
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewCheckBoxColumn1.Frozen = true;
+            this.dataGridViewCheckBoxColumn1.HeaderText = "";
+            this.dataGridViewCheckBoxColumn1.MinimumWidth = 25;
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewCheckBoxColumn1.Visible = false;
+            this.dataGridViewCheckBoxColumn1.Width = 25;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.FillWeight = 25F;
+            this.dataGridViewTextBoxColumn2.Frozen = true;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn3.FillWeight = 25F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Phone";
+            this.dataGridViewTextBoxColumn4.FillWeight = 25F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Phone";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Email";
+            this.dataGridViewTextBoxColumn5.FillWeight = 25F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Email";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewImageButtonEditColumn1
+            // 
+            this.dataGridViewImageButtonEditColumn1.ButtonImage = null;
+            this.dataGridViewImageButtonEditColumn1.FillWeight = 5F;
+            this.dataGridViewImageButtonEditColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dataGridViewImageButtonEditColumn1.HeaderText = "";
+            this.dataGridViewImageButtonEditColumn1.MinimumWidth = 25;
+            this.dataGridViewImageButtonEditColumn1.Name = "dataGridViewImageButtonEditColumn1";
+            this.dataGridViewImageButtonEditColumn1.ReadOnly = true;
+            this.dataGridViewImageButtonEditColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageButtonEditColumn1.ToolTipText = "Edit";
+            this.dataGridViewImageButtonEditColumn1.Width = 25;
+            // 
+            // dataGridViewImageButtonDeleteColumn1
+            // 
+            this.dataGridViewImageButtonDeleteColumn1.ButtonImage = null;
+            this.dataGridViewImageButtonDeleteColumn1.FillWeight = 5F;
+            this.dataGridViewImageButtonDeleteColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dataGridViewImageButtonDeleteColumn1.HeaderText = "";
+            this.dataGridViewImageButtonDeleteColumn1.MinimumWidth = 25;
+            this.dataGridViewImageButtonDeleteColumn1.Name = "dataGridViewImageButtonDeleteColumn1";
+            this.dataGridViewImageButtonDeleteColumn1.ReadOnly = true;
+            this.dataGridViewImageButtonDeleteColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageButtonDeleteColumn1.ToolTipText = "Remove";
+            this.dataGridViewImageButtonDeleteColumn1.Width = 25;
+            // 
+            // bsCustomers
+            // 
+            this.bsCustomers.Filter = "";
             // 
             // CustomerManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.ToolStripContainer1);
-            this.Controls.Add(this.ss_StatusView);
-            this.Controls.Add(this.mms_Main);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::M3App.My.Resources.Resources.App_Icon;
-            this.MainMenuStrip = this.mms_Main;
-            this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "CustomerManagement";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Media Ministry Manager";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.DisplayClosing);
             this.Load += new System.EventHandler(this.Reload);
-            this.ss_StatusView.ResumeLayout(false);
-            this.ss_StatusView.PerformLayout();
-            this.ToolStripContainer1.ContentPanel.ResumeLayout(false);
-            this.ToolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-            this.ToolStripContainer1.TopToolStripPanel.PerformLayout();
-            this.ToolStripContainer1.ResumeLayout(false);
-            this.ToolStripContainer1.PerformLayout();
+            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cdg_Customers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-        internal StatusStrip ss_StatusView;
-        internal ToolStripStatusLabel tss_CustomersView;
-        internal SPPBC.M3Tools.MainMenuStrip mms_Main;
         internal SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
-        internal ToolStripContainer ToolStripContainer1;
         internal SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
-        internal SPPBC.M3Tools.ToolsToolStrip ts_Tools;
 		private CustomerBindingSource bsCustomers;
+		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
+		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 	}
 }

@@ -7,7 +7,7 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-    public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView //where T : IDbEntry
+    public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView
 	{
 
         private string _filter = "";
@@ -272,11 +272,14 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
         public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts)
         {
-            throw new System.NotImplementedException("ApplySort");
-            IsSorted = true;
+#if DEBUG
+			throw new System.NotImplementedException("ApplySort");
+#else
+			IsSorted = true;
 			SortDescriptions = sorts;
 
             OnChanged(System.ComponentModel.ListChangedType.Reset);
+#endif
         }
 
 		/// <summary>
@@ -327,8 +330,11 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
         public void AddIndex(System.ComponentModel.PropertyDescriptor @property)
         {
-            throw new System.NotImplementedException("AddIndex");
-            OnChanged(System.ComponentModel.ListChangedType.Reset);
+#if DEBUG
+			throw new System.NotImplementedException("AddIndex");
+#else
+			OnChanged(System.ComponentModel.ListChangedType.Reset);
+#endif
         }
 
 		/// <summary>
@@ -338,8 +344,11 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
         public void RemoveIndex(System.ComponentModel.PropertyDescriptor @property)
         {
-            throw new System.NotImplementedException("RemoveIndex");
-            OnChanged(System.ComponentModel.ListChangedType.Reset);
+#if DEBUG
+			throw new System.NotImplementedException("RemoveIndex");
+#else
+			OnChanged(System.ComponentModel.ListChangedType.Reset);
+#endif
         }
 
 		/// <summary>
@@ -348,9 +357,12 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
         public void RemoveSort()
         {
-            throw new System.NotImplementedException("RemoveSort");
-            IsSorted = false;
+#if DEBUG
+			throw new System.NotImplementedException("RemoveSort");
+#else
+			IsSorted = false;
             OnChanged(System.ComponentModel.ListChangedType.Reset);
+#endif
         }
 
 		/// <summary>
@@ -360,8 +372,11 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
         public object AddNew()
         {
-            throw new System.NotImplementedException("AddNew");
+#if DEBUG
+			throw new System.NotImplementedException("AddNew");
+#else
 			return (T)new object();
+#endif
         }
 
 		/// <summary>

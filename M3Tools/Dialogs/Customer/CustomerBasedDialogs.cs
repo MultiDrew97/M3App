@@ -23,7 +23,7 @@ namespace SPPBC.M3Tools
 		/// <returns></returns>
         public DialogResult EditCustomer(Types.Customer customer)
         {
-            return new Dialogs.EditCustomerDialog() { Customer = customer }.ShowDialog();
+            return new Dialogs.EditCustomerDialog(customer).ShowDialog();
         }
     }
 }

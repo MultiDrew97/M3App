@@ -8,7 +8,9 @@ using SPPBC.M3Tools.Types;
 
 namespace M3App
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class PlaceOrderDialog
     {
         private DataTable CustomersTable;
@@ -16,6 +18,9 @@ namespace M3App
         private DataTable ProductsTable;
         private readonly System.Collections.ObjectModel.Collection<Product> Products;
 
+		/// <summary>
+		/// 
+		/// </summary>
         public PlaceOrderDialog()
         {
             InitializeComponent();
@@ -50,7 +55,7 @@ namespace M3App
                 DialogResult = DialogResult.OK;
                 Close();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 tss_AddOrder.Text = "The order could not be added. Please try again";
                 tss_AddOrder.ForeColor = Color.Red;

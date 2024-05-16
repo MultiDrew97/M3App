@@ -55,5 +55,13 @@ namespace SPPBC.M3Tools.Data
             this.PerformLayout();
 
 		}
+
+
+		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
+		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
+		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
+		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
+		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
 	}
 }

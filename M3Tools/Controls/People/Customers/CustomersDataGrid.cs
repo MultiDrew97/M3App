@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Security.Cryptography;
 using SPPBC.M3Tools.Events;
 
 namespace SPPBC.M3Tools.Data
@@ -10,7 +11,7 @@ namespace SPPBC.M3Tools.Data
 	/// <summary>
 	/// Custom data grid to use for displaying customer information
 	/// </summary>
-    public partial class CustomerDataGrid : DataGrid<Types.Customer>
+    public partial class CustomerDataGrid
     {
 		/*private readonly System.Collections.Generic.Dictionary<string, Tuple<string, int>> columns = new() {
 			{ "ID", new("CustomerID", 1) },
@@ -71,41 +72,45 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
+			this.LoadColumns();
+
 			if (DesignMode)
 			{
 				return;
 			}
 
-			LoadColumns();
-
-			AddEntry += new DataEventHandler<Types.Customer>(ParseEvents);
-			UpdateEntry += new DataEventHandler<Types.Customer>(ParseEvents);
-			RemoveEntry += new DataEventHandler<Types.Customer>(ParseEvents);
+			AddEntry += (sender, e) => AddCustomer?.Invoke(sender, new(e.Value, e.EventType));
+			UpdateEntry += (sender, e) => UpdateCustomer?.Invoke(sender, new(e.Value, e.EventType));
+			RemoveEntry += (sender, e) => RemoveCustomer?.Invoke(sender, new(e.Value, e.EventType));
 		}
 
-		private void ParseEvents(object sender, DataEventArgs<Types.Customer> e)
+		private void ParseEvents(object sender, Events.Customers.CustomerEventArgs e)
 		{
 			Console.WriteLine("Parsing DataGrid Event");
 			Console.WriteLine("Sender: {0}\nEvent Type: {1}\nValue: {2}", sender, e.EventType, e.Value);
 			switch (e.EventType)
 			{
-				case EventType.Added: { AddCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
-				case EventType.Removed: { RemoveCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
-				case EventType.Updated: { UpdateCustomer?.Invoke(sender, (Events.Customers.CustomerEventArgs)e); break; }
+				case EventType.Added: { AddCustomer?.Invoke(sender, e); break; }
+				case EventType.Removed: { RemoveCustomer?.Invoke(sender, e); break; }
+				case EventType.Updated: { UpdateCustomer?.Invoke(sender, e); break; }
 				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
 			}
 		}
 
 		private new void LoadColumns()
 		{
+			if (DesignMode)
+			{
+				return;
+			}
 			base.LoadColumns();
 
 			dgc_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Join = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			dgc_Join = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
 			// 
 			// dgc_CustomerID
@@ -119,6 +124,7 @@ namespace SPPBC.M3Tools.Data
 			this.dgc_CustomerID.Name = "dgc_CustomerID";
 			this.dgc_CustomerID.ReadOnly = true;
 			this.dgc_CustomerID.Visible = false;
+
 			// 
 			// dgc_Name
 			// 
@@ -130,6 +136,7 @@ namespace SPPBC.M3Tools.Data
 			this.dgc_Name.MinimumWidth = 10;
 			this.dgc_Name.Name = "dgc_Name";
 			this.dgc_Name.ReadOnly = true;
+
 			// 
 			// dgc_Address
 			// 
@@ -140,6 +147,7 @@ namespace SPPBC.M3Tools.Data
 			this.dgc_Address.MinimumWidth = 10;
 			this.dgc_Address.Name = "dgc_Address";
 			this.dgc_Address.ReadOnly = true;
+
 			// 
 			// dgc_Phone
 			// 
@@ -150,6 +158,7 @@ namespace SPPBC.M3Tools.Data
 			this.dgc_Phone.MinimumWidth = 10;
 			this.dgc_Phone.Name = "dgc_Phone";
 			this.dgc_Phone.ReadOnly = true;
+
 			// 
 			// dgc_Email
 			// 
@@ -160,6 +169,7 @@ namespace SPPBC.M3Tools.Data
 			this.dgc_Email.MinimumWidth = 10;
 			this.dgc_Email.Name = "dgc_Email";
 			this.dgc_Email.ReadOnly = true;
+
 			// 
 			// dgc_Join
 			//
@@ -179,13 +189,6 @@ namespace SPPBC.M3Tools.Data
 				this.dgc_Edit, this.dgc_Remove
 			});
 		}
-
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
 	}
 
 }

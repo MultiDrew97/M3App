@@ -8,7 +8,7 @@ namespace SPPBC.M3Tools.Data
 	/// Base class for data grid controls used in the app
 	/// </summary>
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
-	public partial class DataGrid<T> : System.Windows.Forms.DataGridView // where T : Types.IDbEntry
+	public partial class DataGrid<T>
 	{
 		// TODO: Maybe Remove this later
 		/// <summary>
@@ -29,7 +29,7 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// Issues a reload event for the data grid
 		/// </summary>
-		public event Events.RefreshViewEventHandler Reload;
+		public event EventHandler Reload;
 
 		/// <summary>
 		/// The data used for the data grid
@@ -238,6 +238,7 @@ namespace SPPBC.M3Tools.Data
 		public DataGrid() : base()
 		{
 			InitializeComponent();
+			AutoGenerateColumns = false;
 
 			LoadColumns();
 
@@ -252,6 +253,7 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		protected internal virtual void LoadColumns()
 		{
+			this.Columns.Clear();
 			this.dgc_Selection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.dgc_Edit = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
 			this.dgc_Remove = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
@@ -310,8 +312,8 @@ namespace SPPBC.M3Tools.Data
 
 		private void ToolsOpened(object sender, EventArgs e)
 		{
-			cms_Tools.ToggleRemove(SelectedRows.Count > 0);
-			cms_Tools.ToggleEdit(SelectedRows.Count > 0);
+			cms_Tools.RemoveEnabled = SelectedRows.Count > 0;
+			cms_Tools.EditEnabled = SelectedRows.Count > 0;
 		}
 
 		private void EditSelected()
@@ -361,20 +363,5 @@ namespace SPPBC.M3Tools.Data
 		{
 			RemoveEntry?.Invoke(sender, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
 		}
-
-		/// <summary>
-		/// The column associated with selecting an entry
-		/// </summary>
-		protected internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Selection;
-
-		/// <summary>
-		/// The column associated with editting the entry
-		/// </summary>
-		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
-
-		/// <summary>
-		/// The column associated with removing the entry
-		/// </summary>
-		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
 	}
 }

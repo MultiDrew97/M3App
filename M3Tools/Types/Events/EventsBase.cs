@@ -12,14 +12,7 @@ namespace SPPBC.M3Tools.Events
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void DataEventHandler<T>(object sender, DataEventArgs<T> e); //where T : Types.IDbEntry;
-
-	/// <summary>
-	/// When a refresh view event occurs
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	public delegate void RefreshViewEventHandler(object sender, EventArgs e);
+	public delegate void DataEventHandler<T>(object sender, DataEventArgs<T> e);
 
 	/// <summary>
 	/// When a remove rows event occurs
@@ -37,10 +30,17 @@ namespace SPPBC.M3Tools.Events
 	public delegate void EditSelectedEventHandler();
 
 	/// <summary>
+	/// When a manage button is clicked
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	public delegate void ManageEventHandler(object sender, ManageEventArgs e);
+
+	/// <summary>
 	/// The argument values for the event that occured
 	/// </summary>
 	/// <typeparam name="T">The type of the data being modified</typeparam>
-	public class DataEventArgs<T> : BaseArgs //where T : Types.IDbEntry
+	public class DataEventArgs<T> : BaseDataEventArgs
 	{
 		/*/// <summary>
 		/// The row of the data being modified
@@ -77,10 +77,23 @@ namespace SPPBC.M3Tools.Events
 		}
 	}
 
+	public class ManageEventArgs : EventArgs
+	{
+		/// <summary>
+		/// What management window to open
+		/// </summary>
+		public ManageType Manage { get; protected set;}
+
+		public ManageEventArgs(ManageType manage) : base()
+		{
+			Manage = manage;
+		}
+	}
+
 	/// <summary>
 	/// Base class for all event args
 	/// </summary>
-	public abstract class BaseArgs : EventArgs
+	public abstract class BaseDataEventArgs : EventArgs
     {
 		/// <summary>
 		/// The type of even that occured
@@ -122,4 +135,31 @@ namespace SPPBC.M3Tools.Events
 		/// </summary>
         Updated
     }
+
+	/// <summary>
+	/// What type of management window is desired to be opened
+	/// </summary>
+	public enum ManageType
+	{
+		/// <summary>
+		/// No window needs to open
+		/// </summary>
+		None,
+		/// <summary>
+		/// Manage customers
+		/// </summary>
+		Customers,
+		/// <summary>
+		/// Manage listeners
+		/// </summary>
+		Listeners,
+		/// <summary>
+		/// Manage orders
+		/// </summary>
+		Orders,
+		/// <summary>
+		/// Manage inventory
+		/// </summary>
+		Inventory
+	}
 }

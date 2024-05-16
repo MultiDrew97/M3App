@@ -6,27 +6,42 @@ namespace SPPBC.M3Tools
 	/// <summary>
 	/// 
 	/// </summary>
-    public partial class ToolsContextMenu
-    {
+	public partial class ToolsContextMenu
+	{
 		/// <summary>
 		/// An event fired when the view should be refreshed
 		/// </summary>
-        public event Events.RefreshViewEventHandler RefreshView;
+		public event EventHandler RefreshView;
 
 		/// <summary>
 		/// An event fired when an entry should be removed
 		/// </summary>
-        public event Events.RemoveRowsEventHandler RemoveSelected;
+		public event Events.RemoveRowsEventHandler RemoveSelected;
 
 		/// <summary>
 		/// An event fired when an email should be sent out
 		/// </summary>
-        public event Events.SendEmailsEventHandler SendEmails;
+		public event Events.SendEmailsEventHandler SendEmails;
 
 		/// <summary>
 		/// An event fired when an entry should be editted
 		/// </summary>
-        public event Events.EditSelectedEventHandler EditSelected;
+		public event Events.EditSelectedEventHandler EditSelected;
+
+		/// <summary>
+		/// Set whether the remove button is enabled
+		/// </summary>
+		public bool RemoveEnabled { set => ts_Remove.Enabled = value; }
+
+		/// <summary>
+		/// Set whether the send emails button is enabled
+		/// </summary>
+		public bool SendEnabled { set => ts_Send.Enabled = value; }
+
+		/// <summary>
+		/// Set whether the edit button should be enabled
+		/// </summary>
+		public bool EditEnabled { set => ts_Edit.Enabled = value; }
 
 		/// <summary>
 		/// 
@@ -58,37 +73,6 @@ namespace SPPBC.M3Tools
             ts_Remove.Enabled = false;
         }
 
-		/// <summary>
-		/// Toggle whether the remove button is enabled
-		/// </summary>
-		/// <param name="enable"></param>
-        public void ToggleRemove(bool enable)
-        {
-            ts_Remove.Enabled = enable;
-        }
-
-		/// <summary>
-		/// Toggle whether the send emails button is enabled
-		/// </summary>
-		/// <param name="enable"></param>
-        public void ToggleSend(bool enable)
-        {
-            if (!ts_Send.Visible)
-            {
-                return;
-            }
-
-            ts_Send.Enabled = enable;
-        }
-
-		/// <summary>
-		/// Toggle whether the edit button should be enabled
-		/// </summary>
-		/// <param name="enable"></param>
-        public void ToggleEdit(bool enable)
-        {
-            ts_Edit.Enabled = enable;
-        }
 
         private void EmailFunctions(object sender, EventArgs e)
         {
