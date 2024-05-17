@@ -12,9 +12,8 @@ namespace SPPBC.M3Tools.Dialogs
 		private Types.Customer _customer;
 		// Private _newInfo As Types.Customer
 
-		private event CustomerChangedEventHandler CustomerChanged;
+		protected event EventHandler CustomerChanged;
 
-		private delegate void CustomerChangedEventHandler();
 
 		/// <summary>
 		/// The customer being edited
@@ -28,7 +27,7 @@ namespace SPPBC.M3Tools.Dialogs
 			private set
 			{
 				_customer = value;
-				CustomerChanged?.Invoke();
+				CustomerChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -80,11 +79,11 @@ namespace SPPBC.M3Tools.Dialogs
 		{
 			get
 			{
-				return PhoneNumberField1.Text;
+				return pf_Phone.PhoneNumber;
 			}
 			set
 			{
-				PhoneNumberField1.Text = value;
+				pf_Phone.PhoneNumber = value;
 			}
 		}
 
@@ -129,7 +128,8 @@ namespace SPPBC.M3Tools.Dialogs
         protected EditCustomerDialog()
         {
             InitializeComponent();
-        }
+			CustomerChanged += new EventHandler(CustomerUpdated);
+		}
 
         private void FinishDialog(object sender, EventArgs e)
         {
@@ -149,7 +149,7 @@ namespace SPPBC.M3Tools.Dialogs
             Close();
         }
 
-        private void CustomerUpdated()
+        private void CustomerUpdated(object sender, EventArgs e)
         {
             // _newInfo = Customer.Clone()
             FirstName = Customer.FirstName;
