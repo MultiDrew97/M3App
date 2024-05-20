@@ -7,13 +7,10 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-    public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView
+	public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView
 	{
 
-        private string _filter = "";
-        private System.ComponentModel.ListSortDescriptionCollection _sortDescriptions = new();
-		// Protected _filteredData As IList(Of T)
-		// Private _descriptor As DBEntryPropertyDescriptor
+		private string _filter = "";
 
 		/// <summary>
 		/// Add a range of values to the collection. Can be shadowed to add any data verification gap
@@ -59,18 +56,18 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// List of items currently in the collection
 		/// </summary>
-        public new System.Collections.Generic.IList<T> Items
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Filter))
-                {
-                    return base.Items;
-                }
+		public new System.Collections.Generic.IList<T> Items
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(Filter))
+				{
+					return base.Items;
+				}
 
-                return base.Items.Where(ApplyFilter).ToList();
-            }
-        }
+				return base.Items.Where(ApplyFilter).ToList();
+			}
+		}
 
 		/// <summary>
 		/// Gets an item that has the specified ID in the collection
@@ -78,8 +75,8 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="id">The ID of the entry to find</param>
 		/// <returns>The entry if found</returns>
 		/// <exception cref="System.ArgumentException">Thrown if the entry doesn't exist in the collection</exception>
-        public new T this[int id]
-        {
+		public new T this[int id]
+		{
 			get
 			{
 				foreach (var current in Items)
@@ -94,7 +91,7 @@ namespace SPPBC.M3Tools.Types
 
 				throw new System.ArgumentException($"No entry with ID '{id}'");
 			}
-        }
+		}
 
 		/// <summary>
 		/// The list of items in the collection
@@ -105,173 +102,98 @@ namespace SPPBC.M3Tools.Types
 		/// Applies a filter to the collection
 		/// </summary>
 		public string Filter
-        {
-            get
-            {
-                return _filter;
-            }
-            set
-            {
-                if (string.Equals(value, _filter, System.StringComparison.Ordinal))
-                {
-                    return;
-                }
-
-                _filter = value;
-
-                OnChanged(System.ComponentModel.ListChangedType.Reset);
-			}
-		}
-
-/*		public System.Collections.Generic.IList<T> FilteredData
 		{
 			get
 			{
-				return Items.Where(ApplyFilter).ToList();
+				return _filter;
 			}
-		}*/
+			set
+			{
+				if (string.Equals(value, _filter, System.StringComparison.Ordinal))
+				{
+					return;
+				}
+
+				_filter = value;
+
+				OnChanged(System.ComponentModel.ListChangedType.Reset);
+			}
+		}
 
 		/// <inheritdoc/>
 		public System.ComponentModel.ListSortDescriptionCollection SortDescriptions
-        {
-            get
-            {
-                return _sortDescriptions;
-            }
-			private set
-			{
-				_sortDescriptions = value;
-			}
-        }
+		{
+			get;
+			protected set;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public bool SupportsAdvancedSorting
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool SupportsAdvancedSorting { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection supports filtering
 		/// </summary>
-        public bool SupportsFiltering
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool SupportsFiltering { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection supports adding new entries
 		/// </summary>
-        public bool AllowNew
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool AllowNew { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection allows editing
 		/// </summary>
-        public bool AllowEdit
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool AllowEdit { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection allows removal
 		/// </summary>
-        public bool AllowRemove
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool AllowRemove { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection supports change notification
 		/// </summary>
-        public bool SupportsChangeNotification
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool SupportsChangeNotification { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection supports searching
 		/// </summary>
-        public bool SupportsSearching
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool SupportsSearching { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection supports sorting
 		/// </summary>
-        public bool SupportsSorting
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public bool SupportsSorting { get; protected set; } = true;
 
 		/// <summary>
 		/// Whether the collection is currently sorted
 		/// </summary>
-        public bool IsSorted { get; protected set; }
+		public bool IsSorted { get; protected set; }
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public System.ComponentModel.PropertyDescriptor SortProperty
-		{
-			get
-			{
-				throw new System.NotImplementedException("SortProperty");
-				// Return _descriptor
-			}
-		}
+		public System.ComponentModel.PropertyDescriptor SortProperty { get; protected set; }
 
 		/// <summary>
 		/// The direction the collection is sorted
 		/// </summary>
-		public System.ComponentModel.ListSortDirection SortDirection
-        {
-            get
-            {
-                return System.ComponentModel.ListSortDirection.Ascending;
-            }
-        }
+		public System.ComponentModel.ListSortDirection SortDirection { get; protected set; }
 
 		/// <summary>
 		/// Event that occurs when the collection is changed in any way
 		/// </summary>
-        public event System.ComponentModel.ListChangedEventHandler ListChanged;
+		public event System.ComponentModel.ListChangedEventHandler ListChanged;
 
 		/// <summary>
 		/// Applies a sort to the collection based on the sort criteria description provided
 		/// </summary>
 		/// <param name="sorts"></param>
 		/// <exception cref="System.NotImplementedException"></exception>
-        public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts)
-        {
+		public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts)
+		{
 #if DEBUG
 			throw new System.NotImplementedException("ApplySort");
 #else
@@ -280,16 +202,16 @@ namespace SPPBC.M3Tools.Types
 
             OnChanged(System.ComponentModel.ListChangedType.Reset);
 #endif
-        }
+		}
 
 		/// <summary>
 		/// Removes the applied filter from the 
 		/// </summary>
-        public void RemoveFilter()
-        {
-            Filter = string.Empty;
-            OnChanged(System.ComponentModel.ListChangedType.Reset);
-        }
+		public void RemoveFilter()
+		{
+			Filter = string.Empty;
+			OnChanged(System.ComponentModel.ListChangedType.Reset);
+		}
 
 		/// <summary>
 		/// Applies a sort to the collection using the provided criteria
@@ -297,87 +219,81 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="property">The column to sort on</param>
 		/// <param name="direction">The direction to sort in</param>
 		/// <exception cref="System.ArgumentException">The provided sort direction is not valid</exception>
-        public void ApplySort(System.ComponentModel.PropertyDescriptor @property, System.ComponentModel.ListSortDirection direction)
-        {
-            // Throw New NotImplementedException("ApplySort")
-            // string Column = @property.Name;
-            switch (direction)
-            {
-                case System.ComponentModel.ListSortDirection.Ascending:
-                    {
-                        break;
-                    }
+		public void ApplySort(System.ComponentModel.PropertyDescriptor @property, System.ComponentModel.ListSortDirection direction)
+		{
+			// Throw New NotImplementedException("ApplySort")
+			// string Column = @property.Name;
+			switch (direction)
+			{
+				case System.ComponentModel.ListSortDirection.Ascending:
+					break;
+				case System.ComponentModel.ListSortDirection.Descending:
+					break;
+				default:
+					throw new System.ArgumentException("Invalid sorting direction");
+			}
 
-                case System.ComponentModel.ListSortDirection.Descending:
-                    {
-                        break;
-                    }
-
-                default:
-                    {
-                        throw new System.ArgumentException("Invalid sorting direction");
-                    }
-            }
-
-            IsSorted = true;
-            OnChanged(System.ComponentModel.ListChangedType.Reset);
-        }
+			IsSorted = true;
+			SortProperty = property;
+			SortDirection = direction;
+			OnChanged(System.ComponentModel.ListChangedType.Reset);
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="property"></param>
 		/// <exception cref="System.NotImplementedException"></exception>
-        public void AddIndex(System.ComponentModel.PropertyDescriptor @property)
-        {
+		public void AddIndex(System.ComponentModel.PropertyDescriptor @property)
+		{
 #if DEBUG
 			throw new System.NotImplementedException("AddIndex");
 #else
 			OnChanged(System.ComponentModel.ListChangedType.Reset);
 #endif
-        }
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="property"></param>
 		/// <exception cref="System.NotImplementedException"></exception>
-        public void RemoveIndex(System.ComponentModel.PropertyDescriptor @property)
-        {
+		public void RemoveIndex(System.ComponentModel.PropertyDescriptor @property)
+		{
 #if DEBUG
 			throw new System.NotImplementedException("RemoveIndex");
 #else
 			OnChanged(System.ComponentModel.ListChangedType.Reset);
 #endif
-        }
+		}
 
 		/// <summary>
 		/// Removes the applied sort from the collection
 		/// </summary>
 		/// <exception cref="System.NotImplementedException"></exception>
-        public void RemoveSort()
-        {
+		public void RemoveSort()
+		{
 #if DEBUG
 			throw new System.NotImplementedException("RemoveSort");
 #else
 			IsSorted = false;
             OnChanged(System.ComponentModel.ListChangedType.Reset);
 #endif
-        }
+		}
 
 		/// <summary>
 		/// Create a new entry and return it
 		/// </summary>
 		/// <returns>The new empty entry</returns>
 		/// <exception cref="System.NotImplementedException"></exception>
-        public object AddNew()
-        {
+		public object AddNew()
+		{
 #if DEBUG
 			throw new System.NotImplementedException("AddNew");
 #else
 			return (T)new object();
 #endif
-        }
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -401,10 +317,10 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="type">The type of collection change that occurred</param>
 		/// <param name="index">The index of the item that was changed</param>
-		internal protected virtual void OnChanged(System.ComponentModel.ListChangedType @type = System.ComponentModel.ListChangedType.Reset, int index = -1)
-        {
-            ListChanged?.Invoke(this, new System.ComponentModel.ListChangedEventArgs(type, index));
-        }
-    }
+		protected internal virtual void OnChanged(System.ComponentModel.ListChangedType @type = System.ComponentModel.ListChangedType.Reset, int index = -1)
+		{
+			ListChanged?.Invoke(this, new System.ComponentModel.ListChangedEventArgs(type, index));
+		}
+	}
 }
 

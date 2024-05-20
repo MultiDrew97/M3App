@@ -49,7 +49,6 @@ namespace SPPBC.M3Tools.Data
             this.RowTemplate.Height = 28;
             this.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Size = new System.Drawing.Size(610, 500);
-            this.TabIndex = 2;
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -57,11 +56,11 @@ namespace SPPBC.M3Tools.Data
 		}
 
 
-		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
-		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
-		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
-		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		protected internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
+		protected System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
+		protected System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		protected System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
+		protected System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
+		protected System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
+		protected System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
 	}
 }

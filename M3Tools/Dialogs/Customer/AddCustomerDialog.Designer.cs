@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace SPPBC.M3Tools.Dialogs
 {
-    [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+	[Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class AddCustomerDialog : System.Windows.Forms.Form
     {
 

@@ -18,9 +18,12 @@ namespace SPPBC.M3Tools.Types
 		public new static Customer None => new();
 
 		/// <inheritdoc />
-		[System.ComponentModel.Browsable(false)]
 		[System.Text.Json.Serialization.JsonPropertyName("customerID")]
-		public override int Id => base.Id;
+		public override int Id
+		{
+			get => base.Id;
+			set => base.Id = value;
+		}
 
 		/// <summary>
 		/// The customers phone number
@@ -120,5 +123,35 @@ namespace SPPBC.M3Tools.Types
             // Phone Number
             return $"{Id}) {Name} (e: {Email} p: {Phone}){Constants.vbCrLf}{Constants.vbCrLf}{Address.Display()}{Constants.vbCrLf}";
         }
+
+		/// <summary>
+		/// Determine if a customer object is equal to another
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator ==(Customer left, Customer right)
+		{
+			if ((left is null && right is not null) || (right is null && left is not null)) return false;
+			if (left.FirstName != right.FirstName) return false;
+			if (left.LastName != right.LastName) return false;
+			if (left.Address != right.Address) return false;
+			if (left.Email != right.Email) return false;
+			if (left.Phone != right.Phone) return false;
+			if (left.Joined != right.Joined) return false;
+
+			return true;
+		}
+
+		/// <summary>
+		/// Determine if a customer object is not equal to another
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator !=(Customer left, Customer right)
+		{
+			return !(left == right);
+		}
     }
 }

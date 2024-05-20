@@ -1,4 +1,6 @@
-﻿namespace SPPBC.M3Tools.Types
+﻿using System;
+
+namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
 	/// Interface dictating what is on a database entry
@@ -12,15 +14,23 @@
 	}
 
 	/// <inheritdoc/>
-    public class DbEntry : IDbEntry
+    public class DbEntry : IDbEntry, ICloneable
     {
 		/// <summary>
 		/// An empty entry object
 		/// </summary>
 		public static DbEntry None;
 
+		/// <summary>
+		/// Create a clone of the object
+		/// </summary>
+		/// <returns></returns>
+		public virtual object Clone() { 
+			return this.MemberwiseClone();
+		}
+
 		/// <inheritdoc/>
-        public virtual int Id { get; private set; }
+        public virtual int Id { get; set; }
 
 		/// <inheritdoc/>
 		protected DbEntry(int id)

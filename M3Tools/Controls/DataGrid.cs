@@ -243,9 +243,9 @@ namespace SPPBC.M3Tools.Data
 			LoadColumns();
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
-			cms_Tools.EditSelected += EditSelected;
-			cms_Tools.RemoveSelected += RemoveSelectedRows;
-			cms_Tools.RefreshView += Reload;
+			cms_Tools.EditSelected += (sender, e) => EditSelected();
+			cms_Tools.RemoveSelected += (sender, e) => RemoveSelectedRows();
+			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
 		}
 
 		/// <summary>

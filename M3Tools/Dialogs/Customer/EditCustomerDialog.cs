@@ -42,10 +42,7 @@ namespace SPPBC.M3Tools.Dialogs
 			}
 		}
 
-		/// <summary>
-		/// The customer's first name
-		/// </summary>
-		public string FirstName
+		private string FirstName
 		{
 			get
 			{
@@ -57,10 +54,7 @@ namespace SPPBC.M3Tools.Dialogs
 			}
 		}
 
-		/// <summary>
-		/// The customer's last name
-		/// </summary>
-		public string LastName
+		private string LastName
 		{
 			get
 			{
@@ -72,10 +66,7 @@ namespace SPPBC.M3Tools.Dialogs
 			}
 		}
 
-		/// <summary>
-		/// The customer's phone number
-		/// </summary>
-		public string Phone
+		private string Phone
 		{
 			get
 			{
@@ -87,10 +78,7 @@ namespace SPPBC.M3Tools.Dialogs
 			}
 		}
 
-		/// <summary>
-		/// The email of the customer
-		/// </summary>
-		public string Email
+		private string Email
 		{
 			get
 			{
@@ -102,10 +90,7 @@ namespace SPPBC.M3Tools.Dialogs
 			}
 		}
 
-		/// <summary>
-		/// The address of the customer
-		/// </summary>
-		public Types.Address Address
+		private Types.Address Address
 		{
 			get
 			{
@@ -119,7 +104,7 @@ namespace SPPBC.M3Tools.Dialogs
 
 		public EditCustomerDialog(Types.Customer customer) : this()
 		{
-			this.Customer = customer;
+			this.Customer = (Types.Customer)customer.Clone();
 		}
 
 		/// <summary>
@@ -151,7 +136,6 @@ namespace SPPBC.M3Tools.Dialogs
 
         private void CustomerUpdated(object sender, EventArgs e)
         {
-            // _newInfo = Customer.Clone()
             FirstName = Customer.FirstName;
             LastName = Customer.LastName;
             Address = Customer.Address;
@@ -162,28 +146,12 @@ namespace SPPBC.M3Tools.Dialogs
 
         private bool ValidChangesDetected()
         {
-            bool validFirstName = !string.IsNullOrEmpty(FirstName);
-            if ((FirstName ?? "") != (Customer.FirstName ?? "") && validFirstName)
-            {
-                return true;
-            }
+			if (Customer == NewInfo)
+			{
+				return false;
+			}
 
-            if ((LastName ?? "") != (Customer.LastName ?? "") && validFirstName)
-            {
-                return true;
-            }
-
-            if ((Email ?? "") != (Customer.Email ?? "") && (string.IsNullOrWhiteSpace(Email) || Regex.IsMatch(Email, My.Resources.Resources.EmailRegex2)))
-            {
-                return true;
-            }
-
-            if (Address != Customer.Address && af_Address.IsValidAddress)
-            {
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
         // Private Sub CustomersLoaded(sender As Object, e As RunWorkerCompletedEventArgs)

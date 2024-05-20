@@ -17,17 +17,17 @@ namespace SPPBC.M3Tools.Events
 	/// <summary>
 	/// When a remove rows event occurs
 	/// </summary>
-	public delegate void RemoveRowsEventHandler();
+	// public delegate void RemoveRowsEventHandler();
 
 	/// <summary>
 	/// When a send email event occurs
 	/// </summary>
-	public delegate void SendEmailsEventHandler();
+	// public delegate void SendEmailsEventHandler();
 
 	/// <summary>
 	/// When a edit selected rows event occurs
 	/// </summary>
-	public delegate void EditSelectedEventHandler();
+	// public delegate void EditSelectedEventHandler();
 
 	/// <summary>
 	/// When a manage button is clicked

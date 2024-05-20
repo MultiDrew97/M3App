@@ -16,17 +16,17 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// An event fired when an entry should be removed
 		/// </summary>
-		public event Events.RemoveRowsEventHandler RemoveSelected;
+		public event EventHandler RemoveSelected;
 
 		/// <summary>
 		/// An event fired when an email should be sent out
 		/// </summary>
-		public event Events.SendEmailsEventHandler SendEmails;
+		public event EventHandler SendEmails;
 
 		/// <summary>
 		/// An event fired when an entry should be editted
 		/// </summary>
-		public event Events.EditSelectedEventHandler EditSelected;
+		public event EventHandler EditSelected;
 
 		/// <summary>
 		/// Set whether the remove button is enabled
@@ -60,7 +60,7 @@ namespace SPPBC.M3Tools
                 return;
             }
 
-            RemoveSelected?.Invoke();
+            RemoveSelected?.Invoke(sender, e);
         }
 
         private void Reload(object sender, EventArgs e)
@@ -76,12 +76,12 @@ namespace SPPBC.M3Tools
 
         private void EmailFunctions(object sender, EventArgs e)
         {
-            SendEmails?.Invoke();
+            SendEmails?.Invoke(sender, e);
         }
 
         private void EditClicked(object sender, EventArgs e)
         {
-            EditSelected?.Invoke();
+            EditSelected?.Invoke(sender, e);
         }
     }
 }
