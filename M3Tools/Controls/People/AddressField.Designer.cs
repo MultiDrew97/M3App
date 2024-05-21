@@ -58,7 +58,7 @@ namespace SPPBC.M3Tools
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(706, 198);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(706, 200);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // if_Address1
@@ -68,6 +68,7 @@ namespace SPPBC.M3Tools
             this.if_Address1.Location = new System.Drawing.Point(25, 25);
             this.if_Address1.Margin = new System.Windows.Forms.Padding(25);
             this.if_Address1.Mask = "";
+            this.if_Address1.MaximumSize = new System.Drawing.Size(225, 45);
             this.if_Address1.MinimumSize = new System.Drawing.Size(300, 45);
             this.if_Address1.Name = "if_Address1";
             this.if_Address1.Placeholder = "Address 1";
@@ -83,6 +84,7 @@ namespace SPPBC.M3Tools
             this.if_Address2.Location = new System.Drawing.Point(375, 25);
             this.if_Address2.Margin = new System.Windows.Forms.Padding(25);
             this.if_Address2.Mask = "";
+            this.if_Address2.MaximumSize = new System.Drawing.Size(225, 45);
             this.if_Address2.MinimumSize = new System.Drawing.Size(300, 45);
             this.if_Address2.Name = "if_Address2";
             this.if_Address2.Placeholder = "Address 2";
@@ -97,6 +99,7 @@ namespace SPPBC.M3Tools
             this.if_City.Location = new System.Drawing.Point(25, 120);
             this.if_City.Margin = new System.Windows.Forms.Padding(25);
             this.if_City.Mask = "";
+            this.if_City.MaximumSize = new System.Drawing.Size(225, 45);
             this.if_City.MinimumSize = new System.Drawing.Size(300, 45);
             this.if_City.Name = "if_City";
             this.if_City.Placeholder = "City";
@@ -122,6 +125,7 @@ namespace SPPBC.M3Tools
             this.if_ZipCode.Location = new System.Drawing.Point(515, 120);
             this.if_ZipCode.Margin = new System.Windows.Forms.Padding(25);
             this.if_ZipCode.Mask = "99999";
+            this.if_ZipCode.MaximumSize = new System.Drawing.Size(225, 45);
             this.if_ZipCode.MinimumSize = new System.Drawing.Size(150, 45);
             this.if_ZipCode.Name = "if_ZipCode";
             this.if_ZipCode.Placeholder = "00000";
@@ -135,9 +139,9 @@ namespace SPPBC.M3Tools
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.flowLayoutPanel1);
-            this.MinimumSize = new System.Drawing.Size(650, 125);
+            this.MinimumSize = new System.Drawing.Size(700, 200);
             this.Name = "AddressField";
-            this.Size = new System.Drawing.Size(706, 198);
+            this.Size = new System.Drawing.Size(706, 200);
             ((System.ComponentModel.ISupportInitialize)(this.ep_InvalidAddress)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();

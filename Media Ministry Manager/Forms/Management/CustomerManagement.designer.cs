@@ -55,7 +55,7 @@ namespace M3App
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.cdg_Customers);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 351);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(780, 347);
             this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // dbCustomers
@@ -81,11 +81,12 @@ namespace M3App
             this.cdg_Customers.RowHeadersWidth = 82;
             this.cdg_Customers.RowsCheckable = false;
             this.cdg_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.cdg_Customers.Size = new System.Drawing.Size(784, 351);
+            this.cdg_Customers.Size = new System.Drawing.Size(780, 347);
             this.cdg_Customers.TabIndex = 1;
             // 
             // bsCustomers
             // 
+            this.bsCustomers.DataSource = typeof(SPPBC.M3Tools.Types.CustomerCollection);
             this.bsCustomers.Filter = "";
             // 
             // CustomerManagement
@@ -94,7 +95,7 @@ namespace M3App
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(780, 457);
             this.Icon = global::M3App.My.Resources.Resources.App_Icon;
             this.Name = "CustomerManagement";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.DisplayClosing);
@@ -108,8 +109,8 @@ namespace M3App
             this.PerformLayout();
 
         }
-        internal SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
-        internal SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
+        private SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
 		private CustomerBindingSource bsCustomers;
+		private SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
 	}
 }

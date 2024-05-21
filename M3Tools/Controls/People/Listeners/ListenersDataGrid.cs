@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
-using SPPBC.M3Tools.Data;
 using SPPBC.M3Tools.Events;
 using SPPBC.M3Tools.Events.Listeners;
 
-namespace SPPBC.M3Tools
+namespace SPPBC.M3Tools.Data
 {
 
     public partial class ListenersDataGrid
@@ -66,13 +65,6 @@ namespace SPPBC.M3Tools
         {
             InitializeComponent();
 
-			if (DesignMode)
-			{
-				return;
-			}
-
-			LoadColumns();
-
 			AddEntry += new DataEventHandler<Types.Listener>(ParseEvents);
 			UpdateEntry += new DataEventHandler<Types.Listener>(ParseEvents);
 			RemoveEntry += new DataEventHandler<Types.Listener>(ParseEvents);
@@ -89,53 +81,6 @@ namespace SPPBC.M3Tools
 				case EventType.Updated: { UpdateListener?.Invoke(sender, e); break; }
 				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
 			}
-		}
-
-		private new void LoadColumns()
-		{
-			base.LoadColumns();
-
-			dgc_ListenerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
-			// 
-			// dgc_Email
-			// 
-			dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_Email.DataPropertyName = "Email";
-			dgc_Email.FillWeight = 50.0f;
-			dgc_Email.HeaderText = "Email";
-			dgc_Email.Name = "dgc_Email";
-			// 
-			// dgc_Name
-			// 
-			dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_Name.DataPropertyName = "Name";
-			dgc_Name.FillWeight = 50.0f;
-			dgc_Name.HeaderText = "Name";
-			dgc_Name.Name = "dgc_Name";
-			// 
-			// dgc_ListenerID
-			// 
-			dgc_ListenerID.DataPropertyName = "Id";
-			dgc_ListenerID.FillWeight = 5.0f;
-			dgc_ListenerID.Frozen = true;
-			dgc_ListenerID.HeaderText = "ListenerID";
-			dgc_ListenerID.Name = "dgc_ListenerID";
-			dgc_ListenerID.ReadOnly = true;
-			dgc_ListenerID.Visible = false;
-
-			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
-			{
-				dgc_Selection,
-				dgc_ListenerID, dgc_Name, dgc_Email,
-				dgc_Edit, dgc_Remove
-			});
-		}
-
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ListenerID;
+		}		
 	}
 }

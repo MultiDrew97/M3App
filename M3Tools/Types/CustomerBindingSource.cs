@@ -22,7 +22,10 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[AttributeProvider(typeof(IListSource))]
-		public new Types.CustomerCollection DataSource { get => (Types.CustomerCollection)base.DataSource; set => base.DataSource = value; }
+		public new object DataSource {
+			get => DesignMode ? typeof(Types.CustomerCollection) : (Types.CustomerCollection)base.DataSource;
+			set => base.DataSource = value;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>

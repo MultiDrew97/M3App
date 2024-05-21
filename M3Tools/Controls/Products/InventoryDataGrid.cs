@@ -6,7 +6,7 @@ using Microsoft.VisualBasic.CompilerServices;
 using SPPBC.M3Tools.Events;
 using SPPBC.M3Tools.Events.Inventory;
 
-namespace SPPBC.M3Tools
+namespace SPPBC.M3Tools.Data
 {
 
 	/// <summary>
@@ -30,11 +30,6 @@ namespace SPPBC.M3Tools
 		public event InventoryEventHandler RemoveProduct;
 
 		/// <summary>
-		/// 
-		/// </summary>
-		public delegate void RefreshDisplayEventHandler();
-
-		/// <summary>
 		/// The list of inventory items
 		/// </summary>
 		public IList Products
@@ -49,55 +44,10 @@ namespace SPPBC.M3Tools
 		/// <inheritdoc/>
 		/// </summary>
 		[Description("Data Source to use for data grid.")]
-		public new Data.BindingSource<Types.Product> DataSource
+		public new object DataSource
 		{
-			get
-			{
-				return (Data.InventoryBindingSource)bsInventory.DataSource;
-			}
-			set
-			{
-				bsInventory.DataSource = value;
-			}
-		}
-
-		/// <summary>
-		/// The filter to apply to the list of inventory items
-		/// </summary>
-		[DefaultValue("")]
-		public string Filter
-		{
-			get
-			{
-				return DataSource.Filter;
-			}
-			set
-			{
-				// TODO: Fix bug and flesh out
-				if (!string.IsNullOrEmpty(value))
-				{
-					DataSource.Filter = $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')";
-					return;
-				}
-
-				DataSource.Filter = value;
-			}
-		}
-
-		/// <summary>
-		/// Whether to allow editing the items. If set to false, the edit column will be hidden
-		/// </summary>
-		[DefaultValue(true)]
-		public bool AllowEditting
-		{
-			get
-			{
-				return dgc_Edit.Visible;
-			}
-			set
-			{
-				dgc_Edit.Visible = value;
-			}
+			get => DesignMode ? typeof(InventoryBindingSource) : base.DataSource;
+			set => base.DataSource = value;
 		}
 
 		/// <summary>

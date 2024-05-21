@@ -28,16 +28,35 @@ namespace M3App
 			ldg_Listeners.UpdateListener += new ListenerEventHandler(UpdateListener);
 			ldg_Listeners.RemoveListener += new ListenerEventHandler(RemoveListener);
 
-			mms_Main.ExitApplication += new EventHandler(ExitApplication);
-			mms_Main.Logout += new EventHandler(Logout);
-			mms_Main.ViewSettings += new EventHandler(ViewSettings);
-			mms_Main.AddListener+= new ListenerEventHandler(AddListener);
+			mms_Main.AddListener += new ListenerEventHandler(AddListener);
 
 			ts_Tools.AddEntry += new EventHandler(AddListener);
 			ts_Tools.SendEmails += new EventHandler(SendEmails);
 		}
 
-        private void DisplayClosing(object sender, CancelEventArgs e)
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void Reload(object sender, EventArgs e)
+		{
+			UseWaitCursor = true;
+			bsListeners.Clear();
+			foreach (var listener in dbListeners.GetListeners())
+				bsListeners.Add(listener);
+			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, ldg_Listeners.Listeners.Count);
+			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
+			bsListeners.ResetBindings(false);
+			UseWaitCursor = false;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void DisplayClosing(object sender, CancelEventArgs e)
         {
             // TODO: Find easier way
             if (sender is null)
@@ -46,44 +65,6 @@ namespace M3App
             }
 
             My.MyProject.Forms.MainForm.Show();
-        }
-
-        private void Logout(object sender, EventArgs e)
-        {
-            Helpers.Utils.LogOff();
-            DisplayClosing(null, null);
-        }
-
-        private void ExitApplication(object sender, EventArgs e)
-        {
-            Helpers.Utils.CloseOpenForms();
-        }
-
-        private void ManageCustomers(object sender, EventArgs e)
-        {
-            var customers = new CustomerManagement();
-            customers.Show();
-			DisplayClosing(null, null);
-		}
-
-        private void ManageOrders(object sender, EventArgs e)
-        {
-            var orders = new OrderManagement();
-            orders.Show();
-			DisplayClosing(null, null);
-		}
-
-        private void ManageProducts(object sender, EventArgs e)
-        {
-            var products = new InventoryManagement();
-            products.Show();
-            DisplayClosing(null, null);
-        }
-
-        private void ViewSettings(object sender, EventArgs e)
-        {
-            var settings = new SettingsForm();
-            settings.ShowDialog();
         }
 
         private void SendEmails(object sender, EventArgs e)
@@ -139,18 +120,6 @@ namespace M3App
             UseWaitCursor = true;
             dbListeners.UpdateListener(edit.Listener);
 			Reload(sender, e);
-        }
-
-		private void Reload(object sender, EventArgs e)
-        {
-            UseWaitCursor = true;
-            bsListeners.Clear();
-            foreach (var listener in dbListeners.GetListeners())
-                bsListeners.Add(listener);
-			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, ldg_Listeners.Listeners.Count);
-			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
-			bsListeners.ResetBindings(false);
-			UseWaitCursor = false;
         }
     }
 }
