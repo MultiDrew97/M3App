@@ -52,7 +52,7 @@ namespace SPPBC.M3Tools.Dialogs
             this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.TableLayoutPanel1.Controls.Add(this.OK_Button, 1, 0);
             this.TableLayoutPanel1.Controls.Add(this.Cancel_Button, 0, 0);
-            this.TableLayoutPanel1.Location = new System.Drawing.Point(525, 465);
+            this.TableLayoutPanel1.Location = new System.Drawing.Point(592, 388);
             this.TableLayoutPanel1.Name = "TableLayoutPanel1";
             this.TableLayoutPanel1.RowCount = 1;
             this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -84,10 +84,10 @@ namespace SPPBC.M3Tools.Dialogs
             this.af_Address.Address = null;
             this.af_Address.AutoSize = true;
             this.af_Address.City = "";
-            this.af_Address.Location = new System.Drawing.Point(62, 138);
-            this.af_Address.MinimumSize = new System.Drawing.Size(500, 100);
+            this.af_Address.Location = new System.Drawing.Point(22, 171);
+            this.af_Address.MinimumSize = new System.Drawing.Size(700, 200);
             this.af_Address.Name = "af_Address";
-            this.af_Address.Size = new System.Drawing.Size(558, 298);
+            this.af_Address.Size = new System.Drawing.Size(700, 200);
             this.af_Address.State = "";
             this.af_Address.Street = "";
             this.af_Address.TabIndex = 4;
@@ -97,7 +97,7 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             this.gi_Email.AutoSize = true;
             this.gi_Email.Label = "Email";
-            this.gi_Email.Location = new System.Drawing.Point(351, 70);
+            this.gi_Email.Location = new System.Drawing.Point(385, 109);
             this.gi_Email.Mask = "";
             this.gi_Email.MaximumSize = new System.Drawing.Size(225, 45);
             this.gi_Email.MinimumSize = new System.Drawing.Size(150, 45);
@@ -110,7 +110,7 @@ namespace SPPBC.M3Tools.Dialogs
             // pf_Phone
             // 
             this.pf_Phone.AutoSize = true;
-            this.pf_Phone.Location = new System.Drawing.Point(106, 70);
+            this.pf_Phone.Location = new System.Drawing.Point(140, 109);
             this.pf_Phone.MaximumSize = new System.Drawing.Size(0, 50);
             this.pf_Phone.MinimumSize = new System.Drawing.Size(100, 50);
             this.pf_Phone.Name = "pf_Phone";
@@ -122,7 +122,7 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             this.gi_LastName.AutoSize = true;
             this.gi_LastName.Label = "Last Name";
-            this.gi_LastName.Location = new System.Drawing.Point(351, 18);
+            this.gi_LastName.Location = new System.Drawing.Point(385, 57);
             this.gi_LastName.Mask = "";
             this.gi_LastName.MaximumSize = new System.Drawing.Size(225, 45);
             this.gi_LastName.MinimumSize = new System.Drawing.Size(150, 45);
@@ -136,7 +136,7 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             this.gi_FirstName.AutoSize = true;
             this.gi_FirstName.Label = "First Name";
-            this.gi_FirstName.Location = new System.Drawing.Point(106, 18);
+            this.gi_FirstName.Location = new System.Drawing.Point(140, 57);
             this.gi_FirstName.Mask = "";
             this.gi_FirstName.MaximumSize = new System.Drawing.Size(225, 45);
             this.gi_FirstName.MinimumSize = new System.Drawing.Size(150, 45);
@@ -150,7 +150,7 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(683, 506);
+            this.ClientSize = new System.Drawing.Size(750, 429);
             this.Controls.Add(this.af_Address);
             this.Controls.Add(this.gi_Email);
             this.Controls.Add(this.pf_Phone);

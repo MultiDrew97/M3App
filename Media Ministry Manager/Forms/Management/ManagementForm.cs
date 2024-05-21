@@ -5,10 +5,11 @@ using SPPBC.M3Tools.Events.Customers;
 
 namespace M3App
 {
+	// TODO: Figure out how to make controls editable from designer child designer natuarally
 	/// <summary>
 	/// 
 	/// </summary>
-    public partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
+	public partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
 	{
 		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource; 
 

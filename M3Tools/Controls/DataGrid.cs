@@ -240,62 +240,10 @@ namespace SPPBC.M3Tools.Data
 			InitializeComponent();
 			AutoGenerateColumns = false;
 
-			LoadColumns();
-
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
 			cms_Tools.EditSelected += (sender, e) => EditSelected();
 			cms_Tools.RemoveSelected += (sender, e) => RemoveSelectedRows();
 			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
-		}
-
-		/// <summary>
-		/// Loads the respective columns for the data grid view
-		/// </summary>
-		protected internal virtual void LoadColumns()
-		{
-			this.Columns.Clear();
-			this.dgc_Selection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.dgc_Edit = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-			this.dgc_Remove = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
-
-			// 
-			// dgc_Selection
-			// 
-			this.dgc_Selection.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.dgc_Selection.Frozen = true;
-			this.dgc_Selection.HeaderText = "";
-			this.dgc_Selection.MinimumWidth = 25;
-			this.dgc_Selection.Name = "dgc_Selection";
-			this.dgc_Selection.ReadOnly = true;
-			this.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.dgc_Selection.Width = 25;
-			// 
-			// dgc_Edit
-			// 
-			this.dgc_Edit.ButtonImage = null;
-			this.dgc_Edit.FillWeight = 5F;
-			this.dgc_Edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.dgc_Edit.HeaderText = "";
-			this.dgc_Edit.MinimumWidth = 25;
-			this.dgc_Edit.Name = "dgc_Edit";
-			this.dgc_Edit.ReadOnly = true;
-			this.dgc_Edit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgc_Edit.ToolTipText = "Edit";
-			this.dgc_Edit.Width = 25;
-			// 
-			// dgc_Remove
-			// 
-			this.dgc_Remove.ButtonImage = null;
-			this.dgc_Remove.FillWeight = 5F;
-			this.dgc_Remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.dgc_Remove.HeaderText = "";
-			this.dgc_Remove.MinimumWidth = 25;
-			this.dgc_Remove.Name = "dgc_Remove";
-			this.dgc_Remove.ReadOnly = true;
-			this.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgc_Remove.ToolTipText = "Remove";
-			this.dgc_Remove.Width = 25;
 		}
 
 		/// <summary>

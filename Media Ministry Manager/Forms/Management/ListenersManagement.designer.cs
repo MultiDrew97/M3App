@@ -43,7 +43,7 @@ namespace M3App
             this.gt_Email = new SPPBC.M3Tools.GTools.GmailTool(this.components);
             this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
             this.gd_Drive = new SPPBC.M3Tools.GTools.GdriveTool(this.components);
-            this.ldg_Listeners = new SPPBC.M3Tools.ListenersDataGrid();
+            this.ldg_Listeners = new SPPBC.M3Tools.Data.ListenersDataGrid();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -194,7 +194,7 @@ namespace M3App
         internal SPPBC.M3Tools.Data.ListenerBindingSource bsListeners;
         internal SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
         internal SPPBC.M3Tools.GTools.GdriveTool gd_Drive;
-		private SPPBC.M3Tools.ListenersDataGrid ldg_Listeners;
+		private SPPBC.M3Tools.Data.ListenersDataGrid ldg_Listeners;
 		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

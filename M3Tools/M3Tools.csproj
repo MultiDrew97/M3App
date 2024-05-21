@@ -117,12 +117,6 @@
     <Compile Include="Components\Database\Database.Designer.cs">
       <DependentUpon>Database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\ManagementForm.designer.cs">
-      <DependentUpon>ManagementForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DataGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -580,9 +574,6 @@
     <EmbeddedResource Include="Components\Database\UserDatabase.resx">
       <DependentUpon>UserDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ManagementForm.resx">
-      <DependentUpon>ManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataGrid.resx">
       <DependentUpon>DataGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -842,7 +833,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -11,8 +11,6 @@ namespace M3App
 	/// </summary>
     public partial class CustomerManagement
     {
-		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource; 
-
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
@@ -20,7 +18,7 @@ namespace M3App
         {
             InitializeComponent();
 
-			ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL);
+			ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
 			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(ChangeView);
 
@@ -37,19 +35,19 @@ namespace M3App
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
         }
 
-        private new void DisplayClosing(object sender, CancelEventArgs e)
-        {
-            // TODO: Find easier way
+		private new void DisplayClosing(object sender, CancelEventArgs e)
+		{
+			// TODO: Find easier way
 			Console.WriteLine(sender);
-            if (sender is SPPBC.M3Tools.MainMenuStrip)
-            {
-                return;
-            }
+			if (sender is SPPBC.M3Tools.MainMenuStrip)
+			{
+				return;
+			}
 
-            My.MyProject.Forms.MainForm.Show();
-        }
+			My.MyProject.Forms.MainForm.Show();
+		}
 
-        private void LogOff(object sender, EventArgs e)
+		private void LogOff(object sender, EventArgs e)
         {
 			Close();
             Utils.LogOff();
@@ -160,5 +158,5 @@ namespace M3App
 		{
 			UseWaitCursor = false;
 		}
-    }
+	}
 }

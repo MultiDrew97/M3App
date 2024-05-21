@@ -48,7 +48,7 @@ namespace SPPBC.M3Tools.Dialogs
             gi_FileName = new GenericInputPair();
             btn_Clear = new System.Windows.Forms.Button();
             btn_Clear.Click += new EventHandler(ClearList);
-            ldg_Listeners = new ListenersDataGrid();
+            ldg_Listeners = new Data.ListenersDataGrid();
             bw_ParseFiles = new System.ComponentModel.BackgroundWorker();
             bw_ParseFiles.DoWork += new System.ComponentModel.DoWorkEventHandler(ParseFiles);
             bw_ParseFiles.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(FilesParsed);
@@ -197,7 +197,7 @@ namespace SPPBC.M3Tools.Dialogs
         internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
         internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
         internal System.Windows.Forms.Button btn_Clear;
-        internal ListenersDataGrid ldg_Listeners;
+        internal Data.ListenersDataGrid ldg_Listeners;
         internal System.ComponentModel.BackgroundWorker bw_ParseFiles;
     }
 }

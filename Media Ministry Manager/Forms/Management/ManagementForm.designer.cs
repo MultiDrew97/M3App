@@ -104,7 +104,7 @@ namespace M3App
             // 
             // ts_Tools
             // 
-            this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
+            this.ts_Tools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ts_Tools.ListType = null;
@@ -126,7 +126,7 @@ namespace M3App
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.mms_Main);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.mms_Main;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(800, 500);
@@ -147,10 +147,10 @@ namespace M3App
             this.PerformLayout();
 
         }
-        protected ToolStripStatusLabel tss_Status;
+        protected internal ToolStripStatusLabel tss_Status;
 		protected internal SPPBC.M3Tools.ToolsToolStrip ts_Tools;
 		protected internal StatusStrip ss_StatusView;
-		protected internal SPPBC.M3Tools.MainMenuStrip mms_Main;
 		protected internal ToolStripContainer toolStripContainer1;
+		protected internal SPPBC.M3Tools.MainMenuStrip mms_Main;
 	}
 }

@@ -53,22 +53,8 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// The date the user was added to the database
 		/// </summary>
-        [System.ComponentModel.Browsable(false)]
         [System.Text.Json.Serialization.JsonPropertyName("joined")]
         public DateTime Joined { get; set; }
-		// Get
-		// If __joined.Year < 1950 OrElse IsNothing(__joined) Then
-		// Return Nothing
-		// End If
-
-		// Return __joined
-		// End Get
-		// Set(value As Date)
-		// If value.Year < 1950 Then
-		// __joined = Nothing
-		// End If
-		// End Set
-		// End Property
 
 		/// <summary>
 		/// <inheritdoc/>

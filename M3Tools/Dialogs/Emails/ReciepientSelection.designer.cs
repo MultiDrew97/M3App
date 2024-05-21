@@ -39,7 +39,7 @@ namespace SPPBC.M3Tools
             btn_Select.Click += new EventHandler(ConfirmSelection);
             btn_Cancel = new System.Windows.Forms.Button();
             btn_Cancel.Click += new EventHandler(Cancel);
-            ldg_Listeners = new ListenersDataGrid();
+            ldg_Listeners = new Data.ListenersDataGrid();
             TableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -113,6 +113,6 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         internal System.Windows.Forms.Button btn_Select;
         internal System.Windows.Forms.Button btn_Cancel;
-        internal ListenersDataGrid ldg_Listeners;
+        internal Data.ListenersDataGrid ldg_Listeners;
     }
 }

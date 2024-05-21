@@ -7,7 +7,8 @@ using SPPBC.M3Tools.Events.Inventory;
 namespace M3App
 {
 	// TODO: Mimic CustomerManagement
-    public partial class InventoryManagement
+	// TODO: Place this in Filter for binding source: $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')";
+	public partial class InventoryManagement
     {
         private event InventoryEventHandler InventoryDBModified;
         private bool Tooled = false;

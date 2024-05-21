@@ -38,15 +38,7 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public new object DataSource
 		{
-			get
-			{
-				if (DesignMode)
-				{
-					return typeof(CustomerBindingSource);
-				}
-
-				return (CustomerBindingSource)base.DataSource;
-			}
+			get => DesignMode ? typeof(CustomerBindingSource) : (CustomerBindingSource)base.DataSource;
 			set => base.DataSource = value;
 		}
 
@@ -69,100 +61,9 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
-			LoadColumns();
-
 			AddEntry += (sender, e) => AddCustomer?.Invoke(sender, new(e.Value, e.EventType));
 			UpdateEntry += (sender, e) => UpdateCustomer?.Invoke(sender, new(e.Value, e.EventType));
 			RemoveEntry += (sender, e) => RemoveCustomer?.Invoke(sender, new(e.Value, e.EventType));
-		}
-
-		public new void LoadColumns()
-		{
-			base.LoadColumns();
-
-			dgc_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Join = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
-			// 
-			// dgc_CustomerID
-			// 
-			dgc_CustomerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_CustomerID.DataPropertyName = "Id";
-			dgc_CustomerID.FillWeight = 5F;
-			dgc_CustomerID.Frozen = true;
-			dgc_CustomerID.HeaderText = "CustomerID";
-			dgc_CustomerID.MinimumWidth = 10;
-			dgc_CustomerID.Name = "dgc_CustomerID";
-			dgc_CustomerID.ReadOnly = true;
-			dgc_CustomerID.Visible = false;
-
-			// 
-			// dgc_Name
-			// 
-			dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-			dgc_Name.DataPropertyName = "Name";
-			dgc_Name.FillWeight = 25F;
-			dgc_Name.Frozen = true;
-			dgc_Name.HeaderText = "Name";
-			dgc_Name.MinimumWidth = 10;
-			dgc_Name.Name = "dgc_Name";
-			dgc_Name.ReadOnly = true;
-
-			// 
-			// dgc_Address
-			// 
-			dgc_Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_Address.DataPropertyName = "Address";
-			dgc_Address.FillWeight = 25F;
-			dgc_Address.HeaderText = "Address";
-			dgc_Address.MinimumWidth = 10;
-			dgc_Address.Name = "dgc_Address";
-			dgc_Address.ReadOnly = true;
-
-			// 
-			// dgc_Phone
-			// 
-			dgc_Phone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_Phone.DataPropertyName = "Phone";
-			dgc_Phone.FillWeight = 25F;
-			dgc_Phone.HeaderText = "Phone";
-			dgc_Phone.MinimumWidth = 10;
-			dgc_Phone.Name = "dgc_Phone";
-			dgc_Phone.ReadOnly = true;
-
-			// 
-			// dgc_Email
-			// 
-			dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_Email.DataPropertyName = "Email";
-			dgc_Email.FillWeight = 25F;
-			dgc_Email.HeaderText = "Email";
-			dgc_Email.MinimumWidth = 10;
-			dgc_Email.Name = "dgc_Email";
-			dgc_Email.ReadOnly = true;
-
-			// 
-			// dgc_Join
-			//
-			dgc_Join.HeaderText = "Joined";
-			dgc_Join.DataPropertyName = "Joined";
-			dgc_Join.MinimumWidth = 10;
-			dgc_Join.ReadOnly = true;
-			dgc_Join.Name = "dgc_Join";
-
-			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
-			{
-				dgc_Selection,
-				dgc_CustomerID,
-				dgc_Name, dgc_Address,
-				dgc_Phone, dgc_Email,
-				dgc_Join,
-				dgc_Edit, dgc_Remove
-			});
 		}
 	}
 
