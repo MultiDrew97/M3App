@@ -7,9 +7,14 @@ using Microsoft.VisualBasic;
 
 namespace M3App
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class AddProductDialog
     {
+		/// <summary>
+		/// 
+		/// </summary>
         public AddProductDialog()
         {
             InitializeComponent();
@@ -18,15 +23,6 @@ namespace M3App
         {
             Reset();
         }
-
-        // Private Sub frm_AddNewProduct_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-        // Try
-        // CType(Opener, frm_ViewInventory).customLoad()
-        // Catch ex As ApplicationException
-        // Finally
-        // Opener.Show()
-        // End Try
-        // End Sub
 
         private void Reset()
         {
