@@ -9,7 +9,7 @@ using SPPBC.M3Tools.Events.Customers;
 namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class ManagementForm<T> : Form
+    public abstract partial class ManagementForm<T> : Form
     {
 
         // Form overrides dispose to clean up the component list.
@@ -104,7 +104,7 @@ namespace M3App
             // 
             // ts_Tools
             // 
-            this.ts_Tools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
             this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ts_Tools.ListType = null;
