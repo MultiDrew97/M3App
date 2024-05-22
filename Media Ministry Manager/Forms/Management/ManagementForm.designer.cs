@@ -9,7 +9,7 @@ using SPPBC.M3Tools.Events.Customers;
 namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public abstract partial class ManagementForm<T> : Form
+    public partial class ManagementForm<T> : Form
     {
 
         // Form overrides dispose to clean up the component list.
@@ -44,6 +44,7 @@ namespace M3App
             this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
+            this.tsp_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.ss_StatusView.SuspendLayout();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -57,23 +58,27 @@ namespace M3App
             this.ss_StatusView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ss_StatusView.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ss_StatusView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tss_Status});
+            this.tss_Status,
+            this.tsp_Progress});
             this.ss_StatusView.Location = new System.Drawing.Point(0, 0);
             this.ss_StatusView.Name = "ss_StatusView";
             this.ss_StatusView.Size = new System.Drawing.Size(784, 22);
+            this.ss_StatusView.SizingGrip = false;
             this.ss_StatusView.TabIndex = 3;
             // 
             // tss_Status
             // 
             this.tss_Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tss_Status.Name = "tss_Status";
-            this.tss_Status.Size = new System.Drawing.Size(170, 17);
-            this.tss_Status.Text = "Here are the current customers";
+            this.tss_Status.Size = new System.Drawing.Size(636, 17);
+            this.tss_Status.Spring = true;
+            this.tss_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // mms_Main
             // 
             this.mms_Main.Location = new System.Drawing.Point(0, 0);
             this.mms_Main.Name = "mms_Main";
+            this.mms_Main.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
             this.mms_Main.Size = new System.Drawing.Size(784, 24);
             this.mms_Main.TabIndex = 6;
             this.mms_Main.Text = "Menu";
@@ -88,7 +93,7 @@ namespace M3App
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 376);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 390);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 24);
@@ -106,15 +111,22 @@ namespace M3App
             // 
             this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
             this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ts_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ts_Tools.ListType = null;
             this.ts_Tools.Location = new System.Drawing.Point(0, 0);
             this.ts_Tools.Name = "ts_Tools";
             this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.ts_Tools.Size = new System.Drawing.Size(784, 39);
+            this.ts_Tools.Size = new System.Drawing.Size(784, 25);
             this.ts_Tools.Stretch = true;
             this.ts_Tools.TabIndex = 2;
             this.ts_Tools.Text = "ToolsToolStrip1";
+            // 
+            // tsp_Progress
+            // 
+            this.tsp_Progress.AutoToolTip = true;
+            this.tsp_Progress.CausesValidation = false;
+            this.tsp_Progress.Name = "tsp_Progress";
+            this.tsp_Progress.Size = new System.Drawing.Size(100, 16);
+            this.tsp_Progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // ManagementForm
             // 
@@ -129,7 +141,7 @@ namespace M3App
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.mms_Main;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.MinimumSize = new System.Drawing.Size(795, 484);
             this.Name = "ManagementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Ministry Manager";
@@ -152,5 +164,6 @@ namespace M3App
 		protected internal StatusStrip ss_StatusView;
 		protected internal ToolStripContainer toolStripContainer1;
 		protected internal SPPBC.M3Tools.MainMenuStrip mms_Main;
+		protected internal ToolStripProgressBar tsp_Progress;
 	}
 }

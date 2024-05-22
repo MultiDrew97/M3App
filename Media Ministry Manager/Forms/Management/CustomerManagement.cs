@@ -27,7 +27,7 @@ namespace M3App
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(UpdateCustomer);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(RemoveCustomer);
 
-			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
+			ts_Tools.FilterChanged += (object sender, string filter) => bsCustomers.Filter = filter;
 		}
 
 		/// <summary>
@@ -45,6 +45,23 @@ namespace M3App
 			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsCustomers.ResetBindings(false);
 			UseWaitCursor = false;
+		}
+
+		/// <summary>
+		/// Add a new customer to the database from the tool strip
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void Add(object sender, EventArgs e)
+		{
+			using var @add = new SPPBC.M3Tools.Dialogs.AddCustomerDialog();
+
+			if (add.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
+			AddCustomer(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -104,11 +121,6 @@ namespace M3App
 			dbCustomers.RemoveCustomer(e.Value.Id);
 			MessageBox.Show($"Successfully removed customer", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
-		}
-
-		private void FilterChanged(object sender, string filter)
-		{
-			bsCustomers.Filter = filter;
 		}
 	}
 }

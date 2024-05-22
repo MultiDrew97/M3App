@@ -44,12 +44,6 @@ namespace M3App
             this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
             this.gd_Drive = new SPPBC.M3Tools.GTools.GdriveTool(this.components);
             this.ldg_Listeners = new SPPBC.M3Tools.Data.ListenersDataGrid();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsListeners)).BeginInit();
@@ -89,13 +83,6 @@ namespace M3App
             this.ldg_Listeners.AutoGenerateColumns = false;
             this.ldg_Listeners.CanReorder = true;
             this.ldg_Listeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ldg_Listeners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn1,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewImageButtonEditColumn1,
-            this.dataGridViewImageButtonDeleteColumn1});
             this.ldg_Listeners.DataSource = this.bsListeners;
             this.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ldg_Listeners.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -107,70 +94,6 @@ namespace M3App
             this.ldg_Listeners.Size = new System.Drawing.Size(784, 376);
             this.ldg_Listeners.TabIndex = 0;
             // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn1.Frozen = true;
-            this.dataGridViewCheckBoxColumn1.HeaderText = "";
-            this.dataGridViewCheckBoxColumn1.MinimumWidth = 25;
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewCheckBoxColumn1.Width = 25;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.FillWeight = 5F;
-            this.dataGridViewTextBoxColumn1.Frozen = true;
-            this.dataGridViewTextBoxColumn1.HeaderText = "ListenerID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Email";
-            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Email";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewImageButtonEditColumn1
-            // 
-            this.dataGridViewImageButtonEditColumn1.ButtonImage = null;
-            this.dataGridViewImageButtonEditColumn1.FillWeight = 5F;
-            this.dataGridViewImageButtonEditColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonEditColumn1.HeaderText = "";
-            this.dataGridViewImageButtonEditColumn1.MinimumWidth = 25;
-            this.dataGridViewImageButtonEditColumn1.Name = "dataGridViewImageButtonEditColumn1";
-            this.dataGridViewImageButtonEditColumn1.ReadOnly = true;
-            this.dataGridViewImageButtonEditColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonEditColumn1.ToolTipText = "Edit";
-            this.dataGridViewImageButtonEditColumn1.Width = 25;
-            // 
-            // dataGridViewImageButtonDeleteColumn1
-            // 
-            this.dataGridViewImageButtonDeleteColumn1.ButtonImage = null;
-            this.dataGridViewImageButtonDeleteColumn1.FillWeight = 5F;
-            this.dataGridViewImageButtonDeleteColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonDeleteColumn1.HeaderText = "";
-            this.dataGridViewImageButtonDeleteColumn1.MinimumWidth = 25;
-            this.dataGridViewImageButtonDeleteColumn1.Name = "dataGridViewImageButtonDeleteColumn1";
-            this.dataGridViewImageButtonDeleteColumn1.ReadOnly = true;
-            this.dataGridViewImageButtonDeleteColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonDeleteColumn1.ToolTipText = "Remove";
-            this.dataGridViewImageButtonDeleteColumn1.Width = 25;
-            // 
             // ListenersManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,8 +101,6 @@ namespace M3App
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Icon = global::M3App.My.Resources.Resources.App_Icon;
             this.Name = "ListenersManagement";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.DisplayClosing);
-            this.Load += new System.EventHandler(this.Reload);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
@@ -195,11 +116,5 @@ namespace M3App
         internal SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
         internal SPPBC.M3Tools.GTools.GdriveTool gd_Drive;
 		private SPPBC.M3Tools.Data.ListenersDataGrid ldg_Listeners;
-		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 	}
 }

@@ -10,7 +10,7 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public abstract partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
+	public partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
 	{
 		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource; 
 
@@ -25,6 +25,7 @@ namespace M3App
 			mms_Main.Logout += new EventHandler(LogOff);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(ChangeView);
+			ts_Tools.AddEntry += new EventHandler(Add);
 		}
 
 		/// <summary>
@@ -32,14 +33,30 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected abstract void DisplayClosing(object sender, CancelEventArgs e);
+		protected virtual void DisplayClosing(object sender, CancelEventArgs e) 
+		{
+			throw new NotImplementedException("ManagementForm DisplayClosing");
+		}
 
 		/// <summary>
 		/// Reloads the display
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected abstract void Reload(object sender, EventArgs e);
+		protected virtual void Reload(object sender, EventArgs e) 
+		{
+			throw new NotImplementedException("ManagementForm Reload");
+		}
+
+		/// <summary>
+		/// Add a new entry to the database from the 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void Add(object sender, EventArgs e) 
+		{
+			throw new NotImplementedException("ManagementForm Add");
+		}
 
 		private void LogOff(object sender, EventArgs e)
 		{
