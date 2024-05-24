@@ -12,8 +12,6 @@ namespace M3App
 	/// </summary>
 	public partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
 	{
-		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource;
-
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
@@ -102,34 +100,6 @@ namespace M3App
 		{
 #if DEBUG
 			throw new NotImplementedException("ManagementForm FilterChanged");
-#endif
-		}
-
-		/// <summary>
-		/// When the form should use the wait cursor
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		/// <exception cref="NotImplementedException"></exception>
-		protected virtual void Waiting(object sender, EventArgs e)
-		{
-			UseWaitCursor = true;
-#if DEBUG
-			throw new NotImplementedException("ManagementForm Waiting");
-#endif
-		}
-
-		/// <summary>
-		/// When the form should stop using the wait cursor
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		/// <exception cref="NotImplementedException"></exception>
-		protected virtual void DoneWaiting(object sender, EventArgs e)
-		{
-			UseWaitCursor = false;
-#if DEBUG
-			throw new NotImplementedException("ManagementForm DoneWaiting");
 #endif
 		}
 
