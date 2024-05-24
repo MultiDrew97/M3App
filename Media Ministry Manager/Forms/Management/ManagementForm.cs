@@ -12,7 +12,7 @@ namespace M3App
 	/// </summary>
 	public partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
 	{
-		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource; 
+		// private SPPBC.M3Tools.Data.CustomerBindingSource DataSource => (SPPBC.M3Tools.Data.CustomerBindingSource)cdg_Customers.DataSource;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -24,8 +24,10 @@ namespace M3App
 			mms_Main.ExitApplication += new EventHandler(Exit);
 			mms_Main.Logout += new EventHandler(LogOff);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
+			mms_Main.AddCustomer += new CustomerEventHandler(Add);
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(ChangeView);
 			ts_Tools.AddEntry += new EventHandler(Add);
+			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
 
 		/// <summary>
@@ -35,7 +37,9 @@ namespace M3App
 		/// <param name="e"></param>
 		protected virtual void DisplayClosing(object sender, CancelEventArgs e) 
 		{
+#if DEBUG
 			throw new NotImplementedException("ManagementForm DisplayClosing");
+#endif
 		}
 
 		/// <summary>
@@ -45,17 +49,87 @@ namespace M3App
 		/// <param name="e"></param>
 		protected virtual void Reload(object sender, EventArgs e) 
 		{
+#if DEBUG
 			throw new NotImplementedException("ManagementForm Reload");
+#endif
 		}
 
 		/// <summary>
-		/// Add a new entry to the database from the 
+		/// Add a new entry to the database 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected virtual void Add(object sender, EventArgs e) 
 		{
+#if DEBUG
 			throw new NotImplementedException("ManagementForm Add");
+#endif
+		}
+		
+		/// <summary>
+		/// Update an entry in the database
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <exception cref="NotImplementedException"></exception>
+		protected virtual void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e)
+		{
+#if DEBUG
+			throw new NotImplementedException("ManagementForm Update");
+#endif
+		}
+
+		/// <summary>
+		/// Remove an entry from the database
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <exception cref="NotImplementedException"></exception>
+		protected virtual void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e)
+		{
+#if DEBUG
+			throw new NotImplementedException("ManagementForm Remove");
+#endif
+		}
+
+		/// <summary>
+		/// Called when the filter is changed in the form
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="filter"></param>
+		protected virtual void FilterChanged(object sender, string filter)
+		{
+#if DEBUG
+			throw new NotImplementedException("ManagementForm FilterChanged");
+#endif
+		}
+
+		/// <summary>
+		/// When the form should use the wait cursor
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <exception cref="NotImplementedException"></exception>
+		protected virtual void Waiting(object sender, EventArgs e)
+		{
+			UseWaitCursor = true;
+#if DEBUG
+			throw new NotImplementedException("ManagementForm Waiting");
+#endif
+		}
+
+		/// <summary>
+		/// When the form should stop using the wait cursor
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <exception cref="NotImplementedException"></exception>
+		protected virtual void DoneWaiting(object sender, EventArgs e)
+		{
+			UseWaitCursor = false;
+#if DEBUG
+			throw new NotImplementedException("ManagementForm DoneWaiting");
+#endif
 		}
 
 		private void LogOff(object sender, EventArgs e)

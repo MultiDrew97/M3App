@@ -17,17 +17,14 @@ namespace M3App
 		{
 			InitializeComponent();
 
+			// TODO: Figure out if I can place button toggles in the base class and automate the hiding
 			ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
 			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
 
-			mms_Main.AddCustomer += new CustomerEventHandler(AddCustomer);
-
 			cdg_Customers.Reload += new EventHandler(Reload);
-			cdg_Customers.AddCustomer += new CustomerEventHandler(AddCustomer);
-			cdg_Customers.UpdateCustomer += new CustomerEventHandler(UpdateCustomer);
-			cdg_Customers.RemoveCustomer += new CustomerEventHandler(RemoveCustomer);
-
-			ts_Tools.FilterChanged += (object sender, string filter) => bsCustomers.Filter = filter;
+			cdg_Customers.AddCustomer += new CustomerEventHandler(Add);
+			cdg_Customers.UpdateCustomer += new CustomerEventHandler(Update);
+			cdg_Customers.RemoveCustomer += new CustomerEventHandler(Remove);
 		}
 
 		/// <summary>
@@ -37,6 +34,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Reload(object sender, EventArgs e)
 		{
+			// TODO: Figure out if wait cursor management can be automated in the base class as well
 			UseWaitCursor = true;
 			bsCustomers.Clear();
 			foreach (var customer in dbCustomers.GetCustomers())
@@ -45,6 +43,23 @@ namespace M3App
 			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsCustomers.ResetBindings(false);
 			UseWaitCursor = false;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void DisplayClosing(object sender, CancelEventArgs e)
+		{
+			// TODO: Find easier way to cancel main form opening in certain cases
+			Console.WriteLine(sender);
+			if (sender is SPPBC.M3Tools.MainMenuStrip)
+			{
+				return;
+			}
+
+			My.MyProject.Forms.MainForm.Show();
 		}
 
 		/// <summary>
@@ -58,10 +73,13 @@ namespace M3App
 
 			if (add.ShowDialog() != DialogResult.OK)
 			{
+				UseWaitCursor = false;
 				return;
 			}
 
-			AddCustomer(this, EventArgs.Empty);
+			dbCustomers.AddCustomer(add.Customer);
+			MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			Reload(sender, e);
 		}
 
 		/// <summary>
@@ -69,22 +87,8 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void DisplayClosing(object sender, CancelEventArgs e)
+		protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
-			// TODO: Find easier way
-			Console.WriteLine(sender);
-			if (sender is SPPBC.M3Tools.MainMenuStrip)
-			{
-				return;
-			}
-
-			My.MyProject.Forms.MainForm.Show();
-		}
-
-		private void UpdateCustomer(object sender, CustomerEventArgs e)
-		{
-			UseWaitCursor = true;
-
 			using var @edit = new SPPBC.M3Tools.Dialogs.EditCustomerDialog(e.Value);
 
 			if (edit.ShowDialog() != DialogResult.OK)
@@ -99,28 +103,26 @@ namespace M3App
 			Reload(sender, e);
 		}
 
-		private void AddCustomer(object sender, EventArgs e)
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
-			UseWaitCursor = true;
-			using var @add = new SPPBC.M3Tools.Dialogs.AddCustomerDialog();
-
-			if (add.ShowDialog() != DialogResult.OK)
-			{
-				UseWaitCursor = false;
-				return;
-			}
-
-			/*dbCustomers.AddCustomer(add.Customer);*/
-			MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			Reload(sender, e);
-		}
-
-		private void RemoveCustomer(object sender, CustomerEventArgs e)
-		{
-			UseWaitCursor = true;
 			dbCustomers.RemoveCustomer(e.Value.Id);
 			MessageBox.Show($"Successfully removed customer", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="filter"></param>
+		protected override void FilterChanged(object sender, string filter)
+		{
+			bsCustomers.Filter = filter;
 		}
 	}
 }
