@@ -251,18 +251,13 @@ namespace SPPBC.M3Tools
             return treeNodes;
         }
 
-        private async void RefreshTree()
-        {
-			FillTable(await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()));
-        }
-
 		/// <summary>
 		/// Reloads the control
 		/// </summary>
         public void Reload()
         {
             UseWaitCursor = true;
-            RefreshTree();
+            FillTable((WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()).Result);
             UseWaitCursor = false;
         }
 
