@@ -24,13 +24,11 @@ namespace M3App
             gd_Drive.Authorize(My.Settings.Default.Username);
 
 			ldg_Listeners.Reload += new EventHandler(Reload);
-			ldg_Listeners.AddListener += new ListenerEventHandler(AddListener);
-			ldg_Listeners.UpdateListener += new ListenerEventHandler(UpdateListener);
-			ldg_Listeners.RemoveListener += new ListenerEventHandler(RemoveListener);
+			ldg_Listeners.AddListener += new ListenerEventHandler(Add);
+			ldg_Listeners.UpdateListener += new ListenerEventHandler(Update);
+			ldg_Listeners.RemoveListener += new ListenerEventHandler(Remove);
 
-			mms_Main.AddListener += new ListenerEventHandler(AddListener);
-
-			ts_Tools.AddEntry += new EventHandler(AddListener);
+			ts_Tools.ImportEntries += new EventHandler(Import);
 			ts_Tools.SendEmails += new EventHandler(SendEmails);
 		}
 
@@ -67,22 +65,24 @@ namespace M3App
             My.MyProject.Forms.MainForm.Show();
         }
 
-        private void SendEmails(object sender, EventArgs e)
-        {
-			using var emails = new SendEmailsDialog();
-			UseWaitCursor = true;
-			emails.ShowDialog();
-			UseWaitCursor = false;
-		}
-
-        private void RemoveListener(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+        protected override void Remove(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
         {
             UseWaitCursor = true;
             dbListeners.RemoveListener(e.Value.Id);
             Reload(sender, e);
         }
 
-        private void AddListener(object sender, EventArgs e)
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+        protected override void Add(object sender, EventArgs e)
         {
 			using var @add = new SPPBC.M3Tools.Dialogs.AddListenerDialog();
 
@@ -93,23 +93,33 @@ namespace M3App
 
             UseWaitCursor = true;
             dbListeners.AddListener(add.Listener);
-			SendWelcome(sender, new ListenerEventArgs(add.Listener, SPPBC.M3Tools.Events.EventType.Added));
+			SendWelcome(sender, new ListenerEventArgs(add.Listener, EventType.Added));
         }
 
-        private void SendWelcome(object sender, ListenerEventArgs e)
-        {
-            UseWaitCursor = true;
-#if !DEBUG
-            string subject = "Welcome to the Ministry";
-            string body = string.Format(My.Resources.Resources.newListener, e.Listener.Name.Trim());
-			var message = gt_Email.Create(e.Listener, subject, body);
-			gt_Email.Send(message);
-#endif
-			Reload(sender, e);
-        }
+		private void Import(object sender, EventArgs e)
+		{
+			using var @import = new SPPBC.M3Tools.Dialogs.ImportListenersDialog();
 
-        private void UpdateListener(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
-        {
+			if (import.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+			{
+				return;
+			}
+
+			UseWaitCursor = true;
+			foreach (var listener in import.Listeners)
+			{
+				dbListeners.AddListener(listener);
+				SendWelcome(sender, new ListenerEventArgs(listener, EventType.Added));
+			}
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void Update(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
+		{
 			using var @edit = new SPPBC.M3Tools.Dialogs.EditListenerDialog(e.Value);
 
 			if (edit.ShowDialog() != System.Windows.Forms.DialogResult.OK)
@@ -117,8 +127,36 @@ namespace M3App
 				return;
 			}
 
+			UseWaitCursor = true;
+			dbListeners.UpdateListener(edit.Listener);
+			Reload(sender, e);
+		}
+
+		protected override void FilterChanged(object sender, string filter)
+		{
+			bsListeners.Filter = filter;
+		}
+
+		private void SendEmails(object sender, EventArgs e)
+		{
+			using var emails = new SendEmailsDialog();
+			UseWaitCursor = true;
+			emails.ShowDialog();
+			UseWaitCursor = false;
+		}
+
+		private void SendWelcome(object sender, ListenerEventArgs e)
+        {
             UseWaitCursor = true;
-            dbListeners.UpdateListener(edit.Listener);
+
+            string subject = "Welcome to the Ministry";
+            string body = string.Format(My.Resources.Resources.newListener, e.Value.Name.Trim());
+			var message = gt_Email.Create(e.Value, subject, body);
+
+#if !DEBUG
+			gt_Email.Send(message);
+#endif
+
 			Reload(sender, e);
         }
     }

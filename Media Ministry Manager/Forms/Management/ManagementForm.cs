@@ -36,9 +36,6 @@ namespace M3App
 		/// <param name="e"></param>
 		protected virtual void DisplayClosing(object sender, CancelEventArgs e) 
 		{
-#if DEBUG
-			throw new NotImplementedException("ManagementForm DisplayClosing");
-#endif
 		}
 
 		/// <summary>
@@ -48,9 +45,6 @@ namespace M3App
 		/// <param name="e"></param>
 		protected virtual void Reload(object sender, EventArgs e) 
 		{
-#if DEBUG
-			throw new NotImplementedException("ManagementForm Reload");
-#endif
 		}
 
 		/// <summary>
@@ -60,9 +54,6 @@ namespace M3App
 		/// <param name="e"></param>
 		protected virtual void Add(object sender, EventArgs e) 
 		{
-#if DEBUG
-			throw new NotImplementedException("ManagementForm Add");
-#endif
 		}
 		
 		/// <summary>
@@ -73,9 +64,6 @@ namespace M3App
 		/// <exception cref="NotImplementedException"></exception>
 		protected virtual void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e)
 		{
-#if DEBUG
-			throw new NotImplementedException("ManagementForm Update");
-#endif
 		}
 
 		/// <summary>
@@ -86,9 +74,6 @@ namespace M3App
 		/// <exception cref="NotImplementedException"></exception>
 		protected virtual void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e)
 		{
-#if DEBUG
-			throw new NotImplementedException("ManagementForm Remove");
-#endif
 		}
 
 		/// <summary>
@@ -98,9 +83,6 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected virtual void FilterChanged(object sender, string filter)
 		{
-#if DEBUG
-			throw new NotImplementedException("ManagementForm FilterChanged");
-#endif
 		}
 
 		private void LogOff(object sender, EventArgs e)

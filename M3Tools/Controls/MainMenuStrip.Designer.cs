@@ -159,7 +159,7 @@ namespace SPPBC.M3Tools
             this.tsmi_ViewCustomers.Name = "tsmi_ViewCustomers";
             this.tsmi_ViewCustomers.Size = new System.Drawing.Size(131, 22);
             this.tsmi_ViewCustomers.Text = "Customers";
-            this.tsmi_ViewCustomers.Click += new System.EventHandler(this.ViewCustomers);
+            this.tsmi_ViewCustomers.Click += new System.EventHandler(this.ChangeView);
             // 
             // tsmi_ViewOrders
             // 
@@ -168,7 +168,7 @@ namespace SPPBC.M3Tools
             this.tsmi_ViewOrders.Name = "tsmi_ViewOrders";
             this.tsmi_ViewOrders.Size = new System.Drawing.Size(131, 22);
             this.tsmi_ViewOrders.Text = "Orders";
-            this.tsmi_ViewOrders.Click += new System.EventHandler(this.ViewOrders);
+            this.tsmi_ViewOrders.Click += new System.EventHandler(this.ChangeView);
             // 
             // tsmi_ViewProducts
             // 
@@ -177,7 +177,7 @@ namespace SPPBC.M3Tools
             this.tsmi_ViewProducts.Name = "tsmi_ViewProducts";
             this.tsmi_ViewProducts.Size = new System.Drawing.Size(131, 22);
             this.tsmi_ViewProducts.Text = "Products";
-            this.tsmi_ViewProducts.Click += new System.EventHandler(this.ViewProducts);
+            this.tsmi_ViewProducts.Click += new System.EventHandler(this.ChangeView);
             // 
             // tsmi_ViewListeners
             // 
@@ -186,7 +186,7 @@ namespace SPPBC.M3Tools
             this.tsmi_ViewListeners.Name = "tsmi_ViewListeners";
             this.tsmi_ViewListeners.Size = new System.Drawing.Size(131, 22);
             this.tsmi_ViewListeners.Text = "Listeners";
-            this.tsmi_ViewListeners.Click += new System.EventHandler(this.ViewListeners);
+            this.tsmi_ViewListeners.Click += new System.EventHandler(this.ChangeView);
             // 
             // tsmi_Tools
             // 

@@ -219,7 +219,7 @@ namespace SPPBC.M3Tools.GTools
 		/// 		''' <returns>The message itself after being sent</returns>
         public Google.Apis.Gmail.v1.Data.Message Send(MimeMessage emailContent)
         {
-            return __service.Users.Messages.Send(CreateWithEmail(emailContent), emailContent.Sender.Address).Execute();
+			return __service.Users.Messages.Send(CreateWithEmail(emailContent), emailContent.Sender.Address).Execute();
         }
 
         // Sub SendEmails(details As EmailDetails)

@@ -121,8 +121,6 @@ namespace SPPBC.M3Tools
 		public MainMenuStrip()
 		{
 			InitializeComponent();
-
-			tsmi_ViewCustomers.Click += new EventHandler(ChangeView);
 		}
 
 		private void LogoutApplication(object sender, EventArgs e)
@@ -217,29 +215,28 @@ namespace SPPBC.M3Tools
 			// End If
 		}
 
-		private void ViewCustomers(object sender, EventArgs e)
-		{
-			Manage?.Invoke(this, new(ManageType.Customers));
-		}
-
-		private void ViewProducts(object sender, EventArgs e)
-		{
-			Manage?.Invoke(this, new(ManageType.Inventory));
-		}
-
-		private void ViewOrders(object sender, EventArgs e)
-		{
-			Manage?.Invoke(this, new(ManageType.Orders));
-		}
-
-		private void ViewListeners(object sender, EventArgs e)
-		{
-			Manage?.Invoke(this, new(ManageType.Listeners));
-		}
-
 		private void ChangeView(object sender, EventArgs e)
 		{
-			Console.WriteLine(sender.ToString());
+			var obj = sender as Control;
+
+			switch(obj.AccessibleName.ToLower())
+			{
+				case "customers":
+					Manage?.Invoke(this, new(ManageType.Customers));
+					break;
+				case "listeners":
+					Manage?.Invoke(this, new(ManageType.Listeners));
+					break;
+				case "orders":
+					Manage?.Invoke(this, new(ManageType.Orders));
+					break;
+				case "inventory":
+					Manage?.Invoke(this, new(ManageType.Inventory));
+					break;
+				default:
+					Console.WriteLine(obj.AccessibleName.ToLower());
+					throw new ArgumentException("Sender not known");
+			}
 		}
 
 		private void ShowSettings(object sender, EventArgs e)

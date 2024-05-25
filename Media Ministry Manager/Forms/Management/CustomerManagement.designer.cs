@@ -98,8 +98,6 @@ namespace M3App
             this.ClientSize = new System.Drawing.Size(780, 457);
             this.Icon = global::M3App.My.Resources.Resources.App_Icon;
             this.Name = "CustomerManagement";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.DisplayClosing);
-            this.Load += new System.EventHandler(this.Reload);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();

@@ -111,10 +111,10 @@ namespace M3App
 
         }
 
-        internal SPPBC.M3Tools.GTools.GmailTool gt_Email;
-        internal SPPBC.M3Tools.Data.ListenerBindingSource bsListeners;
-        internal SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
-        internal SPPBC.M3Tools.GTools.GdriveTool gd_Drive;
+        private SPPBC.M3Tools.GTools.GmailTool gt_Email;
+        private SPPBC.M3Tools.Data.ListenerBindingSource bsListeners;
+        private SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
+        private SPPBC.M3Tools.GTools.GdriveTool gd_Drive;
 		private SPPBC.M3Tools.Data.ListenersDataGrid ldg_Listeners;
 	}
 }
