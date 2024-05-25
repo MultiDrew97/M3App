@@ -41,10 +41,10 @@ namespace M3App
             this.components = new System.ComponentModel.Container();
             this.ss_StatusView = new System.Windows.Forms.StatusStrip();
             this.tss_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsp_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
-            this.tsp_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.ss_StatusView.SuspendLayout();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -72,7 +72,16 @@ namespace M3App
             this.tss_Status.Name = "tss_Status";
             this.tss_Status.Size = new System.Drawing.Size(636, 17);
             this.tss_Status.Spring = true;
+            this.tss_Status.Text = "What would you like to do?";
             this.tss_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tsp_Progress
+            // 
+            this.tsp_Progress.AutoToolTip = true;
+            this.tsp_Progress.CausesValidation = false;
+            this.tsp_Progress.Name = "tsp_Progress";
+            this.tsp_Progress.Size = new System.Drawing.Size(100, 16);
+            this.tsp_Progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // mms_Main
             // 
@@ -119,14 +128,6 @@ namespace M3App
             this.ts_Tools.Stretch = true;
             this.ts_Tools.TabIndex = 2;
             this.ts_Tools.Text = "ToolsToolStrip1";
-            // 
-            // tsp_Progress
-            // 
-            this.tsp_Progress.AutoToolTip = true;
-            this.tsp_Progress.CausesValidation = false;
-            this.tsp_Progress.Name = "tsp_Progress";
-            this.tsp_Progress.Size = new System.Drawing.Size(100, 16);
-            this.tsp_Progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // ManagementForm
             // 

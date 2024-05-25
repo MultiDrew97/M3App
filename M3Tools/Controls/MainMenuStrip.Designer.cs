@@ -46,7 +46,7 @@ namespace SPPBC.M3Tools
             this.tsmi_View = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_ViewCustomers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_ViewOrders = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_ViewProducts = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_ViewInventory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_ViewListeners = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_Update = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,7 +146,7 @@ namespace SPPBC.M3Tools
             this.tsmi_View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_ViewCustomers,
             this.tsmi_ViewOrders,
-            this.tsmi_ViewProducts,
+            this.tsmi_ViewInventory,
             this.tsmi_ViewListeners});
             this.tsmi_View.Name = "tsmi_View";
             this.tsmi_View.Size = new System.Drawing.Size(44, 20);
@@ -172,12 +172,12 @@ namespace SPPBC.M3Tools
             // 
             // tsmi_ViewProducts
             // 
-            this.tsmi_ViewProducts.AccessibleDescription = "View all inventory";
-            this.tsmi_ViewProducts.AccessibleName = "Products";
-            this.tsmi_ViewProducts.Name = "tsmi_ViewProducts";
-            this.tsmi_ViewProducts.Size = new System.Drawing.Size(131, 22);
-            this.tsmi_ViewProducts.Text = "Products";
-            this.tsmi_ViewProducts.Click += new System.EventHandler(this.ChangeView);
+            this.tsmi_ViewInventory.AccessibleDescription = "View all inventory";
+            this.tsmi_ViewInventory.AccessibleName = "Inventory";
+            this.tsmi_ViewInventory.Name = "tsmi_ViewInventory";
+            this.tsmi_ViewInventory.Size = new System.Drawing.Size(131, 22);
+            this.tsmi_ViewInventory.Text = "Inventory";
+            this.tsmi_ViewInventory.Click += new System.EventHandler(this.ChangeView);
             // 
             // tsmi_ViewListeners
             // 
@@ -257,7 +257,7 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.ToolStripMenuItem tsmi_View;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_ViewCustomers;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_ViewOrders;
-        internal System.Windows.Forms.ToolStripMenuItem tsmi_ViewProducts;
+        internal System.Windows.Forms.ToolStripMenuItem tsmi_ViewInventory;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_ViewListeners;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_Tools;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_Update;

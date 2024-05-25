@@ -60,10 +60,7 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		public string Count
 		{
-			set
-			{
-				tsl_Count.Text = value;
-			}
+			set => tsl_Count.Text = value;
 		}
 
 		/// <summary>
@@ -74,21 +71,18 @@ namespace SPPBC.M3Tools
 
 		private string Filter
 		{
-			get
-			{
-				return tst_Filter.Text;
-			}
-			set
-			{
-				tst_Filter.Text = value;
-			}
+			get => tst_Filter.Text;
+			set => tst_Filter.Text = value;
 		}
 
 		/// <summary>
 		/// Whether the add entries button is visable
 		/// </summary>
 		[DefaultValue(true)]
-		public bool AddVisible { get => tsb_Add.Visible; set => tsb_Add.Visible = value; }
+		public bool AddVisible {
+			get => tsb_Add.Visible;
+			set => tsb_Add.Visible = value;
+		}
 
 		/// <summary>
 		/// Whether the import entries button is visable

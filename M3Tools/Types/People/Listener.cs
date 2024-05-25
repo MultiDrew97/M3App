@@ -11,7 +11,11 @@ namespace SPPBC.M3Tools.Types
 		/// <inheritdoc/>
 		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("listenerID")]
-		public override int Id => base.Id;
+		public override int Id
+		{
+			get => base.Id;
+			set => base.Id = value;
+		}
 
 		/// <summary>
 		/// An empty instance of the Listener class

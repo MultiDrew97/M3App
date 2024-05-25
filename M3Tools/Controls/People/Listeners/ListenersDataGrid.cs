@@ -32,55 +32,31 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// The complete list of listeners being shown
 		/// </summary>
+		[Browsable(false)]
         public IList Listeners
         {
-            get
-            {
-                return base.Rows;
-            }
+			get => base.Rows;
         }
 
 		/// <summary>
-		/// The data source used for the control
+		/// <inheritdoc/>
 		/// </summary>
-        [Description("Data Source to use for data grid.")]
 		public new object DataSource
 		{
-			get
-			{
-				if (DesignMode)
-				{
-					return typeof(ListenerBindingSource);
-				}
-
-				return (ListenerBindingSource)base.DataSource;
-			}
+			get => DesignMode ? typeof(ListenerBindingSource) : (ListenerBindingSource)base.DataSource;
 			set => base.DataSource = value;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public ListenersDataGrid()
+		public ListenersDataGrid()
         {
             InitializeComponent();
 
-			AddEntry += new DataEventHandler<Types.Listener>(ParseEvents);
-			UpdateEntry += new DataEventHandler<Types.Listener>(ParseEvents);
-			RemoveEntry += new DataEventHandler<Types.Listener>(ParseEvents);
-		}
-
-		private void ParseEvents(object sender, DataEventArgs<Types.Listener> e)
-		{
-			Console.WriteLine("Parsing DataGrid Event");
-			Console.WriteLine("Sender: {0}\nEvent Type: {1}\nValue: {2}", sender, e.EventType, e.Value);
-			switch (e.EventType)
-			{
-				case EventType.Added: { AddListener?.Invoke(sender, e); break; }
-				case EventType.Removed: { RemoveListener?.Invoke(sender, e); break; }
-				case EventType.Updated: { UpdateListener?.Invoke(sender, e); break; }
-				default: { throw new ArgumentException($"'{e.EventType}' is not a valid EventType value"); }
-			}
-		}		
+			AddEntry += (sender, e) => AddListener?.Invoke(sender, new(e.Value, e.EventType));
+			UpdateEntry += (sender, e) => UpdateListener?.Invoke(sender, new(e.Value, e.EventType));
+			RemoveEntry += (sender, e) => RemoveListener?.Invoke(sender, new(e.Value, e.EventType));
+		}	
 	}
 }

@@ -5,7 +5,6 @@ using SPPBC.M3Tools.Events.Listeners;
 
 namespace M3App
 {
-	// TODO: Mimic CustomerManagement
 	/// <summary>
 	/// 
 	/// </summary>
@@ -43,9 +42,9 @@ namespace M3App
 			bsListeners.Clear();
 			foreach (var listener in dbListeners.GetListeners())
 				bsListeners.Add(listener);
-			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, ldg_Listeners.Listeners.Count);
 			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsListeners.ResetBindings(false);
+			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, ldg_Listeners.Listeners.Count);
 			UseWaitCursor = false;
 		}
 

@@ -48,10 +48,7 @@ namespace SPPBC.M3Tools.Data
 		[Browsable(false)]
 		public IList Customers
 		{
-			get
-			{
-				return base.Rows;
-			}
+			get => base.Rows;
 		}
 
 		/// <summary>

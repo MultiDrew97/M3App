@@ -217,7 +217,7 @@ namespace SPPBC.M3Tools
 
 		private void ChangeView(object sender, EventArgs e)
 		{
-			var obj = sender as Control;
+			var obj = (ToolStripMenuItem)sender;
 
 			switch(obj.AccessibleName.ToLower())
 			{
@@ -357,7 +357,7 @@ namespace SPPBC.M3Tools
 
 					break;
 				case MenuItemsCategories.INVENTORY:
-					tsmi_ViewProducts.Available = !tsmi_ViewProducts.Available;
+					tsmi_ViewInventory.Available = !tsmi_ViewInventory.Available;
 
 					if (!viewOnly)
 					{
