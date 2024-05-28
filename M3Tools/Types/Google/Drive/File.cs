@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace SPPBC.M3Tools.Types.GTools
@@ -139,17 +140,17 @@ namespace SPPBC.M3Tools.Types.GTools
 	/// <summary>
 	/// A collection of Google Drive files
 	/// </summary>
-    public class FileCollection : Collection<File>
-    {
+	public class FileCollection : Collection<File>
+	{
 		/// <summary>
 		/// Gets an item based on its ID
 		/// </summary>
 		/// <param name="fileID"></param>
 		/// <returns></returns>
 		public File this[string fileID]
-        {
-            get
-            {
+		{
+			get
+			{
 				foreach (var @file in Items)
 				{
 					if (@file.Id == fileID)
@@ -160,7 +161,7 @@ namespace SPPBC.M3Tools.Types.GTools
 
 				return null;
 			}
-        }
+		}
 
 		// TODO: Clean this up later
 		/// <summary>
@@ -168,46 +169,82 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-        public bool Contains(string id)
-        {
-            foreach (var @file in Items)
-            {
-                if ((@file.Id ?? "") == (id ?? ""))
-                {
-                    return true;
-                }
-            }
+		public bool Contains(string id)
+		{
+			foreach (var @file in Items)
+			{
+				if ((@file.Id ?? "") == (id ?? ""))
+				{
+					return true;
+				}
+			}
 
-            return false;
-        }
+			return false;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="fileSearch"></param>
 		/// <returns></returns>
-        public new bool Contains(File fileSearch)
-        {
-            foreach (var @file in Items)
-            {
-                if (@file == fileSearch)
-                {
-                    return true;
-                }
-            }
+		public new bool Contains(File fileSearch)
+		{
+			foreach (var @file in Items)
+			{
+				if (@file == fileSearch)
+				{
+					return true;
+				}
+			}
 
-            return false;
-        }
+			return false;
+		}
 
 
 		/// <summary>
 		/// Add a list of files to the collection
 		/// </summary>
 		/// <param name="files"></param>
-        public void AddRange(IList<File> files)
-        {
-            foreach (var @file in files)
-                Add(@file);
-        }
-    }
+		public void AddRange(IList<File> files)
+		{
+			foreach (var @file in files)
+				Add(@file);
+		}
+
+		/// <summary>
+		/// Removes files based on the provided predecate
+		/// </summary>
+		/// <param name="pred"></param>
+		public void RemoveAll(Predicate<File> pred) 
+		{
+			for (var i = 0; i < this.Count; i++)
+			{
+				if (!pred(this.Items[i]))
+				{
+					continue;
+				}
+
+				this.Remove(this.Items[i]);
+			}
+		}
+
+		/// <summary>
+		/// Removes folders based on the provided predicate
+		/// </summary>
+		/// <param name="pred"></param>
+		public void RemoveAll(Predicate<Folder> pred)
+		{
+			// FIXME: Figure out why the entries are being removed erroniously
+			for (var i = 0; i < this.Count; i++)
+			{
+				if (!pred((Folder)this.Items[i]))
+				{
+					continue;
+				}
+
+				this.Remove(this.Items[i]);
+			}
+		}
+
+	}
 }

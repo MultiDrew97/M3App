@@ -102,15 +102,46 @@ namespace SPPBC.M3Tools
 		/// <returns>The filtered file collection as a tree node array.</returns>
         private TreeNode[] ParseNodes(FileCollection folders)
         {
-			foreach (Folder folder in folders.Cast<Folder>())
+			folders.RemoveAll((Folder folder) =>
 			{
-				if (folder.Parents is null)
+				if (folder.Parents is null || folder.Parents.Count < 1) return false;
+
+				foreach (string parentID in folder.Parents)
+				{
+					Folder parent = (Folder)folders[parentID];
+					if (parent is null) continue;
+					if (parent.Children[folder.Id] is null)
+					{
+						parent.Children.Add(folder);
+						continue;
+					}
+
+					((Folder)parent.Children[folder.Id]).Children.AddRange(folder.Children);
+				}
+
+				return true;
+			});
+
+			/*foreach (Folder folder in folders.Cast<Folder>())
+			{
+				if (folder.Parents is null || folder.Parents.Count < 1)
 				{
 					// Instance has no parent, thus is standalone
 					continue;
 				}
 
-				foreach (Folder parent in folder.Parents.Cast<Folder>())
+				foreach (string parentID in folder.Parents)
+				{
+					if (((Folder)folders[parentID]).Children[folder.Id] is null)
+					{
+						((Folder)folders[parentID]).Children.Add(folder);
+						continue;
+					}
+
+					((Folder)(((Folder)folders[parentID]).Children[folder.Id])).Children.AddRange(folder.Children);
+				}
+
+				*//*foreach (Folder parent in folder.Parents.Cast<Folder>())
 				{
 					if (parent.Children[folder.Id] is null)
 					{
@@ -120,10 +151,10 @@ namespace SPPBC.M3Tools
 					}
 					
 					((Folder)parent.Children[folder.Id]).Children.AddRange(folder.Children);
-				}
+				}*//*
 
 				folders.Remove(folder);
-			}
+			}*/
             /*do
             {
                 if (folders[i].Parents is null)
