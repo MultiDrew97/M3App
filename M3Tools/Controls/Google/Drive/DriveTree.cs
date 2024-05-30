@@ -109,7 +109,7 @@ namespace SPPBC.M3Tools
 				foreach (string parentID in folder.Parents)
 				{
 					Folder parent = (Folder)folders[parentID];
-					if (parent is null) continue;
+					if (parent is null) return false;
 					if (parent.Children[folder.Id] is null)
 					{
 						parent.Children.Add(folder);

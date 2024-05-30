@@ -235,7 +235,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		public void RemoveAll(Predicate<Folder> pred)
 		{
 			// FIXME: Figure out why the entries are being removed erroniously
-			for (var i = 0; i < this.Count; i++)
+			for (var i = this.Count - 1; i >= 0; i--)
 			{
 				if (!pred((Folder)this.Items[i]))
 				{
