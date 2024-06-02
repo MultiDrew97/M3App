@@ -58,6 +58,17 @@ namespace SPPBC.M3Tools.GTools
 
         Google.Apis.Drive.v3.Data.User IGoogleService<Google.Apis.Drive.v3.Data.User>.UserAccount { get => UserAccount; }
 
+
+		public string DriveID
+		{
+			get
+			{
+				return __service.Files.Get("root").Execute().Id;
+			}
+		}
+		
+		// TODO: Potentially put authorization in constructor so I don't have to manually do it in controls
+
 		/// <summary>
 		/// Authorizes the application to use their account in the API calls
 		/// </summary>
@@ -82,7 +93,7 @@ namespace SPPBC.M3Tools.GTools
             GC.SuppressFinalize(this);
         }
 
-        void IDisposable.Dispose() => Close();
+        void IDisposable.Dispose() => Dispose(true);
 
 		/// <summary>
 		/// 		''' Upload a new file to the drive
@@ -385,7 +396,29 @@ namespace SPPBC.M3Tools.GTools
             foreach (Folder folder in folders.Cast<Folder>())
                 folder.Children.AddRange(await GetChildren(folder.Id));
 
-            return folders;
+            folders.RemoveAll((Folder folder) =>
+			{
+				if (folder.Parents is null || folder.Parents.Count < 1) return false;
+
+				foreach (string parentID in folder.Parents)
+				{
+					if (parentID == this.DriveID) return false;
+					Folder parent = (Folder)folders[parentID];
+
+					if (parent is null) continue;
+					if (parent.Children[folder.Id] is null)
+					{
+						parent.Children.Add(folder);
+						continue;
+					}
+
+					((Folder)parent.Children[folder.Id]).Children.AddRange(folder.Children);
+				}
+
+				return true;
+			});
+
+			return folders;
         }
 
         /// <summary>

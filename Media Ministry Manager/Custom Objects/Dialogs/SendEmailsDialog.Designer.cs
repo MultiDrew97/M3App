@@ -254,11 +254,8 @@ namespace M3App
             ss_StatusBar.PerformLayout();
             Load += new EventHandler(Loading);
             Shown += new EventHandler(Reload);
-            EmailsCancelled += new EmailsCancelledEventHandler(Cancelled);
-            EmailsSending += new EmailsSendingEventHandler(Sending);
-            EmailsSent += new EmailsSentEventHandler(Sent);
-            ProgressReset += new ProgressResetEventHandler(ResetProgress);
-            ProgressMade += new ProgressMadeEventHandler(UpdateProgress);
+            EmailsCancelled += new EventHandler(Cancelled);
+            EmailsSent += new EventHandler(Sent);
             ResumeLayout(false);
 
         }

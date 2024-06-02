@@ -4,53 +4,62 @@ using System.Collections.ObjectModel;
 namespace SPPBC.M3Tools.Types.GTools
 {
 	/// <summary>
-	/// Contains the info for an email being sent out
+	///		Contains the info for an email being sent out
 	/// </summary>
-    public interface IEmailDetails
+    public class EmailDetails
     {
         /// <summary>
-		/// The contents of the email
+		///		The contents of the email
 		/// </summary>
 		/// <returns></returns>
-        EmailContent EmailContents { get; set; }
+        public EmailContent EmailContents;
 
-        /// <summary>
-		/// 		''' The list of any drive links that may have been selected to be sent
-		/// 		''' </summary>
-		/// 		''' <returns></returns>
-        FileCollection DriveLinks { get; set; }
+		/// <summary>
+		/// 	The list of any drive links that may have been selected to be sent
+		/// </summary>
+		/// <returns></returns>
+		public FileCollection DriveLinks;
 
-        /// <summary>
-		/// 		''' The list of any local files that were selected to be sent
-		/// 		''' </summary>
-		/// 		''' <returns></returns>
-        Collection<string> LocalFiles { get; set; }
+		/// <summary>
+		/// 	The list of any local files that were selected to be sent
+		/// </summary>
+		/// <returns></returns>
+		public Collection<string> LocalFiles;
 
-        /// <summary>
-		/// 		''' The list of reciepients of the email
-		/// 		''' </summary>
-		/// 		''' <returns></returns>
-        DBEntryCollection<Listener> Recipients { get; set; }
+		/// <summary>
+		/// 	The list of reciepients of the email
+		/// </summary>
+		/// <returns></returns>
+		public DBEntryCollection<Listener> Recipients;
 
-        /// <summary>
-		/// 		''' The list of links to be added to the email body
-		/// 		''' </summary>
-		/// 		''' <returns></returns>
-        List<string> SendingLinks { get; set; }
+		/// <summary>
+		/// 	The list of links to be added to the email body
+		/// </summary>
+		/// <returns></returns>
+		public List<string> SendingLinks;
 
-        // Public Sub New()
-        // EmailContents = New EmailContent("", "", "html")
-        // DriveLinks = New GTools.Types.FileCollection() 'List(Of String)
-        // LocalFiles = New Collection(Of String)
-        // Recipients = New ListenerCollection
-        // SendingLinks = New List(Of String)
-        // End Sub
-    }
+		public EmailDetails()
+		{
+			EmailContents = new EmailContent();
+			DriveLinks = new FileCollection();
+			LocalFiles = new Collection<string>();
+			Recipients = new ListenerCollection();
+			SendingLinks = new List<string>();
+		}
+
+		// Public Sub New()
+		// EmailContents = New EmailContent("", "", "html")
+		// DriveLinks = New GTools.Types.FileCollection() 'List(Of String)
+		// LocalFiles = New Collection(Of String)
+		// Recipients = New ListenerCollection
+		// SendingLinks = New List(Of String)
+		// End Sub
+	}
 
 	/// <summary>
 	/// The content of the email being sent
 	/// </summary>
-    public class EmailContent
+	public class EmailContent
     {
         /// <summary>
 		/// 		''' The subject of the email
