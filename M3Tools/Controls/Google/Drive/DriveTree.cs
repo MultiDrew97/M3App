@@ -174,9 +174,7 @@ namespace SPPBC.M3Tools
 		/// </summary>
         public void Reload()
         {
-            UseWaitCursor = true;
             FillTable((WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()).Result);
-            UseWaitCursor = false;
         }
 
         private void NewFolder(object sender, EventArgs e)

@@ -43,7 +43,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
         public static bool operator ==(Template left, Template right)
         {
-            return (left.Name ?? "") == (right.Name ?? "");
+            return left.Name == right.Name;
         }
 
 		/// <summary>
@@ -56,16 +56,6 @@ namespace SPPBC.M3Tools.Types
         {
             return !(left == right);
         }
-
-		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
-		public override bool Equals(object obj)
-		{
-			return this == obj as Template || base.Equals(obj);
-		}
 
 		/// <summary>
 		/// <inheritdoc/>

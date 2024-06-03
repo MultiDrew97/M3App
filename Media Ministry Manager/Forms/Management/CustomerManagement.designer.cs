@@ -39,6 +39,7 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
             this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
@@ -55,7 +56,7 @@ namespace M3App
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.cdg_Customers);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(780, 347);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 345);
             this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // dbCustomers
@@ -79,9 +80,8 @@ namespace M3App
             this.cdg_Customers.Name = "cdg_Customers";
             this.cdg_Customers.ReadOnly = true;
             this.cdg_Customers.RowHeadersWidth = 82;
-            this.cdg_Customers.RowsCheckable = false;
             this.cdg_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.cdg_Customers.Size = new System.Drawing.Size(780, 347);
+            this.cdg_Customers.Size = new System.Drawing.Size(775, 345);
             this.cdg_Customers.TabIndex = 1;
             // 
             // bsCustomers
@@ -95,7 +95,7 @@ namespace M3App
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(780, 457);
+            this.ClientSize = new System.Drawing.Size(775, 441);
             this.Icon = global::M3App.My.Resources.Resources.App_Icon;
             this.Name = "CustomerManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);

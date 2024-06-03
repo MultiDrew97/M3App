@@ -15,7 +15,7 @@ namespace M3App
         internal event EventHandler EmailsSent;
         internal event EventHandler EmailsCancelled;
 
-		private readonly EmailDetails details = new EmailDetails();
+		private readonly EmailDetails details = new();
 
 		// TODO: Make email sending more straight forward
 		// Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
@@ -132,13 +132,15 @@ namespace M3App
 
         private void GatherReceipients(object sender, DoWorkEventArgs e)
         {
-            if (rsd_Selection.ShowDialog(dbListeners.GetListeners()) != DialogResult.OK)
+			using var recipients = new SPPBC.M3Tools.ListenerSelectionDialog(dbListeners.GetListeners());
+
+            if (recipients.ShowDialog() != DialogResult.OK)
             {
                 e.Cancel = true;
                 return;
             }
 
-            details.Recipients = rsd_Selection.List;
+            details.Recipients = recipients.Selection;
         }
 
         private void ReceipientsGathered(object sender, RunWorkerCompletedEventArgs e)
@@ -167,19 +169,20 @@ namespace M3App
         private void SendEmails(object sender, DoWorkEventArgs e)
         {
             var messages = new List<MimeKit.MimeMessage>();
-
+			string body;
             foreach (Listener listener in details.Recipients)
             {
+				// TODO: Simplify this function later
                 switch (details.EmailContents.BodyType)
                 {
                     case EmailType.PLAIN:
                         {
-                            details.EmailContents.Body = $"Blessings {listener.Name}, {Constants.vbCrLf}{Constants.vbCrLf}{details.EmailContents.Body}{Constants.vbCrLf}{Constants.vbCrLf}{string.Join(Constants.vbCrLf, details.SendingLinks)}";
+                            body = $"Blessings {listener.Name}, {Constants.vbCrLf}{Constants.vbCrLf}{details.EmailContents.Body}{Constants.vbCrLf}{Constants.vbCrLf}{string.Join(Constants.vbCrLf, details.SendingLinks)}";
                             break;
                         }
                     case EmailType.HTML:
                         {
-							details.EmailContents.Body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br />", details.SendingLinks));
+							body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br />", details.SendingLinks));
                             break;
                         }
 
@@ -190,7 +193,7 @@ namespace M3App
                 }
 
                 // TODO: Make login screen store the user info instead of just username and password to use for sender info
-                messages.Add(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents, details.LocalFiles));
+                messages.Add(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles));
             }
             e.Result = messages;
         }

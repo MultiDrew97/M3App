@@ -78,7 +78,7 @@ namespace SPPBC.M3Tools.GTools
         {
             base.Authorize(username, ct);
             // Create Drive API service.
-            LoadCreds("user", __scopes, ct == null ? CancellationToken.None : ct);
+            LoadCreds("user", __scopes, ct);
 
             __service = new DriveService(__init);
 

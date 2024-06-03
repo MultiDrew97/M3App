@@ -268,12 +268,6 @@
     <Compile Include="Dialogs\Customer\CustomerBasedDialogs.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Dialogs\Emails\RecipientSelectionDialog.Designer.cs">
-      <DependentUpon>RecipientSelectionDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Emails\RecipientSelectionDialog.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Dialogs\Products\EditProductDialog.Designer.cs">
       <DependentUpon>EditProductDialog.cs</DependentUpon>
     </Compile>
@@ -315,17 +309,11 @@
     <Compile Include="Dialogs\Emails\EmailBodySelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Emails\ReciepientSelection.designer.cs">
-      <DependentUpon>ReciepientSelection.cs</DependentUpon>
+    <Compile Include="Dialogs\Emails\ListenerSelectionDialog.designer.cs">
+      <DependentUpon>ListenerSelectionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Emails\ReciepientSelection.cs">
+    <Compile Include="Dialogs\Emails\ListenerSelectionDialog.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Components\SelectReceipient.Designer.cs">
-      <DependentUpon>SelectReceipient.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\SelectReceipient.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Dialogs\Emails\CustomEmailDialog.Designer.cs">
       <DependentUpon>CustomEmailDialog.cs</DependentUpon>
@@ -635,14 +623,8 @@
     <EmbeddedResource Include="Dialogs\Emails\EmailBodySelection.resx">
       <DependentUpon>EmailBodySelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Emails\ReciepientSelection.resx">
-      <DependentUpon>ReciepientSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\SelectReceipient.resx">
-      <DependentUpon>SelectReceipient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Emails\RecipientSelectionDialog.resx">
-      <DependentUpon>RecipientSelectionDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\Emails\ListenerSelectionDialog.resx">
+      <DependentUpon>ListenerSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Google\CreateFolderDialog.resx">
       <DependentUpon>CreateFolderDialog.cs</DependentUpon>
@@ -833,7 +815,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -37,7 +37,7 @@ namespace SPPBC.M3Tools.GTools
         {
             base.Authorize(username, ct);
             // Create Gmail API service
-            LoadCreds("me", __scopes, ct == null ? CancellationToken.None : ct);
+            LoadCreds("me", __scopes, ct);
 
             __service = new GmailService(__init);
         }

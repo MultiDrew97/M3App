@@ -4,41 +4,29 @@ using System.Windows.Forms;
 namespace SPPBC.M3Tools
 {
 
-    public partial class ReciepientSelection
+    public partial class ListenerSelectionDialog
     {
 
 		/// <summary>
 		/// The current selection of recipients
 		/// </summary>
-        public Types.DBEntryCollection<Types.Listener> Selection
+		[System.ComponentModel.Browsable(false)]
+	    public Types.ListenerCollection Selection
         {
             get
             {
-                return (Types.DBEntryCollection<Types.Listener>)ldg_Listeners.SelectedRows;
-            }
-        }
-
-		/// <summary>
-		/// The data source for the control
-		/// </summary>
-        public Data.ListenerBindingSource DataSource
-        {
-            get
-            {
-                return ldg_Listeners.DataSource as Data.ListenerBindingSource;
-            }
-            set
-            {
-                ldg_Listeners.DataSource = value;
+                return (Types.ListenerCollection)ldg_Listeners.SelectedRows;
             }
         }
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public ReciepientSelection()
+        public ListenerSelectionDialog(Types.ListenerCollection listeners)
         {
             InitializeComponent();
+
+			bsListeners.DataSource = listeners;
         }
 
 

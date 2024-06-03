@@ -66,7 +66,6 @@ namespace M3App
             tsl_Status = new ToolStripStatusLabel();
             tsp_Progress = new ToolStripProgressBar();
             gmt_Gmail = new SPPBC.M3Tools.GTools.GmailTool(components);
-            rsd_Selection = new RecipientSelectionDialog(components);
             dbListeners = new ListenerDatabase(components);
             TableLayoutPanel1.SuspendLayout();
             tc_EmailTypes.SuspendLayout();
@@ -276,7 +275,6 @@ namespace M3App
         internal ToolStripStatusLabel tsl_Status;
         internal ToolStripProgressBar tsp_Progress;
         internal FileUpload fu_Receipts;
-        internal RecipientSelectionDialog rsd_Selection;
         internal SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
     }
 }

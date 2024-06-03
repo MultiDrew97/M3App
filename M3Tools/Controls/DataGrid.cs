@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -31,6 +32,19 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event EventHandler Reload;
 
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			base.OnPaint(e);
+
+			if (!(ColumnHeadersVisible && RowsCheckable))
+			{
+				return;
+			}
+
+			System.Drawing.Rectangle rect = GetCellDisplayRectangle(dgc_Selection.DisplayIndex, -1, true);
+			chk_SelectAll.Location = new System.Drawing.Point(rect.Location.X + rect.Width / 2 - chk_SelectAll.Width / 2, rect.Location.Y + rect.Height / 2 - chk_SelectAll.Height / 2);
+		}
+
 		/// <summary>
 		/// The data used for the data grid
 		/// </summary>
@@ -47,11 +61,11 @@ namespace SPPBC.M3Tools.Data
 		}*/
 
 
-#pragma warning disable IDE0051 // Remove unused private members
+//#pragma warning disable IDE0051 // Remove unused private members
 		private new void OnDataSourceChanged(EventArgs e)
-#pragma warning restore IDE0051 // Remove unused private members
+//#pragma warning restore IDE0051 // Remove unused private members
 		{
-			Console.WriteLine("Custom DataSource Changed handler...");
+			Console.WriteLine("--------------------- Custom DataSource Changed handler ---------------------------");
 			AutoGenerateColumns = false;
 			RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(delegate (object sender, System.Windows.Forms.DataGridViewRowsAddedEventArgs ea)
 			{
@@ -203,7 +217,11 @@ namespace SPPBC.M3Tools.Data
 
 				if (chk_SelectAll.Checked)
 				{
-					return Rows;
+					var list = new Types.ListenerCollection();
+					foreach (System.Windows.Forms.DataGridViewRow row in Rows)
+						list.Add((Types.Listener)row.DataBoundItem);
+
+					return list;
 				}
 
 				ClearSelection();
@@ -221,10 +239,7 @@ namespace SPPBC.M3Tools.Data
 		[DefaultValue(true)]
 		public bool RowsCheckable
 		{
-			get
-			{
-				return dgc_Selection.Visible;
-			}
+			get => dgc_Selection.Visible;
 			set
 			{
 				dgc_Selection.Visible = value;
@@ -253,9 +268,10 @@ namespace SPPBC.M3Tools.Data
 		/// <param name="e"></param>
 		public void SelectAll(object sender, EventArgs e)
 		{
-			foreach (System.Windows.Forms.DataGridViewRow row in Rows)
+			foreach (DataGridViewRow row in Rows)
 				row.Cells[dgc_Selection.Index].Value = chk_SelectAll.Checked;
-			Invalidate();
+
+			RefreshEdit();
 		}
 
 		private void ToolsOpened(object sender, EventArgs e)

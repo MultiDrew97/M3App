@@ -14,11 +14,11 @@ namespace SPPBC.M3Tools.Dialogs
             {
                 switch (TabControl1.SelectedIndex)
                 {
-                    case var @case when @case == tp_Templates.TabIndex:
+                    case var @case  when @case == TabControl1.TabPages.IndexOf(tp_Templates):
                         {
                             return ts_Templates.TemplateSubject;
                         }
-                    case var case1 when case1 == tp_Custom.TabIndex:
+                    case var case1 when case1 == TabControl1.TabPages.IndexOf(tp_Custom):
                         {
                             return CustomEmail1.Subject;
                         }
@@ -37,11 +37,11 @@ namespace SPPBC.M3Tools.Dialogs
             {
                 switch (TabControl1.SelectedIndex)
                 {
-                    case var @case when @case == tp_Templates.TabIndex:
+                    case var @case when @case == TabControl1.TabPages.IndexOf(tp_Templates):
                         {
                             return ts_Templates.TemplateValue;
                         }
-                    case var case1 when case1 == tp_Custom.TabIndex:
+					case var case1 when case1 == TabControl1.TabPages.IndexOf(tp_Custom):
                         {
                             return CustomEmail1.Body;
                         }
@@ -60,11 +60,11 @@ namespace SPPBC.M3Tools.Dialogs
             {
                 switch (TabControl1.SelectedIndex)
                 {
-                    case var @case when @case == tp_Templates.TabIndex:
+                    case var @case when @case == TabControl1.TabPages.IndexOf(tp_Templates):
                         {
                             return Types.GTools.EmailType.HTML;
                         }
-                    case var case1 when case1 == tp_Custom.TabIndex:
+                    case var case1 when case1 == TabControl1.TabPages.IndexOf(tp_Custom):
                         {
                             return Types.GTools.EmailType.PLAIN;
                         }
@@ -120,11 +120,9 @@ namespace SPPBC.M3Tools.Dialogs
             Close();
         }
 
-        private void Reload()
+        private void Reload(object sender, EventArgs e)
         {
             ts_Templates.Reload();
         }
-
-        private void Reload(object sender, EventArgs e) => Reload();
     }
 }
