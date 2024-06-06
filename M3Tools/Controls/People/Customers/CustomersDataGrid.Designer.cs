@@ -22,6 +22,14 @@ namespace SPPBC.M3Tools.Data
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
+            // dgc_Edit
+            // 
+            this.dgc_Edit.ReadOnly = false;
+            // 
+            // dgc_Remove
+            // 
+            this.dgc_Remove.ReadOnly = false;
+            // 
             // dgc_CustomerID
             // 
             this.dgc_CustomerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -31,7 +39,6 @@ namespace SPPBC.M3Tools.Data
             this.dgc_CustomerID.HeaderText = "CustomerID";
             this.dgc_CustomerID.MinimumWidth = 10;
             this.dgc_CustomerID.Name = "dgc_CustomerID";
-            this.dgc_CustomerID.ReadOnly = true;
             this.dgc_CustomerID.Visible = false;
             // 
             // dgc_Name
@@ -42,7 +49,6 @@ namespace SPPBC.M3Tools.Data
             this.dgc_Name.HeaderText = "Name";
             this.dgc_Name.MinimumWidth = 10;
             this.dgc_Name.Name = "dgc_Name";
-            this.dgc_Name.ReadOnly = true;
             // 
             // dgc_Address
             // 
@@ -52,7 +58,6 @@ namespace SPPBC.M3Tools.Data
             this.dgc_Address.HeaderText = "Address";
             this.dgc_Address.MinimumWidth = 10;
             this.dgc_Address.Name = "dgc_Address";
-            this.dgc_Address.ReadOnly = true;
             // 
             // dgc_Phone
             // 
@@ -62,7 +67,6 @@ namespace SPPBC.M3Tools.Data
             this.dgc_Phone.HeaderText = "Phone";
             this.dgc_Phone.MinimumWidth = 10;
             this.dgc_Phone.Name = "dgc_Phone";
-            this.dgc_Phone.ReadOnly = true;
             // 
             // dgc_Email
             // 
@@ -72,7 +76,6 @@ namespace SPPBC.M3Tools.Data
             this.dgc_Email.HeaderText = "Email";
             this.dgc_Email.MinimumWidth = 10;
             this.dgc_Email.Name = "dgc_Email";
-            this.dgc_Email.ReadOnly = true;
             // 
             // dgc_Join
             // 
@@ -86,33 +89,29 @@ namespace SPPBC.M3Tools.Data
             this.dgc_Join.HeaderText = "Joined";
             this.dgc_Join.MinimumWidth = 10;
             this.dgc_Join.Name = "dgc_Join";
-            this.dgc_Join.ReadOnly = true;
             // 
             // CustomerDataGrid
             // 
             this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgc_Selection,
-            this.dgc_CustomerID,
-            this.dgc_Name,
-            this.dgc_Address,
-            this.dgc_Phone,
-            this.dgc_Email,
-            this.dgc_Join,
-            this.dgc_Edit,
-            this.dgc_Remove});
             this.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReadOnly = true;
             this.RowTemplate.Height = 28;
+			this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+			{
+				this.dgc_Selection, this.dgc_CustomerID,
+				this.dgc_Name, this.dgc_Phone, this.dgc_Email,
+				this.dgc_Join, this.dgc_Edit, this.dgc_Remove
+
+			});
+			this.Controls.SetChildIndex(this.chk_SelectAll, 0);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
 		}
 
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;

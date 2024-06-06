@@ -11,6 +11,7 @@ namespace SPPBC.M3Tools.Data
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
 	public partial class DataGrid<T>
 	{
+		private bool Moved = false;
 		// TODO: Maybe Remove this later
 		/// <summary>
 		/// Event that occurs when adding data
@@ -32,17 +33,24 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event EventHandler Reload;
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public new DataGridViewColumnCollection Columns => base.Columns;
+
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
 
-			if (!(ColumnHeadersVisible && RowsCheckable))
+			if (!(ColumnHeadersVisible && RowsCheckable) && Moved)
 			{
 				return;
 			}
 
 			System.Drawing.Rectangle rect = GetCellDisplayRectangle(dgc_Selection.DisplayIndex, -1, true);
 			chk_SelectAll.Location = new System.Drawing.Point(rect.Location.X + rect.Width / 2 - chk_SelectAll.Width / 2, rect.Location.Y + rect.Height / 2 - chk_SelectAll.Height / 2);
+			Moved = true;
 		}
 
 		/// <summary>
@@ -62,17 +70,17 @@ namespace SPPBC.M3Tools.Data
 
 
 //#pragma warning disable IDE0051 // Remove unused private members
-		private new void OnDataSourceChanged(EventArgs e)
+//		private new void OnDataSourceChanged(EventArgs e)
 //#pragma warning restore IDE0051 // Remove unused private members
-		{
-			Console.WriteLine("--------------------- Custom DataSource Changed handler ---------------------------");
-			AutoGenerateColumns = false;
-			RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(delegate (object sender, System.Windows.Forms.DataGridViewRowsAddedEventArgs ea)
-			{
-				Console.WriteLine(ea.RowCount);
-			});
-			base.OnDataSourceChanged(e);
-		}
+//		{
+//			Console.WriteLine("--------------------- Custom DataSource Changed handler ---------------------------");
+//			AutoGenerateColumns = false;
+//			RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(delegate (object sender, System.Windows.Forms.DataGridViewRowsAddedEventArgs ea)
+//			{
+//				Console.WriteLine(ea.RowCount);
+//			});
+//			base.OnDataSourceChanged(e);
+//		}
 		/*		{
 					get
 					{
@@ -103,7 +111,7 @@ namespace SPPBC.M3Tools.Data
 					}
 				}*/
 
-		private void RemoveSelectedRows()
+		private void RemoveSelectedRows(object sender, EventArgs e)
 		{
 			if (SelectedRows.Count < 1)
 			{
@@ -117,7 +125,7 @@ namespace SPPBC.M3Tools.Data
 			{
 				try
 				{
-					DeleteEntry(this, new System.Windows.Forms.DataGridViewRowCancelEventArgs(row));
+					OnUserDeletingRow(new System.Windows.Forms.DataGridViewRowCancelEventArgs(row));
 				}
 				catch (Exception ex)
 				{
@@ -144,14 +152,8 @@ namespace SPPBC.M3Tools.Data
 		[DefaultValue(false)]
 		public bool CanReorder
 		{
-			get
-			{
-				return AllowUserToOrderColumns;
-			}
-			set
-			{
-				AllowUserToOrderColumns = value;
-			}
+			get => AllowUserToOrderColumns;
+			set => AllowUserToOrderColumns = value;
 		}
 
 		/// <summary>
@@ -160,14 +162,8 @@ namespace SPPBC.M3Tools.Data
 		[DefaultValue(true)]
 		public bool CanEdit
 		{
-			get
-			{
-				return dgc_Edit.Visible;
-			}
-			set
-			{
-				dgc_Edit.Visible = value;
-			}
+			get => dgc_Edit.Visible;
+			set => dgc_Edit.Visible = value;
 		}
 
 		/// <summary>
@@ -176,14 +172,8 @@ namespace SPPBC.M3Tools.Data
 		[DefaultValue(true)]
 		public bool CanDelete
 		{
-			get
-			{
-				return dgc_Remove.Visible;
-			}
-			set
-			{
-				dgc_Remove.Visible = value;
-			}
+			get => dgc_Remove.Visible;
+			set => dgc_Remove.Visible = value;
 		}
 
 		/// <summary>
@@ -192,21 +182,15 @@ namespace SPPBC.M3Tools.Data
 		[DefaultValue(false)]
 		public bool CanAdd 
 		{
-			get
-			{
-				return base.AllowUserToAddRows;
-			}
-			set
-			{
-				base.AllowUserToAddRows = value;
-			}
+			get => base.AllowUserToAddRows;
+			set => base.AllowUserToAddRows = value;
 		}
 
 		/// <summary>
 		/// The list of selected rows in the data grid
 		/// </summary>
 		[Browsable(false)]
-		public new IList SelectedRows
+		public new DataGridViewSelectedRowCollection SelectedRows
 		{
 			get
 			{
@@ -215,19 +199,10 @@ namespace SPPBC.M3Tools.Data
 					return base.SelectedRows;
 				}
 
-				if (chk_SelectAll.Checked)
-				{
-					var list = new Types.ListenerCollection();
-					foreach (System.Windows.Forms.DataGridViewRow row in Rows)
-						list.Add((Types.Listener)row.DataBoundItem);
-
-					return list;
-				}
-
 				ClearSelection();
 
 				foreach (System.Windows.Forms.DataGridViewRow row in Rows)
-					row.Selected = (bool)row.Cells[dgc_Selection.DisplayIndex].Value;
+					row.Selected = (bool?)row.Cells[dgc_Selection.DisplayIndex].Value ?? false;
 
 				return base.SelectedRows;
 			}
@@ -253,11 +228,10 @@ namespace SPPBC.M3Tools.Data
 		public DataGrid() : base()
 		{
 			InitializeComponent();
-			AutoGenerateColumns = false;
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
-			cms_Tools.EditSelected += (sender, e) => EditSelected();
-			cms_Tools.RemoveSelected += (sender, e) => RemoveSelectedRows();
+			cms_Tools.EditSelected += new EventHandler(EditSelected);
+			cms_Tools.RemoveSelected += new EventHandler(RemoveSelectedRows);
 			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
 		}
 
@@ -271,7 +245,7 @@ namespace SPPBC.M3Tools.Data
 			foreach (DataGridViewRow row in Rows)
 				row.Cells[dgc_Selection.Index].Value = chk_SelectAll.Checked;
 
-			RefreshEdit();
+			this.CommitEdit(DataGridViewDataErrorContexts.Commit);
 		}
 
 		private void ToolsOpened(object sender, EventArgs e)
@@ -280,7 +254,7 @@ namespace SPPBC.M3Tools.Data
 			cms_Tools.EditEnabled = SelectedRows.Count > 0;
 		}
 
-		private void EditSelected()
+		private void EditSelected(object sender, EventArgs e)
 		{
 			if (SelectedRows.Count < 1)
 			{
@@ -296,26 +270,37 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		/// <param name="sender">The object calling the function</param>
 		/// <param name="e">The data grid view cell information for the call</param>
-		protected virtual void CellClicked(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
+		/*protected virtual void CellClicked(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex != dgc_Edit.Index && e.ColumnIndex != dgc_Remove.Index)
+			
+		}*/
+
+		
+		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
+		{
+			base.OnCellContentClick(e);
+
+			if (!(e.ColumnIndex == dgc_Edit.DisplayIndex || e.ColumnIndex == dgc_Remove.DisplayIndex || e.ColumnIndex == dgc_Selection.DisplayIndex))
 			{
 				return;
 			}
 
 			switch (e.ColumnIndex)
 			{
-				case var @edit when @edit == dgc_Edit.Index:
+				case var @edit when @edit == dgc_Edit.DisplayIndex:
 					{
 						UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem, M3Tools.Events.EventType.Updated));
 						break;
 					}
-				case var @remove when @remove == dgc_Remove.Index:
+				case var @remove when @remove == dgc_Remove.DisplayIndex:
 					{
-						RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem, M3Tools.Events.EventType.Removed));
+						OnUserDeletingRow(new(Rows[e.RowIndex]));
+						// RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem, M3Tools.Events.EventType.Removed));
 						break;
 					}
 			}
+
+			this.CommitEdit(DataGridViewDataErrorContexts.Commit);
 		}
 
 		/// <summary>
@@ -323,9 +308,15 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void DeleteEntry(object sender, System.Windows.Forms.DataGridViewRowCancelEventArgs e)
+		/*protected virtual void DeleteEntry(object sender, System.Windows.Forms.DataGridViewRowCancelEventArgs e)
 		{
 			RemoveEntry?.Invoke(sender, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
+		}*/
+
+		protected override void OnUserDeletingRow(DataGridViewRowCancelEventArgs e)
+		{
+			base.OnUserDeletingRow(e);
+			RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
 		}
 	}
 }

@@ -15,7 +15,8 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                return (Types.ListenerCollection)ldg_Listeners.SelectedRows;
+                return (Types.ListenerCollection)ldg_Listeners.SelectedRows.
+					;
             }
         }
 
@@ -47,5 +48,10 @@ namespace SPPBC.M3Tools
             DialogResult = DialogResult.Cancel;
             Close();
         }
-    }
+
+		private void FilterChanged(object sender, string filter)
+		{
+			bsListeners.Filter = filter;
+		}
+	}
 }
