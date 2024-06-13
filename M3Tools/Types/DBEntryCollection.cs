@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
 {
@@ -7,10 +8,15 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-	public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView
+	public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
 	{
 
 		private string _filter = "";
+
+		internal static DBEntryCollection<T> Cast(System.Collections.ICollection collection)
+		{
+			throw new System.NotImplementedException("DBEntryCollection Cast");
+		}
 
 		/// <summary>
 		/// Add a range of values to the collection. Can be shadowed to add any data verification gap
@@ -81,7 +87,7 @@ namespace SPPBC.M3Tools.Types
 			{
 				foreach (var current in Items)
 				{
-					if (current.GetHashCode() != id)
+					if (((IDbEntry)current).Id != id)
 					{
 						continue;
 					}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
 {
@@ -7,6 +8,29 @@ namespace SPPBC.M3Tools.Types
 	/// </summary>
     public class ListenerCollection : DBEntryCollection<Listener>
     {
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="collection"></param>
+		/// <returns></returns>
+		public static new ListenerCollection Cast(System.Collections.ICollection collection)
+		{
+			ListenerCollection list = new();
+			switch (collection.GetType())
+			{
+				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
+				case var @selected when @selected == typeof(DataGridViewRowCollection):
+					foreach (DataGridViewRow row in collection)
+					{
+						list.Add((Listener)row.DataBoundItem);
+					}
+					break;
+			}
+
+
+
+			return list;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -14,7 +38,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="listener"></param>
 		/// <param name="index"></param>
 		/// <returns></returns>
-        public override bool ApplyFilter(Listener listener, int index)
+		public override bool ApplyFilter(Listener listener, int index)
         {
 			if (listener == null)
 			{

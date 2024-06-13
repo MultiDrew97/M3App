@@ -211,12 +211,11 @@ namespace SPPBC.M3Tools.GTools
             return message;
         }
 
-        // <param name="sender">The account the email will be sent from. me is default</param>
         /// <summary>
-		/// 		''' Send an email using the provided email message
-		/// 		''' </summary>
-		/// 		''' <param name="emailContent">The email to be sent</param>
-		/// 		''' <returns>The message itself after being sent</returns>
+		///		Send an email using the provided email message
+		/// </summary>
+		/// <param name="emailContent">The email to be sent</param>
+		/// <returns>The message itself after being sent</returns>
         public Google.Apis.Gmail.v1.Data.Message Send(MimeMessage emailContent)
         {
 			return __service.Users.Messages.Send(CreateWithEmail(emailContent), emailContent.Sender.Address).Execute();

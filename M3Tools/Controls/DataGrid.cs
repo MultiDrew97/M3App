@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Collections;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Data
@@ -33,12 +32,16 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event EventHandler Reload;
 
-		/// <summary>
+		/*/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public new DataGridViewColumnCollection Columns => base.Columns;
+		public new DataGridViewColumnCollection Columns => base.Columns;*/
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
@@ -121,7 +124,7 @@ namespace SPPBC.M3Tools.Data
 			int failed = 0;
 			int total = SelectedRows.Count;
 
-			foreach (System.Windows.Forms.DataGridViewRow row in SelectedRows)
+			foreach (DataGridViewRow row in SelectedRows)
 			{
 				try
 				{
@@ -187,22 +190,19 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// The list of selected rows in the data grid
+		/// <inheritdoc/>
 		/// </summary>
 		[Browsable(false)]
-		public new DataGridViewSelectedRowCollection SelectedRows
+		public new System.Collections.ICollection SelectedRows
 		{
 			get
 			{
-				if (!RowsCheckable)
-				{
-					return base.SelectedRows;
+				if (RowsCheckable) { 
+					ClearSelection();
+
+					foreach (System.Windows.Forms.DataGridViewRow row in Rows)
+						row.Selected = (bool?)row.Cells[dgc_Selection.DisplayIndex].Value ?? false;
 				}
-
-				ClearSelection();
-
-				foreach (System.Windows.Forms.DataGridViewRow row in Rows)
-					row.Selected = (bool?)row.Cells[dgc_Selection.DisplayIndex].Value ?? false;
 
 				return base.SelectedRows;
 			}
@@ -250,8 +250,9 @@ namespace SPPBC.M3Tools.Data
 
 		private void ToolsOpened(object sender, EventArgs e)
 		{
-			cms_Tools.RemoveEnabled = SelectedRows.Count > 0;
-			cms_Tools.EditEnabled = SelectedRows.Count > 0;
+			var enable = SelectedRows.Count > 0;
+			cms_Tools.RemoveEnabled = enable;
+			cms_Tools.EditEnabled = enable;
 		}
 
 		private void EditSelected(object sender, EventArgs e)
@@ -266,16 +267,9 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// Called when a cell is clicked in the data grid view. Can be shadowed to add extra functionality as well.
+		/// <inheritdoc/>
 		/// </summary>
-		/// <param name="sender">The object calling the function</param>
-		/// <param name="e">The data grid view cell information for the call</param>
-		/*protected virtual void CellClicked(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
-		{
-			
-		}*/
-
-		
+		/// <param name="e"></param>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
 		{
 			base.OnCellContentClick(e);
@@ -287,20 +281,17 @@ namespace SPPBC.M3Tools.Data
 
 			switch (e.ColumnIndex)
 			{
+				case var @select when select == dgc_Selection.DisplayIndex:
+					Rows[e.RowIndex].Cells[dgc_Selection.DisplayIndex].Value = !(bool)Rows[e.RowIndex].Cells[dgc_Selection.DisplayIndex].FormattedValue;
+					chk_SelectAll.Checked = SelectedRows.Count == Rows.Count;
+					break;
 				case var @edit when @edit == dgc_Edit.DisplayIndex:
-					{
-						UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem, M3Tools.Events.EventType.Updated));
-						break;
-					}
+					UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem, M3Tools.Events.EventType.Updated));
+					break;
 				case var @remove when @remove == dgc_Remove.DisplayIndex:
-					{
-						OnUserDeletingRow(new(Rows[e.RowIndex]));
-						// RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)Rows[e.RowIndex].DataBoundItem, M3Tools.Events.EventType.Removed));
-						break;
-					}
+					OnUserDeletingRow(new(Rows[e.RowIndex]));
+					break;
 			}
-
-			this.CommitEdit(DataGridViewDataErrorContexts.Commit);
 		}
 
 		/// <summary>

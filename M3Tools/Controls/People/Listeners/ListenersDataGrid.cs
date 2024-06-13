@@ -48,6 +48,15 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[Browsable(false)]
+		public new Types.ListenerCollection SelectedRows
+		{
+			get => Types.ListenerCollection.Cast(base.SelectedRows);
+		}
+
+		/// <summary>
 		/// 
 		/// </summary>
 		public ListenersDataGrid()

@@ -1,4 +1,5 @@
-﻿
+﻿using System.Windows.Forms;
+
 namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
@@ -6,6 +7,30 @@ namespace SPPBC.M3Tools.Types
 	/// </summary>
     public class CustomerCollection : DBEntryCollection<Customer>
     {
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="collection"></param>
+		/// <returns></returns>
+		public static new CustomerCollection Cast(System.Collections.ICollection collection)
+		{
+			CustomerCollection list = new();
+			switch (collection.GetType())
+			{
+				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
+				case var @selected when @selected == typeof(DataGridViewRowCollection):
+					foreach (DataGridViewRow row in collection)
+					{
+						list.Add((Customer)row.DataBoundItem);
+					}
+					break;
+			}
+
+
+
+			return list;
+		}
+
 		/// <summary>
 		/// Applies a filter to the collection, finding any values that match the criteria
 		/// </summary>

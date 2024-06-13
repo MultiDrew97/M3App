@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chk_SelectAll = new System.Windows.Forms.CheckBox();
             this.cms_Tools = new SPPBC.M3Tools.ToolsContextMenu();
             this.dgc_Selection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -46,7 +45,7 @@
             this.chk_SelectAll.TabIndex = 3;
             this.chk_SelectAll.TabStop = false;
             this.chk_SelectAll.UseVisualStyleBackColor = true;
-            this.chk_SelectAll.CheckedChanged += new System.EventHandler(this.SelectAll);
+            this.chk_SelectAll.Click += new System.EventHandler(this.SelectAll);
             // 
             // cms_Tools
             // 
@@ -57,13 +56,14 @@
             // dgc_Selection
             // 
             this.dgc_Selection.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgc_Selection.FalseValue = "False";
             this.dgc_Selection.Frozen = true;
             this.dgc_Selection.HeaderText = "";
-			this.dgc_Selection.ReadOnly = false;
             this.dgc_Selection.MinimumWidth = 25;
             this.dgc_Selection.Name = "dgc_Selection";
             this.dgc_Selection.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgc_Selection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgc_Selection.TrueValue = "True";
             this.dgc_Selection.Width = 25;
             // 
             // dgc_Edit
@@ -96,10 +96,10 @@
             // 
             this.AllowUserToAddRows = false;
             this.AllowUserToOrderColumns = true;
+			this.ReadOnly = true;
             this.ContextMenuStrip = this.cms_Tools;
             this.Controls.Add(this.chk_SelectAll);
             this.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-			this.ReadOnly = false;
             this.RowTemplate.Height = 28;
             this.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Size = new System.Drawing.Size(450, 300);

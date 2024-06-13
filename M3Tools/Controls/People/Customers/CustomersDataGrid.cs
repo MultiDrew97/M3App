@@ -54,6 +54,15 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
+		[Browsable(false)]
+		public new Types.CustomerCollection SelectedRows
+		{
+			get => Types.CustomerCollection.Cast(base.SelectedRows);
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
 		public CustomerDataGrid() : base()
 		{
 			InitializeComponent();

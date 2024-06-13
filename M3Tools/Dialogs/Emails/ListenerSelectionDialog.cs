@@ -15,8 +15,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                return (Types.ListenerCollection)ldg_Listeners.SelectedRows.
-					;
+				return ldg_Listeners.SelectedRows;
             }
         }
 
