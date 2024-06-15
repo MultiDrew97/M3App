@@ -55,13 +55,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void DisplayClosing(object sender, CancelEventArgs e)
         {
-            // TODO: Find easier way
-            if (sender is null)
-            {
-                return;
-            }
-
-            My.MyProject.Forms.MainForm.Show();
+            base.DisplayClosing(sender, e);
         }
 
 		/// <summary>

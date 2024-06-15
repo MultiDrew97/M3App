@@ -36,6 +36,14 @@ namespace M3App
 		/// <param name="e"></param>
 		protected virtual void DisplayClosing(object sender, CancelEventArgs e) 
 		{
+			// FIXME: Forms are staying open after returning from this method for some reason
+			if (sender is SPPBC.M3Tools.MainMenuStrip)
+			{
+				e.Cancel = false;
+				return;
+			}
+
+			My.MyProject.Forms.MainForm.Show();
 		}
 
 		/// <summary>

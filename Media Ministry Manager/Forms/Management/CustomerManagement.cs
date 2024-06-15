@@ -52,14 +52,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void DisplayClosing(object sender, CancelEventArgs e)
 		{
-			// TODO: Find easier way to cancel main form opening in certain cases
-			Console.WriteLine(sender);
-			if (sender is SPPBC.M3Tools.MainMenuStrip)
-			{
-				return;
-			}
-
-			My.MyProject.Forms.MainForm.Show();
+			base.DisplayClosing(sender, e);
 		}
 
 		/// <summary>
