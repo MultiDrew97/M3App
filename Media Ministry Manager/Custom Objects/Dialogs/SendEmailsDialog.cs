@@ -34,7 +34,10 @@ namespace M3App
         public SendEmailsDialog()
         {
             InitializeComponent();
-        }
+
+			EmailsCancelled += new EventHandler(Cancelled);
+			EmailsSent += new EventHandler(Sent);
+		}
 
         private void BeginSending(object sender, EventArgs e)
         {
@@ -176,6 +179,7 @@ namespace M3App
             foreach (Listener listener in details.Recipients)
             {
 				// TODO: Simplify this function later
+				// FIXME: Resolve issue where links aren't clickable in email once sent
                 switch (details.EmailContents.BodyType)
                 {
                     case EmailType.PLAIN:

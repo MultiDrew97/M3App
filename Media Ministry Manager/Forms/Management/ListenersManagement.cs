@@ -53,16 +53,6 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		/*protected override void DisplayClosing(object sender, CancelEventArgs e)
-        {
-            base.DisplayClosing(sender, e);
-        }*/
-
-		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
         protected override void Remove(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
         {
             UseWaitCursor = true;

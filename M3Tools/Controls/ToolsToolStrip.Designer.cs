@@ -64,12 +64,12 @@ namespace SPPBC.M3Tools
             this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.SuspendLayout();
             // 
-            // tsb_New
+            // tsb_Add
             // 
             this.tsb_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsb_Add.Image = global::SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption;
             this.tsb_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_Add.Name = "tsb_New";
+            this.tsb_Add.Name = "tsb_Add";
             this.tsb_Add.Size = new System.Drawing.Size(23, 22);
             this.tsb_Add.Text = "New";
             this.tsb_Add.ToolTipText = "Add {0}";
@@ -93,20 +93,18 @@ namespace SPPBC.M3Tools
             // 
             // tst_Filter
             // 
-            this.tst_Filter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.tst_Filter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
             this.tst_Filter.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tst_Filter.Name = "tst_Filter";
             this.tst_Filter.Size = new System.Drawing.Size(100, 23);
-            this.tst_Filter.ToolTipText = "Filter {0}";
+            this.tst_Filter.ToolTipText = "Filter entries";
             this.tst_Filter.TextChanged += new System.EventHandler(this.Filtered);
             // 
-            // tsb_Emails
+            // tsb_Send
             // 
             this.tsb_Send.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsb_Send.Image = global::SPPBC.M3Tools.My.Resources.Resources.send_email;
             this.tsb_Send.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_Send.Name = "tsb_Emails";
+            this.tsb_Send.Name = "tsb_Send";
             this.tsb_Send.Size = new System.Drawing.Size(23, 22);
             this.tsb_Send.Text = "Send Emails";
             this.tsb_Send.Click += new System.EventHandler(this.Emails);

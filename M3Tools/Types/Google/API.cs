@@ -35,7 +35,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		void IDisposable.Dispose() => Close();
 
 		/// <summary>
-		/// 	Closes the connection to Google Drive
+		/// Closes the connection to Google Drive
 		/// </summary>
 		public virtual void Close()
 		{
@@ -47,7 +47,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		{
 			get
 			{
-				// TODO: Change saving folder. Requires admin permissions to save here
+				// TODO: Figure out best saving folder for tokens
 				string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 				string path = System.IO.Path.Combine(folder, $@"SPPBC\{Username}\Tokens");
 
@@ -55,13 +55,18 @@ namespace SPPBC.M3Tools.Types.GTools
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="scopes"></param>
 		protected API(string user, string[] scopes)
 		{
 			__user = user;
 			__scopes = scopes;
 		}
 
-        protected internal virtual System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
+        private System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
         {
 			if (ct.IsCancellationRequested) return (System.Threading.Tasks.Task<UserCredential>)System.Threading.Tasks.Task.FromCanceled(ct);
 
@@ -73,7 +78,6 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <summary>
 		/// Authorize with Google API on behalf of the specified user
 		/// </summary>
-		/// <param name="username">The username of the current user using the app itself</param>
 		/// <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
 		public virtual void Authorize(System.Threading.CancellationToken ct = default)
         {

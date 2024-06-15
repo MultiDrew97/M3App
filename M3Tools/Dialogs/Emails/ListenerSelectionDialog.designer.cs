@@ -38,6 +38,12 @@ namespace SPPBC.M3Tools
             this.btn_Select = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.ldg_Listeners = new SPPBC.M3Tools.Data.ListenersDataGrid();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
+            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.bsListeners = new SPPBC.M3Tools.Data.ListenerBindingSource();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolsToolStrip1 = new SPPBC.M3Tools.ToolsToolStrip(this.components);
@@ -89,20 +95,99 @@ namespace SPPBC.M3Tools
             // 
             this.ldg_Listeners.AllowUserToAddRows = false;
             this.ldg_Listeners.AllowUserToOrderColumns = true;
+            this.ldg_Listeners.AutoGenerateColumns = false;
             this.ldg_Listeners.CanDelete = false;
             this.ldg_Listeners.CanEdit = false;
             this.ldg_Listeners.CanReorder = true;
             this.ldg_Listeners.ColumnHeadersHeight = 46;
+            this.ldg_Listeners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewImageButtonEditColumn1,
+            this.dataGridViewImageButtonDeleteColumn1});
             this.ldg_Listeners.DataSource = this.bsListeners;
             this.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ldg_Listeners.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ldg_Listeners.Location = new System.Drawing.Point(0, 0);
             this.ldg_Listeners.MinimumSize = new System.Drawing.Size(400, 200);
             this.ldg_Listeners.Name = "ldg_Listeners";
+            this.ldg_Listeners.ReadOnly = true;
             this.ldg_Listeners.RowHeadersWidth = 82;
             this.ldg_Listeners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ldg_Listeners.Size = new System.Drawing.Size(524, 337);
             this.ldg_Listeners.TabIndex = 1;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewCheckBoxColumn1.FalseValue = "False";
+            this.dataGridViewCheckBoxColumn1.Frozen = true;
+            this.dataGridViewCheckBoxColumn1.HeaderText = "";
+            this.dataGridViewCheckBoxColumn1.MinimumWidth = 25;
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewCheckBoxColumn1.TrueValue = "True";
+            this.dataGridViewCheckBoxColumn1.Width = 25;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.FillWeight = 5F;
+            this.dataGridViewTextBoxColumn1.Frozen = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "ListenerID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Email";
+            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Email";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewImageButtonEditColumn1
+            // 
+            this.dataGridViewImageButtonEditColumn1.ButtonImage = null;
+            this.dataGridViewImageButtonEditColumn1.FillWeight = 5F;
+            this.dataGridViewImageButtonEditColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dataGridViewImageButtonEditColumn1.HeaderText = "";
+            this.dataGridViewImageButtonEditColumn1.MinimumWidth = 25;
+            this.dataGridViewImageButtonEditColumn1.Name = "dataGridViewImageButtonEditColumn1";
+            this.dataGridViewImageButtonEditColumn1.ReadOnly = true;
+            this.dataGridViewImageButtonEditColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageButtonEditColumn1.ToolTipText = "Edit";
+            this.dataGridViewImageButtonEditColumn1.Visible = false;
+            this.dataGridViewImageButtonEditColumn1.Width = 25;
+            // 
+            // dataGridViewImageButtonDeleteColumn1
+            // 
+            this.dataGridViewImageButtonDeleteColumn1.ButtonImage = null;
+            this.dataGridViewImageButtonDeleteColumn1.FillWeight = 5F;
+            this.dataGridViewImageButtonDeleteColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dataGridViewImageButtonDeleteColumn1.HeaderText = "";
+            this.dataGridViewImageButtonDeleteColumn1.MinimumWidth = 25;
+            this.dataGridViewImageButtonDeleteColumn1.Name = "dataGridViewImageButtonDeleteColumn1";
+            this.dataGridViewImageButtonDeleteColumn1.ReadOnly = true;
+            this.dataGridViewImageButtonDeleteColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageButtonDeleteColumn1.ToolTipText = "Remove";
+            this.dataGridViewImageButtonDeleteColumn1.Visible = false;
+            this.dataGridViewImageButtonDeleteColumn1.Width = 25;
             // 
             // bsListeners
             // 
@@ -177,5 +262,11 @@ namespace SPPBC.M3Tools
 		private Data.ListenerBindingSource bsListeners;
 		private System.Windows.Forms.ToolStripContainer toolStripContainer1;
 		private ToolsToolStrip toolsToolStrip1;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
+		private DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 	}
 }

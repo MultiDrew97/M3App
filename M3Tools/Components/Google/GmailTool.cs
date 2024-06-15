@@ -7,6 +7,9 @@ using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools.GTools
 {
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class GmailTool : API, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
     {
 
@@ -27,6 +30,9 @@ namespace SPPBC.M3Tools.GTools
 
         private MailboxAddress DefaultSender => new("Elder Bryon Miller", __user);
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public GmailTool() : base("me", new[] { GmailService.Scope.GmailCompose })
 		{
 			InitializeComponent();
@@ -35,7 +41,6 @@ namespace SPPBC.M3Tools.GTools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		/// <param name="username"></param>
 		/// <param name="ct"></param>
         public override void Authorize(CancellationToken ct = default)
         {

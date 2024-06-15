@@ -60,6 +60,7 @@ namespace SPPBC.M3Tools
             // SplitContainer1
             // 
             this.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SplitContainer1.IsSplitterFixed = true;
             this.SplitContainer1.Location = new System.Drawing.Point(0, 0);
             this.SplitContainer1.Name = "SplitContainer1";
             this.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;

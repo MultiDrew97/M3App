@@ -253,11 +253,9 @@ namespace M3App
             ss_StatusBar.PerformLayout();
             Load += new EventHandler(Loading);
             Shown += new EventHandler(Reload);
-            EmailsCancelled += new EventHandler(Cancelled);
-            EmailsSent += new EventHandler(Sent);
             ResumeLayout(false);
-
         }
+
         internal TableLayoutPanel TableLayoutPanel1;
         internal Button btn_Send;
         internal Button btn_Cancel;

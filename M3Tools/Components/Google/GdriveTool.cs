@@ -58,7 +58,7 @@ namespace SPPBC.M3Tools.GTools
 		Google.Apis.Drive.v3.Data.User IGoogleService<Google.Apis.Drive.v3.Data.User>.UserAccount => UserAccount;
 
 
-		public string DriveID
+		private string DriveID
 		{
 			get
 			{
@@ -66,7 +66,9 @@ namespace SPPBC.M3Tools.GTools
 			}
 		}
 
-		// TODO: Potentially put authorization in constructor so I don't have to manually do it in controls
+		/// <summary>
+		/// 
+		/// </summary>
 		public GdriveTool() : base("user", new[] { DriveService.Scope.Drive })
 		{
 			InitializeComponent();

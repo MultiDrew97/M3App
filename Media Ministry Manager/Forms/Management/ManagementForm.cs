@@ -10,7 +10,7 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ManagementForm<T> //where T : SPPBC.M3Tools.Types.IDbEntry
+	public partial class ManagementForm<T> where T : SPPBC.M3Tools.Types.IDbEntry
 	{
 		/// <summary>
 		/// <inheritdoc/>
@@ -30,28 +30,14 @@ namespace M3App
 		}
 
 		/// <summary>
-		/// Called when the display is being closed
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		/*protected virtual void DisplayClosing(object sender, CancelEventArgs e)
-		{
-			// FIXME: Forms are staying open after returning from this method for some reason
-			if (sender is SPPBC.M3Tools.MainMenuStrip)
-			{
-				return;
-			}
-
-			My.MyProject.Forms.MainForm.Show();
-		}*/
-
-		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="sender"></param>
 		protected void Close(object sender)
 		{
+			// FIXME: Bug where form will be closed correctly from menu strip, but not if closed from normal close button
 			Close();
+
 			if (sender is SPPBC.M3Tools.MainMenuStrip)
 			{
 				return;

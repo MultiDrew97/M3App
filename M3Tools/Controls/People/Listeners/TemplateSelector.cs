@@ -101,5 +101,10 @@ namespace SPPBC.M3Tools
             foreach (var template in templates)
                 AddTemplate(template);
         }
-    }
+
+		private void TemplateListUpdated(object sender, ListChangedEventArgs e)
+		{
+
+		}
+	}
 }
