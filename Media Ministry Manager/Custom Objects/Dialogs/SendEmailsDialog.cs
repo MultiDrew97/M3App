@@ -20,7 +20,7 @@ namespace M3App
 		// TODO: Make email sending more straight forward
 		// Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
 
-		public int FileCount
+		private int FileCount
         {
             get
             {
@@ -28,6 +28,9 @@ namespace M3App
             }
         }
 
+		/// <summary>
+		/// 
+		/// </summary>
         public SendEmailsDialog()
         {
             InitializeComponent();
@@ -151,17 +154,17 @@ namespace M3App
                 return;
             }
 
-            // TODO: Figure out how to make this simplier
-            using (var body = new EmailBodySelection() { Templates = new TemplateList() { new Template("Sermon", My.Resources.Resources.newSermon, "New Sermon"), new Template("Reciept", My.Resources.Resources.receipt, "Thank you") } })
+			// TODO: Figure out how to make this simplier
+			using var body = new EmailBodySelection(new() { new("Sermon", My.Resources.Resources.newSermon, "New Sermon"), new("Reciept", My.Resources.Resources.receipt, "Bless you") });
+            
+            if (body.ShowDialog() != DialogResult.OK)
             {
-                if (body.ShowDialog() != DialogResult.OK)
-                {
-                    EmailsCancelled?.Invoke(this, EventArgs.Empty);
-                    return;
-                }
-
-                details.EmailContents = body.Content;
+                EmailsCancelled?.Invoke(this, EventArgs.Empty);
+                return;
             }
+
+            details.EmailContents = body.Content;
+            
 
             bw_PrepEmails.RunWorkerAsync();
         }

@@ -17,15 +17,6 @@ namespace SPPBC.M3Tools.GTools
 
         }
 
-        [DebuggerNonUserCode()]
-        public GmailTool() : base()
-        {
-
-            // This call is required by the Component Designer.
-            InitializeComponent();
-
-        }
-
         // Component overrides dispose to clean up the component list.
         [DebuggerNonUserCode()]
         protected override void Dispose(bool disposing)

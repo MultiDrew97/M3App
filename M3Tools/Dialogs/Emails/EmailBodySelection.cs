@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SPPBC.M3Tools.Types;
 
 namespace SPPBC.M3Tools.Dialogs
 {
@@ -12,22 +13,12 @@ namespace SPPBC.M3Tools.Dialogs
         {
             get
             {
-                switch (TabControl1.SelectedIndex)
+                return TabControl1.SelectedIndex switch
                 {
-                    case var @case  when @case == TabControl1.TabPages.IndexOf(tp_Templates):
-                        {
-                            return ts_Templates.TemplateSubject;
-                        }
-                    case var case1 when case1 == TabControl1.TabPages.IndexOf(tp_Custom):
-                        {
-                            return CustomEmail1.Subject;
-                        }
-
-                    default:
-                        {
-                            return null;
-                        }
-                }
+                    var @template when @template == TabControl1.TabPages.IndexOf(tp_Templates) => ts_Templates.TemplateSubject,
+                    var @custom when @custom == TabControl1.TabPages.IndexOf(tp_Custom) => CustomEmail1.Subject,
+                    _ => null,
+                };
             }
         }
 
@@ -35,46 +26,26 @@ namespace SPPBC.M3Tools.Dialogs
         {
             get
             {
-                switch (TabControl1.SelectedIndex)
-                {
-                    case var @case when @case == TabControl1.TabPages.IndexOf(tp_Templates):
-                        {
-                            return ts_Templates.TemplateValue;
-                        }
-					case var case1 when case1 == TabControl1.TabPages.IndexOf(tp_Custom):
-                        {
-                            return CustomEmail1.Body;
-                        }
-
-                    default:
-                        {
-                            return null;
-                        }
-                }
-            }
+				return TabControl1.SelectedIndex switch
+				{
+					var @template when @template == TabControl1.TabPages.IndexOf(tp_Templates) => ts_Templates.TemplateValue,
+					var @custom when @custom == TabControl1.TabPages.IndexOf(tp_Custom) => CustomEmail1.Body,
+					_ => null,
+				};
+			}
         }
 
         private Types.GTools.EmailType BodyType
         {
             get
             {
-                switch (TabControl1.SelectedIndex)
-                {
-                    case var @case when @case == TabControl1.TabPages.IndexOf(tp_Templates):
-                        {
-                            return Types.GTools.EmailType.HTML;
-                        }
-                    case var case1 when case1 == TabControl1.TabPages.IndexOf(tp_Custom):
-                        {
-                            return Types.GTools.EmailType.PLAIN;
-                        }
-
-                    default:
-                        {
-                            return default;
-                        }
-                }
-            }
+				return TabControl1.SelectedIndex switch
+				{
+					var @template when @template == TabControl1.TabPages.IndexOf(tp_Templates) => Types.GTools.EmailType.HTML,
+					var @custom when @custom == TabControl1.TabPages.IndexOf(tp_Custom) => Types.GTools.EmailType.PLAIN,
+					_ => default,
+				};
+			}
         }
 
 		/// <summary>
@@ -82,10 +53,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// </summary>
         public Types.GTools.EmailContent Content
         {
-            get
-            {
-                return new Types.GTools.EmailContent(Subject, Body, BodyType);
-            }
+            get => new(Subject, Body, BodyType);
         }
 
 		/// <summary>
@@ -93,28 +61,26 @@ namespace SPPBC.M3Tools.Dialogs
 		/// </summary>
         public Types.TemplateList Templates
         {
-            set
-            {
-                ts_Templates.AddRange(value);
-            }
+            set => ts_Templates.AddRange(value);
         }
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public EmailBodySelection()
+        public EmailBodySelection(TemplateList templates)
         {
             InitializeComponent();
+			Templates = templates;
         }
 
 
-        private void FinishDialog(object sender, EventArgs e)
+        private void ConfirmSelection(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void CancelDialog(object sender, EventArgs e)
+        private void CancelSelection(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

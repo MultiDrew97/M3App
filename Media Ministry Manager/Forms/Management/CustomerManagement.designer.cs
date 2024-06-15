@@ -63,7 +63,7 @@ namespace M3App
             // 
             this.cdg_Customers.AllowUserToAddRows = false;
             this.cdg_Customers.AllowUserToOrderColumns = true;
-            this.cdg_Customers.AutoGenerateColumns = false;
+            //this.cdg_Customers.AutoGenerateColumns = false;
             this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cdg_Customers.DataSource = this.bsCustomers;

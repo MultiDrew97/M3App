@@ -29,6 +29,7 @@ namespace SPPBC.M3Tools.GTools
 
 		public GmailTool() : base("me", new[] { GmailService.Scope.GmailCompose })
 		{
+			InitializeComponent();
 		}
 
 		/// <summary>

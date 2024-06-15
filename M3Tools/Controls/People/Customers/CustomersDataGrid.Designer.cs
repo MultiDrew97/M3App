@@ -98,7 +98,7 @@ namespace SPPBC.M3Tools.Data
 			this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
 			{
 				this.dgc_Selection, this.dgc_CustomerID,
-				this.dgc_Name, this.dgc_Phone, this.dgc_Email,
+				this.dgc_Name, this.dgc_Address, this.dgc_Phone, this.dgc_Email,
 				this.dgc_Join, this.dgc_Edit, this.dgc_Remove
 
 			});

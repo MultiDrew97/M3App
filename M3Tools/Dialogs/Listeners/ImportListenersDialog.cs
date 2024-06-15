@@ -94,7 +94,7 @@ namespace SPPBC.M3Tools.Dialogs
         {
             var colDict = new Dictionary<string, int>() { { "Name", 0 }, { "Email", 1 } };
             TextFieldParser csvReader;
-            // Dim listeners As New Types.DBEntryCollection(Of Types.Listener)
+			Types.ListenerCollection list = new();
 
             foreach (var @file in ofd_ImportFile.FileNames)
             {
@@ -112,7 +112,7 @@ namespace SPPBC.M3Tools.Dialogs
                     }
                     catch (ArgumentException)
                     {
-                        throw new NotImplementedException("Import Fields Error");
+                        throw new MalformedLineException("Headers missing in file");
                     }
                 }
 
@@ -126,18 +126,19 @@ namespace SPPBC.M3Tools.Dialogs
                         continue;
                     }
 
-                    bsListeners.Add(listener);
+                    list.Add(listener);
                 }
             }
 
-            // e.Result = listeners
+			e.Result = list;
         }
 
         private void FilesParsed(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error is not null)
             {
-                throw e.Error;
+				MessageBox.Show(e.Error.Message, "Failed to Import", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+				return;
             }
 
             if (e.Cancelled)
@@ -145,7 +146,10 @@ namespace SPPBC.M3Tools.Dialogs
                 return;
             }
 
-            bsListeners.DataSource = (Types.DBEntryCollection<Types.Listener>)e.Result;
+            var list = (Types.ListenerCollection)e.Result;
+
+			foreach (var listener in list)
+				bsListeners.Add(listener);
         }
     }
 }

@@ -80,7 +80,6 @@ namespace M3App
             // 
             this.ldg_Listeners.AllowUserToAddRows = false;
             this.ldg_Listeners.AllowUserToOrderColumns = true;
-            this.ldg_Listeners.AutoGenerateColumns = false;
             this.ldg_Listeners.CanReorder = true;
             this.ldg_Listeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ldg_Listeners.DataSource = this.bsListeners;

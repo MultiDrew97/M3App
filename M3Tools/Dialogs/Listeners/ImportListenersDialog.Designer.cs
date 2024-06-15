@@ -194,8 +194,6 @@ namespace SPPBC.M3Tools.Dialogs
         internal System.Windows.Forms.Button btn_Browse;
         internal System.Windows.Forms.CheckBox chk_Headers;
         internal System.Windows.Forms.BindingSource bsListeners;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
         internal System.Windows.Forms.Button btn_Clear;
         internal Data.ListenersDataGrid ldg_Listeners;
         internal System.ComponentModel.BackgroundWorker bw_ParseFiles;

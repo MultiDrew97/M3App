@@ -179,95 +179,51 @@
   <data name="newSermon" xml:space="preserve">
     <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-  &lt;head&gt;
-    &lt;link rel="stylesheet" href="https://sppbc.herbivore.site/manager/css/emails.css" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div&gt;
-      &lt;p&gt;Blessings To You, {0}&lt;/p&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
 
+        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href="https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos"&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
+        &lt;p&gt;Also, give us a follow on &lt;a href="https://facebook.com/bryon.miller436"&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
+        &lt;p&gt;You may give an offering to any of the ministries of St. Paul Primitive Baptist Church &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-A Special Gift to the Pastor)&lt;/em&gt;.&lt;/p&gt;
+        &lt;p&gt;Select Any of the Available Option Below.&lt;/p&gt;
 
-      &lt;p&gt;
-        Welcome to the new &lt;strong&gt;BK &amp; AR Miller Ministries Email Listening&lt;/strong&gt;, formerly St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for being a subscriber.
-        Over the last year I suffered a major stroke, but thanks be to God, I am still here and alive!
-        My prayer is that you continue to enjoy the emails with expectancy, as all our email listenings have been modified for you.
-      &lt;/p&gt;
+        &lt;p&gt;Send Cashier's Check or Money Order To:&lt;/p&gt;
+        &lt;p class="center"&gt;&lt;strong&gt;Attention: Pastor B. Miller&lt;/strong&gt;&lt;br&gt;
+        ST. PAUL PRIMITIVE BAPTIST CHURCH&lt;br&gt;
+        2209 East 14th Street&lt;br&gt;
+        Austin, TX. 78702&lt;/p&gt;
+        &lt;p&gt;Send Through &lt;a href="https://cash.app/$elderbmiller" target="_blank"&gt;Cash App&lt;/a&gt;, &lt;a href="https://www.givelify.com/donate/st-paul-primitive-baptist-curch-austin-tx-2j7wy5ODg4OTA3/donation/amount" target="_blank"&gt;Givelify&lt;/a&gt;, or &lt;a href="https://paypal.me/elderbmiller" target="_blank"&gt;Paypal&lt;/a&gt;&lt;/p&gt;
+        &lt;p class="center"&gt;ADD A NOTE, MEMO or MESSAGE&lt;br&gt;
+        St. Paul Primitive Baptist Church&lt;br&gt;
+        &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Offering-Special Gift to the Pastor).&lt;/em&gt;&lt;/p&gt;
 
-      &lt;p&gt;If you no longer wish to receive these ministry listenings, please respond to this email, letting me know.&lt;/p&gt;
+        &lt;p class="center"&gt;&lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;em&gt;(A personal email message of donation received will be delivered upon receipt. If you have any questions, please contact Elder Bryon Miller personally by:&lt;br&gt;
+        Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
+        Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
+        -Identifying yourself as an Email Subscriber by &lt;em&gt;Last Name&lt;/em&gt; &amp; &lt;em&gt;Email Address&lt;/em&gt;. Once verified you will receive a call back from Elder Miller. These processes are in place to protect your privacy, personal information, the integrity and trust of this Ministry &amp; Staff, and the well-being of St. Paul PBC)&lt;/em&gt;&lt;/p&gt;
 
-      &lt;p&gt;
-        You will receive your  message within 24-72hrs following Service.
-      &lt;/p&gt;
+        &lt;p&gt;Thank for your support and be blessed.&lt;/p&gt;
 
-      &lt;p&gt;
-        We are live streaming through Facebook Live and Teaching through Zoom to Facebook Live; still with an email option to choose from on my YouTube channel &lt;a href="https://www.youtube.com/@elderb.miller1522"&gt;[Elder Bryon Miller]&lt;/a&gt;. Please Subscribe/Share/Like/Comment for easier access to any service/uploads on the channel.
-      &lt;/p&gt;
+        &lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
 
-      &lt;p&gt;Give us a follow on Facebook, where we host our weekly live streams&lt;/p&gt;
-      &lt;p&gt;You can also watch all our sermons on  and subscribe for notifications of future uploads.&lt;/p&gt;
-    &lt;/div&gt;
-
-
-    &lt;div&gt;
-      &lt;p&gt;If you would like to give back to the Ministry, via Offering, Special Love Gift to Elder Miller please send through:&lt;/p&gt;
-
-      &lt;ul&gt;
-        &lt;li&gt;CASH APP ( $elderbmiller )&lt;/li&gt;
-      &lt;/ul&gt;
-
-      &lt;p&gt;
-        &lt;strong&gt;ADD A NOTE, MEMO or MESSAGE:&lt;/strong&gt;
-      &lt;/p&gt;
-      BK &amp; AR Miller Ministries Email Listening
-      (ie...Tithes/Offering through &lt;a href="https://giv.li/ckgyds"&gt;Givelify&lt;/a&gt; or Special Love Gift to Elder Miller through Cashapp&lt;/p&gt;
-
-      &lt;p&gt;
-        &lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;
-      &lt;/p&gt;
-      &lt;p&gt;
-        A personal email message of donation received will be delivered upon receipt. If you have any questions, please contact Elder Bryon Miller personally by:
-
-        &lt;ul&gt;
-          &lt;li&gt;
-            Email --- &lt;a href="mailto:bryon436@gmail.com"&gt;bryon436@gmail.com&lt;/a&gt;
-          &lt;/li&gt;
-          &lt;li&gt;
-            Text --- &lt;a href="tel:+15122964246"&gt;(512) 296-4246&lt;/a&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/p&gt;
-
-      &lt;p&gt;
-        Once verified you will receive a callback from Elder Miller. These processes are in place to protect your privacy, personal information already on file, the integrity and trust of this Ministry, the Staff, and the well-being of BK &amp; AR Miller Ministries.
-      &lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;div&gt;
-      &lt;p&gt;
-        Again, if you decide at any time that you no longer wish to receive these emails, simply respond to this message or email me at &lt;a href="mailto:bryon436@gmail.com"&gt;bryon436@gmail.com&lt;/a&gt; to be removed from the list.
-
-        If you decide to stick with us, please add this email address to your contacts to minimize any interuptions in receiving your listening.
-      &lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;Thank You For Your Support.&lt;/p&gt;
-
-    &lt;p&gt;Be Blessed.&lt;/p&gt;
-
-    &lt;p class="center"&gt;
-      &lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;
-      &lt;br /&gt;
-    &lt;/p&gt;
-
-    &lt;hr /&gt;
-
-    &lt;p&gt;
-      &lt;strong&gt;Elder Bryon K Miller&lt;/strong&gt;
-      &lt;br /&gt;
-    &lt;/p&gt;
-
-&lt;div id="drive-links-link"&gt;{1}&lt;/div&gt;
-  &lt;/body&gt;
+		&lt;hr&gt;
+		
+        &lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+        St. Paul Primitive Baptist Church&lt;br&gt;
+        Email Listening Ministry&lt;br&gt;
+        2209 East 14th Street&lt;br&gt;
+        Austin, TX. 78702&lt;/p&gt;
+		
+		{1}
+		
+		&lt;div class="center-image"&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+		&lt;/div&gt;
+    &lt;/body&gt;
 &lt;/html&gt;</value>
     <comment>The html format of the email for a new sermon</comment>
   </data>

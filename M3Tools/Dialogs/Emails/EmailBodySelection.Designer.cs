@@ -37,9 +37,9 @@ namespace SPPBC.M3Tools.Dialogs
             components = new System.ComponentModel.Container();
             TableLayoutPanel1 = new TableLayoutPanel();
             OK_Button = new Button();
-            OK_Button.Click += new EventHandler(FinishDialog);
+            OK_Button.Click += new EventHandler(ConfirmSelection);
             Cancel_Button = new Button();
-            Cancel_Button.Click += new EventHandler(CancelDialog);
+            Cancel_Button.Click += new EventHandler(CancelSelection);
             TabControl1 = new TabControl();
             tp_Templates = new TabPage();
             ts_Templates = new TemplateSelector();

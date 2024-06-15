@@ -57,7 +57,6 @@ namespace SPPBC.M3Tools.Types.GTools
 
 		protected API(string user, string[] scopes)
 		{
-			InitializeComponent();
 			__user = user;
 			__scopes = scopes;
 		}

@@ -76,20 +76,11 @@ namespace SPPBC.M3Tools
             if (cbx_TemplateSelection.SelectedIndex < 0)
             {
                 cbx_TemplateSelection.Text = "Select Template...";
+				wb_TemplateDisplay.Navigate("about:blank");
                 return;
             }
 
-            // wb_TemplateDisplay.Navigate("about:blank")
-            wb_TemplateDisplay.DocumentText = Conversions.ToString(cbx_TemplateSelection.SelectedValue);
-        }
-
-        private void TemplateListUpdated(object sender, ListChangedEventArgs e)
-        {
-            if (!(e.ListChangedType == ListChangedType.ItemAdded))
-            {
-                return;
-            }
-
+            wb_TemplateDisplay.DocumentText = TemplateValue;
         }
 
 		/// <summary>

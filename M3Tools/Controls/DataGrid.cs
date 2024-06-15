@@ -10,6 +10,7 @@ namespace SPPBC.M3Tools.Data
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
 	public partial class DataGrid<T>
 	{
+		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
 		// TODO: Maybe Remove this later
 		/// <summary>
@@ -31,12 +32,6 @@ namespace SPPBC.M3Tools.Data
 		/// Issues a reload event for the data grid
 		/// </summary>
 		public event EventHandler Reload;
-
-		/*/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public new DataGridViewColumnCollection Columns => base.Columns;*/
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -228,6 +223,7 @@ namespace SPPBC.M3Tools.Data
 		public DataGrid() : base()
 		{
 			InitializeComponent();
+			AutoGenerateColumns = false;
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
 			cms_Tools.EditSelected += new EventHandler(EditSelected);
@@ -274,10 +270,10 @@ namespace SPPBC.M3Tools.Data
 		{
 			base.OnCellContentClick(e);
 
-			if (!(e.ColumnIndex == dgc_Edit.DisplayIndex || e.ColumnIndex == dgc_Remove.DisplayIndex || e.ColumnIndex == dgc_Selection.DisplayIndex))
+			/*if (!(e.ColumnIndex == dgc_Edit.DisplayIndex || e.ColumnIndex == dgc_Remove.DisplayIndex || e.ColumnIndex == dgc_Selection.DisplayIndex))
 			{
 				return;
-			}
+			}*/
 
 			switch (e.ColumnIndex)
 			{
@@ -295,15 +291,9 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// Remove an entry from the database
+		/// <inheritdoc/>
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		/*protected virtual void DeleteEntry(object sender, System.Windows.Forms.DataGridViewRowCancelEventArgs e)
-		{
-			RemoveEntry?.Invoke(sender, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
-		}*/
-
 		protected override void OnUserDeletingRow(DataGridViewRowCancelEventArgs e)
 		{
 			base.OnUserDeletingRow(e);

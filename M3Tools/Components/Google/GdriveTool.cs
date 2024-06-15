@@ -69,12 +69,12 @@ namespace SPPBC.M3Tools.GTools
 		// TODO: Potentially put authorization in constructor so I don't have to manually do it in controls
 		public GdriveTool() : base("user", new[] { DriveService.Scope.Drive })
 		{
+			InitializeComponent();
 		}
 
 		/// <summary>
 		/// Authorizes the application to use their account in the API calls
 		/// </summary>
-		/// <param name="username"></param>
 		/// <param name="ct"></param>
 		public override void Authorize(CancellationToken ct = default)
         {
