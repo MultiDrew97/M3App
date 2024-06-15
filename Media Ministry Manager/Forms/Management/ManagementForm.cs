@@ -34,12 +34,26 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void DisplayClosing(object sender, CancelEventArgs e) 
+		/*protected virtual void DisplayClosing(object sender, CancelEventArgs e)
 		{
 			// FIXME: Forms are staying open after returning from this method for some reason
 			if (sender is SPPBC.M3Tools.MainMenuStrip)
 			{
-				e.Cancel = false;
+				return;
+			}
+
+			My.MyProject.Forms.MainForm.Show();
+		}*/
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		protected void Close(object sender)
+		{
+			Close();
+			if (sender is SPPBC.M3Tools.MainMenuStrip)
+			{
 				return;
 			}
 
@@ -130,8 +144,8 @@ namespace M3App
 					return;
 			}
 
-
-			DisplayClosing(sender, new CancelEventArgs());
+			//DisplayClosing(sender, new CancelEventArgs());
+			Close(sender);
 		}
 	}
 }

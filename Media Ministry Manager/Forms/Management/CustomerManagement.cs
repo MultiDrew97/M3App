@@ -50,10 +50,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void DisplayClosing(object sender, CancelEventArgs e)
+		/*protected override void DisplayClosing(object sender, CancelEventArgs e)
 		{
 			base.DisplayClosing(sender, e);
-		}
+		}*/
 
 		/// <summary>
 		/// Add a new customer to the database from the tool strip
