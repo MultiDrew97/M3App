@@ -7,48 +7,41 @@ using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools.GTools
 {
-    public partial class GmailTool : API, IDisposable, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
+    public partial class GmailTool : API, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
     {
 
-        private readonly string[] __scopes = new[] { GmailService.Scope.GmailCompose };
         private GmailService __service;
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        protected Google.Apis.Gmail.v1.Data.Profile UserAccount
-        {
-            get
-            {
-                return __service.Users.GetProfile("me").Execute();
-            }
-        }
+		protected Google.Apis.Gmail.v1.Data.Profile UserAccount
+		{
+			get
+			{
+				return __service.Users.GetProfile(__user).Execute();
+			}
+		}
 
-        Google.Apis.Gmail.v1.Data.Profile IGoogleService<Google.Apis.Gmail.v1.Data.Profile>.UserAccount { get => UserAccount; }
+		Google.Apis.Gmail.v1.Data.Profile IGoogleService<Google.Apis.Gmail.v1.Data.Profile>.UserAccount  => UserAccount;
 
-        private readonly MailboxAddress DefaultSender = new("Elder Bryon Miller", "me");
+        private MailboxAddress DefaultSender => new("Elder Bryon Miller", __user);
+
+		public GmailTool() : base("me", new[] { GmailService.Scope.GmailCompose })
+		{
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="username"></param>
 		/// <param name="ct"></param>
-        public override void Authorize(string username, CancellationToken ct = default)
+        public override void Authorize(CancellationToken ct = default)
         {
-            base.Authorize(username, ct);
-            // Create Gmail API service
-            LoadCreds("me", __scopes, ct);
+            base.Authorize(ct);
 
             __service = new GmailService(__init);
         }
-
-
-        // ''' <summary>
-        // ''' Perform cleanup for this component
-        // ''' </summary>
-        // Public Overloads Sub Dispose(disposing As Boolean) Implements IDisposable.Dispose
-        // Dispose(disposing)
-        // End Sub
 
 		/// <summary>
 		/// Create an email to be sent

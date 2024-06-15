@@ -10,7 +10,7 @@ namespace M3App
     public partial class CreateFolderDialog
     {
         private string __folderName;
-        private readonly Collection<string> __parents = new Collection<string>();
+        private readonly Collection<string> __parents = new();
         public string FolderName
         {
             get
@@ -76,7 +76,7 @@ namespace M3App
         {
             UseWaitCursor = true;
 
-            gdt_GDrive.Authorize(My.Settings.Default.Username);
+            gdt_GDrive.Authorize();
 
             dt_DriveHeirarchy.Reload();
 

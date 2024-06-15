@@ -92,7 +92,7 @@ namespace SPPBC.M3Tools
         {
             UseWaitCursor = true;
 
-            gdt_GDrive.Authorize(Username);
+            gdt_GDrive.Authorize();
 
             dt_DriveHeirarchy.Reload();
 

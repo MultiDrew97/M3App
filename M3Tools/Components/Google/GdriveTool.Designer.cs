@@ -17,14 +17,6 @@ namespace SPPBC.M3Tools.GTools
 
         }
 
-        [DebuggerNonUserCode()]
-        public GdriveTool() : base()
-        {
-
-            // This call is required by the Component Designer.
-            InitializeComponent();
-        }
-
         // Component overrides dispose to clean up the component list.
         [DebuggerNonUserCode()]
         protected override void Dispose(bool disposing)

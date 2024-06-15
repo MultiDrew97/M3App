@@ -33,10 +33,9 @@ namespace SPPBC.M3Tools.GTools
 	/// <summary>
 	/// The class that handles all Google Drive API calls
 	/// </summary>
-    public partial class GdriveTool : API, IDisposable, IGoogleService<Google.Apis.Drive.v3.Data.User>
+    public partial class GdriveTool : API, IGoogleService<Google.Apis.Drive.v3.Data.User>
     {
 
-        private readonly string[] __scopes = new[] { DriveService.Scope.Drive };
         private DriveService __service;
 
         private readonly Google.Apis.Drive.v3.Data.Permission __defaultPermissions = new()
@@ -48,15 +47,15 @@ namespace SPPBC.M3Tools.GTools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        protected Google.Apis.Drive.v3.Data.User UserAccount
-        {
-            get
-            {
-                return __service.About.Get().Execute().User;
-            }
-        }
+		protected Google.Apis.Drive.v3.Data.User UserAccount
+		{
+			get
+			{
+				return __service.About.Get().Execute().User;
+			}
+		}
 
-        Google.Apis.Drive.v3.Data.User IGoogleService<Google.Apis.Drive.v3.Data.User>.UserAccount { get => UserAccount; }
+		Google.Apis.Drive.v3.Data.User IGoogleService<Google.Apis.Drive.v3.Data.User>.UserAccount => UserAccount;
 
 
 		public string DriveID
@@ -66,34 +65,25 @@ namespace SPPBC.M3Tools.GTools
 				return __service.Files.Get("root").Execute().Id;
 			}
 		}
-		
+
 		// TODO: Potentially put authorization in constructor so I don't have to manually do it in controls
+		public GdriveTool() : base("user", new[] { DriveService.Scope.Drive })
+		{
+		}
 
 		/// <summary>
 		/// Authorizes the application to use their account in the API calls
 		/// </summary>
 		/// <param name="username"></param>
 		/// <param name="ct"></param>
-        public override void Authorize(string username, CancellationToken ct = default)
+		public override void Authorize(CancellationToken ct = default)
         {
-            base.Authorize(username, ct);
-            // Create Drive API service.
-            LoadCreds("user", __scopes, ct);
+			
+            base.Authorize(ct);
 
             __service = new DriveService(__init);
 
         }
-
-        /// <summary>
-		/// 		''' Closes the connection to Google Drive
-		/// 		''' </summary>
-        public void Close()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        void IDisposable.Dispose() => Dispose(true);
 
 		/// <summary>
 		/// 		''' Upload a new file to the drive

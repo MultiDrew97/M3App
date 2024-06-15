@@ -62,8 +62,8 @@ namespace M3App
 
         private void Loading(object sender, EventArgs e)
         {
-            gmt_Gmail.Authorize(My.Settings.Default.Username);
-            gdt_Files.Load(My.Settings.Default.Username);
+            gmt_Gmail.Authorize();
+            gdt_Files.Load();
         }
 
         public void Reload(object sender, EventArgs e)

@@ -191,9 +191,9 @@ namespace SPPBC.M3Tools
 		/// When the control is loaded
 		/// </summary>
 		/// <param name="username"></param>
-        public new void Load(string username)
+        public new void Load()
         {
-            gdt_GDrive.Authorize(username);
+            gdt_GDrive.Authorize();
         }
     }
 }

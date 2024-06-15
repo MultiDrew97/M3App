@@ -19,8 +19,8 @@ namespace M3App
 
             mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.LISTENERS);
 
-            gt_Email.Authorize(My.Settings.Default.Username);
-            gd_Drive.Authorize(My.Settings.Default.Username);
+            gt_Email.Authorize();
+            gd_Drive.Authorize();
 
 			ldg_Listeners.Reload += new EventHandler(Reload);
 			ldg_Listeners.AddListener += new ListenerEventHandler(Add);
