@@ -2,27 +2,35 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using M3App.Helpers;
+using SPPBC.M3Tools.Events.Customers;
 using SPPBC.M3Tools.Events.Inventory;
 
 namespace M3App
 {
 	// TODO: Mimic CustomerManagement
 	// TODO: Place this in Filter for binding source: $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')";
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class InventoryManagement
     {
-        private event InventoryEventHandler InventoryDBModified;
-        private bool Tooled = false;
-
-        public InventoryManagement()
+        public InventoryManagement() : base()
         {
             InitializeComponent();
-			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.INVENTORY);
+
+			// TODO: Figure out if I can place button toggles in the base class and automate the hiding
+			ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
+			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
+
+			idg_Inventory.Reload += new EventHandler(Reload);
+			idg_Inventory.AddProduct += new InventoryEventHandler(Add);
+			idg_Inventory.UpdateProduct += new InventoryEventHandler(Update);
+			idg_Inventory.RemoveProduct += new InventoryEventHandler(Remove);
 		}
 
         private void DisplayClosing(object sender, CancelEventArgs e)
         {
-            // TODO: Find easier way
-            if (Tooled)
+            if (sender is SPPBC.M3Tools.MainMenuStrip)
             {
                 return;
             }
@@ -30,60 +38,18 @@ namespace M3App
             My.MyProject.Forms.MainForm.Show();
         }
 
-        private void Logout(object sender, EventArgs e)
-        {
-            Utils.LogOff();
-            Tooled = true;
-            Close();
-        }
-
-        private void ExitApplication(object sender, EventArgs e)
-        {
-            Utils.CloseOpenForms();
-        }
-
-        private void ManageOrders(object sender, EventArgs e)
-        {
-            var orders = new OrderManagement();
-            orders.Show();
-            Tooled = true;
-            Close();
-        }
-
-        private void ManageProducts(object sender, EventArgs e)
-        {
-            var customers = new CustomerManagement();
-            customers.Show();
-            Tooled = true;
-            Close();
-        }
-
-        private void ManageListeners(object sender, EventArgs e)
-        {
-            var listeners = new ListenersManagement();
-            listeners.Show();
-            Tooled = true;
-            Close();
-        }
-
-        private void ViewSettings(object sender , EventArgs e)
-        {
-			using var settings = new SettingsForm();
-			settings.Show();
-		}
-
-
-		private void AddProduct(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
-		{
-			AddProduct(sender, e as InventoryEventArgs);
-		}
-
-		private void AddProduct(object sender, InventoryEventArgs e)
+		protected override void Add(object sender, EventArgs e)
         {
             UseWaitCursor = true;
-            dbInventory.AddProduct(e.Value);
+
+			using var @add = new AddProductDialog();
+
+			if (add.ShowDialog() != DialogResult.OK)
+				return;
+
+            dbInventory.AddProduct(add.Product);
             MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            InventoryDBModified.Invoke(this, e);
+			Reload(sender, e);
         }
 
         private void RemoveProduct(object sender, InventoryEventArgs e)
@@ -91,21 +57,21 @@ namespace M3App
             UseWaitCursor = true;
             dbInventory.RemoveProduct(e.Value.Id);
             MessageBox.Show($"Successfully removed product", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            InventoryDBModified.Invoke(this, e);
-        }
+			Reload(sender, e);
+		}
 
         private void UpdateProduct(object sender, InventoryEventArgs e)
         {
             UseWaitCursor = true;
             dbInventory.UpdateProduct(e.Value);
             MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            InventoryDBModified.Invoke(this, e);
+            Reload(sender, e);
         }
 
-		private void Reload(object sender, InventoryEventArgs e)
+		/*private void Reload(object sender, InventoryEventArgs e)
 		{
 			Reload(sender, EventArgs.Empty);
-		}
+		}*/
 
         private void Reload(object sender, EventArgs e)
         {

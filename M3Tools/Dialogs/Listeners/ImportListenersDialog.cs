@@ -11,11 +11,11 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// The list of listeners being imported
 		/// </summary>
-        public Types.DBEntryCollection<Types.Listener> Listeners
+        public Types.DbEntryCollection<Types.Listener> Listeners
         {
             get
             {
-                return (Types.DBEntryCollection<Types.Listener>)ldg_Listeners.Listeners;
+                return (Types.DbEntryCollection<Types.Listener>)ldg_Listeners.Listeners;
             }
         }
 

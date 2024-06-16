@@ -6,7 +6,7 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// A collection of listeners
 	/// </summary>
-    public class ListenerCollection : DBEntryCollection<Listener>
+    public class ListenerCollection : DbEntryCollection<Listener>
     {
 		/// <summary>
 		/// <inheritdoc/>

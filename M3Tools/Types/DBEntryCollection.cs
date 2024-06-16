@@ -8,12 +8,12 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-	public abstract class DBEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
+	public abstract class DbEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
 	{
 
 		private string _filter = "";
 
-		internal static DBEntryCollection<T> Cast(System.Collections.ICollection collection)
+		internal static DbEntryCollection<T> Cast(System.Collections.ICollection collection)
 		{
 			throw new System.NotImplementedException("DBEntryCollection Cast");
 		}
@@ -22,7 +22,7 @@ namespace SPPBC.M3Tools.Types
 		/// Add a range of values to the collection. Can be shadowed to add any data verification gap
 		/// </summary>
 		/// <param name="collection">The range of values to add to the collection</param>
-		public virtual void AddRange(DBEntryCollection<T> collection)
+		public virtual void AddRange(DbEntryCollection<T> collection)
 		{
 			foreach (T item in collection)
 			{

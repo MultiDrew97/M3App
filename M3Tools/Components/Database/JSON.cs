@@ -23,11 +23,11 @@ namespace SPPBC.M3Tools.M3API
 		};
 
 		/// <summary>
-		/// 		''' Converts a JSON string to the respective object type given the type parameter
-		/// 		''' </summary>
-		/// 		''' <typeparam name="T">The type to convert to</typeparam>
-		/// 		''' <param name="json">The JSON string</param>
-		/// 		''' <returns></returns>
+		/// Converts a JSON string to the respective object type given the type parameter
+		/// </summary>
+		/// <typeparam name="T">The type to convert to</typeparam>
+		/// <param name="json">The JSON string</param>
+		/// <returns></returns>
 		public static T ConvertFromJSON<T>(string json)
 		{
 			if (string.IsNullOrWhiteSpace(json) || !(json.Contains("{") && json.Contains("}")))
@@ -40,10 +40,10 @@ namespace SPPBC.M3Tools.M3API
 		}
 
 		/// <summary>
-		/// 		''' Convert an object to a JSON string using the global serilization options
-		/// 		''' </summary>
-		/// 		''' <param name="obj"></param>
-		/// 		''' <returns></returns>
+		/// Convert an object to a JSON string using the global serilization options
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public static string ConvertToJSON(object obj)
 		{
 			if (obj is null)

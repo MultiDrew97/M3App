@@ -12,7 +12,7 @@ namespace SPPBC.M3Tools.Data
 	/// <summary>
 	/// A control to display a list of inventory items
 	/// </summary>
-	public partial class InventoryDataGrid : Data.DataGrid<Types.Product>
+	public partial class InventoryDataGrid : DataGrid<Types.Product>
 	{
 		/// <summary>
 		/// An event fired when a new product is added
@@ -32,11 +32,12 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// The list of inventory items
 		/// </summary>
-		public IList Products
+		[Browsable(false)]
+		public Types.InventoryCollection Products
 		{
 			get
 			{
-				return base.Rows;
+				return Types.InventoryCollection.Cast(base.Rows);
 			}
 		}
 
@@ -46,31 +47,29 @@ namespace SPPBC.M3Tools.Data
 		[Description("Data Source to use for data grid.")]
 		public new object DataSource
 		{
-			get => DesignMode ? typeof(InventoryBindingSource) : base.DataSource;
+			get => DesignMode ? typeof(InventoryBindingSource) : (InventoryBindingSource)base.DataSource;
 			set => base.DataSource = value;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[Browsable(false)]
+		public new Types.InventoryCollection SelectedRows
+		{
+			get => Types.InventoryCollection.Cast(base.SelectedRows);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public InventoryDataGrid()
+		public InventoryDataGrid() : base()
 		{
 			InitializeComponent();
 
-			//AddEntry += new DataEventHandler<Types.Product>(AddProduct.Invoke);
-			UpdateEntry += new DataEventHandler<Types.Product>(UpdateProduct.Invoke);
-			RemoveEntry += new DataEventHandler<Types.Product>(RemoveProduct.Invoke);
-		}
-
-		private void ParseEvents(object sender, DataEventArgs<Types.Product> e)
-		{
-			switch (e.EventType)
-			{
-				case EventType.Added: { AddProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
-				case EventType.Removed: { UpdateProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
-				case EventType.Updated: { RemoveProduct?.Invoke(sender, (InventoryEventArgs)e); break; }
-				default: { throw new ArgumentException($""); }
-			}
+			AddEntry += (sender, e) => AddProduct?.Invoke(sender, new(e.Value, e.EventType));
+			UpdateEntry += (sender, e) => UpdateProduct?.Invoke(sender, new(e.Value, e.EventType));
+			RemoveEntry += (sender, e) => RemoveProduct?.Invoke(sender, new(e.Value, e.EventType));
 		}
 	}
 }

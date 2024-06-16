@@ -5,7 +5,7 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// Filterable collection of customers
 	/// </summary>
-    public class CustomerCollection : DBEntryCollection<Customer>
+    public class CustomerCollection : DbEntryCollection<Customer>
     {
 		/// <summary>
 		/// <inheritdoc/>

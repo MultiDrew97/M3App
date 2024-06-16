@@ -7,13 +7,21 @@ namespace SPPBC.M3Tools.Types
 	/// </summary>
 	public class Product : DbEntry
 	{
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public static new Product None => new();
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		[System.ComponentModel.Browsable(false)]
 		[System.Text.Json.Serialization.JsonPropertyName("itemID")]
-		public new int Id { get; }
+		public new int Id
+		{
+			get => base.Id;
+			set => base.Id = value;
+		}
 
 		/// <summary>
 		/// The name of the item

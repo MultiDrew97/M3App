@@ -46,16 +46,16 @@ namespace SPPBC.M3Tools.Data
 		/// The list of customers currently in the data grid
 		/// </summary>
 		[Browsable(false)]
-		public IList Customers
+		public Types.DbEntryCollection<Types.Customer> Customers
 		{
-			get => base.Rows;
+			get => Types.CustomerCollection.Cast(base.Rows);
 		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		[Browsable(false)]
-		public new Types.CustomerCollection SelectedRows
+		public new Types.DbEntryCollection<Types.Customer> SelectedRows
 		{
 			get => Types.CustomerCollection.Cast(base.SelectedRows);
 		}

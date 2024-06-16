@@ -100,9 +100,9 @@ namespace SPPBC.M3Tools.Database
 		/// Retrieve the complete list of users in the database
 		/// </summary>
 		/// <returns></returns>
-        private DBEntryCollection<User> GetUsers()
+        private DbEntryCollection<User> GetUsers()
         {
-            return ExecuteWithResult<DBEntryCollection<User>>(Method.Get, $"/{path}").Result;
+            return ExecuteWithResult<DbEntryCollection<User>>(Method.Get, $"/{path}").Result;
         }
 
         // Private Structure ColumnNames

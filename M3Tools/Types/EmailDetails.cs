@@ -30,7 +30,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// 	The list of reciepients of the email
 		/// </summary>
 		/// <returns></returns>
-		public DBEntryCollection<Listener> Recipients;
+		public DbEntryCollection<Listener> Recipients;
 
 		/// <summary>
 		/// 	The list of links to be added to the email body

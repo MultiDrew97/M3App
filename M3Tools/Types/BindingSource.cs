@@ -22,7 +22,7 @@ namespace SPPBC.M3Tools.Data
 		{
 			get
 			{
-				return ((Types.DBEntryCollection<T>)DataSource).Items;
+				return ((Types.DbEntryCollection<T>)DataSource).Items;
 			}
 		}
 

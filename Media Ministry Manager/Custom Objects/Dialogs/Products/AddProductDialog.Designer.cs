@@ -35,176 +35,135 @@ namespace M3App
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            btn_Cancel = new Button();
-            btn_Cancel.Click += new EventHandler(CancelAddition);
-            btn_Add = new Button();
-            btn_Add.Click += new EventHandler(AddProduct);
-            lbl_ProductName = new Label();
-            lbl_InStock = new Label();
-            txt_ProductName = new TextBox();
-            txt_ProductName.GotFocus += new EventHandler(NameGotFocus);
-            txt_ProductName.LostFocus += new EventHandler(NameLostFocus);
-            txt_ProductName.TextChanged += new EventHandler(NameTextChanged);
-            txt_Price = new TextBox();
-            txt_Price.GotFocus += new EventHandler(PriceGotFocus);
-            txt_Price.LostFocus += new EventHandler(PriceLostFocus);
-            nud_Stock = new NumericUpDown();
-            nud_Stock.GotFocus += new EventHandler(StockGotFocus);
-            lbl_Price = new Label();
-            ss_AddItem = new StatusStrip();
-            tss_AddProduct = new ToolStripStatusLabel();
-            ep_EmptyFields = new ErrorProvider(components);
-            bw_AddProduct = new System.ComponentModel.BackgroundWorker();
-            bw_AddProduct.DoWork += new System.ComponentModel.DoWorkEventHandler(AddProductBW);
-            ((System.ComponentModel.ISupportInitialize)nud_Stock).BeginInit();
-            ss_AddItem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ep_EmptyFields).BeginInit();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.btn_Cancel = new System.Windows.Forms.Button();
+            this.btn_Add = new System.Windows.Forms.Button();
+            this.ss_AddItem = new System.Windows.Forms.StatusStrip();
+            this.tss_AddProduct = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ep_EmptyFields = new System.Windows.Forms.ErrorProvider(this.components);
+            this.gi_Name = new SPPBC.M3Tools.GenericInputPair();
+            this.pi_Price = new SPPBC.M3Tools.PriceInput();
+            this.qnc_Stock = new SPPBC.M3Tools.QuantityNudCtrl();
+            this.ss_AddItem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ep_EmptyFields)).BeginInit();
+            this.SuspendLayout();
             // 
             // btn_Cancel
             // 
-            btn_Cancel.DialogResult = DialogResult.Cancel;
-            btn_Cancel.Font = new Font("Microsoft Sans Serif", 16.0f);
-            btn_Cancel.Location = new Point(18, 225);
-            btn_Cancel.Name = "btn_Cancel";
-            btn_Cancel.Size = new Size(144, 53);
-            btn_Cancel.TabIndex = 7;
-            btn_Cancel.Text = "Cancel";
-            btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btn_Cancel.Location = new System.Drawing.Point(18, 225);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(144, 53);
+            this.btn_Cancel.TabIndex = 7;
+            this.btn_Cancel.Text = "Cancel";
+            this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Click += new System.EventHandler(this.Cancel);
             // 
             // btn_Add
             // 
-            btn_Add.DialogResult = DialogResult.Cancel;
-            btn_Add.Font = new Font("Microsoft Sans Serif", 16.0f);
-            btn_Add.Location = new Point(214, 225);
-            btn_Add.Name = "btn_Add";
-            btn_Add.Size = new Size(144, 53);
-            btn_Add.TabIndex = 6;
-            btn_Add.Text = "Add Product";
-            btn_Add.UseVisualStyleBackColor = true;
-            // 
-            // lbl_ProductName
-            // 
-            lbl_ProductName.AutoSize = true;
-            lbl_ProductName.Font = new Font("Microsoft Sans Serif", 9.0f);
-            lbl_ProductName.Location = new Point(80, 29);
-            lbl_ProductName.Name = "lbl_ProductName";
-            lbl_ProductName.Size = new Size(89, 15);
-            lbl_ProductName.TabIndex = 0;
-            lbl_ProductName.Text = "Product Name:";
-            // 
-            // lbl_InStock
-            // 
-            lbl_InStock.AutoSize = true;
-            lbl_InStock.Font = new Font("Microsoft Sans Serif", 9.0f);
-            lbl_InStock.Location = new Point(146, 98);
-            lbl_InStock.Name = "lbl_InStock";
-            lbl_InStock.Size = new Size(53, 15);
-            lbl_InStock.TabIndex = 2;
-            lbl_InStock.Text = "In Stock:";
-            // 
-            // txt_ProductName
-            // 
-            txt_ProductName.Font = new Font("Microsoft Sans Serif", 16.0f);
-            txt_ProductName.ForeColor = SystemColors.ControlLight;
-            txt_ProductName.Location = new Point(83, 46);
-            txt_ProductName.Name = "txt_ProductName";
-            txt_ProductName.Size = new Size(213, 32);
-            txt_ProductName.TabIndex = 1;
-            txt_ProductName.Text = "Product Name";
-            // 
-            // txt_Price
-            // 
-            txt_Price.Font = new Font("Microsoft Sans Serif", 16.0f);
-            txt_Price.ForeColor = SystemColors.ControlLight;
-            txt_Price.Location = new Point(83, 173);
-            txt_Price.Name = "txt_Price";
-            txt_Price.Size = new Size(213, 32);
-            txt_Price.TabIndex = 5;
-            txt_Price.Text = "$0.00";
-            // 
-            // nud_Stock
-            // 
-            nud_Stock.Font = new Font("Microsoft Sans Serif", 16.0f);
-            nud_Stock.Location = new Point(149, 116);
-            nud_Stock.Name = "nud_Stock";
-            nud_Stock.Size = new Size(80, 32);
-            nud_Stock.TabIndex = 3;
-            // 
-            // lbl_Price
-            // 
-            lbl_Price.AutoSize = true;
-            lbl_Price.Font = new Font("Microsoft Sans Serif", 9.0f);
-            lbl_Price.Location = new Point(80, 155);
-            lbl_Price.Name = "lbl_Price";
-            lbl_Price.Size = new Size(38, 15);
-            lbl_Price.TabIndex = 4;
-            lbl_Price.Text = "Price:";
+            this.btn_Add.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btn_Add.Location = new System.Drawing.Point(214, 225);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(144, 53);
+            this.btn_Add.TabIndex = 6;
+            this.btn_Add.Text = "Add Product";
+            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.Add);
             // 
             // ss_AddItem
             // 
-            ss_AddItem.Items.AddRange(new ToolStripItem[] { tss_AddProduct });
-            ss_AddItem.Location = new Point(0, 284);
-            ss_AddItem.Name = "ss_AddItem";
-            ss_AddItem.Size = new Size(377, 22);
-            ss_AddItem.TabIndex = 8;
+            this.ss_AddItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tss_AddProduct});
+            this.ss_AddItem.Location = new System.Drawing.Point(0, 284);
+            this.ss_AddItem.Name = "ss_AddItem";
+            this.ss_AddItem.Size = new System.Drawing.Size(377, 22);
+            this.ss_AddItem.TabIndex = 8;
             // 
             // tss_AddProduct
             // 
-            tss_AddProduct.Name = "tss_AddProduct";
-            tss_AddProduct.Size = new Size(231, 17);
-            tss_AddProduct.Text = "Enter the information for the new product.";
+            this.tss_AddProduct.Name = "tss_AddProduct";
+            this.tss_AddProduct.Size = new System.Drawing.Size(231, 17);
+            this.tss_AddProduct.Text = "Enter the information for the new product.";
             // 
             // ep_EmptyFields
             // 
-            ep_EmptyFields.ContainerControl = this;
+            this.ep_EmptyFields.ContainerControl = this;
             // 
-            // bw_AddProduct
+            // gi_Name
             // 
+            this.gi_Name.AutoSize = true;
+            this.gi_Name.Label = "Product Name:";
+            this.gi_Name.Location = new System.Drawing.Point(78, 16);
+            this.gi_Name.Mask = "";
+            this.gi_Name.MaximumSize = new System.Drawing.Size(225, 45);
+            this.gi_Name.MinimumSize = new System.Drawing.Size(150, 45);
+            this.gi_Name.Name = "gi_Name";
+            this.gi_Name.Placeholder = "Product Name";
+            this.gi_Name.Size = new System.Drawing.Size(221, 45);
+            this.gi_Name.TabIndex = 9;
+            this.gi_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // pi_Price
+            // 
+            this.pi_Price.AutoSize = true;
+            this.pi_Price.Location = new System.Drawing.Point(78, 168);
+            this.pi_Price.MaximumSize = new System.Drawing.Size(0, 45);
+            this.pi_Price.MinimumSize = new System.Drawing.Size(150, 45);
+            this.pi_Price.Name = "pi_Price";
+            this.pi_Price.Price = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.pi_Price.Size = new System.Drawing.Size(221, 45);
+            this.pi_Price.TabIndex = 10;
+            // 
+            // qnc_Stock
+            // 
+            this.qnc_Stock.Label = "In Stock:";
+            this.qnc_Stock.Location = new System.Drawing.Point(137, 92);
+            this.qnc_Stock.MaximumSize = new System.Drawing.Size(0, 45);
+            this.qnc_Stock.MinimumSize = new System.Drawing.Size(100, 45);
+            this.qnc_Stock.Name = "qnc_Stock";
+            this.qnc_Stock.Size = new System.Drawing.Size(100, 45);
+            this.qnc_Stock.TabIndex = 11;
             // 
             // AddProductDialog
             // 
-            AcceptButton = btn_Add;
-            AutoScaleDimensions = new SizeF(6.0f, 13.0f);
-            AutoScaleMode = AutoScaleMode.Font;
-            CancelButton = btn_Cancel;
-            ClientSize = new Size(377, 306);
-            Controls.Add(ss_AddItem);
-            Controls.Add(nud_Stock);
-            Controls.Add(txt_Price);
-            Controls.Add(txt_ProductName);
-            Controls.Add(lbl_Price);
-            Controls.Add(lbl_InStock);
-            Controls.Add(lbl_ProductName);
-            Controls.Add(btn_Add);
-            Controls.Add(btn_Cancel);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MinimizeBox = false;
-            Name = "AddProductDialog";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Media Ministry";
-            ((System.ComponentModel.ISupportInitialize)nud_Stock).EndInit();
-            ss_AddItem.ResumeLayout(false);
-            ss_AddItem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)ep_EmptyFields).EndInit();
-            Load += new EventHandler(Frm_AddNewProduct_Load);
-            ResumeLayout(false);
-            PerformLayout();
+            this.AcceptButton = this.btn_Add;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Cancel;
+            this.ClientSize = new System.Drawing.Size(377, 306);
+            this.Controls.Add(this.qnc_Stock);
+            this.Controls.Add(this.gi_Name);
+            this.Controls.Add(this.ss_AddItem);
+            this.Controls.Add(this.btn_Add);
+            this.Controls.Add(this.btn_Cancel);
+            this.Controls.Add(this.pi_Price);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
+            this.Name = "AddProductDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Media Ministry";
+            this.Load += new System.EventHandler(Reload);
+            this.ss_AddItem.ResumeLayout(false);
+            this.ss_AddItem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ep_EmptyFields)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         internal Button btn_Cancel;
         internal Button btn_Add;
-        internal Label lbl_ProductName;
-        internal Label lbl_InStock;
-        internal TextBox txt_ProductName;
-        internal TextBox txt_Price;
-        internal NumericUpDown nud_Stock;
-        internal Label lbl_Price;
         internal StatusStrip ss_AddItem;
         internal ToolStripStatusLabel tss_AddProduct;
         internal ErrorProvider ep_EmptyFields;
-        internal System.ComponentModel.BackgroundWorker bw_AddProduct;
-    }
+		private SPPBC.M3Tools.GenericInputPair gi_Name;
+		private SPPBC.M3Tools.PriceInput pi_Price;
+		private SPPBC.M3Tools.QuantityNudCtrl qnc_Stock;
+	}
 }

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Data.SqlClient;
 using SPPBC.M3Tools.M3API;
-using SPPBC.M3Tools.Types;
 
 namespace SPPBC.M3Tools.Database
 {
@@ -15,18 +14,18 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <param name="itemID"></param>
 		/// <returns></returns>
-		public Product GetProduct(int itemID)
+		public Types.Product GetProduct(int itemID)
 		{
-			return ExecuteWithResult<Product>(Method.Get, $"{path}/{itemID}").Result;
+			return ExecuteWithResult<Types.Product>(Method.Get, $"{path}/{itemID}").Result;
 		}
 
 		/// <summary>
 		/// Retrieve the complete list of inventory items
 		/// </summary>
 		/// <returns></returns>
-		public DBEntryCollection<Product> GetProducts()
+		public Types.InventoryCollection GetProducts()
 		{
-			return ExecuteWithResult<DBEntryCollection<Product>>(Method.Get, $"{path}").Result;
+			return ExecuteWithResult<Types.InventoryCollection> (Method.Get, $"{path}").Result;
 		}
 
 		/// <summary>
@@ -37,14 +36,14 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="price"></param>
 		public void AddProduct(string itemName, int stock, decimal price)
 		{
-			AddProduct(new Product(-1, itemName, stock, price, true));
+			AddProduct(new Types.Product(-1, itemName, stock, price, true));
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="item"></param>
-		public void AddProduct(Product item)
+		public void AddProduct(Types.Product item)
 		{
 			Execute(Method.Post, $"{path}", JSON.ConvertToJSON(item));
 		}
@@ -59,14 +58,14 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="available"></param>
 		public void UpdateProduct(int itemID, string itemName, int stock, decimal price, bool available)
 		{
-			UpdateProduct(new Product(itemID, itemName, stock, price, available));
+			UpdateProduct(new Types.Product(itemID, itemName, stock, price, available));
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="item"></param>
-		public void UpdateProduct(Product item)
+		public void UpdateProduct(Types.Product item)
 		{
 			Execute(Method.Put, $"{path}/{item.Id}", JSON.ConvertToJSON(item));
 		}

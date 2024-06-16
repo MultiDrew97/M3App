@@ -33,9 +33,9 @@ namespace SPPBC.M3Tools.Data
 		/// The complete list of listeners being shown
 		/// </summary>
 		[Browsable(false)]
-        public IList Listeners
+        public Types.ListenerCollection Listeners
         {
-			get => base.Rows;
+			get => Types.ListenerCollection.Cast(base.Rows);
         }
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// 
 		/// </summary>
-		public ListenersDataGrid()
+		public ListenersDataGrid() : base()
         {
             InitializeComponent();
 

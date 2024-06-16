@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using SPPBC.M3Tools.Types;
+using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -13,27 +13,18 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// 
 		/// </summary>
-		public InventoryBindingSource() 
+		public InventoryBindingSource() : base()
 		{
 			_inventory = new Types.InventoryCollection();
 			DataSource = _inventory;
 		}
 
 		/// <summary>
-		/// The data source for the binding source to bind from
+		/// <inheritdoc/>
 		/// </summary>
-		public new Types.DBEntryCollection<Types.Product> DataSource
-		{
-			get
-			{
-				return _inventory;
-			}
-			protected set
-			{
-				_inventory.Clear();
-				_inventory.AddRange(value);
-			}
-		}
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[AttributeProvider(typeof(IListSource))]
+		public new Types.InventoryCollection DataSource { get => (Types.InventoryCollection)base.DataSource; set => base.DataSource = value; }
 
 		/// <summary>
 		/// <inheritdoc/>
