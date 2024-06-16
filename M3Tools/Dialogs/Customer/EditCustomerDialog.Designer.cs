@@ -65,7 +65,7 @@ namespace SPPBC.M3Tools.Dialogs
             this.OK_Button.Location = new System.Drawing.Point(76, 3);
             this.OK_Button.Name = "OK_Button";
             this.OK_Button.Size = new System.Drawing.Size(67, 23);
-            this.OK_Button.TabIndex = 1;
+            this.OK_Button.TabIndex = 0;
             this.OK_Button.Text = "OK";
             this.OK_Button.Click += new System.EventHandler(this.FinishDialog);
             // 
@@ -75,7 +75,7 @@ namespace SPPBC.M3Tools.Dialogs
             this.Cancel_Button.Location = new System.Drawing.Point(3, 3);
             this.Cancel_Button.Name = "Cancel_Button";
             this.Cancel_Button.Size = new System.Drawing.Size(67, 23);
-            this.Cancel_Button.TabIndex = 0;
+            this.Cancel_Button.TabIndex = 1;
             this.Cancel_Button.Text = "Cancel";
             this.Cancel_Button.Click += new System.EventHandler(this.CancelDialog);
             // 

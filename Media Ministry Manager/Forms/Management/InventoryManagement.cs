@@ -40,8 +40,6 @@ namespace M3App
 
 		protected override void Add(object sender, EventArgs e)
         {
-            UseWaitCursor = true;
-
 			using var @add = new AddProductDialog();
 
 			if (add.ShowDialog() != DialogResult.OK)
@@ -52,18 +50,26 @@ namespace M3App
 			Reload(sender, e);
         }
 
-        private void RemoveProduct(object sender, InventoryEventArgs e)
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+        protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
         {
-            UseWaitCursor = true;
             dbInventory.RemoveProduct(e.Value.Id);
             MessageBox.Show($"Successfully removed product", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
-        private void UpdateProduct(object sender, InventoryEventArgs e)
+        protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
         {
-            UseWaitCursor = true;
-            dbInventory.UpdateProduct(e.Value);
+			using var @edit = new SPPBC.M3Tools.Dialogs.EditProductDialog(e.Value);
+
+			if (edit.ShowDialog() != DialogResult.OK)
+				return;
+
+            dbInventory.UpdateProduct(edit.Product);
             MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Reload(sender, e);
         }
@@ -73,13 +79,20 @@ namespace M3App
 			Reload(sender, EventArgs.Empty);
 		}*/
 
-        private void Reload(object sender, EventArgs e)
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+        protected override void Reload(object sender, EventArgs e)
         {
             UseWaitCursor = true;
             bsInventory.Clear();
             foreach (var product in dbInventory.GetProducts())
                 bsInventory.Add(product);
-            UseWaitCursor = false;
+			bsInventory.ResetBindings(false);
+			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, idg_Inventory.Inventory.Count);
+			UseWaitCursor = false;
         }
     }
 }

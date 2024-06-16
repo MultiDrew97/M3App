@@ -33,92 +33,95 @@ namespace SPPBC.M3Tools.Dialogs
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            btn_Save = new System.Windows.Forms.Button();
-            btn_Save.Click += new EventHandler(FinishDialog);
-            btn_Cancel = new System.Windows.Forms.Button();
-            btn_Cancel.Click += new EventHandler(CancelDialog);
-            gi_Email = new GenericInputPair();
-            gi_Name = new GenericInputPair();
-            TableLayoutPanel1.SuspendLayout();
-            SuspendLayout();
+            this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.btn_Cancel = new System.Windows.Forms.Button();
+            this.gi_Email = new SPPBC.M3Tools.GenericInputPair();
+            this.gi_Name = new SPPBC.M3Tools.GenericInputPair();
+            this.TableLayoutPanel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // TableLayoutPanel1
             // 
-            TableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            TableLayoutPanel1.ColumnCount = 2;
-            TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-            TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-            TableLayoutPanel1.Controls.Add(btn_Save, 1, 0);
-            TableLayoutPanel1.Controls.Add(btn_Cancel, 0, 0);
-            TableLayoutPanel1.Location = new System.Drawing.Point(217, 162);
-            TableLayoutPanel1.Name = "TableLayoutPanel1";
-            TableLayoutPanel1.RowCount = 1;
-            TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-            TableLayoutPanel1.Size = new System.Drawing.Size(146, 29);
-            TableLayoutPanel1.TabIndex = 0;
+            this.TableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TableLayoutPanel1.ColumnCount = 2;
+            this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.Controls.Add(this.btn_Save, 1, 0);
+            this.TableLayoutPanel1.Controls.Add(this.btn_Cancel, 0, 0);
+            this.TableLayoutPanel1.Location = new System.Drawing.Point(100, 158);
+            this.TableLayoutPanel1.Name = "TableLayoutPanel1";
+            this.TableLayoutPanel1.RowCount = 1;
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(146, 29);
+            this.TableLayoutPanel1.TabIndex = 2;
             // 
             // btn_Save
             // 
-            btn_Save.Anchor = System.Windows.Forms.AnchorStyles.None;
-            btn_Save.Location = new System.Drawing.Point(76, 3);
-            btn_Save.Name = "btn_Save";
-            btn_Save.Size = new System.Drawing.Size(67, 23);
-            btn_Save.TabIndex = 0;
-            btn_Save.Text = "OK";
+            this.btn_Save.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Save.Location = new System.Drawing.Point(76, 3);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(67, 23);
+            this.btn_Save.TabIndex = 0;
+            this.btn_Save.Text = "OK";
+            this.btn_Save.Click += new System.EventHandler(this.FinishDialog);
             // 
             // btn_Cancel
             // 
-            btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            btn_Cancel.Location = new System.Drawing.Point(3, 3);
-            btn_Cancel.Name = "btn_Cancel";
-            btn_Cancel.Size = new System.Drawing.Size(67, 23);
-            btn_Cancel.TabIndex = 1;
-            btn_Cancel.Text = "Cancel";
+            this.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Cancel.Location = new System.Drawing.Point(3, 3);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(67, 23);
+            this.btn_Cancel.TabIndex = 1;
+            this.btn_Cancel.Text = "Cancel";
+            this.btn_Cancel.Click += new System.EventHandler(this.CancelDialog);
             // 
             // gi_Email
             // 
-            gi_Email.AutoSize = true;
-            gi_Email.Label = "Email Address";
-            gi_Email.Location = new System.Drawing.Point(33, 100);
-            gi_Email.Mask = "";
-            gi_Email.Name = "gi_Email";
-            gi_Email.Placeholder = "Email";
-            gi_Email.Size = new System.Drawing.Size(308, 46);
-            gi_Email.TabIndex = 2;
-            gi_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gi_Email.AutoSize = true;
+            this.gi_Email.Label = "Email Address";
+            this.gi_Email.Location = new System.Drawing.Point(17, 79);
+            this.gi_Email.Mask = "";
+            this.gi_Email.MaximumSize = new System.Drawing.Size(225, 45);
+            this.gi_Email.MinimumSize = new System.Drawing.Size(150, 45);
+            this.gi_Email.Name = "gi_Email";
+            this.gi_Email.Placeholder = "Email";
+            this.gi_Email.Size = new System.Drawing.Size(225, 45);
+            this.gi_Email.TabIndex = 1;
+            this.gi_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // gi_Name
             // 
-            gi_Name.AutoSize = true;
-            gi_Name.Label = "Name";
-            gi_Name.Location = new System.Drawing.Point(33, 39);
-            gi_Name.Mask = "";
-            gi_Name.Name = "gi_Name";
-            gi_Name.Placeholder = "Name";
-            gi_Name.Size = new System.Drawing.Size(308, 46);
-            gi_Name.TabIndex = 1;
-            gi_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.gi_Name.AutoSize = true;
+            this.gi_Name.Label = "Name";
+            this.gi_Name.Location = new System.Drawing.Point(17, 18);
+            this.gi_Name.Mask = "";
+            this.gi_Name.MaximumSize = new System.Drawing.Size(225, 45);
+            this.gi_Name.MinimumSize = new System.Drawing.Size(150, 45);
+            this.gi_Name.Name = "gi_Name";
+            this.gi_Name.Placeholder = "Name";
+            this.gi_Name.Size = new System.Drawing.Size(225, 45);
+            this.gi_Name.TabIndex = 0;
+            this.gi_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // EditListenerDialog
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(375, 203);
-            Controls.Add(gi_Email);
-            Controls.Add(gi_Name);
-            Controls.Add(TableLayoutPanel1);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "EditListenerDialog";
-            ShowInTaskbar = false;
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Update Listener";
-            TableLayoutPanel1.ResumeLayout(false);
-            ListenerChanged += new ListenerChangedEventHandler(ListenerUpdated);
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(258, 199);
+            this.Controls.Add(this.gi_Email);
+            this.Controls.Add(this.gi_Name);
+            this.Controls.Add(this.TableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "EditListenerDialog";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Edit {0}";
+            this.TableLayoutPanel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;

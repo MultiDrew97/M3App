@@ -87,5 +87,33 @@ namespace SPPBC.M3Tools.Types
 		{
 			return string.Join(My.Settings.Default.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
 		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator ==(Product left, Product right)
+		{
+			if ((left is null && right is not null) || (right is null && left is not null)) return false;
+			if (left.Name != right.Name) return false;
+			if (left.Stock != right.Stock) return false;
+			if (left.Price != right.Price) return false;
+			if (left.Available != right.Available) return false;
+			
+			return true;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator !=(Product left, Product right)
+		{
+			return !(left == right);
+		}
 	}
 }

@@ -43,18 +43,10 @@ namespace M3App
             this.ss_StatusView = new System.Windows.Forms.StatusStrip();
             this.tss_StatusView = new System.Windows.Forms.ToolStripStatusLabel();
             this.idg_Inventory = new SPPBC.M3Tools.Data.InventoryDataGrid();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageButtonEditColumn3 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn3 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageButtonEditColumn2 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn2 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
             this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
             this.bsInventory = new SPPBC.M3Tools.Data.InventoryBindingSource();
@@ -108,18 +100,10 @@ namespace M3App
             this.idg_Inventory.CanReorder = true;
             this.idg_Inventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.idg_Inventory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewCheckBoxColumn2,
-            this.dataGridViewImageButtonEditColumn3,
-            this.dataGridViewImageButtonDeleteColumn3,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewCheckBoxColumn1,
-            this.dataGridViewImageButtonEditColumn2,
-            this.dataGridViewImageButtonDeleteColumn2,
             this.dataGridViewImageButtonEditColumn1,
             this.dataGridViewImageButtonDeleteColumn1});
             this.idg_Inventory.DataSource = this.bsInventory;
@@ -133,71 +117,6 @@ namespace M3App
             this.idg_Inventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.idg_Inventory.Size = new System.Drawing.Size(784, 400);
             this.idg_Inventory.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn5.FillWeight = 40F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Stock";
-            this.dataGridViewTextBoxColumn6.FillWeight = 20F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Stock";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "Price";
-            this.dataGridViewTextBoxColumn7.FillWeight = 20F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewCheckBoxColumn2.DataPropertyName = "Available";
-            this.dataGridViewCheckBoxColumn2.FalseValue = "";
-            this.dataGridViewCheckBoxColumn2.FillWeight = 20F;
-            this.dataGridViewCheckBoxColumn2.HeaderText = "Available?";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn2.TrueValue = "";
-            // 
-            // dataGridViewImageButtonEditColumn3
-            // 
-            this.dataGridViewImageButtonEditColumn3.ButtonImage = null;
-            this.dataGridViewImageButtonEditColumn3.FillWeight = 5F;
-            this.dataGridViewImageButtonEditColumn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonEditColumn3.HeaderText = "";
-            this.dataGridViewImageButtonEditColumn3.MinimumWidth = 25;
-            this.dataGridViewImageButtonEditColumn3.Name = "dataGridViewImageButtonEditColumn3";
-            this.dataGridViewImageButtonEditColumn3.ReadOnly = true;
-            this.dataGridViewImageButtonEditColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonEditColumn3.ToolTipText = "Edit";
-            this.dataGridViewImageButtonEditColumn3.Width = 25;
-            // 
-            // dataGridViewImageButtonDeleteColumn3
-            // 
-            this.dataGridViewImageButtonDeleteColumn3.ButtonImage = null;
-            this.dataGridViewImageButtonDeleteColumn3.FillWeight = 5F;
-            this.dataGridViewImageButtonDeleteColumn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonDeleteColumn3.HeaderText = "";
-            this.dataGridViewImageButtonDeleteColumn3.MinimumWidth = 25;
-            this.dataGridViewImageButtonDeleteColumn3.Name = "dataGridViewImageButtonDeleteColumn3";
-            this.dataGridViewImageButtonDeleteColumn3.ReadOnly = true;
-            this.dataGridViewImageButtonDeleteColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonDeleteColumn3.ToolTipText = "Remove";
-            this.dataGridViewImageButtonDeleteColumn3.Width = 25;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -237,32 +156,6 @@ namespace M3App
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.ReadOnly = true;
             this.dataGridViewCheckBoxColumn1.TrueValue = "";
-            // 
-            // dataGridViewImageButtonEditColumn2
-            // 
-            this.dataGridViewImageButtonEditColumn2.ButtonImage = null;
-            this.dataGridViewImageButtonEditColumn2.FillWeight = 5F;
-            this.dataGridViewImageButtonEditColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonEditColumn2.HeaderText = "";
-            this.dataGridViewImageButtonEditColumn2.MinimumWidth = 25;
-            this.dataGridViewImageButtonEditColumn2.Name = "dataGridViewImageButtonEditColumn2";
-            this.dataGridViewImageButtonEditColumn2.ReadOnly = true;
-            this.dataGridViewImageButtonEditColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonEditColumn2.ToolTipText = "Edit";
-            this.dataGridViewImageButtonEditColumn2.Width = 25;
-            // 
-            // dataGridViewImageButtonDeleteColumn2
-            // 
-            this.dataGridViewImageButtonDeleteColumn2.ButtonImage = null;
-            this.dataGridViewImageButtonDeleteColumn2.FillWeight = 5F;
-            this.dataGridViewImageButtonDeleteColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageButtonDeleteColumn2.HeaderText = "";
-            this.dataGridViewImageButtonDeleteColumn2.MinimumWidth = 25;
-            this.dataGridViewImageButtonDeleteColumn2.Name = "dataGridViewImageButtonDeleteColumn2";
-            this.dataGridViewImageButtonDeleteColumn2.ReadOnly = true;
-            this.dataGridViewImageButtonDeleteColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageButtonDeleteColumn2.ToolTipText = "Remove";
-            this.dataGridViewImageButtonDeleteColumn2.Width = 25;
             // 
             // dataGridViewImageButtonEditColumn1
             // 
@@ -321,19 +214,11 @@ namespace M3App
         internal ToolStripStatusLabel tss_StatusView;
 		private SPPBC.M3Tools.Data.InventoryDataGrid idg_Inventory;
 		private SPPBC.M3Tools.Data.InventoryBindingSource bsInventory;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
 		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn2;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn2;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn3;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn3;
+		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
+		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 	}
 }

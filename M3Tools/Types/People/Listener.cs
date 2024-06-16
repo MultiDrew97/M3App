@@ -70,14 +70,29 @@ namespace SPPBC.M3Tools.Types
         }
 
 		/// <summary>
-		/// Clones the current instance of a listener and returns it
+		/// <inheritdoc/>
 		/// </summary>
-		/// <returns>A copy of the current instance</returns>
-        public Listener Clone()
-        {
-			// TODO: Verify this works
-			return base.MemberwiseClone() as Listener;
-            //return new Listener(Id, Name, Email);
-        }
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator ==(Listener left, Listener right)
+		{
+			if ((left is null && right is not null) || (right is null && left is not null)) return false;
+			if (left.Name != right.Name) return false;
+			if (left.Email != right.Email) return false;
+
+			return true;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator !=(Listener left, Listener right)
+		{
+			return !(left == right);
+		}
     }
 }

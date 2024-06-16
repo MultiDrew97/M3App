@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
+// TODO: Create a base class for these edit dialogs and other components I use for easier updating
+
 namespace SPPBC.M3Tools.Dialogs
 {
 	/// <summary>
@@ -8,15 +10,12 @@ namespace SPPBC.M3Tools.Dialogs
 	/// </summary>
     public partial class EditListenerDialog
     {
-        private event ListenerChangedEventHandler ListenerChanged;
-
-        private delegate void ListenerChangedEventHandler();
-        // Private _newInfo As Types.Listener
+        private event EventHandler ListenerChanged;
 
 		/// <summary>
 		/// The original info for the listener
 		/// </summary>
-        public Types.Listener Original { get; set; }
+        public Types.Listener Original { get; private set; }
 
 		/// <summary>
 		/// The current listener info
@@ -59,23 +58,27 @@ namespace SPPBC.M3Tools.Dialogs
             }
         }
 
+		private EditListenerDialog()
+		{
+			InitializeComponent();
+
+			ListenerChanged += new EventHandler(ListenerUpdated);
+		}
+
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="listener"></param>
-        public EditListenerDialog(Types.Listener listener)
+        public EditListenerDialog(Types.Listener listener) : this()
         {
-            // This call is required by the designer.
-            InitializeComponent();
-
             // Add any initialization after the InitializeComponent() call.
             Original = listener;
-            ListenerChanged?.Invoke();
+            ListenerChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void FinishDialog(object sender, EventArgs e)
         {
-            if (!ChangeDetected())
+            if (Listener == Original)
             {
                 return;
             }
@@ -90,25 +93,11 @@ namespace SPPBC.M3Tools.Dialogs
             Close();
         }
 
-        private void ListenerUpdated()
+        private void ListenerUpdated(object sender, EventArgs e)
         {
             ListenerName = Original.Name;
             ListenerEmail = Original.Email;
-        }
-
-        private bool ChangeDetected()
-        {
-            if ((ListenerName ?? "") != (Original.Name ?? ""))
-            {
-                return true;
-            }
-
-            if ((ListenerEmail ?? "") != (Original.Email ?? ""))
-            {
-                return true;
-            }
-
-            return false;
+			Text = string.Format(Text, Original.Name);
         }
     }
 }

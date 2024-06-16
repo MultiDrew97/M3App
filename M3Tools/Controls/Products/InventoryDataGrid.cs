@@ -33,7 +33,7 @@ namespace SPPBC.M3Tools.Data
 		/// The list of inventory items
 		/// </summary>
 		[Browsable(false)]
-		public Types.InventoryCollection Products
+		public Types.InventoryCollection Inventory
 		{
 			get
 			{

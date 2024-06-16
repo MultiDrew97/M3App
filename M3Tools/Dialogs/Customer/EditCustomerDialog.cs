@@ -1,44 +1,28 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Microsoft.VisualBasic.CompilerServices;
+
+// TODO: Create a base class for these edit dialogs and other components I use for easier updating
 
 namespace SPPBC.M3Tools.Dialogs
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class EditCustomerDialog
 	{
-		private Types.Customer _customer;
-
-		protected event EventHandler CustomerChanged;
-
+		private event EventHandler CustomerChanged;
 
 		/// <summary>
 		/// The customer being edited
 		/// </summary>
-		public Types.Customer Customer
-		{
-			get
-			{
-				return _customer;
-			}
-			private set
-			{
-				_customer = value;
-				CustomerChanged?.Invoke(this, EventArgs.Empty);
-			}
-		}
+		public Types.Customer Original { get; private set; }
 
 		/// <summary>
 		/// The new info for the customer
 		/// </summary>
-		public Types.Customer NewInfo
+		public Types.Customer Customer
 		{
-			get
-			{
-				return new Types.Customer(Customer.Id, FirstName, LastName, Address, Email, Phone);
-			}
+			get => new(Original.Id, FirstName, LastName, Address, Email, Phone);
 		}
 
 		private string FirstName
@@ -100,47 +84,48 @@ namespace SPPBC.M3Tools.Dialogs
 				af_Address.Address = value;
 			}
 		}
-
-		public EditCustomerDialog(Types.Customer customer) : this()
+		private EditCustomerDialog()
 		{
-			this.Customer = (Types.Customer)customer.Clone();
-		}
-
-		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-        protected EditCustomerDialog()
-        {
-            InitializeComponent();
+			InitializeComponent();
 			CustomerChanged += new EventHandler(CustomerUpdated);
 		}
 
-        private void FinishDialog(object sender, EventArgs e)
-        {
-            if (Customer == NewInfo)
-            {
-                MessageBox.Show("There were errors in your edits. Please review And try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+		/// <summary>
+		/// 
+		/// </summary>
+		public EditCustomerDialog(Types.Customer customer) : this()
+		{
+			Original = (Types.Customer)customer.Clone();
+			CustomerChanged?.Invoke(this, EventArgs.Empty);
+		}
 
-            DialogResult = DialogResult.OK;
-            Close();
-        }
 
-        private void CancelDialog(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
+		private void FinishDialog(object sender, EventArgs e)
+		{
+			if (Customer == Original)
+			{
+				MessageBox.Show("There were errors in your edits. Please review And try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
-        private void CustomerUpdated(object sender, EventArgs e)
-        {
-            FirstName = Customer.FirstName;
-            LastName = Customer.LastName;
-            Address = Customer.Address;
-            Phone = Customer.Phone;
-            Email = Customer.Email;
-            Text = string.Format(Text, Customer.Name);
-        }
-    }
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void CancelDialog(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
+		}
+
+		private void CustomerUpdated(object sender, EventArgs e)
+		{
+			FirstName = Original.FirstName;
+			LastName = Original.LastName;
+			Address = Original.Address;
+			Phone = Original.Phone;
+			Email = Original.Email;
+			Text = string.Format(Text, Original.Name);
+		}
+	}
 }
