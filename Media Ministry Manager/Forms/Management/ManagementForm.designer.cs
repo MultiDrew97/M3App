@@ -146,6 +146,7 @@ namespace M3App
             this.Name = "ManagementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Ministry Manager";
+			this.FormClosing += new FormClosingEventHandler(DisplayClosing);
             this.Load += new System.EventHandler(this.Reload);
             this.ss_StatusView.ResumeLayout(false);
             this.ss_StatusView.PerformLayout();

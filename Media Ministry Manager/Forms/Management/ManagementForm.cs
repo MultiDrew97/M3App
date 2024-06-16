@@ -5,7 +5,6 @@ using SPPBC.M3Tools.Events.Customers;
 
 namespace M3App
 {
-	// TODO: Figure out how to make controls editable from designer child designer natuarally
 	// TODO: Figure out how to allow to be abstract and still have designer privleges
 	/// <summary>
 	/// 
@@ -23,21 +22,19 @@ namespace M3App
 			mms_Main.Logout += new EventHandler(LogOff);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
 			mms_Main.AddCustomer += new CustomerEventHandler(Add);
-			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(ChangeView);
+			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
 
 			ts_Tools.AddEntry += new EventHandler(Add);
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="sender"></param>
-		protected void Close(object sender)
+		/// <param name="e"></param>
+		protected void DisplayClosing(object sender, FormClosingEventArgs e)
 		{
-			// FIXME: Bug where form will be closed correctly from menu strip, but not if closed from normal close button
-			Close();
-
 			if (sender is SPPBC.M3Tools.MainMenuStrip)
 			{
 				return;
@@ -110,28 +107,30 @@ namespace M3App
 			settings.Show();
 		}
 
-		private void ChangeView(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
+		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
 		{
 			switch (e.Manage)
 			{
 				case SPPBC.M3Tools.Events.ManageType.Listeners:
-					new ListenersManagement().Show();
+					My.MyProject.Forms.ListenersManagement.Show();
 					break;
 				case SPPBC.M3Tools.Events.ManageType.Inventory:
-					new InventoryManagement().Show();
+					My.MyProject.Forms.InventoryManagement.Show();
 					break;
 				case SPPBC.M3Tools.Events.ManageType.Orders:
-					new OrderManagement().Show();
+					My.MyProject.Forms.OrderManagement.Show();
 					break;
 				case SPPBC.M3Tools.Events.ManageType.Customers:
-					new CustomerManagement().Show();
+					My.MyProject.Forms.CustomersManagement.Show();
 					break;
 				default:
 					return;
 			}
 
-			//DisplayClosing(sender, new CancelEventArgs());
-			Close(sender);
+			((Control)sender).Invoke(Close);
+
+			//OnFormClosing(new(CloseReason.None, false));
+			//DisplayClosing(sender, new(CloseReason.None, false));
 		}
 	}
 }

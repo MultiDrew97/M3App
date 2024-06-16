@@ -79,24 +79,24 @@ namespace M3App.My
 
 
             [EditorBrowsable(EditorBrowsableState.Never)]
-            public CustomerManagement m_CustomersManagement;
+            public CustomerManagement m_CustomerManagement;
 
             public CustomerManagement CustomersManagement
             {
                 [DebuggerHidden]
                 get
                 {
-                    m_CustomersManagement = Create__Instance__(m_CustomersManagement);
-                    return m_CustomersManagement;
+                    m_CustomerManagement = Create__Instance__(m_CustomerManagement);
+                    return m_CustomerManagement;
                 }
                 [DebuggerHidden]
                 set
                 {
-                    if (ReferenceEquals(value, m_CustomersManagement))
+                    if (ReferenceEquals(value, m_CustomerManagement))
                         return;
                     if (value is not null)
                         throw new ArgumentException("Property can only be set to Nothing");
-                    Dispose__Instance__(ref m_CustomersManagement);
+                    Dispose__Instance__(ref m_CustomerManagement);
                 }
             }
 
