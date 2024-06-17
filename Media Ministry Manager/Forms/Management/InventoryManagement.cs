@@ -14,6 +14,9 @@ namespace M3App
 	/// </summary>
 	public partial class InventoryManagement
     {
+		/// <summary>
+		/// 
+		/// </summary>
         public InventoryManagement() : base()
         {
             InitializeComponent();
@@ -28,16 +31,11 @@ namespace M3App
 			idg_Inventory.RemoveProduct += new InventoryEventHandler(Remove);
 		}
 
-        private void DisplayClosing(object sender, CancelEventArgs e)
-        {
-            if (sender is SPPBC.M3Tools.MainMenuStrip)
-            {
-                return;
-            }
-
-            My.MyProject.Forms.MainForm.Show();
-        }
-
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		protected override void Add(object sender, EventArgs e)
         {
 			using var @add = new AddProductDialog();
@@ -62,6 +60,11 @@ namespace M3App
 			Reload(sender, e);
 		}
 
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
         {
 			using var @edit = new SPPBC.M3Tools.Dialogs.EditProductDialog(e.Value);
@@ -73,11 +76,6 @@ namespace M3App
             MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Reload(sender, e);
         }
-
-		/*private void Reload(object sender, InventoryEventArgs e)
-		{
-			Reload(sender, EventArgs.Empty);
-		}*/
 
 		/// <summary>
 		/// <inheritdoc/>

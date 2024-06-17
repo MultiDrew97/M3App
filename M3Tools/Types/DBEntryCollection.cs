@@ -8,7 +8,7 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-	public abstract class DbEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
+	public abstract class DbEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView //where T : IDbEntry
 	{
 
 		private string _filter = "";
@@ -78,31 +78,24 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// Gets an item that has the specified ID in the collection
 		/// </summary>
-		/// <param name="id">The ID of the entry to find</param>
+		/// <param name="entryID">The ID of the entry to find</param>
 		/// <returns>The entry if found</returns>
 		/// <exception cref="System.ArgumentException">Thrown if the entry doesn't exist in the collection</exception>
-		public new T this[int id]
+		public new T this[int entryID]
 		{
 			get
 			{
-				foreach (var current in Items)
+				foreach (var item in Items)
 				{
-					if (((IDbEntry)current).Id != id)
-					{
+					if (item.GetHashCode() != entryID)
 						continue;
-					}
 
-					return current;
+					return item;
 				}
 
-				throw new System.ArgumentException($"No entry with ID '{id}'");
+				throw new System.ArgumentException($"No entry with ID '{entryID}'");
 			}
 		}
-
-		/// <summary>
-		/// The list of items in the collection
-		/// </summary>
-		public System.Collections.Generic.IList<T> List => Items;
 
 		/// <summary>
 		/// Applies a filter to the collection

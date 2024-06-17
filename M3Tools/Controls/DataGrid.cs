@@ -8,7 +8,7 @@ namespace SPPBC.M3Tools.Data
 	/// Base class for data grid controls used in the app
 	/// </summary>
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
-	public partial class DataGrid<T>
+	public partial class DataGrid<T> //where T : Types.IDbEntry
 	{
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
@@ -51,64 +51,6 @@ namespace SPPBC.M3Tools.Data
 			Moved = true;
 		}
 
-		/// <summary>
-		/// The data used for the data grid
-		/// </summary>
-		// <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-		// <DefaultValue(GetType(BindingSource))>
-		/*[AttributeProvider(typeof(IListSource))]
-		[RefreshProperties(RefreshProperties.Repaint)]
-		[Description("Data Source to use for data grid.")]
-		public virtual new System.Windows.Forms.BindingSource DataSource { get => (System.Windows.Forms.BindingSource)base.DataSource; set
-			{
-				AutoGenerateColumns = false;
-				base.DataSource = value;
-			}
-		}*/
-
-
-//#pragma warning disable IDE0051 // Remove unused private members
-//		private new void OnDataSourceChanged(EventArgs e)
-//#pragma warning restore IDE0051 // Remove unused private members
-//		{
-//			Console.WriteLine("--------------------- Custom DataSource Changed handler ---------------------------");
-//			AutoGenerateColumns = false;
-//			RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(delegate (object sender, System.Windows.Forms.DataGridViewRowsAddedEventArgs ea)
-//			{
-//				Console.WriteLine(ea.RowCount);
-//			});
-//			base.OnDataSourceChanged(e);
-//		}
-		/*		{
-					get
-					{
-						return (Data.BindingSource<T>)base.DataSource;
-					}
-					set
-					{
-						AutoGenerateColumns = false;
-						base.DataSource = value;
-						//switch (true)
-						//{
-						//	case object _ when value is Types.CustomersBindingSource:
-						//		{
-						//			base.DataSource = value;
-						//			break;
-						//		}
-						//	case object _ when value is Types.Customer:
-						//		{
-						//			base.DataSource = new Types.CustomersCollection();
-						//			break;
-						//		}
-
-						//	default:
-						//		{
-						//			throw new Exception("CustomerDataGrid - Unknown DataSource Type");
-						//		}
-						//}
-					}
-				}*/
-
 		private void RemoveSelectedRows(object sender, EventArgs e)
 		{
 			if (SelectedRows.Count < 1)
@@ -123,7 +65,7 @@ namespace SPPBC.M3Tools.Data
 			{
 				try
 				{
-					OnUserDeletingRow(new System.Windows.Forms.DataGridViewRowCancelEventArgs(row));
+					OnUserDeletingRow(new DataGridViewRowCancelEventArgs(row));
 				}
 				catch (Exception ex)
 				{
@@ -222,8 +164,9 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public DataGrid() : base()
 		{
-			InitializeComponent();
 			AutoGenerateColumns = false;
+
+			InitializeComponent();
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
 			cms_Tools.EditSelected += new EventHandler(EditSelected);
@@ -268,12 +211,8 @@ namespace SPPBC.M3Tools.Data
 		/// <param name="e"></param>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
 		{
+			var context = DataGridViewDataErrorContexts.Commit;
 			base.OnCellContentClick(e);
-
-			/*if (!(e.ColumnIndex == dgc_Edit.DisplayIndex || e.ColumnIndex == dgc_Remove.DisplayIndex || e.ColumnIndex == dgc_Selection.DisplayIndex))
-			{
-				return;
-			}*/
 
 			switch (e.ColumnIndex)
 			{
@@ -288,6 +227,8 @@ namespace SPPBC.M3Tools.Data
 					OnUserDeletingRow(new(Rows[e.RowIndex]));
 					break;
 			}
+
+			CommitEdit(context);
 		}
 
 		/// <summary>

@@ -3,21 +3,11 @@ using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
 {
-
-	// TODO: Remove old dgc for remove and edit if customs continue to work out. keep until proven
 	/// <summary>
 	/// Custom data grid to use for displaying customer information
 	/// </summary>
 	public partial class CustomerDataGrid
 	{
-		/*private readonly System.Collections.Generic.Dictionary<string, Tuple<string, int>> columns = new() {
-			{ "ID", new("CustomerID", 1) },
-			{ "Name", new("Name", 2) },
-			{ "Address", new("Address", 3) },
-			{ "Phone", new("Phone", 4)},
-			{ "Email", new("Email", 5) },
-			{ "Join", new("Join", 6) }
-		};*/
 		/// <summary>
 		/// Event that occurs when a customer is being added to the database
 		/// </summary>
@@ -46,7 +36,7 @@ namespace SPPBC.M3Tools.Data
 		/// The list of customers currently in the data grid
 		/// </summary>
 		[Browsable(false)]
-		public Types.DbEntryCollection<Types.Customer> Customers
+		public Types.CustomerCollection Customers
 		{
 			get => Types.CustomerCollection.Cast(base.Rows);
 		}
@@ -55,7 +45,7 @@ namespace SPPBC.M3Tools.Data
 		/// <inheritdoc/>
 		/// </summary>
 		[Browsable(false)]
-		public new Types.DbEntryCollection<Types.Customer> SelectedRows
+		public new Types.CustomerCollection SelectedRows
 		{
 			get => Types.CustomerCollection.Cast(base.SelectedRows);
 		}

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
-using SPPBC.M3Tools.Data;
-using SPPBC.M3Tools.Types;
-using SPPBC.M3Tools.Events.Customers;
+﻿using System.Diagnostics;
 
 namespace M3App
 {
@@ -39,7 +33,6 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
             this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
             this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
@@ -63,11 +56,12 @@ namespace M3App
             // 
             this.cdg_Customers.AllowUserToAddRows = false;
             this.cdg_Customers.AllowUserToOrderColumns = true;
+            this.cdg_Customers.AutoGenerateColumns = false;
             this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cdg_Customers.DataSource = this.bsCustomers;
             this.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.cdg_Customers.Location = new System.Drawing.Point(0, 0);
             this.cdg_Customers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cdg_Customers.Name = "cdg_Customers";
@@ -108,7 +102,7 @@ namespace M3App
 
         }
         private SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
-		private CustomerBindingSource bsCustomers;
+		private SPPBC.M3Tools.Data.CustomerBindingSource bsCustomers;
 		private SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
 	}
 }

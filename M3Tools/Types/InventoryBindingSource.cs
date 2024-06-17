@@ -8,7 +8,7 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
     public class InventoryBindingSource : BindingSource<Types.Product>
     {
-		private readonly Types.InventoryCollection _inventory;
+		private readonly Types.InventoryCollection _inventory = new();
 
 		/// <summary>
 		/// 
@@ -24,7 +24,10 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[AttributeProvider(typeof(IListSource))]
-		public new Types.InventoryCollection DataSource { get => (Types.InventoryCollection)base.DataSource; set => base.DataSource = value; }
+		public new object DataSource { 
+			get => DesignMode ? typeof(Types.InventoryCollection) : (Types.InventoryCollection)base.DataSource;
+			set => base.DataSource = value;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>

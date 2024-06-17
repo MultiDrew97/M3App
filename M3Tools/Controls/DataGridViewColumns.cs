@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace SPPBC.M3Tools
+namespace SPPBC.M3Tools.Data
 {
 	/// <summary>
 	/// Columns for creating button cells with a image on them

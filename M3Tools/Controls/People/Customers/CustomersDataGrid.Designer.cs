@@ -22,23 +22,12 @@ namespace SPPBC.M3Tools.Data
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgc_Edit
-            // 
-            this.dgc_Edit.ReadOnly = false;
-            // 
-            // dgc_Remove
-            // 
-            this.dgc_Remove.ReadOnly = false;
-            // 
             // dgc_CustomerID
             // 
-            this.dgc_CustomerID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dgc_CustomerID.DataPropertyName = "Id";
-            this.dgc_CustomerID.FillWeight = 5F;
-            this.dgc_CustomerID.Frozen = true;
             this.dgc_CustomerID.HeaderText = "CustomerID";
-            this.dgc_CustomerID.MinimumWidth = 10;
             this.dgc_CustomerID.Name = "dgc_CustomerID";
+			this.dgc_CustomerID.ReadOnly = true;
             this.dgc_CustomerID.Visible = false;
             // 
             // dgc_Name
@@ -92,9 +81,6 @@ namespace SPPBC.M3Tools.Data
             // 
             // CustomerDataGrid
             // 
-            this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RowTemplate.Height = 28;
 			this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
 			{
 				this.dgc_Selection, this.dgc_CustomerID,
@@ -102,16 +88,16 @@ namespace SPPBC.M3Tools.Data
 				this.dgc_Join, this.dgc_Edit, this.dgc_Remove
 
 			});
-			this.Controls.SetChildIndex(this.chk_SelectAll, 0);
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+			this.Name = "CustomerDataGrid";
+			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
 		}
 
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;

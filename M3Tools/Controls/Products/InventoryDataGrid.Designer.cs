@@ -6,34 +6,12 @@ namespace SPPBC.M3Tools.Data
 	[Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
 	public partial class InventoryDataGrid : DataGrid<Types.Product>
 	{
-
-		// UserControl overrides dispose to clean up the component list.
-		[DebuggerNonUserCode()]
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (disposing && components is not null)
-				{
-					components.Dispose();
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-
-		// Required by the Windows Form Designer
-		private System.ComponentModel.IContainer components;
-
 		// NOTE: The following procedure is required by the Windows Form Designer
 		// It can be modified using the Windows Form Designer.  
 		// Do not modify it using the code editor.
 		[DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
 			dgc_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			dgc_Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,20 +65,18 @@ namespace SPPBC.M3Tools.Data
 			// 
 			// InventoryDataGrid
 			//
-			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dgc_Id, dgc_Name, dgc_Stock, dgc_Price, dgc_Available, dgc_Edit, dgc_Remove });
-			MinimumSize = new System.Drawing.Size(500, 400);
+			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dgc_Selection, dgc_Id, dgc_Name, dgc_Stock, dgc_Price, dgc_Available, dgc_Edit, dgc_Remove });
 			Name = "InventoryDataGrid";
-			Size = new System.Drawing.Size(500, 400);
 			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 
 		}
 
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Id;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Stock;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Price;
-		internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Available;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Id;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Stock;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Price;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Available;
 	}
 }

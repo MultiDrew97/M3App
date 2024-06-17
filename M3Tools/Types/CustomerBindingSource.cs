@@ -8,9 +8,11 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
     public class CustomerBindingSource : BindingSource<Types.Customer>
     {
-		private readonly Types.CustomerCollection _customers;
+		private readonly Types.CustomerCollection _customers = new();
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// 
+		/// </summary>
 		public CustomerBindingSource() : base()
 		{
 			_customers = new Types.CustomerCollection();

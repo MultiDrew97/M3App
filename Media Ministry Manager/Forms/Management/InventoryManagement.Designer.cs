@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
-using SPPBC.M3Tools.Database;
-using SPPBC.M3Tools.Events.Inventory;
+﻿using System.Diagnostics;
 
 namespace M3App
 {
@@ -38,33 +33,30 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryManagement));
             this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
-            this.ss_StatusView = new System.Windows.Forms.StatusStrip();
-            this.tss_StatusView = new System.Windows.Forms.ToolStripStatusLabel();
             this.idg_Inventory = new SPPBC.M3Tools.Data.InventoryDataGrid();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewImageButtonEditColumn1 = new SPPBC.M3Tools.Data.DataGridViewImageButtonEditColumn();
+            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.Data.DataGridViewImageButtonDeleteColumn();
             this.bsInventory = new SPPBC.M3Tools.Data.InventoryBindingSource();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.ss_StatusView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.idg_Inventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsInventory)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripContainer1
             // 
+            this.toolStripContainer1.BottomToolStripPanelVisible = true;
             // 
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.idg_Inventory);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 365);
-            this.toolStripContainer1.Size = new System.Drawing.Size(784, 415);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 345);
             this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // dbInventory
@@ -72,25 +64,6 @@ namespace M3App
             this.dbInventory.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
             this.dbInventory.Password = global::M3App.My.Settings.Default.ApiPassword;
             this.dbInventory.Username = global::M3App.My.Settings.Default.ApiUsername;
-            // 
-            // ss_StatusView
-            // 
-            this.ss_StatusView.BackColor = System.Drawing.SystemColors.Control;
-            this.ss_StatusView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ss_StatusView.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.ss_StatusView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tss_StatusView});
-            this.ss_StatusView.Location = new System.Drawing.Point(0, 439);
-            this.ss_StatusView.Name = "ss_StatusView";
-            this.ss_StatusView.Size = new System.Drawing.Size(784, 22);
-            this.ss_StatusView.TabIndex = 5;
-            // 
-            // tss_StatusView
-            // 
-            this.tss_StatusView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tss_StatusView.Name = "tss_StatusView";
-            this.tss_StatusView.Size = new System.Drawing.Size(157, 17);
-            this.tss_StatusView.Text = "Here is the current inventory";
             // 
             // idg_Inventory
             // 
@@ -100,10 +73,11 @@ namespace M3App
             this.idg_Inventory.CanReorder = true;
             this.idg_Inventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.idg_Inventory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCheckBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewCheckBoxColumn2,
             this.dataGridViewImageButtonEditColumn1,
             this.dataGridViewImageButtonDeleteColumn1});
             this.idg_Inventory.DataSource = this.bsInventory;
@@ -113,10 +87,26 @@ namespace M3App
             this.idg_Inventory.MinimumSize = new System.Drawing.Size(500, 400);
             this.idg_Inventory.Name = "idg_Inventory";
             this.idg_Inventory.ReadOnly = true;
+            this.idg_Inventory.RowsCheckable = false;
             this.idg_Inventory.RowTemplate.Height = 28;
             this.idg_Inventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.idg_Inventory.Size = new System.Drawing.Size(784, 400);
+            this.idg_Inventory.Size = new System.Drawing.Size(775, 400);
             this.idg_Inventory.TabIndex = 0;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewCheckBoxColumn1.FalseValue = "False";
+            this.dataGridViewCheckBoxColumn1.Frozen = true;
+            this.dataGridViewCheckBoxColumn1.HeaderText = "";
+            this.dataGridViewCheckBoxColumn1.MinimumWidth = 25;
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewCheckBoxColumn1.TrueValue = "True";
+            this.dataGridViewCheckBoxColumn1.Visible = false;
+            this.dataGridViewCheckBoxColumn1.Width = 25;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -146,16 +136,16 @@ namespace M3App
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
-            // dataGridViewCheckBoxColumn1
+            // dataGridViewCheckBoxColumn2
             // 
-            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "Available";
-            this.dataGridViewCheckBoxColumn1.FalseValue = "";
-            this.dataGridViewCheckBoxColumn1.FillWeight = 20F;
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Available?";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn1.TrueValue = "";
+            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "Available";
+            this.dataGridViewCheckBoxColumn2.FalseValue = "";
+            this.dataGridViewCheckBoxColumn2.FillWeight = 20F;
+            this.dataGridViewCheckBoxColumn2.HeaderText = "Available?";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn2.TrueValue = "";
             // 
             // dataGridViewImageButtonEditColumn1
             // 
@@ -187,38 +177,28 @@ namespace M3App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.ss_StatusView);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.ClientSize = new System.Drawing.Size(775, 441);
+            this.Icon = global::M3App.My.Resources.Resources.App_Icon;
             this.Name = "InventoryManagement";
-            this.Text = "Inventory Management";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.DisplayClosing);
-            this.Load += new System.EventHandler(this.Reload);
-            this.Controls.SetChildIndex(this.ss_StatusView, 0);
-            this.Controls.SetChildIndex(this.toolStripContainer1, 0);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.ss_StatusView.ResumeLayout(false);
-            this.ss_StatusView.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.idg_Inventory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsInventory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-        internal InventoryDatabase dbInventory;
-        internal StatusStrip ss_StatusView;
-        internal ToolStripStatusLabel tss_StatusView;
+
+        internal SPPBC.M3Tools.Database.InventoryDatabase dbInventory;
 		private SPPBC.M3Tools.Data.InventoryDataGrid idg_Inventory;
 		private SPPBC.M3Tools.Data.InventoryBindingSource bsInventory;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
-		private SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+		private SPPBC.M3Tools.Data.DataGridViewImageButtonEditColumn dataGridViewImageButtonEditColumn1;
+		private SPPBC.M3Tools.Data.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 	}
 }

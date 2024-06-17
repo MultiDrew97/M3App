@@ -31,8 +31,8 @@
             this.chk_SelectAll = new System.Windows.Forms.CheckBox();
             this.cms_Tools = new SPPBC.M3Tools.ToolsContextMenu();
             this.dgc_Selection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgc_Edit = new SPPBC.M3Tools.DataGridViewImageButtonEditColumn();
-            this.dgc_Remove = new SPPBC.M3Tools.DataGridViewImageButtonDeleteColumn();
+            this.dgc_Edit = new SPPBC.M3Tools.Data.DataGridViewImageButtonEditColumn();
+            this.dgc_Remove = new SPPBC.M3Tools.Data.DataGridViewImageButtonDeleteColumn();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,13 +96,16 @@
             // 
             this.AllowUserToAddRows = false;
             this.AllowUserToOrderColumns = true;
-			this.ReadOnly = true;
+			this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ContextMenuStrip = this.cms_Tools;
             this.Controls.Add(this.chk_SelectAll);
+			this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.RowTemplate.Height = 28;
+			this.ReadOnly = true;
+			this.RowTemplate.Height = 28;
             this.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Size = new System.Drawing.Size(450, 300);
+			this.Size = new System.Drawing.Size(450, 300);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
