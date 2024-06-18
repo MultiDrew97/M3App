@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using NPOI.SS.Formula.Functions;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -8,35 +9,30 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
     public class CustomerBindingSource : BindingSource<Types.Customer>
     {
-		private readonly Types.CustomerCollection _customers = new();
+		private readonly string CustomerFilter = "Name LIKE '%{0}%'";
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public CustomerBindingSource() : base()
 		{
-			_customers = new Types.CustomerCollection();
-			DataSource = _customers;
-		}
-
-		/// <summary>
-		/// The data source for the binding source to bind from
-		/// </summary>
-		[RefreshProperties(RefreshProperties.Repaint)]
-		[AttributeProvider(typeof(IListSource))]
-		public new object DataSource {
-			get => DesignMode ? typeof(Types.CustomerCollection) : (Types.CustomerCollection)base.DataSource;
-			set => base.DataSource = value;
+			DataSource = new();
 		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public override string Filter
+		[Browsable(false)]
+		public new Types.CustomerCollection DataSource
 		{
-			get => _customers?.Filter;
-			set => _customers.Filter = value;
+			get => (Types.CustomerCollection)base.DataSource;
+			set => base.DataSource = value;
 		}
 
+		public override string Filter
+		{
+			get => base.Filter;
+			set => base.Filter = string.Format(CustomerFilter, value);
+		}
 	}
 }

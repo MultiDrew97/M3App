@@ -240,5 +240,13 @@ namespace SPPBC.M3Tools.Data
 			base.OnUserDeletingRow(e);
 			RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
 		}
+
+		protected override void OnDataError(bool displayErrorDialogIfNoHandler, DataGridViewDataErrorEventArgs e)
+		{
+			base.OnDataError(false, e);
+
+			if (Rows[e.RowIndex] is not null)
+				return;
+		}
 	}
 }

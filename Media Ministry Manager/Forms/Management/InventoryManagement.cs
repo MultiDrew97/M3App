@@ -85,9 +85,7 @@ namespace M3App
         protected override void Reload(object sender, EventArgs e)
         {
             UseWaitCursor = true;
-            bsInventory.Clear();
-            foreach (var product in dbInventory.GetProducts())
-                bsInventory.Add(product);
+			bsInventory.DataSource = dbInventory.GetProducts();
 			bsInventory.ResetBindings(false);
 			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;

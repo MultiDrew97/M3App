@@ -36,9 +36,7 @@ namespace M3App
 		{
 			// TODO: Figure out if wait cursor management can be automated in the base class as well
 			UseWaitCursor = true;
-			bsCustomers.Clear();
-			foreach (var customer in dbCustomers.GetCustomers())
-				bsCustomers.Add(customer);
+			bsCustomers.DataSource = dbCustomers.GetCustomers();
 			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsCustomers.ResetBindings(false);
 			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, cdg_Customers.Customers.Count);

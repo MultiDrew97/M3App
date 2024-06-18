@@ -23,5 +23,25 @@ namespace SPPBC.M3Tools.Data
 		{
 			get => ((Types.DbEntryCollection<T>)DataSource).Items;
 		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[AttributeProvider(typeof(IListSource))]
+		protected new Types.DbEntryCollection<T> DataSource
+		{
+			get => (Types.DbEntryCollection<T>)base.DataSource;
+			set => base.DataSource = value;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public override string Filter
+		{
+			get => base.Filter;
+			set => base.Filter = value;
+		}
 	}
 }

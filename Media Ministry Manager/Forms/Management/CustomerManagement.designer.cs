@@ -74,7 +74,6 @@ namespace M3App
             // 
             // bsCustomers
             // 
-            this.bsCustomers.DataSource = typeof(SPPBC.M3Tools.Types.CustomerCollection);
             this.bsCustomers.Filter = "";
             // 
             // dbCustomers

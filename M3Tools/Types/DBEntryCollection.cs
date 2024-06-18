@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -100,7 +101,7 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// Applies a filter to the collection
 		/// </summary>
-		public string Filter
+		public virtual string Filter
 		{
 			get
 			{
@@ -301,14 +302,17 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="key"></param>
 		/// <returns></returns>
 		/// <exception cref="System.NotImplementedException"></exception>
-		public int Find(System.ComponentModel.PropertyDescriptor @property, object key)
-		{
-			return Find(property, (T)key);
-		}
-
-		private int Find(System.ComponentModel.PropertyDescriptor @property, T key)
+		public int Find(PropertyDescriptor @property, object key)
 		{
 			throw new System.NotImplementedException("Find");
+			for (var index = 0; index < this.Count; index++)
+			{
+				var item = this[index];
+				if (property.GetValue(item) != key) continue;
+
+				return index;
+			}
+			return -1;
 		}
 
 		/// <summary>
