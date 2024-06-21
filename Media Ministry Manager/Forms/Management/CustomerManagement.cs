@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Events.Customers;
 
@@ -11,15 +10,11 @@ namespace M3App
 	public partial class CustomerManagement
 	{
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public CustomerManagement() : base()
 		{
-			InitializeComponent();
-
-			// TODO: Figure out if I can place button toggles in the base class and automate the hiding
-			ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
-			mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
+			InitializeComponent();			
 
 			cdg_Customers.Reload += new EventHandler(Reload);
 			cdg_Customers.AddCustomer += new CustomerEventHandler(Add);
@@ -34,10 +29,8 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Reload(object sender, EventArgs e)
 		{
-			// TODO: Figure out if wait cursor management can be automated in the base class as well
 			UseWaitCursor = true;
 			bsCustomers.DataSource = dbCustomers.GetCustomers();
-			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsCustomers.ResetBindings(false);
 			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, cdg_Customers.Customers.Count);
 			UseWaitCursor = false;

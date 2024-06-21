@@ -2,14 +2,16 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Events.Customers;
+using SPPBC.M3Tools.Types;
 
 namespace M3App
 {
 	// TODO: Figure out how to allow to be abstract and still have designer privleges
+	// TODO: Create custom events for when loading is happening and finished to show and hide the wait cursor from here
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ManagementForm<T> where T : SPPBC.M3Tools.Types.IDbEntry
+	public partial class ManagementForm<T> where T : IDbEntry
 	{
 		/// <summary>
 		/// <inheritdoc/>
@@ -17,6 +19,8 @@ namespace M3App
         public ManagementForm()
         {
             InitializeComponent();
+
+			HideStuff(typeof(T));
 
 			mms_Main.ExitApplication += new EventHandler(Exit);
 			mms_Main.Logout += new EventHandler(LogOff);
@@ -26,6 +30,31 @@ namespace M3App
 
 			ts_Tools.AddEntry += new EventHandler(Add);
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
+		}
+
+		// TODO: Find a more descriptive name for this function
+		private void HideStuff(Type type)
+		{
+			switch (true)
+			{
+				case var _ when type == typeof(Customer):
+					ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
+					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
+					break;
+				case var _ when type == typeof(Listener):
+					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.LISTENERS);
+					break;
+				case var _ when type == typeof(Order):
+					ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
+					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.ORDERS);
+					break;
+				case var _ when type == typeof(Product):
+					ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL });
+					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.INVENTORY);
+					break;
+				default:
+					throw new NotSupportedException($"Type '{type}' not supported by form");
+			}
 		}
 
 		/// <summary>

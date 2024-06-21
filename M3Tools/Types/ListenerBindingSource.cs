@@ -8,6 +8,7 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
     public class ListenerBindingSource : BindingSource<Types.Listener>
     {
+		private readonly string ListenerFilter = "[Name] LIKE '%{0}%'";
 		/// <inheritdoc/>
 		public ListenerBindingSource() : base()
 		{
@@ -23,6 +24,15 @@ namespace SPPBC.M3Tools.Data
             get => (Types.ListenerCollection)base.DataSource;
 			set => base.DataSource = value;
         }
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public override string Filter
+		{
+			get => base.Filter;
+			set => base.Filter = string.IsNullOrEmpty(value) ? value : string.Format(ListenerFilter, value);
+		}
 
 	}
 }

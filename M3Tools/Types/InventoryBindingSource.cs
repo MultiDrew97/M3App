@@ -8,6 +8,7 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
     public class InventoryBindingSource : BindingSource<Types.Product>
     {
+		private readonly string InventoryFilter = "[ItemName] LIKE '%{0}%'";
 		/// <summary>
 		/// 
 		/// </summary>
@@ -23,6 +24,15 @@ namespace SPPBC.M3Tools.Data
 		public new Types.InventoryCollection DataSource { 
 			get => (Types.InventoryCollection)base.DataSource;
 			set => base.DataSource = value;
+		}
+
+		/// <summary>
+		/// <inheritdoc/>
+		/// </summary>
+		public override string Filter
+		{
+			get => base.Filter;
+			set => base.Filter = value == string.Empty ? value : string.Format(InventoryFilter, value);
 		}
 	}
 }

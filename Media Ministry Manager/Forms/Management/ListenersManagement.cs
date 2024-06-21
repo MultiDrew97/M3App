@@ -17,8 +17,6 @@ namespace M3App
         {
             InitializeComponent();
 
-            mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.LISTENERS);
-
             gt_Email.Authorize();
             gd_Drive.Authorize();
 

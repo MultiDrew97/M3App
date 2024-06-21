@@ -40,6 +40,7 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public override string Filter
 		{
+			// TODO: Ensure filtering text follows this format $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')";
 			get => base.Filter;
 			set => base.Filter = value;
 		}

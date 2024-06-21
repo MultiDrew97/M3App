@@ -110,9 +110,7 @@ namespace SPPBC.M3Tools.Types
 			set
 			{
 				if (string.Equals(value, _filter, System.StringComparison.Ordinal))
-				{
 					return;
-				}
 
 				_filter = value;
 

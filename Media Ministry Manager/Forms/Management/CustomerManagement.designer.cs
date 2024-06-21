@@ -56,25 +56,18 @@ namespace M3App
             // 
             this.cdg_Customers.AllowUserToAddRows = false;
             this.cdg_Customers.AllowUserToOrderColumns = true;
-            this.cdg_Customers.AutoGenerateColumns = false;
             this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cdg_Customers.DataSource = this.bsCustomers;
             this.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.cdg_Customers.Location = new System.Drawing.Point(0, 0);
-            this.cdg_Customers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cdg_Customers.Name = "cdg_Customers";
             this.cdg_Customers.ReadOnly = true;
-            this.cdg_Customers.RowHeadersWidth = 82;
             this.cdg_Customers.RowsCheckable = false;
             this.cdg_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cdg_Customers.Size = new System.Drawing.Size(775, 345);
             this.cdg_Customers.TabIndex = 1;
-            // 
-            // bsCustomers
-            // 
-            this.bsCustomers.Filter = "";
             // 
             // dbCustomers
             // 
