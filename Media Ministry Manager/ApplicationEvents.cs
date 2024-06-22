@@ -19,22 +19,23 @@ namespace M3App.My
         {
 			MinimumSplashScreenDisplayTime = 5000;
 
-			// TODO: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 
+			if (Settings.Default.UpgradeRequired)
+            {
+				// Bring in the settings from previous version
+                Console.WriteLine("Upgrade required");
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
+            }
+
+			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 #if DEBUG
 			Settings.Default.BaseUrl = "http://localhost:3000/api";
 			Settings.Default.ApiPassword = "password";
 			Settings.Default.ApiUsername = "username";
 			Settings.Default.Save();
 #endif
-			// Bring in the settings from previous version
-			if (Settings.Default.UpgradeRequired)
-            {
-                Console.WriteLine("Upgrade required");
-                Settings.Default.Upgrade();
-                Settings.Default.UpgradeRequired = false;
-                Settings.Default.Save();
-            }
 
             // TODO: May have to figure out a way to transfer Google API tokens
 

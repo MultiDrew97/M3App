@@ -162,12 +162,6 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		[Browsable(true)]
-		public new bool AutoGenerateColumns { set => base.AutoGenerateColumns = value; }
-
-		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
 		public DataGrid() : base()
 		{
 			AutoGenerateColumns = false;

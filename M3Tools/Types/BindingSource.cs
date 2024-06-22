@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
@@ -8,7 +7,7 @@ namespace SPPBC.M3Tools.Data
 	/// Custom binding source to be used with the M3 Application
 	/// </summary>
 	/// <typeparam name="T">Data type for the data being used for binding</typeparam>
-	public partial class BindingSource<T> //where T : Types.IDbEntry
+	public partial class BindingSource<T> where T : Types.IDbEntry
 	{
 		/// <summary>
 		/// The binding source supports filtering
@@ -33,16 +32,6 @@ namespace SPPBC.M3Tools.Data
 		{
 			get => (Types.DbEntryCollection<T>)base.DataSource;
 			set => base.DataSource = value;
-		}
-
-		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-		public override string Filter
-		{
-			// TODO: Ensure filtering text follows this format $"([FirstName] like '%{value}%') OR ([LastName] like '%${value}%') OR ([Email] like '%{value}%')";
-			get => base.Filter;
-			set => base.Filter = value;
 		}
 	}
 }

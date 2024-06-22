@@ -83,6 +83,8 @@ namespace SPPBC.M3Tools.GTools
 			
             base.Authorize(ct);
 
+			if (ct.IsCancellationRequested) return;
+
             __service = new DriveService(__init);
 
         }

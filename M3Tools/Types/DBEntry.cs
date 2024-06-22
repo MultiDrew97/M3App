@@ -25,7 +25,7 @@ namespace SPPBC.M3Tools.Types
 		/// Create a clone of the object
 		/// </summary>
 		/// <returns></returns>
-		public virtual object Clone() { 
+		public virtual object Clone() {
 			return this.MemberwiseClone();
 		}
 
@@ -37,10 +37,8 @@ namespace SPPBC.M3Tools.Types
 		{
 			if (!Utils.ValidID(id))
 			{
-				// TODO: Determine how to handle invalid ID values
-				Id = -1;
-				return;
-				throw new System.ArgumentException();
+				id = -1;
+				//throw new System.ArgumentException($"'{id}' is not a valid ID value");
 			}
 
 			Id = id;

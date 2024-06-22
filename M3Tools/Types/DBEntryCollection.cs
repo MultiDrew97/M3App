@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,7 +8,7 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-	public abstract class DbEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView //where T : IDbEntry
+	public abstract class DbEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
 	{
 
 		private string _filter = "";
@@ -300,7 +299,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="key"></param>
 		/// <returns></returns>
 		/// <exception cref="System.NotImplementedException"></exception>
-		public int Find(PropertyDescriptor @property, object key)
+		public int Find(System.ComponentModel.PropertyDescriptor @property, object key)
 		{
 			throw new System.NotImplementedException("Find");
 			for (var index = 0; index < this.Count; index++)

@@ -83,7 +83,7 @@ namespace SPPBC.M3Tools.Types.GTools
         {
 			// Place general authorization logic here
 			if (ct.IsCancellationRequested)
-				ct.ThrowIfCancellationRequested();
+				return;
 
 			using var creds = LoadCreds(ct);
 
@@ -92,6 +92,8 @@ namespace SPPBC.M3Tools.Types.GTools
 			creds.Wait(ct);
 			if (creds.IsCanceled) throw new Exception("Canceled");
 			if (creds.IsFaulted) throw new Exception("Faulted");
+			if (creds.Result.Token.IsStale) creds.Result.RefreshTokenAsync(ct);
+
 
 			__init.HttpClientInitializer = creds.Result;
 		}
