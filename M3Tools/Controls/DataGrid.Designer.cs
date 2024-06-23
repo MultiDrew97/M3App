@@ -96,16 +96,13 @@
             // 
             this.AllowUserToAddRows = false;
             this.AllowUserToOrderColumns = true;
-			this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ContextMenuStrip = this.cms_Tools;
             this.Controls.Add(this.chk_SelectAll);
-			this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.ReadOnly = true;
             this.RowTemplate.Height = 28;
-			this.ReadOnly = true;
-			this.RowTemplate.Height = 28;
             this.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.Size = new System.Drawing.Size(450, 300);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -115,10 +112,10 @@
 		internal ToolsContextMenu cms_Tools;
 		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
 		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
-		protected internal System.Windows.Forms.CheckBox chk_SelectAll;
 		protected internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Selection;
 
 		#endregion
 
+		internal System.Windows.Forms.CheckBox chk_SelectAll;
 	}
 }

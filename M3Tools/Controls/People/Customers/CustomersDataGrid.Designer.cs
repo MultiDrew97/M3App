@@ -95,11 +95,11 @@ namespace SPPBC.M3Tools.Data
 
 		}
 
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_CustomerID;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Address;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Phone;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Join;
 	}
 }

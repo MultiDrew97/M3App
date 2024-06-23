@@ -94,10 +94,10 @@ namespace SPPBC.M3Tools.Data
 
 		}
 
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_ItemId;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Stock;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Price;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Available;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ItemId;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Stock;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Price;
+		internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Available;
 	}
 }

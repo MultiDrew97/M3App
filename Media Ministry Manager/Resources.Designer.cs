@@ -157,7 +157,7 @@ namespace M3App.My.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a href=&quot;&quot;{0}&quot;&quot; class=&quot;&quot;drive-link&quot;&quot;&gt;{1}&lt;/a&gt;.
+        ///   Looks up a localized string similar to &lt;a href=&quot;{0}&quot; class=&quot;drive-link&quot;&gt;{1}&lt;/a&gt;.
         /// </summary>
         internal static string DriveLinkHtml {
             get {
@@ -255,14 +255,14 @@ namespace M3App.My.Resources {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot; /&gt;
+        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/css/emails.css&quot; /&gt;
         ///    &lt;/head&gt;
         ///    &lt;body&gt;
         ///        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
         ///
         ///        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
         ///        &lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
-        ///        &lt;p&gt;You may gi [rest of string was truncated]&quot;;.
+        ///        &lt;p&gt;You m [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string newSermon {
             get {

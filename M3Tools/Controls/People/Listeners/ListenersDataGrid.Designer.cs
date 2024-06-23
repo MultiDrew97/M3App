@@ -59,8 +59,8 @@ namespace SPPBC.M3Tools.Data
 			this.PerformLayout();
 
 		}
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_ListenerID;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ListenerID;
 	}
 }

@@ -180,7 +180,7 @@
     <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;link rel="stylesheet" href="https://sppbc.hopto.org/css/emails.css" /&gt;
+        &lt;link rel="stylesheet" href="https://sppbc.herbivore.site/css/emails.css" /&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
@@ -221,7 +221,7 @@
 		{1}
 		
 		&lt;div class="center-image"&gt;
-			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.hopto.org/res/imgs/Media%20Ministry%20Logo.png" /&gt;
+			&lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.herbivore.site/res/imgs/Media%20Ministry%20Logo.png" /&gt;
 		&lt;/div&gt;
     &lt;/body&gt;
 &lt;/html&gt;</value>
@@ -352,7 +352,7 @@
     <comment>The regex for verifying a phone number. Found at: https://www.regextester.com/17</comment>
   </data>
   <data name="DriveLinkHtml" xml:space="preserve">
-    <value>&lt;a href=""{0}"" class=""drive-link""&gt;{1}&lt;/a&gt;</value>
+    <value>&lt;a href="{0}" class="drive-link"&gt;{1}&lt;/a&gt;</value>
     <comment>The html format of the share link for easy clicking</comment>
   </data>
   <data name="CountTemplate" xml:space="preserve">

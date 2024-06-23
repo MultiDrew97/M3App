@@ -179,7 +179,6 @@ namespace M3App
             foreach (Listener listener in details.Recipients)
             {
 				// TODO: Simplify this function later
-				// FIXME: Resolve issue where links aren't clickable in email once sent
                 switch (details.EmailContents.BodyType)
                 {
                     case EmailType.PLAIN:
@@ -202,7 +201,8 @@ namespace M3App
                 // TODO: Make login screen store the user info instead of just username and password to use for sender info
                 messages.Add(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles));
             }
-            e.Result = messages;
+
+			e.Result = messages;
         }
 
         private void EmailsDone(object sender, RunWorkerCompletedEventArgs e)
@@ -216,6 +216,7 @@ namespace M3App
             List<MimeKit.MimeMessage> messages = (List<MimeKit.MimeMessage>)e.Result;
 
 			tsp_Progress.Value = 0;
+			tsp_Progress.Maximum = messages.Count;
 			tsp_Progress.Step = (int)Math.Floor(1d / messages.Count);
 
 			foreach (var message in messages)
