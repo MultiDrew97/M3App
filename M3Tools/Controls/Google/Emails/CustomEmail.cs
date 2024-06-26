@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SPPBC.M3Tools.Types.Extensions;
 
 // TODO: Use this for all instances of an email being sent instead of how it's being done now
 
@@ -11,6 +12,7 @@ namespace SPPBC.M3Tools
     public partial class CustomEmail
     {
         private readonly string[] placeholders = new[] { "Subject...", "Email Body..." };
+
         private struct Shortcuts
         {
             public static string Bold = "Bold";
@@ -55,7 +57,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                return rtb_Body.Rtf;
+                return rtb_Body.Rtf.FromRtfToHtml();
             }
         }
 

@@ -188,7 +188,7 @@ namespace M3App
                         }
                     case EmailType.HTML:
                         {
-							body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br />", details.SendingLinks));
+							body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br>", details.SendingLinks));
                             break;
                         }
 

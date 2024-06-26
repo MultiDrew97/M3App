@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SPPBC.M3Tools.Types.Extensions;
 
 namespace SPPBC.M3Tools
 {
@@ -30,7 +31,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// The body of the email
 		/// </summary>
-        public string Body
+        public string TextBody
         {
             get
             {
@@ -38,11 +39,12 @@ namespace SPPBC.M3Tools
             }
         }
 
-        private string RTBody
+        private string HtmlBody
         {
             get
             {
-                return Email.RichTextBody;
+
+                return Email.Html;
             }
         }
 
