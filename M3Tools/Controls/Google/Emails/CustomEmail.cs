@@ -53,7 +53,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// The body of the email in Rich-Text form
 		/// </summary>
-        public string RichTextBody
+        public string Html
         {
             get
             {

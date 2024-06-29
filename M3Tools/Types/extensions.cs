@@ -6,6 +6,26 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types.Extensions
 {
+	// TODO: Flesh out this functionality at some point
+	//			Need to find a better way to convert RTF to HTML effectively effeciently
+	public enum End
+	{
+		Open=0,
+		Close=1
+	}
+
+	public readonly struct HTMLTags
+	{
+		public static readonly string[] Document = { "<html><body>", "</body></html>" };
+		public static readonly string[] Bold = { "<strong>", "</strong>" };
+		public static readonly string[] Italic = { "<em>", "</em>" };
+		public static readonly string[] Striketrough = { "<s>", "</s>" };
+		public static readonly string[] Underline = { "<u>", "</u>" };
+
+		public HTMLTags()
+		{
+		}
+	}
 	static class StringExtensions
 	{
 		public static string FormatPhone(this string value)
@@ -41,12 +61,12 @@ namespace SPPBC.M3Tools.Types.Extensions
 			richTextBox.Rtf = value;
 
 			// Extract the plain text
-			string plainText = richTextBox.Text;
+			//string plainText = richTextBox.Text;
 
 			// Initialize a StringBuilder to build the HTML
 			StringBuilder htmlBuilder = new();
 
-			htmlBuilder.Append("<html><body>");
+			htmlBuilder.Append(HTMLTags.Document[(int)End.Open]);
 
 			// Iterate through the text and apply formatting
 			int start = 0;
@@ -57,19 +77,19 @@ namespace SPPBC.M3Tools.Types.Extensions
 				// Handle bold
 				if (richTextBox.SelectionFont != null && richTextBox.SelectionFont.Bold)
 				{
-					htmlBuilder.Append("<b>");
+					htmlBuilder.Append(HTMLTags.Bold[(int)End.Open]);
 				}
 
 				// Handle italic
 				if (richTextBox.SelectionFont != null && richTextBox.SelectionFont.Italic)
 				{
-					htmlBuilder.Append("<i>");
+					htmlBuilder.Append(HTMLTags.Italic[(int)End.Open]);
 				}
 
 				// Handle underline
 				if (richTextBox.SelectionFont != null && richTextBox.SelectionFont.Underline)
 				{
-					htmlBuilder.Append("<u>");
+					htmlBuilder.Append(HTMLTags.Underline[(int)End.Open]);
 				}
 
 				// Add the character
@@ -78,21 +98,21 @@ namespace SPPBC.M3Tools.Types.Extensions
 				// Close the tags
 				if (richTextBox.SelectionFont != null && richTextBox.SelectionFont.Underline)
 				{
-					htmlBuilder.Append("</u>");
+					htmlBuilder.Append(HTMLTags.Underline[(int)End.Close]);
 				}
 				if (richTextBox.SelectionFont != null && richTextBox.SelectionFont.Italic)
 				{
-					htmlBuilder.Append("</i>");
+					htmlBuilder.Append(HTMLTags.Italic[(int)End.Close]);
 				}
 				if (richTextBox.SelectionFont != null && richTextBox.SelectionFont.Bold)
 				{
-					htmlBuilder.Append("</b>");
+					htmlBuilder.Append(HTMLTags.Bold[(int)End.Close]);
 				}
 
 				start++;
 			}
 
-			htmlBuilder.Append("</body></html>");
+			htmlBuilder.Append(HTMLTags.Document[(int)End.Close]);
 
 			return htmlBuilder.ToString();
 		}

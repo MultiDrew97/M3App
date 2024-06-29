@@ -29,7 +29,7 @@ namespace SPPBC.M3Tools.Dialogs
 				return TabControl1.SelectedIndex switch
 				{
 					var @template when @template == TabControl1.TabPages.IndexOf(tp_Templates) => ts_Templates.TemplateValue,
-					var @custom when @custom == TabControl1.TabPages.IndexOf(tp_Custom) => CustomEmail1.Body,
+					var @custom when @custom == TabControl1.TabPages.IndexOf(tp_Custom) => CustomEmail1.Html,
 					_ => null,
 				};
 			}
