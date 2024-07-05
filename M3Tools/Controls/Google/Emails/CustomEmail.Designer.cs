@@ -36,7 +36,6 @@ namespace SPPBC.M3Tools
             this.txt_Subject = new System.Windows.Forms.TextBox();
             this.sc_CustomComp = new System.Windows.Forms.SplitContainer();
             this.tsc_BodyContainer = new System.Windows.Forms.ToolStripContainer();
-            this.txt_Body = new System.Windows.Forms.TextBox();
             this.rtb_Body = new System.Windows.Forms.RichTextBox();
             this.ts_TextButtons = new System.Windows.Forms.ToolStrip();
             this.btn_Bold = new System.Windows.Forms.ToolStripButton();
@@ -109,9 +108,8 @@ namespace SPPBC.M3Tools
             // 
             // tsc_BodyContainer.ContentPanel
             // 
-            this.tsc_BodyContainer.ContentPanel.Controls.Add(this.txt_Body);
             this.tsc_BodyContainer.ContentPanel.Controls.Add(this.rtb_Body);
-            this.tsc_BodyContainer.ContentPanel.Size = new System.Drawing.Size(380, 236);
+            this.tsc_BodyContainer.ContentPanel.Size = new System.Drawing.Size(380, 212);
             this.tsc_BodyContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsc_BodyContainer.LeftToolStripPanelVisible = false;
             this.tsc_BodyContainer.Location = new System.Drawing.Point(10, 10);
@@ -125,29 +123,13 @@ namespace SPPBC.M3Tools
             // 
             this.tsc_BodyContainer.TopToolStripPanel.Controls.Add(this.ts_TextButtons);
             this.tsc_BodyContainer.TopToolStripPanel.Enabled = false;
-            this.tsc_BodyContainer.TopToolStripPanelVisible = false;
-            // 
-            // txt_Body
-            // 
-            this.txt_Body.AcceptsReturn = true;
-            this.txt_Body.AcceptsTab = true;
-            this.txt_Body.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt_Body.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.txt_Body.Location = new System.Drawing.Point(0, 0);
-            this.txt_Body.Margin = new System.Windows.Forms.Padding(25, 26, 25, 26);
-            this.txt_Body.Multiline = true;
-            this.txt_Body.Name = "txt_Body";
-            this.txt_Body.Size = new System.Drawing.Size(380, 236);
-            this.txt_Body.TabIndex = 0;
-            this.txt_Body.Text = "Email Body...";
             // 
             // rtb_Body
             // 
-
             this.rtb_Body.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_Body.Location = new System.Drawing.Point(0, 0);
             this.rtb_Body.Name = "rtb_Body";
-            this.rtb_Body.Size = new System.Drawing.Size(380, 236);
+            this.rtb_Body.Size = new System.Drawing.Size(380, 212);
             this.rtb_Body.TabIndex = 1;
             this.rtb_Body.TabStop = false;
             this.rtb_Body.Text = "";
@@ -157,7 +139,7 @@ namespace SPPBC.M3Tools
             // ts_TextButtons
             // 
             this.ts_TextButtons.AutoSize = false;
-            this.ts_TextButtons.Dock = System.Windows.Forms.DockStyle.None;
+            this.ts_TextButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ts_TextButtons.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_TextButtons.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_Bold,
@@ -171,6 +153,7 @@ namespace SPPBC.M3Tools
             this.ts_TextButtons.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.ts_TextButtons.Size = new System.Drawing.Size(132, 24);
             this.ts_TextButtons.TabIndex = 0;
+            this.ts_TextButtons.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ts_TextButtons_ItemClicked);
             // 
             // btn_Bold
             // 
@@ -326,7 +309,6 @@ namespace SPPBC.M3Tools
             ((System.ComponentModel.ISupportInitialize)(this.sc_CustomComp)).EndInit();
             this.sc_CustomComp.ResumeLayout(false);
             this.tsc_BodyContainer.ContentPanel.ResumeLayout(false);
-            this.tsc_BodyContainer.ContentPanel.PerformLayout();
             this.tsc_BodyContainer.TopToolStripPanel.ResumeLayout(false);
             this.tsc_BodyContainer.ResumeLayout(false);
             this.tsc_BodyContainer.PerformLayout();
@@ -342,7 +324,6 @@ namespace SPPBC.M3Tools
 		internal System.Windows.Forms.TextBox txt_Subject;
 		internal System.Windows.Forms.SplitContainer sc_CustomComp;
 		internal System.Windows.Forms.ToolStripContainer tsc_BodyContainer;
-		internal System.Windows.Forms.TextBox txt_Body;
 		internal System.Windows.Forms.RichTextBox rtb_Body;
 		internal System.Windows.Forms.ToolStrip ts_TextButtons;
 		internal System.Windows.Forms.ToolStripButton btn_Bold;
@@ -355,11 +336,11 @@ namespace SPPBC.M3Tools
 		internal System.Windows.Forms.ToolStripMenuItem Underline;
 		internal System.Windows.Forms.ToolStripMenuItem Italics;
 		internal System.Windows.Forms.MenuStrip ShortcutKeyStrip;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
 		private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
 		private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
 		private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
 		private System.Windows.Forms.ToolStripContentPanel ContentPanel;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 	}
 }

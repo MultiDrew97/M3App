@@ -8,12 +8,18 @@ namespace SPPBC.M3Tools.Types.Extensions
 {
 	// TODO: Flesh out this functionality at some point
 	//			Need to find a better way to convert RTF to HTML effectively effeciently
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum End
 	{
 		Open=0,
 		Close=1
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public readonly struct HTMLTags
 	{
 		public static readonly string[] Document = { "<html><body>", "</body></html>" };
@@ -21,10 +27,6 @@ namespace SPPBC.M3Tools.Types.Extensions
 		public static readonly string[] Italic = { "<em>", "</em>" };
 		public static readonly string[] Striketrough = { "<s>", "</s>" };
 		public static readonly string[] Underline = { "<u>", "</u>" };
-
-		public HTMLTags()
-		{
-		}
 	}
 	static class StringExtensions
 	{

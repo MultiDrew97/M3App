@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using SPPBC.M3Tools.Types.Extensions;
 
-// TODO: Use this for all instances of an email being sent instead of how it's being done now
+// TODO: Make this have all the RTF functionality, then create a seperate view in the body selector dialog to display the RTF in HTML for 'debugging'
 
 namespace SPPBC.M3Tools
 {
@@ -32,21 +32,6 @@ namespace SPPBC.M3Tools
             set
             {
                 txt_Subject.Text = value;
-            }
-        }
-
-		/// <summary>
-		/// The body of the email
-		/// </summary>
-        public string Body
-        {
-            get
-            {
-                return txt_Body.Text;
-            }
-            set
-            {
-                txt_Body.Text = value;
             }
         }
 
@@ -215,7 +200,6 @@ namespace SPPBC.M3Tools
             btn_Italics.Checked = fd_Font.Font.Italic;
             btn_Underline.Checked = fd_Font.Font.Underline;
             txt_Subject.Text = placeholders[0];
-            txt_Body.Text = placeholders[1];
         }
 
         private void TextGotFocus(object sender, EventArgs e)
@@ -245,5 +229,10 @@ namespace SPPBC.M3Tools
             txtBox.Text = value;
             txtBox.ForeColor = System.Drawing.SystemColors.ControlDark;
         }
-    }
+
+		private void ts_TextButtons_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+		{
+
+		}
+	}
 }
