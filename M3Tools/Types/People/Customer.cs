@@ -90,10 +90,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
         public override string ToString()
         {
-			// Name (Email)
-			// Street
-			// City, ST ZipCode
-			// Phone Number
+			// Id,Name,Email,Address,Phone,Joined
 			return string.Join(My.Settings.Default.ObjectDelimiter, Id, Name, Email, Address.ToString(), Phone, Joined);
         }
 

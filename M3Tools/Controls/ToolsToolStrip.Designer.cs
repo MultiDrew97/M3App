@@ -72,7 +72,7 @@ namespace SPPBC.M3Tools
             this.tsb_Add.Name = "tsb_Add";
             this.tsb_Add.Size = new System.Drawing.Size(23, 22);
             this.tsb_Add.Text = "New";
-            this.tsb_Add.ToolTipText = "Add {0}";
+            this.tsb_Add.ToolTipText = "Add";
             this.tsb_Add.Click += new System.EventHandler(this.Add);
             // 
             // tsb_Import
@@ -83,7 +83,7 @@ namespace SPPBC.M3Tools
             this.tsb_Import.Name = "tsb_Import";
             this.tsb_Import.Size = new System.Drawing.Size(23, 22);
             this.tsb_Import.Text = "Import";
-            this.tsb_Import.ToolTipText = "Import {0}";
+            this.tsb_Import.ToolTipText = "Import";
             this.tsb_Import.Click += new System.EventHandler(this.Import);
             // 
             // ToolStripSeparator1

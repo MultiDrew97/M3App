@@ -9,14 +9,6 @@ namespace SPPBC.M3Tools
 	/// </summary>
     public partial class CustomEmailDialog
     {
-        private CustomEmail Email
-        {
-            get
-            {
-                return ce_Email;
-            }
-        }
-
 		/// <summary>
 		/// The subject of the email
 		/// </summary>
@@ -24,27 +16,16 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                return Email.Subject;
+                return ce_Email.Subject;
             }
         }
 
-		/// <summary>
-		/// The body of the email
-		/// </summary>
-        public string TextBody
-        {
-            get
-            {
-                return Email.Body;
-            }
-        }
-
-        private string HtmlBody
+        private string Body
         {
             get
             {
 
-                return Email.Html;
+                return ce_Email.Body;
             }
         }
 

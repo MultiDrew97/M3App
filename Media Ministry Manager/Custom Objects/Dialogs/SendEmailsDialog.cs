@@ -104,24 +104,7 @@ namespace M3App
         {
             foreach (var @file in details.DriveLinks)
             {
-                switch (details.EmailContents.BodyType)
-                {
-                    case EmailType.PLAIN:
-                        {
-                            details.SendingLinks.Add(string.Format(My.Resources.Resources.DriveShareLink, @file.Id));
-                            break;
-                        }
-                    case EmailType.HTML:
-                        {
-                            details.SendingLinks.Add(string.Format(My.Resources.Resources.DriveLinkHtml, string.Format(My.Resources.Resources.DriveShareLink, @file.Id), @file.Name));
-                            break;
-                        }
-
-                    default:
-                        {
-							throw new ArgumentException($"Unknown email body type: {details.EmailContents.BodyType}");
-                        }
-                }
+				details.SendingLinks.Add(string.Format(My.Resources.Resources.DriveLinkHtml, string.Format(My.Resources.Resources.DriveShareLink, @file.Id), @file.Name));
             }
         }
 
@@ -175,31 +158,10 @@ namespace M3App
         private void SendEmails(object sender, DoWorkEventArgs e)
         {
             var messages = new List<MimeKit.MimeMessage>();
-			string body;
             foreach (Listener listener in details.Recipients)
             {
-				// TODO: Simplify this function later
-                switch (details.EmailContents.BodyType)
-                {
-                    case EmailType.PLAIN:
-                        {
-                            body = $"Blessings {listener.Name}, {Constants.vbCrLf}{Constants.vbCrLf}{details.EmailContents.Body}{Constants.vbCrLf}{Constants.vbCrLf}{string.Join(Constants.vbCrLf, details.SendingLinks)}";
-                            break;
-                        }
-                    case EmailType.HTML:
-                        {
-							body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br>", details.SendingLinks));
-                            break;
-                        }
-
-                    default:
-                        {
-							throw new ArgumentException($"Unknown Email body type {details.EmailContents.BodyType}");
-						}
-                }
-
-                // TODO: Make login screen store the user info instead of just username and password to use for sender info
-                messages.Add(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.EmailContents.BodyType, details.LocalFiles));
+				var body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br>", details.SendingLinks));
+				messages.Add(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
             }
 
 			e.Result = messages;

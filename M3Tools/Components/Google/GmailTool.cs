@@ -57,26 +57,24 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="to"></param>
 		/// <param name="subject"></param>
 		/// <param name="body"></param>
-		/// <param name="bodyType"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-        public MimeMessage Create(Types.Listener to, string subject, string body, EmailType bodyType = default, MailboxAddress @from = null)
+        public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress @from = null)
         {
-            return Create(new MailboxAddress(to.Name, to.Email), subject, body, bodyType, from);
+            return Create(new MailboxAddress(to.Name, to.Email), subject, body, from);
         }
 
 		/// <summary>
-		/// 		''' Creates an email using the provided information
-		/// 		''' </summary>
-		/// 		''' <param name="to">The address to whom the email is being sent to</param>
-		/// 		''' <param name="subject">The subject of the email to be sent</param>
-		/// 		''' <param name="body">The body of the email to be sent</param>
-		/// 		''' <param name="from">Who the email is being sent from</param>
-		/// 		''' <param name="bodyType">The type of body the email will have. Default html</param>
-		/// 		''' <returns></returns>
-		public MimeMessage Create(MailboxAddress to, string subject, string body, EmailType bodyType = default, MailboxAddress @from = null)
+		/// Creates an email using the provided information
+		/// </summary>
+		///<param name="to">The address to whom the email is being sent to</param>
+		/// <param name="subject">The subject of the email to be sent</param>
+		/// <param name="body">The body of the email to be sent</param>
+		/// <param name="from">Who the email is being sent from</param>
+		/// <returns></returns>
+		public MimeMessage Create(MailboxAddress to, string subject, string body, MailboxAddress @from = null)
         {
-            return Create(to, new EmailContent(subject, body, bodyType), from);
+            return Create(to, new EmailContent(subject, body), from);
         }
 
 		/// <summary>
@@ -93,32 +91,12 @@ namespace SPPBC.M3Tools.GTools
 
         private MimeMessage Create(MailboxAddress to, EmailContent content, MailboxAddress @from)
         {
-            string bodyType;
-
-            switch (content.BodyType)
-            {
-                case EmailType.PLAIN:
-                    {
-                        bodyType = "plain";
-                        break;
-                    }
-                case EmailType.HTML:
-                    {
-                        bodyType = "html";
-                        break;
-                    }
-
-                default:
-                    {
-                        throw new ArgumentException($"{content.BodyType} is not a valid body type.");
-                    }
-            }
 
             var email = new MimeMessage()
             {
                 Sender = from ?? DefaultSender,
                 Subject = content.Subject,
-                Body = new TextPart(bodyType) { Text = content.Body }
+                Body = new TextPart("html") { Text = content.Body }
             };
 
             email.To.Add(to);
@@ -132,13 +110,12 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="to"></param>
 		/// <param name="subject"></param>
 		/// <param name="body"></param>
-		/// <param name="bodyType"></param>
 		/// <param name="files"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-        public MimeMessage CreateWithAttachment(MailboxAddress to, string subject, string body, EmailType bodyType, IList<string> files, MailboxAddress @from = null)
+        public MimeMessage CreateWithAttachment(MailboxAddress to, string subject, string body, IList<string> files, MailboxAddress @from = null)
         {
-            return CreateWithAttachment(to, new EmailContent(subject, body, bodyType), files, from);
+            return CreateWithAttachment(to, new EmailContent(subject, body), files, from);
         }
 
 		/// <summary>
@@ -147,13 +124,12 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="to"></param>
 		/// <param name="subject"></param>
 		/// <param name="body"></param>
-		/// <param name="bodyType"></param>
 		/// <param name="files"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-        public MimeMessage CreateWithAttachment(Types.Listener to, string subject, string body, EmailType bodyType, IList<string> files, MailboxAddress @from = null)
+        public MimeMessage CreateWithAttachment(Types.Listener to, string subject, string body, IList<string> files, MailboxAddress @from = null)
         {
-            return CreateWithAttachment(new MailboxAddress(to.Name, to.Email), new EmailContent(subject, body, bodyType), files, from);
+            return CreateWithAttachment(new MailboxAddress(to.Name, to.Email), new EmailContent(subject, body), files, from);
         }
 
 		/// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using SPPBC.M3Tools.Types.Extensions;
 
@@ -11,7 +12,10 @@ namespace SPPBC.M3Tools
 	/// </summary>
     public partial class CustomEmail
     {
-        private readonly string[] placeholders = new[] { "Subject...", "Email Body..." };
+		private readonly System.Drawing.Color _placeholderColor = System.Drawing.SystemColors.ControlDark;
+		private readonly System.Drawing.Color _normalColor = System.Drawing.SystemColors.WindowText;
+		private string _subjectPlaceholder = "Subject...";
+		private string _bodyPlaceholder = "Body...";
 
         private struct Shortcuts
         {
@@ -21,29 +25,72 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
+		/// 
+		/// </summary>
+		[DefaultValue("Subject...")]
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Design")]
+		public string SubejctPlaceholder
+		{
+			get => _subjectPlaceholder;
+			set => _subjectPlaceholder = value;
+		}
+
+		/// <summary>
 		/// The subject of the email
 		/// </summary>
-        public string Subject
+		[DefaultValue("")]
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Email")]
+		public string Subject
         {
             get
             {
+				if (txt_Subject.Text == _subjectPlaceholder) return string.Empty;
+
                 return txt_Subject.Text;
             }
-            set
-            {
-                txt_Subject.Text = value;
-            }
+			set
+			{
+				if (value == _bodyPlaceholder) txt_Subject.ForeColor = _placeholderColor;
+				else txt_Subject.ForeColor = _normalColor;
+
+				txt_Subject.Text = value;
+			}
         }
+
+		/// <summary>
+		/// The placeholder to use for the body control
+		/// </summary>
+		[DefaultValue("Body...")]
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Design")]
+		public string BodyPlaceholder
+		{
+			get => _bodyPlaceholder;
+			set => _bodyPlaceholder = value;
+		}
 
 		/// <summary>
 		/// The body of the email in Rich-Text form
 		/// </summary>
-        public string Html
+		[DefaultValue("")]
+		[RefreshProperties(RefreshProperties.Repaint)]
+		[Category("Email")]
+		public string Body
         {
             get
             {
+				if (rtb_Body.Text == _bodyPlaceholder) return string.Empty;
                 return rtb_Body.Rtf.FromRtfToHtml();
             }
+			set 
+			{
+				if (value == _bodyPlaceholder) rtb_Body.ForeColor = _placeholderColor;
+				else rtb_Body.ForeColor = _normalColor;
+
+				rtb_Body.Text = value;
+			}
         }
 
 		/// <summary>
@@ -52,163 +99,63 @@ namespace SPPBC.M3Tools
         public CustomEmail()
         {
             InitializeComponent();
+
+			rtb_Body.KeyDown += BodyShortcutPressed;
         }
 
-        private void ChangeFont(object sender, EventArgs e)
+		private void BodyShortcutPressed(object sender, KeyEventArgs e)
+		{
+			if (!e.Control) return;
+
+			if (e.KeyCode == Keys.B)
+			{
+				BoldText(sender, EventArgs.Empty);
+				e.SuppressKeyPress = true;
+			}
+			else if (e.KeyCode == Keys.I)
+			{
+				ItalicizeText(sender, EventArgs.Empty);
+				e.SuppressKeyPress = true;
+			}
+			else if (e.KeyCode == Keys.U)
+			{
+				UnderlineText(sender, EventArgs.Empty);
+				e.SuppressKeyPress = true;
+			}
+		}
+
+		private void BoldText(object sender, EventArgs e)
         {
-            if (fd_Font.ShowDialog() == DialogResult.OK)
-            {
-                rtb_Body.Font = fd_Font.Font;
-                btn_Bold.Checked = fd_Font.Font.Bold;
-                btn_Italics.Checked = fd_Font.Font.Italic;
-                btn_Underline.Checked = fd_Font.Font.Underline;
-            }
-        }
-
-        private void BoldText(object sender, EventArgs e)
-        {
-#if DEBUG
-			MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-#else
-			int fontStyle = GetCurrentFontStyle();
-
-            if (!rtb_Body.SelectionFont.Bold)
-            {
-                fontStyle += (int)System.Drawing.FontStyle.Bold;
-            }
-            else
-            {
-                fontStyle -= (int)System.Drawing.FontStyle.Bold;
-            }
-
-            rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, (System.Drawing.FontStyle)fontStyle);
-#endif
-        }
-
-        private void BoldShortcut(object sender, EventArgs e)
-        {
-            string name = ((ToolStripMenuItem)sender).Name;
-
-            switch (name ?? "")
-            {
-                case var @case when @case == (Shortcuts.Bold ?? ""):
-                    {
-                        btn_Bold.Checked = !btn_Bold.Checked;
-                        break;
-                    }
-                case var case1 when case1 == (Shortcuts.Underline ?? ""):
-                    {
-                        btn_Underline.Checked = !btn_Underline.Checked;
-                        break;
-                    }
-                case var case2 when case2 == (Shortcuts.Italics ?? ""):
-                    {
-                        btn_Italics.Checked = !btn_Italics.Checked;
-                        break;
-                    }
-            }
+            rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, rtb_Body.SelectionFont.Style ^ System.Drawing.FontStyle.Bold);
+			btn_Bold.Checked = rtb_Body.SelectionFont.Bold;
         }
 
         private void UnderlineText(object sender, EventArgs e)
         {
-#if DEBUG
-			MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-#else
-			int fontStyle = GetCurrentFontStyle();
-
-            if (!rtb_Body.SelectionFont.Underline)
-            {
-                fontStyle += (int)System.Drawing.FontStyle.Underline;
-            }
-            else
-            {
-                fontStyle -= (int)System.Drawing.FontStyle.Underline;
-            }
-
-            rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, (System.Drawing.FontStyle)fontStyle);
-#endif
+			rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, rtb_Body.SelectionFont.Style ^ System.Drawing.FontStyle.Underline);
+			btn_Underline.Checked = rtb_Body.SelectionFont.Underline;
         }
 
         private void ItalicizeText(object sender, EventArgs e)
         {
-#if DEBUG
-			MessageBox.Show("Under Construction", "Text formatting is still under construction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-#else
-			int fontStyle = GetCurrentFontStyle();
-
-            if (!rtb_Body.SelectionFont.Italic)
-            {
-                fontStyle += (int)System.Drawing.FontStyle.Italic;
-            }
-            else
-            {
-                fontStyle -= (int)System.Drawing.FontStyle.Italic;
-            }
-
-            rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, (System.Drawing.FontStyle)fontStyle);
-#endif
-        }
-
-        private int GetCurrentFontStyle()
-        {
-            // Dim fontStyle As Integer
-
-            return (rtb_Body.SelectionFont.Bold ? (int)System.Drawing.FontStyle.Bold : 0) + (rtb_Body.SelectionFont.Underline ? (int)System.Drawing.FontStyle.Underline : 0) + (rtb_Body.SelectionFont.Italic ? (int)System.Drawing.FontStyle.Italic : 0);
-
-            // If rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Italic And rtb_Body.SelectionFont.Bold Then
-            // fontStyle = Drawing.FontStyle.Italic + Drawing.FontStyle.Underline + Drawing.FontStyle.Bold
-            // ElseIf rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Italic Then
-            // fontStyle = Drawing.FontStyle.Underline + Drawing.FontStyle.Italic
-            // ElseIf rtb_Body.SelectionFont.Underline And rtb_Body.SelectionFont.Bold Then
-            // fontStyle = Drawing.FontStyle.Underline + Drawing.FontStyle.Bold
-            // ElseIf rtb_Body.SelectionFont.Italic And rtb_Body.SelectionFont.Bold Then
-            // fontStyle = Drawing.FontStyle.Italic + Drawing.FontStyle.Bold
-            // ElseIf rtb_Body.SelectionFont.Underline Then
-            // fontStyle = Drawing.FontStyle.Underline
-            // ElseIf rtb_Body.SelectionFont.Italic Then
-            // fontStyle = Drawing.FontStyle.Italic
-            // ElseIf rtb_Body.SelectionFont.Bold Then
-            // fontStyle = Drawing.FontStyle.Bold
-            // Else
-            // fontStyle = 0
-            // End If
-
-            // Return fontStyle
-        }
-
-        // Private Sub BodyChanged(sender As Object, e As EventArgs) Handles txt_Body.TextChanged
-        // If txt_Body.Text <> "" Or txt_Body.Text = placeholder Then
-        // Return
-        // End If
-
-        // 'rtb_Body.SelectionFont = New Drawing.Font(rtb_Body.Font, Drawing.FontStyle.Regular)
-
-        // ResetFontButtons()
-        // txt_Body.Text = placeholder
-        // End Sub
-
-        // Private Sub ResetFontButtons()
-        // btn_Bold.Checked = False
-        // btn_Italics.Checked = False
-        // btn_Underline.Checked = False
-        // End Sub
+			rtb_Body.SelectionFont = new System.Drawing.Font(rtb_Body.Font, rtb_Body.SelectionFont.Style ^ System.Drawing.FontStyle.Italic);
+			btn_Italics.Checked = rtb_Body.SelectionFont.Italic;
+		}
 
         private void Loading(object sender, EventArgs e)
-        {
-            rtb_Body.SelectionFont = fd_Font.Font;
-            btn_Bold.Checked = fd_Font.Font.Bold;
-            btn_Italics.Checked = fd_Font.Font.Italic;
-            btn_Underline.Checked = fd_Font.Font.Underline;
-            txt_Subject.Text = placeholders[0];
-        }
+        {            
+			Subject = _subjectPlaceholder;
+			Body = _bodyPlaceholder;
+		}
 
         private void TextGotFocus(object sender, EventArgs e)
         {
-            TextBox txtBox = (TextBox)sender;
-            string value = txtBox.Name == "txt_Subject" ? placeholders[0] : placeholders[1];
+			Control txtBox = sender as Control;
+            string placeholder = txtBox.Name == "txt_Subject" ? _subjectPlaceholder : _bodyPlaceholder;
 
-            if ((txtBox.Text ?? "") != (value ?? ""))
+            if (txtBox.Text != placeholder)
             {
+				// No actual text present
                 return;
             }
 
@@ -218,21 +165,17 @@ namespace SPPBC.M3Tools
 
         private void TextLostFocus(object sender, EventArgs e)
         {
-            TextBox txtBox = (TextBox)sender;
-            string value = txtBox.Name == "txt_Subject" ? placeholders[0] : placeholders[1];
+            Control txtBox = sender as Control;
+            string placeholder = txtBox.Name == "txt_Subject" ? _subjectPlaceholder : _bodyPlaceholder;
 
             if (!string.IsNullOrEmpty(txtBox.Text))
             {
+				// Actual text present
                 return;
             }
 
-            txtBox.Text = value;
-            txtBox.ForeColor = System.Drawing.SystemColors.ControlDark;
+			txtBox.Text = placeholder;
+			txtBox.ForeColor = System.Drawing.SystemColors.ControlDark;
         }
-
-		private void ts_TextButtons_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-
-		}
 	}
 }

@@ -87,7 +87,6 @@ namespace SPPBC.M3Tools.Data
             this.dgc_Edit,
             this.dgc_Remove});
             this.RowTemplate.Height = 28;
-            this.Controls.SetChildIndex(this.chk_SelectAll, 0);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -126,7 +126,6 @@ namespace SPPBC.M3Tools
 
 		internal System.Windows.Forms.DataGridView dgv_Cart;
 		internal System.Windows.Forms.BindingSource bsCart;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn ProductDataGridViewTextBoxColumn;
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ItemName;
 		internal System.Windows.Forms.DataGridViewTextBoxColumn QuantityDataGridViewTextBoxColumn;
 		internal System.Windows.Forms.DataGridViewTextBoxColumn ItemTotalDataGridViewTextBoxColumn;

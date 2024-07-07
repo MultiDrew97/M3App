@@ -20,7 +20,7 @@ namespace M3App
         {
             InitializeComponent();
 
-			HideStuff(typeof(T));
+			Init(typeof(T));
 
 			mms_Main.ExitApplication += new EventHandler(Exit);
 			mms_Main.Logout += new EventHandler(LogOff);
@@ -33,7 +33,7 @@ namespace M3App
 		}
 
 		// TODO: Find a more descriptive name for this function
-		private void HideStuff(Type type)
+		private void Init(Type type)
 		{
 			switch (true)
 			{

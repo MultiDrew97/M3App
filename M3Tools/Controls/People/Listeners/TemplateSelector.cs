@@ -4,10 +4,11 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools
 {
+	// TODO: Make the templates stored in a certain file/folder location so that they can easily be retrieved dynamically
 	/// <summary>
 	/// 
 	/// </summary>
-    public partial class TemplateSelector
+	public partial class TemplateSelector
     {
         // TODO: Create template management system for this later
 

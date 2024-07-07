@@ -79,7 +79,6 @@ namespace SPPBC.M3Tools
             // ce_Email
             // 
             this.ce_Email.AutoSize = true;
-            this.ce_Email.Body = "Email Body...";
             this.ce_Email.Location = new System.Drawing.Point(0, 0);
             this.ce_Email.Margin = new System.Windows.Forms.Padding(6);
             this.ce_Email.MaximumSize = new System.Drawing.Size(600, 500);
