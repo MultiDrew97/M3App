@@ -191,14 +191,11 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
 		public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts)
 		{
-#if DEBUG
 			throw new System.NotImplementedException("ApplySort");
-#else
 			IsSorted = true;
 			SortDescriptions = sorts;
 
             OnChanged(System.ComponentModel.ListChangedType.Reset);
-#endif
 		}
 
 		/// <summary>
@@ -218,8 +215,8 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.ArgumentException">The provided sort direction is not valid</exception>
 		public void ApplySort(System.ComponentModel.PropertyDescriptor @property, System.ComponentModel.ListSortDirection direction)
 		{
-			// Throw New NotImplementedException("ApplySort")
-			// string Column = @property.Name;
+			throw new System.NotImplementedException("ApplySort");
+			
 			switch (direction)
 			{
 				case System.ComponentModel.ListSortDirection.Ascending:
@@ -243,11 +240,8 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
 		public void AddIndex(System.ComponentModel.PropertyDescriptor @property)
 		{
-#if DEBUG
 			throw new System.NotImplementedException("AddIndex");
-#else
 			OnChanged(System.ComponentModel.ListChangedType.Reset);
-#endif
 		}
 
 		/// <summary>
@@ -257,11 +251,8 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
 		public void RemoveIndex(System.ComponentModel.PropertyDescriptor @property)
 		{
-#if DEBUG
 			throw new System.NotImplementedException("RemoveIndex");
-#else
 			OnChanged(System.ComponentModel.ListChangedType.Reset);
-#endif
 		}
 
 		/// <summary>
@@ -270,12 +261,9 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
 		public void RemoveSort()
 		{
-#if DEBUG
 			throw new System.NotImplementedException("RemoveSort");
-#else
 			IsSorted = false;
             OnChanged(System.ComponentModel.ListChangedType.Reset);
-#endif
 		}
 
 		/// <summary>
@@ -285,11 +273,8 @@ namespace SPPBC.M3Tools.Types
 		/// <exception cref="System.NotImplementedException"></exception>
 		public object AddNew()
 		{
-#if DEBUG
 			throw new System.NotImplementedException("AddNew");
-#else
 			return (T)new object();
-#endif
 		}
 
 		/// <summary>

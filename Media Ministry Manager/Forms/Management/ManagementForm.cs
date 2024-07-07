@@ -8,6 +8,7 @@ namespace M3App
 {
 	// TODO: Figure out how to allow to be abstract and still have designer privleges
 	// TODO: Create custom events for when loading is happening and finished to show and hide the wait cursor from here
+	// FIXME: Fix the filtering problem
 	/// <summary>
 	/// 
 	/// </summary>
@@ -64,6 +65,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected void DisplayClosing(object sender, FormClosingEventArgs e)
 		{
+			// FIXME: Figure out why I can't get this to be sent from the MainStrip
 			if (sender is SPPBC.M3Tools.MainMenuStrip)
 			{
 				return;
