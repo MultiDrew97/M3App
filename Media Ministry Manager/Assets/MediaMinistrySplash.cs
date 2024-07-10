@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 
 namespace M3App
@@ -50,5 +51,10 @@ namespace M3App
             // Copyright info
             Copyright = ((System.Reflection.AssemblyCopyrightAttribute) System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyCopyrightAttribute), false)[0]).Copyright;//My.MyProject.Application.Info.Copyright;
         }
+
+		internal void UpdateProgress(object sender, ProgressChangedEventArgs e)
+		{
+			progressBar1.Value = e.ProgressPercentage;
+		}
 	}
 }

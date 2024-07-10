@@ -45,6 +45,7 @@ namespace M3App
             this.lbl_Copyright = new System.Windows.Forms.Label();
             this.lbl_Version = new System.Windows.Forms.Label();
             this.ApplicationTitle = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.spsh_SplashScreen.SuspendLayout();
             this.DetailsLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +59,8 @@ namespace M3App
             this.spsh_SplashScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 253F));
             this.spsh_SplashScreen.Controls.Add(this.DetailsLayoutPanel, 1, 1);
             this.spsh_SplashScreen.Controls.Add(this.lbl_Version, 0, 1);
-            this.spsh_SplashScreen.Controls.Add(this.ApplicationTitle, 1, 0);
+            this.spsh_SplashScreen.Controls.Add(this.ApplicationTitle, 0, 0);
+            this.spsh_SplashScreen.Controls.Add(this.progressBar1, 1, 0);
             this.spsh_SplashScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spsh_SplashScreen.Location = new System.Drawing.Point(0, 0);
             this.spsh_SplashScreen.Name = "spsh_SplashScreen";
@@ -74,12 +76,10 @@ namespace M3App
             this.DetailsLayoutPanel.BackColor = System.Drawing.Color.Transparent;
             this.DetailsLayoutPanel.ColumnCount = 1;
             this.DetailsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
-            this.DetailsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
             this.DetailsLayoutPanel.Controls.Add(this.lbl_Copyright, 0, 1);
             this.DetailsLayoutPanel.Location = new System.Drawing.Point(246, 221);
             this.DetailsLayoutPanel.Name = "DetailsLayoutPanel";
-            this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.DetailsLayoutPanel.Size = new System.Drawing.Size(247, 79);
             this.DetailsLayoutPanel.TabIndex = 1;
             // 
@@ -97,7 +97,7 @@ namespace M3App
             // lbl_Version
             // 
             this.lbl_Version.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_Version.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Version.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_Version.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Version.Location = new System.Drawing.Point(3, 218);
             this.lbl_Version.Name = "lbl_Version";
@@ -111,11 +111,20 @@ namespace M3App
             this.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ApplicationTitle.BackColor = System.Drawing.Color.Transparent;
             this.ApplicationTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ApplicationTitle.Location = new System.Drawing.Point(246, 3);
+            this.ApplicationTitle.Location = new System.Drawing.Point(3, 3);
             this.ApplicationTitle.Name = "ApplicationTitle";
-            this.ApplicationTitle.Size = new System.Drawing.Size(247, 212);
+            this.ApplicationTitle.Size = new System.Drawing.Size(237, 212);
             this.ApplicationTitle.TabIndex = 0;
             this.ApplicationTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(246, 205);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(247, 10);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 2;
             // 
             // MediaMinistrySplash
             // 
@@ -136,5 +145,7 @@ namespace M3App
             this.ResumeLayout(false);
 
         }
-    }
+
+		private ProgressBar progressBar1;
+	}
 }

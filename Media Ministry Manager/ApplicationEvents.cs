@@ -14,6 +14,9 @@ namespace M3App
     // NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     internal partial class MyApplication : ApplicationContext
     {
+		private static readonly System.ComponentModel.BackgroundWorker bwLoader = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+		private static MediaMinistrySplash splash;
+
 		// TODO: Create a timer to show the splash screen for 5 seconds then close and open the application. Opening the application in the background and opening after the thred is over
 		// MAYBE: Background worker? Timer?
 		[STAThread()]
@@ -21,27 +24,40 @@ namespace M3App
 		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 		internal static void Main(string[] Args)
 		{
-			(new MediaMinistrySplash()).Show();
+			bwLoader.DoWork += LoadApp;
+			bwLoader.RunWorkerCompleted += AppLoaded;
 			Console.WriteLine(Args);
+
+			//MinimumSplashScreenDisplayTime = 5000;
+
 			try
 			{
-				Application.SetCompatibleTextRenderingDefault(true);
+				Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+				splash = new MediaMinistrySplash();
+				bwLoader.ProgressChanged += splash.UpdateProgress;
+				splash.Show();
+				bwLoader.RunWorkerAsync(Args);
+			} 
+			catch (Exception ex)
+			{
+
+				MessageBox.Show($"We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{ex.Message}", "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
 			}
-			Application.Run(new LoginForm());
 		}
 
-		// Found this code at https://stackoverflow.com/questions/8993685/winform-splash-screen-vb-net-timer to increae
-		// the time that the splash screen is on screen to 5000 ms (5 seconds)
-		protected override bool OnInitialize(ReadOnlyCollection<string> commandLineArgs)
-        {
-			MinimumSplashScreenDisplayTime = 5000;
+		private static void LoadApp(object sender, System.ComponentModel.DoWorkEventArgs e)
+		{
+			Console.WriteLine("Starting application preamble...");
+			System.ComponentModel.BackgroundWorker worker = sender as System.ComponentModel.BackgroundWorker;
+			var args = (string[])e.Argument;
 
-
+			Console.WriteLine($"Arguments passed for background worker: {args}");
 			if (Settings.Default.UpgradeRequired)
-            {
+			{
 				// Bring in the settings from previous version
 				try
 				{
@@ -55,7 +71,8 @@ namespace M3App
 				{
 					Console.WriteLine("Unable to import settings");
 				}
-            }
+			}
+			worker.ReportProgress(50);
 
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 #if DEBUG
@@ -65,9 +82,29 @@ namespace M3App
 			Settings.Default.Save();
 #endif
 
-            // MAYBE: May have to figure out a way to transfer Google API tokens
+			worker.ReportProgress(100);
+		}
 
-            return base.OnInitialize(commandLineArgs);
-        }
-    }
+		private static void AppLoaded(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			if (e.Error != null)
+			{
+				MessageBox.Show($"Unable to start application. Please reach out to your administrator.\n\nError:\n\t{e.Error.Message}");
+				return;
+			}
+
+			if (e.Cancelled)
+			{
+				Console.WriteLine("Application preamble was canceled from finishing");
+				return;
+			}
+
+			splash.Close();
+			splash.Dispose();
+			splash = null;
+			
+			Console.WriteLine("Application preamble has finished loading. Starting application...");
+			Application.Run(new LoginForm());
+		}
+	}
 }
