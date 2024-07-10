@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class OrderManagement : Form
+    public partial class OrderManagement : ManagementForm<SPPBC.M3Tools.Types.Order>
     {
 
         // Form overrides dispose to clean up the component list.
@@ -34,10 +34,29 @@ namespace M3App
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Text = "Order Management";
+            this.toolStripContainer1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // toolStripContainer1
+            // 
+            this.toolStripContainer1.BottomToolStripPanelVisible = true;
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 331);
+            this.toolStripContainer1.TopToolStripPanelVisible = true;
+            // 
+            // OrderManagement
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(775, 441);
+            this.Name = "OrderManagement";
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
     }
 }

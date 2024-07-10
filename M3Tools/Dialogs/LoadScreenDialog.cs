@@ -15,10 +15,9 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		public new void Dispose()
 		{
-			if (!Closable) { return; }
 			LoadingScreen.Close();
 			_loadScreen = null;
-			base.Dispose();
+			base.Dispose(true);
 		}
 
         private LoadingScreen LoadingScreen

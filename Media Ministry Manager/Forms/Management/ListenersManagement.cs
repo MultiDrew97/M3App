@@ -8,12 +8,12 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ListenersManagement
+	public partial class ListenerManagement
     {
 		/// <summary>
 		/// 
 		/// </summary>
-        public ListenersManagement()
+        public ListenerManagement()
         {
             InitializeComponent();
 

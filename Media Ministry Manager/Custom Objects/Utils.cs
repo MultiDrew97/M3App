@@ -36,17 +36,17 @@ namespace M3App.Helpers
             {
                 try
                 {
-                    My.MyProject.Application.OpenForms[0].Close();
+                    Application.OpenForms[0].Close();
                     attempts = 0;
                 }
                 catch (InvalidOperationException ex)
                 {
-                    Console.WriteLine("Form of name {0} falied to close", My.MyProject.Application.OpenForms[0].Name);
+                    Console.WriteLine("Form of name {0} falied to close", Application.OpenForms[0].Name);
 					MessageBox.Show(ex.Message, "Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     attempts += 1;
                 }
             }
-            while (My.MyProject.Application.OpenForms.Count > 0 & attempts < MAX_ATTEMPTS);
+            while (Application.OpenForms.Count > 0 & attempts < MAX_ATTEMPTS);
         }
 
 		/// <summary>
@@ -54,11 +54,11 @@ namespace M3App.Helpers
 		/// </summary>
         public static void LogOff()
         {
-            My.Settings.Default.Username = "";
-            My.Settings.Default.Password = "";
-            My.Settings.Default.KeepLoggedIn = false;
-            My.Settings.Default.Save();
-            My.MyProject.Forms.LoginForm.Show();
+            Settings.Default.Username = "";
+            Settings.Default.Password = "";
+            Settings.Default.KeepLoggedIn = false;
+            Settings.Default.Save();
+            new LoginForm().Show();
         }
     }
 }

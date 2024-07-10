@@ -5,8 +5,7 @@
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void InventoryEventHandler(object sender, DataEventArgs<Types.Product> e);
-	//public delegate void InventoryEventHandler(object sender, InventoryEventArgs e);
+	public delegate void InventoryEventHandler(object sender, InventoryEventArgs e);
 
 	/// <inheritdoc/>
 	public class InventoryEventArgs : DataEventArgs<Types.Product>

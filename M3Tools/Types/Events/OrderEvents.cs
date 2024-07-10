@@ -6,8 +6,7 @@
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	// TODO: Try to figure out why polymorphism doesn't work for handlers
-	public delegate void OrderEventHandler(object sender, DataEventArgs<Types.Order> e);
-	// public delegate void CustomerEventHandler(object sender, CustomerEventArgs e);
+	public delegate void OrderEventHandler(object sender, OrderEventArgs e);
 
 	/// <inheritdoc/>
 	sealed public class OrderEventArgs : DataEventArgs<Types.Order>

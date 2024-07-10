@@ -71,9 +71,9 @@ namespace M3App
             // 
             // dbCustomers
             // 
-            this.dbCustomers.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            this.dbCustomers.Password = global::M3App.My.Settings.Default.ApiPassword;
-            this.dbCustomers.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbCustomers.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbCustomers.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbCustomers.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // CustomerManagement
             // 

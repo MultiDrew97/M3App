@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace M3App.My {
+namespace M3App {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -132,8 +132,18 @@ namespace M3App.My {
             }
         }
         
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Count: {0}")]
+        public string CountTemplate {
+            get {
+                return ((string)(this["CountTemplate"]));
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool KeepLoggedIn {
             get {
@@ -144,12 +154,15 @@ namespace M3App.My {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Count: {0}")]
-        public string CountTemplate {
+        [global::System.Configuration.DefaultSettingValueAttribute("Test Value")]
+        public string Test {
             get {
-                return ((string)(this["CountTemplate"]));
+                return ((string)(this["Test"]));
+            }
+            set {
+                this["Test"] = value;
             }
         }
     }

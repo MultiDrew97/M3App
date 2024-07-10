@@ -54,9 +54,9 @@ namespace M3App
             // 
             // dbInventory
             // 
-            this.dbInventory.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            this.dbInventory.Password = global::M3App.My.Settings.Default.ApiPassword;
-            this.dbInventory.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbInventory.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbInventory.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbInventory.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // idg_Inventory
             // 

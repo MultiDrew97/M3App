@@ -26,8 +26,8 @@ namespace M3App
             }
         }
         internal Label ApplicationTitle;
-        internal Label Version;
-        internal Label Copyright;
+        internal Label lbl_Version;
+        internal Label lbl_Copyright;
         internal TableLayoutPanel spsh_SplashScreen;
         internal TableLayoutPanel DetailsLayoutPanel;
 
@@ -40,100 +40,100 @@ namespace M3App
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            spsh_SplashScreen = new TableLayoutPanel();
-            DetailsLayoutPanel = new TableLayoutPanel();
-            Copyright = new Label();
-            Version = new Label();
-            ApplicationTitle = new Label();
-            spsh_SplashScreen.SuspendLayout();
-            DetailsLayoutPanel.SuspendLayout();
-            SuspendLayout();
+            this.spsh_SplashScreen = new System.Windows.Forms.TableLayoutPanel();
+            this.DetailsLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_Copyright = new System.Windows.Forms.Label();
+            this.lbl_Version = new System.Windows.Forms.Label();
+            this.ApplicationTitle = new System.Windows.Forms.Label();
+            this.spsh_SplashScreen.SuspendLayout();
+            this.DetailsLayoutPanel.SuspendLayout();
+            this.SuspendLayout();
             // 
             // spsh_SplashScreen
             // 
-            spsh_SplashScreen.BackgroundImage = My.Resources.Resources.BannerImage;
-            spsh_SplashScreen.BackgroundImageLayout = ImageLayout.Stretch;
-            spsh_SplashScreen.ColumnCount = 2;
-            spsh_SplashScreen.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 243.0f));
-            spsh_SplashScreen.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 253.0f));
-            spsh_SplashScreen.Controls.Add(DetailsLayoutPanel, 1, 1);
-            spsh_SplashScreen.Controls.Add(Version, 0, 1);
-            spsh_SplashScreen.Controls.Add(ApplicationTitle, 1, 0);
-            spsh_SplashScreen.Dock = DockStyle.Fill;
-            spsh_SplashScreen.Location = new Point(0, 0);
-            spsh_SplashScreen.Name = "spsh_SplashScreen";
-            spsh_SplashScreen.RowCount = 2;
-            spsh_SplashScreen.RowStyles.Add(new RowStyle(SizeType.Absolute, 218.0f));
-            spsh_SplashScreen.RowStyles.Add(new RowStyle(SizeType.Absolute, 38.0f));
-            spsh_SplashScreen.Size = new Size(496, 303);
-            spsh_SplashScreen.TabIndex = 0;
+            this.spsh_SplashScreen.BackgroundImage = global::M3App.My.Resources.Resources.BannerImage;
+            this.spsh_SplashScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.spsh_SplashScreen.ColumnCount = 2;
+            this.spsh_SplashScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
+            this.spsh_SplashScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 253F));
+            this.spsh_SplashScreen.Controls.Add(this.DetailsLayoutPanel, 1, 1);
+            this.spsh_SplashScreen.Controls.Add(this.lbl_Version, 0, 1);
+            this.spsh_SplashScreen.Controls.Add(this.ApplicationTitle, 1, 0);
+            this.spsh_SplashScreen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spsh_SplashScreen.Location = new System.Drawing.Point(0, 0);
+            this.spsh_SplashScreen.Name = "spsh_SplashScreen";
+            this.spsh_SplashScreen.RowCount = 2;
+            this.spsh_SplashScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 218F));
+            this.spsh_SplashScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.spsh_SplashScreen.Size = new System.Drawing.Size(496, 303);
+            this.spsh_SplashScreen.TabIndex = 0;
             // 
             // DetailsLayoutPanel
             // 
-            DetailsLayoutPanel.Anchor = AnchorStyles.None;
-            DetailsLayoutPanel.BackColor = Color.Transparent;
-            DetailsLayoutPanel.ColumnCount = 1;
-            DetailsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 247.0f));
-            DetailsLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 142.0f));
-            DetailsLayoutPanel.Controls.Add(Copyright, 0, 1);
-            DetailsLayoutPanel.Location = new Point(246, 221);
-            DetailsLayoutPanel.Name = "DetailsLayoutPanel";
-            DetailsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0f));
-            DetailsLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0f));
-            DetailsLayoutPanel.Size = new Size(247, 79);
-            DetailsLayoutPanel.TabIndex = 1;
+            this.DetailsLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DetailsLayoutPanel.BackColor = System.Drawing.Color.Transparent;
+            this.DetailsLayoutPanel.ColumnCount = 1;
+            this.DetailsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
+            this.DetailsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.DetailsLayoutPanel.Controls.Add(this.lbl_Copyright, 0, 1);
+            this.DetailsLayoutPanel.Location = new System.Drawing.Point(246, 221);
+            this.DetailsLayoutPanel.Name = "DetailsLayoutPanel";
+            this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.DetailsLayoutPanel.Size = new System.Drawing.Size(247, 79);
+            this.DetailsLayoutPanel.TabIndex = 1;
             // 
-            // Copyright
+            // lbl_Copyright
             // 
-            Copyright.Anchor = AnchorStyles.None;
-            Copyright.BackColor = Color.Transparent;
-            Copyright.Font = new Font("Microsoft Sans Serif", 9.0f, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Copyright.Location = new Point(3, 39);
-            Copyright.Name = "Copyright";
-            Copyright.Size = new Size(241, 40);
-            Copyright.TabIndex = 2;
-            Copyright.Text = "Copyright";
+            this.lbl_Copyright.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Copyright.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Copyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Copyright.Location = new System.Drawing.Point(3, 39);
+            this.lbl_Copyright.Name = "lbl_Copyright";
+            this.lbl_Copyright.Size = new System.Drawing.Size(241, 40);
+            this.lbl_Copyright.TabIndex = 2;
+            this.lbl_Copyright.Text = "Copyright";
             // 
-            // Version
+            // lbl_Version
             // 
-            Version.Anchor = AnchorStyles.None;
-            Version.BackColor = Color.Transparent;
-            Version.Font = new Font("Microsoft Sans Serif", 9.0f, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Version.Location = new Point(3, 250);
-            Version.Name = "Version";
-            Version.Size = new Size(237, 20);
-            Version.TabIndex = 1;
-            Version.Text = "Version {0}.{1:0}.{2}";
-            Version.TextAlign = ContentAlignment.TopCenter;
+            this.lbl_Version.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Version.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Version.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Version.Location = new System.Drawing.Point(3, 218);
+            this.lbl_Version.Name = "lbl_Version";
+            this.lbl_Version.Size = new System.Drawing.Size(237, 85);
+            this.lbl_Version.TabIndex = 1;
+            this.lbl_Version.Text = "Version";
+            this.lbl_Version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ApplicationTitle
             // 
-            ApplicationTitle.Anchor = AnchorStyles.None;
-            ApplicationTitle.BackColor = Color.Transparent;
-            ApplicationTitle.Font = new Font("Microsoft Sans Serif", 18.0f, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ApplicationTitle.Location = new Point(246, 3);
-            ApplicationTitle.Name = "ApplicationTitle";
-            ApplicationTitle.Size = new Size(247, 212);
-            ApplicationTitle.TabIndex = 0;
-            ApplicationTitle.TextAlign = ContentAlignment.BottomLeft;
+            this.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ApplicationTitle.BackColor = System.Drawing.Color.Transparent;
+            this.ApplicationTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ApplicationTitle.Location = new System.Drawing.Point(246, 3);
+            this.ApplicationTitle.Name = "ApplicationTitle";
+            this.ApplicationTitle.Size = new System.Drawing.Size(247, 212);
+            this.ApplicationTitle.TabIndex = 0;
+            this.ApplicationTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // MediaMinistrySplash
             // 
-            AutoScaleDimensions = new SizeF(6.0f, 13.0f);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(496, 303);
-            ControlBox = false;
-            Controls.Add(spsh_SplashScreen);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "MediaMinistrySplash";
-            ShowInTaskbar = false;
-            StartPosition = FormStartPosition.CenterScreen;
-            spsh_SplashScreen.ResumeLayout(false);
-            DetailsLayoutPanel.ResumeLayout(false);
-            Load += new EventHandler(SplashLoading);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(496, 303);
+            this.ControlBox = false;
+            this.Controls.Add(this.spsh_SplashScreen);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "MediaMinistrySplash";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.SplashLoading);
+            this.spsh_SplashScreen.ResumeLayout(false);
+            this.DetailsLayoutPanel.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
     }

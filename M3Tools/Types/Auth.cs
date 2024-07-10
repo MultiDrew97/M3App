@@ -34,23 +34,23 @@ namespace SPPBC.M3Tools.Types
         public AccountRole Role { get; set; }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
-        public Auth() : this("JohnDoe123", "WelcomeJohnDoe123!")
+        public Auth() : this("", "")
         {
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="username"></param>
 		/// <param name="password"></param>
 		/// <param name="salt"></param>
 		/// <param name="role"></param>
-        public Auth(string username = "JohnDoe123", string password = null, Guid salt = default, AccountRole role = AccountRole.User)
+        public Auth(string username = default, string password = default, Guid salt = default, AccountRole role = AccountRole.User)
         {
             Username = username;
-            Password = password?.ToBase64String();
+            Password = password.ToBase64String();
 			Salt = salt;
             Role = role;
         }

@@ -100,30 +100,6 @@ namespace M3App.My
                 }
             }
 
-
-            [EditorBrowsable(EditorBrowsableState.Never)]
-            public Frm_DisplayOrders m_Frm_DisplayOrders;
-
-            public Frm_DisplayOrders Frm_DisplayOrders
-            {
-                [DebuggerHidden]
-                get
-                {
-                    m_Frm_DisplayOrders = Create__Instance__(m_Frm_DisplayOrders);
-                    return m_Frm_DisplayOrders;
-                }
-                [DebuggerHidden]
-                set
-                {
-                    if (ReferenceEquals(value, m_Frm_DisplayOrders))
-                        return;
-                    if (value is not null)
-                        throw new ArgumentException("Property can only be set to Nothing");
-                    Dispose__Instance__(ref m_Frm_DisplayOrders);
-                }
-            }
-
-
             [EditorBrowsable(EditorBrowsableState.Never)]
             public InventoryManagement m_InventoryManagement;
 

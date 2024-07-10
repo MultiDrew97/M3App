@@ -34,7 +34,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                return string.IsNullOrWhiteSpace(uf_Username.Username) ? null : uf_Username.Username;
+                return string.IsNullOrWhiteSpace(uf_Username.Username) ? string.Empty : uf_Username.Username;
             }
             set
             {
@@ -50,7 +50,7 @@ namespace SPPBC.M3Tools
         {
             get
             {
-                return string.IsNullOrWhiteSpace(pf_Password.Password) ? null : pf_Password.Password;
+                return string.IsNullOrWhiteSpace(pf_Password.Password) ? string.Empty : pf_Password.Password;
             }
             set
             {

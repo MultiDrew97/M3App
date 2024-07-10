@@ -36,162 +36,143 @@ namespace M3App
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            btn_OrderManagement = new Button();
-            btn_OrderManagement.Click += new EventHandler(ManageOrders);
-            btn_ProductManagement = new Button();
-            btn_ProductManagement.Click += new EventHandler(MangeInventory);
-            btn_CustomerManagement = new Button();
-            btn_CustomerManagement.Click += new EventHandler(ManageCustomers);
-            ss_Queries = new StatusStrip();
-            tss_Feedback = new ToolStripStatusLabel();
-            bw_ChangedSizes = new System.ComponentModel.BackgroundWorker();
-            btn_EmailMinistry = new Button();
-            btn_EmailMinistry.Click += new EventHandler(ManageListeners);
-            pnl_Controls = new Panel();
-            mms_Main = new SPPBC.M3Tools.MainMenuStrip();
-            mms_Main.Logout += Logout;
-            mms_Main.ExitApplication += ExitApp;
-            mms_Main.UpdateAvailable += ExitApp;
-            mms_Main.AddCustomer += AddCustomer;
-            mms_Main.AddListener += AddListener;
-            mms_Main.AddProduct += AddProduct;
-            mms_Main.ViewSettings += ViewSettings;
-            wb_Updater = new WebBrowser();
-            dbCustomer = new CustomerDatabase(components);
-            dbListener = new ListenerDatabase(components);
-            dbInventory = new InventoryDatabase(components);
-            ss_Queries.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.btn_OrderManagement = new System.Windows.Forms.Button();
+            this.btn_ProductManagement = new System.Windows.Forms.Button();
+            this.btn_CustomerManagement = new System.Windows.Forms.Button();
+            this.ss_Queries = new System.Windows.Forms.StatusStrip();
+            this.tss_Feedback = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bw_ChangedSizes = new System.ComponentModel.BackgroundWorker();
+            this.btn_EmailMinistry = new System.Windows.Forms.Button();
+            this.pnl_Controls = new System.Windows.Forms.Panel();
+            this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
+            this.dbCustomer = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
+            this.dbListener = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
+            this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
+            this.ss_Queries.SuspendLayout();
+            this.SuspendLayout();
             // 
             // btn_OrderManagement
             // 
-            btn_OrderManagement.Enabled = false;
-            btn_OrderManagement.Font = new Font("Microsoft Sans Serif", 12.0f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_OrderManagement.Location = new Point(24, 95);
-            btn_OrderManagement.Name = "btn_OrderManagement";
-            btn_OrderManagement.Size = new Size(226, 43);
-            btn_OrderManagement.TabIndex = 3;
-            btn_OrderManagement.Text = "Order Management";
-            btn_OrderManagement.UseVisualStyleBackColor = true;
+            this.btn_OrderManagement.Enabled = false;
+            this.btn_OrderManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_OrderManagement.Location = new System.Drawing.Point(24, 228);
+            this.btn_OrderManagement.Name = "btn_OrderManagement";
+            this.btn_OrderManagement.Size = new System.Drawing.Size(226, 43);
+            this.btn_OrderManagement.TabIndex = 3;
+            this.btn_OrderManagement.Text = "Order Management";
+            this.btn_OrderManagement.UseVisualStyleBackColor = true;
+            this.btn_OrderManagement.Click += new System.EventHandler(this.ManageOrders);
             // 
             // btn_ProductManagement
             // 
-            btn_ProductManagement.Font = new Font("Microsoft Sans Serif", 12.0f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_ProductManagement.Location = new Point(24, 160);
-            btn_ProductManagement.Name = "btn_ProductManagement";
-            btn_ProductManagement.Size = new Size(226, 43);
-            btn_ProductManagement.TabIndex = 4;
-            btn_ProductManagement.Text = "Product Management";
-            btn_ProductManagement.UseVisualStyleBackColor = true;
+            this.btn_ProductManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_ProductManagement.Location = new System.Drawing.Point(24, 160);
+            this.btn_ProductManagement.Name = "btn_ProductManagement";
+            this.btn_ProductManagement.Size = new System.Drawing.Size(226, 43);
+            this.btn_ProductManagement.TabIndex = 4;
+            this.btn_ProductManagement.Text = "Product Management";
+            this.btn_ProductManagement.UseVisualStyleBackColor = true;
+            this.btn_ProductManagement.Click += new System.EventHandler(this.MangeInventory);
             // 
             // btn_CustomerManagement
             // 
-            btn_CustomerManagement.Font = new Font("Microsoft Sans Serif", 12.0f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_CustomerManagement.Location = new Point(24, 27);
-            btn_CustomerManagement.Name = "btn_CustomerManagement";
-            btn_CustomerManagement.Size = new Size(226, 43);
-            btn_CustomerManagement.TabIndex = 1;
-            btn_CustomerManagement.Text = "Customer Management";
-            btn_CustomerManagement.UseVisualStyleBackColor = true;
+            this.btn_CustomerManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_CustomerManagement.Location = new System.Drawing.Point(24, 95);
+            this.btn_CustomerManagement.Name = "btn_CustomerManagement";
+            this.btn_CustomerManagement.Size = new System.Drawing.Size(226, 43);
+            this.btn_CustomerManagement.TabIndex = 1;
+            this.btn_CustomerManagement.Text = "Customer Management";
+            this.btn_CustomerManagement.UseVisualStyleBackColor = true;
+            this.btn_CustomerManagement.Click += new System.EventHandler(this.ManageCustomers);
             // 
             // ss_Queries
             // 
-            ss_Queries.Items.AddRange(new ToolStripItem[] { tss_Feedback });
-            ss_Queries.Location = new Point(0, 300);
-            ss_Queries.Name = "ss_Queries";
-            ss_Queries.Size = new Size(272, 22);
-            ss_Queries.TabIndex = 0;
+            this.ss_Queries.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tss_Feedback});
+            this.ss_Queries.Location = new System.Drawing.Point(0, 300);
+            this.ss_Queries.Name = "ss_Queries";
+            this.ss_Queries.Size = new System.Drawing.Size(272, 22);
+            this.ss_Queries.TabIndex = 0;
             // 
             // tss_Feedback
             // 
-            tss_Feedback.Name = "tss_Feedback";
-            tss_Feedback.Size = new Size(151, 17);
-            tss_Feedback.Text = "What would you like to do?";
+            this.tss_Feedback.Name = "tss_Feedback";
+            this.tss_Feedback.Size = new System.Drawing.Size(151, 17);
+            this.tss_Feedback.Text = "What would you like to do?";
             // 
             // btn_EmailMinistry
             // 
-            btn_EmailMinistry.Font = new Font("Microsoft Sans Serif", 12.0f, FontStyle.Bold);
-            btn_EmailMinistry.Location = new Point(24, 221);
-            btn_EmailMinistry.Name = "btn_EmailMinistry";
-            btn_EmailMinistry.Size = new Size(226, 43);
-            btn_EmailMinistry.TabIndex = 5;
-            btn_EmailMinistry.Text = "Email Ministry";
-            btn_EmailMinistry.UseVisualStyleBackColor = true;
+            this.btn_EmailMinistry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_EmailMinistry.Location = new System.Drawing.Point(24, 27);
+            this.btn_EmailMinistry.Name = "btn_EmailMinistry";
+            this.btn_EmailMinistry.Size = new System.Drawing.Size(226, 43);
+            this.btn_EmailMinistry.TabIndex = 5;
+            this.btn_EmailMinistry.Text = "Email Ministry";
+            this.btn_EmailMinistry.UseVisualStyleBackColor = true;
+            this.btn_EmailMinistry.Click += new System.EventHandler(this.ManageListeners);
             // 
             // pnl_Controls
             // 
-            pnl_Controls.BackColor = Color.Transparent;
-            pnl_Controls.BackgroundImageLayout = ImageLayout.Stretch;
-            pnl_Controls.Dock = DockStyle.Fill;
-            pnl_Controls.Location = new Point(0, 0);
-            pnl_Controls.Name = "pnl_Controls";
-            pnl_Controls.Size = new Size(397, 413);
-            pnl_Controls.TabIndex = 0;
+            this.pnl_Controls.BackColor = System.Drawing.Color.Transparent;
+            this.pnl_Controls.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnl_Controls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_Controls.Location = new System.Drawing.Point(0, 0);
+            this.pnl_Controls.Name = "pnl_Controls";
+            this.pnl_Controls.Size = new System.Drawing.Size(397, 413);
+            this.pnl_Controls.TabIndex = 0;
             // 
             // mms_Main
             // 
-            mms_Main.Location = new Point(0, 0);
-            mms_Main.Name = "mms_Main";
-            mms_Main.Size = new Size(272, 24);
-            mms_Main.TabIndex = 7;
-            mms_Main.Text = "Tools";
-            // 
-            // wb_Updater
-            // 
-            wb_Updater.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            wb_Updater.Location = new Point(222, 277);
-            wb_Updater.MinimumSize = new Size(20, 20);
-            wb_Updater.Name = "wb_Updater";
-            wb_Updater.Size = new Size(38, 20);
-            wb_Updater.TabIndex = 8;
-            wb_Updater.Url = new Uri("", UriKind.Relative);
-            wb_Updater.Visible = false;
+            this.mms_Main.Location = new System.Drawing.Point(0, 0);
+            this.mms_Main.Name = "mms_Main";
+            this.mms_Main.Size = new System.Drawing.Size(272, 24);
+            this.mms_Main.TabIndex = 7;
+            this.mms_Main.Text = "Tools";
             // 
             // dbCustomer
             // 
-            dbCustomer.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            dbCustomer.Password = global::M3App.My.Settings.Default.ApiPassword;
-            dbCustomer.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbCustomer.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbCustomer.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbCustomer.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // dbListener
             // 
-            dbListener.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            dbListener.Password = global::M3App.My.Settings.Default.ApiPassword;
-            dbListener.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbListener.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbListener.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbListener.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // dbInventory
             // 
-            dbInventory.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            dbInventory.Password = global::M3App.My.Settings.Default.ApiPassword;
-            dbInventory.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbInventory.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbInventory.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbInventory.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(6.0f, 13.0f);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(272, 322);
-            Controls.Add(wb_Updater);
-            Controls.Add(mms_Main);
-            Controls.Add(btn_EmailMinistry);
-            Controls.Add(ss_Queries);
-            Controls.Add(btn_CustomerManagement);
-            Controls.Add(btn_OrderManagement);
-            Controls.Add(btn_ProductManagement);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            MainMenuStrip = mms_Main;
-            MaximizeBox = false;
-            Name = "MainForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Media Ministry Manager";
-            ss_Queries.ResumeLayout(false);
-            ss_Queries.PerformLayout();
-            Load += new EventHandler(Reload);
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(272, 322);
+            this.Controls.Add(this.btn_OrderManagement);
+            this.Controls.Add(this.btn_ProductManagement);
+            this.Controls.Add(this.btn_CustomerManagement);
+            this.Controls.Add(this.btn_EmailMinistry);
+            this.Controls.Add(this.mms_Main);
+            this.Controls.Add(this.ss_Queries);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.mms_Main;
+            this.MaximizeBox = false;
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Media Ministry Manager";
+            this.Load += new System.EventHandler(this.Reload);
+            this.ss_Queries.ResumeLayout(false);
+            this.ss_Queries.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         internal Button btn_OrderManagement;
@@ -201,7 +182,6 @@ namespace M3App
         internal ToolStripStatusLabel tss_Feedback;
         internal System.ComponentModel.BackgroundWorker bw_ChangedSizes;
         internal Button btn_EmailMinistry;
-        internal WebBrowser wb_Updater;
         internal Panel pnl_Controls;
         internal SPPBC.M3Tools.MainMenuStrip mms_Main;
         internal CustomerDatabase dbCustomer;

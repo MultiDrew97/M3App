@@ -44,9 +44,7 @@ namespace M3App
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.tc_EmailTypes = new System.Windows.Forms.TabControl();
             this.tp_GDrive = new System.Windows.Forms.TabPage();
-            this.gdt_Files = new SPPBC.M3Tools.DriveTree();
             this.tp_LocalFiles = new System.Windows.Forms.TabPage();
-            this.fu_Receipts = new SPPBC.M3Tools.FileUpload();
             this.bw_GatherFiles = new System.ComponentModel.BackgroundWorker();
             this.bw_PrepEmails = new System.ComponentModel.BackgroundWorker();
             this.bw_GatherReceipients = new System.ComponentModel.BackgroundWorker();
@@ -55,6 +53,8 @@ namespace M3App
             this.ss_StatusBar = new System.Windows.Forms.StatusStrip();
             this.tsl_Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsp_Progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.gdt_Files = new SPPBC.M3Tools.DriveTree();
+            this.fu_Receipts = new SPPBC.M3Tools.FileUpload();
             this.gmt_Gmail = new SPPBC.M3Tools.GTools.GmailTool(this.components);
             this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
             this.TableLayoutPanel1.SuspendLayout();
@@ -124,33 +124,15 @@ namespace M3App
             this.tp_GDrive.Text = "Google Drive";
             this.tp_GDrive.UseVisualStyleBackColor = true;
             // 
-            // gdt_Files
-            // 
-            this.gdt_Files.DataBindings.Add(new System.Windows.Forms.Binding("Username", global::M3App.My.Settings.Default, "Username", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gdt_Files.Location = new System.Drawing.Point(0, 0);
-            this.gdt_Files.Name = "gdt_Files";
-            this.gdt_Files.Size = new System.Drawing.Size(403, 272);
-            this.gdt_Files.TabIndex = 4;
-            this.gdt_Files.Username = global::M3App.My.Settings.Default.Username;
-            // 
             // tp_LocalFiles
             // 
             this.tp_LocalFiles.Controls.Add(this.fu_Receipts);
             this.tp_LocalFiles.Location = new System.Drawing.Point(4, 22);
             this.tp_LocalFiles.Name = "tp_LocalFiles";
-            this.tp_LocalFiles.Size = new System.Drawing.Size(403, 272);
+            this.tp_LocalFiles.Size = new System.Drawing.Size(99, 62);
             this.tp_LocalFiles.TabIndex = 0;
             this.tp_LocalFiles.Text = "Local Files";
             this.tp_LocalFiles.UseVisualStyleBackColor = true;
-            // 
-            // fu_Receipts
-            // 
-            this.fu_Receipts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fu_Receipts.Location = new System.Drawing.Point(0, 0);
-            this.fu_Receipts.Name = "fu_Receipts";
-            this.fu_Receipts.Size = new System.Drawing.Size(403, 272);
-            this.fu_Receipts.TabIndex = 1;
             // 
             // bw_GatherFiles
             // 
@@ -208,7 +190,7 @@ namespace M3App
             // tsl_Status
             // 
             this.tsl_Status.Name = "tsl_Status";
-            this.tsl_Status.Size = new System.Drawing.Size(263, 17);
+            this.tsl_Status.Size = new System.Drawing.Size(294, 17);
             this.tsl_Status.Spring = true;
             this.tsl_Status.Text = "Select the files to attach...";
             this.tsl_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -219,15 +201,33 @@ namespace M3App
             this.tsp_Progress.Name = "tsp_Progress";
             this.tsp_Progress.Size = new System.Drawing.Size(100, 16);
             // 
+            // gdt_Files
+            // 
+            this.gdt_Files.DataBindings.Add(new System.Windows.Forms.Binding("Username", global::M3App.Settings.Default, "Username", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gdt_Files.Location = new System.Drawing.Point(0, 0);
+            this.gdt_Files.Name = "gdt_Files";
+            this.gdt_Files.Size = new System.Drawing.Size(403, 272);
+            this.gdt_Files.TabIndex = 4;
+            this.gdt_Files.Username = global::M3App.Settings.Default.Username;
+            // 
+            // fu_Receipts
+            // 
+            this.fu_Receipts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fu_Receipts.Location = new System.Drawing.Point(0, 0);
+            this.fu_Receipts.Name = "fu_Receipts";
+            this.fu_Receipts.Size = new System.Drawing.Size(99, 62);
+            this.fu_Receipts.TabIndex = 1;
+            // 
             // gmt_Gmail
             // 
-            this.gmt_Gmail.Username = global::M3App.My.Settings.Default.Username;
+            this.gmt_Gmail.Username = global::M3App.Settings.Default.Username;
             // 
             // dbListeners
             // 
-            this.dbListeners.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            this.dbListeners.Password = global::M3App.My.Settings.Default.ApiPassword;
-            this.dbListeners.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbListeners.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbListeners.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbListeners.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // SendEmailsDialog
             // 

@@ -101,6 +101,7 @@ namespace M3App
             // 
             // toolStripContainer1.ContentPanel
             // 
+			this.toolStripContainer1.BottomToolStripPanelVisible = true;
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 390);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -111,6 +112,7 @@ namespace M3App
             this.toolStripContainer1.Size = new System.Drawing.Size(784, 437);
             this.toolStripContainer1.TabIndex = 7;
             this.toolStripContainer1.Text = "ToolStripContainer1";
+			this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
@@ -160,6 +162,7 @@ namespace M3App
             this.PerformLayout();
 
         }
+
         protected internal ToolStripStatusLabel tss_Status;
 		protected internal SPPBC.M3Tools.ToolsToolStrip ts_Tools;
 		protected internal StatusStrip ss_StatusView;

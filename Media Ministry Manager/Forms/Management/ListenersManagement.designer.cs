@@ -9,7 +9,7 @@ using SPPBC.M3Tools.Types;
 namespace M3App
 {
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class ListenersManagement : ManagementForm<SPPBC.M3Tools.Types.Listener>
+    public partial class ListenerManagement : ManagementForm<SPPBC.M3Tools.Types.Listener>
     {
 
         // Form overrides dispose to clean up the component list.
@@ -64,17 +64,17 @@ namespace M3App
             // 
             // gt_Email
             // 
-            this.gt_Email.Username = global::M3App.My.Settings.Default.Username;
+            this.gt_Email.Username = global::M3App.Settings.Default.Username;
             // 
             // dbListeners
             // 
-            this.dbListeners.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            this.dbListeners.Password = global::M3App.My.Settings.Default.ApiPassword;
-            this.dbListeners.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbListeners.BaseUrl = global::M3App.Settings.Default.BaseUrl;
+            this.dbListeners.Password = global::M3App.Settings.Default.ApiPassword;
+            this.dbListeners.Username = global::M3App.Settings.Default.ApiUsername;
             // 
             // gd_Drive
             // 
-            this.gd_Drive.Username = global::M3App.My.Settings.Default.Username;
+            this.gd_Drive.Username = global::M3App.Settings.Default.Username;
             // 
             // ldg_Listeners
             // 
@@ -99,7 +99,7 @@ namespace M3App
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Icon = global::M3App.My.Resources.Resources.App_Icon;
-            this.Name = "ListenersManagement";
+            this.Name = "ListenerManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();

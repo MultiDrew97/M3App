@@ -73,11 +73,15 @@ namespace SPPBC.M3Tools.Types.Extensions
 
 		public static string ToBase64String(this string value)
 		{
+			if (string.IsNullOrWhiteSpace(value)) return string.Empty;
+
 			return Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
 		}
 
 		public static string FromBase64String(this string value)
 		{
+			if (string.IsNullOrWhiteSpace(value)) return string.Empty;
+
 			return Encoding.UTF8.GetString(Convert.FromBase64String(value));
 		}
 

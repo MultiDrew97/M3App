@@ -1,4 +1,7 @@
-﻿namespace M3App.My {
+﻿using System.ComponentModel;
+using System.Configuration;
+
+namespace M3App {
     
     /// <summary>
 	/// 
@@ -14,22 +17,47 @@
 		/// 
 		/// </summary>
         public Settings() {
-            // // To add event handlers for saving and changing settings, uncomment the lines below:
-            //
-            // this.SettingChanging += this.SettingChangingEventHandler;
-            //
-            // this.SettingsSaving += this.SettingsSavingEventHandler;
-            //
+            // To add event handlers for saving and changing settings, uncomment the lines below:
         }
 
-		
-        
-        private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
-            // Add code to handle the SettingChangingEvent event here.
-        }
-        
-        private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
-            // Add code to handle the SettingsSaving event here.
-        }
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnSettingsSaving(object sender, CancelEventArgs e)
+		{
+			base.OnSettingsSaving(sender, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnSettingChanging(object sender, SettingChangingEventArgs e)
+		{
+			base.OnSettingChanging(sender, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			base.OnPropertyChanged(sender, e);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnSettingsLoaded(object sender, SettingsLoadedEventArgs e)
+		{
+			base.OnSettingsLoaded(sender, e);
+		}
+	}
 }

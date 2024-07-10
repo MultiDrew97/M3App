@@ -1,16 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using M3App.My;
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Exceptions;
-using SPPBC.M3Tools.My;
 
 namespace M3App
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
     public partial class LoginForm
     {
         private event BeginLoginEventHandler BeginLogin;
@@ -22,38 +22,20 @@ namespace M3App
 
         private string Username
         {
-            get
-            {
-                return lf_Login.Username;
-            }
-            set
-            {
-                lf_Login.Username = value;
-            }
+            get => lf_Login.Username;
+			set => lf_Login.Username = value;
         }
 
         private string Password
         {
-            get
-            {
-                return lf_Login.Password;
-            }
-            set
-            {
-                lf_Login.Password = value;
-            }
+            get => lf_Login.Password;
+            set => lf_Login.Password = value;
         }
 
         private bool KeepLoggedIn
         {
-            get
-            {
-                return chk_KeepLoggedIn.Checked;
-            }
-            set
-            {
-                chk_KeepLoggedIn.Checked = value;
-            }
+            get => chk_KeepLoggedIn.Checked;
+            set => chk_KeepLoggedIn.Checked = value;
         }
 
 		/// <summary>
@@ -62,19 +44,21 @@ namespace M3App
         public LoginForm()
         {
             InitializeComponent();
+
 			Shown += Showing;
 			BeginLogin += LoginBegin;
 			EndLogin += LoginEnd;
 			FormClosing += LoginClosing;
+            Username = Settings.Default.Username;
+			KeepLoggedIn = Settings.Default.KeepLoggedIn;
         }
 
         // TODO: Potentially consolidate these function
         // TODO: Figure out more secure way to store login info
         private void Showing(object sender, EventArgs e)
         {
-            Username = My.Settings.Default.Username;
-
-            if (!My.Settings.Default.KeepLoggedIn)
+			// MAYBE: Implement a token system to verify logins instead of crendentials
+            if (!KeepLoggedIn)
             {
                 Reset();
                 return;
@@ -102,11 +86,8 @@ namespace M3App
         private void SaveSettings(object sender, DoWorkEventArgs e)
         {
 			// TODO: Determine better way to handle this
-			My.Settings.Default.KeepLoggedIn = !KeepLoggedIn ? My.Settings.Default.KeepLoggedIn : KeepLoggedIn;
-            My.Settings.Default.Username = lf_Login.Username ?? My.Settings.Default.Username;
-            // FIXME: Prevent this from saving password as plain text
-            My.Settings.Default.Password = lf_Login.Password ?? My.Settings.Default.Password;
-            My.Settings.Default.Save();
+			Settings.Default.KeepLoggedIn = KeepLoggedIn;
+            Settings.Default.Save();
         }
 
         private void SettingsSaved(object sender, RunWorkerCompletedEventArgs e)
@@ -118,10 +99,10 @@ namespace M3App
         private void NewUser(object sender, LinkLabelLinkClickedEventArgs e)
         {
 			using var create = new CreateAccountDialog();
-			if (create.ShowDialog() == DialogResult.OK)
-			{
-				Reset();
-			}
+
+			if (create.ShowDialog() != DialogResult.OK) return;
+
+			Reset();
 		}
 
         private void PerformLogin(object sender, EventArgs e)
@@ -129,10 +110,12 @@ namespace M3App
             try
             {
                 BeginLogin?.Invoke();
-				My.Settings.Default.User = dbUsers.Login(Username ?? My.Settings.Default.Username, Password ?? My.Settings.Default.Password);
+				var user = dbUsers.Login(Username ?? Settings.Default.Username, Password ?? Settings.Default.Password);
 
-                bw_SaveSettings.RunWorkerAsync();
-                MyProject.Forms.MainForm.Show();
+				if (KeepLoggedIn) Settings.Default.User = user;
+					
+				bw_SaveSettings.RunWorkerAsync();
+                new MainForm().Show();
             }
             catch (RoleException)
             {
@@ -174,10 +157,7 @@ namespace M3App
         {
 			using var forgot = new ChangePasswordDialog();
 
-			if (forgot.ShowDialog() != DialogResult.OK)
-			{
-				return;
-			}
+			if (forgot.ShowDialog() != DialogResult.OK) return;
 
 			Reset();
 		}
@@ -185,10 +165,10 @@ namespace M3App
         private void CreateAccount(object sender, LinkLabelLinkClickedEventArgs e)
         {
 			using var create = new CreateAccountDialog();
-			if (create.ShowDialog() == DialogResult.OK)
-			{
-				Reset();
-			}
+			
+			if (create.ShowDialog() != DialogResult.OK) return;
+
+			Reset();
 		}
 
         private void LoginClosing(object sender, CancelEventArgs e)
