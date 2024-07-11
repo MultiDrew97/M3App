@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 
 namespace M3App {
@@ -11,13 +12,14 @@ namespace M3App {
     //  The PropertyChanged event is raised after a setting's value is changed.
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
-    public sealed partial class Settings {
-        
+    public sealed partial class Settings : ApplicationSettingsBase {
 		/// <summary>
 		/// 
 		/// </summary>
-        public Settings() {
-            // To add event handlers for saving and changing settings, uncomment the lines below:
+        public Settings()
+		{
+			// To add event handlers for saving and changing settings, uncomment the lines below:
+			Console.WriteLine("Creating an instance of the Settings object...");
         }
 
 		/// <summary>

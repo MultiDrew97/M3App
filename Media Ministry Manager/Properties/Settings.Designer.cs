@@ -153,17 +153,5 @@ namespace M3App {
                 this["KeepLoggedIn"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Test Value")]
-        public string Test {
-            get {
-                return ((string)(this["Test"]));
-            }
-            set {
-                this["Test"] = value;
-            }
-        }
     }
 }

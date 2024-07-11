@@ -54,6 +54,7 @@ namespace M3App
 
 		internal void UpdateProgress(object sender, ProgressChangedEventArgs e)
 		{
+			Console.WriteLine($"Updating displayed load progress: {e.ProgressPercentage}");
 			progressBar1.Value = e.ProgressPercentage;
 		}
 	}

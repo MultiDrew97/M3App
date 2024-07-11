@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Forms;
+using NPOI.SS.Formula.Functions;
 
 namespace M3App
 {
@@ -12,7 +13,7 @@ namespace M3App
     // UnhandledException: Raised if the application encounters an unhandled exception.
     // StartupNextInstance: Raised when launching a single-instance application and the application is already active.
     // NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
-    internal partial class MyApplication : ApplicationContext
+    internal partial class M3ApplicationContext : ApplicationContext
     {
 		private static readonly System.ComponentModel.BackgroundWorker bwLoader = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
 		private static MediaMinistrySplash splash;
@@ -25,7 +26,7 @@ namespace M3App
 		internal static void Main(string[] Args)
 		{
 			bwLoader.DoWork += LoadApp;
-			bwLoader.RunWorkerCompleted += AppLoaded;
+			bwLoader.RunWorkerCompleted += StartApplication;
 			Console.WriteLine(Args);
 
 			//MinimumSplashScreenDisplayTime = 5000;
@@ -41,7 +42,6 @@ namespace M3App
 			} 
 			catch (Exception ex)
 			{
-
 				MessageBox.Show($"We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{ex.Message}", "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
@@ -53,39 +53,41 @@ namespace M3App
 		{
 			Console.WriteLine("Starting application preamble...");
 			System.ComponentModel.BackgroundWorker worker = sender as System.ComponentModel.BackgroundWorker;
-			var args = (string[])e.Argument;
 
-			Console.WriteLine($"Arguments passed for background worker: {args}");
-			if (Settings.Default.UpgradeRequired)
-			{
-				// Bring in the settings from previous version
-				try
-				{
-					Console.WriteLine("Upgrade required");
-					Settings.Default.KeepLoggedIn = false;
-					Settings.Default.Upgrade();
-					Settings.Default.UpgradeRequired = false;
-					Settings.Default.Save();
-				}
-				catch
-				{
-					Console.WriteLine("Unable to import settings");
-				}
-			}
+			Console.WriteLine("Checking for previous settings...");
+			//if (Settings.Default.UpgradeRequired)
+			//{
+			//	// Bring in the settings from previous version
+			//	try
+			//	{
+			//		Console.WriteLine("Previous settings found. Importing previous settings...");
+			//		Settings.Default.KeepLoggedIn = false;
+			//		Settings.Default.Upgrade();
+			//		Settings.Default.UpgradeRequired = false;
+			//		Settings.Default.Save();
+			//	}
+			//	catch
+			//	{
+			//		Console.WriteLine("Unable to import previous settings. Using defaults");
+			//	}
+			//}
+
 			worker.ReportProgress(50);
 
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 #if DEBUG
-			Settings.Default.BaseUrl = "http://localhost:3000/api";
-			Settings.Default.ApiPassword = "password";
-			Settings.Default.ApiUsername = "username";
-			Settings.Default.Save();
+			Console.WriteLine("DEBUG: Changing API settings for debug settings");
+			//Settings.Default.BaseUrl = "http://localhost:3000/api";
+			//Settings.Default.ApiPassword = "password";
+			//Settings.Default.ApiUsername = "username";
+			//Settings.Default.Save();
 #endif
 
+			Console.WriteLine("Application preamble has finished. Starting application...");
 			worker.ReportProgress(100);
 		}
 
-		private static void AppLoaded(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		private static void StartApplication(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
 			if (e.Error != null)
 			{
@@ -99,12 +101,24 @@ namespace M3App
 				return;
 			}
 
+			// Close the splash screen and show the application
+			Console.WriteLine("Closing splash screen...");
 			splash.Close();
 			splash.Dispose();
 			splash = null;
-			
-			Console.WriteLine("Application preamble has finished loading. Starting application...");
+
 			Application.Run(new LoginForm());
+			while (true)
+			{
+				if (Application.OpenForms.Count > 0) continue;
+
+				Console.WriteLine("Application is being exited");
+
+				// TODO: Figure out how the wording of this documentation can be used for better error handling and such
+				//
+				//		Returns whether any Form within the application cancelled the exit.
+				Application.Exit(new(true));
+			}
 		}
 	}
 }

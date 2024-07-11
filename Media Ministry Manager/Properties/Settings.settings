@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="M3App.My" GeneratedClassName="Settings" UseMySettingsClassName="true">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="M3App" GeneratedClassName="Settings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
     <Setting Name="CurrentFont" Roaming="true" Type="System.Drawing.Font" Scope="User">
@@ -34,9 +34,6 @@
     </Setting>
     <Setting Name="KeepLoggedIn" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="Test" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Test Value</Value>
     </Setting>
   </Settings>
 </SettingsFile>
