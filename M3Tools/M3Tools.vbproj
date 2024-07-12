@@ -807,7 +807,7 @@
       <Version>7.0.3</Version>
     </PackageReference>
     <PackageReference Include="MimeKit">
-      <Version>4.2.0</Version>
+      <Version>4.7.1</Version>
     </PackageReference>
     <PackageReference Include="NPOI">
       <Version>2.6.2</Version>
