@@ -52,10 +52,10 @@ namespace M3App
             Copyright = ((System.Reflection.AssemblyCopyrightAttribute) System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyCopyrightAttribute), false)[0]).Copyright;//My.MyProject.Application.Info.Copyright;
         }
 
-		internal void UpdateProgress(object sender, ProgressChangedEventArgs e)
+		internal void UpdateProgress(int progress)
 		{
-			Console.WriteLine($"Updating displayed load progress: {e.ProgressPercentage}");
-			progressBar1.Value = e.ProgressPercentage;
+			Console.WriteLine($"Updating displayed load progress: {progress}");
+			progressBar1.Value = progress;
 		}
 	}
 }

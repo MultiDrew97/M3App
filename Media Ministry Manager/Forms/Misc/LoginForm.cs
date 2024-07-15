@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using M3App.My;
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Exceptions;
 
@@ -49,8 +48,8 @@ namespace M3App
 			BeginLogin += LoginBegin;
 			EndLogin += LoginEnd;
 			FormClosing += LoginClosing;
-            Username = Settings.Default.Username;
-			KeepLoggedIn = Settings.Default.KeepLoggedIn;
+            Username = Properties.Settings.Default.Username;
+			KeepLoggedIn = Properties.Settings.Default.KeepLoggedIn;
         }
 
         // TODO: Potentially consolidate these function
@@ -86,14 +85,15 @@ namespace M3App
         private void SaveSettings(object sender, DoWorkEventArgs e)
         {
 			// TODO: Determine better way to handle this
-			Settings.Default.KeepLoggedIn = KeepLoggedIn;
-            Settings.Default.Save();
+			Properties.Settings.Default.KeepLoggedIn = KeepLoggedIn;
+            Properties.Settings.Default.Save();
         }
 
         private void SettingsSaved(object sender, RunWorkerCompletedEventArgs e)
         {
             UseWaitCursor = false;
-            Close();
+			Utils.OpenForm(typeof(MainForm));
+			Close();
         }
 
         private void NewUser(object sender, LinkLabelLinkClickedEventArgs e)
@@ -110,12 +110,11 @@ namespace M3App
             try
             {
                 BeginLogin?.Invoke();
-				var user = dbUsers.Login(Username ?? Settings.Default.Username, Password ?? Settings.Default.Password);
+				var user = dbUsers.Login(Username ?? Properties.Settings.Default.Username, Password ?? Properties.Settings.Default.Password);
 
-				if (KeepLoggedIn) Settings.Default.User = user;
-					
+				if (KeepLoggedIn) Properties.Settings.Default.User = user;
+                
 				bw_SaveSettings.RunWorkerAsync();
-                new MainForm().Show();
             }
             catch (RoleException)
             {

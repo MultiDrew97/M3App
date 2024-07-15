@@ -52,7 +52,7 @@ namespace M3App
             // 
             // spsh_SplashScreen
             // 
-            this.spsh_SplashScreen.BackgroundImage = global::M3App.My.Resources.Resources.BannerImage;
+            this.spsh_SplashScreen.BackgroundImage = global::M3App.Properties.Resources.BannerImage;
             this.spsh_SplashScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.spsh_SplashScreen.ColumnCount = 2;
             this.spsh_SplashScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
@@ -80,6 +80,7 @@ namespace M3App
             this.DetailsLayoutPanel.Location = new System.Drawing.Point(246, 221);
             this.DetailsLayoutPanel.Name = "DetailsLayoutPanel";
             this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.DetailsLayoutPanel.Size = new System.Drawing.Size(247, 79);
             this.DetailsLayoutPanel.TabIndex = 1;
             // 
@@ -88,9 +89,9 @@ namespace M3App
             this.lbl_Copyright.BackColor = System.Drawing.Color.Transparent;
             this.lbl_Copyright.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Copyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Copyright.Location = new System.Drawing.Point(3, 39);
+            this.lbl_Copyright.Location = new System.Drawing.Point(3, 0);
             this.lbl_Copyright.Name = "lbl_Copyright";
-            this.lbl_Copyright.Size = new System.Drawing.Size(241, 40);
+            this.lbl_Copyright.Size = new System.Drawing.Size(241, 79);
             this.lbl_Copyright.TabIndex = 2;
             this.lbl_Copyright.Text = "Copyright";
             // 
@@ -139,6 +140,7 @@ namespace M3App
             this.Name = "MediaMinistrySplash";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.SplashLoading);
             this.spsh_SplashScreen.ResumeLayout(false);
             this.DetailsLayoutPanel.ResumeLayout(false);

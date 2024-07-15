@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Configuration;
 
-namespace M3App {
+namespace M3App.Properties {
     
     /// <summary>
 	/// 

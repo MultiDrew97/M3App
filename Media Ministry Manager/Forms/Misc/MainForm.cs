@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using M3App.Helpers;
 
 namespace M3App
 {
@@ -52,39 +51,42 @@ namespace M3App
 				case SPPBC.M3Tools.Events.ManageType.Inventory:
 					MangeInventory(sender, e);
 					break;
-					
 			}
 		}
 
         private void MangeInventory(object sender, EventArgs e)
         {
 			UseWaitCursor = true;
-            var products = new InventoryManagement();
-            products.Show();
+			Utils.OpenForm(typeof(InventoryManagement));
+            //var products = new InventoryManagement();
+            //products.Show();
             Close();
         }
 
         private void ManageOrders(object sender, EventArgs e)
         {
 			UseWaitCursor = true;
-			var orders = new OrderManagement();
-            orders.Show();
+			Utils.OpenForm(typeof(OrderManagement));
+			//var orders = new OrderManagement();
+			//orders.Show();
             Close();
         }
 
         private void ManageCustomers(object sender, EventArgs e)
         {
 			UseWaitCursor = true;
-			var customers = new CustomerManagement();
-            customers.Show();
+			Utils.OpenForm(typeof(CustomerManagement));
+			//var customers = new CustomerManagement();
+			//customers.Show();
             Close();
         }
 
         private void ManageListeners(object sender, EventArgs e)
         {
 			UseWaitCursor = true;
-			var listeners = new ListenerManagement();
-            listeners.Show();
+			Utils.OpenForm(typeof(ListenerManagement));
+			//var listeners = new ListenerManagement();
+            //listeners.Show();
             Close();
         }
 
@@ -129,7 +131,7 @@ namespace M3App
 		private void AddOrder(object sender, SPPBC.M3Tools.Events.Orders.OrderEventArgs e)
 		{
 			UseWaitCursor = true;
-			// dbOrder.AddOrder(e.Value);
+			dbOrders.AddOrder(e.Value);
 			MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}

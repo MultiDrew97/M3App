@@ -203,13 +203,13 @@ namespace M3App
             // 
             // gdt_Files
             // 
-            this.gdt_Files.DataBindings.Add(new System.Windows.Forms.Binding("Username", global::M3App.Settings.Default, "Username", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.gdt_Files.DataBindings.Add(new System.Windows.Forms.Binding("Username", global::M3App.Properties.Settings.Default, "Username", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.gdt_Files.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gdt_Files.Location = new System.Drawing.Point(0, 0);
             this.gdt_Files.Name = "gdt_Files";
             this.gdt_Files.Size = new System.Drawing.Size(403, 272);
             this.gdt_Files.TabIndex = 4;
-            this.gdt_Files.Username = global::M3App.Settings.Default.Username;
+            this.gdt_Files.Username = global::M3App.Properties.Settings.Default.Username;
             // 
             // fu_Receipts
             // 
@@ -221,13 +221,13 @@ namespace M3App
             // 
             // gmt_Gmail
             // 
-            this.gmt_Gmail.Username = global::M3App.Settings.Default.Username;
+            this.gmt_Gmail.Username = global::M3App.Properties.Settings.Default.Username;
             // 
             // dbListeners
             // 
-            this.dbListeners.BaseUrl = global::M3App.Settings.Default.BaseUrl;
-            this.dbListeners.Password = global::M3App.Settings.Default.ApiPassword;
-            this.dbListeners.Username = global::M3App.Settings.Default.ApiUsername;
+            this.dbListeners.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbListeners.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbListeners.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // SendEmailsDialog
             // 

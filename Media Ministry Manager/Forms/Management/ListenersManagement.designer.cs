@@ -64,17 +64,17 @@ namespace M3App
             // 
             // gt_Email
             // 
-            this.gt_Email.Username = global::M3App.Settings.Default.Username;
+            this.gt_Email.Username = global::M3App.Properties.Settings.Default.Username;
             // 
             // dbListeners
             // 
-            this.dbListeners.BaseUrl = global::M3App.Settings.Default.BaseUrl;
-            this.dbListeners.Password = global::M3App.Settings.Default.ApiPassword;
-            this.dbListeners.Username = global::M3App.Settings.Default.ApiUsername;
+            this.dbListeners.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbListeners.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbListeners.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // gd_Drive
             // 
-            this.gd_Drive.Username = global::M3App.Settings.Default.Username;
+            this.gd_Drive.Username = global::M3App.Properties.Settings.Default.Username;
             // 
             // ldg_Listeners
             // 
@@ -98,7 +98,7 @@ namespace M3App
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Icon = global::M3App.My.Resources.Resources.App_Icon;
+            this.Icon = global::M3App.Properties.Resources.App_Icon;
             this.Name = "ListenerManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);

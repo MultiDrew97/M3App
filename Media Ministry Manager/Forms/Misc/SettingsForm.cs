@@ -26,7 +26,7 @@ namespace M3App
         private void Frm_Settings_Load(object sender, EventArgs e)
         {
             // Load settings from settings file to display to user
-            Font = Settings.Default.CurrentFont;
+            Font = Properties.Settings.Default.CurrentFont;
             bw_Settings.RunWorkerAsync("l");
             bw_CheckServices.RunWorkerAsync();
         }
@@ -51,7 +51,7 @@ namespace M3App
             }
             else
             {
-                fd_FontSelector.Font = Settings.Default.CurrentFont;
+                fd_FontSelector.Font = Properties.Settings.Default.CurrentFont;
             }
         }
 
@@ -71,7 +71,7 @@ namespace M3App
                         // Load the settings of the application
                         Invoke(new Action(() =>
             {
-                fd_FontSelector.Font = Settings.Default.CurrentFont;
+                fd_FontSelector.Font = Properties.Settings.Default.CurrentFont;
                 ChangeFont();
             }));
                         break;
@@ -79,28 +79,23 @@ namespace M3App
                 case "s":
                     {
                         // Save the settings that have been changed by the user
-                        Settings.Default.CurrentFont = fd_FontSelector.Font;
-                        Settings.Default.Save();
+                        Properties.Settings.Default.CurrentFont = fd_FontSelector.Font;
+                        Properties.Settings.Default.Save();
                         break;
                     }
                 case "d":
                     {
                         // Restore the defaults of the application
-                        Settings.Default.CurrentFont = Settings.Default.DefaultFont;
+                        Properties.Settings.Default.CurrentFont = Properties.Settings.Default.DefaultFont;
                         Invoke(new Action(() =>
             {
-                fd_FontSelector.Font = Settings.Default.CurrentFont;
+                fd_FontSelector.Font = Properties.Settings.Default.CurrentFont;
                 ChangeFont();
             }));
-                        Settings.Default.Save();
+                        Properties.Settings.Default.Save();
                         break;
                     }
             }
-        }
-
-        private void ExitToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Helpers.Utils.CloseOpenForms();
         }
 
         private void Btn_GoogleDrive_Click(object sender, EventArgs e)

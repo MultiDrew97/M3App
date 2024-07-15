@@ -149,9 +149,9 @@ namespace M3App
             // 
             // dbUsers
             // 
-            this.dbUsers.BaseUrl = global::M3App.Settings.Default.BaseUrl;
-            this.dbUsers.Password = global::M3App.Settings.Default.ApiPassword;
-            this.dbUsers.Username = global::M3App.Settings.Default.ApiUsername;
+            this.dbUsers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbUsers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbUsers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // lsd_LoadScreen
             // 

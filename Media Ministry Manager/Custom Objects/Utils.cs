@@ -1,13 +1,33 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
-namespace M3App.Helpers
+namespace M3App
 {
 	/// <summary>
-	/// <inheritdoc/>
+	/// 
 	/// </summary>
     public struct Utils
     {
+		[STAThread]
+		public static bool OpenForm(Type form, params object[] args)
+		{
+			try
+			{
+				var constructor = form.GetConstructor(args.Select(arg => arg.GetType()).ToArray());
+
+				Form tmp = (Form)constructor.Invoke(args);
+				tmp.FormClosed += (sender, e) => { if (Application.OpenForms.Count > 0) return; Application.Exit(); };
+				tmp.Show();
+				//WindowsFormsSynchronizationContext.Current.Post(_ => tmp.Show(), null);
+				return true;
+			} 
+			catch
+			{
+				return false;
+			}
+		}
+
 		/// <summary>
 		/// Waits for a certain amount of time. Typically used with Async functions to wait for tasks to complete
 		/// </summary>
@@ -54,11 +74,11 @@ namespace M3App.Helpers
 		/// </summary>
         public static void LogOff()
         {
-            Settings.Default.Username = "";
-            Settings.Default.Password = "";
-            Settings.Default.KeepLoggedIn = false;
-            Settings.Default.Save();
-            new LoginForm().Show();
+            Properties.Settings.Default.Username = "";
+            Properties.Settings.Default.Password = "";
+            Properties.Settings.Default.KeepLoggedIn = false;
+            Properties.Settings.Default.Save();
+			OpenForm(typeof(LoginForm));
         }
     }
 }

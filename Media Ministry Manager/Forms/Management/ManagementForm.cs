@@ -123,12 +123,12 @@ namespace M3App
 		private void LogOff(object sender, EventArgs e)
 		{
 			Close();
-			Helpers.Utils.LogOff();
+			Utils.LogOff();
 		}
 
 		private void Exit(object sender, EventArgs e)
 		{
-			Helpers.Utils.CloseOpenForms();
+			Utils.CloseOpenForms();
 		}
 
 		private void ViewSettings(object sender, EventArgs e)

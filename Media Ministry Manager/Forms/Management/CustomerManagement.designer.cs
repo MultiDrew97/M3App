@@ -71,9 +71,9 @@ namespace M3App
             // 
             // dbCustomers
             // 
-            this.dbCustomers.BaseUrl = global::M3App.Settings.Default.BaseUrl;
-            this.dbCustomers.Password = global::M3App.Settings.Default.ApiPassword;
-            this.dbCustomers.Username = global::M3App.Settings.Default.ApiUsername;
+            this.dbCustomers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbCustomers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbCustomers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // CustomerManagement
             // 
@@ -82,7 +82,7 @@ namespace M3App
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(775, 441);
-            this.Icon = global::M3App.My.Resources.Resources.App_Icon;
+            this.Icon = global::M3App.Properties.Resources.App_Icon;
             this.Name = "CustomerManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);

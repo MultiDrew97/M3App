@@ -359,4 +359,16 @@
     <value>Count: {0}</value>
     <comment>The template for displaying the count of entries</comment>
   </data>
+  <data name="FAILED_TO_OPEN" xml:space="preserve">
+    <value>We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{0}</value>
+    <comment>The error message for when the application fails to open</comment>
+  </data>
+  <data name="CONSOLE_ERROR_FILE" xml:space="preserve">
+    <value>M3App-error.log</value>
+    <comment>The name of the log file to send console error output to</comment>
+  </data>
+  <data name="CONSOLE_OUTPUT_FILE" xml:space="preserve">
+    <value>M3App.log</value>
+    <comment>The name of the log file to send console output to</comment>
+  </data>
 </root>
