@@ -17,9 +17,6 @@
     <Setting Name="ApiUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">Preachy2034</Value>
     </Setting>
-    <Setting Name="UpgradeRequired" Roaming="true" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="User" Roaming="true" Type="SPPBC.M3Tools.Types.User" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -35,8 +32,11 @@
     <Setting Name="CountTemplate" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Count: {0}</Value>
     </Setting>
-    <Setting Name="KeepLoggedIn" Roaming="true" Type="System.Boolean" Scope="User">
+    <Setting Name="KeepLoggedIn1" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpgradeRequired" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

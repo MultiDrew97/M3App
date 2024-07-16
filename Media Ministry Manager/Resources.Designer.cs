@@ -344,5 +344,14 @@ namespace M3App.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5.
+        /// </summary>
+        internal static string SPLASH_TIMER {
+            get {
+                return ResourceManager.GetString("SPLASH_TIMER", resourceCulture);
+            }
+        }
     }
 }
