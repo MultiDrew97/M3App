@@ -24,7 +24,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// The datasource being used for the binding source
 		/// </summary>
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[AttributeProvider(typeof(IListSource))]

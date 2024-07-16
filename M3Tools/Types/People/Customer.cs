@@ -17,7 +17,9 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		public new static Customer None => new();
 
-		/// <inheritdoc />
+		/// <summary>
+		/// 
+		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("customerID")]
 		public override int Id
 		{
@@ -57,14 +59,14 @@ namespace SPPBC.M3Tools.Types
         public DateTime Joined { get; set; }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public Customer() : this(-1)
         {
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="customerID"></param>
 		/// <param name="firstName"></param>

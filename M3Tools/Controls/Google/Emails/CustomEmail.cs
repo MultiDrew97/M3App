@@ -94,7 +94,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public CustomEmail()
         {

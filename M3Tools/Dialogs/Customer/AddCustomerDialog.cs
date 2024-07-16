@@ -127,7 +127,7 @@ namespace SPPBC.M3Tools.Dialogs
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public AddCustomerDialog()
         {

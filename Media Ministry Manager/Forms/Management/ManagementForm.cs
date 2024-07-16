@@ -7,7 +7,7 @@ using SPPBC.M3Tools.Types;
 namespace M3App
 {
 	// TODO: Figure out how to allow to be abstract and still have designer privleges
-	// TODO: Create custom events for when loading is happening and finished to show and hide the wait cursor from here
+	// FIXME: Figure out why some child components aren't initialized properly on inherited objects (i.e toolStripContainer)
 	// FIXME: Fix the filtering problem
 	/// <summary>
 	/// 
@@ -33,7 +33,6 @@ namespace M3App
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
 
-		// TODO: Find a more descriptive name for this function
 		private void Init(Type type)
 		{
 			switch (true)
@@ -71,7 +70,7 @@ namespace M3App
 				return;
 			}
 
-			My.MyProject.Forms.MainForm.Show();
+			Utils.OpenForm(typeof(MainForm));
 		}
 
 		/// <summary>
@@ -124,12 +123,12 @@ namespace M3App
 		private void LogOff(object sender, EventArgs e)
 		{
 			Close();
-			Helpers.Utils.LogOff();
+			Utils.LogOff();
 		}
 
 		private void Exit(object sender, EventArgs e)
 		{
-			Helpers.Utils.CloseOpenForms();
+			Utils.CloseApplication();
 		}
 
 		private void ViewSettings(object sender, EventArgs e)
@@ -143,16 +142,16 @@ namespace M3App
 			switch (e.Manage)
 			{
 				case SPPBC.M3Tools.Events.ManageType.Listeners:
-					My.MyProject.Forms.ListenersManagement.Show();
+					new ListenerManagement().Show();
 					break;
 				case SPPBC.M3Tools.Events.ManageType.Inventory:
-					My.MyProject.Forms.InventoryManagement.Show();
+					new InventoryManagement().Show();
 					break;
 				case SPPBC.M3Tools.Events.ManageType.Orders:
-					My.MyProject.Forms.OrderManagement.Show();
+					new OrderManagement().Show();
 					break;
 				case SPPBC.M3Tools.Events.ManageType.Customers:
-					My.MyProject.Forms.CustomersManagement.Show();
+					new CustomerManagement().Show();
 					break;
 				default:
 					return;

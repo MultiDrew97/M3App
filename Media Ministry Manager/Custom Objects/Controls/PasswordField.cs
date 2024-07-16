@@ -12,11 +12,11 @@ namespace M3App
         {
             if (txtPassword.UseSystemPasswordChar)
             {
-                btnShow.Image = My.Resources.Resources.HidePasswordIcon;
+                btnShow.Image = Properties.Resources.HidePasswordIcon;
             }
             else
             {
-                btnShow.Image = My.Resources.Resources.ShowPasswordIcon;
+                btnShow.Image = Properties.Resources.ShowPasswordIcon;
             }
 
             txtPassword.UseSystemPasswordChar = !txtPassword.UseSystemPasswordChar;

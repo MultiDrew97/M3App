@@ -81,7 +81,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public object SelectedValue
         {
@@ -101,7 +101,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public CustomersComboBox()
         {

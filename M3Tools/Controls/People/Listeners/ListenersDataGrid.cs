@@ -39,7 +39,7 @@ namespace SPPBC.M3Tools.Data
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public new object DataSource
 		{
@@ -48,7 +48,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[Browsable(false)]
 		public new Types.ListenerCollection SelectedRows

@@ -50,26 +50,6 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		public event ManageEventHandler Manage;
 
-		/*/// <summary>
-		/// Occurs when the ViewCustomer menu item is clicked
-		/// </summary>
-		public event EventHandler ManageCustomers;
-
-		/// <summary>
-		/// Occurs when the ViewListener menu item is clicked
-		/// </summary>
-		public event EventHandler ManageListeners;
-
-		/// <summary>
-		/// Occurs when the ViewProducts menu item is clicked
-		/// </summary>
-		public event EventHandler ManageProducts;
-
-		/// <summary>
-		/// Occurs when the ViewOrders menu item is clicked
-		/// </summary>
-		public event EventHandler ManageOrders;*/
-
 		/// <summary>
 		/// Occurs when the Settings menu item is clicked
 		/// </summary>
@@ -114,6 +94,61 @@ namespace SPPBC.M3Tools
 
 		private readonly Uri _VersionUri = new(My.Resources.Resources.LatestAppVersionUri);
 		private readonly Uri _UpdateUri = new(My.Resources.Resources.AppUpdateUri);
+
+		private bool IsUpdateAvailable
+		{
+			get
+			{
+				return false;
+				// ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+				// TODO: Make this so that it just reads the value off the page instead of downloading it to read it
+				string versionFileLocation = Path.Combine(_DownloadLocation, "version.txt");
+
+				// Dim latestVersion As Version = Nothing
+				// While latestVersion Is Nothing
+				// wb_Updater.Url = New Uri(My.Resources.LatestAppVersionUri)
+				// wb_Updater.Refresh()
+				// versionString = wb_Updater.DocumentText.Replace("Version", String.Empty).Replace(vbCrLf, String.Empty).Trim
+				// Try
+				// latestVersion = New Version(versionString)
+				// Catch
+				// Continue While
+				// End Try
+				// End While
+				if (File.Exists(versionFileLocation))
+				{
+					File.Delete(versionFileLocation);
+				}
+
+				while (!File.Exists(versionFileLocation))
+				{
+					try
+					{
+						My.MyProject.Computer.Network.DownloadFile(My.Resources.Resources.LatestAppVersionUri, versionFileLocation);
+
+						var latestVersion = new Version(File.ReadAllText(versionFileLocation).Replace("Version", string.Empty).Replace(Constants.vbCrLf, string.Empty).Trim());
+						// 
+						// CompareTo
+						// -1 = Referenced Version is older
+						// 0 = Referenced Version is the same
+						// 1 = Referenced Version is newer
+						// 
+						Console.WriteLine("Latest: {0}", latestVersion);
+						Console.WriteLine("Current: {0}", My.MyProject.Application.Info.Version);
+						Console.WriteLine("Comparison: {0}", My.MyProject.Application.Info.Version.CompareTo(latestVersion));
+
+						return My.MyProject.Application.Info.Version.CompareTo(latestVersion) == -1;
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show(ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						break;
+					}
+				}
+
+				return false;
+			}
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -187,6 +222,8 @@ namespace SPPBC.M3Tools
 
 		private void UpdateApp(object sender, EventArgs e)
 		{
+
+			if (!IsUpdateAvailable) return;
 			// Dim updateLocation As String = "https://sppbc.hopto.org/Manager%20Installer/MediaMinistryManagerSetup.msi"
 			// Dim updateCheck As String = "https://sppbc.hopto.org/Manager%20Installer/version.txt"
 
@@ -264,60 +301,6 @@ namespace SPPBC.M3Tools
 			{
 				e.Cancel = true;
 			}
-		}
-
-		private bool IsUpdateAvailable()
-		{
-			// ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
-			string versionFileLocation = Path.Combine(_DownloadLocation, "version.txt");
-
-			// Dim latestVersion As Version = Nothing
-			// While latestVersion Is Nothing
-			// wb_Updater.Url = New Uri(My.Resources.LatestAppVersionUri)
-			// wb_Updater.Refresh()
-			// versionString = wb_Updater.DocumentText.Replace("Version", String.Empty).Replace(vbCrLf, String.Empty).Trim
-			// Try
-			// latestVersion = New Version(versionString)
-			// Catch
-			// Continue While
-			// End Try
-			// End While
-			if (File.Exists(versionFileLocation))
-			{
-				File.Delete(versionFileLocation);
-			}
-
-			while (!File.Exists(versionFileLocation))
-			{
-				try
-				{
-					My.MyProject.Computer.Network.DownloadFile(My.Resources.Resources.LatestAppVersionUri, versionFileLocation);
-
-					var latestVersion = new Version(File.ReadAllText(versionFileLocation).Replace("Version", string.Empty).Replace(Constants.vbCrLf, string.Empty).Trim());
-					// 
-					// CompareTo
-					// -1 = Referenced Version is older
-					// 0 = Referenced Version is the same
-					// 1 = Referenced Version is newer
-					// 
-					Console.WriteLine("Latest: {0}", latestVersion);
-					Console.WriteLine("Current: {0}", My.MyProject.Application.Info.Version);
-					Console.WriteLine("Comparison: {0}", My.MyProject.Application.Info.Version.CompareTo(latestVersion));
-
-					return My.MyProject.Application.Info.Version.CompareTo(latestVersion) == -1;
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					break;
-				}
-				finally
-				{
-					lsd_Loading.Closable = true;
-				}
-			}
-
-			return false;
 		}
 
 		/// <summary>

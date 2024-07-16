@@ -72,10 +72,10 @@ namespace SPPBC.M3Tools.Database
         }
 
         /// <summary>
-		/// 		''' Attempt to login a user provided their username and password
-		/// 		''' </summary>
-		/// 		''' <param name="auth">The credentials to use for logging in the user</param>
-		/// 		''' <returns>The user if successful, otherwise Nothing</returns>
+		/// Attempt to login a user provided their username and password
+		/// </summary>
+		/// <param name="auth">The credentials to use for logging in the user</param>
+		/// <returns>The user if successful, otherwise Nothing</returns>
         public User Login(Auth auth)
         {
             return Login(JSON.ConvertToJSON(auth));

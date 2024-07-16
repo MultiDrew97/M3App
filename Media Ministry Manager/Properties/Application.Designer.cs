@@ -18,8 +18,8 @@ namespace M3App.My
     // (go to Project Properties or double-click the My Project node in
     // Solution Explorer), and make changes on the Application tab.
     // 
-    internal partial class MyApplication
-    {
+    internal partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
+	{
 
         [DebuggerStepThrough()]
         public MyApplication() : base(Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.ApplicationDefined)
@@ -33,13 +33,13 @@ namespace M3App.My
         [DebuggerStepThrough()]
         protected override void OnCreateMainForm()
         {
-            MainForm = MyProject.Forms.LoginForm;
+            MainForm = new LoginForm();
         }
 
         [DebuggerStepThrough()]
         protected override void OnCreateSplashScreen()
         {
-            SplashScreen = MyProject.Forms.MediaMinistrySplash;
+            SplashScreen = new MediaMinistrySplash();
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Windows.Forms;
 namespace SPPBC.M3Tools
 {
 	/// <summary>
-	/// <inheritdoc/>
+	/// 
 	/// </summary>
     public partial class ChangePasswordDialog
     {
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public ChangePasswordDialog()
         {

@@ -52,7 +52,6 @@ namespace SPPBC.M3Tools
             this.tsmi_Update = new System.Windows.Forms.ToolStripMenuItem();
             this.bw_Update = new System.ComponentModel.BackgroundWorker();
             this.wb_Updater = new System.Windows.Forms.WebBrowser();
-            this.lsd_Loading = new SPPBC.M3Tools.LoadScreenDialog();
             this.tsmi_NewOrder = new System.Windows.Forms.ToolStripMenuItem();
             this.SuspendLayout();
             // 
@@ -222,12 +221,6 @@ namespace SPPBC.M3Tools
             this.wb_Updater.TabIndex = 0;
             this.wb_Updater.Visible = false;
             // 
-            // lsd_Loading
-            // 
-            this.lsd_Loading.Image = ((System.Drawing.Bitmap)(resources.GetObject("lsd_Loading.Image")));
-            this.lsd_Loading.LoadText = "";
-            this.lsd_Loading.TopMost = true;
-            // 
             // tsmi_NewOrder
             // 
             this.tsmi_NewOrder.Name = "tsmi_NewOrder";
@@ -263,7 +256,6 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.ToolStripMenuItem tsmi_Update;
         internal System.ComponentModel.BackgroundWorker bw_Update;
         internal System.Windows.Forms.WebBrowser wb_Updater;
-        internal LoadScreenDialog lsd_Loading;
 		internal System.Windows.Forms.ToolStripMenuItem tsmi_NewOrder;
 	}
 }

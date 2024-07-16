@@ -10,9 +10,14 @@ namespace SPPBC.M3Tools.Types
 	/// <typeparam name="T">The type of entries in collection</typeparam>
 	public abstract class DbEntryCollection<T> : System.Collections.ObjectModel.Collection<T>, System.ComponentModel.IBindingListView where T : IDbEntry
 	{
-
 		private string _filter = "";
 
+		/// <summary>
+		/// Attempts a given collection into a DbEntryCollection
+		/// </summary>
+		/// <param name="collection"></param>
+		/// <returns></returns>
+		/// <exception cref="System.NotImplementedException"></exception>
 		internal static DbEntryCollection<T> Cast(System.Collections.ICollection collection)
 		{
 			throw new System.NotImplementedException("DBEntryCollection Cast");
@@ -98,7 +103,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// Applies a filter to the collection
+		/// Sets a filter to use on the collection
 		/// </summary>
 		public virtual string Filter
 		{
@@ -117,7 +122,9 @@ namespace SPPBC.M3Tools.Types
 			}
 		}
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// 
+		/// </summary>
 		public System.ComponentModel.ListSortDescriptionCollection SortDescriptions
 		{
 			get;
@@ -125,7 +132,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public bool SupportsAdvancedSorting { get; protected set; } = true;
 
@@ -170,7 +177,7 @@ namespace SPPBC.M3Tools.Types
 		public bool IsSorted { get; protected set; }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public System.ComponentModel.PropertyDescriptor SortProperty { get; protected set; }
 
@@ -234,7 +241,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="property"></param>
 		/// <exception cref="System.NotImplementedException"></exception>
@@ -245,7 +252,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="property"></param>
 		/// <exception cref="System.NotImplementedException"></exception>
@@ -278,7 +285,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="property"></param>
 		/// <param name="key"></param>

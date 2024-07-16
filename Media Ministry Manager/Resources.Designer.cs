@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace M3App.My.Resources {
+namespace M3App.Properties {
     using System;
     
     
@@ -77,6 +77,24 @@ namespace M3App.My.Resources {
             get {
                 object obj = ResourceManager.GetObject("BannerImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M3App-error.log.
+        /// </summary>
+        internal static string CONSOLE_ERROR_FILE {
+            get {
+                return ResourceManager.GetString("CONSOLE_ERROR_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M3App.log.
+        /// </summary>
+        internal static string CONSOLE_OUTPUT_FILE {
+            get {
+                return ResourceManager.GetString("CONSOLE_OUTPUT_FILE", resourceCulture);
             }
         }
         
@@ -181,6 +199,15 @@ namespace M3App.My.Resources {
             get {
                 object obj = ResourceManager.GetObject("ErrorImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{0}.
+        /// </summary>
+        internal static string FAILED_TO_OPEN {
+            get {
+                return ResourceManager.GetString("FAILED_TO_OPEN", resourceCulture);
             }
         }
         

@@ -24,7 +24,7 @@ namespace SPPBC.M3Tools.Data
 		public event Events.Customers.CustomerEventHandler UpdateCustomer;
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public new object DataSource
 		{
@@ -42,7 +42,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[Browsable(false)]
 		public new Types.CustomerCollection SelectedRows
@@ -51,7 +51,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public CustomerDataGrid() : base()
 		{

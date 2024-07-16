@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace SPPBC.M3Tools
 {
 	/// <summary>
-	/// <inheritdoc/>
+	/// 
 	/// </summary>
     public partial class BulkDeletionDialog
     {
@@ -27,7 +27,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public BulkDeletionDialog()
         {

@@ -32,7 +32,7 @@ namespace M3App
             UseWaitCursor = true;
 			bsInventory.DataSource = dbInventory.GetProducts();
 			bsInventory.ResetBindings(false);
-			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, idg_Inventory.Inventory.Count);
+			ts_Tools.Count = string.Format(Properties.Resources.CountTemplate, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;
         }
 

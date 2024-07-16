@@ -32,7 +32,7 @@ namespace M3App
 			UseWaitCursor = true;
 			bsCustomers.DataSource = dbCustomers.GetCustomers();
 			bsCustomers.ResetBindings(false);
-			ts_Tools.Count = string.Format(My.Resources.Resources.CountTemplate, cdg_Customers.Customers.Count);
+			ts_Tools.Count = string.Format(Properties.Resources.CountTemplate, cdg_Customers.Customers.Count);
 			UseWaitCursor = false;
 		}
 

@@ -54,9 +54,9 @@ namespace M3App
             // 
             // dbInventory
             // 
-            this.dbInventory.BaseUrl = global::M3App.My.Settings.Default.BaseUrl;
-            this.dbInventory.Password = global::M3App.My.Settings.Default.ApiPassword;
-            this.dbInventory.Username = global::M3App.My.Settings.Default.ApiUsername;
+            this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // idg_Inventory
             // 
@@ -80,7 +80,7 @@ namespace M3App
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 441);
-            this.Icon = global::M3App.My.Resources.Resources.App_Icon;
+            this.Icon = global::M3App.Properties.Resources.App_Icon;
             this.Name = "InventoryManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);

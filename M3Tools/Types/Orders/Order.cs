@@ -70,13 +70,13 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// 		''' New CurrentOrder Object
-		/// 		''' </summary>
-		/// 		''' <param name="orderID"></param>
-		/// 		''' <param name="customerID"></param>
-		/// 		''' <param name="itemID"></param>
-		/// 		''' <param name="quantity"></param>
-		/// 		''' <param name="orderDate"></param>
+		/// New CurrentOrder Object
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <param name="customerID"></param>
+		/// <param name="itemID"></param>
+		/// <param name="quantity"></param>
+		/// <param name="orderDate"></param>
 		/// <param name="completedDate"></param>
 		public Order(int orderID, int customerID = -1, int itemID = -1, int quantity = 0, DateTime orderDate = default, DateTime completedDate = default): base(orderID)
 		{
@@ -88,9 +88,9 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// 		''' Retrieve a user from the database using their CustomerID
-		/// 		''' </summary>
-		/// 		''' <param name="customerID">CustomerID of the desired customer</param>
+		/// Retrieve a user from the database using their CustomerID
+		/// </summary>
+		/// <param name="customerID">CustomerID of the desired customer</param>
 		private void GetCustomer(int customerID)
 		{
 			if (!Utils.ValidID(customerID))
@@ -103,9 +103,9 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// 		''' Retrieve an item from the database using the provided itemID
-		/// 		''' </summary>
-		/// 		''' <param name="itemID">ItemID of the desired item</param>
+		/// Retrieve an item from the database using the provided itemID
+		/// </summary>
+		/// <param name="itemID">ItemID of the desired item</param>
 		private void GetItem(int itemID)
 		{
 			if (!Utils.ValidID(itemID))

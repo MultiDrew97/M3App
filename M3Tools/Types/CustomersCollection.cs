@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
 {
@@ -8,7 +9,7 @@ namespace SPPBC.M3Tools.Types
     public class CustomerCollection : DbEntryCollection<Customer>
     {
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="collection"></param>
 		/// <returns></returns>
@@ -24,15 +25,15 @@ namespace SPPBC.M3Tools.Types
 						list.Add((Customer)row.DataBoundItem);
 					}
 					break;
+				default:
+					throw new Exception("Unable to cast collection");
 			}
-
-
 
 			return list;
 		}
 
 		/// <summary>
-		/// Applies a filter to the collection, finding any values that match the criteria
+		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="customer">The current customer to compare with</param>
 		/// <param name="index">The index of the current customer</param>

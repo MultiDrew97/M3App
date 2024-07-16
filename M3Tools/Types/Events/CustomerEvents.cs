@@ -5,17 +5,23 @@
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	// TODO: Try to figure out why polymorphism doesn't work for handlers
-	//public delegate void CustomerEventHandler(object sender, DataEventArgs<Types.Customer> e);
 	public delegate void CustomerEventHandler(object sender, CustomerEventArgs e);
 
-	/// <inheritdoc/>
+	/// <summary>
+	/// 
+	/// </summary>
 	sealed public class CustomerEventArgs : DataEventArgs<Types.Customer>
     {
-		/// <inheritdoc/>
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Types.Customer Value { get; protected set; }
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="type"></param>
 		public CustomerEventArgs(Types.Customer value, EventType type = EventType.None) : base(value, type)
 		{
 		}
