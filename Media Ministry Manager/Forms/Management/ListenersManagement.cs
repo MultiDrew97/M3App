@@ -42,7 +42,7 @@ namespace M3App
 				bsListeners.Add(listener);
 			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsListeners.ResetBindings(false);
-			ts_Tools.Count = string.Format(Properties.Resources.CountTemplate, ldg_Listeners.Listeners.Count);
+			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
 			UseWaitCursor = false;
 		}
 
@@ -131,7 +131,7 @@ namespace M3App
             UseWaitCursor = true;
 
             string subject = "Welcome to the Ministry";
-            string body = string.Format(Properties.Resources.newListener, e.Value.Name.Trim());
+            string body = string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim());
 			var message = gt_Email.Create(e.Value, subject, body);
 
 #if !DEBUG

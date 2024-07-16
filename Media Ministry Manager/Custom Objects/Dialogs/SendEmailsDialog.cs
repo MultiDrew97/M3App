@@ -104,7 +104,7 @@ namespace M3App
         {
             foreach (var @file in details.DriveLinks)
             {
-				details.SendingLinks.Add(string.Format(Properties.Resources.DriveLinkHtml, string.Format(Properties.Resources.DriveShareLink, @file.Id), @file.Name));
+				details.SendingLinks.Add(string.Format(Properties.Resources.DRIVE_LINK_HTML, string.Format(Properties.Resources.DRIVE_SHARE_LINK_TEMPLATE, @file.Id), @file.Name));
             }
         }
 
@@ -141,7 +141,7 @@ namespace M3App
             }
 
 			// TODO: Figure out how to make this simplier
-			using var body = new EmailBodySelection(new() { new("Sermon", Properties.Resources.newSermon, "New Sermon"), new("Reciept", Properties.Resources.receipt, "Bless you") });
+			using var body = new EmailBodySelection(new() { new("Sermon", Properties.Resources.SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Reciept", Properties.Resources.RECEIPT_EMAIL, "Bless you") });
             
             if (body.ShowDialog() != DialogResult.OK)
             {

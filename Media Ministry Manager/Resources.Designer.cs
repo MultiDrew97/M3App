@@ -101,9 +101,9 @@ namespace M3App.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Count: {0}.
         /// </summary>
-        internal static string CountTemplate {
+        internal static string COUNT_TEMPLATE {
             get {
-                return ResourceManager.GetString("CountTemplate", resourceCulture);
+                return ResourceManager.GetString("COUNT_TEMPLATE", resourceCulture);
             }
         }
         
@@ -138,9 +138,9 @@ namespace M3App.Properties {
         ///&lt;/body&gt;
         ///&lt;/html&gt;.
         /// </summary>
-        internal static string customMessageTemplate {
+        internal static string CUSTOM_EMAIL_TEMPLATE {
             get {
-                return ResourceManager.GetString("customMessageTemplate", resourceCulture);
+                return ResourceManager.GetString("CUSTOM_EMAIL_TEMPLATE", resourceCulture);
             }
         }
         
@@ -168,27 +168,27 @@ namespace M3App.Properties {
         ///&lt;/body&gt;
         ///&lt;/html&gt;.
         /// </summary>
-        internal static string customMessageWithDriveLink {
+        internal static string CUSTOM_EMAIL_W_ATTACH_TEMPLATE {
             get {
-                return ResourceManager.GetString("customMessageWithDriveLink", resourceCulture);
+                return ResourceManager.GetString("CUSTOM_EMAIL_W_ATTACH_TEMPLATE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;a href=&quot;{0}&quot; class=&quot;drive-link&quot;&gt;{1}&lt;/a&gt;.
         /// </summary>
-        internal static string DriveLinkHtml {
+        internal static string DRIVE_LINK_HTML {
             get {
-                return ResourceManager.GetString("DriveLinkHtml", resourceCulture);
+                return ResourceManager.GetString("DRIVE_LINK_HTML", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
         /// </summary>
-        internal static string DriveShareLink {
+        internal static string DRIVE_SHARE_LINK_TEMPLATE {
             get {
-                return ResourceManager.GetString("DriveShareLink", resourceCulture);
+                return ResourceManager.GetString("DRIVE_SHARE_LINK_TEMPLATE", resourceCulture);
             }
         }
         
@@ -272,37 +272,18 @@ namespace M3App.Properties {
         ///
         ///		&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday&apos;s Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Mes [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string newListener {
+        internal static string NEW_LISTENER_EMAIL_TEMPLATE {
             get {
-                return ResourceManager.GetString("newListener", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/css/emails.css&quot; /&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
-        ///        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
-        ///
-        ///        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
-        ///        &lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
-        ///        &lt;p&gt;You m [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string newSermon {
-            get {
-                return ResourceManager.GetString("newSermon", resourceCulture);
+                return ResourceManager.GetString("NEW_LISTENER_EMAIL_TEMPLATE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$.
         /// </summary>
-        internal static string PhoneRegex {
+        internal static string PHONE_REGEX {
             get {
-                return ResourceManager.GetString("PhoneRegex", resourceCulture);
+                return ResourceManager.GetString("PHONE_REGEX", resourceCulture);
             }
         }
         
@@ -329,9 +310,28 @@ namespace M3App.Properties {
         ///		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
         ///		St. Paul Primitive Baptist Church [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string receipt {
+        internal static string RECEIPT_EMAIL {
             get {
-                return ResourceManager.GetString("receipt", resourceCulture);
+                return ResourceManager.GetString("RECEIPT_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///    &lt;head&gt;
+        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/css/emails.css&quot; /&gt;
+        ///    &lt;/head&gt;
+        ///    &lt;body&gt;
+        ///        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
+        ///
+        ///        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
+        ///        &lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
+        ///        &lt;p&gt;You m [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SERMON_EMAIL_TEMPLATE {
+            get {
+                return ResourceManager.GetString("SERMON_EMAIL_TEMPLATE", resourceCulture);
             }
         }
         
