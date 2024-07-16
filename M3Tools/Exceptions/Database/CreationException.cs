@@ -9,14 +9,14 @@ namespace SPPBC.M3Tools.Exceptions
     public class CreationException : DatabaseException
     {
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public CreationException() : base()
         {
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="message"></param>
         public CreationException(string message) : base(message)
@@ -24,7 +24,7 @@ namespace SPPBC.M3Tools.Exceptions
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>

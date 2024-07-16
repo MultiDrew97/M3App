@@ -59,7 +59,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="product"></param>
 		/// <param name="quantity"></param>

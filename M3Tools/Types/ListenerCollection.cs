@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
@@ -9,7 +10,7 @@ namespace SPPBC.M3Tools.Types
     public class ListenerCollection : DbEntryCollection<Listener>
     {
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="collection"></param>
 		/// <returns></returns>
@@ -33,7 +34,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="listener"></param>
 		/// <param name="index"></param>

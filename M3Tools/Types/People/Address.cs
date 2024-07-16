@@ -12,7 +12,7 @@ namespace SPPBC.M3Tools.Types
     {
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[System.ComponentModel.Browsable(true)]
         [System.ComponentModel.Category("Contact")]
@@ -20,14 +20,14 @@ namespace SPPBC.M3Tools.Types
         public string Street { get; set; }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("city")]
         public string City { get; set; }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("state")]
@@ -35,7 +35,7 @@ namespace SPPBC.M3Tools.Types
 
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         [System.ComponentModel.Category("Contact")]
         [System.Text.Json.Serialization.JsonPropertyName("zipCode")]
@@ -53,7 +53,7 @@ namespace SPPBC.M3Tools.Types
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="street"></param>
 		/// <param name="city"></param>
@@ -130,7 +130,7 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <returns></returns>
 		public override int GetHashCode()

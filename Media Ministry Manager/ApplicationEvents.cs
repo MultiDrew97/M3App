@@ -22,7 +22,8 @@ namespace M3App
 		// MAYBE: Background worker? Timer?
 		public M3ApplicationContext(string[] args)
 		{
-			splash.Show();
+			//splash.Show();
+			//Utils.Wait(5);
 			LoadApp();
 			MainForm = new LoginForm();
 		}
@@ -36,6 +37,7 @@ namespace M3App
 
 		protected override void ExitThreadCore()
 		{
+			// Perform any application clean up that may be necessary
 			base.ExitThreadCore();
 		}
 
@@ -60,6 +62,7 @@ namespace M3App
 			}
 
 			splash.UpdateProgress(50);
+			//Utils.Wait(2);
 
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 #if DEBUG
@@ -72,6 +75,7 @@ namespace M3App
 
 			Console.WriteLine("Application preamble has finished. Starting application...");
 			splash.UpdateProgress(100);
+			// Utils.Wait(2);
 			splash.Close();
 			splash.Dispose();
 			splash = null;

@@ -2,7 +2,7 @@
 namespace SPPBC.M3Tools
 {
 	/// <summary>
-	/// <inheritdoc/>
+	/// 
 	/// </summary>
     public partial class AddressField
     {
@@ -25,7 +25,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public string Street
         {
@@ -61,7 +61,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public string City
         {
@@ -76,7 +76,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public string State
         {
@@ -101,7 +101,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public string ZipCode
         {
@@ -133,7 +133,7 @@ namespace SPPBC.M3Tools
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public AddressField()
         {

@@ -9,9 +9,17 @@ namespace M3App
 	/// </summary>
     public struct Utils
     {
-		[STAThread]
+		/// <summary>
+		/// Opens forms of the application, automatically attaching that when the last form is
+		/// closed, the application will be exited completely
+		/// </summary>
+		/// <param name="form"></param>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		//[STAThread]
 		public static bool OpenForm(Type form, params object[] args)
 		{
+			// TODO: Find if there is a better way to handle this
 			try
 			{
 				var constructor = form.GetConstructor(args.Select(arg => arg.GetType()).ToArray());
@@ -19,11 +27,13 @@ namespace M3App
 				Form tmp = (Form)constructor.Invoke(args);
 				tmp.FormClosed += (sender, e) => { if (Application.OpenForms.Count > 0) return; Application.Exit(); };
 				tmp.Show();
-				//WindowsFormsSynchronizationContext.Current.Post(_ => tmp.Show(), null);
+
 				return true;
 			} 
-			catch
+			catch(Exception ex)
 			{
+				MessageBox.Show($"Failed to open form of type {form.Name}.\n\nError:\n\t{ex.Message}", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Console.Error.WriteLine($"Failed to open form of type {form.Name}.\n\nError:\n\t{ex.Message}");
 				return false;
 			}
 		}
@@ -44,12 +54,11 @@ namespace M3App
         }
 
 		/// <summary>
-		/// Attempts to close all open forms
+		/// Attempts to close all open forms gracefully. Allowing them to close and handle any straggling tasks
+		/// and finish executions if needed.
 		/// </summary>
-        public static void CloseOpenForms()
+        public static void CloseApplication()
         {
-            // Close all open windows. Figuring this out will allow me to change from only clearing when primary form closes to when all forms close.
-            // improving efficiency in memory management
             int attempts = 0;
 			const int MAX_ATTEMPTS = 3;
             do

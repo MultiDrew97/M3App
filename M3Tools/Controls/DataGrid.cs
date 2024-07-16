@@ -12,6 +12,7 @@ namespace SPPBC.M3Tools.Data
 	{
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
+
 		// TODO: Maybe Remove this later
 		/// <summary>
 		/// Event that occurs when adding data
@@ -34,7 +35,7 @@ namespace SPPBC.M3Tools.Data
 		public event EventHandler Reload;
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnPaint(PaintEventArgs e)
@@ -127,7 +128,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[Browsable(false)]
 		public new System.Collections.ICollection SelectedRows
@@ -160,7 +161,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public DataGrid() : base()
 		{
@@ -205,7 +206,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
@@ -231,7 +232,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnUserDeletingRow(DataGridViewRowCancelEventArgs e)

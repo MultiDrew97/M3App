@@ -70,7 +70,7 @@ namespace M3App
 				return;
 			}
 
-			new MainForm().Show();
+			Utils.OpenForm(typeof(MainForm));
 		}
 
 		/// <summary>
@@ -128,7 +128,7 @@ namespace M3App
 
 		private void Exit(object sender, EventArgs e)
 		{
-			Utils.CloseOpenForms();
+			Utils.CloseApplication();
 		}
 
 		private void ViewSettings(object sender, EventArgs e)

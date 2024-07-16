@@ -14,7 +14,7 @@ namespace SPPBC.M3Tools.Dialogs
         private readonly string __passwordMisMatchError = "Passwords must match to proceed";
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public CreateAccountDialog()
         {

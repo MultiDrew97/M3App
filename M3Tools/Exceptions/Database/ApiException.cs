@@ -8,14 +8,14 @@ namespace SPPBC.M3Tools.Exceptions
     public class ApiException : Exception
     {
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
         public ApiException() : base()
         {
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="message"></param>
         public ApiException(string message) : base(message)
@@ -23,7 +23,7 @@ namespace SPPBC.M3Tools.Exceptions
         }
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>

@@ -15,7 +15,7 @@ namespace M3App
             InitializeComponent();
 
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
-			FormClosing += Closing;
+			FormClosed += Closed;
         }
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void Closing(object sender, EventArgs e)
+		private void Closed(object sender, EventArgs e)
 		{
 			UseWaitCursor = false;
 		}
@@ -100,7 +100,7 @@ namespace M3App
         private void ExitApp(object sender, EventArgs e)
         {
 			UseWaitCursor = true;
-			Utils.CloseOpenForms();
+			Utils.CloseApplication();
 			UseWaitCursor = false;
 		}
 
