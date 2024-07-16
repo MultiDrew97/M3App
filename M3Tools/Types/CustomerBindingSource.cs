@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using NPOI.SS.Formula.Functions;
+﻿using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
 {

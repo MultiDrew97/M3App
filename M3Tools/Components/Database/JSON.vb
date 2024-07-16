@@ -2,9 +2,9 @@
 
 Namespace M3API
 	Public Class JSON
-		''' <summary>
-		''' The options used when serializing a object to JSON string
-		''' </summary>
+		<summary>
+		The options used When serializing a Object To JSON String
+</summary>
 		Private Shared ReadOnly options As New JsonSerializerOptions(JsonSerializerDefaults.Web) With {
 										   .PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
 										   .PropertyNameCaseInsensitive = True,
@@ -16,12 +16,12 @@ Namespace M3API
 										   .NumberHandling = Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals
 								}
 
-		''' <summary>
-		''' Converts a JSON string to the respective object type given the type parameter
-		''' </summary>
-		''' <typeparam name="T">The type to convert to</typeparam>
-		''' <param name="json">The JSON string</param>
-		''' <returns></returns>
+		<summary>
+		Converts a JSON String To the respective Object type given the type parameter
+</summary>
+<typeparam name = "T" > The type To convert To</typeparam>
+<param name = "json" > The JSON String</param>
+<returns></returns>
 		Shared Function ConvertFromJSON(Of T)(json As String) As T
 			If (String.IsNullOrWhiteSpace(json)) Then
 				Throw New JsonException("No JSON was present")
@@ -30,11 +30,11 @@ Namespace M3API
 			Return JsonSerializer.Deserialize(Of T)(json, options)
 		End Function
 
-		''' <summary>
-		''' Convert an object to a JSON string using the global serilization options
-		''' </summary>
-		''' <param name="obj"></param>
-		''' <returns></returns>
+		<summary>
+		Convert an Object To a JSON String Using the Global serilization options
+</summary>
+<param name = "obj" ></param>
+		<returns></returns>
 		Shared Function ConvertToJSON(obj As Object) As String
 			If obj Is Nothing Then
 				Return ""

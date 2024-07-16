@@ -146,13 +146,13 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Create an email that contains attachements to be sent to a email box
-		/// 		''' </summary>
-		/// 		''' <param name="to">The MailBox Address to send to</param>
-		/// 		''' <param name="content">The content of the email to be sent</param>
-		/// 		''' <param name="files">The files to attach to the email</param>
-		/// 		''' <param name="from">The email address to send from</param>
-		/// 		''' <returns>Returns an Email to be sent</returns>
+		/// Create an email that contains attachements to be sent to a email box
+		/// </summary>
+		/// <param name="to">The MailBox Address to send to</param>
+		/// <param name="content">The content of the email to be sent</param>
+		/// <param name="files">The files to attach to the email</param>
+		/// <param name="from">The email address to send from</param>
+		/// <returns>Returns an Email to be sent</returns>
         private MimeMessage CreateWithAttachment(MailboxAddress to, EmailContent content, IList<string> files, MailboxAddress @from = null)
         {
             var email = Create(to, content, from);
@@ -174,15 +174,15 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Create an Email using a premade message
-		/// 		''' </summary>
-		/// 		''' <param name="emailContent">The email to be created</param>
-		/// 		''' <returns>Returns a message to be sent</returns>
+		/// Create an Email using a premade message
+		/// </summary>
+		/// <param name="emailContent">The email to be created</param>
+		/// <returns>Returns a message to be sent</returns>
         private Google.Apis.Gmail.v1.Data.Message CreateWithEmail(MimeMessage emailContent)
         {
-            var buffer = new NPOI.Util.ByteArrayOutputStream();
+            using var buffer = new System.IO.MemoryStream();
             emailContent.WriteTo(buffer);
-            string encodedEmail = Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Encode(buffer.ToByteArray());
+            string encodedEmail = Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Encode(buffer.ToArray());
             var message = new Google.Apis.Gmail.v1.Data.Message() { Raw = encodedEmail };
 
             return message;
@@ -197,15 +197,5 @@ namespace SPPBC.M3Tools.GTools
         {
 			return __service.Users.Messages.Send(CreateWithEmail(emailContent), emailContent.Sender.Address).Execute();
         }
-
-        // Sub SendEmails(details As EmailDetails)
-
-        // For Each recv In details.Recipients
-
-        // For Each file In details.DriveFiles
-
-        // Next
-        // Next
-        // End Sub
     }
 }

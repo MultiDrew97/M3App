@@ -8,8 +8,8 @@ namespace SPPBC.M3Tools.M3API
 	public class JSON
 	{
 		/// <summary>
-		/// 		''' The options used when serializing a object to JSON string
-		/// 		''' </summary>
+		/// The options used when serializing a object to JSON string
+		/// </summary>
 		private static readonly JsonSerializerOptions options = new(JsonSerializerDefaults.Web)
 		{
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

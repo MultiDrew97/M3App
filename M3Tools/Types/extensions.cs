@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
-using NPOI.OpenXmlFormats.Wordprocessing;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types.Extensions

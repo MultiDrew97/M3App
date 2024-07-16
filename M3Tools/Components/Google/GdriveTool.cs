@@ -90,12 +90,12 @@ namespace SPPBC.M3Tools.GTools
         }
 
 		/// <summary>
-		/// 		''' Upload a new file to the drive
-		/// 		''' </summary>
-		/// 		''' <param name="file">The file to be uploaded. Contains folder information</param>
-		/// 		''' <param name="uploadName">The desired name to name the file when uploaded</param>
+		/// Upload a new file to the drive
+		/// </summary>
+		/// <param name="file">The file to be uploaded. Contains folder information</param>
+		/// <param name="uploadName">The desired name to name the file when uploaded</param>
 		/// <param name="permissions"></param>
-		/// 		''' <exception cref="Exceptions.UploadException"></exception>
+		/// <exception cref="Exceptions.UploadException"></exception>
 		public Task UploadFile(File @file, string uploadName, Google.Apis.Drive.v3.Data.Permission permissions = null)
         {
             var fileMetadata = new Google.Apis.Drive.v3.Data.File()
@@ -131,10 +131,10 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Create a new folder based on information passed
-		/// 		''' </summary>
-		/// 		''' <param name="folderName">The name of the new folder</param>
-		/// 		''' <param name="parents">The parent folders, if any, for the new folder to be in</param>
+		/// Create a new folder based on information passed
+		/// </summary>
+		/// <param name="folderName">The name of the new folder</param>
+		/// <param name="parents">The parent folders, if any, for the new folder to be in</param>
         public Task<object> CreateFolder(string folderName, IList<string> parents = null)
         {
             try
@@ -165,11 +165,11 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets the ID of the desired folder
-		/// 		''' </summary>
-		/// 		''' <param name="name">The name of the folder to find the ID of</param>
-		/// 		''' <returns>The id of the desired the folder, if it exists</returns>
-		/// 		''' <exception cref="Exceptions.FolderException"></exception>
+		/// Gets the ID of the desired folder
+		/// </summary>
+		/// <param name="name">The name of the folder to find the ID of</param>
+		/// <returns>The id of the desired the folder, if it exists</returns>
+		/// <exception cref="Exceptions.FolderException"></exception>
         public Task<string> GetFolderID(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -254,13 +254,13 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets the desired file based on the provided information.
-		/// 		''' </summary>
-		/// 		''' <param name="fileName">The name of the file to get</param>
-		/// 		''' <param name="folderName">The name of the folder that holds the desired file</param>
-		/// 		''' <returns>All file information for the desired file</returns>
-		/// 		''' <exception cref="Exceptions.FolderException"></exception>
-		/// 		''' <exception cref="Exceptions.FileException"></exception>
+		/// Gets the desired file based on the provided information.
+		/// </summary>
+		/// <param name="fileName">The name of the file to get</param>
+		/// <param name="folderName">The name of the folder that holds the desired file</param>
+		/// <returns>All file information for the desired file</returns>
+		/// <exception cref="Exceptions.FolderException"></exception>
+		/// <exception cref="Exceptions.FileException"></exception>
         public Task<Google.Apis.Drive.v3.Data.File> GetFile(string fileName, string folderName = null)
         {
             var request = __service.Files.List();
@@ -306,11 +306,11 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets all files in a given folder
-		/// 		''' </summary>
-		/// 		''' <param name="folderName">The name of the folder to pull the files from</param>
-		/// 		''' <returns>A collection of all files contained in the given folder</returns>
-		/// 		''' <exception cref="Exceptions.FolderException"></exception>
+		/// Gets all files in a given folder
+		/// </summary>
+		/// <param name="folderName">The name of the folder to pull the files from</param>
+		/// <returns>A collection of all files contained in the given folder</returns>
+		/// <exception cref="Exceptions.FolderException"></exception>
         public Task<FileCollection> GetFiles(string folderName)
         {
             var request = __service.Files.List();
@@ -347,9 +347,9 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets all folders in the users drive folder
-		/// 		''' </summary>
-		/// 		''' <returns>A collection of folders</returns>
+		/// Gets all folders in the users drive folder
+		/// </summary>
+		/// <returns>A collection of folders</returns>
         public Task<FileCollection> GetFolders()
         {
             var folders = new FileCollection();
@@ -381,9 +381,9 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets all folders and the children folders and files under them
-		/// 		''' </summary>
-		/// 		''' <returns>A collection of folders that contains their child files and folders</returns>
+		/// Gets all folders and the children folders and files under them
+		/// </summary>
+		/// <returns>A collection of folders that contains their child files and folders</returns>
         public async Task<FileCollection> GetFoldersWithChildren()
         {
             var folders = await GetFolders();
@@ -416,10 +416,10 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets the children of a certain folder using its ID
-		/// 		''' </summary>
-		/// 		''' <param name="parentID">The ID of the folder to get the children from</param>
-		/// 		''' <returns>A collection of files that are contained in the specified folder</returns>
+		/// Gets the children of a certain folder using its ID
+		/// </summary>
+		/// <param name="parentID">The ID of the folder to get the children from</param>
+		/// <returns>A collection of files that are contained in the specified folder</returns>
         public Task<FileCollection> GetChildren(string parentID)
         {
             var request = __service.Files.List();
@@ -472,10 +472,10 @@ namespace SPPBC.M3Tools.GTools
         }
 
         /// <summary>
-		/// 		''' Gets whether a certain folder exists based on the given name
-		/// 		''' </summary>
-		/// 		''' <param name="folderName">The name of the folder to find</param>
-		/// 		''' <returns>Returns True if the folder exists, otherwise False</returns>
+		/// Gets whether a certain folder exists based on the given name
+		/// </summary>
+		/// <param name="folderName">The name of the folder to find</param>
+		/// <returns>Returns True if the folder exists, otherwise False</returns>
         private Task<bool> FolderExists(string folderName)
         {
             try
