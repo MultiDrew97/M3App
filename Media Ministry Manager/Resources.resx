@@ -121,7 +121,7 @@
   <data name="App_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\app icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="customMessageTemplate" xml:space="preserve">
+  <data name="CUSTOM_EMAIL_TEMPLATE" xml:space="preserve">
     <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -143,7 +143,7 @@
 &lt;/html&gt;</value>
     <comment>Template for the custom message</comment>
   </data>
-  <data name="receipt" xml:space="preserve">
+  <data name="RECEIPT_EMAIL" xml:space="preserve">
     <value>&lt;!Doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;
@@ -176,7 +176,7 @@
 &lt;/html&gt;</value>
     <comment>The html format for a receipt email</comment>
   </data>
-  <data name="newSermon" xml:space="preserve">
+  <data name="SERMON_EMAIL_TEMPLATE" xml:space="preserve">
     <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
@@ -230,7 +230,7 @@
   <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="newListener" xml:space="preserve">
+  <data name="NEW_LISTENER_EMAIL_TEMPLATE" xml:space="preserve">
     <value>&lt;!Doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;
@@ -300,7 +300,7 @@
   <data name="ShowPasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ShowPasswordIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="customMessageWithDriveLink" xml:space="preserve">
+  <data name="CUSTOM_EMAIL_W_ATTACH_TEMPLATE" xml:space="preserve">
     <value>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -343,21 +343,21 @@
   <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DriveShareLink" xml:space="preserve">
+  <data name="DRIVE_SHARE_LINK_TEMPLATE" xml:space="preserve">
     <value>https://drive.google.com/file/d/{0}/view?usp=sharing</value>
     <comment>The link to share a file from Google Drive</comment>
   </data>
-  <data name="PhoneRegex" xml:space="preserve">
+  <data name="PHONE_REGEX" xml:space="preserve">
     <value>^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$</value>
     <comment>The regex for verifying a phone number. Found at: https://www.regextester.com/17</comment>
   </data>
-  <data name="DriveLinkHtml" xml:space="preserve">
+  <data name="DRIVE_LINK_HTML" xml:space="preserve">
     <value>&lt;a href="{0}" class="drive-link"&gt;{1}&lt;/a&gt;</value>
     <comment>The html format of the share link for easy clicking</comment>
   </data>
-  <data name="CountTemplate" xml:space="preserve">
+  <data name="COUNT_TEMPLATE" xml:space="preserve">
     <value>Count: {0}</value>
-    <comment>The template for displaying the count of entries</comment>
+    <comment>The template for displaying entry counts</comment>
   </data>
   <data name="FAILED_TO_OPEN" xml:space="preserve">
     <value>We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{0}</value>
