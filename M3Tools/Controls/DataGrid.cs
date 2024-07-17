@@ -34,6 +34,13 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event EventHandler Reload;
 
+		// TODO: Make it so the datagrid has it's own binding source and when using in a form, you just pass the list itself
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public new bool AutoGenerateColumns = false;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -165,7 +172,6 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public DataGrid() : base()
 		{
-			AutoGenerateColumns = false;
 			InitializeComponent();
 
 			cms_Tools.Opened += new EventHandler(ToolsOpened);

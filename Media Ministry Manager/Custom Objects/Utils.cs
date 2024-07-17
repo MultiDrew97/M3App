@@ -17,24 +17,19 @@ namespace M3App
 		/// <param name="args"></param>
 		/// <returns></returns>
 		//[STAThread]
-		public static bool OpenForm(Type form, params object[] args)
+		public static void OpenForm(Type form, params object[] args)
 		{
 			// TODO: Find if there is a better way to handle this
-			try
-			{
+			try { 
 				var constructor = form.GetConstructor(args.Select(arg => arg.GetType()).ToArray());
 
 				Form tmp = (Form)constructor.Invoke(args);
 				tmp.FormClosed += (sender, e) => { if (Application.OpenForms.Count > 0) return; Application.Exit(); };
 				tmp.Show();
-
-				return true;
-			} 
-			catch(Exception ex)
+			}
+			catch (Exception ex)
 			{
-				MessageBox.Show($"Failed to open form of type {form.Name}.\n\nError:\n\t{ex.Message}", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Console.Error.WriteLine($"Failed to open form of type {form.Name}.\n\nError:\n\t{ex.Message}");
-				return false;
+				throw new Exception($"Failed to open form of type {form.Name}.\n\t{ex.Message}");
 			}
 		}
 
@@ -49,6 +44,7 @@ namespace M3App
             for (int i = 0, loopTo = seconds * 100; i <= loopTo; i++)
             {
                 System.Threading.Thread.Sleep(10);
+				// Allows the application thread to continue while waiting
                 Application.DoEvents();
             }
         }

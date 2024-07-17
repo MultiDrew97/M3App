@@ -1,21 +1,16 @@
 ﻿using System;
 
-// needed for database work
-// got the database set up information from here
-// https://support.microsoft.com/en-us/help/308656/how-to-open-a-sql-server-database-by-using-the-sql-server-net-data-pro
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using SPPBC.M3Tools.M3API;
 
-// TODO: Go through all functions and make sure that all schema values are present in database
-
 namespace SPPBC.M3Tools.Database
 {
 	/// <summary>
-	/// 
+	/// The parent object for managing database connection and integrations
 	/// </summary>
-    public partial class Database
+    public abstract partial class Database
     {
 		/// <summary>
 		/// The username to use for the API calls
@@ -23,6 +18,7 @@ namespace SPPBC.M3Tools.Database
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The username to use with the API calls")]
+		[Category("Connection")]
         public string Username { get; set; }
 
 		/// <summary>
@@ -32,6 +28,7 @@ namespace SPPBC.M3Tools.Database
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The password to use with the API calls")]
+		[Category("Connection")]
         public string Password { get; set; }
 
 		/// <summary>
@@ -40,8 +37,11 @@ namespace SPPBC.M3Tools.Database
         [SettingsBindable(true)]
         [DefaultValue("")]
         [Description("The URL value to use for API calls")]
+		[Category("Connection")]
         public string BaseUrl { get; set; }
 
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		private string Auth => Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}"));
 
 		internal void Execute(Method @method, string path, string payload = null)
@@ -78,8 +78,18 @@ namespace SPPBC.M3Tools.Database
 				stream.Write(payload, 0, payload.Count());
 			}
 
-			using var res = VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
-			return Task.FromResult(JSON.ConvertFromJSON<R>(new System.IO.StreamReader(res.GetResponseStream()).ReadToEnd()));
+			try
+			{
+				using var res = VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
+
+				return Task.FromResult(JSON.ConvertFromJSON<R>(new System.IO.StreamReader(res.GetResponseStream()).ReadToEnd()));
+			}
+			catch (System.Text.Json.JsonException json)
+			{
+				Console.Error.WriteLine(json.Message);
+				Console.Error.WriteLine(json.StackTrace);
+				return default;
+			}
 		}
 
         private System.Net.HttpWebResponse VerifyResponse(System.Net.HttpWebResponse res)

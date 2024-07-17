@@ -24,14 +24,14 @@ namespace M3App
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 
-				Application.Run(new M3ApplicationContext(args));
+				Application.Run(new M3AppContext());
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.TargetSite);
 				Console.Error.WriteLine(ex.Message);
 				Console.Error.WriteLine(ex.StackTrace);
-				MessageBox.Show(string.Format(Properties.Resources.FAILED_TO_OPEN, ex.Message), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(string.Format(Properties.Resources.FAILED_TO_OPEN.Replace(@"\n", "\n").Replace(@"\t", "\t"), ex.Message), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{

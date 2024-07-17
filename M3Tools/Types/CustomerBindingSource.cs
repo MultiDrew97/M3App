@@ -18,7 +18,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[Browsable(false)]
 		public new Types.CustomerCollection DataSource
@@ -28,7 +28,7 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		public override string Filter
 		{

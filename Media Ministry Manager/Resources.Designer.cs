@@ -203,7 +203,7 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{0}.
+        ///   Looks up a localized string similar to We were unable to start the application. Please reach out to your administrator.\n\nError:\n{0}.
         /// </summary>
         internal static string FAILED_TO_OPEN {
             get {

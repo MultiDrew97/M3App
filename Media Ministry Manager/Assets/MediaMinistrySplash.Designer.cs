@@ -69,6 +69,7 @@ namespace M3App
             this.spsh_SplashScreen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.spsh_SplashScreen.Size = new System.Drawing.Size(496, 303);
             this.spsh_SplashScreen.TabIndex = 0;
+            this.spsh_SplashScreen.UseWaitCursor = true;
             // 
             // DetailsLayoutPanel
             // 
@@ -83,6 +84,7 @@ namespace M3App
             this.DetailsLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.DetailsLayoutPanel.Size = new System.Drawing.Size(247, 79);
             this.DetailsLayoutPanel.TabIndex = 1;
+            this.DetailsLayoutPanel.UseWaitCursor = true;
             // 
             // lbl_Copyright
             // 
@@ -94,6 +96,7 @@ namespace M3App
             this.lbl_Copyright.Size = new System.Drawing.Size(241, 79);
             this.lbl_Copyright.TabIndex = 2;
             this.lbl_Copyright.Text = "Copyright";
+            this.lbl_Copyright.UseWaitCursor = true;
             // 
             // lbl_Version
             // 
@@ -106,6 +109,7 @@ namespace M3App
             this.lbl_Version.TabIndex = 1;
             this.lbl_Version.Text = "Version";
             this.lbl_Version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Version.UseWaitCursor = true;
             // 
             // ApplicationTitle
             // 
@@ -117,6 +121,7 @@ namespace M3App
             this.ApplicationTitle.Size = new System.Drawing.Size(237, 212);
             this.ApplicationTitle.TabIndex = 0;
             this.ApplicationTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.ApplicationTitle.UseWaitCursor = true;
             // 
             // progressBar1
             // 
@@ -126,6 +131,7 @@ namespace M3App
             this.progressBar1.Size = new System.Drawing.Size(247, 10);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 2;
+            this.progressBar1.UseWaitCursor = true;
             // 
             // MediaMinistrySplash
             // 
@@ -141,6 +147,7 @@ namespace M3App
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.SplashLoading);
             this.spsh_SplashScreen.ResumeLayout(false);
             this.DetailsLayoutPanel.ResumeLayout(false);

@@ -360,7 +360,7 @@
     <comment>The template for displaying entry counts</comment>
   </data>
   <data name="FAILED_TO_OPEN" xml:space="preserve">
-    <value>We were unable to start the application. Please reach out to your administrator.\n\nError:\n\t{0}</value>
+    <value>We were unable to start the application. Please reach out to your administrator.\n\nError:\n{0}</value>
     <comment>The error message for when the application fails to open</comment>
   </data>
   <data name="CONSOLE_ERROR_FILE" xml:space="preserve">

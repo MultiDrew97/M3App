@@ -78,7 +78,10 @@ namespace SPPBC.M3Tools.Database
 		/// <returns>The user if successful, otherwise Nothing</returns>
         public User Login(Auth auth)
         {
-            return Login(JSON.ConvertToJSON(auth));
+			// TODO: Upon successful login, update the LastLogin field in the database using m3.sp_UpdateLastLogin
+			// MAYBE: Look into SQL triggers to see if I can make one that triggers upon login from the table function
+			// MAYBE: Put this in the API instead? 
+			return Login(JSON.ConvertToJSON(auth));
         }
 
         private User Login(string auth)

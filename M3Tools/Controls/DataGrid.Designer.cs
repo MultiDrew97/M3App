@@ -109,13 +109,12 @@
 
 		}
 
+		#endregion
+
 		internal ToolsContextMenu cms_Tools;
 		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
 		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
 		protected internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Selection;
-
-		#endregion
-
 		internal System.Windows.Forms.CheckBox chk_SelectAll;
 	}
 }

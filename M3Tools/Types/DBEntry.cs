@@ -52,6 +52,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns>True if objects are equal, otherwise false</returns>
 		public static bool operator ==(DbEntry ls, DbEntry rs)
 		{
+			if (ls is null ^ rs is null) return false;
 			return ls.GetHashCode() == rs.GetHashCode();
 		}
 
@@ -71,10 +72,11 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="obj">The referenced object to compare with</param>
 		/// <returns>True if the object is the same as the current instance, otherwise false</returns>
-		public override bool Equals(object obj)
-		{
-			return (this == (DbEntry)obj) || base.Equals(obj);
-		}
+		//public override bool Equals(object obj)
+		//{
+		//	if (this is null ^ obj is null || obj is System.DBNull) return false;
+		//	return (this == (DbEntry)obj) || base.Equals(obj);
+		//}
 
 		/// <summary>
 		/// Gets the Hash code for the current object

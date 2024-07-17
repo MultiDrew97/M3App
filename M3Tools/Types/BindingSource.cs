@@ -17,7 +17,7 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// List of customers in the binding source
 		/// </summary>
-		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public new IList<T> List
 		{
 			get => ((Types.DbEntryCollection<T>)DataSource).Items;

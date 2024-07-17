@@ -581,6 +581,9 @@
     <EmbeddedResource Include="Controls\DataGrid.resx">
       <DependentUpon>DataGrid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Orders\OrderDataGrid.resx">
+      <DependentUpon>OrderDataGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\People\Listeners\TemplateSelector.resx">
       <DependentUpon>TemplateSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -755,7 +758,6 @@
       <CustomToolNamespace>SPPBC.M3Tools.My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
     <None Include="Resources\configs\credentials.json" />
   </ItemGroup>
   <ItemGroup>
@@ -821,11 +823,12 @@
     <Folder Include="Exceptions\Orders\" />
     <Folder Include="Exceptions\Products\" />
     <Folder Include="My Project\DataSources\" />
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

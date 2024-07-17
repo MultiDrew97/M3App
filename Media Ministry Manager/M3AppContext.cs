@@ -9,13 +9,12 @@ namespace M3App
 	// UnhandledException: Raised if the application encounters an unhandled exception.
 	// StartupNextInstance: Raised when launching a single-instance application and the application is already active.
 	// NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
-	internal partial class M3ApplicationContext : ApplicationContext
+	internal partial class M3AppContext : ApplicationContext
 	{
 		private readonly MediaMinistrySplash splash = new();
 		private readonly Timer timer = new() { Interval = int.Parse(Properties.Resources.SPLASH_TIMER) * 1000 };
 
-		// TODO: Create a timer to show the splash screen for 5 seconds then close and open the application. Opening the application in the background and opening after the thred is over
-		public M3ApplicationContext(string[] args)
+		public M3AppContext()
 		{
 			splash.Show();
 			timer.Start();
