@@ -19,7 +19,10 @@ namespace SPPBC.M3Tools.M3API
 			DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
 			AllowTrailingCommas = true,
 			DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-			NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals
+			NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
+			UnmappedMemberHandling = System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip,
+			UnknownTypeHandling = System.Text.Json.Serialization.JsonUnknownTypeHandling.JsonElement,
+			PreferredObjectCreationHandling = System.Text.Json.Serialization.JsonObjectCreationHandling.Populate
 		};
 
 		/// <summary>

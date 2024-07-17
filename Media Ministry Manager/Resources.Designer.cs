@@ -353,5 +353,23 @@ namespace M3App.Properties {
                 return ResourceManager.GetString("SPLASH_TIMER", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This feature is currently under construction. Please contact administrator for more information..
+        /// </summary>
+        internal static string UNDER_CONSTRUCTION_MESSAGE {
+            get {
+                return ResourceManager.GetString("UNDER_CONSTRUCTION_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under Construction.
+        /// </summary>
+        internal static string UNDER_CONSTRUCTION_TITLE {
+            get {
+                return ResourceManager.GetString("UNDER_CONSTRUCTION_TITLE", resourceCulture);
+            }
+        }
     }
 }

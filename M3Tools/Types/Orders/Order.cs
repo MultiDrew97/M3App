@@ -19,7 +19,7 @@ namespace SPPBC.M3Tools.Types
 		/// The customer the order was placed for
 		/// </summary>
 		[System.Text.Json.Serialization.JsonPropertyName("customer")]
-		public Person Customer { get; set; }
+		public Customer Customer { get; set; }
 
 		/// <summary>
 		/// The item the order was placed for

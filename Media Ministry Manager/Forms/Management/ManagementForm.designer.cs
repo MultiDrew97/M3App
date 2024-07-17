@@ -64,13 +64,13 @@ namespace M3App
             this.ss_StatusView.Name = "ss_StatusView";
             this.ss_StatusView.Size = new System.Drawing.Size(784, 22);
             this.ss_StatusView.SizingGrip = false;
-            this.ss_StatusView.TabIndex = 3;
+            this.ss_StatusView.TabIndex = 0;
             // 
             // tss_Status
             // 
             this.tss_Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tss_Status.Name = "tss_Status";
-            this.tss_Status.Size = new System.Drawing.Size(636, 17);
+            this.tss_Status.Size = new System.Drawing.Size(667, 17);
             this.tss_Status.Spring = true;
             this.tss_Status.Text = "What would you like to do?";
             this.tss_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -89,7 +89,7 @@ namespace M3App
             this.mms_Main.Name = "mms_Main";
             this.mms_Main.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
             this.mms_Main.Size = new System.Drawing.Size(784, 24);
-            this.mms_Main.TabIndex = 6;
+            this.mms_Main.TabIndex = 0;
             this.mms_Main.Text = "Menu";
             // 
             // toolStripContainer1
@@ -101,7 +101,6 @@ namespace M3App
             // 
             // toolStripContainer1.ContentPanel
             // 
-			this.toolStripContainer1.BottomToolStripPanelVisible = true;
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 390);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -110,9 +109,8 @@ namespace M3App
             this.toolStripContainer1.Name = "toolStripContainer1";
             this.toolStripContainer1.RightToolStripPanelVisible = false;
             this.toolStripContainer1.Size = new System.Drawing.Size(784, 437);
-            this.toolStripContainer1.TabIndex = 7;
+            this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "ToolStripContainer1";
-			this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
@@ -128,7 +126,7 @@ namespace M3App
             this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.ts_Tools.Size = new System.Drawing.Size(784, 25);
             this.ts_Tools.Stretch = true;
-            this.ts_Tools.TabIndex = 2;
+            this.ts_Tools.TabIndex = 0;
             this.ts_Tools.Text = "ToolsToolStrip1";
             // 
             // ManagementForm
@@ -148,7 +146,7 @@ namespace M3App
             this.Name = "ManagementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Ministry Manager";
-			this.FormClosing += new FormClosingEventHandler(DisplayClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DisplayClosing);
             this.Load += new System.EventHandler(this.Reload);
             this.ss_StatusView.ResumeLayout(false);
             this.ss_StatusView.PerformLayout();

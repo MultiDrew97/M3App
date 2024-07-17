@@ -65,6 +65,10 @@ namespace M3App
 
         private void ManageOrders(object sender, EventArgs e)
         {
+#if !DEBUG
+			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+#endif
 			UseWaitCursor = true;
 			Utils.OpenForm(typeof(OrderManagement));
 			//var orders = new OrderManagement();

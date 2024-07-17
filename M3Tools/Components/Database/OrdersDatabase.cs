@@ -13,9 +13,9 @@ namespace SPPBC.M3Tools.Database
 		/// Retrieve the complete list of orders from the database
 		/// </summary>
 		/// <returns></returns>
-		public DbEntryCollection<Order> GetOrders()
+		public OrderCollection GetOrders()
 		{
-			return ExecuteWithResult<DbEntryCollection<Order>>(Method.Get, $"{path}").Result;
+			return ExecuteWithResult<OrderCollection>(Method.Get, $"{path}").Result;
 		}
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		/// <exception cref="NotImplementedException"></exception>
-		public DbEntryCollection<Order> GetCompletedOrders()
+		public OrderCollection GetCompletedOrders()
 		{
 			// TODO: Test this to make sure it works properly
 			throw new NotImplementedException("GetCompletedOrders");
@@ -154,7 +154,7 @@ namespace SPPBC.M3Tools.Database
 		/// <returns></returns>
 		/// <exception cref="ArgumentException"></exception>
 		/// <exception cref="NotImplementedException"></exception>
-		public DbEntryCollection<Order> GetOrderByCustomer(int customerID)
+		public OrderCollection GetOrderByCustomer(int customerID)
 		{
 			if (customerID < 0)
 			{

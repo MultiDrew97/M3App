@@ -375,4 +375,12 @@
     <value>5</value>
     <comment>the amount of time in seconds to show the splash screen</comment>
   </data>
+  <data name="UNDER_CONSTRUCTION_MESSAGE" xml:space="preserve">
+    <value>This feature is currently under construction. Please contact administrator for more information.</value>
+    <comment>The message to display when a feature isn't ready yet</comment>
+  </data>
+  <data name="UNDER_CONSTRUCTION_TITLE" xml:space="preserve">
+    <value>Under Construction</value>
+    <comment>The title of the message box when a feature isn't ready yet</comment>
+  </data>
 </root>
