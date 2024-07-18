@@ -47,7 +47,7 @@ namespace SPPBC.M3Tools.Data
 		[Browsable(false)]
 		public new Types.CustomerCollection SelectedRows
 		{
-			get => Types.CustomerCollection.Cast(base.SelectedRows);
+			get => Types.CustomerCollection.Cast((IList)base.SelectedRows);
 		}
 
 		/// <summary>

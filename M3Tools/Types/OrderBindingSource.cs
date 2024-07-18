@@ -11,16 +11,16 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public OrderBindingSource() : base()
 		{
-			DataSource = new();
+			DataSource = new Types.OrderCollection();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		[Browsable(false)]
-		public new Types.OrderCollection DataSource
+		[Category("Data")]
+		public new object DataSource
 		{
-			get => (Types.OrderCollection)base.DataSource;
+			get => DesignMode ? typeof(Types.OrderCollection) : (Types.OrderCollection)base.DataSource;
 			set => base.DataSource = value;
 		}
 

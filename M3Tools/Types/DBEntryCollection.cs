@@ -18,9 +18,9 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="collection"></param>
 		/// <returns></returns>
 		/// <exception cref="System.NotImplementedException"></exception>
-		internal static DbEntryCollection<T> Cast(System.Collections.ICollection collection)
+		internal static DbEntryCollection<T> Cast(System.Collections.IList collection)
 		{
-			throw new System.NotImplementedException("DBEntryCollection Cast");
+			throw new System.NotImplementedException("Cast for this collection was not implemented yet");
 		}
 
 		/// <summary>

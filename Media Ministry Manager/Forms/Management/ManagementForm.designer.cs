@@ -140,7 +140,8 @@ namespace M3App
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.mms_Main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.MainMenuStrip = this.mms_Main;
+			this.Icon = global::M3App.Properties.Resources.App_Icon;
+			this.MainMenuStrip = this.mms_Main;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(795, 484);
             this.Name = "ManagementForm";

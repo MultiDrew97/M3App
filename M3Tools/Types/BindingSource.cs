@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
@@ -14,23 +14,24 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public readonly new bool SupportsFiltering = true;
 
-		/// <summary>
-		/// List of customers in the binding source
-		/// </summary>
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public new IList<T> List
-		{
-			get => ((Types.DbEntryCollection<T>)DataSource).Items;
-		}
+		///// <summary>
+		///// List of customers in the binding source
+		///// </summary>
+		//[EditorBrowsable(EditorBrowsableState.Advanced)]
+		//public new IList List
+		//{
+		//	get => base.List;
+		//}
 
 		/// <summary>
 		/// The datasource being used for the binding source
 		/// </summary>
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[AttributeProvider(typeof(IListSource))]
-		protected new Types.DbEntryCollection<T> DataSource
+		// MAYBE: Look into using the TypeDescriptionProviderAttribute and similar to make dev potentially easier
+		protected new object DataSource
 		{
-			get => (Types.DbEntryCollection<T>)base.DataSource;
+			get => DesignMode ? typeof(Types.DbEntryCollection<T>) : (Types.DbEntryCollection<T>)base.DataSource;
 			set => base.DataSource = value;
 		}
 	}

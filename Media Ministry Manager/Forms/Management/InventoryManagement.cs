@@ -48,7 +48,7 @@ namespace M3App
 			if (add.ShowDialog() != DialogResult.OK)
 				return;
 
-            dbInventory.AddProduct(add.Product);
+            dbInventory.AddInventory(add.Product);
             MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
         }

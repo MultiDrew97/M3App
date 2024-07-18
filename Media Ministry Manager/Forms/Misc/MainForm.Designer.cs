@@ -44,7 +44,7 @@ namespace M3App
             this.ss_Queries = new System.Windows.Forms.StatusStrip();
             this.tss_Feedback = new System.Windows.Forms.ToolStripStatusLabel();
             this.bw_ChangedSizes = new System.ComponentModel.BackgroundWorker();
-            this.btn_EmailMinistry = new System.Windows.Forms.Button();
+            this.btn_ListenerManagement = new System.Windows.Forms.Button();
             this.pnl_Controls = new System.Windows.Forms.Panel();
             this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
             this.dbCustomer = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
@@ -63,7 +63,6 @@ namespace M3App
             this.btn_OrderManagement.TabIndex = 4;
             this.btn_OrderManagement.Text = "Order Management";
             this.btn_OrderManagement.UseVisualStyleBackColor = true;
-            this.btn_OrderManagement.Click += new System.EventHandler(this.ManageOrders);
             // 
             // btn_ProductManagement
             // 
@@ -74,7 +73,6 @@ namespace M3App
             this.btn_ProductManagement.TabIndex = 3;
             this.btn_ProductManagement.Text = "Product Management";
             this.btn_ProductManagement.UseVisualStyleBackColor = true;
-            this.btn_ProductManagement.Click += new System.EventHandler(this.MangeInventory);
             // 
             // btn_CustomerManagement
             // 
@@ -85,7 +83,6 @@ namespace M3App
             this.btn_CustomerManagement.TabIndex = 2;
             this.btn_CustomerManagement.Text = "Customer Management";
             this.btn_CustomerManagement.UseVisualStyleBackColor = true;
-            this.btn_CustomerManagement.Click += new System.EventHandler(this.ManageCustomers);
             // 
             // ss_Queries
             // 
@@ -101,17 +98,17 @@ namespace M3App
             this.tss_Feedback.Name = "tss_Feedback";
             this.tss_Feedback.Size = new System.Drawing.Size(151, 17);
             this.tss_Feedback.Text = "What would you like to do?";
-            // 
-            // btn_EmailMinistry
-            // 
-            this.btn_EmailMinistry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_EmailMinistry.Location = new System.Drawing.Point(24, 27);
-            this.btn_EmailMinistry.Name = "btn_EmailMinistry";
-            this.btn_EmailMinistry.Size = new System.Drawing.Size(226, 43);
-            this.btn_EmailMinistry.TabIndex = 1;
-            this.btn_EmailMinistry.Text = "Email Ministry";
-            this.btn_EmailMinistry.UseVisualStyleBackColor = true;
-            this.btn_EmailMinistry.Click += new System.EventHandler(this.ManageListeners);
+			this.tss_Feedback.ForeColor = System.Drawing.SystemColors.WindowText;
+			// 
+			// btn_ListenerManagement
+			// 
+			this.btn_ListenerManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_ListenerManagement.Location = new System.Drawing.Point(24, 27);
+            this.btn_ListenerManagement.Name = "btn_ListenerManagement";
+            this.btn_ListenerManagement.Size = new System.Drawing.Size(226, 43);
+            this.btn_ListenerManagement.TabIndex = 1;
+            this.btn_ListenerManagement.Text = "Email Ministry";
+            this.btn_ListenerManagement.UseVisualStyleBackColor = true;
             // 
             // pnl_Controls
             // 
@@ -163,7 +160,7 @@ namespace M3App
             this.Controls.Add(this.btn_OrderManagement);
             this.Controls.Add(this.btn_ProductManagement);
             this.Controls.Add(this.btn_CustomerManagement);
-            this.Controls.Add(this.btn_EmailMinistry);
+            this.Controls.Add(this.btn_ListenerManagement);
             this.Controls.Add(this.mms_Main);
             this.Controls.Add(this.ss_Queries);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -173,7 +170,6 @@ namespace M3App
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Ministry Manager";
-            this.Load += new System.EventHandler(this.Reload);
             this.ss_Queries.ResumeLayout(false);
             this.ss_Queries.PerformLayout();
             this.ResumeLayout(false);
@@ -186,7 +182,7 @@ namespace M3App
         internal StatusStrip ss_Queries;
         internal ToolStripStatusLabel tss_Feedback;
         internal System.ComponentModel.BackgroundWorker bw_ChangedSizes;
-        internal Button btn_EmailMinistry;
+        internal Button btn_ListenerManagement;
         internal Panel pnl_Controls;
         internal SPPBC.M3Tools.MainMenuStrip mms_Main;
         internal CustomerDatabase dbCustomer;

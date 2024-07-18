@@ -139,7 +139,6 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             this.ldg_Listeners.AllowUserToAddRows = false;
             this.ldg_Listeners.AllowUserToOrderColumns = true;
-            this.ldg_Listeners.AutoGenerateColumns = false;
             this.ldg_Listeners.CanDelete = false;
             this.ldg_Listeners.CanEdit = false;
             this.ldg_Listeners.CanReorder = true;

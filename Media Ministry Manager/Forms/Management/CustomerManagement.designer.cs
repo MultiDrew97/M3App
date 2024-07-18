@@ -57,7 +57,6 @@ namespace M3App
             // 
             this.cdg_Customers.AllowUserToAddRows = false;
             this.cdg_Customers.AllowUserToOrderColumns = true;
-            this.cdg_Customers.AutoGenerateColumns = false;
             this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cdg_Customers.DataSource = this.bsCustomers;
@@ -84,7 +83,6 @@ namespace M3App
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(775, 441);
-            this.Icon = global::M3App.Properties.Resources.App_Icon;
             this.Name = "CustomerManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);

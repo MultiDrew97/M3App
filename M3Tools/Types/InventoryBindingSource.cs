@@ -21,8 +21,8 @@ namespace SPPBC.M3Tools.Data
 		/// <inheritdoc/>
 		/// </summary>
 		[Browsable(false)]
-		public new Types.InventoryCollection DataSource { 
-			get => (Types.InventoryCollection)base.DataSource;
+		public new object DataSource {
+			get => DesignMode ? typeof(Types.InventoryCollection) : (Types.InventoryCollection)base.DataSource;
 			set => base.DataSource = value;
 		}
 

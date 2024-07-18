@@ -13,23 +13,23 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="collection"></param>
 		/// <returns></returns>
-		public static new InventoryCollection Cast(System.Collections.ICollection collection)
+		public static new InventoryCollection Cast(System.Collections.IList collection)
 		{
-			InventoryCollection list = new();
+			InventoryCollection coll = new();
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
 					foreach (DataGridViewRow row in collection)
 					{
-						list.Add((Product)row.DataBoundItem);
+						coll.Add((Product)row.DataBoundItem);
 					}
 					break;
 			}
 
 
 
-			return list;
+			return coll;
 		}
 
 		/// <summary>

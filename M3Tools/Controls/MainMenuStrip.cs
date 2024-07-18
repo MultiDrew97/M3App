@@ -78,7 +78,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Occurs when a product is successfully added
 		/// </summary>
-		public event Events.Inventory.InventoryEventHandler AddProduct;
+		public event Events.Inventory.InventoryEventHandler AddInventory;
 
 		/// <summary>
 		/// Occurs when an order is successfully added

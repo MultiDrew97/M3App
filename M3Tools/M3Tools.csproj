@@ -758,6 +758,10 @@
       <CustomToolNamespace>SPPBC.M3Tools.My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
+    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.InventoryCollection.datasource" />
+    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
+    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.OrderCollection.datasource" />
     <None Include="Resources\configs\credentials.json" />
   </ItemGroup>
   <ItemGroup>
@@ -823,12 +827,11 @@
     <Folder Include="Exceptions\Orders\" />
     <Folder Include="Exceptions\Products\" />
     <Folder Include="My Project\DataSources\" />
-    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

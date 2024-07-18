@@ -36,14 +36,14 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="price"></param>
 		public void AddProduct(string itemName, int stock, decimal price)
 		{
-			AddProduct(new Types.Product(-1, itemName, stock, price, true));
+			AddInventory(new Types.Product(-1, itemName, stock, price, true));
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="item"></param>
-		public void AddProduct(Types.Product item)
+		public void AddInventory(Types.Product item)
 		{
 			Execute(Method.Post, $"{path}", JSON.ConvertToJSON(item));
 		}

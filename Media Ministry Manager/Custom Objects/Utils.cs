@@ -16,7 +16,6 @@ namespace M3App
 		/// <param name="form"></param>
 		/// <param name="args"></param>
 		/// <returns></returns>
-		//[STAThread]
 		public static void OpenForm(Type form, params object[] args)
 		{
 			// TODO: Find if there is a better way to handle this
@@ -29,7 +28,7 @@ namespace M3App
 			}
 			catch (Exception ex)
 			{
-				throw new Exception($"Failed to open form of type {form.Name}.\n\t{ex.Message}");
+				throw new ApplicationException($"Failed to open form of type {form.Name}.\n\nError:\n{ex.Message}");
 			}
 		}
 

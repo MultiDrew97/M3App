@@ -13,23 +13,23 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="collection"></param>
 		/// <returns></returns>
-		public static new CustomerCollection Cast(System.Collections.ICollection collection)
+		public static new CustomerCollection Cast(System.Collections.IList collection)
 		{
-			CustomerCollection list = new();
+			CustomerCollection coll = new();
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
 					foreach (DataGridViewRow row in collection)
 					{
-						list.Add((Customer)row.DataBoundItem);
+						coll.Add((Customer)row.DataBoundItem);
 					}
 					break;
 				default:
 					throw new Exception("Unable to cast collection");
 			}
 
-			return list;
+			return coll;
 		}
 
 		/// <summary>

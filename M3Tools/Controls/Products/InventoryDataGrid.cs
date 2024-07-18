@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -48,7 +49,7 @@ namespace SPPBC.M3Tools.Data
 		[Browsable(false)]
 		public new Types.InventoryCollection SelectedRows
 		{
-			get => Types.InventoryCollection.Cast(base.SelectedRows);
+			get => Types.InventoryCollection.Cast((IList)base.SelectedRows);
 		}
 
 		/// <summary>

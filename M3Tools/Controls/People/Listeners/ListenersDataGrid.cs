@@ -53,7 +53,7 @@ namespace SPPBC.M3Tools.Data
 		[Browsable(false)]
 		public new Types.ListenerCollection SelectedRows
 		{
-			get => Types.ListenerCollection.Cast(base.SelectedRows);
+			get => Types.ListenerCollection.Cast((IList)base.SelectedRows);
 		}
 
 		/// <summary>

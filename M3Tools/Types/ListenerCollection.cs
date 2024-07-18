@@ -14,23 +14,23 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="collection"></param>
 		/// <returns></returns>
-		public static new ListenerCollection Cast(System.Collections.ICollection collection)
+		public static new ListenerCollection Cast(System.Collections.IList collection)
 		{
-			ListenerCollection list = new();
+			ListenerCollection coll = new();
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
 					foreach (DataGridViewRow row in collection)
 					{
-						list.Add((Listener)row.DataBoundItem);
+						coll.Add((Listener)row.DataBoundItem);
 					}
 					break;
 			}
 
 
 
-			return list;
+			return coll;
 		}
 
 		/// <summary>

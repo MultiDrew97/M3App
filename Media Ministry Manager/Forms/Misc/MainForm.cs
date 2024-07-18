@@ -16,25 +16,42 @@ namespace M3App
 		{
 			InitializeComponent();
 
+			// Menu Strip
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
-			FormClosed += ClosedForm;
+			mms_Main.ExitApplication += new EventHandler(ExitApp);
+			mms_Main.Logout += new EventHandler(Logout);
+			mms_Main.AddCustomer += new SPPBC.M3Tools.Events.Customers.CustomerEventHandler(AddCustomer);
+			mms_Main.AddListener += new SPPBC.M3Tools.Events.Listeners.ListenerEventHandler(AddListener);
+			mms_Main.AddOrder += new SPPBC.M3Tools.Events.Orders.OrderEventHandler(AddOrder);
+			mms_Main.AddInventory += new SPPBC.M3Tools.Events.Inventory.InventoryEventHandler(AddInventory);
+
+			// Management Buttons
+			btn_ProductManagement.Click += (sender, e) => Manage(sender, new(SPPBC.M3Tools.Events.ManageType.Inventory));
+			btn_CustomerManagement.Click += (sender, e) => Manage(sender, new(SPPBC.M3Tools.Events.ManageType.Customers));
+			btn_ListenerManagement.Click += (sender, e) => Manage(sender, new(SPPBC.M3Tools.Events.ManageType.Listeners));
+			btn_OrderManagement.Click += (sender, e) => Manage(sender, new(SPPBC.M3Tools.Events.ManageType.Orders));
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ClosedForm(object sender, EventArgs e)
+		protected override void OnFormClosed(FormClosedEventArgs e)
 		{
+			// Place any custom closing behavior here
 			UseWaitCursor = false;
+
+			base.OnFormClosed(e);
 		}
 
-		private void Reload(object sender, EventArgs e)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void OnLoad(EventArgs e)
 		{
-			tss_Feedback.Text = "What would you like to do?";
-			tss_Feedback.ForeColor = SystemColors.WindowText;
-			Focus();
+			// Place any custom loading behavior here
+			base.OnLoad(e);
 		}
 
 		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
@@ -45,20 +62,33 @@ namespace M3App
 				switch (e.Manage)
 				{
 					case SPPBC.M3Tools.Events.ManageType.Customers:
-						ManageCustomers(sender, e);
+						UseWaitCursor = true;
+						Utils.OpenForm(typeof(CustomerManagement));
+						Close();
 						break;
 					case SPPBC.M3Tools.Events.ManageType.Listeners:
-						ManageListeners(sender, e);
+						UseWaitCursor = true;
+						Utils.OpenForm(typeof(ListenerManagement));
+						Close();
 						break;
 					case SPPBC.M3Tools.Events.ManageType.Orders:
-						ManageOrders(sender, e);
+#if !DEBUG
+						MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 						break;
+#else
+						UseWaitCursor = true;
+						Utils.OpenForm(typeof(OrderManagement));
+						Close();
+						break;
+#endif
 					case SPPBC.M3Tools.Events.ManageType.Inventory:
-						MangeInventory(sender, e);
+						UseWaitCursor = true;
+						Utils.OpenForm(typeof(InventoryManagement));
+						Close();
 						break;
 				}
 			}
-			catch(Exception ex)
+			catch(ApplicationException ex)
 			{
 				MessageBox.Show(ex.Message, "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Console.Error.WriteLine(ex.Message);
@@ -67,46 +97,6 @@ namespace M3App
 			{
 				UseWaitCursor = false;
 			}
-		}
-
-		private void MangeInventory(object sender, EventArgs e)
-		{
-			UseWaitCursor = true;
-			Utils.OpenForm(typeof(InventoryManagement));
-			//var products = new InventoryManagement();
-			//products.Show();
-			Close();
-		}
-
-		private void ManageOrders(object sender, EventArgs e)
-		{
-#if !DEBUG
-			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			return;
-#endif
-			UseWaitCursor = true;
-			Utils.OpenForm(typeof(OrderManagement));
-			//var orders = new OrderManagement();
-			//orders.Show();
-			Close();
-		}
-
-		private void ManageCustomers(object sender, EventArgs e)
-		{
-			UseWaitCursor = true;
-			Utils.OpenForm(typeof(CustomerManagement));
-			//var customers = new CustomerManagement();
-			//customers.Show();
-			Close();
-		}
-
-		private void ManageListeners(object sender, EventArgs e)
-		{
-			UseWaitCursor = true;
-			Utils.OpenForm(typeof(ListenerManagement));
-			//var listeners = new ListenerManagement();
-			//listeners.Show();
-			Close();
 		}
 
 		private void Logout(object sender, EventArgs e)
@@ -140,10 +130,10 @@ namespace M3App
 			UseWaitCursor = false;
 		}
 
-		private void AddProduct(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
+		private void AddInventory(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
 		{
 			UseWaitCursor = true;
-			dbInventory.AddProduct(e.Value);
+			dbInventory.AddInventory(e.Value);
 			MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}

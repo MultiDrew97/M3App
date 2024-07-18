@@ -18,23 +18,32 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="collection"></param>
 		/// <returns></returns>
-		public static new OrderCollection Cast(System.Collections.ICollection collection)
+		public static new OrderCollection Cast(System.Collections.IList collection)
 		{
-			OrderCollection list = new();
+			OrderCollection coll;
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
+					coll = new();
 					foreach (DataGridViewRow row in collection)
 					{
-						list.Add((Order)row.DataBoundItem);
+						coll.Add((Order)row.DataBoundItem);
 					}
-					break;
+					return coll;
+				case var @list when @list == typeof(System.Collections.IList):
+				case var @gen_list when @gen_list == typeof(List<Order>):
+					coll = new();
+					foreach (Order item in collection)
+					{
+						coll.Add(item);
+					}
+					return coll;
+				case var @dbColl when dbColl == typeof(OrderCollection):
+					return (OrderCollection)collection;
 				default:
-					throw new Exception("Unable to cast collection");
+					throw new Exception("Unable to cast collection to OrderCollection");
 			}
-
-			return list;
 		}
 
 		/// <summary>

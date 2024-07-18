@@ -21,9 +21,9 @@ namespace SPPBC.M3Tools.Data
 		/// 
 		/// </summary>
 		[Browsable(false)]
-		public new Types.CustomerCollection DataSource
+		public new object DataSource
 		{
-			get => (Types.CustomerCollection)base.DataSource;
+			get => DesignMode ? typeof(Types.CustomerCollection) : (Types.CustomerCollection)base.DataSource;
 			set => base.DataSource = value;
 		}
 

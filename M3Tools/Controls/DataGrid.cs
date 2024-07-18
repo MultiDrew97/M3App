@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -12,6 +13,12 @@ namespace SPPBC.M3Tools.Data
 	{
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
+
+
+		protected internal DataGridViewCheckBoxColumn dgc_Selection;
+		protected internal DataGridViewTextBoxColumn dgc_ID;
+		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
+		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
 
 		// TODO: Maybe Remove this later
 		/// <summary>
@@ -34,12 +41,10 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event EventHandler Reload;
 
-		// TODO: Make it so the datagrid has it's own binding source and when using in a form, you just pass the list itself
-
 		/// <summary>
 		/// 
 		/// </summary>
-		public new bool AutoGenerateColumns = false;
+		public new bool AutoGenerateColumns => false;
 
 		/// <summary>
 		/// 
@@ -66,38 +71,30 @@ namespace SPPBC.M3Tools.Data
 				return;
 			}
 
-			int failed = 0;
-			int total = SelectedRows.Count;
+			int done = 0;
 
 			foreach (DataGridViewRow row in SelectedRows)
 			{
 				try
 				{
 					OnUserDeletingRow(new DataGridViewRowCancelEventArgs(row));
+					done++;
 				}
 				catch (Exception ex)
 				{
-					Console.WriteLine(ex.Message);
-					failed += 1;
+					Console.Error.WriteLine(ex.Message);
 					continue;
 				}
 			}
-
-			if (failed > 0)
-			{
-				System.Windows.Forms.MessageBox.Show($"Failed to remove {failed} {(failed > 1 ? "entries" : "entry")}", "Failed Removals", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-			}
-
-			if (total - failed > 0)
-			{
-				System.Windows.Forms.MessageBox.Show($"Successfully removed {total - failed} {(total - failed > 1 ? "entries" : "entry")}", "Successful Removals", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-			}
+			
+			MessageBox.Show($"Failed to remove {done} {(done > 1 ? "entries" : "entry")}", "Entries Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		/// <summary>
 		/// Whether the data grid allows for column reordering
 		/// </summary>
 		[DefaultValue(false)]
+		[Category("Behavior")]
 		public bool CanReorder
 		{
 			get => AllowUserToOrderColumns;
@@ -108,6 +105,7 @@ namespace SPPBC.M3Tools.Data
 		/// Whether the data grid allows for editing data
 		/// </summary>
 		[DefaultValue(true)]
+		[Category("Behavior")]
 		public bool CanEdit
 		{
 			get => dgc_Edit.Visible;
@@ -118,6 +116,7 @@ namespace SPPBC.M3Tools.Data
 		/// Whether the data grid allows for deleting entries
 		/// </summary>
 		[DefaultValue(true)]
+		[Category("Behavior")]
 		public bool CanDelete
 		{
 			get => dgc_Remove.Visible;
@@ -128,7 +127,8 @@ namespace SPPBC.M3Tools.Data
 		/// Whether the data grid allows for adding entries
 		/// </summary>
 		[DefaultValue(false)]
-		public bool CanAdd 
+		[Category("Behavior")]
+		public bool CanAdd
 		{
 			get => base.AllowUserToAddRows;
 			set => base.AllowUserToAddRows = value;
@@ -138,14 +138,15 @@ namespace SPPBC.M3Tools.Data
 		/// 
 		/// </summary>
 		[Browsable(false)]
-		public new System.Collections.ICollection SelectedRows
+		public new DataGridViewSelectedRowCollection SelectedRows
 		{
 			get
 			{
-				if (RowsCheckable) { 
+				if (RowsCheckable)
+				{
 					ClearSelection();
 
-					foreach (System.Windows.Forms.DataGridViewRow row in Rows)
+					foreach (DataGridViewRow row in Rows)
 						row.Selected = (bool?)row.Cells[dgc_Selection.DisplayIndex].Value ?? false;
 				}
 
@@ -174,10 +175,66 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
+			// Standard columns for data grid
+			dgc_Selection = new DataGridViewCheckBoxColumn();
+			dgc_ID = new DataGridViewTextBoxColumn();
+			dgc_Edit = new DataGridViewImageButtonEditColumn();
+			dgc_Remove = new DataGridViewImageButtonDeleteColumn();
+
+			// Context Menu Strip events
 			cms_Tools.Opened += new EventHandler(ToolsOpened);
 			cms_Tools.EditSelected += new EventHandler(EditSelected);
 			cms_Tools.RemoveSelected += new EventHandler(RemoveSelectedRows);
 			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
+		}
+
+		/// <summary>
+		/// Load the columns for the data grid
+		/// </summary>
+		protected virtual void LoadColumns()
+		{
+			// Entry selection column
+			dgc_Selection.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+			dgc_Selection.FalseValue = "False";
+			dgc_Selection.Frozen = true;
+			dgc_Selection.HeaderText = "";
+			dgc_Selection.MinimumWidth = 25;
+			dgc_Selection.Name = "dgc_Selection";
+			dgc_Selection.Resizable = DataGridViewTriState.False;
+			dgc_Selection.SortMode = DataGridViewColumnSortMode.Automatic;
+			dgc_Selection.TrueValue = "True";
+			dgc_Selection.Width = 25;
+
+			// Entry ID column
+			dgc_ID.DataPropertyName = "Id";
+			dgc_ID.HeaderText = "ID";
+			dgc_ID.Name = "dgc_ID";
+			dgc_ID.ReadOnly = true;
+			dgc_ID.Visible = false;
+
+			// Edit entry button column
+			dgc_Edit.ButtonImage = null;
+			dgc_Edit.FillWeight = 5F;
+			dgc_Edit.FlatStyle = FlatStyle.Flat;
+			dgc_Edit.HeaderText = "";
+			dgc_Edit.MinimumWidth = 25;
+			dgc_Edit.Name = "dgc_Edit";
+			dgc_Edit.ReadOnly = true;
+			dgc_Edit.Resizable = DataGridViewTriState.False;
+			dgc_Edit.ToolTipText = "Edit";
+			dgc_Edit.Width = 25;
+
+			// Remove entry button column
+			dgc_Remove.ButtonImage = null;
+			dgc_Remove.FillWeight = 5F;
+			dgc_Remove.FlatStyle = FlatStyle.Flat;
+			dgc_Remove.HeaderText = "";
+			dgc_Remove.MinimumWidth = 25;
+			dgc_Remove.Name = "dgc_Remove";
+			dgc_Remove.ReadOnly = true;
+			dgc_Remove.Resizable = DataGridViewTriState.False;
+			dgc_Remove.ToolTipText = "Remove";
+			dgc_Remove.Width = 25;
 		}
 
 		/// <summary>
@@ -190,7 +247,7 @@ namespace SPPBC.M3Tools.Data
 			foreach (DataGridViewRow row in Rows)
 				row.Cells[dgc_Selection.Index].Value = chk_SelectAll.Checked;
 
-			this.CommitEdit(DataGridViewDataErrorContexts.Commit);
+			CommitEdit(DataGridViewDataErrorContexts.Commit);
 		}
 
 		private void ToolsOpened(object sender, EventArgs e)
@@ -207,7 +264,7 @@ namespace SPPBC.M3Tools.Data
 				return;
 			}
 
-			foreach (System.Windows.Forms.DataGridViewRow row in SelectedRows)
+			foreach (DataGridViewRow row in SelectedRows)
 				UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)row.DataBoundItem, M3Tools.Events.EventType.Updated));
 		}
 
@@ -247,12 +304,12 @@ namespace SPPBC.M3Tools.Data
 			RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
 		}
 
-		protected override void OnDataError(bool displayErrorDialogIfNoHandler, DataGridViewDataErrorEventArgs e)
-		{
-			base.OnDataError(false, e);
+		//protected override void OnDataError(bool displayErrorDialogIfNoHandler, DataGridViewDataErrorEventArgs e)
+		//{
+		//	base.OnDataError(false, e);
 
-			if (Rows[e.RowIndex] is not null)
-				return;
-		}
+		//	if (Rows[e.RowIndex] is not null)
+		//		return;
+		//}
 	}
 }
