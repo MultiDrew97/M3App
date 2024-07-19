@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace SPPBC.M3Tools.Types
@@ -14,55 +13,49 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("orderID")]
+		[JsonPropertyName("orderID")]
 		public new int Id { get; }
 
 		/// <summary>
 		/// The customer the order was placed for
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("customer")]
+		[JsonPropertyName("customer")]
 		public Customer Customer { get; set; }
 
 		/// <summary>
 		/// The item the order was placed for
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("item")]
+		[JsonPropertyName("item")]
 		public Product Item { get; set; }
 
 		/// <summary>
 		/// How many of the item the customer wanted
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("quantity")]
+		[JsonPropertyName("quantity")]
 		public int Quantity { get; set; }
 
 		/// <summary>
 		/// The subtotal for the order
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("total")]
-		public double OrderTotal
-		{
-			get
-			{
-				return (double)(Item.Price * Quantity);
-			}
-		}
+		[JsonPropertyName("total")]
+		public double OrderTotal => (double)(Item.Price * Quantity);
 
 		/// <summary>
 		/// The date the order was placed
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("ordered")]
+		[JsonPropertyName("ordered")]
 		public DateTime OrderDate { get; set; }
 
 		/// <summary>
 		/// The date the order was fulfilled
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("completed")]
+		[JsonPropertyName("completed")]
 		public DateTime CompletedDate { get; set; }
 
 		/// <summary>
 		/// An empty instance of an Order object
 		/// </summary>
-		public new static Order None { get; } = new();
+		public static new Order None { get; } = new();
 
 		/// <summary>
 		/// 
@@ -80,7 +73,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="quantity"></param>
 		/// <param name="orderDate"></param>
 		/// <param name="completedDate"></param>
-		public Order(int orderID, int customerID = -1, int itemID = -1, int quantity = 0, DateTime orderDate = default, DateTime completedDate = default): base(orderID)
+		public Order(int orderID, int customerID = -1, int itemID = -1, int quantity = 0, DateTime orderDate = default, DateTime completedDate = default) : base(orderID)
 		{
 			Quantity = quantity;
 			OrderDate = orderDate.Year < 2000 ? DateTime.Now : orderDate;
@@ -100,7 +93,7 @@ namespace SPPBC.M3Tools.Types
 				return;
 			}
 
-			using var c = new Database.CustomerDatabase();
+			using Database.CustomerDatabase c = new();
 			Customer = c.GetCustomer(customerID);
 		}
 
@@ -115,7 +108,7 @@ namespace SPPBC.M3Tools.Types
 				return;
 			}
 
-			using var i = new Database.InventoryDatabase();
+			using Database.InventoryDatabase i = new();
 			Item = i.GetProduct(itemID);
 		}
 
