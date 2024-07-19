@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace SPPBC.M3Tools.Types
 {

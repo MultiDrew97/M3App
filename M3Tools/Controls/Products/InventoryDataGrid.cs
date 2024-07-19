@@ -47,9 +47,9 @@ namespace SPPBC.M3Tools.Data
 		/// <inheritdoc/>
 		/// </summary>
 		[Browsable(false)]
-		public new Types.InventoryCollection SelectedRows
+		public Types.InventoryCollection SelectedInventory
 		{
-			get => Types.InventoryCollection.Cast((IList)base.SelectedRows);
+			get => Types.InventoryCollection.Cast(base.SelectedRows);
 		}
 
 		/// <summary>

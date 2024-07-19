@@ -20,25 +20,26 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static new OrderCollection Cast(System.Collections.IList collection)
 		{
-			OrderCollection coll;
+			if (collection == null || collection.Count <= 0) return new();
+
+			OrderCollection result;
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
-					coll = new();
+					result = new();
 					foreach (DataGridViewRow row in collection)
 					{
-						coll.Add((Order)row.DataBoundItem);
+						result.Add((Order)row.DataBoundItem);
 					}
-					return coll;
+					return result;
 				case var @list when @list == typeof(System.Collections.IList):
-				case var @gen_list when @gen_list == typeof(List<Order>):
-					coll = new();
+					result = new();
 					foreach (Order item in collection)
 					{
-						coll.Add(item);
+						result.Add(item);
 					}
-					return coll;
+					return result;
 				case var @dbColl when dbColl == typeof(OrderCollection):
 					return (OrderCollection)collection;
 				default:

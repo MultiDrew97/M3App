@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace SPPBC.M3Tools
 {
@@ -10,12 +11,12 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// The current selection of recipients
 		/// </summary>
-		[System.ComponentModel.Browsable(false)]
+		[Browsable(false)]
 	    public Types.ListenerCollection Selection
         {
             get
             {
-				return ldg_Listeners.SelectedRows;
+				return ldg_Listeners.SelectedListeners;
             }
         }
 

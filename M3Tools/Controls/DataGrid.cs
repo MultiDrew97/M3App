@@ -44,11 +44,6 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// 
 		/// </summary>
-		public new bool AutoGenerateColumns => false;
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
@@ -135,6 +130,20 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
+		/// Whether rows can be selected in the data grid
+		/// </summary>
+		[DefaultValue(true)]
+		public bool RowsCheckable
+		{
+			get => dgc_Selection.Visible;
+			set
+			{
+				dgc_Selection.Visible = value;
+				chk_SelectAll.Visible = value;
+			}
+		}
+
+		/// <summary>
 		/// 
 		/// </summary>
 		[Browsable(false)]
@@ -155,24 +164,12 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// Whether rows can be selected in the data grid
-		/// </summary>
-		[DefaultValue(true)]
-		public bool RowsCheckable
-		{
-			get => dgc_Selection.Visible;
-			set
-			{
-				dgc_Selection.Visible = value;
-				chk_SelectAll.Visible = value;
-			}
-		}
-
-		/// <summary>
 		/// 
 		/// </summary>
 		public DataGrid() : base()
 		{
+			AutoGenerateColumns = false;
+
 			InitializeComponent();
 
 			// Standard columns for data grid
@@ -207,7 +204,6 @@ namespace SPPBC.M3Tools.Data
 
 			// Entry ID column
 			dgc_ID.DataPropertyName = "Id";
-			dgc_ID.HeaderText = "ID";
 			dgc_ID.Name = "dgc_ID";
 			dgc_ID.ReadOnly = true;
 			dgc_ID.Visible = false;

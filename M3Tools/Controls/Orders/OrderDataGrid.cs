@@ -9,6 +9,7 @@ namespace SPPBC.M3Tools.Data
 		private readonly DataGridViewTextBoxColumn dgc_CustomerName;
 		private readonly DataGridViewTextBoxColumn dgc_ItemName;
 		private readonly DataGridViewTextBoxColumn dgc_OrderTotal;
+		private readonly DataGridViewTextBoxColumn dgc_Quantity;
 		private readonly DataGridViewTextBoxColumn dgc_OrderDate;
 		private readonly DataGridViewTextBoxColumn dgc_CompletedDate;
 
@@ -54,7 +55,7 @@ namespace SPPBC.M3Tools.Data
 		/// 
 		/// </summary>
 		[Browsable(false)]
-		public new Types.OrderCollection SelectedRows
+		public Types.OrderCollection SelectedOrders
 		{
 			get => Types.OrderCollection.Cast(base.SelectedRows);
 		}
@@ -69,6 +70,7 @@ namespace SPPBC.M3Tools.Data
 			dgc_CustomerName = new DataGridViewTextBoxColumn();
 			dgc_ItemName = new DataGridViewTextBoxColumn();
 			dgc_OrderTotal = new DataGridViewTextBoxColumn();
+			dgc_Quantity = new DataGridViewTextBoxColumn();
 			dgc_OrderDate = new DataGridViewTextBoxColumn();
 			dgc_CompletedDate = new DataGridViewTextBoxColumn();
 
@@ -88,68 +90,69 @@ namespace SPPBC.M3Tools.Data
 
 			dgc_ID.HeaderText = "OrderID";
 
-			// 
-			// dgc_CustomerName
-			// 
-			dgc_CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			// Customer Column
+			dgc_CustomerName.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+			dgc_CustomerName.DataPropertyName = "Customer.Name";
 			dgc_CustomerName.FillWeight = 25F;
 			dgc_CustomerName.HeaderText = "Customer";
 			dgc_CustomerName.MinimumWidth = 10;
 			dgc_CustomerName.Name = "dgc_CustomerName";
-			dgc_CustomerName.ReadOnly = true;
-			// 
-			// dgc_ItemName
-			// 
-			dgc_ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+
+			// Item Column
+			dgc_ItemName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+			dgc_ItemName.DataPropertyName = "Item.Name";
 			dgc_ItemName.FillWeight = 25F;
 			dgc_ItemName.HeaderText = "Item";
 			dgc_ItemName.MinimumWidth = 10;
 			dgc_ItemName.Name = "dgc_ItemName";
-			dgc_ItemName.ReadOnly = true;
-			// 
-			// dgc_OrderTotal
-			// 
-			dgc_OrderTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+
+			// Quantity Column
+			dgc_Quantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+			dgc_Quantity.DataPropertyName = "Quantity";
+			dgc_Quantity.FillWeight = 25F;
+			dgc_Quantity.HeaderText = "Quantity";
+			dgc_Quantity.MinimumWidth = 10;
+			dgc_Quantity.Name = "dgc_Quantity";
+
+			// Order Total Column
+			dgc_OrderTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			dgc_OrderTotal.DataPropertyName = "Total";
 			dgc_OrderTotal.DefaultCellStyle = new() { Alignment = DataGridViewContentAlignment.MiddleCenter, Format = "C2", NullValue = "0" };
 			dgc_OrderTotal.FillWeight = 25F;
 			dgc_OrderTotal.HeaderText = "Total";
 			dgc_OrderTotal.MinimumWidth = 50;
 			dgc_OrderTotal.Name = "dgc_OrderTotal";
-			dgc_OrderTotal.ReadOnly = true;
-			// 
-			// dgc_OrderDate
-			// 
-			dgc_OrderDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+
+			// Order Placed Date Column
+			dgc_OrderDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			dgc_OrderDate.DataPropertyName = "OrderDate";
 			dgc_OrderDate.DefaultCellStyle = new() { Alignment = DataGridViewContentAlignment.MiddleCenter, Format = "d", NullValue = "N/A" };
 			dgc_OrderDate.FillWeight = 25F;
 			dgc_OrderDate.HeaderText = "Ordered";
 			dgc_OrderDate.MinimumWidth = 10;
 			dgc_OrderDate.Name = "dgc_OrderDate";
-			dgc_OrderDate.ReadOnly = true;
-			// 
-			// dgc_CompletedDate
-			// 
-			dgc_CompletedDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+
+			// Order Completed Date Column
+			dgc_CompletedDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			dgc_CompletedDate.DataPropertyName = "CompletedDate";
 			dgc_CompletedDate.DefaultCellStyle = new() { Alignment = DataGridViewContentAlignment.MiddleCenter, Format = "d", NullValue = "N/A" };
 			dgc_CompletedDate.FillWeight = 25F;
 			dgc_CompletedDate.HeaderText = "Completed";
 			dgc_CompletedDate.MinimumWidth = 10;
 			dgc_CompletedDate.Name = "dgc_CompletedDate";
-			dgc_CompletedDate.ReadOnly = true;
 
 			Columns.AddRange(new DataGridViewColumn[] {
-			dgc_Selection,
-			dgc_ID,
-			dgc_CustomerName,
-			dgc_ItemName,
-			dgc_OrderTotal,
-			dgc_OrderDate,
-			dgc_CompletedDate,
-			dgc_Edit,
-			dgc_Remove});
+				dgc_Selection,
+				dgc_ID,
+				dgc_CustomerName,
+				dgc_ItemName,
+				dgc_Quantity,
+				dgc_OrderTotal,
+				dgc_OrderDate,
+				dgc_CompletedDate,
+				dgc_Edit,
+				dgc_Remove
+			});
 		}
 	}
 }
