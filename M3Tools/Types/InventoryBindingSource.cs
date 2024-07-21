@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace SPPBC.M3Tools.Data
 {
 	/// <summary>
 	/// A binding source that contains a list of inventory items
 	/// </summary>
-    public class InventoryBindingSource : BindingSource<Types.Product>
-    {
+	public class InventoryBindingSource : BindingSource<Types.Product>
+	{
 		private readonly string InventoryFilter = "[ItemName] LIKE '%{0}%'";
 		/// <summary>
 		/// 
@@ -18,10 +17,11 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// <inheritdoc/>
+		/// 
 		/// </summary>
 		[Browsable(false)]
-		public new object DataSource {
+		public new object DataSource
+		{
 			get => DesignMode ? typeof(Types.InventoryCollection) : (Types.InventoryCollection)base.DataSource;
 			set => base.DataSource = value;
 		}

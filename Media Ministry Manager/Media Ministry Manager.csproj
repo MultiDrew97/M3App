@@ -169,7 +169,7 @@
     <Compile Include="Forms\Management\ManagementForm.designer.cs">
       <DependentUpon>ManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="M3AppContext.cs" />
+    <Compile Include="Properties\M3AppContext.cs" />
     <Compile Include="Assets\MediaMinistrySplash.Designer.cs">
       <DependentUpon>MediaMinistrySplash.cs</DependentUpon>
     </Compile>
@@ -274,11 +274,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Application.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -361,13 +356,7 @@
     <None Include="M3App.pfx" />
     <None Include="MediaMinistryManager.pfx" />
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>M3App</CustomToolNamespace>
-    </None>
     <None Include="App.config" />
-    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>M3App.Properties</CustomToolNamespace>
@@ -411,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="My Project\DataSources\" />
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Runtime">

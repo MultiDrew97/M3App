@@ -7,15 +7,15 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// Class containing customer data
 	/// </summary>
-    public class Customer : Person
-    {
-        // Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
-        private string __phone;
+	public class Customer : Person
+	{
+		// Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
+		private string __phone;
 
 		/// <summary>
 		/// An empty instance of a customer
 		/// </summary>
-		public new static Customer None => new();
+		public static new Customer None => new();
 
 		/// <summary>
 		/// 
@@ -31,39 +31,33 @@ namespace SPPBC.M3Tools.Types
 		/// The customers phone number
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
-        [System.Text.Json.Serialization.JsonPropertyName("phoneNumber")]
-        public string Phone
-        {
-            get
-            {
-                return __phone;
-            }
-            set
-            {
-                __phone = value.FormatPhone();
-            }
-        }
+		[System.Text.Json.Serialization.JsonPropertyName("phoneNumber")]
+		public string Phone
+		{
+			get => __phone;
+			set => __phone = value.FormatPhone();
+		}
 
 		/// <summary>
 		/// The shipping address of the customer
 		/// </summary>
-        [System.ComponentModel.Category("Contact")]
-        [System.ComponentModel.TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-        [System.Text.Json.Serialization.JsonPropertyName("address")]
-        public Address Address { get; set; }
+		[System.ComponentModel.Category("Contact")]
+		[System.ComponentModel.TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+		[System.Text.Json.Serialization.JsonPropertyName("address")]
+		public Address Address { get; set; }
 
 		/// <summary>
 		/// The date the user was added to the database
 		/// </summary>
-        [System.Text.Json.Serialization.JsonPropertyName("joined")]
-        public DateTime Joined { get; set; }
+		[System.Text.Json.Serialization.JsonPropertyName("joined")]
+		public DateTime Joined { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public Customer() : this(-1)
-        {
-        }
+		public Customer() : this(-1)
+		{
+		}
 
 		/// <summary>
 		/// 
@@ -75,39 +69,39 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="email"></param>
 		/// <param name="phoneNumber"></param>
 		/// <param name="joined"></param>
-        public Customer(int customerID, string firstName = "John", string lastName = "Doe", Address address = null, string email = "johndoe@domain.ext", string phoneNumber = "1234567890", string joined = null) : this(customerID, $"{firstName} {lastName}", address, phoneNumber, email, string.IsNullOrWhiteSpace(joined) ? default : DateTime.Parse(joined))
-        {
-        }
+		public Customer(int customerID, string firstName = "New", string lastName = "Customer", Address address = null, string phoneNumber = "1234567890", string email = "johndoe@domain.ext", string joined = null) : this(customerID, $"{firstName} {lastName}", address, phoneNumber, email, string.IsNullOrWhiteSpace(joined) ? default : DateTime.Parse(joined))
+		{
+		}
 
-        private Customer(int customerID, string name, Address address, string phone, string email, DateTime @join) : base(customerID, name, email)
-        {
-            Phone = phone;
-            Address = address ?? Address.None;
-            Joined = join;
-        }
+		private Customer(int customerID, string name, Address address, string phone, string email, DateTime @join) : base(customerID, name, email)
+		{
+			Phone = phone;
+			Address = address ?? Address.None;
+			Joined = join;
+		}
 
 		/// <summary>
 		/// Returns the customer in a string format
 		/// </summary>
 		/// <returns></returns>
-        public override string ToString()
-        {
+		public override string ToString()
+		{
 			// Id,Name,Email,Address,Phone,Joined
-			return string.Join(My.Settings.Default.ObjectDelimiter, Id, Name, Email, Address.ToString(), Phone, Joined);
-        }
+			return string.Join(Properties.Settings.Default.ObjectDelimiter, Id, Name, Email, Address.ToString(), Phone, Joined);
+		}
 
 		/// <summary>
 		/// Returns the info for the custoemr in a human readable format
 		/// </summary>
 		/// <returns></returns>
-        public string Display()
-        {
-            // ID) Name (Email)
-            // Street
-            // City, ST ZipCode
-            // Phone Number
-            return $"{Id}) {Name} (e: {Email} p: {Phone}){Constants.vbCrLf}{Constants.vbCrLf}{Address.Display()}{Constants.vbCrLf}";
-        }
+		public string Display()
+		{
+			// ID) Name (Email)
+			// Street
+			// City, ST ZipCode
+			// Phone Number
+			return $"{Id}) {Name} (e: {Email} p: {Phone}){Constants.vbCrLf}{Constants.vbCrLf}{Address.Display()}{Constants.vbCrLf}";
+		}
 
 		/// <summary>
 		/// Determine if a customer object is equal to another
@@ -117,15 +111,27 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static bool operator ==(Customer left, Customer right)
 		{
-			if ((left is null && right is not null) || (right is null && left is not null)) return false;
-			if (left.FirstName != right.FirstName) return false;
-			if (left.LastName != right.LastName) return false;
-			if (left.Address != right.Address) return false;
-			if (left.Email != right.Email) return false;
-			if (left.Phone != right.Phone) return false;
-			if (left.Joined != right.Joined) return false;
+			if ((left is null && right is not null) || (right is null && left is not null))
+			{
+				return false;
+			}
 
-			return true;
+			if (left.FirstName != right.FirstName)
+			{
+				return false;
+			}
+
+			if (left.LastName != right.LastName)
+			{
+				return false;
+			}
+
+			if (left.Address != right.Address)
+			{
+				return false;
+			}
+
+			return left.Email == right.Email && left.Phone == right.Phone && left.Joined == right.Joined;
 		}
 
 		/// <summary>
@@ -138,5 +144,5 @@ namespace SPPBC.M3Tools.Types
 		{
 			return !(left == right);
 		}
-    }
+	}
 }

@@ -62,7 +62,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="stock"></param>
 		/// <param name="price"></param>
 		/// <param name="available"></param>
-		public Product(int productID, string name = "New Product", int stock = 0, decimal price = 0m, bool available = false): base(productID)
+		public Product(int productID, string name = "New Product", int stock = 0, decimal price = 0m, bool available = false) : base(productID)
 		{
 			Name = name;
 			Stock = stock;
@@ -85,7 +85,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Join(My.Settings.Default.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
+			return string.Join(Properties.Settings.Default.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
 		}
 
 		/// <summary>
@@ -96,13 +96,27 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static bool operator ==(Product left, Product right)
 		{
-			if ((left is null && right is not null) || (right is null && left is not null)) return false;
-			if (left.Name != right.Name) return false;
-			if (left.Stock != right.Stock) return false;
-			if (left.Price != right.Price) return false;
-			if (left.Available != right.Available) return false;
-			
-			return true;
+			if ((left is null && right is not null) || (right is null && left is not null))
+			{
+				return false;
+			}
+
+			if (left.Name != right.Name)
+			{
+				return false;
+			}
+
+			if (left.Stock != right.Stock)
+			{
+				return false;
+			}
+
+			if (left.Price != right.Price)
+			{
+				return false;
+			}
+
+			return left.Available == right.Available;
 		}
 
 		/// <summary>

@@ -111,7 +111,7 @@ namespace SPPBC.M3Tools
             // tbtn_Select
             // 
             tbtn_Select.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tbtn_Select.Image = My.Resources.Resources.import;
+            tbtn_Select.Image = Properties.Resources.import;
             tbtn_Select.ImageTransparentColor = System.Drawing.Color.Magenta;
             tbtn_Select.Margin = new System.Windows.Forms.Padding(0);
             tbtn_Select.Name = "tbtn_Select";

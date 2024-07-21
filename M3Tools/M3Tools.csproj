@@ -131,9 +131,6 @@
       <DependentUpon>OrderDataGrid.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\Users\UsernameException.cs" />
-    <Compile Include="My Project\MyNamespace.Static.1.Designer.cs" />
-    <Compile Include="My Project\MyNamespace.Static.2.Designer.cs" />
-    <Compile Include="My Project\MyNamespace.Static.3.Designer.cs" />
     <Compile Include="Components\Database\CustomerDatabase.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -286,6 +283,11 @@
     <Compile Include="Exceptions\Database\AuthorizationException.cs" />
     <Compile Include="Exceptions\Database\NotFoundException.cs" />
     <Compile Include="Exceptions\FormClosedException.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Types\Auth.cs" />
     <Compile Include="Types\BindingSource.cs">
       <SubType>Component</SubType>
@@ -547,17 +549,7 @@
     <Compile Include="Controls\People\Users\PasswordField.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="My Project\AssemblyInfo.cs" />
-    <Compile Include="My Project\Application.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="My Project\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Components\Database\CustomerDatabase.resx">
@@ -729,7 +721,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>SPPBC.M3Tools.My.Resources</CustomToolNamespace>
+      <CustomToolNamespace>SPPBC.M3Tools.Properties</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -749,19 +741,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="M3Tools.pfx" />
-    <None Include="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="My Project\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>SPPBC.M3Tools.My</CustomToolNamespace>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.CustomerCollection.datasource" />
-    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.InventoryCollection.datasource" />
-    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.ListenerCollection.datasource" />
-    <None Include="Properties\DataSources\SPPBC.M3Tools.Types.OrderCollection.datasource" />
     <None Include="Resources\configs\credentials.json" />
   </ItemGroup>
   <ItemGroup>
@@ -826,7 +809,7 @@
     <Folder Include="Exceptions\Listeners\" />
     <Folder Include="Exceptions\Orders\" />
     <Folder Include="Exceptions\Products\" />
-    <Folder Include="My Project\DataSources\" />
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

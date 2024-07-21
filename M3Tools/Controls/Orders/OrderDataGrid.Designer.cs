@@ -2,23 +2,6 @@
 {
 	partial class OrderDataGrid : DataGrid<Types.Order>
 	{
-		/// <summary> 
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
-
-		/// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
 
 		#region Component Designer generated code
 
@@ -40,7 +23,6 @@
             // OrderDataGrid
             // 
             this.DataSource = this.bsOrders;
-            this.RowTemplate.Height = 28;
             ((System.ComponentModel.ISupportInitialize)(this.bsOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
@@ -49,6 +31,7 @@
 		}
 
 		#endregion
+
 		internal OrderBindingSource bsOrders;
 	}
 }

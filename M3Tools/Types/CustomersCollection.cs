@@ -4,32 +4,50 @@ using System.Windows.Forms;
 namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
-	/// Filterable collection of customers
+	/// 
 	/// </summary>
-    public class CustomerCollection : DbEntryCollection<Customer>
-    {
+	public class CustomerCollection : DbEntryCollection<Customer>
+	{
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="collection"></param>
+		/// <param name="source"></param>
 		/// <returns></returns>
-		public static new CustomerCollection Cast(System.Collections.IList collection)
+		public static new CustomerCollection Cast(System.Collections.IList source)
 		{
-			CustomerCollection coll = new();
-			switch (collection.GetType())
+			if (source == null || source.Count <= 0)
+			{
+				return new();
+			}
+
+			CustomerCollection result;
+
+			switch (source.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
-					foreach (DataGridViewRow row in collection)
+					result = new();
+					foreach (DataGridViewRow row in source)
 					{
-						coll.Add((Customer)row.DataBoundItem);
+						result.Add((Customer)row.DataBoundItem);
 					}
-					break;
-				default:
-					throw new Exception("Unable to cast collection");
-			}
 
-			return coll;
+					return result;
+				case var @list when @list == typeof(System.Collections.IList):
+				case var @collection when collection == typeof(System.Collections.ICollection):
+					result = new();
+
+					foreach (Customer item in source)
+					{
+						result.Add(item);
+					}
+
+					return result;
+				case var @dbColl when dbColl == typeof(CustomerCollection):
+					return (CustomerCollection)source;
+				default:
+					throw new Exception("Unable to cast collection to CustomerCollection");
+			}
 		}
 
 		/// <summary>
@@ -38,15 +56,9 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="customer">The current customer to compare with</param>
 		/// <param name="index">The index of the current customer</param>
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
-        public override bool ApplyFilter(Customer customer, int index)
-        {
-            // TODO: Do I want to allow for nothing values?
-            if (customer is null)
-            {
-                return false;
-            }
-
-            return customer.Name.Contains(Filter) || customer.Email.Contains(Filter) || customer.Phone.Contains(Filter);
-        }
-    }
+		public override bool ApplyFilter(Customer customer, int index)
+		{
+			return customer is not null && (customer.Name.Contains(Filter) || customer.Email.Contains(Filter) || customer.Phone.Contains(Filter));
+		}
+	}
 }

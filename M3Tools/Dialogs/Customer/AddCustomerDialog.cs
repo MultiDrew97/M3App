@@ -10,188 +10,140 @@ namespace SPPBC.M3Tools.Dialogs
 	/// <summary>
 	/// The dialog responsible to retrieving new customer info
 	/// </summary>
-    public partial class AddCustomerDialog
-    {
+	public partial class AddCustomerDialog
+	{
 		/// <summary>
 		/// The event that occurs when a user is created
 		/// </summary>
-        public event CustomerEventHandler CustomerAdded;
+		public event CustomerEventHandler CustomerAdded;
 
-        private string FirstName
-        {
-            get
-            {
-                return gi_FirstName.Text;
-            }
-        }
+		private string FirstName => gi_FirstName.Text;
 
-        private string LastName
-        {
-            get
-            {
-                return gi_LastName.Text;
-            }
-        }
+		private string LastName => gi_LastName.Text;
 
-        private Address Address
-        {
-            get
-            {
-                return af_Address.Address;
-            }
-        }
+		private Address Address => af_Address.Address;
 
-        private string Phone
-        {
-            get
-            {
-                return pn_PhoneNumber.Text;
-            }
-        }
+		private string Phone => pn_PhoneNumber.Text;
 
-        private string Email
-        {
-            get
-            {
-                return gi_EmailAddress.Text;
-            }
-        }
+		private string Email => gi_EmailAddress.Text;
 
 		/// <summary>
 		/// The customer being created
 		/// </summary>
-        public Customer Customer
-        {
-            get
-            {
-                return new Customer(-1, FirstName, LastName, Address, Email, Phone);
-            }
-        }
+		public Customer Customer => new(-1, FirstName, LastName, Address, Email, Phone);
 
-        private bool ValidName
-        {
-            get
-            {
-                return ValidFirstName & ValidLastName;
-            }
-        }
+		private bool ValidName => ValidFirstName & ValidLastName;
 
-        private bool ValidFirstName
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(FirstName))
-                {
-                    ep_InputError.SetError(gi_FirstName, "A first name is required");
-                    return false;
-                }
+		private bool ValidFirstName
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(FirstName))
+				{
+					ep_InputError.SetError(gi_FirstName, "A first name is required");
+					return false;
+				}
 
-                return true;
-            }
-        }
+				return true;
+			}
+		}
 
-        private bool ValidLastName
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(LastName))
-                {
-                    ep_InputError.SetError(gi_LastName, "A last name is required");
-                    return false;
-                }
+		private bool ValidLastName
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(LastName))
+				{
+					ep_InputError.SetError(gi_LastName, "A last name is required");
+					return false;
+				}
 
-                return true;
-            }
-        }
+				return true;
+			}
+		}
 
-        private bool ValidEmail
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(Email) || !Regex.IsMatch(Email, My.Resources.Resources.EmailRegex2))
-                {
-                    ep_InputError.SetError(gi_EmailAddress, "No valid email address provided");
-                    return false;
-                }
+		private bool ValidEmail
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(Email) || !Regex.IsMatch(Email, Properties.Resources.EmailRegex2))
+				{
+					ep_InputError.SetError(gi_EmailAddress, "No valid email address provided");
+					return false;
+				}
 
-                return true;
-            }
-        }
+				return true;
+			}
+		}
 
-        private bool ValidCustomer
-        {
-            get
-            {
-                return ValidName && ValidEmail && af_Address.IsValidAddress && pn_PhoneNumber.ValidPhone;
-            }
-        }
+		private bool ValidCustomer => ValidName && ValidEmail && af_Address.IsValidAddress && pn_PhoneNumber.ValidPhone;
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public AddCustomerDialog()
-        {
-            InitializeComponent();
-        }
+		public AddCustomerDialog()
+		{
+			InitializeComponent();
+		}
 
-        private void PreviousStep(object sender, EventArgs e)
-        {
-            switch (tc_Creation.SelectedIndex)
-            {
-                case var @case when @case == tp_Basics.TabIndex:
-                    {
-                        var res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+		private void PreviousStep(object sender, EventArgs e)
+		{
+			switch (tc_Creation.SelectedIndex)
+			{
+				case var @case when @case == tp_Basics.TabIndex:
+					{
+						DialogResult res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                        if (!(res == DialogResult.Yes))
-                        {
-                            return;
-                        }
+						if (!(res == DialogResult.Yes))
+						{
+							return;
+						}
 
-                        DialogResult = DialogResult.Cancel;
-                        Close();
-                        break;
-                    }
+						DialogResult = DialogResult.Cancel;
+						Close();
+						break;
+					}
 
-                default:
-                    {
-                        tc_Creation.SelectedIndex -= 1;
-                        break;
-                    }
-            }
-        }
+				default:
+					{
+						tc_Creation.SelectedIndex -= 1;
+						break;
+					}
+			}
+		}
 
-        private void NextStep(object sender, EventArgs e)
-        {
-            switch (tc_Creation.SelectedIndex)
-            {
-                case var @case when @case == tp_Summary.TabIndex:
-                    {
-                        if (!ValidCustomer)
-                        {
-                            MessageBox.Show("There were errors in your customer submission. Please try again.", "Customer Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
+		private void NextStep(object sender, EventArgs e)
+		{
+			switch (tc_Creation.SelectedIndex)
+			{
+				case var @case when @case == tp_Summary.TabIndex:
+					{
+						if (!ValidCustomer)
+						{
+							_ = MessageBox.Show("There were errors in your customer submission. Please try again.", "Customer Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							return;
+						}
 
-                        CustomerAdded?.Invoke(this, new CustomerEventArgs(Customer, M3Tools.Events.EventType.Added));
+						CustomerAdded?.Invoke(this, new CustomerEventArgs(Customer, M3Tools.Events.EventType.Added));
 
-                        DialogResult = DialogResult.OK;
-                        Close();
-                        break;
-                    }
+						DialogResult = DialogResult.OK;
+						Close();
+						break;
+					}
 
-                default:
-                    {
-                        tc_Creation.SelectedIndex += 1;
-                        break;
-                    }
-            }
-        }
+				default:
+					{
+						tc_Creation.SelectedIndex += 1;
+						break;
+					}
+			}
+		}
 
-        private void PageChanged(object sender, EventArgs e)
-        {
-            btn_Cancel.Text = tc_Creation.SelectedIndex <= tp_Basics.TabIndex ? "Cancel" : "Back";
-            btn_Create.Text = tc_Creation.SelectedIndex >= tp_Summary.TabIndex ? "Create" : "Next";
-            sc_Summary.Display = tc_Creation.SelectedIndex == tp_Summary.TabIndex ? Customer : null;
-        }
+		private void PageChanged(object sender, EventArgs e)
+		{
+			btn_Cancel.Text = tc_Creation.SelectedIndex <= tp_Basics.TabIndex ? "Cancel" : "Back";
+			btn_Create.Text = tc_Creation.SelectedIndex >= tp_Summary.TabIndex ? "Create" : "Next";
+			sc_Summary.Display = tc_Creation.SelectedIndex == tp_Summary.TabIndex ? Customer : null;
+		}
 	}
 }

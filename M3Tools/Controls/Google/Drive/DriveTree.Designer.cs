@@ -82,7 +82,7 @@ namespace SPPBC.M3Tools
             // 
             tss_NewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             tss_NewItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmi_NewFolder, tsmi_NewUpload });
-            tss_NewItem.Image = My.Resources.Resources.NewDocumentOption;
+            tss_NewItem.Image = Properties.Resources.NewDocumentOption;
             tss_NewItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             tss_NewItem.Name = "tss_NewItem";
             tss_NewItem.Size = new System.Drawing.Size(32, 22);

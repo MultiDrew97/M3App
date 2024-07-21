@@ -51,6 +51,7 @@ namespace M3App
             this.toolStripContainer1.ContentPanel.Controls.Add(this.odg_Orders);
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 345);
             this.toolStripContainer1.TopToolStripPanelVisible = true;
+			this.toolStripContainer1.BottomToolStripPanelVisible = true;
             // 
             // odg_Orders
             // 

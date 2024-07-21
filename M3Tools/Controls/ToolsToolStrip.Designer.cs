@@ -67,7 +67,7 @@ namespace SPPBC.M3Tools
             // tsb_Add
             // 
             this.tsb_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_Add.Image = global::SPPBC.M3Tools.My.Resources.Resources.NewDocumentOption;
+            this.tsb_Add.Image = global::SPPBC.M3Tools.Properties.Resources.NewDocumentOption;
             this.tsb_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_Add.Name = "tsb_Add";
             this.tsb_Add.Size = new System.Drawing.Size(23, 22);
@@ -78,7 +78,7 @@ namespace SPPBC.M3Tools
             // tsb_Import
             // 
             this.tsb_Import.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_Import.Image = global::SPPBC.M3Tools.My.Resources.Resources.import;
+            this.tsb_Import.Image = global::SPPBC.M3Tools.Properties.Resources.import;
             this.tsb_Import.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_Import.Name = "tsb_Import";
             this.tsb_Import.Size = new System.Drawing.Size(23, 22);
@@ -102,7 +102,7 @@ namespace SPPBC.M3Tools
             // tsb_Send
             // 
             this.tsb_Send.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_Send.Image = global::SPPBC.M3Tools.My.Resources.Resources.send_email;
+            this.tsb_Send.Image = global::SPPBC.M3Tools.Properties.Resources.send_email;
             this.tsb_Send.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_Send.Name = "tsb_Send";
             this.tsb_Send.Size = new System.Drawing.Size(23, 22);

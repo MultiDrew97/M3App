@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
@@ -7,8 +6,8 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// A collection of listeners
 	/// </summary>
-    public class ListenerCollection : DbEntryCollection<Listener>
-    {
+	public class ListenerCollection : DbEntryCollection<Listener>
+	{
 		/// <summary>
 		/// 
 		/// </summary>
@@ -16,21 +15,37 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static new ListenerCollection Cast(System.Collections.IList collection)
 		{
-			ListenerCollection coll = new();
+			if (collection == null || collection.Count <= 0)
+			{
+				return new();
+			}
+
+			ListenerCollection result;
+
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
+					result = new();
 					foreach (DataGridViewRow row in collection)
 					{
-						coll.Add((Listener)row.DataBoundItem);
+						result.Add((Listener)row.DataBoundItem);
 					}
-					break;
+
+					return result;
+				case var @list when @list == typeof(System.Collections.IList):
+					result = new();
+					foreach (Listener item in collection)
+					{
+						result.Add(item);
+					}
+
+					return result;
+				case var @dbColl when dbColl == typeof(ListenerCollection):
+					return (ListenerCollection)collection;
+				default:
+					throw new Exception("Unable to cast collection to ListenerCollection");
 			}
-
-
-
-			return coll;
 		}
 
 		/// <summary>
@@ -40,13 +55,8 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="index"></param>
 		/// <returns></returns>
 		public override bool ApplyFilter(Listener listener, int index)
-        {
-			if (listener == null)
-			{
-				return false;
-			}
-
-            return listener.Name.Contains(Filter) || listener.Email.Contains(Filter);
-        }
-    }
+		{
+			return listener != null && (listener.Name.Contains(Filter) || listener.Email.Contains(Filter));
+		}
+	}
 }

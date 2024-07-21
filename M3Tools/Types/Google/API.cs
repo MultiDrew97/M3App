@@ -32,7 +32,10 @@ namespace SPPBC.M3Tools.Types.GTools
 
 		internal BaseClientService.Initializer __init = new() { ApplicationName = "Media Ministry Manager", };
 
-		void IDisposable.Dispose() => Close();
+		void IDisposable.Dispose()
+		{
+			Close();
+		}
 
 		/// <summary>
 		/// Closes the connection to Google Drive
@@ -66,36 +69,54 @@ namespace SPPBC.M3Tools.Types.GTools
 			__scopes = scopes;
 		}
 
-        private System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
-        {
-			if (ct.IsCancellationRequested) return (System.Threading.Tasks.Task<UserCredential>)System.Threading.Tasks.Task.FromCanceled(ct);
+		private System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
+		{
+			if (ct.IsCancellationRequested)
+			{
+				return (System.Threading.Tasks.Task<UserCredential>)System.Threading.Tasks.Task.FromCanceled(ct);
+			}
 
-            var stream = new System.IO.MemoryStream(My.Resources.Resources.credentials);
+			System.IO.MemoryStream stream = new(Properties.Resources.credentials);
 
-            return GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
-        }
+			return GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
+		}
 
 		/// <summary>
 		/// Authorize with Google API on behalf of the specified user
 		/// </summary>
 		/// <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
 		public virtual void Authorize(System.Threading.CancellationToken ct = default)
-        {
+		{
 			// Place general authorization logic here
 			if (ct.IsCancellationRequested)
+			{
 				return;
+			}
 
-			using var creds = LoadCreds(ct);
+			using System.Threading.Tasks.Task<UserCredential> creds = LoadCreds(ct);
 
-			if (creds == null) throw new Exception("Creds is null");
+			if (creds == null)
+			{
+				throw new Exception("Creds is null");
+			}
 
 			creds.Wait(ct);
-			if (creds.IsCanceled) throw new Exception("Canceled");
-			if (creds.IsFaulted) throw new Exception("Faulted");
-			if (creds.Result.Token.IsStale) creds.Result.RefreshTokenAsync(ct);
+			if (creds.IsCanceled)
+			{
+				throw new Exception("Canceled");
+			}
 
+			if (creds.IsFaulted)
+			{
+				throw new Exception("Faulted");
+			}
+
+			if (creds.Result.Token.IsStale)
+			{
+				_ = creds.Result.RefreshTokenAsync(ct);
+			}
 
 			__init.HttpClientInitializer = creds.Result;
 		}
-    }
+	}
 }

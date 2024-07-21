@@ -12,55 +12,22 @@ namespace SPPBC.M3Tools.Data
 		[DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			this.dgc_ListenerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dgc_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// dgc_ListenerID
-			// 
-			this.dgc_ListenerID.DataPropertyName = "Id";
-			this.dgc_ListenerID.FillWeight = 5F;
-			this.dgc_ListenerID.Frozen = true;
-			this.dgc_ListenerID.HeaderText = "ListenerID";
-			this.dgc_ListenerID.Name = "dgc_ListenerID";
-			this.dgc_ListenerID.ReadOnly = true;
-			this.dgc_ListenerID.Visible = false;
-			// 
-			// dgc_Email
-			// 
-			this.dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dgc_Email.DataPropertyName = "Email";
-			this.dgc_Email.FillWeight = 50F;
-			this.dgc_Email.HeaderText = "Email";
-			this.dgc_Email.Name = "dgc_Email";
-			// 
-			// dgc_Name
-			// 
-			this.dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dgc_Name.DataPropertyName = "Name";
-			this.dgc_Name.FillWeight = 50F;
-			this.dgc_Name.HeaderText = "Name";
-			this.dgc_Name.Name = "dgc_Name";
-			// 
-			// ListenersDataGrid
-			// 
-			this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-			this.dgc_Selection,
-			this.dgc_ListenerID,
-			this.dgc_Name,
-			this.dgc_Email,
-			this.dgc_Edit,
-			this.dgc_Remove});
-			this.RowTemplate.Height = 28;
-			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            this.bsListeners = new SPPBC.M3Tools.Data.ListenerBindingSource();
+            ((System.ComponentModel.ISupportInitialize)(this.bsListeners)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // ListenersDataGrid
+            // 
+            this.DataSource = this.bsListeners;
+            this.RowTemplate.Height = 28;
+            ((System.ComponentModel.ISupportInitialize)(this.bsListeners)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ListenerID;
+
+		private ListenerBindingSource bsListeners;
 	}
 }

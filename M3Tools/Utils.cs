@@ -125,10 +125,12 @@ namespace SPPBC.M3Tools
 		/// <returns></returns>
 		public static SecureString ToSecureString(string password)
 		{
-			var secureString = new SecureString();
+			SecureString secureString = new();
 
 			foreach (char ch in password)
+			{
 				secureString.AppendChar(ch);
+			}
 
 			secureString.MakeReadOnly();
 
@@ -193,7 +195,7 @@ namespace SPPBC.M3Tools
 				return States[stateCode.Trim()];
 			}
 			catch
-			{ 
+			{
 				throw new ArgumentException($"'{stateCode}' not a valid state code");
 			}
 		}
@@ -206,7 +208,7 @@ namespace SPPBC.M3Tools
 		/// <exception cref="ArgumentException"></exception>
 		public static string StateToStateCode(string state)
 		{
-			foreach (var statePair in States)
+			foreach (System.Collections.Generic.KeyValuePair<string, string> statePair in States)
 			{
 				if (StringComparer.OrdinalIgnoreCase.Compare(state, statePair.Value) != 0)
 				{ continue; }
@@ -226,7 +228,7 @@ namespace SPPBC.M3Tools
 		{
 			try
 			{
-				return System.Text.RegularExpressions.Regex.IsMatch(email, My.Resources.Resources.EmailRegex2);
+				return System.Text.RegularExpressions.Regex.IsMatch(email, Properties.Resources.EmailRegex2);
 			}
 			catch
 			{

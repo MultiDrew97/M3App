@@ -14,8 +14,8 @@ namespace SPPBC.M3Tools.Types
 	}
 
 	/// <inheritdoc/>
-    public class DbEntry : IDbEntry, ICloneable
-    {
+	public class DbEntry : IDbEntry, ICloneable
+	{
 		/// <summary>
 		/// An empty entry object
 		/// </summary>
@@ -25,12 +25,13 @@ namespace SPPBC.M3Tools.Types
 		/// Create a clone of the object
 		/// </summary>
 		/// <returns></returns>
-		public virtual object Clone() {
-			return this.MemberwiseClone();
+		public virtual object Clone()
+		{
+			return MemberwiseClone();
 		}
 
 		/// <inheritdoc/>
-        public virtual int Id { get; set; }
+		public virtual int Id { get; set; }
 
 		/// <inheritdoc/>
 		protected DbEntry(int id)
@@ -52,8 +53,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns>True if objects are equal, otherwise false</returns>
 		public static bool operator ==(DbEntry ls, DbEntry rs)
 		{
-			if (ls is null ^ rs is null) return false;
-			return ls.GetHashCode() == rs.GetHashCode();
+			return !(ls is null ^ rs is null) && ls.GetHashCode() == rs.GetHashCode();
 		}
 
 		/// <summary>
@@ -72,11 +72,10 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="obj">The referenced object to compare with</param>
 		/// <returns>True if the object is the same as the current instance, otherwise false</returns>
-		//public override bool Equals(object obj)
-		//{
-		//	if (this is null ^ obj is null || obj is System.DBNull) return false;
-		//	return (this == (DbEntry)obj) || base.Equals(obj);
-		//}
+		public override bool Equals(object obj)
+		{
+			return !(this is null ^ obj is null) && obj is not System.DBNull && ((this == (DbEntry)obj) || base.Equals(obj));
+		}
 
 		/// <summary>
 		/// Gets the Hash code for the current object
@@ -84,9 +83,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns>The hash code for the current instance</returns>
 		public override int GetHashCode()
 		{
-			if (!Utils.ValidID(Id)) return base.GetHashCode();
-
-			return Id;
+			return !Utils.ValidID(Id) ? base.GetHashCode() : Id;
 		}
 	}
 }

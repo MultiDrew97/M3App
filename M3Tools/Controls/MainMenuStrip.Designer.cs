@@ -123,7 +123,7 @@ namespace SPPBC.M3Tools
             // tsmi_Logout
             // 
             this.tsmi_Logout.AccessibleName = "Logout";
-            this.tsmi_Logout.Image = global::SPPBC.M3Tools.My.Resources.Resources.Logout;
+            this.tsmi_Logout.Image = global::SPPBC.M3Tools.Properties.Resources.Logout;
             this.tsmi_Logout.Name = "tsmi_Logout";
             this.tsmi_Logout.Size = new System.Drawing.Size(116, 22);
             this.tsmi_Logout.Text = "&Logout";

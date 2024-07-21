@@ -33,7 +33,11 @@ namespace M3App
 
 		protected override void OnMainFormClosed(object sender, EventArgs e)
 		{
-			if (Application.OpenForms.Count > 0) return;
+			if (Application.OpenForms.Count > 0)
+			{
+				// TODO: Figure out how to no longer need this
+				return;
+			}
 
 			base.OnMainFormClosed(sender, e);
 		}

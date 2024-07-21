@@ -5,8 +5,8 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// An email listener that recieves the email ministry emails
 	/// </summary>
-    public class Listener : Person
-    {
+	public class Listener : Person
+	{
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
@@ -25,9 +25,9 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// 
 		/// </summary>
-        public Listener() : this(-1)
-        {
-        }
+		public Listener() : this(-1)
+		{
+		}
 
 		/// <summary>
 		/// 
@@ -36,9 +36,9 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="fName"></param>
 		/// <param name="lName"></param>
 		/// <param name="email"></param>
-        public Listener(int listenerID, string fName = "Test", string lName = "Listener", string email = "TestListener@domain.tst") : this(listenerID, $"{fName} {lName}", email)
-        {
-        }
+		public Listener(int listenerID, string fName = "New", string lName = "Listener", string email = "NewListener@domain.tst") : this(listenerID, $"{fName} {lName}", email)
+		{
+		}
 
 		/// <summary>
 		/// 
@@ -46,28 +46,28 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="listenerID"></param>
 		/// <param name="name"></param>
 		/// <param name="email"></param>
-        public Listener(int listenerID, string name, string email) : base(listenerID, name, email)
-        {
-        }
+		public Listener(int listenerID, string name, string email) : base(listenerID, name, email)
+		{
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <returns></returns>
-        public override string ToString()
-        {
-            return $"{Id}) {Name} <{Email}>";
-        }
+		public override string ToString()
+		{
+			return $"{Id}) {Name} <{Email}>";
+		}
 
 		/// <summary>
 		/// Parses a listener from an array of parameters
 		/// </summary>
 		/// <param name="arr"></param>
 		/// <returns></returns>
-        public static Listener Parse(object[] arr)
-        {
-            return new Listener(Conversions.ToInteger(arr[0]), Conversions.ToString(arr[1]), Conversions.ToString(arr[2]));
-        }
+		public static Listener Parse(object[] arr)
+		{
+			return new Listener(Conversions.ToInteger(arr[0]), Conversions.ToString(arr[1]), Conversions.ToString(arr[2]));
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -77,11 +77,17 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static bool operator ==(Listener left, Listener right)
 		{
-			if ((left is null && right is not null) || (right is null && left is not null)) return false;
-			if (left.Name != right.Name) return false;
-			if (left.Email != right.Email) return false;
+			if ((left is null && right is not null) || (right is null && left is not null))
+			{
+				return false;
+			}
 
-			return true;
+			if (left.Name != right.Name)
+			{
+				return false;
+			}
+
+			return left.Email == right.Email;
 		}
 
 		/// <summary>
@@ -94,5 +100,5 @@ namespace SPPBC.M3Tools.Types
 		{
 			return !(left == right);
 		}
-    }
+	}
 }

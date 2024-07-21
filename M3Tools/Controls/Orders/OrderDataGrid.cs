@@ -3,15 +3,18 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Data
 {
+	/// <summary>
+	/// Custom data grid to use for displaying order information
+	/// </summary>
 	public partial class OrderDataGrid
 	{
 		// Columns for the data grid
-		private readonly DataGridViewTextBoxColumn dgc_CustomerName;
-		private readonly DataGridViewTextBoxColumn dgc_ItemName;
-		private readonly DataGridViewTextBoxColumn dgc_OrderTotal;
-		private readonly DataGridViewTextBoxColumn dgc_Quantity;
-		private readonly DataGridViewTextBoxColumn dgc_OrderDate;
-		private readonly DataGridViewTextBoxColumn dgc_CompletedDate;
+		private readonly DataGridViewTextBoxColumn dgc_CustomerName = new();
+		private readonly DataGridViewTextBoxColumn dgc_ItemName = new();
+		private readonly DataGridViewTextBoxColumn dgc_OrderTotal = new();
+		private readonly DataGridViewTextBoxColumn dgc_Quantity = new();
+		private readonly DataGridViewTextBoxColumn dgc_OrderDate = new();
+		private readonly DataGridViewTextBoxColumn dgc_CompletedDate = new();
 
 		/// <summary>
 		/// Event that occurs when a order is being added to the database
@@ -37,7 +40,11 @@ namespace SPPBC.M3Tools.Data
 			get => Types.OrderCollection.Cast(bsOrders.List);
 			set
 			{
-				if (DesignMode) return;
+				if (DesignMode)
+				{
+					return;
+				}
+
 				bsOrders.DataSource = value;
 			}
 		}
@@ -55,10 +62,7 @@ namespace SPPBC.M3Tools.Data
 		/// 
 		/// </summary>
 		[Browsable(false)]
-		public Types.OrderCollection SelectedOrders
-		{
-			get => Types.OrderCollection.Cast(base.SelectedRows);
-		}
+		public Types.OrderCollection SelectedOrders => Types.OrderCollection.Cast(base.SelectedRows);
 
 		/// <summary>
 		/// 
@@ -67,12 +71,12 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
-			dgc_CustomerName = new DataGridViewTextBoxColumn();
-			dgc_ItemName = new DataGridViewTextBoxColumn();
-			dgc_OrderTotal = new DataGridViewTextBoxColumn();
-			dgc_Quantity = new DataGridViewTextBoxColumn();
-			dgc_OrderDate = new DataGridViewTextBoxColumn();
-			dgc_CompletedDate = new DataGridViewTextBoxColumn();
+			//dgc_CustomerName = new DataGridViewTextBoxColumn();
+			//dgc_ItemName = new DataGridViewTextBoxColumn();
+			//dgc_OrderTotal = new DataGridViewTextBoxColumn();
+			//dgc_Quantity = new DataGridViewTextBoxColumn();
+			//dgc_OrderDate = new DataGridViewTextBoxColumn();
+			//dgc_CompletedDate = new DataGridViewTextBoxColumn();
 
 			LoadColumns();
 
@@ -82,9 +86,9 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// 
+		/// <inheritdoc/>
 		/// </summary>
-		protected new void LoadColumns()
+		protected override void LoadColumns()
 		{
 			base.LoadColumns();
 
@@ -109,6 +113,7 @@ namespace SPPBC.M3Tools.Data
 			// Quantity Column
 			dgc_Quantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Quantity.DataPropertyName = "Quantity";
+			dgc_Quantity.DefaultCellStyle = new() { Alignment = DataGridViewContentAlignment.MiddleCenter, NullValue = "0" };
 			dgc_Quantity.FillWeight = 25F;
 			dgc_Quantity.HeaderText = "Quantity";
 			dgc_Quantity.MinimumWidth = 10;
@@ -117,7 +122,7 @@ namespace SPPBC.M3Tools.Data
 			// Order Total Column
 			dgc_OrderTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			dgc_OrderTotal.DataPropertyName = "Total";
-			dgc_OrderTotal.DefaultCellStyle = new() { Alignment = DataGridViewContentAlignment.MiddleCenter, Format = "C2", NullValue = "0" };
+			dgc_OrderTotal.DefaultCellStyle = new() { Alignment = DataGridViewContentAlignment.MiddleCenter, Format = "C2", NullValue = "$0.00" };
 			dgc_OrderTotal.FillWeight = 25F;
 			dgc_OrderTotal.HeaderText = "Total";
 			dgc_OrderTotal.MinimumWidth = 50;

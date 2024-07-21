@@ -71,7 +71,7 @@ namespace SPPBC.M3Tools
             // 
             // pic_Load
             // 
-            pic_Load.Image = My.Resources.Resources.Loading_Loop_3;
+            pic_Load.Image = Properties.Resources.Loading_Loop_3;
             pic_Load.Location = new System.Drawing.Point(74, 9);
             pic_Load.Name = "pic_Load";
             pic_Load.Size = new System.Drawing.Size(56, 58);

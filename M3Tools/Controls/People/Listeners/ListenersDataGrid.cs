@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using SPPBC.M3Tools.Events;
+﻿using System.ComponentModel;
 using SPPBC.M3Tools.Events.Listeners;
 
 namespace SPPBC.M3Tools.Data
 {
-
-    public partial class ListenersDataGrid
-    {
+	/// <summary>
+	/// 
+	/// </summary>
+	public partial class ListenersDataGrid
+	{
+		// Columns for listeners data grid
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name = new();
+		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email = new();
 		/// <summary>
 		/// An event fired when a listener is added
 		/// </summary>
@@ -17,26 +19,23 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// An event fired when a listener is updated
 		/// </summary>
-        public event ListenerEventHandler UpdateListener;
+		public event ListenerEventHandler UpdateListener;
 
 		/// <summary>
 		/// An event fired when a listener is removed
 		/// </summary>
-        public event ListenerEventHandler RemoveListener;
+		public event ListenerEventHandler RemoveListener;
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public delegate void RefreshDisplayEventHandler();
+		public delegate void RefreshDisplayEventHandler();
 
 		/// <summary>
 		/// The complete list of listeners being shown
 		/// </summary>
 		[Browsable(false)]
-        public Types.ListenerCollection Listeners
-        {
-			get => Types.ListenerCollection.Cast(base.Rows);
-        }
+		public Types.ListenerCollection Listeners => Types.ListenerCollection.Cast(base.Rows);
 
 		/// <summary>
 		/// 
@@ -51,21 +50,56 @@ namespace SPPBC.M3Tools.Data
 		/// 
 		/// </summary>
 		[Browsable(false)]
-		public Types.ListenerCollection SelectedListeners
-		{
-			get => Types.ListenerCollection.Cast(base.SelectedRows);
-		}
+		public Types.ListenerCollection SelectedListeners => Types.ListenerCollection.Cast(base.SelectedRows);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public ListenersDataGrid() : base()
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
+
+			LoadColumns();
 
 			AddEntry += (sender, e) => AddListener?.Invoke(sender, new(e.Value, e.EventType));
 			UpdateEntry += (sender, e) => UpdateListener?.Invoke(sender, new(e.Value, e.EventType));
 			RemoveEntry += (sender, e) => RemoveListener?.Invoke(sender, new(e.Value, e.EventType));
-		}	
+		}
+		/// <inheritdoc/>
+
+		protected override void LoadColumns()
+		{
+			base.LoadColumns();
+
+			// 
+			// dgc_ListenerID
+			// 
+			dgc_ID.HeaderText = "ListenerID";
+
+			// 
+			// dgc_Email
+			// 
+			dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			dgc_Email.DataPropertyName = "Email";
+			dgc_Email.FillWeight = 50F;
+			dgc_Email.HeaderText = "Email";
+			dgc_Email.Name = "dgc_Email";
+			// 
+			// dgc_Name
+			// 
+			dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			dgc_Name.DataPropertyName = "Name";
+			dgc_Name.FillWeight = 50F;
+			dgc_Name.HeaderText = "Name";
+			dgc_Name.Name = "dgc_Name";
+			// 
+			// ListenersDataGrid
+			// 
+			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+				dgc_Selection, dgc_ID,
+				dgc_Name, dgc_Email,
+				dgc_Edit, dgc_Remove
+			});
+		}
 	}
 }

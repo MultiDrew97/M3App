@@ -38,7 +38,7 @@ namespace SPPBC.M3Tools.Types
 		/// The subtotal for the order
 		/// </summary>
 		[JsonPropertyName("total")]
-		public double OrderTotal => (double)(Item.Price * Quantity);
+		public double Total => (double)(Item.Price * Quantity);
 
 		/// <summary>
 		/// The date the order was placed
@@ -77,7 +77,7 @@ namespace SPPBC.M3Tools.Types
 		{
 			Quantity = quantity;
 			OrderDate = orderDate.Year < 2000 ? DateTime.Now : orderDate;
-			CompletedDate = completedDate;
+			CompletedDate = completedDate.Year < 2000 ? DateTime.MinValue : completedDate;
 			GetCustomer(customerID);
 			GetItem(itemID);
 		}

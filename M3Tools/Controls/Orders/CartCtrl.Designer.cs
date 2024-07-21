@@ -102,7 +102,7 @@ namespace SPPBC.M3Tools
 			// dgc_Remove
 			// 
 			dgc_Remove.HeaderText = "";
-			dgc_Remove.Image = My.Resources.Resources.delete;
+			dgc_Remove.Image = Properties.Resources.delete;
 			dgc_Remove.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
 			dgc_Remove.Name = "dgc_Remove";
 			dgc_Remove.ReadOnly = true;

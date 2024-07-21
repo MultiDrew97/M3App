@@ -20,69 +20,36 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// The new info for the customer
 		/// </summary>
-		public Types.Customer Customer
-		{
-			get => new(Original.Id, FirstName, LastName, Address, Email, Phone);
-		}
+		public Types.Customer Customer => new(Original.Id, FirstName, LastName, Address, Email, Phone);
 
 		private string FirstName
 		{
-			get
-			{
-				return gi_FirstName.Text;
-			}
-			set
-			{
-				gi_FirstName.Text = value;
-			}
+			get => gi_FirstName.Text;
+			set => gi_FirstName.Text = value;
 		}
 
 		private string LastName
 		{
-			get
-			{
-				return gi_LastName.Text;
-			}
-			set
-			{
-				gi_LastName.Text = value;
-			}
+			get => gi_LastName.Text;
+			set => gi_LastName.Text = value;
 		}
 
 		private string Phone
 		{
-			get
-			{
-				return pf_Phone.PhoneNumber;
-			}
-			set
-			{
-				pf_Phone.PhoneNumber = value;
-			}
+			get => pf_Phone.PhoneNumber;
+			set => pf_Phone.PhoneNumber = value;
 		}
 
 		private string Email
 		{
-			get
-			{
-				return gi_Email.Text;
-			}
-			set
-			{
-				gi_Email.Text = value;
-			}
+			get => gi_Email.Text;
+			set => gi_Email.Text = value;
 		}
 
 		private Types.Address Address
 		{
-			get
-			{
-				return af_Address.Address;
-			}
-			set
-			{
-				af_Address.Address = value;
-			}
+			get => af_Address.Address;
+			set => af_Address.Address = value;
 		}
 		private EditCustomerDialog()
 		{
@@ -99,12 +66,11 @@ namespace SPPBC.M3Tools.Dialogs
 			CustomerChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-
 		private void FinishDialog(object sender, EventArgs e)
 		{
 			if (Customer == Original)
 			{
-				MessageBox.Show("There were errors in your edits. Please review And try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				_ = MessageBox.Show("There were errors in your edits. Please review And try again.", "Editting Errors", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 

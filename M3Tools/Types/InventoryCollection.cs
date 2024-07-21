@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
@@ -6,8 +7,8 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// Filterable collection of customers
 	/// </summary>
-    public class InventoryCollection : DbEntryCollection<Product>
-    {
+	public class InventoryCollection : DbEntryCollection<Product>
+	{
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
@@ -15,21 +16,36 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static new InventoryCollection Cast(System.Collections.IList collection)
 		{
-			InventoryCollection coll = new();
+			if (collection == null || collection.Count <= 0)
+			{
+				return new();
+			}
+
+			InventoryCollection result;
 			switch (collection.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
+					result = new();
 					foreach (DataGridViewRow row in collection)
 					{
-						coll.Add((Product)row.DataBoundItem);
+						result.Add((Product)row.DataBoundItem);
 					}
-					break;
+
+					return result;
+				case var @list when @list == typeof(System.Collections.IList):
+					result = new();
+					foreach (Product item in collection)
+					{
+						result.Add(item);
+					}
+
+					return result;
+				case var @dbColl when dbColl == typeof(InventoryCollection):
+					return (InventoryCollection)collection;
+				default:
+					throw new Exception("Unable to cast collection to InventoryCollection");
 			}
-
-
-
-			return coll;
 		}
 
 		/// <summary>
@@ -39,14 +55,9 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="index">The index of the current customer</param>
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
 		public override bool ApplyFilter(Product customer, int index)
-        {
-            // TODO: Do I want to allow for nothing values?
-            if (customer is null)
-            {
-                return false;
-            }
-
-			return customer.Name.Contains(Filter);
-        }
-    }
+		{
+			// TODO: Do I want to allow for nothing values?
+			return customer is not null && customer.Name.Contains(Filter);
+		}
+	}
 }

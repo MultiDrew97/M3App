@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace SPPBC.M3Tools.Data
 {
@@ -13,7 +12,6 @@ namespace SPPBC.M3Tools.Data
 	{
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
-
 
 		protected internal DataGridViewCheckBoxColumn dgc_Selection;
 		protected internal DataGridViewTextBoxColumn dgc_ID;
@@ -55,7 +53,7 @@ namespace SPPBC.M3Tools.Data
 			}
 
 			System.Drawing.Rectangle rect = GetCellDisplayRectangle(dgc_Selection.DisplayIndex, -1, true);
-			chk_SelectAll.Location = new System.Drawing.Point(rect.Location.X + rect.Width / 2 - chk_SelectAll.Width / 2, rect.Location.Y + rect.Height / 2 - chk_SelectAll.Height / 2);
+			chk_SelectAll.Location = new System.Drawing.Point(rect.Location.X + (rect.Width / 2) - (chk_SelectAll.Width / 2), rect.Location.Y + (rect.Height / 2) - (chk_SelectAll.Height / 2));
 			Moved = true;
 		}
 
@@ -81,8 +79,8 @@ namespace SPPBC.M3Tools.Data
 					continue;
 				}
 			}
-			
-			MessageBox.Show($"Failed to remove {done} {(done > 1 ? "entries" : "entry")}", "Entries Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+			_ = MessageBox.Show($"Failed to remove {done} {(done > 1 ? "entries" : "entry")}", "Entries Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		/// <summary>
@@ -156,12 +154,19 @@ namespace SPPBC.M3Tools.Data
 					ClearSelection();
 
 					foreach (DataGridViewRow row in Rows)
+					{
 						row.Selected = (bool?)row.Cells[dgc_Selection.DisplayIndex].Value ?? false;
+					}
 				}
 
 				return base.SelectedRows;
 			}
 		}
+
+		/// <summary>
+		/// Whether to auto generate columns
+		/// </summary>
+		//public new bool AutoGenerateColumns => false;
 
 		/// <summary>
 		/// 
@@ -241,14 +246,16 @@ namespace SPPBC.M3Tools.Data
 		public void SelectAll(object sender, EventArgs e)
 		{
 			foreach (DataGridViewRow row in Rows)
+			{
 				row.Cells[dgc_Selection.Index].Value = chk_SelectAll.Checked;
+			}
 
-			CommitEdit(DataGridViewDataErrorContexts.Commit);
+			_ = CommitEdit(DataGridViewDataErrorContexts.Commit);
 		}
 
 		private void ToolsOpened(object sender, EventArgs e)
 		{
-			var enable = SelectedRows.Count > 0;
+			bool enable = SelectedRows.Count > 0;
 			cms_Tools.RemoveEnabled = enable;
 			cms_Tools.EditEnabled = enable;
 		}
@@ -261,7 +268,9 @@ namespace SPPBC.M3Tools.Data
 			}
 
 			foreach (DataGridViewRow row in SelectedRows)
+			{
 				UpdateEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)row.DataBoundItem, M3Tools.Events.EventType.Updated));
+			}
 		}
 
 		/// <summary>
@@ -270,7 +279,7 @@ namespace SPPBC.M3Tools.Data
 		/// <param name="e"></param>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
 		{
-			var context = DataGridViewDataErrorContexts.Commit;
+			DataGridViewDataErrorContexts context = DataGridViewDataErrorContexts.Commit;
 			base.OnCellContentClick(e);
 
 			switch (e.ColumnIndex)
@@ -287,7 +296,7 @@ namespace SPPBC.M3Tools.Data
 					break;
 			}
 
-			CommitEdit(context);
+			_ = CommitEdit(context);
 		}
 
 		/// <summary>

@@ -6,6 +6,9 @@ using SPPBC.M3Tools.Events.Orders;
 namespace M3App
 {
 	// TODO: Mimic CustomerManagement
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class OrderManagement
 	{
 		/// <summary>
@@ -41,7 +44,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Add(object sender, EventArgs e)
 		{
-			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 			//using var @add = new SPPBC.M3Tools.Dialogs.AddOrderDialog();
 
@@ -63,7 +66,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Order> e)
 		{
-			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 			//using var @edit = new SPPBC.M3Tools.Dialogs.EditOrderDialog(e.Value);
 
@@ -72,7 +75,6 @@ namespace M3App
 			//	UseWaitCursor = false;
 			//	return;
 			//}
-
 
 			//dbOrders.UpdateOrder(edit.Order);
 			//MessageBox.Show($"Successfully updated order", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -86,10 +88,10 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Order> e)
 		{
-			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 			//dbOrders.RemoveOrder(e.Value.Id);
-			MessageBox.Show($"Successfully removed order", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			_ = MessageBox.Show($"Successfully removed order", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 

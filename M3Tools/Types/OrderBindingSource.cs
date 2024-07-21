@@ -2,6 +2,9 @@
 
 namespace SPPBC.M3Tools.Data
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class OrderBindingSource
 	{
 		private readonly string OrderFilter = "[CustomerName] LIKE '%{0}%' OR [ItemName] LIKE '%{0}%'";
@@ -25,9 +28,9 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// 
+		/// <inheritdoc/>
 		/// </summary>
-		public new string Filter
+		public override string Filter
 		{
 			get => base.Filter;
 			set => base.Filter = string.IsNullOrEmpty(value) ? value : string.Format(OrderFilter, value);

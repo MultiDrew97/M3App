@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Google.Apis.Gmail.v1.Data;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
-	/// Used to hold the collection of orders
+	/// 
 	/// </summary>
 	public class OrderCollection : DbEntryCollection<Order>
 	{
@@ -20,7 +15,10 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static new OrderCollection Cast(System.Collections.IList collection)
 		{
-			if (collection == null || collection.Count <= 0) return new();
+			if (collection == null || collection.Count <= 0)
+			{
+				return new();
+			}
 
 			OrderCollection result;
 			switch (collection.GetType())
@@ -32,6 +30,7 @@ namespace SPPBC.M3Tools.Types
 					{
 						result.Add((Order)row.DataBoundItem);
 					}
+
 					return result;
 				case var @list when @list == typeof(System.Collections.IList):
 					result = new();
@@ -39,6 +38,7 @@ namespace SPPBC.M3Tools.Types
 					{
 						result.Add(item);
 					}
+
 					return result;
 				case var @dbColl when dbColl == typeof(OrderCollection):
 					return (OrderCollection)collection;
@@ -55,14 +55,8 @@ namespace SPPBC.M3Tools.Types
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
 		public override bool ApplyFilter(Order order, int index)
 		{
-			// TODO: Do I want to allow for nothing values?
-			if (order is null)
-			{
-				return false;
-			}
-
 			// TODO: Find best way to check against order number to search by that param as well
-			return order.Customer.Name.Contains(Filter) || order.Item.Name.Contains(Filter);
+			return order is not null && (order.Customer.Name.Contains(Filter) || order.Item.Name.Contains(Filter));
 		}
 	}
 }

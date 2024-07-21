@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using SPPBC.M3Tools.Events;
@@ -92,8 +91,8 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		private readonly string _DownloadLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", "M3");
 
-		private readonly Uri _VersionUri = new(My.Resources.Resources.LatestAppVersionUri);
-		private readonly Uri _UpdateUri = new(My.Resources.Resources.AppUpdateUri);
+		private readonly Uri _VersionUri = new(Properties.Resources.LatestAppVersionUri);
+		private readonly Uri _UpdateUri = new(Properties.Resources.AppUpdateUri);
 
 		private bool IsUpdateAvailable
 		{
@@ -102,11 +101,11 @@ namespace SPPBC.M3Tools
 				return false;
 				// ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 				// TODO: Make this so that it just reads the value off the page instead of downloading it to read it
-				string versionFileLocation = Path.Combine(_DownloadLocation, "version.txt");
+				string downloadLocation = Path.Combine(_DownloadLocation, "version.txt");
 
 				// Dim latestVersion As Version = Nothing
 				// While latestVersion Is Nothing
-				// wb_Updater.Url = New Uri(My.Resources.LatestAppVersionUri)
+				// wb_Updater.Url = New Uri(Properties.LatestAppVersionUri)
 				// wb_Updater.Refresh()
 				// versionString = wb_Updater.DocumentText.Replace("Version", String.Empty).Replace(vbCrLf, String.Empty).Trim
 				// Try
@@ -115,18 +114,21 @@ namespace SPPBC.M3Tools
 				// Continue While
 				// End Try
 				// End While
-				if (File.Exists(versionFileLocation))
+				if (File.Exists(downloadLocation))
 				{
-					File.Delete(versionFileLocation);
+					File.Delete(downloadLocation);
 				}
 
-				while (!File.Exists(versionFileLocation))
+				// TODO: Make sure this doesn't cause a infinite loop in prod when ready to use
+				while (!File.Exists(downloadLocation))
 				{
 					try
 					{
-						My.MyProject.Computer.Network.DownloadFile(My.Resources.Resources.LatestAppVersionUri, versionFileLocation);
+						using System.Net.WebClient client = new();
+						client.DownloadFile(Properties.Resources.LatestAppVersionUri, downloadLocation);
 
-						var latestVersion = new Version(File.ReadAllText(versionFileLocation).Replace("Version", string.Empty).Replace(Constants.vbCrLf, string.Empty).Trim());
+						Version currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+						Version latestVersion = new(File.ReadAllText(downloadLocation).Replace("Version", string.Empty).Replace(Constants.vbCrLf, string.Empty).Trim());
 						// 
 						// CompareTo
 						// -1 = Referenced Version is older
@@ -134,14 +136,14 @@ namespace SPPBC.M3Tools
 						// 1 = Referenced Version is newer
 						// 
 						Console.WriteLine("Latest: {0}", latestVersion);
-						Console.WriteLine("Current: {0}", My.MyProject.Application.Info.Version);
-						Console.WriteLine("Comparison: {0}", My.MyProject.Application.Info.Version.CompareTo(latestVersion));
+						Console.WriteLine("Current: {0}", currentVersion);
+						Console.WriteLine("Comparison: {0}", currentVersion.CompareTo(latestVersion));
 
-						return My.MyProject.Application.Info.Version.CompareTo(latestVersion) == -1;
+						return currentVersion.CompareTo(latestVersion) == -1;
 					}
 					catch (Exception ex)
 					{
-						MessageBox.Show(ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						_ = MessageBox.Show(ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						break;
 					}
 				}
@@ -171,7 +173,7 @@ namespace SPPBC.M3Tools
 		private void CreateCustomer(object sender, EventArgs e)
 		{
 			// TODO: Determine better process to decouple this functionality from M3Tools API
-			using var create = new Dialogs.AddCustomerDialog();
+			using Dialogs.AddCustomerDialog create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
 			{
@@ -198,7 +200,7 @@ namespace SPPBC.M3Tools
 
 		private void CreateListener(object sender, EventArgs e)
 		{
-			using var create = new Dialogs.AddListenerDialog();
+			using Dialogs.AddListenerDialog create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
 			{
@@ -223,7 +225,10 @@ namespace SPPBC.M3Tools
 		private void UpdateApp(object sender, EventArgs e)
 		{
 
-			if (!IsUpdateAvailable) return;
+			if (!IsUpdateAvailable)
+			{
+				return;
+			}
 			// Dim updateLocation As String = "https://sppbc.hopto.org/Manager%20Installer/MediaMinistryManagerSetup.msi"
 			// Dim updateCheck As String = "https://sppbc.hopto.org/Manager%20Installer/version.txt"
 
@@ -238,13 +243,13 @@ namespace SPPBC.M3Tools
 			// If Not latestVersion.Contains(currentVersion) Then
 			// wb_Updater.Navigate(updateLocation)
 			// End If
-			MessageBox.Show("This feature is currently under construction.", "Out of Order", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+			_ = MessageBox.Show("This feature is currently under construction.", "Out of Order", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 			// lsd_Loading.LoadText = "Checking for updates..."
 			// lsd_Loading.ShowDialog()
 
 			// If IsUpdateAvailable() Then
 			// 'RaiseEvent UpdateAvailable()
-			// 'wb_Updater.Url = New Uri(My.Resources.AppUpdateUri)
+			// 'wb_Updater.Url = New Uri(Properties.AppUpdateUri)
 			// bw_Update.RunWorkerAsync(wb_Updater)
 			// Else
 			// 'MessageBox.Show("Software is up to date", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -254,9 +259,9 @@ namespace SPPBC.M3Tools
 
 		private void ChangeView(object sender, EventArgs e)
 		{
-			var obj = (ToolStripMenuItem)sender;
+			ToolStripMenuItem obj = (ToolStripMenuItem)sender;
 
-			switch(obj.AccessibleName.ToLower())
+			switch (obj.AccessibleName.ToLower())
 			{
 				case "customers":
 					Manage?.Invoke(this, new(ManageType.Customers));
@@ -291,10 +296,12 @@ namespace SPPBC.M3Tools
 				File.Delete(setupFileLocation);
 			}
 
-			My.MyProject.Computer.Network.DownloadFile(My.Resources.Resources.AppUpdateUri, setupFileLocation);
+			using System.Net.WebClient client = new();
+			client.DownloadFile(Properties.Resources.AppUpdateUri, setupFileLocation);
+
 			try
 			{
-				Process.Start(setupFileLocation);
+				_ = Process.Start(setupFileLocation);
 				UpdateAvailable?.Invoke(this, e);
 			}
 			catch
@@ -316,7 +323,8 @@ namespace SPPBC.M3Tools
 				case MenuItemsCategories.CUSTOMERS:
 					tsmi_ViewCustomers.Available = !tsmi_ViewCustomers.Available;
 
-					if (!viewOnly) {
+					if (!viewOnly)
+					{
 						tsmi_NewCustomer.Available = !tsmi_NewCustomer.Available;
 					}
 
