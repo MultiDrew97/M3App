@@ -1,36 +1,36 @@
 ﻿namespace SPPBC.M3Tools
 {
 	/// <summary>
-	/// A control that displays a list of customers in a combo box
+	/// 
 	/// </summary>
-	public partial class CustomersComboBox
+	public partial class InventoryComboBox
 	{
 		/// <summary>
-		/// 
+		/// The list of items to use
 		/// </summary>
-		public Types.CustomerCollection Customers
+		public Types.InventoryCollection Inventory
 		{
 			set
 			{
-				foreach (Types.Customer item in value)
+				foreach (Types.Product item in value)
 				{
-					_ = bsCustomers.Add(item);
+					_ = bsInventory.Add(item);
 				}
 			}
 		}
 
 		/// <summary>
-		/// The currently selected customer
+		/// The currently selected inventory item
 		/// </summary>
-		public Types.Customer SelectedItem => (Types.Customer)cbx_Items.SelectedItem;
+		public Types.Product SelectedItem => (Types.Product)cbx_Items.SelectedItem;
 
 		/// <summary>
-		/// The index in the list for the currently selected customer
+		/// The currently selected index
 		/// </summary>
 		public int SelectedIndex => cbx_Items.SelectedIndex;
 
 		/// <summary>
-		/// 
+		/// The currently selected value
 		/// </summary>
 		public object SelectedValue
 		{
@@ -49,7 +49,7 @@
 		/// <summary>
 		/// 
 		/// </summary>
-		public CustomersComboBox()
+		public InventoryComboBox()
 		{
 			InitializeComponent();
 		}

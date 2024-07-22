@@ -37,6 +37,8 @@ namespace M3App
             this.components = new System.ComponentModel.Container();
             this.odg_Orders = new SPPBC.M3Tools.Data.OrderDataGrid();
             this.dbOrders = new SPPBC.M3Tools.Database.OrdersDatabase(this.components);
+            this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
+            this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.odg_Orders)).BeginInit();
@@ -51,12 +53,12 @@ namespace M3App
             this.toolStripContainer1.ContentPanel.Controls.Add(this.odg_Orders);
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 345);
             this.toolStripContainer1.TopToolStripPanelVisible = true;
-			this.toolStripContainer1.BottomToolStripPanelVisible = true;
             // 
             // odg_Orders
             // 
             this.odg_Orders.AllowUserToAddRows = false;
             this.odg_Orders.AllowUserToOrderColumns = true;
+            this.odg_Orders.AutoGenerateColumns = false;
             this.odg_Orders.CanReorder = true;
             this.odg_Orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.odg_Orders.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -76,6 +78,18 @@ namespace M3App
             this.dbOrders.Password = global::M3App.Properties.Settings.Default.ApiPassword;
             this.dbOrders.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
+            // dbCustomers
+            // 
+            this.dbCustomers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbCustomers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbCustomers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            // 
+            // dbInventory
+            // 
+            this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            // 
             // OrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -93,5 +107,7 @@ namespace M3App
 
 		private SPPBC.M3Tools.Data.OrderDataGrid odg_Orders;
 		private SPPBC.M3Tools.Database.OrdersDatabase dbOrders;
+		private SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
+		private SPPBC.M3Tools.Database.InventoryDatabase dbInventory;
 	}
 }

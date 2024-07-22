@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SPPBC.M3Tools
+namespace SPPBC.M3Tools.Dialogs
 {
 	[Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
 	public partial class PlaceOrderDialog : System.Windows.Forms.Form
@@ -47,7 +47,7 @@ namespace SPPBC.M3Tools
 			otc_Total = new OrderTotalCtrl();
 			qnc_Quantity = new QuantityNudCtrl();
 			ccb_Customers = new CustomersComboBox();
-			pcb_Items = new ProductsComboBox();
+			pcb_Items = new InventoryComboBox();
 			cc_Cart = new CartCtrl();
 			cc_Cart.ItemAdded += new CartCtrl.ItemAddedEventHandler(ItemAdded);
 			db_Orders = new Database.OrdersDatabase(components);
@@ -126,9 +126,6 @@ namespace SPPBC.M3Tools
 			ccb_Customers.MaximumSize = new System.Drawing.Size(0, 42);
 			ccb_Customers.MinimumSize = new System.Drawing.Size(200, 42);
 			ccb_Customers.Name = "ccb_Customers";
-			ccb_Customers.SelectedIndex = -1;
-			ccb_Customers.SelectedItem = null;
-			ccb_Customers.SelectedValue = null;
 			ccb_Customers.Size = new System.Drawing.Size(200, 42);
 			ccb_Customers.TabIndex = 2;
 			// 
@@ -139,8 +136,6 @@ namespace SPPBC.M3Tools
 			pcb_Items.MaximumSize = new System.Drawing.Size(0, 42);
 			pcb_Items.MinimumSize = new System.Drawing.Size(200, 42);
 			pcb_Items.Name = "pcb_Items";
-			pcb_Items.SelectedIndex = -1;
-			pcb_Items.SelectedValue = null;
 			pcb_Items.Size = new System.Drawing.Size(200, 42);
 			pcb_Items.TabIndex = 1;
 			// 
@@ -186,7 +181,7 @@ namespace SPPBC.M3Tools
 		internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
 		internal System.Windows.Forms.Button btn_Checkout;
 		internal System.Windows.Forms.Button btn_Cancel;
-		internal ProductsComboBox pcb_Items;
+		internal InventoryComboBox pcb_Items;
 		internal CustomersComboBox ccb_Customers;
 		internal QuantityNudCtrl qnc_Quantity;
 		internal System.Windows.Forms.Button btn_AddCart;

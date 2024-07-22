@@ -14,7 +14,11 @@ namespace SPPBC.M3Tools.Types
 		/// <inheritdoc/>
 		/// </summary>
 		[JsonPropertyName("orderID")]
-		public new int Id { get; }
+		public override int Id
+		{
+			get => base.Id;
+			set => base.Id = value;
+		}
 
 		/// <summary>
 		/// The customer the order was placed for
@@ -65,7 +69,16 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// New CurrentOrder Object
+		/// 
+		/// </summary>
+		/// <param name="orderID"></param>
+		public Order(int orderID) : this(orderID, -1, -1, 0, default, default)
+		{
+
+		}
+
+		/// <summary>
+		/// 
 		/// </summary>
 		/// <param name="orderID"></param>
 		/// <param name="customerID"></param>
@@ -73,62 +86,56 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="quantity"></param>
 		/// <param name="orderDate"></param>
 		/// <param name="completedDate"></param>
-		public Order(int orderID, int customerID = -1, int itemID = -1, int quantity = 0, DateTime orderDate = default, DateTime completedDate = default) : base(orderID)
+		public Order(int orderID, int customerID, int itemID, int quantity, DateTime orderDate = default, DateTime completedDate = default) : this(orderID, new Customer(customerID), new Product(itemID), quantity, orderDate, completedDate)
 		{
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <param name="customer"></param>
+		/// <param name="item"></param>
+		/// <param name="quantity"></param>
+		/// <param name="orderDate"></param>
+		/// <param name="completedDate"></param>
+		public Order(int orderID, Customer customer, Product item, int quantity, DateTime orderDate, DateTime completedDate) : base(orderID)
+		{
+			Customer = customer;
+			Item = item;
 			Quantity = quantity;
 			OrderDate = orderDate.Year < 2000 ? DateTime.Now : orderDate;
 			CompletedDate = completedDate.Year < 2000 ? DateTime.MinValue : completedDate;
-			GetCustomer(customerID);
-			GetItem(itemID);
 		}
 
 		/// <summary>
-		/// Retrieve a user from the database using their CustomerID
+		/// 
 		/// </summary>
-		/// <param name="customerID">CustomerID of the desired customer</param>
-		private void GetCustomer(int customerID)
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator ==(Order left, Order right)
 		{
-			if (!Utils.ValidID(customerID))
-			{
-				return;
-			}
-
-			using Database.CustomerDatabase c = new();
-			Customer = c.GetCustomer(customerID);
+			return !(left is null ^ right is null) && left.Id == right.Id && left.Customer == right.Customer && left.Item == right.Item && left.Quantity == right.Quantity && left.OrderDate == right.OrderDate && left.CompletedDate == right.CompletedDate;
 		}
 
 		/// <summary>
-		/// Retrieve an item from the database using the provided itemID
+		/// 
 		/// </summary>
-		/// <param name="itemID">ItemID of the desired item</param>
-		private void GetItem(int itemID)
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns></returns>
+		public static bool operator !=(Order left, Order right)
 		{
-			if (!Utils.ValidID(itemID))
-			{
-				return;
-			}
-
-			using Database.InventoryDatabase i = new();
-			Item = i.GetProduct(itemID);
+			return !(left == right);
 		}
-
-		// Public Overrides Sub UpdateID(newID As Integer)
-		// If newID = Id Then
-		// Return
-		// End If
-
-		// Using conn As New Database.OrdersDatabase
-		// Dim newOrder = conn.GetOrderById(newID)
-
-		// ' TODO: Finish implementing updates
-		// End Using
-		// End Sub
 
 		/// <summary>
 		/// Clones a copy of the current Order object
 		/// </summary>
 		/// <returns></returns>
-		public Order Clone()
+		public new Order Clone()
 		{
 			return new Order(Id, Customer.Id, Item.Id, Quantity, OrderDate, CompletedDate);
 		}

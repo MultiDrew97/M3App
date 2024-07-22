@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-
-namespace SPPBC.M3Tools.Types
+﻿namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
 	/// An email listener that recieves the email ministry emails
@@ -36,7 +34,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="fName"></param>
 		/// <param name="lName"></param>
 		/// <param name="email"></param>
-		public Listener(int listenerID, string fName = "New", string lName = "Listener", string email = "NewListener@domain.tst") : this(listenerID, $"{fName} {lName}", email)
+		public Listener(int listenerID, string fName = "New", string lName = "Listener", string email = default) : this(listenerID, $"{fName} {lName}", email)
 		{
 		}
 
@@ -60,16 +58,6 @@ namespace SPPBC.M3Tools.Types
 		}
 
 		/// <summary>
-		/// Parses a listener from an array of parameters
-		/// </summary>
-		/// <param name="arr"></param>
-		/// <returns></returns>
-		public static Listener Parse(object[] arr)
-		{
-			return new Listener(Conversions.ToInteger(arr[0]), Conversions.ToString(arr[1]), Conversions.ToString(arr[2]));
-		}
-
-		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="left"></param>
@@ -77,17 +65,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static bool operator ==(Listener left, Listener right)
 		{
-			if ((left is null && right is not null) || (right is null && left is not null))
-			{
-				return false;
-			}
-
-			if (left.Name != right.Name)
-			{
-				return false;
-			}
-
-			return left.Email == right.Email;
+			return !(left is null ^ right is null) && left.Id == right.Id && left.Name == right.Name && left.Email == right.Email;
 		}
 
 		/// <summary>

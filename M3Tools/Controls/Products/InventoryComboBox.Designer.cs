@@ -3,42 +3,42 @@ using System.Diagnostics;
 
 namespace SPPBC.M3Tools
 {
-    [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
-    public partial class CustomersComboBox : System.Windows.Forms.UserControl
-    {
+	[Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+	public partial class InventoryComboBox : System.Windows.Forms.UserControl
+	{
 
-        // UserControl overrides dispose to clean up the component list.
-        [DebuggerNonUserCode()]
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                if (disposing && components is not null)
-                {
-                    components.Dispose();
-                }
-            }
-            finally
-            {
-                base.Dispose(disposing);
-            }
-        }
+		// UserControl overrides dispose to clean up the component list.
+		[DebuggerNonUserCode()]
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (disposing && components is not null)
+				{
+					components.Dispose();
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
 
-        // Required by the Windows Form Designer
-        private System.ComponentModel.IContainer components;
+		// Required by the Windows Form Designer
+		private System.ComponentModel.IContainer components;
 
-        // NOTE: The following procedure is required by the Windows Form Designer
-        // It can be modified using the Windows Form Designer.  
-        // Do not modify it using the code editor.
-        [DebuggerStepThrough()]
-        private void InitializeComponent()
-        {
+		// NOTE: The following procedure is required by the Windows Form Designer
+		// It can be modified using the Windows Form Designer.  
+		// Do not modify it using the code editor.
+		[DebuggerStepThrough()]
+		private void InitializeComponent()
+		{
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbx_Items = new System.Windows.Forms.ComboBox();
-            this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
+            this.bsInventory = new SPPBC.M3Tools.Data.InventoryBindingSource();
             this.lbl_Items = new System.Windows.Forms.Label();
             this.TableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsInventory)).BeginInit();
             this.SuspendLayout();
             // 
             // TableLayoutPanel1
@@ -60,7 +60,7 @@ namespace SPPBC.M3Tools
             // 
             this.cbx_Items.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbx_Items.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbx_Items.DataSource = this.bsCustomers;
+            this.cbx_Items.DataSource = this.bsInventory;
             this.cbx_Items.DisplayMember = "Name";
             this.cbx_Items.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbx_Items.FormattingEnabled = true;
@@ -70,9 +70,9 @@ namespace SPPBC.M3Tools
             this.cbx_Items.TabIndex = 2;
             this.cbx_Items.ValueMember = "Id";
             // 
-            // bsCustomers
+            // bsInventory
             // 
-            this.bsCustomers.DataSource = typeof(SPPBC.M3Tools.Types.CustomerCollection);
+            this.bsInventory.DataSource = typeof(SPPBC.M3Tools.Types.InventoryCollection);
             // 
             // lbl_Items
             // 
@@ -82,9 +82,9 @@ namespace SPPBC.M3Tools
             this.lbl_Items.Name = "lbl_Items";
             this.lbl_Items.Size = new System.Drawing.Size(194, 13);
             this.lbl_Items.TabIndex = 0;
-            this.lbl_Items.Text = "Customers";
+            this.lbl_Items.Text = "Inventory";
             // 
-            // CustomersComboBox
+            // InventoryComboBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,18 +92,18 @@ namespace SPPBC.M3Tools
             this.Controls.Add(this.TableLayoutPanel1);
             this.MaximumSize = new System.Drawing.Size(0, 42);
             this.MinimumSize = new System.Drawing.Size(200, 42);
-            this.Name = "CustomersComboBox";
+            this.Name = "InventoryComboBox";
             this.Size = new System.Drawing.Size(200, 42);
             this.TableLayoutPanel1.ResumeLayout(false);
             this.TableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsInventory)).EndInit();
             this.ResumeLayout(false);
 
-        }
+		}
 
-        internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
-        internal System.Windows.Forms.Label lbl_Items;
-        internal System.Windows.Forms.ComboBox cbx_Items;
-		private Data.CustomerBindingSource bsCustomers;
+		internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
+		internal System.Windows.Forms.Label lbl_Items;
+		internal System.Windows.Forms.ComboBox cbx_Items;
+		private Data.InventoryBindingSource bsInventory;
 	}
 }

@@ -111,27 +111,8 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static bool operator ==(Customer left, Customer right)
 		{
-			if ((left is null && right is not null) || (right is null && left is not null))
-			{
-				return false;
-			}
-
-			if (left.FirstName != right.FirstName)
-			{
-				return false;
-			}
-
-			if (left.LastName != right.LastName)
-			{
-				return false;
-			}
-
-			if (left.Address != right.Address)
-			{
-				return false;
-			}
-
-			return left.Email == right.Email && left.Phone == right.Phone && left.Joined == right.Joined;
+			return !(left is null ^ right is null) && left.FirstName == right.FirstName && left.LastName == right.LastName && left.Address == right.Address
+			&& left.Email == right.Email && left.Phone == right.Phone && left.Joined == right.Joined;
 		}
 
 		/// <summary>

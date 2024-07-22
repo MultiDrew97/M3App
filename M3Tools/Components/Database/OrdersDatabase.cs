@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using SPPBC.M3Tools.M3API;
 using SPPBC.M3Tools.Types;
 
@@ -41,17 +40,22 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public void AddOrder(int customerID, int itemID, int quantity)
 		{
-			if (!Utils.ValidID(customerID) | !Utils.ValidID(itemID))
+			if (!Utils.ValidID(customerID))
 			{
-				throw new ArgumentException($"Invalid OrderID provided");
+				throw new ArgumentException($"Invalid customer ID '{customerID}' provided");
+			}
+
+			if (!Utils.ValidID(itemID))
+			{
+				throw new ArgumentException($"Invalid item ID '{itemID}' provided");
 			}
 
 			if (quantity < 1)
 			{
-				throw new ArgumentException("Quantity values must be greater than or equal to 1");
+				throw new ArgumentException($"Invalid quantity value '{quantity}' provided");
 			}
 
-			AddOrder(new Order(-1, customerID, itemID, quantity));
+			AddOrder(new(-1, customerID, itemID, quantity));
 		}
 
 		/// <summary>
@@ -127,7 +131,7 @@ namespace SPPBC.M3Tools.Database
 
 		private void RemoveOrder(int orderID, bool completed)
 		{
-			Execute(Method.Put, $"{path}/{orderID}?force={completed}");
+			Execute(Method.Put, $"{path}/{orderID}?completed={completed}");
 		}
 
 		/// <summary>
@@ -138,12 +142,9 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public Order GetOrderById(int orderID)
 		{
-			if (!Utils.ValidID(orderID))
-			{
-				throw new ArgumentException("ID values must be greater than or equal to 0");
-			}
-
-			return ExecuteWithResult<Order>(Method.Get, $"{path}/{orderID}").Result;
+			return !Utils.ValidID(orderID)
+				? throw new ArgumentException("ID values must be greater than or equal to 0")
+				: ExecuteWithResult<Order>(Method.Get, $"{path}/{orderID}").Result;
 		}
 
 		// TODO: Likely create a custom API path to search by customerID instead of orderID
@@ -160,6 +161,7 @@ namespace SPPBC.M3Tools.Database
 			{
 				throw new ArgumentException("ID values must be greater than or equal to 0");
 			}
+
 			throw new NotImplementedException("GetOrderByCustomer");
 			// Return CType(GetOrders().Where(Function(order As Order)
 			// Return order.Customer.Id = customerID

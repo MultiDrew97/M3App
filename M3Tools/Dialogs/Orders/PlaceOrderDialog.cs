@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.CompilerServices;
 
-namespace SPPBC.M3Tools
+namespace SPPBC.M3Tools.Dialogs
 {
 	/// <summary>
 	/// 
@@ -25,8 +25,10 @@ namespace SPPBC.M3Tools
 			{
 				double sum = 0d;
 
-				foreach (var item in cc_Cart.Cart)
+				foreach (Types.CartItem item in cc_Cart.Cart)
+				{
 					sum += item.ItemTotal;
+				}
 
 				return sum;
 			}
@@ -42,16 +44,14 @@ namespace SPPBC.M3Tools
 
 		private void Reload()
 		{
-			ccb_Customers.Reload();
-			pcb_Items.Reload();
 			qnc_Quantity.Quantity = 1;
 			otc_Total.Total = 0d;
 		}
 
 		private void Checkout(object sender, EventArgs e)
 		{
-			Types.Customer selectedCustomer = (Types.Customer)ccb_Customers.SelectedItem;
-			var response = MessageBox.Show($"Are you sure you want to place an order for {selectedCustomer.Name}?", "Confirm Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			Types.Customer selectedCustomer = ccb_Customers.SelectedItem;
+			DialogResult response = MessageBox.Show($"Are you sure you want to place an order for {selectedCustomer.Name}?", "Confirm Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 			if (response == DialogResult.No)
 			{
@@ -63,7 +63,7 @@ namespace SPPBC.M3Tools
 
 		private void Cancel(object sender, EventArgs e)
 		{
-			var res = MessageBox.Show("Are you sure you want to cancel placing this order?", "Cancel Order Placement", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+			DialogResult res = MessageBox.Show("Are you sure you want to cancel placing this order?", "Cancel Order Placement", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
 			if (res == DialogResult.No)
 			{
@@ -81,7 +81,7 @@ namespace SPPBC.M3Tools
 
 		private void AddToCart(object sender, EventArgs e)
 		{
-			cc_Cart.Add((Types.Product)pcb_Items.SelectedItem, qnc_Quantity.Quantity);
+			cc_Cart.Add(pcb_Items.SelectedItem, qnc_Quantity.Quantity);
 
 			CartItemAdded?.Invoke();
 		}
@@ -95,7 +95,7 @@ namespace SPPBC.M3Tools
 		{
 			int customerID = Conversions.ToInteger(e.Argument);
 			int failedOrders = 0;
-			foreach (var item in cc_Cart.Cart)
+			foreach (Types.CartItem item in cc_Cart.Cart)
 			{
 				try
 				{
@@ -120,10 +120,10 @@ namespace SPPBC.M3Tools
 
 			if (failed > 0)
 			{
-				MessageBox.Show($"{failed} order{(failed > 1 ? "s were" : "was")} unable to be placed. Please check the orders panel to see which items were not added and try again.", "Order Failures", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				_ = MessageBox.Show($"{failed} order{(failed > 1 ? "s were" : "was")} unable to be placed. Please check the orders panel to see which items were not added and try again.", "Order Failures", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
-			var res = MessageBox.Show("Would you like to place any more orders?", "More Orders", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			DialogResult res = MessageBox.Show("Would you like to place any more orders?", "More Orders", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 			if (res == DialogResult.No)
 			{

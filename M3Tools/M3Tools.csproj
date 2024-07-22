@@ -130,6 +130,12 @@
     <Compile Include="Controls\Orders\OrderDataGrid.Designer.cs">
       <DependentUpon>OrderDataGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Orders\EditOrderDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Orders\EditOrderDialog.Designer.cs">
+      <DependentUpon>EditOrderDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions\Users\UsernameException.cs" />
     <Compile Include="Components\Database\CustomerDatabase.cs">
       <SubType>Component</SubType>
@@ -254,10 +260,10 @@
     <Compile Include="Dialogs\BulkDeletionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Products\ProductsComboBox.Designer.cs">
-      <DependentUpon>ProductsComboBox.cs</DependentUpon>
+    <Compile Include="Controls\Products\InventoryComboBox.Designer.cs">
+      <DependentUpon>InventoryComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Products\ProductsComboBox.cs">
+    <Compile Include="Controls\Products\InventoryComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogs\Customer\AddCustomerDialog.Designer.cs">
@@ -382,12 +388,6 @@
     </Compile>
     <Compile Include="Dialogs\LoadScreenDialog.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Dialogs\Orders\EditOrderDialog.Designer.cs">
-      <DependentUpon>EditOrderDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Orders\EditOrderDialog.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Orders\PlaceOrderDialog.Designer.cs">
       <DependentUpon>PlaceOrderDialog.cs</DependentUpon>
@@ -609,8 +609,8 @@
     <EmbeddedResource Include="Controls\Products\InventoryDataGrid.resx">
       <DependentUpon>InventoryDataGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Products\ProductsComboBox.resx">
-      <DependentUpon>ProductsComboBox.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Products\InventoryComboBox.resx">
+      <DependentUpon>InventoryComboBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SummaryCtrl.resx">
       <DependentUpon>SummaryCtrl.cs</DependentUpon>
