@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Events
 {
@@ -71,8 +70,6 @@ namespace SPPBC.M3Tools.Events
 		/// <returns></returns>
 		public static DataEventArgs<T> Parse(T value, EventType type)
 		{
-			Console.WriteLine(value.GetType());
-			
 			return new(value, type);
 		}
 	}
@@ -82,7 +79,7 @@ namespace SPPBC.M3Tools.Events
 		/// <summary>
 		/// What management window to open
 		/// </summary>
-		public ManageType Manage { get; protected set;}
+		public ManageType Manage { get; protected set; }
 
 		public ManageEventArgs(ManageType manage) : base()
 		{
@@ -94,47 +91,47 @@ namespace SPPBC.M3Tools.Events
 	/// Base class for all event args
 	/// </summary>
 	public abstract class BaseDataEventArgs : EventArgs
-    {
+	{
 		/// <summary>
 		/// The type of even that occured
 		/// </summary>
 		public EventType EventType { get; protected set; }
 	}
 
-    //public class BulkActionEventArgs : BaseArgs
-    //{
+	//public class BulkActionEventArgs : BaseArgs
+	//{
 
-    //    public IList List { get; set; }
+	//    public IList List { get; set; }
 
-    //    public BulkActionEventArgs(IList list, EventType eventType = EventType.None)
-    //    {
-    //        List = list;
-    //        EventType = eventType;
-    //    }
-    //}
+	//    public BulkActionEventArgs(IList list, EventType eventType = EventType.None)
+	//    {
+	//        List = list;
+	//        EventType = eventType;
+	//    }
+	//}
 
 	/// <summary>
 	/// The types of events that can occur for data entries
 	/// </summary>
-    public enum EventType
-    {
+	public enum EventType
+	{
 		/// <summary>
 		/// No specific event has occured
 		/// </summary>
-        None,
+		None,
 		/// <summary>
 		/// When an entry is added
 		/// </summary>
-        Added,
+		Added,
 		/// <summary>
 		/// When an entry is removed
 		/// </summary>
-        Removed,
+		Removed,
 		/// <summary>
 		/// When an entry is updated
 		/// </summary>
-        Updated
-    }
+		Updated
+	}
 
 	/// <summary>
 	/// What type of management window is desired to be opened

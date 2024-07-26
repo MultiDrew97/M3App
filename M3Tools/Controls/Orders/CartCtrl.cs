@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
@@ -7,11 +6,6 @@ namespace SPPBC.M3Tools
 
 	public partial class CartCtrl
 	{
-		/// <summary>
-		/// The event that occurs when an item is added
-		/// </summary>
-		// TODO: Turn into component?
-		public event ItemAddedEventHandler ItemAdded;
 
 		/// <summary>
 		/// The event that occurs when an item is updated
@@ -33,13 +27,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// The cart of items
 		/// </summary>
-		public BindingList<Types.CartItem> Cart
-		{
-			get
-			{
-				return (BindingList<Types.CartItem>)bsCart.List;
-			}
-		}
+		public Types.CartItemCollection Cart => Types.CartItemCollection.Cast(dgv_Cart.Rows);
 
 		/// <summary>
 		/// The subtotal of the cart
@@ -48,10 +36,12 @@ namespace SPPBC.M3Tools
 		{
 			get
 			{
-				var sum = default(double);
+				double sum = 0;
 
-				foreach (var item in Cart)
+				foreach (Types.CartItem item in Cart)
+				{
 					sum += item.ItemTotal;
+				}
 
 				return sum;
 			}
@@ -86,10 +76,10 @@ namespace SPPBC.M3Tools
 			}
 			else
 			{
-				bsCart.Add(item);
+				_ = bsCart.Add(item);
 			}
 
-			ItemAdded?.Invoke(Total);
+			dgv_Cart.Refresh();
 		}
 
 		/// <summary>
@@ -98,23 +88,15 @@ namespace SPPBC.M3Tools
 		/// <param name="items"></param>
 		public void AddRange(params Types.CartItem[] items)
 		{
-			foreach (var item in items)
+			foreach (Types.CartItem item in items)
+			{
 				Add(item);
+			}
 		}
 
 		private void CartLoaded(object sender, EventArgs e)
 		{
 			bsCart.Clear();
-		}
-
-		private void Reload(double total)
-		{
-			dgv_Cart.Refresh();
-		}
-
-		private void Temp(Types.CartItem item)
-		{
-			ItemAdded?.Invoke(Total);
 		}
 
 		private void ItemValuesUpdated(object sender, DataGridViewCellEventArgs e)
@@ -133,6 +115,7 @@ namespace SPPBC.M3Tools
 			{
 				return;
 			}
+
 			Types.CartItem removed = (Types.CartItem)bsCart[e.RowIndex];
 			bsCart.Remove(removed);
 			ItemUpdated?.Invoke(removed);
@@ -140,7 +123,7 @@ namespace SPPBC.M3Tools
 
 		private int FindItem(Types.CartItem item)
 		{
-			foreach (var current in Cart)
+			foreach (Types.CartItem current in Cart)
 			{
 				if (current.ItemID == item.ItemID)
 				{

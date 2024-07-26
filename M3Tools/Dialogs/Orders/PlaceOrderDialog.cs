@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools.Dialogs
 {
@@ -10,11 +8,27 @@ namespace SPPBC.M3Tools.Dialogs
 	/// </summary>
 	public partial class PlaceOrderDialog
 	{
-		private event CartItemAddedEventHandler CartItemAdded;
+		public Types.CustomerCollection Customers
+		{
+			set => ccb_Customers.Customers = value;
+		}
 
-		private delegate void CartItemAddedEventHandler();
+		public Types.InventoryCollection Inventory
+		{
+			set => pcb_Items.Inventory = value;
+		}
 
 		// Private ReadOnly Property Cart As New Collection(Of Types.CartItem)
+		// MAYBE: Implement a cart system instead of using one item per row
+		/// <summary>
+		/// 
+		/// </summary>
+		public Types.CartItemCollection Cart => cc_Cart.Cart;//new(-1, ccb_Customers.SelectedItem, pcb_Items.SelectedItem, qnc_Quantity.Quantity, default, default);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Types.Customer Customer => ccb_Customers.SelectedItem;
 
 		/// <summary>
 		/// The total for the order
@@ -37,12 +51,15 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
-		public PlaceOrderDialog()
+		public PlaceOrderDialog(Types.CustomerCollection customers, Types.InventoryCollection inventory)
 		{
 			InitializeComponent();
+
+			Customers = customers;
+			Inventory = inventory;
 		}
 
-		private void Reload()
+		private void Reload(object sender, EventArgs e)
 		{
 			qnc_Quantity.Quantity = 1;
 			otc_Total.Total = 0d;
@@ -50,15 +67,15 @@ namespace SPPBC.M3Tools.Dialogs
 
 		private void Checkout(object sender, EventArgs e)
 		{
-			Types.Customer selectedCustomer = ccb_Customers.SelectedItem;
-			DialogResult response = MessageBox.Show($"Are you sure you want to place an order for {selectedCustomer.Name}?", "Confirm Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			DialogResult result = MessageBox.Show($"Are you sure you want to place an order for {Customer.Name}?", "Confirm Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-			if (response == DialogResult.No)
+			if (result != DialogResult.Yes)
 			{
 				return;
 			}
 
-			bw_PlaceOrders.RunWorkerAsync(selectedCustomer.Id);
+			DialogResult = DialogResult.OK;
+			Close();
 		}
 
 		private void Cancel(object sender, EventArgs e)
@@ -74,64 +91,11 @@ namespace SPPBC.M3Tools.Dialogs
 			Close();
 		}
 
-		private void DialogLoading(object sender, EventArgs e)
-		{
-			Reload();
-		}
-
 		private void AddToCart(object sender, EventArgs e)
 		{
 			cc_Cart.Add(pcb_Items.SelectedItem, qnc_Quantity.Quantity);
 
-			CartItemAdded?.Invoke();
-		}
-
-		private void ItemAdded(double total)
-		{
-			otc_Total.Total = total;
-		}
-
-		private void PlaceOrders(object sender, DoWorkEventArgs e)
-		{
-			int customerID = Conversions.ToInteger(e.Argument);
-			int failedOrders = 0;
-			foreach (Types.CartItem item in cc_Cart.Cart)
-			{
-				try
-				{
-					db_Orders.AddOrder(customerID, item.ItemID, item.Quantity);
-				}
-				catch
-				{
-					failedOrders += 1;
-				}
-			}
-
-			e.Result = failedOrders;
-		}
-
-		private void OrdersPlaced(object sender, RunWorkerCompletedEventArgs e)
-		{
-			int failed = Conversions.ToInteger(e.Result);
-			if (e.Cancelled)
-			{
-				return;
-			}
-
-			if (failed > 0)
-			{
-				_ = MessageBox.Show($"{failed} order{(failed > 1 ? "s were" : "was")} unable to be placed. Please check the orders panel to see which items were not added and try again.", "Order Failures", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-
-			DialogResult res = MessageBox.Show("Would you like to place any more orders?", "More Orders", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-			if (res == DialogResult.No)
-			{
-				Close();
-				return;
-			}
-
-			Reload();
+			//cc_Cart.Refresh();
 		}
 	}
 }

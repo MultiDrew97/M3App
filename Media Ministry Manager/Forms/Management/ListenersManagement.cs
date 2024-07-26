@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Windows.Forms;
 using SPPBC.M3Tools.Events;
 using SPPBC.M3Tools.Events.Listeners;
 
@@ -9,16 +9,16 @@ namespace M3App
 	/// 
 	/// </summary>
 	public partial class ListenerManagement
-    {
+	{
 		/// <summary>
 		/// 
 		/// </summary>
-        public ListenerManagement()
-        {
-            InitializeComponent();
+		public ListenerManagement()
+		{
+			InitializeComponent();
 
-            gt_Email.Authorize();
-            gd_Drive.Authorize();
+			gt_Email.Authorize();
+			gd_Drive.Authorize();
 
 			ldg_Listeners.Reload += new EventHandler(Reload);
 			ldg_Listeners.AddListener += new ListenerEventHandler(Add);
@@ -38,8 +38,10 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			bsListeners.Clear();
-			foreach (var listener in dbListeners.GetListeners())
-				bsListeners.Add(listener);
+			foreach (SPPBC.M3Tools.Types.Listener listener in dbListeners.GetListeners())
+			{
+				_ = bsListeners.Add(listener);
+			}
 			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
 			bsListeners.ResetBindings(false);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
@@ -51,46 +53,60 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        protected override void Remove(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
-        {
-            UseWaitCursor = true;
-            dbListeners.RemoveListener(e.Value.Id);
-            Reload(sender, e);
-        }
+		protected override void Remove(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
+		{
+			UseWaitCursor = true;
+			dbListeners.RemoveListener(e.Value.Id);
+			Reload(sender, e);
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        protected override void Add(object sender, EventArgs e)
-        {
-			using var @add = new SPPBC.M3Tools.Dialogs.AddListenerDialog();
-
-			if (add.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-			{
-				return;
-			}
-
-            UseWaitCursor = true;
-            dbListeners.AddListener(add.Listener);
-			SendWelcome(sender, new ListenerEventArgs(add.Listener, EventType.Added));
-        }
-
-		private void Import(object sender, EventArgs e)
+		protected override void Add(object sender, EventArgs e)
 		{
-			using var @import = new SPPBC.M3Tools.Dialogs.ImportListenersDialog();
+			using SPPBC.M3Tools.Dialogs.AddListenerDialog @add = new();
 
-			if (import.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+			if (add.ShowDialog() != DialogResult.OK)
 			{
 				return;
 			}
 
 			UseWaitCursor = true;
-			foreach (var listener in import.Listeners)
+			AddToDB(sender, add.Listener);
+			UseWaitCursor = false;
+		}
+
+		private void Import(object sender, EventArgs e)
+		{
+			using SPPBC.M3Tools.Dialogs.ImportListenersDialog @import = new();
+
+			if (import.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
+			UseWaitCursor = true;
+			foreach (SPPBC.M3Tools.Types.Listener listener in import.Listeners)
+			{
+				AddToDB(sender, listener);
+			}
+
+			UseWaitCursor = false;
+		}
+
+		private void AddToDB(object sender, SPPBC.M3Tools.Types.Listener listener)
+		{
+			try
 			{
 				dbListeners.AddListener(listener);
 				SendWelcome(sender, new ListenerEventArgs(listener, EventType.Added));
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Unable to add listener {listener.Name} to database\nError:\n{ex.Message}");
 			}
 		}
 
@@ -101,17 +117,29 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Update(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
 		{
-			using var @edit = new SPPBC.M3Tools.Dialogs.EditListenerDialog(e.Value);
-
-			if (edit.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+			try
 			{
-				return;
-			}
+				UseWaitCursor = true;
+				using SPPBC.M3Tools.Dialogs.EditListenerDialog @edit = new(e.Value);
 
-			UseWaitCursor = true;
-			dbListeners.UpdateListener(edit.Listener);
-			Reload(sender, e);
+				if (edit.ShowDialog() != DialogResult.OK)
+				{
+					return;
+				}
+
+				dbListeners.UpdateListener(edit.Listener);
+				Reload(sender, e);
+			}
+			catch
+			{
+				_ = MessageBox.Show($"We were unable to update the info for {e.Value.Name}");
+			}
+			finally
+			{
+				UseWaitCursor = false;
+			}
 		}
+		/// <inheritdoc/>
 
 		protected override void FilterChanged(object sender, string filter)
 		{
@@ -120,25 +148,25 @@ namespace M3App
 
 		private void SendEmails(object sender, EventArgs e)
 		{
-			using var emails = new SendEmailsDialog();
+			using SendEmailsDialog emails = new();
 			UseWaitCursor = true;
-			emails.ShowDialog();
+			_ = emails.ShowDialog();
 			UseWaitCursor = false;
 		}
 
 		private void SendWelcome(object sender, ListenerEventArgs e)
-        {
-            UseWaitCursor = true;
+		{
+			UseWaitCursor = true;
 
-            string subject = "Welcome to the Ministry";
-            string body = string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim());
-			var message = gt_Email.Create(e.Value, subject, body);
+			string subject = "Welcome to the Ministry";
+			string body = string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim());
+			MimeKit.MimeMessage message = gt_Email.Create(e.Value, subject, body);
 
 #if !DEBUG
 			gt_Email.Send(message);
 #endif
 
 			Reload(sender, e);
-        }
-    }
+		}
+	}
 }

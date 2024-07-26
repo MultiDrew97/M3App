@@ -33,149 +33,136 @@ namespace SPPBC.M3Tools.Dialogs
 		[DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
-			TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			btn_Checkout = new System.Windows.Forms.Button();
-			btn_Checkout.Click += new EventHandler(Checkout);
-			btn_Cancel = new System.Windows.Forms.Button();
-			btn_Cancel.Click += new EventHandler(Cancel);
-			btn_AddCart = new System.Windows.Forms.Button();
-			btn_AddCart.Click += new EventHandler(AddToCart);
-			bw_PlaceOrders = new System.ComponentModel.BackgroundWorker();
-			bw_PlaceOrders.DoWork += new System.ComponentModel.DoWorkEventHandler(PlaceOrders);
-			bw_PlaceOrders.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(OrdersPlaced);
-			otc_Total = new OrderTotalCtrl();
-			qnc_Quantity = new QuantityNudCtrl();
-			ccb_Customers = new CustomersComboBox();
-			pcb_Items = new InventoryComboBox();
-			cc_Cart = new CartCtrl();
-			cc_Cart.ItemAdded += new CartCtrl.ItemAddedEventHandler(ItemAdded);
-			db_Orders = new Database.OrdersDatabase(components);
-			TableLayoutPanel1.SuspendLayout();
-			SuspendLayout();
-			// 
-			// TableLayoutPanel1
-			// 
-			TableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-			TableLayoutPanel1.ColumnCount = 2;
-			TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-			TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-			TableLayoutPanel1.Controls.Add(btn_Cancel, 1, 0);
-			TableLayoutPanel1.Controls.Add(btn_Checkout, 0, 0);
-			TableLayoutPanel1.Location = new System.Drawing.Point(37, 219);
-			TableLayoutPanel1.Name = "TableLayoutPanel1";
-			TableLayoutPanel1.RowCount = 1;
-			TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0f));
-			TableLayoutPanel1.Size = new System.Drawing.Size(146, 29);
-			TableLayoutPanel1.TabIndex = 0;
-			// 
-			// btn_Checkout
-			// 
-			btn_Checkout.Anchor = System.Windows.Forms.AnchorStyles.None;
-			btn_Checkout.Location = new System.Drawing.Point(3, 3);
-			btn_Checkout.Name = "btn_Checkout";
-			btn_Checkout.Size = new System.Drawing.Size(67, 23);
-			btn_Checkout.TabIndex = 0;
-			btn_Checkout.Text = "Checkout";
-			// 
-			// btn_Cancel
-			// 
-			btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None;
-			btn_Cancel.Location = new System.Drawing.Point(76, 3);
-			btn_Cancel.Name = "btn_Cancel";
-			btn_Cancel.Size = new System.Drawing.Size(67, 23);
-			btn_Cancel.TabIndex = 1;
-			btn_Cancel.Text = "Cancel";
-			// 
-			// btn_AddCart
-			// 
-			btn_AddCart.Location = new System.Drawing.Point(137, 129);
-			btn_AddCart.Name = "btn_AddCart";
-			btn_AddCart.Size = new System.Drawing.Size(75, 23);
-			btn_AddCart.TabIndex = 7;
-			btn_AddCart.Text = "Add to Cart";
-			btn_AddCart.UseVisualStyleBackColor = true;
-			// 
-			// bw_PlaceOrders
-			// 
-			// 
-			// otc_Total
-			// 
-			otc_Total.Location = new System.Drawing.Point(55, 179);
-			otc_Total.MaximumSize = new System.Drawing.Size(115, 20);
-			otc_Total.MinimumSize = new System.Drawing.Size(95, 20);
-			otc_Total.Name = "otc_Total";
-			otc_Total.Size = new System.Drawing.Size(115, 20);
-			otc_Total.TabIndex = 8;
-			otc_Total.Total = 0d;
-			// 
-			// qnc_Quantity
-			// 
-			qnc_Quantity.Location = new System.Drawing.Point(12, 119);
-			qnc_Quantity.MaximumSize = new System.Drawing.Size(0, 42);
-			qnc_Quantity.MinimumSize = new System.Drawing.Size(100, 42);
-			qnc_Quantity.Name = "qnc_Quantity";
-			qnc_Quantity.Quantity = 1;
-			qnc_Quantity.Size = new System.Drawing.Size(100, 42);
-			qnc_Quantity.TabIndex = 3;
-			// 
-			// ccb_Customers
-			// 
-			ccb_Customers.AutoSize = true;
-			ccb_Customers.Location = new System.Drawing.Point(12, 14);
-			ccb_Customers.MaximumSize = new System.Drawing.Size(0, 42);
-			ccb_Customers.MinimumSize = new System.Drawing.Size(200, 42);
-			ccb_Customers.Name = "ccb_Customers";
-			ccb_Customers.Size = new System.Drawing.Size(200, 42);
-			ccb_Customers.TabIndex = 2;
-			// 
-			// pcb_Items
-			// 
-			pcb_Items.AutoSize = true;
-			pcb_Items.Location = new System.Drawing.Point(12, 62);
-			pcb_Items.MaximumSize = new System.Drawing.Size(0, 42);
-			pcb_Items.MinimumSize = new System.Drawing.Size(200, 42);
-			pcb_Items.Name = "pcb_Items";
-			pcb_Items.Size = new System.Drawing.Size(200, 42);
-			pcb_Items.TabIndex = 1;
-			// 
-			// cc_Cart
-			// 
-			cc_Cart.Dock = System.Windows.Forms.DockStyle.Right;
-			cc_Cart.Location = new System.Drawing.Point(218, 0);
-			cc_Cart.Name = "cc_Cart";
-			cc_Cart.Size = new System.Drawing.Size(367, 260);
-			cc_Cart.TabIndex = 9;
-			// 
-			// db_Orders
-			// 
-			db_Orders.BaseUrl = "Media Ministry Test";
-			db_Orders.Password = "M3AppPassword2499";
-			db_Orders.Username = "M3App";
-			// 
-			// PlaceOrderDialog
-			// 
-			AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			ClientSize = new System.Drawing.Size(585, 260);
-			Controls.Add(otc_Total);
-			Controls.Add(btn_AddCart);
-			Controls.Add(qnc_Quantity);
-			Controls.Add(ccb_Customers);
-			Controls.Add(pcb_Items);
-			Controls.Add(TableLayoutPanel1);
-			Controls.Add(cc_Cart);
-			FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			MaximizeBox = false;
-			MinimizeBox = false;
-			Name = "PlaceOrderDialog";
-			ShowInTaskbar = false;
-			StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			Text = "PlaceOrderDialog";
-			TableLayoutPanel1.ResumeLayout(false);
-			Load += new EventHandler(DialogLoading);
-			ResumeLayout(false);
-			PerformLayout();
+            this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_Cancel = new System.Windows.Forms.Button();
+            this.btn_Checkout = new System.Windows.Forms.Button();
+            this.btn_AddCart = new System.Windows.Forms.Button();
+            this.otc_Total = new SPPBC.M3Tools.OrderTotalCtrl();
+            this.qnc_Quantity = new SPPBC.M3Tools.QuantityNudCtrl();
+            this.ccb_Customers = new SPPBC.M3Tools.CustomersComboBox();
+            this.pcb_Items = new SPPBC.M3Tools.InventoryComboBox();
+            this.cc_Cart = new SPPBC.M3Tools.CartCtrl();
+            this.TableLayoutPanel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // TableLayoutPanel1
+            // 
+            this.TableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TableLayoutPanel1.ColumnCount = 2;
+            this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.Controls.Add(this.btn_Cancel, 1, 0);
+            this.TableLayoutPanel1.Controls.Add(this.btn_Checkout, 0, 0);
+            this.TableLayoutPanel1.Location = new System.Drawing.Point(37, 219);
+            this.TableLayoutPanel1.Name = "TableLayoutPanel1";
+            this.TableLayoutPanel1.RowCount = 1;
+            this.TableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableLayoutPanel1.Size = new System.Drawing.Size(146, 29);
+            this.TableLayoutPanel1.TabIndex = 0;
+            // 
+            // btn_Cancel
+            // 
+            this.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Cancel.Location = new System.Drawing.Point(76, 3);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(67, 23);
+            this.btn_Cancel.TabIndex = 1;
+            this.btn_Cancel.Text = "Cancel";
+            this.btn_Cancel.Click += new System.EventHandler(this.Cancel);
+            // 
+            // btn_Checkout
+            // 
+            this.btn_Checkout.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Checkout.Location = new System.Drawing.Point(3, 3);
+            this.btn_Checkout.Name = "btn_Checkout";
+            this.btn_Checkout.Size = new System.Drawing.Size(67, 23);
+            this.btn_Checkout.TabIndex = 0;
+            this.btn_Checkout.Text = "Checkout";
+            this.btn_Checkout.Click += new System.EventHandler(this.Checkout);
+            // 
+            // btn_AddCart
+            // 
+            this.btn_AddCart.Location = new System.Drawing.Point(137, 129);
+            this.btn_AddCart.Name = "btn_AddCart";
+            this.btn_AddCart.Size = new System.Drawing.Size(75, 23);
+            this.btn_AddCart.TabIndex = 7;
+            this.btn_AddCart.Text = "Add to Cart";
+            this.btn_AddCart.UseVisualStyleBackColor = true;
+            this.btn_AddCart.Click += new System.EventHandler(this.AddToCart);
+            // 
+            // otc_Total
+            // 
+            this.otc_Total.Location = new System.Drawing.Point(55, 179);
+            this.otc_Total.MaximumSize = new System.Drawing.Size(115, 20);
+            this.otc_Total.MinimumSize = new System.Drawing.Size(95, 20);
+            this.otc_Total.Name = "otc_Total";
+            this.otc_Total.Size = new System.Drawing.Size(115, 20);
+            this.otc_Total.TabIndex = 8;
+            this.otc_Total.Total = 0D;
+            // 
+            // qnc_Quantity
+            // 
+            this.qnc_Quantity.Location = new System.Drawing.Point(12, 119);
+            this.qnc_Quantity.MaximumSize = new System.Drawing.Size(0, 42);
+            this.qnc_Quantity.MinimumSize = new System.Drawing.Size(100, 42);
+            this.qnc_Quantity.Name = "qnc_Quantity";
+            this.qnc_Quantity.Quantity = 1;
+            this.qnc_Quantity.Size = new System.Drawing.Size(100, 42);
+            this.qnc_Quantity.TabIndex = 3;
+            // 
+            // ccb_Customers
+            // 
+            this.ccb_Customers.AutoSize = true;
+            this.ccb_Customers.Location = new System.Drawing.Point(12, 14);
+            this.ccb_Customers.MaximumSize = new System.Drawing.Size(0, 42);
+            this.ccb_Customers.MinimumSize = new System.Drawing.Size(200, 42);
+            this.ccb_Customers.Name = "ccb_Customers";
+            this.ccb_Customers.SelectedValue = null;
+            this.ccb_Customers.Size = new System.Drawing.Size(200, 42);
+            this.ccb_Customers.TabIndex = 2;
+            // 
+            // pcb_Items
+            // 
+            this.pcb_Items.AutoSize = true;
+            this.pcb_Items.Location = new System.Drawing.Point(12, 62);
+            this.pcb_Items.MaximumSize = new System.Drawing.Size(0, 42);
+            this.pcb_Items.MinimumSize = new System.Drawing.Size(200, 42);
+            this.pcb_Items.Name = "pcb_Items";
+            this.pcb_Items.SelectedValue = null;
+            this.pcb_Items.Size = new System.Drawing.Size(200, 42);
+            this.pcb_Items.TabIndex = 1;
+            // 
+            // cc_Cart
+            // 
+            this.cc_Cart.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cc_Cart.Location = new System.Drawing.Point(218, 0);
+            this.cc_Cart.Name = "cc_Cart";
+            this.cc_Cart.Size = new System.Drawing.Size(367, 260);
+            this.cc_Cart.TabIndex = 9;
+            // 
+            // PlaceOrderDialog
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(585, 260);
+            this.Controls.Add(this.otc_Total);
+            this.Controls.Add(this.btn_AddCart);
+            this.Controls.Add(this.qnc_Quantity);
+            this.Controls.Add(this.ccb_Customers);
+            this.Controls.Add(this.pcb_Items);
+            this.Controls.Add(this.TableLayoutPanel1);
+            this.Controls.Add(this.cc_Cart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "PlaceOrderDialog";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "PlaceOrderDialog";
+            this.Load += new System.EventHandler(this.Reload);
+            this.TableLayoutPanel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 		internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
@@ -185,9 +172,7 @@ namespace SPPBC.M3Tools.Dialogs
 		internal CustomersComboBox ccb_Customers;
 		internal QuantityNudCtrl qnc_Quantity;
 		internal System.Windows.Forms.Button btn_AddCart;
-		internal System.ComponentModel.BackgroundWorker bw_PlaceOrders;
 		internal OrderTotalCtrl otc_Total;
 		internal CartCtrl cc_Cart;
-		internal Database.OrdersDatabase db_Orders;
 	}
 }

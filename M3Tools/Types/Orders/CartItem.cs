@@ -7,7 +7,10 @@ namespace SPPBC.M3Tools.Types
 	/// </summary>
 	public class CartItem
 	{
-		private Product Product { get; set; }
+		/// <summary>
+		/// The item for this cart item entry
+		/// </summary>
+		public Product Product { get; set; }
 
 		/// <summary>
 		/// How many of this item to have in the cart
@@ -17,46 +20,22 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// The complete total for the amount of the item in the cart
 		/// </summary>
-		public double ItemTotal
-		{
-			get
-			{
-				return (double)(Product.Price * Quantity);
-			}
-		}
+		public double ItemTotal => (double)(Product.Price * Quantity);
 
 		/// <summary>
 		/// The name of the item
 		/// </summary>
-		public string ItemName
-		{
-			get
-			{
-				return Product.Name;
-			}
-		}
+		public string ItemName => Product.Name;
 
 		/// <summary>
 		/// The ID of the item in the cart
 		/// </summary>
-		public int ItemID
-		{
-			get
-			{
-				return Product.Id;
-			}
-		}
+		public int ItemID => Product.Id;
 
 		/// <summary>
 		/// The price of one of the item
 		/// </summary>
-		public double ItemPrice
-		{
-			get
-			{
-				return (double)Product.Price;
-			}
-		}
+		public double ItemPrice => (double)Product.Price;
 
 		/// <summary>
 		/// 

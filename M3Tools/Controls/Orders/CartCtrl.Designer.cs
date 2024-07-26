@@ -33,102 +33,108 @@ namespace SPPBC.M3Tools
 		[DebuggerStepThrough()]
 		private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
-			var DataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			var DataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			dgv_Cart = new System.Windows.Forms.DataGridView();
-			dgv_Cart.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(ItemValuesUpdated);
-			dgv_Cart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(RemoveItem);
-			bsCart = new System.Windows.Forms.BindingSource(components);
-			dgc_ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			QuantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			ItemTotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			dgc_Remove = new System.Windows.Forms.DataGridViewImageColumn();
-			((System.ComponentModel.ISupportInitialize)dgv_Cart).BeginInit();
-			((System.ComponentModel.ISupportInitialize)bsCart).BeginInit();
-			SuspendLayout();
-			// 
-			// dgv_Cart
-			// 
-			dgv_Cart.AllowUserToAddRows = false;
-			dgv_Cart.AutoGenerateColumns = false;
-			dgv_Cart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgv_Cart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dgc_ItemName, QuantityDataGridViewTextBoxColumn, ItemTotalDataGridViewTextBoxColumn, dgc_Remove });
-			dgv_Cart.DataSource = bsCart;
-			dgv_Cart.Dock = System.Windows.Forms.DockStyle.Fill;
-			dgv_Cart.Location = new System.Drawing.Point(0, 0);
-			dgv_Cart.MultiSelect = false;
-			dgv_Cart.Name = "dgv_Cart";
-			dgv_Cart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			dgv_Cart.Size = new System.Drawing.Size(543, 302);
-			dgv_Cart.TabIndex = 0;
-			// 
-			// bsCart
-			// 
-			bsCart.DataSource = typeof(Types.CartItem);
-			// 
-			// dgc_ItemName
-			// 
-			dgc_ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dgc_ItemName.DataPropertyName = "ItemName";
-			dgc_ItemName.HeaderText = "Product";
-			dgc_ItemName.MinimumWidth = 100;
-			dgc_ItemName.Name = "dgc_ItemName";
-			dgc_ItemName.ReadOnly = true;
-			// 
-			// QuantityDataGridViewTextBoxColumn
-			// 
-			QuantityDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-			QuantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-			DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			QuantityDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle1;
-			QuantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
-			QuantityDataGridViewTextBoxColumn.Name = "QuantityDataGridViewTextBoxColumn";
-			QuantityDataGridViewTextBoxColumn.Width = 71;
-			// 
-			// ItemTotalDataGridViewTextBoxColumn
-			// 
-			ItemTotalDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			ItemTotalDataGridViewTextBoxColumn.DataPropertyName = "ItemTotal";
-			DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			DataGridViewCellStyle2.Format = "C2";
-			DataGridViewCellStyle2.NullValue = null;
-			ItemTotalDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2;
-			ItemTotalDataGridViewTextBoxColumn.HeaderText = "Price";
-			ItemTotalDataGridViewTextBoxColumn.Name = "ItemTotalDataGridViewTextBoxColumn";
-			ItemTotalDataGridViewTextBoxColumn.ReadOnly = true;
-			ItemTotalDataGridViewTextBoxColumn.Width = 56;
-			// 
-			// dgc_Remove
-			// 
-			dgc_Remove.HeaderText = "";
-			dgc_Remove.Image = Properties.Resources.delete;
-			dgc_Remove.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-			dgc_Remove.Name = "dgc_Remove";
-			dgc_Remove.ReadOnly = true;
-			dgc_Remove.Width = 25;
-			// 
-			// CartCtrl
-			// 
-			AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			Controls.Add(dgv_Cart);
-			Name = "CartCtrl";
-			Size = new System.Drawing.Size(543, 302);
-			((System.ComponentModel.ISupportInitialize)dgv_Cart).EndInit();
-			((System.ComponentModel.ISupportInitialize)bsCart).EndInit();
-			Load += new EventHandler(CartLoaded);
-			ItemAdded += new ItemAddedEventHandler(Reload);
-			ItemUpdated += new ItemUpdatedEventHandler(Temp);
-			ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dgv_Cart = new System.Windows.Forms.DataGridView();
+            this.bsCart = new System.Windows.Forms.BindingSource(this.components);
+            this.dgc_ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemTotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgc_Remove = new SPPBC.M3Tools.Data.DataGridViewImageButtonDeleteColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Cart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCart)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgv_Cart
+            // 
+            this.dgv_Cart.AllowUserToAddRows = false;
+            this.dgv_Cart.AutoGenerateColumns = false;
+            this.dgv_Cart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Cart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgc_ItemName,
+            this.QuantityDataGridViewTextBoxColumn,
+            this.ItemTotalDataGridViewTextBoxColumn,
+            this.dgc_Remove});
+            this.dgv_Cart.DataSource = this.bsCart;
+            this.dgv_Cart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Cart.Location = new System.Drawing.Point(0, 0);
+            this.dgv_Cart.MultiSelect = false;
+            this.dgv_Cart.Name = "dgv_Cart";
+            this.dgv_Cart.ReadOnly = true;
+            this.dgv_Cart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Cart.Size = new System.Drawing.Size(543, 302);
+            this.dgv_Cart.TabIndex = 0;
+            this.dgv_Cart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RemoveItem);
+            this.dgv_Cart.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemValuesUpdated);
+            // 
+            // bsCart
+            // 
+            this.bsCart.DataSource = typeof(SPPBC.M3Tools.Types.CartItem);
+            // 
+            // dgc_ItemName
+            // 
+            this.dgc_ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgc_ItemName.DataPropertyName = "ItemName";
+            this.dgc_ItemName.HeaderText = "Product";
+            this.dgc_ItemName.MinimumWidth = 100;
+            this.dgc_ItemName.Name = "dgc_ItemName";
+            this.dgc_ItemName.ReadOnly = true;
+            // 
+            // QuantityDataGridViewTextBoxColumn
+            // 
+            this.QuantityDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.QuantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.QuantityDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.QuantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
+            this.QuantityDataGridViewTextBoxColumn.Name = "QuantityDataGridViewTextBoxColumn";
+            this.QuantityDataGridViewTextBoxColumn.ReadOnly = true;
+            this.QuantityDataGridViewTextBoxColumn.Width = 71;
+            // 
+            // ItemTotalDataGridViewTextBoxColumn
+            // 
+            this.ItemTotalDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ItemTotalDataGridViewTextBoxColumn.DataPropertyName = "ItemTotal";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.ItemTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ItemTotalDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.ItemTotalDataGridViewTextBoxColumn.Name = "ItemTotalDataGridViewTextBoxColumn";
+            this.ItemTotalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ItemTotalDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // dgc_Remove
+            // 
+            this.dgc_Remove.ButtonImage = null;
+            this.dgc_Remove.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.dgc_Remove.HeaderText = "";
+            this.dgc_Remove.Name = "dgc_Remove";
+            this.dgc_Remove.ReadOnly = true;
+            this.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgc_Remove.ToolTipText = "Remove";
+            this.dgc_Remove.Width = 25;
+            // 
+            // CartCtrl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dgv_Cart);
+            this.Name = "CartCtrl";
+            this.Size = new System.Drawing.Size(543, 302);
+            this.Load += new System.EventHandler(this.CartLoaded);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Cart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCart)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 
 		internal System.Windows.Forms.DataGridView dgv_Cart;
 		internal System.Windows.Forms.BindingSource bsCart;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_ItemName;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn QuantityDataGridViewTextBoxColumn;
-		internal System.Windows.Forms.DataGridViewTextBoxColumn ItemTotalDataGridViewTextBoxColumn;
-		internal System.Windows.Forms.DataGridViewImageColumn dgc_Remove;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dgc_ItemName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn QuantityDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ItemTotalDataGridViewTextBoxColumn;
+		private Data.DataGridViewImageButtonDeleteColumn dgc_Remove;
 	}
 }

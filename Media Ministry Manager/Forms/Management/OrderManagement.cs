@@ -48,7 +48,7 @@ namespace M3App
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #else
-			using SPPBC.M3Tools.Dialogs.PlaceOrderDialog @add = new();
+			using SPPBC.M3Tools.Dialogs.PlaceOrderDialog @add = new(dbCustomers.GetCustomers(), dbInventory.GetProducts());
 
 			if (add.ShowDialog() != DialogResult.OK)
 			{
@@ -56,8 +56,12 @@ namespace M3App
 				return;
 			}
 
-			//dbOrders.AddOrder(add.Order);
-			//MessageBox.Show($"Order has been placed for {add.Order.Customer.Name}", "Order Placed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			foreach (SPPBC.M3Tools.Types.CartItem item in add.Cart)
+			{
+				dbOrders.AddOrder(new(-1, add.Customer, item.Product, item.Quantity, default, default));
+			}
+
+			MessageBox.Show($"Order has been placed for {add.Customer.Name}", "Order Placed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 #endif
 		}
@@ -100,28 +104,39 @@ namespace M3App
 #else
 			string text;
 			string caption;
-
-			switch (MessageBox.Show("Is this order being canceled?", "Removing Order", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+			try
 			{
-				case DialogResult.Yes:
-					dbOrders.CancelOrder(e.Value.Id);
-					text = $"Successfully removed order for {e.Value.Customer.Name}";
-					caption = "Order Cancelled";
-					break;
-				case DialogResult.No:
-					dbOrders.CompleteOrder(e.Value.Id);
-					text = $"Successfully removed order for {e.Value.Customer.Name}";
-					caption = "Order Completed";
-					break;
-				case DialogResult.Cancel:
-				default:
-					text = $"Successfully removed order for {e.Value.Customer.Name}";
-					caption = "Removal Cancelled";
-					return;
-			}
+				UseWaitCursor = true;
+				switch (MessageBox.Show("Is this order being canceled?", "Cancel Order", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
+				{
+					case DialogResult.Yes:
+						dbOrders.CancelOrder(e.Value.Id);
+						text = $"Order for {e.Value.Customer.Name} has been cancelled";
+						caption = "Order Cancelled";
+						break;
+					case DialogResult.No:
+						dbOrders.CompleteOrder(e.Value.Id);
+						text = $"Order for {e.Value.Customer.Name} has been completed";
+						caption = "Order Completed";
+						break;
+					case DialogResult.Cancel:
+					default:
+						text = $"Removal of order for {e.Value.Customer.Name} has been canceled";
+						caption = "Removal Canceled";
+						return;
+				}
 
-			_ = MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-			Reload(sender, e);
+				_ = MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				Reload(sender, e);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Removal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				UseWaitCursor = false;
+			}
 #endif
 		}
 

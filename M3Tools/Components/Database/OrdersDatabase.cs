@@ -131,7 +131,15 @@ namespace SPPBC.M3Tools.Database
 
 		private void RemoveOrder(int orderID, bool completed)
 		{
-			Execute(Method.Put, $"{path}/{orderID}?completed={completed}");
+			try
+			{
+
+				Execute(Method.Delete, $"{path}/{orderID}?{(completed ? "completed" : "")}");
+			}
+			catch (Exception e)
+			{
+				throw new Exceptions.ApiException($"Unable to {(completed ? "complete" : "cancel")} order", e);
+			}
 		}
 
 		/// <summary>
