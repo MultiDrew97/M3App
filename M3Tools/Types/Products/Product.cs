@@ -96,27 +96,7 @@ namespace SPPBC.M3Tools.Types
 		/// <returns></returns>
 		public static bool operator ==(Product left, Product right)
 		{
-			if ((left is null && right is not null) || (right is null && left is not null))
-			{
-				return false;
-			}
-
-			if (left.Name != right.Name)
-			{
-				return false;
-			}
-
-			if (left.Stock != right.Stock)
-			{
-				return false;
-			}
-
-			if (left.Price != right.Price)
-			{
-				return false;
-			}
-
-			return left.Available == right.Available;
+			return !(left is null ^ right is null) && left?.Name == right?.Name && left?.Stock == right?.Stock && left?.Price == right?.Price && left?.Available == right?.Available;
 		}
 
 		/// <summary>

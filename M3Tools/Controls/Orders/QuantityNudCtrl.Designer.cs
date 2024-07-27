@@ -36,7 +36,6 @@ namespace SPPBC.M3Tools
             TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             lbl_Quantity = new System.Windows.Forms.Label();
             nud_Quantity = new System.Windows.Forms.NumericUpDown();
-            nud_Quantity.ValueChanged += new EventHandler(QuantityValueChanged);
             TableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             SuspendLayout();

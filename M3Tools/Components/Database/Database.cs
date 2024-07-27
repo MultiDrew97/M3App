@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using SPPBC.M3Tools.M3API;
 
+// FIXME: Convert Database on here and API to use a non-relational (i.e MongoDB)
+
 namespace SPPBC.M3Tools.Database
 {
 	/// <summary>

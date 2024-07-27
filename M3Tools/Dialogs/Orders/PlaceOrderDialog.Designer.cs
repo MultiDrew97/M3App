@@ -92,12 +92,14 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             // otc_Total
             // 
+            this.otc_Total.Enabled = false;
             this.otc_Total.Location = new System.Drawing.Point(55, 179);
             this.otc_Total.MaximumSize = new System.Drawing.Size(115, 20);
             this.otc_Total.MinimumSize = new System.Drawing.Size(95, 20);
             this.otc_Total.Name = "otc_Total";
             this.otc_Total.Size = new System.Drawing.Size(115, 20);
             this.otc_Total.TabIndex = 8;
+            this.otc_Total.TabStop = false;
             this.otc_Total.Total = 0D;
             // 
             // qnc_Quantity

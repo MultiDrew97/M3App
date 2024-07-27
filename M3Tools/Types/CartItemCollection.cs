@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
@@ -21,16 +22,15 @@ namespace SPPBC.M3Tools.Types
 		{
 			if (source is null || source.Count < 1)
 			{
-				return new();
+				return [];
 			}
 
-			CartItemCollection result;
+			CartItemCollection result = [];
 
 			switch (source.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
-					result = new();
 					foreach (DataGridViewRow row in source)
 					{
 						result.Add((CartItem)row.DataBoundItem);
@@ -38,15 +38,22 @@ namespace SPPBC.M3Tools.Types
 
 					return result;
 				case var @list when list == typeof(System.Collections.IList):
-					result = new();
-					foreach (CartItem item in source)
-					{
-						result.Add(item);
-					}
-
+					result.AddRange(source);
 					return result;
 				default:
 					throw new ArgumentException("Unable to cast to CartItemCollection");
+			}
+		}
+
+		/// <summary>
+		/// Add a range of items to the collection
+		/// </summary>
+		/// <param name="source"></param>
+		public void AddRange(IList source)
+		{
+			foreach (CartItem item in source)
+			{
+				Add(item);
 			}
 		}
 	}

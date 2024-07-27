@@ -71,13 +71,6 @@ namespace SPPBC.M3Tools.Data
 		{
 			InitializeComponent();
 
-			//dgc_CustomerName = new DataGridViewTextBoxColumn();
-			//dgc_ItemName = new DataGridViewTextBoxColumn();
-			//dgc_OrderTotal = new DataGridViewTextBoxColumn();
-			//dgc_Quantity = new DataGridViewTextBoxColumn();
-			//dgc_OrderDate = new DataGridViewTextBoxColumn();
-			//dgc_CompletedDate = new DataGridViewTextBoxColumn();
-
 			LoadColumns();
 
 			AddEntry += (sender, e) => AddOrder?.Invoke(sender, new(e.Value, e.EventType));

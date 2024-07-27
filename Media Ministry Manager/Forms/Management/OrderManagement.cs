@@ -58,7 +58,7 @@ namespace M3App
 
 			foreach (SPPBC.M3Tools.Types.CartItem item in add.Cart)
 			{
-				dbOrders.AddOrder(new(-1, add.Customer, item.Product, item.Quantity, default, default));
+				dbOrders.AddOrder(new(-1, add.Customer, item.Item, item.Quantity, default, default));
 			}
 
 			MessageBox.Show($"Order has been placed for {add.Customer.Name}", "Order Placed", MessageBoxButtons.OK, MessageBoxIcon.Information);

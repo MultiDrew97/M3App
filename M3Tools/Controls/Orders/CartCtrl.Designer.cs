@@ -37,6 +37,7 @@ namespace SPPBC.M3Tools
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_Cart = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageButtonDeleteColumn1 = new SPPBC.M3Tools.Data.DataGridViewImageButtonDeleteColumn();
             this.bsCart = new System.Windows.Forms.BindingSource(this.components);
             this.dgc_ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,7 +67,18 @@ namespace SPPBC.M3Tools
             this.dgv_Cart.Size = new System.Drawing.Size(543, 302);
             this.dgv_Cart.TabIndex = 0;
             this.dgv_Cart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RemoveItem);
-            this.dgv_Cart.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemValuesUpdated);
+            // 
+            // dataGridViewImageButtonDeleteColumn1
+            // 
+            this.dataGridViewImageButtonDeleteColumn1.ButtonImage = null;
+            this.dataGridViewImageButtonDeleteColumn1.FillWeight = 5F;
+            this.dataGridViewImageButtonDeleteColumn1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.dataGridViewImageButtonDeleteColumn1.HeaderText = "";
+            this.dataGridViewImageButtonDeleteColumn1.MinimumWidth = 25;
+            this.dataGridViewImageButtonDeleteColumn1.Name = "dataGridViewImageButtonDeleteColumn1";
+            this.dataGridViewImageButtonDeleteColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageButtonDeleteColumn1.ToolTipText = "Remove";
+            this.dataGridViewImageButtonDeleteColumn1.Width = 25;
             // 
             // bsCart
             // 
@@ -108,8 +120,10 @@ namespace SPPBC.M3Tools
             // dgc_Remove
             // 
             this.dgc_Remove.ButtonImage = null;
+            this.dgc_Remove.FillWeight = 5F;
             this.dgc_Remove.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.dgc_Remove.HeaderText = "";
+            this.dgc_Remove.MinimumWidth = 25;
             this.dgc_Remove.Name = "dgc_Remove";
             this.dgc_Remove.ReadOnly = true;
             this.dgc_Remove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -123,7 +137,6 @@ namespace SPPBC.M3Tools
             this.Controls.Add(this.dgv_Cart);
             this.Name = "CartCtrl";
             this.Size = new System.Drawing.Size(543, 302);
-            this.Load += new System.EventHandler(this.CartLoaded);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Cart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCart)).EndInit();
             this.ResumeLayout(false);
@@ -136,5 +149,6 @@ namespace SPPBC.M3Tools
 		private System.Windows.Forms.DataGridViewTextBoxColumn QuantityDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ItemTotalDataGridViewTextBoxColumn;
 		private Data.DataGridViewImageButtonDeleteColumn dgc_Remove;
+		private Data.DataGridViewImageButtonDeleteColumn dataGridViewImageButtonDeleteColumn1;
 	}
 }

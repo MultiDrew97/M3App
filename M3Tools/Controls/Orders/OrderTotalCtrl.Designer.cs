@@ -32,71 +32,70 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            SplitContainer1 = new System.Windows.Forms.SplitContainer();
-            lbl_Total = new System.Windows.Forms.Label();
-            txt_Total = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)SplitContainer1).BeginInit();
-            SplitContainer1.Panel1.SuspendLayout();
-            SplitContainer1.Panel2.SuspendLayout();
-            SplitContainer1.SuspendLayout();
-            SuspendLayout();
+            this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lbl_Total = new System.Windows.Forms.Label();
+            this.txt_Total = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).BeginInit();
+            this.SplitContainer1.Panel1.SuspendLayout();
+            this.SplitContainer1.Panel2.SuspendLayout();
+            this.SplitContainer1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // SplitContainer1
             // 
-            SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            SplitContainer1.Location = new System.Drawing.Point(0, 0);
-            SplitContainer1.MinimumSize = new System.Drawing.Size(0, 20);
-            SplitContainer1.Name = "SplitContainer1";
+            this.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SplitContainer1.IsSplitterFixed = true;
+            this.SplitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.SplitContainer1.MinimumSize = new System.Drawing.Size(0, 20);
+            this.SplitContainer1.Name = "SplitContainer1";
             // 
             // SplitContainer1.Panel1
             // 
-            SplitContainer1.Panel1.Controls.Add(lbl_Total);
+            this.SplitContainer1.Panel1.Controls.Add(this.lbl_Total);
             // 
             // SplitContainer1.Panel2
             // 
-            SplitContainer1.Panel2.Controls.Add(txt_Total);
-            SplitContainer1.Size = new System.Drawing.Size(115, 20);
-            SplitContainer1.SplitterDistance = 39;
-            SplitContainer1.TabIndex = 0;
+            this.SplitContainer1.Panel2.Controls.Add(this.txt_Total);
+            this.SplitContainer1.Size = new System.Drawing.Size(115, 20);
+            this.SplitContainer1.SplitterDistance = 39;
+            this.SplitContainer1.TabIndex = 0;
             // 
             // lbl_Total
             // 
-            lbl_Total.Dock = System.Windows.Forms.DockStyle.Fill;
-            lbl_Total.Location = new System.Drawing.Point(0, 0);
-            lbl_Total.Name = "lbl_Total";
-            lbl_Total.Size = new System.Drawing.Size(39, 20);
-            lbl_Total.TabIndex = 5;
-            lbl_Total.Text = "Total:";
-            lbl_Total.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Total.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Total.Location = new System.Drawing.Point(0, 0);
+            this.lbl_Total.Name = "lbl_Total";
+            this.lbl_Total.Size = new System.Drawing.Size(39, 20);
+            this.lbl_Total.TabIndex = 5;
+            this.lbl_Total.Text = "Total:";
+            this.lbl_Total.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txt_Total
             // 
-            txt_Total.Dock = System.Windows.Forms.DockStyle.Fill;
-            txt_Total.Enabled = false;
-            txt_Total.Location = new System.Drawing.Point(0, 0);
-            txt_Total.Name = "txt_Total";
-            txt_Total.ReadOnly = true;
-            txt_Total.Size = new System.Drawing.Size(72, 20);
-            txt_Total.TabIndex = 7;
-            txt_Total.Text = "0";
-            txt_Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_Total.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_Total.Location = new System.Drawing.Point(0, 0);
+            this.txt_Total.Name = "txt_Total";
+            this.txt_Total.ReadOnly = true;
+            this.txt_Total.Size = new System.Drawing.Size(72, 20);
+            this.txt_Total.TabIndex = 7;
+            this.txt_Total.Text = "$ 0.00";
+            this.txt_Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OrderTotalCtrl
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(SplitContainer1);
-            MaximumSize = new System.Drawing.Size(115, 20);
-            MinimumSize = new System.Drawing.Size(95, 20);
-            Name = "OrderTotalCtrl";
-            Size = new System.Drawing.Size(115, 20);
-            SplitContainer1.Panel1.ResumeLayout(false);
-            SplitContainer1.Panel2.ResumeLayout(false);
-            SplitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)SplitContainer1).EndInit();
-            SplitContainer1.ResumeLayout(false);
-            TotalChanged += new TotalChangedEventHandler(UpdateTotal);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SplitContainer1);
+            this.MaximumSize = new System.Drawing.Size(115, 20);
+            this.MinimumSize = new System.Drawing.Size(95, 20);
+            this.Name = "OrderTotalCtrl";
+            this.Size = new System.Drawing.Size(115, 20);
+            this.SplitContainer1.Panel1.ResumeLayout(false);
+            this.SplitContainer1.Panel2.ResumeLayout(false);
+            this.SplitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).EndInit();
+            this.SplitContainer1.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
 

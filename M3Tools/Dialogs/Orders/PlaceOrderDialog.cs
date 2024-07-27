@@ -8,11 +8,17 @@ namespace SPPBC.M3Tools.Dialogs
 	/// </summary>
 	public partial class PlaceOrderDialog
 	{
+		/// <summary>
+		/// The source list of Customers to use
+		/// </summary>
 		public Types.CustomerCollection Customers
 		{
 			set => ccb_Customers.Customers = value;
 		}
 
+		/// <summary>
+		/// The source list of Inventory to use
+		/// </summary>
 		public Types.InventoryCollection Inventory
 		{
 			set => pcb_Items.Inventory = value;
@@ -23,12 +29,16 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
-		public Types.CartItemCollection Cart => cc_Cart.Cart;//new(-1, ccb_Customers.SelectedItem, pcb_Items.SelectedItem, qnc_Quantity.Quantity, default, default);
+		public Types.CartItemCollection Cart => cc_Cart.Cart;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Types.Customer Customer => ccb_Customers.SelectedItem;
+
+		private Types.Product Item => pcb_Items.SelectedItem;
+
+		private int Quantity => qnc_Quantity.Quantity;
 
 		/// <summary>
 		/// The total for the order
@@ -69,7 +79,7 @@ namespace SPPBC.M3Tools.Dialogs
 		{
 			DialogResult res = MessageBox.Show("Are you sure you want to cancel placing this order?", "Cancel Order Placement", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-			if (res == DialogResult.No)
+			if (res != DialogResult.Yes)
 			{
 				return;
 			}
@@ -80,7 +90,12 @@ namespace SPPBC.M3Tools.Dialogs
 
 		private void AddToCart(object sender, EventArgs e)
 		{
-			cc_Cart.Add(pcb_Items.SelectedItem, qnc_Quantity.Quantity);
+			if (Quantity < 1)
+			{
+				return;
+			}
+
+			cc_Cart += (Item, Quantity);
 
 			otc_Total.Total = OrderTotal;
 		}
