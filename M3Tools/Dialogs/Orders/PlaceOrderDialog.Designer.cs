@@ -82,7 +82,7 @@ namespace SPPBC.M3Tools.Dialogs
             // 
             // btn_AddCart
             // 
-            this.btn_AddCart.Location = new System.Drawing.Point(137, 129);
+            this.btn_AddCart.Location = new System.Drawing.Point(130, 135);
             this.btn_AddCart.Name = "btn_AddCart";
             this.btn_AddCart.Size = new System.Drawing.Size(75, 23);
             this.btn_AddCart.TabIndex = 7;

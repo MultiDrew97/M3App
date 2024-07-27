@@ -259,12 +259,6 @@
     <Compile Include="Forms\Misc\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Orders\PlaceOrderDialog.Designer.cs">
-      <DependentUpon>PlaceOrderDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Custom Objects\Dialogs\Orders\PlaceOrderDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Properties\M3App.cs" />
     <Compile Include="Forms\Misc\MainForm.cs">
       <SubType>Form</SubType>
@@ -339,9 +333,6 @@
     <EmbeddedResource Include="Forms\Misc\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Custom Objects\Dialogs\Orders\PlaceOrderDialog.resx">
-      <DependentUpon>PlaceOrderDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <CustomToolNamespace>M3App.Properties</CustomToolNamespace>
@@ -399,6 +390,7 @@
     <Content Include="Resources\ShowPasswordIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Custom Objects\Dialogs\Orders\" />
     <Folder Include="My Project\DataSources\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
@@ -438,7 +430,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2019/5/8" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_ConfigurationName="Any" />
+      <UserProperties BuildVersion_ConfigurationName="Any" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_StartDate="2019/5/8" BuildVersion_UseGlobalSettings="True" BuildVersion_DetectChanges="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

@@ -70,6 +70,7 @@ namespace SPPBC.M3Tools.Dialogs
 		{
 			if (Listener == Original)
 			{
+				_ = MessageBox.Show("No changes were detected", "No Changes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 

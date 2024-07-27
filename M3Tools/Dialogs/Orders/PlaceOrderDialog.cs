@@ -33,20 +33,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// The total for the order
 		/// </summary>
-		public double OrderTotal
-		{
-			get
-			{
-				double sum = 0d;
-
-				foreach (Types.CartItem item in cc_Cart.Cart)
-				{
-					sum += item.ItemTotal;
-				}
-
-				return sum;
-			}
-		}
+		public double OrderTotal => cc_Cart.Total;
 
 		/// <summary>
 		/// 
@@ -95,7 +82,7 @@ namespace SPPBC.M3Tools.Dialogs
 		{
 			cc_Cart.Add(pcb_Items.SelectedItem, qnc_Quantity.Quantity);
 
-			//cc_Cart.Refresh();
+			otc_Total.Total = OrderTotal;
 		}
 	}
 }

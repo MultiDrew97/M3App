@@ -41,7 +41,7 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="NotImplementedException"></exception>
 		public void UpdateListener(Types.Listener listener)
 		{
-			Execute(Method.Patch, $"{path}/{listener.Id}", JSON.ConvertToJSON(listener));
+			Execute(Method.Put, $"{path}/{listener.Id}", JSON.ConvertToJSON(listener));
 		}
 
 		/// <summary>
