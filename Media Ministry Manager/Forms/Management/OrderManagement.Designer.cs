@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace M3App
 {
@@ -51,9 +49,7 @@ namespace M3App
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.odg_Orders);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(765, 244);
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 48);
-            this.toolStripContainer1.Size = new System.Drawing.Size(765, 361);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 345);
             this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
             // odg_Orders
@@ -72,7 +68,7 @@ namespace M3App
             this.odg_Orders.RowHeadersWidth = 82;
             this.odg_Orders.RowTemplate.Height = 28;
             this.odg_Orders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.odg_Orders.Size = new System.Drawing.Size(765, 244);
+            this.odg_Orders.Size = new System.Drawing.Size(775, 345);
             this.odg_Orders.TabIndex = 0;
             // 
             // dbOrders
@@ -97,7 +93,7 @@ namespace M3App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 409);
+            this.ClientSize = new System.Drawing.Size(775, 441);
             this.Name = "OrderManagement";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);

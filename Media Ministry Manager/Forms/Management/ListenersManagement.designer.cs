@@ -39,14 +39,12 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.bsListeners = new SPPBC.M3Tools.Data.ListenerBindingSource();
             this.gt_Email = new SPPBC.M3Tools.GTools.GmailTool(this.components);
             this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
             this.gd_Drive = new SPPBC.M3Tools.GTools.GdriveTool(this.components);
             this.ldg_Listeners = new SPPBC.M3Tools.Data.ListenersDataGrid();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsListeners)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ldg_Listeners)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,10 +58,6 @@ namespace M3App
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(775, 345);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.TopToolStripPanelVisible = true;
-            // 
-            // bsListeners
-            // 
-            this.bsListeners.Filter = "";
             // 
             // gt_Email
             // 
@@ -85,7 +79,6 @@ namespace M3App
             this.ldg_Listeners.AllowUserToOrderColumns = true;
             this.ldg_Listeners.CanReorder = true;
             this.ldg_Listeners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ldg_Listeners.DataSource = this.bsListeners;
             this.ldg_Listeners.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ldg_Listeners.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ldg_Listeners.Location = new System.Drawing.Point(0, 0);
@@ -106,7 +99,6 @@ namespace M3App
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsListeners)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ldg_Listeners)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -114,7 +106,6 @@ namespace M3App
         }
 
         private SPPBC.M3Tools.GTools.GmailTool gt_Email;
-        private SPPBC.M3Tools.Data.ListenerBindingSource bsListeners;
         private SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
         private SPPBC.M3Tools.GTools.GdriveTool gd_Drive;
 		private SPPBC.M3Tools.Data.ListenersDataGrid ldg_Listeners;

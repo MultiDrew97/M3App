@@ -8,13 +8,13 @@ namespace M3App
 	/// 
 	/// </summary>
 	public partial class InventoryManagement
-    {
+	{
 		/// <summary>
 		/// 
 		/// </summary>
-        public InventoryManagement() : base()
-        {
-            InitializeComponent();
+		public InventoryManagement() : base()
+		{
+			InitializeComponent();
 
 			idg_Inventory.Reload += new EventHandler(Reload);
 			idg_Inventory.AddProduct += new InventoryEventHandler(Add);
@@ -27,14 +27,13 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        protected override void Reload(object sender, EventArgs e)
-        {
-            UseWaitCursor = true;
-			bsInventory.DataSource = dbInventory.GetProducts();
-			bsInventory.ResetBindings(false);
+		protected override void Reload(object sender, EventArgs e)
+		{
+			UseWaitCursor = true;
+			idg_Inventory.DataSource = dbInventory.GetProducts();
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;
-        }
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -42,43 +41,47 @@ namespace M3App
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected override void Add(object sender, EventArgs e)
-        {
-			using var @add = new AddProductDialog();
+		{
+			using AddProductDialog @add = new();
 
 			if (add.ShowDialog() != DialogResult.OK)
+			{
 				return;
+			}
 
-            dbInventory.AddInventory(add.Product);
-            MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			dbInventory.AddInventory(add.Product);
+			_ = MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
-        }
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
-        {
-			using var @edit = new SPPBC.M3Tools.Dialogs.EditProductDialog(e.Value);
+		protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
+		{
+			using SPPBC.M3Tools.Dialogs.EditProductDialog @edit = new(e.Value);
 
 			if (edit.ShowDialog() != DialogResult.OK)
+			{
 				return;
+			}
 
-            dbInventory.UpdateProduct(edit.Product);
-            MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Reload(sender, e);
-        }
+			dbInventory.UpdateProduct(edit.Product);
+			_ = MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			Reload(sender, e);
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
-        {
-            dbInventory.RemoveProduct(e.Value.Id);
-            MessageBox.Show($"Successfully removed product", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
+		{
+			dbInventory.RemoveProduct(e.Value.Id);
+			_ = MessageBox.Show($"Successfully removed product", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -89,7 +92,7 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			bsInventory.Filter = filter;
+			idg_Inventory.Filter = filter;
 		}
 	}
 }

@@ -34,12 +34,10 @@ namespace M3App
         {
             this.components = new System.ComponentModel.Container();
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
-            this.bsCustomers = new SPPBC.M3Tools.Data.CustomerBindingSource();
             this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cdg_Customers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -59,9 +57,9 @@ namespace M3App
             this.cdg_Customers.AllowUserToOrderColumns = true;
             this.cdg_Customers.CanReorder = true;
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.cdg_Customers.DataSource = this.bsCustomers;
             this.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.cdg_Customers.Filter = null;
             this.cdg_Customers.Location = new System.Drawing.Point(0, 0);
             this.cdg_Customers.Name = "cdg_Customers";
             this.cdg_Customers.ReadOnly = true;
@@ -88,13 +86,11 @@ namespace M3App
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cdg_Customers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
         private SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
-		private SPPBC.M3Tools.Data.CustomerBindingSource bsCustomers;
 		private SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
 	}
 }

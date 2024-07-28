@@ -29,20 +29,31 @@ namespace SPPBC.M3Tools.Data
 		public event Events.Inventory.InventoryEventHandler RemoveProduct;
 
 		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-		[Description("Data Source to use for data grid.")]
-		public new object DataSource
-		{
-			get => DesignMode ? typeof(InventoryBindingSource) : (InventoryBindingSource)base.DataSource;
-			set => base.DataSource = value;
-		}
-
-		/// <summary>
 		/// The list of inventory items
 		/// </summary>
 		[Browsable(false)]
-		public Types.InventoryCollection Inventory => Types.InventoryCollection.Cast(base.Rows);
+		public Types.InventoryCollection Inventory
+		{
+			get => Types.InventoryCollection.Cast(bsInventory.List);
+			set
+			{
+				if (DesignMode)
+				{
+					return;
+				}
+
+				bsInventory.DataSource = value;
+			}
+		}
+
+		/// <summary>
+		/// The filter to place on the data grid
+		/// </summary>
+		public string Filter
+		{
+			get => bsInventory.Filter;
+			set => bsInventory.Filter = value;
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -112,11 +123,11 @@ namespace SPPBC.M3Tools.Data
 			dgc_Available.ReadOnly = true;
 			dgc_Available.TrueValue = "True";
 
-			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			Columns.AddRange([
 				dgc_Selection, dgc_ID,
 				dgc_Name, dgc_Stock, dgc_Price, dgc_Available,
 				dgc_Edit, dgc_Remove
-			});
+			]);
 		}
 	}
 }

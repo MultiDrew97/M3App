@@ -11,6 +11,7 @@ namespace SPPBC.M3Tools.Data
 		// Columns for listeners data grid
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name = new();
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email = new();
+
 		/// <summary>
 		/// An event fired when a listener is added
 		/// </summary>
@@ -35,15 +36,15 @@ namespace SPPBC.M3Tools.Data
 		/// The complete list of listeners being shown
 		/// </summary>
 		[Browsable(false)]
-		public Types.ListenerCollection Listeners => Types.ListenerCollection.Cast(base.Rows);
+		public Types.ListenerCollection Listeners => Types.ListenerCollection.Cast(bsListeners.List);
 
 		/// <summary>
-		/// 
+		/// The filter to apply to the data grid
 		/// </summary>
-		public new object DataSource
+		public string Filter
 		{
-			get => DesignMode ? typeof(ListenerBindingSource) : (ListenerBindingSource)base.DataSource;
-			set => base.DataSource = value;
+			get => bsListeners.Filter;
+			set => bsListeners.Filter = value;
 		}
 
 		/// <summary>
@@ -71,35 +72,29 @@ namespace SPPBC.M3Tools.Data
 		{
 			base.LoadColumns();
 
-			// 
-			// dgc_ListenerID
-			// 
+
 			dgc_ID.HeaderText = "ListenerID";
 
-			// 
-			// dgc_Email
-			// 
+			// Email Column
 			dgc_Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Email.DataPropertyName = "Email";
 			dgc_Email.FillWeight = 50F;
 			dgc_Email.HeaderText = "Email";
 			dgc_Email.Name = "dgc_Email";
-			// 
-			// dgc_Name
-			// 
+
+			// Name Column
 			dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Name.DataPropertyName = "Name";
 			dgc_Name.FillWeight = 50F;
 			dgc_Name.HeaderText = "Name";
 			dgc_Name.Name = "dgc_Name";
-			// 
-			// ListenersDataGrid
-			// 
-			Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+
+
+			Columns.AddRange([
 				dgc_Selection, dgc_ID,
 				dgc_Name, dgc_Email,
 				dgc_Edit, dgc_Remove
-			});
+			]);
 		}
 	}
 }

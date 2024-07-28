@@ -35,11 +35,9 @@ namespace M3App
             this.components = new System.ComponentModel.Container();
             this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
             this.idg_Inventory = new SPPBC.M3Tools.Data.InventoryDataGrid();
-            this.bsInventory = new SPPBC.M3Tools.Data.InventoryBindingSource();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.idg_Inventory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsInventory)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -65,7 +63,6 @@ namespace M3App
             this.idg_Inventory.AllowUserToOrderColumns = true;
             this.idg_Inventory.CanReorder = true;
             this.idg_Inventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.idg_Inventory.DataSource = this.bsInventory;
             this.idg_Inventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.idg_Inventory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.idg_Inventory.Location = new System.Drawing.Point(0, 0);
@@ -86,7 +83,6 @@ namespace M3App
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.idg_Inventory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsInventory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,6 +90,5 @@ namespace M3App
 
         internal SPPBC.M3Tools.Database.InventoryDatabase dbInventory;
 		private SPPBC.M3Tools.Data.InventoryDataGrid idg_Inventory;
-		private SPPBC.M3Tools.Data.InventoryBindingSource bsInventory;
 	}
 }

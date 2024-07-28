@@ -30,7 +30,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// The customer being created
 		/// </summary>
-		public Customer Customer => new(-1, FirstName, LastName, Address, Email, Phone);
+		public Customer Customer => new(-1, FirstName, LastName, Address, Phone, Email);
 
 		private bool ValidName => ValidFirstName & ValidLastName;
 

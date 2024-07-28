@@ -1,6 +1,6 @@
 ﻿namespace SPPBC.M3Tools.Data
 {
-	partial class OrderDataGrid : DataGrid<Types.Order>
+	public partial class OrderDataGrid : DataGrid<Types.Order>
 	{
 
 		#region Component Designer generated code

@@ -139,7 +139,7 @@ namespace SPPBC.M3Tools.Data
 			dgc_CompletedDate.MinimumWidth = 10;
 			dgc_CompletedDate.Name = "dgc_CompletedDate";
 
-			Columns.AddRange(new DataGridViewColumn[] {
+			Columns.AddRange([
 				dgc_Selection,
 				dgc_ID,
 				dgc_CustomerName,
@@ -150,7 +150,7 @@ namespace SPPBC.M3Tools.Data
 				dgc_CompletedDate,
 				dgc_Edit,
 				dgc_Remove
-			});
+			]);
 		}
 	}
 }

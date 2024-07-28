@@ -37,13 +37,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			bsListeners.Clear();
-			foreach (SPPBC.M3Tools.Types.Listener listener in dbListeners.GetListeners())
-			{
-				_ = bsListeners.Add(listener);
-			}
-			// FIXME: Determine how to no longer need this like before to have the DataGridView actually show the new data
-			bsListeners.ResetBindings(false);
+			ldg_Listeners.DataSource = dbListeners.GetListeners();
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
 			UseWaitCursor = false;
 		}
@@ -103,6 +97,7 @@ namespace M3App
 			{
 				dbListeners.AddListener(listener);
 				SendWelcome(sender, new ListenerEventArgs(listener, EventType.Added));
+
 			}
 			catch (Exception ex)
 			{
@@ -139,11 +134,11 @@ namespace M3App
 				UseWaitCursor = false;
 			}
 		}
-		/// <inheritdoc/>
 
+		/// <inheritdoc/>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			bsListeners.Filter = filter;
+			ldg_Listeners.Filter = filter;
 		}
 
 		private void SendEmails(object sender, EventArgs e)
@@ -158,12 +153,13 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 
+#if !DEBUG
 			string subject = "Welcome to the Ministry";
 			string body = string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim());
 			MimeKit.MimeMessage message = gt_Email.Create(e.Value, subject, body);
-
-#if !DEBUG
 			gt_Email.Send(message);
+#else
+			MessageBox.Show($"Listener {e.Value.Name} has been added to the database", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
 
 			Reload(sender, e);
