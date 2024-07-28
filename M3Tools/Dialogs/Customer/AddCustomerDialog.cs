@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using SPPBC.M3Tools.Events.Customers;
 using SPPBC.M3Tools.Types;
 
 // TODO: Cleanup this dialog box
@@ -12,10 +11,6 @@ namespace SPPBC.M3Tools.Dialogs
 	/// </summary>
 	public partial class AddCustomerDialog
 	{
-		/// <summary>
-		/// The event that occurs when a user is created
-		/// </summary>
-		public event CustomerEventHandler CustomerAdded;
 
 		private string FirstName => gi_FirstName.Text;
 
@@ -23,7 +18,7 @@ namespace SPPBC.M3Tools.Dialogs
 
 		private Address Address => af_Address.Address;
 
-		private string Phone => pn_PhoneNumber.Text;
+		private string Phone => pn_PhoneNumber.PhoneNumber;
 
 		private string Email => gi_EmailAddress.Text;
 
@@ -66,6 +61,7 @@ namespace SPPBC.M3Tools.Dialogs
 		{
 			get
 			{
+				// TODO: Verify/Simplify this
 				if (string.IsNullOrWhiteSpace(Email) || !Regex.IsMatch(Email, Properties.Resources.EmailRegex2))
 				{
 					ep_InputError.SetError(gi_EmailAddress, "No valid email address provided");
@@ -91,24 +87,19 @@ namespace SPPBC.M3Tools.Dialogs
 			switch (tc_Creation.SelectedIndex)
 			{
 				case var @case when @case == tp_Basics.TabIndex:
+					DialogResult res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+					if (res != DialogResult.Yes)
 					{
-						DialogResult res = MessageBox.Show("Are you sure you want to cancel customer creation?", "Cancel Creation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-						if (!(res == DialogResult.Yes))
-						{
-							return;
-						}
-
-						DialogResult = DialogResult.Cancel;
-						Close();
-						break;
+						return;
 					}
 
+					DialogResult = DialogResult.Cancel;
+					Close();
+					break;
 				default:
-					{
-						tc_Creation.SelectedIndex -= 1;
-						break;
-					}
+					tc_Creation.SelectedIndex -= 1;
+					break;
 			}
 		}
 
@@ -117,25 +108,18 @@ namespace SPPBC.M3Tools.Dialogs
 			switch (tc_Creation.SelectedIndex)
 			{
 				case var @case when @case == tp_Summary.TabIndex:
+					if (!ValidCustomer)
 					{
-						if (!ValidCustomer)
-						{
-							_ = MessageBox.Show("There were errors in your customer submission. Please try again.", "Customer Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-							return;
-						}
-
-						CustomerAdded?.Invoke(this, new CustomerEventArgs(Customer, M3Tools.Events.EventType.Added));
-
-						DialogResult = DialogResult.OK;
-						Close();
-						break;
+						_ = MessageBox.Show("There were errors in your customer submission. Please try again.", "Customer Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
 					}
 
+					DialogResult = DialogResult.OK;
+					Close();
+					break;
 				default:
-					{
-						tc_Creation.SelectedIndex += 1;
-						break;
-					}
+					tc_Creation.SelectedIndex += 1;
+					break;
 			}
 		}
 

@@ -86,7 +86,6 @@ namespace SPPBC.M3Tools
             this.MinimumSize = new System.Drawing.Size(150, 45);
             this.Name = "GenericInputPair";
             this.Size = new System.Drawing.Size(225, 45);
-            this.Load += new System.EventHandler(this.Loading);
             this.TableLayoutPanel1.ResumeLayout(false);
             this.TableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

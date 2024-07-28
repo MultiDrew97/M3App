@@ -20,7 +20,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// The new info for the customer
 		/// </summary>
-		public Types.Customer Customer => new(Original.Id, FirstName, LastName, Address, Email, Phone);
+		public Types.Customer Customer => new(Original.Id, FirstName, LastName, Address, Phone, Email);
 
 		private string FirstName
 		{
