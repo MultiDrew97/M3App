@@ -71,13 +71,13 @@ namespace M3App
 			splash.UpdateProgress(50);
 
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
-#if DEBUG
-			Console.WriteLine("DEBUG: Changing API settings for debug settings");
-			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api";
-			Properties.Settings.Default.ApiPassword = "password";
-			Properties.Settings.Default.ApiUsername = "username";
-			Properties.Settings.Default.Save();
-#endif
+			//#if DEBUG
+			//			Console.WriteLine("DEBUG: Changing API settings for debug settings");
+			//			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api";
+			//			Properties.Settings.Default.ApiPassword = "password";
+			//			Properties.Settings.Default.ApiUsername = "username";
+			//			Properties.Settings.Default.Save();
+			//#endif
 
 			Console.WriteLine("Application preamble has finished. Starting application...");
 			splash.UpdateProgress(100);

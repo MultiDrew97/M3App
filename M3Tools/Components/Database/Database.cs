@@ -135,6 +135,7 @@ namespace SPPBC.M3Tools.Database
 				System.Net.HttpStatusCode.Unauthorized => throw new Exceptions.AuthorizationException(res.StatusDescription),
 				System.Net.HttpStatusCode.NotFound => throw new Exceptions.NotFoundException(res.StatusDescription),
 				System.Net.HttpStatusCode.Forbidden => throw new Exceptions.ApiException(res.StatusDescription),
+				System.Net.HttpStatusCode.InternalServerError => throw new Exceptions.ApiException(res.StatusDescription),
 				_ => res,
 			};
 		}
