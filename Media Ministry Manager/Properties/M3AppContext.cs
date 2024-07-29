@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace M3App
@@ -17,13 +18,17 @@ namespace M3App
 		public M3AppContext()
 		{
 			splash.Show();
+#if DEBUG
+			ShowApplication(this, EventArgs.Empty);
+#else
 			timer.Start();
 			timer.Tick += ShowApplication;
+#endif
 		}
 
 		private void ShowApplication(object sender, EventArgs e)
 		{
-			LoadApp(new string[] { });
+			LoadApp();
 			timer.Stop();
 			splash.Close();
 			splash.Dispose();
@@ -48,15 +53,15 @@ namespace M3App
 			base.ExitThreadCore();
 		}
 
-		private void LoadApp(string[] args)
+		private void LoadApp()
 		{
-			Console.WriteLine("Checking for previous settings...");
+			Debug.WriteLine("Checking for previous settings...");
 			if (Properties.Settings.Default.UpgradeRequired)
 			{
 				try
 				{
 					// Bring in the settings from previous version
-					Console.WriteLine("Previous settings found. Importing previous settings...");
+					Debug.WriteLine("Previous settings found. Importing previous settings...");
 					Properties.Settings.Default.KeepLoggedIn = false;
 					Properties.Settings.Default.Upgrade();
 					Properties.Settings.Default.UpgradeRequired = false;
@@ -70,16 +75,16 @@ namespace M3App
 
 			splash.UpdateProgress(50);
 
+#if DEBUG
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
-			//#if DEBUG
-			//			Console.WriteLine("DEBUG: Changing API settings for debug settings");
-			//			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api";
-			//			Properties.Settings.Default.ApiPassword = "password";
-			//			Properties.Settings.Default.ApiUsername = "username";
-			//			Properties.Settings.Default.Save();
-			//#endif
+			Debug.WriteLine("DEBUG: Changing API settings for debug settings");
+			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api";
+			Properties.Settings.Default.ApiPassword = "password";
+			Properties.Settings.Default.ApiUsername = "username";
+			Properties.Settings.Default.Save();
+#endif
 
-			Console.WriteLine("Application preamble has finished. Starting application...");
+			Debug.WriteLine("Application preamble has finished. Starting application...");
 			splash.UpdateProgress(100);
 		}
 	}
