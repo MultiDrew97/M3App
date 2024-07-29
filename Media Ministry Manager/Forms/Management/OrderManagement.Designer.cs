@@ -66,6 +66,7 @@ namespace M3App
             this.odg_Orders.Name = "odg_Orders";
             this.odg_Orders.ReadOnly = true;
             this.odg_Orders.RowHeadersWidth = 82;
+            this.odg_Orders.RowsCheckable = false;
             this.odg_Orders.RowTemplate.Height = 28;
             this.odg_Orders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.odg_Orders.Size = new System.Drawing.Size(775, 345);

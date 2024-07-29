@@ -36,7 +36,19 @@ namespace SPPBC.M3Tools.Data
 		/// The complete list of listeners being shown
 		/// </summary>
 		[Browsable(false)]
-		public Types.ListenerCollection Listeners => Types.ListenerCollection.Cast(bsListeners.List);
+		public Types.ListenerCollection Listeners
+		{
+			get => Types.ListenerCollection.Cast(bsListeners.List);
+			set
+			{
+				if (DesignMode)
+				{
+					return;
+				}
+
+				bsListeners.DataSource = value;
+			}
+		}
 
 		/// <summary>
 		/// The filter to apply to the data grid

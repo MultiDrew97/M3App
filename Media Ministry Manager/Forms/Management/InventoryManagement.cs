@@ -30,7 +30,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			idg_Inventory.DataSource = dbInventory.GetProducts();
+			idg_Inventory.Inventory = dbInventory.GetProducts();
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;
 		}

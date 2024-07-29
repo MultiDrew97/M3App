@@ -37,7 +37,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			ldg_Listeners.DataSource = dbListeners.GetListeners();
+			ldg_Listeners.Listeners = dbListeners.GetListeners();
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
 			UseWaitCursor = false;
 		}

@@ -138,6 +138,7 @@ namespace SPPBC.M3Tools.Database
 			}
 			catch (Exception e)
 			{
+				// TODO: Create custom exception for each operation
 				throw new Exceptions.ApiException($"Unable to {(completed ? "complete" : "cancel")} order", e);
 			}
 		}

@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using SPPBC.M3Tools.M3API;
+﻿using SPPBC.M3Tools.M3API;
 
 namespace SPPBC.M3Tools.Database
 {
@@ -25,7 +22,7 @@ namespace SPPBC.M3Tools.Database
 		/// <returns></returns>
 		public Types.InventoryCollection GetProducts()
 		{
-			return ExecuteWithResult<Types.InventoryCollection> (Method.Get, $"{path}").Result;
+			return ExecuteWithResult<Types.InventoryCollection>(Method.Get, $"{path}").Result;
 		}
 
 		/// <summary>
@@ -76,7 +73,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="itemID"></param>
 		public void RemoveProduct(int itemID)
 		{
-			Execute(Method.Put, $"{path}/{itemID}");
+			Execute(Method.Delete, $"{path}/{itemID}?force");
 		}
 	}
 }
