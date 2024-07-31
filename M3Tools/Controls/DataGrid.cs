@@ -13,9 +13,21 @@ namespace SPPBC.M3Tools.Data
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected internal DataGridViewCheckBoxColumn dgc_Selection;
+		/// <summary>
+		/// 
+		/// </summary>
 		protected internal DataGridViewTextBoxColumn dgc_ID;
+		/// <summary>
+		/// 
+		/// </summary>
 		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
+		/// <summary>
+		/// 
+		/// </summary>
 		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
 
 		// TODO: Maybe Remove this later
@@ -39,10 +51,7 @@ namespace SPPBC.M3Tools.Data
 		/// </summary>
 		public event EventHandler Reload;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
+		/// <inheritdoc />
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
@@ -164,11 +173,6 @@ namespace SPPBC.M3Tools.Data
 		}
 
 		/// <summary>
-		/// Whether to auto generate columns
-		/// </summary>
-		//public new bool AutoGenerateColumns => false;
-
-		/// <summary>
 		/// 
 		/// </summary>
 		public DataGrid() : base()
@@ -273,10 +277,7 @@ namespace SPPBC.M3Tools.Data
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
+		/// <inheritdoc/>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
 		{
 			DataGridViewDataErrorContexts context = DataGridViewDataErrorContexts.Commit;
@@ -299,22 +300,28 @@ namespace SPPBC.M3Tools.Data
 			_ = CommitEdit(context);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
+		/// <inheritdoc/>
 		protected override void OnUserDeletingRow(DataGridViewRowCancelEventArgs e)
 		{
 			base.OnUserDeletingRow(e);
 			RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
 		}
 
-		//protected override void OnDataError(bool displayErrorDialogIfNoHandler, DataGridViewDataErrorEventArgs e)
-		//{
-		//	base.OnDataError(false, e);
+		/// <inheritdoc/>
+		protected override void OnUserAddedRow(DataGridViewRowEventArgs e)
+		{
+			base.OnUserAddedRow(e);
 
-		//	if (Rows[e.RowIndex] is not null)
-		//		return;
-		//}
+			AddEntry?.Invoke(this, new((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Added));
+		}
+
+		/// <inheritdoc/>
+		protected override void OnDataError(bool _, DataGridViewDataErrorEventArgs e)
+		{
+			base.OnDataError(false, e);
+
+			if (Rows[e.RowIndex] is not null)
+				return;
+		}
 	}
 }

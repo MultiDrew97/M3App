@@ -11,7 +11,6 @@ namespace SPPBC.M3Tools.Dialogs
 	public partial class EditListenerDialog
 	{
 		private Types.Listener _original;
-		private event EventHandler ListenerChanged;
 
 		/// <summary>
 		/// The original info for the listener
@@ -51,20 +50,15 @@ namespace SPPBC.M3Tools.Dialogs
 			private set => gi_Email.Text = value;
 		}
 
-		private EditListenerDialog()
-		{
-			InitializeComponent();
-		}
+		private EditListenerDialog() => InitializeComponent();
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="listener"></param>
-		public EditListenerDialog(Types.Listener listener) : this()
-		{
+		public EditListenerDialog(Types.Listener listener) : this() =>
 			// Add any initialization after the InitializeComponent() call.
 			Original = listener;
-		}
 
 		private void FinishDialog(object sender, EventArgs e)
 		{

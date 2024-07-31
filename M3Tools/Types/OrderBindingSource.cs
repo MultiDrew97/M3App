@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 
+using SPPBC.M3Tools.Types;
+
 namespace SPPBC.M3Tools.Data
 {
 	/// <summary>
@@ -12,10 +14,7 @@ namespace SPPBC.M3Tools.Data
 		/// <summary>
 		/// 
 		/// </summary>
-		public OrderBindingSource() : base()
-		{
-			DataSource = new Types.OrderCollection();
-		}
+		public OrderBindingSource() : base() => DataSource = new OrderCollection();
 
 		/// <summary>
 		/// 
@@ -23,7 +22,7 @@ namespace SPPBC.M3Tools.Data
 		[Category("Data")]
 		public new object DataSource
 		{
-			get => DesignMode ? typeof(Types.OrderCollection) : (Types.OrderCollection)base.DataSource;
+			get => DesignMode ? typeof(OrderCollection) : (OrderCollection)base.DataSource;
 			set => base.DataSource = value;
 		}
 

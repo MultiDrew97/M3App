@@ -74,19 +74,13 @@ namespace SPPBC.M3Tools.Types
 		/// Returns the item in a display friendly format
 		/// </summary>
 		/// <returns></returns>
-		public string Display()
-		{
-			return $"{Id}) {Name} ({Price.FormatPrice()}) {(Available ? "Available" : "Not Available")}";
-		}
+		public string Display() => $"{Id}) {Name} ({Price.FormatPrice()}) {(Available ? "Available" : "Not Available")}";
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <returns></returns>
-		public override string ToString()
-		{
-			return string.Join(Properties.Settings.Default.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
-		}
+		public override string ToString() => string.Join(Properties.Settings.Default.ObjectDelimiter, Id, Name, Stock, Price.FormatPrice(), Available ? "Available" : "Not Available");
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -94,10 +88,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator ==(Product left, Product right)
-		{
-			return !(left is null ^ right is null) && left?.Name == right?.Name && left?.Stock == right?.Stock && left?.Price == right?.Price && left?.Available == right?.Available;
-		}
+		public static bool operator ==(Product left, Product right) => !(left is null ^ right is null) && left?.Name == right?.Name && left?.Stock == right?.Stock && left?.Price == right?.Price && left?.Available == right?.Available;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -105,9 +96,12 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator !=(Product left, Product right)
-		{
-			return !(left == right);
-		}
+		public static bool operator !=(Product left, Product right) => !(left == right);
+
+		/// <inheritdoc/>
+		public override bool Equals(object obj) => this == (obj as Product);
+
+		/// <inheritdoc/>
+		public override int GetHashCode() => base.GetHashCode();
 	}
 }

@@ -81,14 +81,17 @@ namespace M3App
 		{
 			Properties.Settings.Default.Username = "";
 			Properties.Settings.Default.Password = "";
+			Properties.Settings.Default.User = null;
 			Properties.Settings.Default.KeepLoggedIn = false;
 			Properties.Settings.Default.Save();
 			OpenForm(typeof(LoginForm));
 		}
 
-		public static bool ValidID(int id)
-		{
-			return id > -1;
-		}
+		/// <summary>
+		/// Determines if ID value is valid
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public static bool ValidID(int id) => id > -1;
 	}
 }

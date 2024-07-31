@@ -1,106 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Exceptions;
 
 namespace M3App
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	public partial class CreateFolderDialog
+	{
+		/// <summary>
+		/// The name of the folder to create
+		/// </summary>
+		public string FolderName { get; private set; }
 
-    public partial class CreateFolderDialog
-    {
-        private string __folderName;
-        private readonly Collection<string> __parents = new();
-        public string FolderName
-        {
-            get
-            {
-                return __folderName;
-            }
-            set
-            {
-                __folderName = value;
-            }
-        }
+		/// <summary>
+		/// The list of parents for the folder being created
+		/// </summary>
+		public IList<string> Parents { get; private set; } = [];
 
-        public IList<string> Parents
-        {
-            get
-            {
-                return __parents.Count == 0 ? null : __parents;
-            }
-        }
+		/// <summary>
+		/// 
+		/// </summary>
+		public CreateFolderDialog() => InitializeComponent();
 
-        public CreateFolderDialog()
-        {
-            InitializeComponent();
-        }
+		private void Create(object sender, EventArgs e)
+		{
+			bw_GatherInfo.RunWorkerAsync(dt_DriveHeirarchy.SelectedNode);
+			try
+			{
+				_ = gdt_GDrive.CreateFolder(FolderName, Parents);
+				DialogResult = DialogResult.OK;
+				Close();
+			}
+			catch (FolderException ex)
+			{
+				_ = MessageBox.Show(ex.Message, "New Folder Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        // Public Property Username As String
-        // Get
-        // Return gdt_GDrive.Username
-        // End Get
-        // Set(value As String)
-        // gdt_GDrive.Username = value
-        // dt_DriveHeirarchy.Username = value
-        // End Set
-        // End Property
+		private void Cancel(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
+		}
 
-        private void Create(object sender, EventArgs e)
-        {
-            bw_GatherInfo.RunWorkerAsync(dt_DriveHeirarchy.SelectedNode);
-            try
-            {
-                gdt_GDrive.CreateFolder(FolderName, Parents);
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            catch (FolderException ex)
-            {
-                MessageBox.Show(this, ex.Message, "New Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+		private void FolderNameTextChanged(object sender, EventArgs e) => FolderName = ip_FolderName.Text;
 
-        private void Cancel(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
+		private void LoadDialog(object sender, EventArgs e)
+		{
+			UseWaitCursor = true;
 
-        private void FolderNameTextChanged(object sender, EventArgs e)
-        {
-            FolderName = ip_FolderName.Text;
-        }
+			gdt_GDrive.Authorize();
 
-        private void LoadDialog(object sender, EventArgs e)
-        {
-            UseWaitCursor = true;
+			dt_DriveHeirarchy.Reload();
 
-            gdt_GDrive.Authorize();
+			UseWaitCursor = false;
+		}
 
-            dt_DriveHeirarchy.Reload();
+		private void GatherInfo(object sender, System.ComponentModel.DoWorkEventArgs e)
+		{
+			Parents.Clear();
+			TreeNode nodeSelected = (TreeNode)e.Argument;
 
-            UseWaitCursor = false;
-        }
-
-        private void GatherInfo(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            __parents.Clear();
-            TreeNode nodeSelected = (TreeNode)e.Argument;
-
-            if (nodeSelected is not null)
-            {
-                // A node is selected
-                if (!nodeSelected.Name.ToLower().Equals("main"))
-                {
-                    // Selected node was not the My Drive Folder node
-                    __parents.Add(nodeSelected.Name);
-                }
-            }
-            else
-            {
-                MessageBox.Show("You must select a folder for the new one to go in.", "New Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-    }
+			if (nodeSelected is not null)
+			{
+				// A node is selected
+				if (!nodeSelected.Name.ToLower().Equals("main"))
+				{
+					// Selected node was not the My Drive Folder node
+					Parents.Add(nodeSelected.Name);
+				}
+			}
+			else
+			{
+				_ = MessageBox.Show("You must select a folder for the new one to go in.", "New Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+	}
 }

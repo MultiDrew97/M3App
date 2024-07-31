@@ -52,10 +52,7 @@
 		/// <inheritdoc/>
 		/// </summary>
 		/// <returns></returns>
-		public override string ToString()
-		{
-			return $"{Id}) {Name} <{Email}>";
-		}
+		public override string ToString() => $"{Id}) {Name} <{Email}>";
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -63,10 +60,7 @@
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator ==(Listener left, Listener right)
-		{
-			return !(left is null ^ right is null) && left.Id == right.Id && left.Name == right.Name && left.Email == right.Email;
-		}
+		public static bool operator ==(Listener left, Listener right) => !(left is null ^ right is null) && left.Id == right.Id && left.Name == right.Name && left.Email == right.Email;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -74,9 +68,12 @@
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator !=(Listener left, Listener right)
-		{
-			return !(left == right);
-		}
+		public static bool operator !=(Listener left, Listener right) => !(left == right);
+
+		/// <inheritdoc/>
+		public override bool Equals(object obj) => this == (obj as Listener);
+
+		/// <inheritdoc/>
+		public override int GetHashCode() => base.GetHashCode();
 	}
 }

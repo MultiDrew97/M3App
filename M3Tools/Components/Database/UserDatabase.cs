@@ -1,9 +1,13 @@
 ﻿using System;
+
 using SPPBC.M3Tools.M3API;
 using SPPBC.M3Tools.Types;
 
 namespace SPPBC.M3Tools.Database
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public sealed partial class UserDatabase
 	{
 		private const string path = "users";
@@ -32,10 +36,7 @@ namespace SPPBC.M3Tools.Database
 		/// 
 		/// </summary>
 		/// <param name="user"></param>
-		public void CreateUser(User user)
-		{
-			Execute(Method.Post, $"/{path}", JSON.ConvertToJSON(user));
-		}
+		public void CreateUser(User user) => Execute(Method.Post, $"/{path}", JSON.ConvertToJSON(user));
 
 		/// <summary>
 		/// Change the password of the specified user
@@ -45,19 +46,13 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="newPassword"></param>
 		/// <returns></returns>
 		/// <exception cref="NotImplementedException"></exception>
-		public bool ChangePassword(string username, string oldPassword, string newPassword)
-		{
-			throw new NotImplementedException("ChangePassword");
-		}
+		public bool ChangePassword(string username, string oldPassword, string newPassword) => throw new NotImplementedException("ChangePassword");
 
 		/// <summary>
 		/// Completly delete the specified user's account
 		/// </summary>
 		/// <param name="userID"></param>
-		public void CloseAccount(int userID)
-		{
-			Execute(Method.Delete, $"/{path}/{userID}");
-		}
+		public void CloseAccount(int userID) => Execute(Method.Delete, $"/{path}/{userID}");
 
 		/// <summary>
 		/// Login a user using the provided login info
@@ -65,39 +60,27 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="username"></param>
 		/// <param name="password"></param>
 		/// <returns></returns>
-		public User Login(string username, string password)
-		{
-			return Login(new Auth(username, password));
-		}
+		public User Login(string username, string password) => Login(new Auth(username, password));
 
 		/// <summary>
 		/// Attempt to login a user provided their username and password
 		/// </summary>
 		/// <param name="auth">The credentials to use for logging in the user</param>
 		/// <returns>The user if successful, otherwise Nothing</returns>
-		public User Login(Auth auth)
-		{
-			// TODO: Upon successful login, update the LastLogin field in the database using m3.sp_UpdateLastLogin
-			// MAYBE: Look into SQL triggers to see if I can make one that triggers upon login from the table function
-			// MAYBE: Put this in the API instead? 
-			return Login(JSON.ConvertToJSON(auth));
-		}
+		public User Login(Auth auth) => Login(JSON.ConvertToJSON(auth));
+
+		//{
+		//	// TODO: Upon successful login, update the LastLogin field in the database using m3.sp_UpdateLastLogin
+		//	// MAYBE: Look into SQL triggers to see if I can make one that triggers upon login from the table function
+		//	// MAYBE: Put this in the API instead? 
+		//	return Login(JSON.ConvertToJSON(auth));
+		//}
 
 		private User Login(string auth)
 		{
 			System.Threading.Tasks.Task<User> task = ExecuteWithResult<User>(Method.Post, $"{path}/login", auth);
 
-			if (task.IsFaulted)
-			{
-				throw task.Exception;
-			}
-
-			if (task.IsCanceled)
-			{
-				throw new OperationCanceledException();
-			}
-
-			return task.Result;
+			return task.IsFaulted ? throw task.Exception : task.IsCanceled ? throw new OperationCanceledException() : task.Result;
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
@@ -10,12 +9,12 @@ namespace SPPBC.M3Tools.Data
 	/// Custom binding source to be used with the M3 Application
 	/// </summary>
 	/// <typeparam name="T">Data type for the data being used for binding</typeparam>
-	public partial class BindingSource<T> where T : Types.IDbEntry
+	public partial class BindingSource<T> where T : Types.IDbEntry, new()
 	{
 		/// <summary>
 		/// The binding source supports filtering
 		/// </summary>
-		public readonly new bool SupportsFiltering = true;
+		public new readonly bool SupportsFiltering = true;
 
 		///// <summary>
 		///// List of customers in the binding source
@@ -45,8 +44,8 @@ namespace SPPBC.M3Tools.Data
 		/// <returns></returns>
 		public override PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors)
 		{
-			var properties = TypeDescriptor.GetProperties(typeof(T));
-			var newProperties = new List<PropertyDescriptor>();
+			PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+			List<PropertyDescriptor> newProperties = [];
 
 			foreach (PropertyDescriptor pd in properties)
 			{
@@ -54,6 +53,7 @@ namespace SPPBC.M3Tools.Data
 				{
 					newProperties.AddRange(CreateNestedProperties(pd));
 				}
+
 				newProperties.Add(pd);
 			}
 
@@ -69,7 +69,7 @@ namespace SPPBC.M3Tools.Data
 		}
 	}
 
-	class NestedPropertyDescriptor : PropertyDescriptor
+	internal class NestedPropertyDescriptor : PropertyDescriptor
 	{
 		private readonly PropertyDescriptor _parent;
 		private readonly PropertyInfo _info;

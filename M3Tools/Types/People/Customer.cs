@@ -1,5 +1,7 @@
 ﻿using System;
+
 using Microsoft.VisualBasic;
+
 using SPPBC.M3Tools.Types.Extensions;
 
 namespace SPPBC.M3Tools.Types
@@ -84,31 +86,26 @@ namespace SPPBC.M3Tools.Types
 		/// Returns the customer in a string format
 		/// </summary>
 		/// <returns></returns>
-		public override string ToString()
-		{
+		public override string ToString() =>
 			// Id,Name,Email,Address,Phone,Joined
-			return string.Join(Properties.Settings.Default.ObjectDelimiter, Id, Name, Email, Address.ToString(), Phone, Joined);
-		}
+			string.Join(Properties.Settings.Default.ObjectDelimiter, Id, Name, Email, Address.ToString(), Phone, Joined);
 
 		/// <summary>
 		/// Returns the info for the custoemr in a human readable format
 		/// </summary>
 		/// <returns></returns>
-		public string Display()
-		{
+		public string Display() =>
 			// ID) Name (Email)
 			// Street
 			// City, ST ZipCode
 			// Phone Number
-			return $"{Id}) {Name} (e: {Email} p: {Phone}){Constants.vbCrLf}{Constants.vbCrLf}{Address.Display()}{Constants.vbCrLf}";
-		}
+			$"{Id}) {Name} (e: {Email} p: {Phone}){Constants.vbCrLf}{Constants.vbCrLf}{Address.Display()}{Constants.vbCrLf}";
 
 		/// <summary>
 		/// Determine if a customer object is equal to another
 		/// </summary>
 		/// <param name="left"></param>
 		/// <param name="right"></param>
-		/// <returns></returns>
 		public static bool operator ==(Customer left, Customer right)
 		{
 			return !(left is null ^ right is null) && left.FirstName == right.FirstName && left.LastName == right.LastName && left.Address == right.Address
@@ -120,10 +117,12 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="left"></param>
 		/// <param name="right"></param>
-		/// <returns></returns>
-		public static bool operator !=(Customer left, Customer right)
-		{
-			return !(left == right);
-		}
+		public static bool operator !=(Customer left, Customer right) => !(left == right);
+
+		/// <inheritdoc/>
+		public override bool Equals(object obj) => this == (obj as Customer);
+
+		/// <inheritdoc/>
+		public override int GetHashCode() => base.GetHashCode();
 	}
 }

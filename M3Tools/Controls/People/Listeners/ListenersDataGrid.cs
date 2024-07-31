@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+
 using SPPBC.M3Tools.Events.Listeners;
 
 namespace SPPBC.M3Tools.Data
@@ -84,7 +85,6 @@ namespace SPPBC.M3Tools.Data
 		{
 			base.LoadColumns();
 
-
 			dgc_ID.HeaderText = "ListenerID";
 
 			// Email Column
@@ -100,7 +100,6 @@ namespace SPPBC.M3Tools.Data
 			dgc_Name.FillWeight = 50F;
 			dgc_Name.HeaderText = "Name";
 			dgc_Name.Name = "dgc_Name";
-
 
 			Columns.AddRange([
 				dgc_Selection, dgc_ID,
