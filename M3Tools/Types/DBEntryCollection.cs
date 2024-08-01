@@ -93,7 +93,7 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		public virtual string Filter
 		{
-			get => _filter;
+			get => _filter.ToLower();
 			set
 			{
 				if (string.Equals(value, _filter, System.StringComparison.Ordinal))

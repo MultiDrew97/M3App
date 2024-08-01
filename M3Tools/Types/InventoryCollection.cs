@@ -58,6 +58,6 @@ namespace SPPBC.M3Tools.Types
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
 		public override bool ApplyFilter(Product customer, int index) =>
 			// TODO: Do I want to allow for nothing values?
-			customer is not null && customer.Name.Contains(Filter);
+			customer is not null && customer.Name.ToLower().Contains(Filter);
 	}
 }

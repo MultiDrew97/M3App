@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
+// TODO: Make a label popup when there are no rows being displayed
 namespace SPPBC.M3Tools.Data
 {
 	/// <summary>

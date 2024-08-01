@@ -380,6 +380,24 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This feature is currently under construction. Please contact administrator for more information..
+        /// </summary>
+        internal static string UNDER_CONSTRUCTION_MESSAGE {
+            get {
+                return ResourceManager.GetString("UNDER_CONSTRUCTION_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under Construction.
+        /// </summary>
+        internal static string UNDER_CONSTRUCTION_TITLE {
+            get {
+                return ResourceManager.GetString("UNDER_CONSTRUCTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap UnderlineOption {

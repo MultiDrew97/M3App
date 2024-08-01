@@ -55,6 +55,6 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="listener"></param>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		public override bool ApplyFilter(Listener listener, int index) => listener != null && (listener.Name.Contains(Filter) || listener.Email.Contains(Filter));
+		public override bool ApplyFilter(Listener listener, int index) => listener != null && (listener.Name.ToLower().Contains(Filter) || listener.Email.ToLower().Contains(Filter));
 	}
 }

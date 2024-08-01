@@ -17,6 +17,7 @@ namespace M3App
 
 			// Menu Strip
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
+			mms_Main.ViewSettings += new EventHandler(ViewSettings);
 			mms_Main.ExitApplication += new EventHandler(ExitApp);
 			mms_Main.Logout += new EventHandler(Logout);
 			mms_Main.AddCustomer += new SPPBC.M3Tools.Events.Customers.CustomerEventHandler(AddCustomer);

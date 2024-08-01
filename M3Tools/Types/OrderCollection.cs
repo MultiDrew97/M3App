@@ -57,6 +57,6 @@ namespace SPPBC.M3Tools.Types
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
 		public override bool ApplyFilter(Order order, int index) =>
 			// TODO: Find best way to check against order number to search by that param as well
-			order is not null && (order.Customer.Name.Contains(Filter) || order.Item.Name.Contains(Filter));
+			order is not null && (order.Customer.Name.ToLower().Contains(Filter) || order.Item.Name.ToLower().Contains(Filter));
 	}
 }

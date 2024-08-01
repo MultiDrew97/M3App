@@ -3,7 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+
 using Microsoft.VisualBasic;
+
 using SPPBC.M3Tools.Events;
 
 namespace SPPBC.M3Tools
@@ -155,20 +157,11 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public MainMenuStrip()
-		{
-			InitializeComponent();
-		}
+		public MainMenuStrip() => InitializeComponent();
 
-		private void LogoutApplication(object sender, EventArgs e)
-		{
-			Logout?.Invoke(sender, e);
-		}
+		private void LogoutApplication(object sender, EventArgs e) => Logout?.Invoke(sender, e);
 
-		private void Exit(object sender, EventArgs e)
-		{
-			ExitApplication?.Invoke(sender, e);
-		}
+		private void Exit(object sender, EventArgs e) => ExitApplication?.Invoke(sender, e);
 
 		private void CreateCustomer(object sender, EventArgs e)
 		{
@@ -281,10 +274,12 @@ namespace SPPBC.M3Tools
 			}
 		}
 
-		private void ShowSettings(object sender, EventArgs e)
-		{
+		private void ShowSettings(object sender, EventArgs e) =>
+#if !DEBUG
+			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+#else
 			ViewSettings?.Invoke(sender, e);
-		}
+#endif
 
 		private void UpdateAppBW(object sender, DoWorkEventArgs e)
 		{

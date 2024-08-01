@@ -55,6 +55,6 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="customer">The current customer to compare with</param>
 		/// <param name="index">The index of the current customer</param>
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
-		public override bool ApplyFilter(Customer customer, int index) => customer is not null && (customer.Name.Contains(Filter) || customer.Email.Contains(Filter) || customer.Phone.Contains(Filter));
+		public override bool ApplyFilter(Customer customer, int index) => customer is not null && (customer.Name.ToLower().Contains(Filter) || customer.Email.ToLower().Contains(Filter) || customer.Phone.Contains(Filter));
 	}
 }
