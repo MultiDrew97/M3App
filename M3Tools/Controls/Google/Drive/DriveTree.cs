@@ -7,14 +7,12 @@ using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools
 {
-	// FIXME: Resolve node nesting bug with not removing the node from the list after nesting it
 	/// <summary>
 	/// 
 	/// </summary>
 	public partial class DriveTree
 	{
 		// TODO: Make sure that when a file is checked, as long as not all values are selected, the folder will have the intermediate check
-		// Private __username As String
 
 		/// <summary>
 		/// The nodes on the tree
@@ -56,7 +54,12 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public DriveTree() => InitializeComponent();
+		public DriveTree()
+		{
+			InitializeComponent();
+
+			gdt_GDrive.Authorize();
+		}
 
 		/// <summary>
 		/// Fills the table with the provided files
@@ -64,7 +67,7 @@ namespace SPPBC.M3Tools
 		/// <param name="treeNodes"></param>
 		public void FillTable(FileCollection treeNodes)
 		{
-			// TODO: Potentially move to a background worker
+			// TODO: Figure out best way to utilize background worker for filling table instead of doing it all on main thread
 			UseWaitCursor = true;
 			tv_DriveFiles.Nodes[0].Nodes.Clear();
 			tv_DriveFiles.Nodes[0].Nodes.AddRange(ParseTree(treeNodes));
@@ -159,10 +162,5 @@ namespace SPPBC.M3Tools
 
 			Reload();
 		}
-
-		/// <summary>
-		/// When the control is loaded
-		/// </summary>
-		public new void Load() => gdt_GDrive.Authorize();
 	}
 }

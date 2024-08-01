@@ -245,7 +245,6 @@ namespace M3App
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Email";
-            this.Load += new System.EventHandler(this.Loading);
             this.Shown += new System.EventHandler(this.Reload);
             this.TableLayoutPanel1.ResumeLayout(false);
             this.tc_EmailTypes.ResumeLayout(false);

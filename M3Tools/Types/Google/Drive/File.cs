@@ -7,46 +7,40 @@ namespace SPPBC.M3Tools.Types.GTools
 	/// <summary>
 	/// A file that was found in the user's google drive
 	/// </summary>
-    public class File
-    {
+	public class File
+	{
 		/// <summary>
 		/// The ID of the file
 		/// </summary>
-        public readonly string Id;
+		public readonly string Id;
 
 		/// <summary>
 		/// The name of the file
 		/// </summary>
-        public string Name { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// The type of the file
 		/// </summary>
-        public string FileType { get; set; }
+		public string FileType { get; set; }
 
 		/// <summary>
 		/// The list of folder IDs that the file is contained in
 		/// </summary>
-        public IList<string> Parents { get; set; }
+		public IList<string> Parents { get; set; }
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public new string ToString
-        {
-            get
-            {
-                return $"Name: {Name} ({Id}): FileType: {FileType} > Parent Count: {Parents.Count}";
-            }
-        }
+		public new string ToString => $"Name: {Name} ({Id}): FileType: {FileType} > Parent Count: {Parents.Count}";
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="id"></param>
-        public File(string id) : this(id, "Temp File", "txt")
-        {
-        }
+		public File(string id) : this(id, "Temp File", "txt")
+		{
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -55,13 +49,13 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="name"></param>
 		/// <param name="filetype"></param>
 		/// <param name="parents"></param>
-        public File(string id, string name, string filetype, string[] parents = null)
-        {
-            Id = id;
-            Name = name;
-            FileType = filetype;
-			Parents = parents ?? new string[] { };
-        }
+		public File(string id, string name, string filetype = "", string[] parents = null)
+		{
+			Id = id;
+			Name = name;
+			FileType = filetype;
+			Parents = parents ?? [];
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -69,10 +63,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-        public static bool operator ==(File left, File right)
-        {
-            return (left.Id ?? "") == (right.Id ?? ""); // AndAlso left.Name = right.Name AndAlso left.Parents.Equals(right.Parents) AndAlso left.FileType = right.FileType
-        }
+		public static bool operator ==(File left, File right) => (left.Id ?? "") == (right.Id ?? ""); // AndAlso left.Name = right.Name AndAlso left.Parents.Equals(right.Parents) AndAlso left.FileType = right.FileType
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -80,49 +71,40 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-        public static bool operator !=(File left, File right)
-        {
-            return !(left == right);
-        }
+		public static bool operator !=(File left, File right) => !(left == right);
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public override bool Equals(object obj)
-		{
-			return this == obj as File || base.Equals(obj);
-		}
+		public override bool Equals(object obj) => this == (obj as File) || base.Equals(obj);
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <returns></returns>
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
-		}
+		public override int GetHashCode() => base.GetHashCode();
 	}
 
 	/// <summary>
 	/// A folder found in the user's google drive. Since Files and Folders share the same functionality
 	/// and are classified as files on their API, this inherits from File as well
 	/// </summary>
-    public class Folder : File
-    {
+	public class Folder : File
+	{
 		/// <summary>
 		/// The list of children within the folder
 		/// </summary>
-        public FileCollection Children { get; set; }
+		public FileCollection Children { get; set; }
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="id"></param>
-        public Folder(string id) : this(id, "Temp Folder")
-        {
-        }
+		public Folder(string id) : this(id, "Temp Folder")
+		{
+		}
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -131,11 +113,8 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="name"></param>
 		/// <param name="parents"></param>
 		/// <param name="children"></param>
-        public Folder(string id, string name, string[] parents = null, FileCollection children = null) : base(id, name, "folder", parents)
-        {
-            Children = children ?? new FileCollection();
-        }
-    }
+		public Folder(string id, string name, string[] parents = null, FileCollection children = null) : base(id, name, "folder", parents) => Children = children ?? [];
+	}
 
 	/// <summary>
 	/// A collection of Google Drive files
@@ -151,7 +130,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		{
 			get
 			{
-				foreach (var @file in Items)
+				foreach (File @file in Items)
 				{
 					if (@file.Id == fileID)
 					{
@@ -171,7 +150,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <returns></returns>
 		public bool Contains(string id)
 		{
-			foreach (var @file in Items)
+			foreach (File @file in Items)
 			{
 				if ((@file.Id ?? "") == (id ?? ""))
 				{
@@ -189,7 +168,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <returns></returns>
 		public new bool Contains(File fileSearch)
 		{
-			foreach (var @file in Items)
+			foreach (File @file in Items)
 			{
 				if (@file == fileSearch)
 				{
@@ -200,14 +179,13 @@ namespace SPPBC.M3Tools.Types.GTools
 			return false;
 		}
 
-
 		/// <summary>
 		/// Add a list of files to the collection
 		/// </summary>
 		/// <param name="files"></param>
 		public void AddRange(IList<File> files)
 		{
-			foreach (var @file in files)
+			foreach (File @file in files)
 				Add(@file);
 		}
 
@@ -215,16 +193,16 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// Removes files based on the provided predecate
 		/// </summary>
 		/// <param name="pred"></param>
-		public void RemoveAll(Predicate<File> pred) 
+		public void RemoveAll(Predicate<File> pred)
 		{
-			for (var i = 0; i < this.Count; i++)
+			for (int i = 0; i < Count; i++)
 			{
-				if (!pred(this.Items[i]))
+				if (!pred(Items[i]))
 				{
 					continue;
 				}
 
-				this.Remove(this.Items[i]);
+				_ = Remove(Items[i]);
 			}
 		}
 
@@ -235,14 +213,14 @@ namespace SPPBC.M3Tools.Types.GTools
 		public void RemoveAll(Predicate<Folder> pred)
 		{
 			// FIXME: Figure out why the entries are being removed erroniously
-			for (var i = this.Count - 1; i >= 0; i--)
+			for (int i = Count - 1; i >= 0; i--)
 			{
-				if (!pred((Folder)this.Items[i]))
+				if (!pred((Folder)Items[i]))
 				{
 					continue;
 				}
 
-				this.Remove(this.Items[i]);
+				_ = Remove(Items[i]);
 			}
 		}
 
