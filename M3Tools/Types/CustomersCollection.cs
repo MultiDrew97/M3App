@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
@@ -13,11 +14,11 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		/// <param name="source"></param>
 		/// <returns></returns>
-		public static new CustomerCollection Cast(System.Collections.IList source)
+		public static new CustomerCollection Cast(System.Collections.IEnumerable source)
 		{
-			if (source == null || source.Count <= 0)
+			if (source == null)
 			{
-				return new();
+				return [];
 			}
 
 			CustomerCollection result;
@@ -26,7 +27,7 @@ namespace SPPBC.M3Tools.Types
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
-					result = new();
+					result = [];
 					foreach (DataGridViewRow row in source)
 					{
 						result.Add((Customer)row.DataBoundItem);
@@ -34,13 +35,11 @@ namespace SPPBC.M3Tools.Types
 
 					return result;
 				case var @list when @list == typeof(System.Collections.IList):
+				case var @genList when @genList == typeof(System.Collections.Generic.List<Customer>):
+				case var @genIList when @genIList == typeof(System.Collections.Generic.IList<Customer>):
 				case var @collection when collection == typeof(System.Collections.ICollection):
-					result = new();
-
-					foreach (Customer item in source)
-					{
-						result.Add(item);
-					}
+				case var @enum when @enum == typeof(System.Collections.IEnumerable):
+					result = [.. source.Cast<Customer>().ToList()];
 
 					return result;
 				case var @dbColl when dbColl == typeof(CustomerCollection):
@@ -56,9 +55,6 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="customer">The current customer to compare with</param>
 		/// <param name="index">The index of the current customer</param>
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
-		public override bool ApplyFilter(Customer customer, int index)
-		{
-			return customer is not null && (customer.Name.Contains(Filter) || customer.Email.Contains(Filter) || customer.Phone.Contains(Filter));
-		}
+		public override bool ApplyFilter(Customer customer, int index) => customer is not null && (customer.Name.Contains(Filter) || customer.Email.Contains(Filter) || customer.Phone.Contains(Filter));
 	}
 }

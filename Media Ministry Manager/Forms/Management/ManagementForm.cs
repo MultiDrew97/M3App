@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events.Customers;
 using SPPBC.M3Tools.Types;
 
@@ -12,14 +12,19 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ManagementForm<T> where T : IDbEntry
+	public partial class ManagementForm<T> where T : IDbEntry, new()
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal DbEntryCollection<T> _original;
+
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public ManagementForm()
-        {
-            InitializeComponent();
+		public ManagementForm()
+		{
+			InitializeComponent();
 
 			Init(typeof(T));
 
@@ -78,7 +83,7 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Reload(object sender, EventArgs e) 
+		protected virtual void Reload(object sender, EventArgs e)
 		{
 		}
 
@@ -87,10 +92,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Add(object sender, EventArgs e) 
+		protected virtual void Add(object sender, EventArgs e)
 		{
 		}
-		
+
 		/// <summary>
 		/// Update an entry in the database
 		/// </summary>
@@ -126,14 +131,11 @@ namespace M3App
 			Utils.LogOff();
 		}
 
-		private void Exit(object sender, EventArgs e)
-		{
-			Utils.CloseApplication();
-		}
+		private void Exit(object sender, EventArgs e) => Utils.CloseApplication();
 
 		private void ViewSettings(object sender, EventArgs e)
 		{
-			using var settings = new SettingsForm();
+			using SettingsForm settings = new();
 			settings.Show();
 		}
 
@@ -157,7 +159,7 @@ namespace M3App
 					return;
 			}
 
-			((Control)sender).Invoke(Close);
+			_ = ((Control)sender).Invoke(Close);
 
 			//OnFormClosing(new(CloseReason.None, false));
 			//DisplayClosing(sender, new(CloseReason.None, false));

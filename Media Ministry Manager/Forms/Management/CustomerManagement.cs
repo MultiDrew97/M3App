@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events.Customers;
 
 namespace M3App
 {
+
 	/// <summary>
 	/// 
 	/// </summary>
 	public partial class CustomerManagement
 	{
+		//private readonly CustomerCollection _original;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -20,6 +24,8 @@ namespace M3App
 			cdg_Customers.AddCustomer += new CustomerEventHandler(Add);
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(Update);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(Remove);
+
+			_original = dbCustomers.GetCustomers();
 		}
 
 		/// <summary>
@@ -30,7 +36,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			cdg_Customers.Customers = dbCustomers.GetCustomers();
+			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, cdg_Customers.Customers.Count);
 			UseWaitCursor = false;
 		}
@@ -70,7 +76,6 @@ namespace M3App
 				return;
 			}
 
-
 			dbCustomers.UpdateCustomer(edit.Customer);
 			_ = MessageBox.Show($"Successfully updated customer", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
@@ -95,7 +100,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			cdg_Customers.Filter = filter;
+			_original.Filter = filter;
+			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original.Items);
 		}
 	}
 }

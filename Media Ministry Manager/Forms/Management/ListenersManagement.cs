@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events;
 using SPPBC.M3Tools.Events.Listeners;
 
@@ -27,6 +28,8 @@ namespace M3App
 
 			ts_Tools.ImportEntries += new EventHandler(Import);
 			ts_Tools.SendEmails += new EventHandler(SendEmails);
+
+			_original = dbListeners.GetListeners();
 		}
 
 		/// <summary>
@@ -138,7 +141,8 @@ namespace M3App
 		/// <inheritdoc/>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			ldg_Listeners.Filter = filter;
+			_original.Filter = filter;
+			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
 		}
 
 		private void SendEmails(object sender, EventArgs e)

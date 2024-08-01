@@ -9,7 +9,7 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
 	public partial class OrderBindingSource
 	{
-		private readonly string OrderFilter = "[CustomerName] LIKE '%{0}%' OR [ItemName] LIKE '%{0}%'";
+		private readonly string OrderFilter = "[dgc_CustomerName] LIKE '%{0}%' OR [dgc_ItemName] LIKE '%{0}%'";
 
 		/// <summary>
 		/// 

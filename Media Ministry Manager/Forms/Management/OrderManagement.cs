@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events.Orders;
 
 namespace M3App
@@ -22,6 +23,8 @@ namespace M3App
 			odg_Orders.AddOrder += new OrderEventHandler(Add);
 			odg_Orders.UpdateOrder += new OrderEventHandler(Update);
 			odg_Orders.RemoveOrder += new OrderEventHandler(Remove);
+
+			_original = dbOrders.GetOrders();
 		}
 
 		/// <summary>
@@ -147,7 +150,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			odg_Orders.Filter = filter;
+			_original.Filter = filter;
+			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 		}
 	}
 }

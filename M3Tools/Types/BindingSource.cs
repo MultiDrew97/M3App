@@ -17,25 +17,16 @@ namespace SPPBC.M3Tools.Data
 		public new readonly bool SupportsFiltering = true;
 
 		///// <summary>
-		///// List of customers in the binding source
+		///// The datasource being used for the binding source
 		///// </summary>
-		//[EditorBrowsable(EditorBrowsableState.Advanced)]
-		//public new IList List
+		//[RefreshProperties(RefreshProperties.Repaint)]
+		//[AttributeProvider(typeof(IListSource))]
+		//// MAYBE: Look into using the TypeDescriptionProviderAttribute and similar to make dev potentially easier
+		//protected new object DataSource
 		//{
-		//	get => base.List;
+		//	get => DesignMode ? typeof(Types.DbEntryCollection<T>) : base.DataSource;
+		//	set => base.DataSource = value;
 		//}
-
-		/// <summary>
-		/// The datasource being used for the binding source
-		/// </summary>
-		[RefreshProperties(RefreshProperties.Repaint)]
-		[AttributeProvider(typeof(IListSource))]
-		// MAYBE: Look into using the TypeDescriptionProviderAttribute and similar to make dev potentially easier
-		protected new object DataSource
-		{
-			get => DesignMode ? typeof(Types.DbEntryCollection<T>) : (Types.DbEntryCollection<T>)base.DataSource;
-			set => base.DataSource = value;
-		}
 
 		/// <summary>
 		/// 

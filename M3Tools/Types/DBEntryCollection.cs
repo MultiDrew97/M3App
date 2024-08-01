@@ -18,7 +18,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="collection"></param>
 		/// <returns></returns>
 		/// <exception cref="System.NotImplementedException"></exception>
-		internal static DbEntryCollection<T> Cast(System.Collections.IList collection) => throw new System.NotImplementedException("Cast for this collection was not implemented yet");
+		internal static DbEntryCollection<T> Cast(System.Collections.IEnumerable collection) => throw new System.NotImplementedException("Cast for this collection was not implemented yet");
 
 		/// <summary>
 		/// Add a range of values to the collection. Can be shadowed to add any data verification gap
@@ -29,7 +29,7 @@ namespace SPPBC.M3Tools.Types
 			foreach (T item in collection)
 			{
 				Add(item);
-				OnChanged(System.ComponentModel.ListChangedType.ItemAdded, IndexOf(item));
+				OnChanged(ListChangedType.ItemAdded, IndexOf(item));
 			}
 		}
 
