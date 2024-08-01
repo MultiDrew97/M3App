@@ -6,7 +6,7 @@ using SPPBC.M3Tools.Events.Inventory;
 namespace M3App
 {
 	/// <summary>
-	/// 
+	/// Form for managing inventory
 	/// </summary>
 	public partial class InventoryManagement
 	{
@@ -33,7 +33,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			idg_Inventory.Inventory = dbInventory.GetProducts();
+			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;
 		}

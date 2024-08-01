@@ -6,9 +6,8 @@ using SPPBC.M3Tools.Events.Orders;
 
 namespace M3App
 {
-	// TODO: Mimic CustomerManagement
 	/// <summary>
-	/// 
+	/// Form for managing orders
 	/// </summary>
 	public partial class OrderManagement
 	{
@@ -35,7 +34,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			odg_Orders.Orders = dbOrders.GetOrders();
+			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, odg_Orders.Orders.Count);
 			UseWaitCursor = false;
 		}

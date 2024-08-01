@@ -7,12 +7,15 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
 	public partial class InventoryDataGrid
 	{
+		#region Columns
 		// Columns for the inventory data grid
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name = new();
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Stock = new();
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Price = new();
 		internal System.Windows.Forms.DataGridViewCheckBoxColumn dgc_Available = new();
+		#endregion
 
+		#region Events
 		/// <summary>
 		/// An event fired when a new product is added
 		/// </summary>
@@ -27,6 +30,7 @@ namespace SPPBC.M3Tools.Data
 		/// An event fired when a product is removed
 		/// </summary>
 		public event Events.Inventory.InventoryEventHandler RemoveProduct;
+		#endregion
 
 		/// <summary>
 		/// The list of inventory items
@@ -44,15 +48,6 @@ namespace SPPBC.M3Tools.Data
 
 				bsInventory.DataSource = value;
 			}
-		}
-
-		/// <summary>
-		/// The filter to place on the data grid
-		/// </summary>
-		public string Filter
-		{
-			get => bsInventory.Filter;
-			set => bsInventory.Filter = value;
 		}
 
 		/// <summary>
@@ -74,17 +69,15 @@ namespace SPPBC.M3Tools.Data
 			UpdateEntry += (sender, e) => UpdateProduct?.Invoke(sender, new(e.Value, e.EventType));
 			RemoveEntry += (sender, e) => RemoveProduct?.Invoke(sender, new(e.Value, e.EventType));
 		}
-		/// <inheritdoc/>
 
+		/// <inheritdoc/>
 		protected override void LoadColumns()
 		{
 			base.LoadColumns();
 
 			dgc_ID.HeaderText = "ItemID";
 
-			// 
-			// dgc_Name
-			// 
+			// Name Column
 			dgc_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Name.DataPropertyName = "Name";
 			dgc_Name.FillWeight = 40F;
@@ -92,18 +85,16 @@ namespace SPPBC.M3Tools.Data
 			dgc_Name.MinimumWidth = 50;
 			dgc_Name.Name = "dgc_Name";
 			dgc_Name.ReadOnly = true;
-			// 
-			// dgc_Stock
-			// 
+
+			// Stock Column
 			dgc_Stock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Stock.DataPropertyName = "Stock";
 			dgc_Stock.FillWeight = 20F;
 			dgc_Stock.HeaderText = "Stock";
 			dgc_Stock.Name = "dgc_Stock";
 			dgc_Stock.ReadOnly = true;
-			// 
-			// dgc_Price
-			// 
+
+			// Price Column
 			dgc_Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Price.DataPropertyName = "Price";
 			dgc_Price.DefaultCellStyle = new() { Format = "C2", NullValue = "$0.00" };
@@ -111,9 +102,8 @@ namespace SPPBC.M3Tools.Data
 			dgc_Price.HeaderText = "Price";
 			dgc_Price.Name = "dgc_Price";
 			dgc_Price.ReadOnly = true;
-			// 
-			// dgc_Available
-			// 
+
+			// Availability Column
 			dgc_Available.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			dgc_Available.DataPropertyName = "Available";
 			dgc_Available.FalseValue = "False";

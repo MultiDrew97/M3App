@@ -23,6 +23,7 @@ namespace SPPBC.M3Tools.Types
 			}
 
 			InventoryCollection result;
+
 			switch (source.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):

@@ -7,7 +7,7 @@ namespace M3App
 {
 
 	/// <summary>
-	/// 
+	/// Form for managing  customers
 	/// </summary>
 	public partial class CustomerManagement
 	{
@@ -36,7 +36,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original);
+			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, cdg_Customers.Customers.Count);
 			UseWaitCursor = false;
 		}

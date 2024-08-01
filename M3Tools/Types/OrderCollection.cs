@@ -22,6 +22,7 @@ namespace SPPBC.M3Tools.Types
 			}
 
 			OrderCollection result;
+
 			switch (source.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
+// TODO: Determine if these custom binding sources are even necessary since I couldn't get them to work properly for filtering
 namespace SPPBC.M3Tools.Data
 {
 	/// <summary>
-	/// Custom binding source to be used with the M3 Application
+	/// Binding source made for mangaing M3 App data operations
 	/// </summary>
 	/// <typeparam name="T">Data type for the data being used for binding</typeparam>
 	public partial class BindingSource<T> where T : Types.IDbEntry, new()
@@ -15,18 +16,6 @@ namespace SPPBC.M3Tools.Data
 		/// The binding source supports filtering
 		/// </summary>
 		public new readonly bool SupportsFiltering = true;
-
-		///// <summary>
-		///// The datasource being used for the binding source
-		///// </summary>
-		//[RefreshProperties(RefreshProperties.Repaint)]
-		//[AttributeProvider(typeof(IListSource))]
-		//// MAYBE: Look into using the TypeDescriptionProviderAttribute and similar to make dev potentially easier
-		//protected new object DataSource
-		//{
-		//	get => DesignMode ? typeof(Types.DbEntryCollection<T>) : base.DataSource;
-		//	set => base.DataSource = value;
-		//}
 
 		/// <summary>
 		/// 

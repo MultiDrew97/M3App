@@ -9,10 +9,13 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
 	public partial class ListenersDataGrid
 	{
+		#region Columns
 		// Columns for listeners data grid
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Name = new();
 		internal System.Windows.Forms.DataGridViewTextBoxColumn dgc_Email = new();
+		#endregion
 
+		#region Events
 		/// <summary>
 		/// An event fired when a listener is added
 		/// </summary>
@@ -27,11 +30,7 @@ namespace SPPBC.M3Tools.Data
 		/// An event fired when a listener is removed
 		/// </summary>
 		public event ListenerEventHandler RemoveListener;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public delegate void RefreshDisplayEventHandler();
+		#endregion
 
 		/// <summary>
 		/// The complete list of listeners being shown
@@ -49,15 +48,6 @@ namespace SPPBC.M3Tools.Data
 
 				bsListeners.DataSource = value;
 			}
-		}
-
-		/// <summary>
-		/// The filter to apply to the data grid
-		/// </summary>
-		public string Filter
-		{
-			get => bsListeners.Filter;
-			set => bsListeners.Filter = value;
 		}
 
 		/// <summary>
@@ -79,8 +69,8 @@ namespace SPPBC.M3Tools.Data
 			UpdateEntry += (sender, e) => UpdateListener?.Invoke(sender, new(e.Value, e.EventType));
 			RemoveEntry += (sender, e) => RemoveListener?.Invoke(sender, new(e.Value, e.EventType));
 		}
-		/// <inheritdoc/>
 
+		/// <inheritdoc/>
 		protected override void LoadColumns()
 		{
 			base.LoadColumns();

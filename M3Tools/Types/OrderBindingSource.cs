@@ -1,38 +1,13 @@
-﻿using System.ComponentModel;
-
-using SPPBC.M3Tools.Types;
-
-namespace SPPBC.M3Tools.Data
+﻿namespace SPPBC.M3Tools.Data
 {
 	/// <summary>
-	/// 
+	/// Binding source for managing order info
 	/// </summary>
 	public partial class OrderBindingSource
 	{
-		private readonly string OrderFilter = "[dgc_CustomerName] LIKE '%{0}%' OR [dgc_ItemName] LIKE '%{0}%'";
-
 		/// <summary>
 		/// 
 		/// </summary>
-		public OrderBindingSource() : base() => DataSource = new OrderCollection();
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[Category("Data")]
-		public new object DataSource
-		{
-			get => DesignMode ? typeof(OrderCollection) : (OrderCollection)base.DataSource;
-			set => base.DataSource = value;
-		}
-
-		/// <summary>
-		/// <inheritdoc/>
-		/// </summary>
-		public override string Filter
-		{
-			get => base.Filter;
-			set => base.Filter = string.IsNullOrEmpty(value) ? value : string.Format(OrderFilter, value);
-		}
+		public OrderBindingSource() : base() => DataSource = new Types.OrderCollection();
 	}
 }

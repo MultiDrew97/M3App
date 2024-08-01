@@ -7,7 +7,7 @@ using SPPBC.M3Tools.Events.Listeners;
 namespace M3App
 {
 	/// <summary>
-	/// 
+	/// Form for managing email listeners
 	/// </summary>
 	public partial class ListenerManagement
 	{
@@ -26,9 +26,6 @@ namespace M3App
 			ldg_Listeners.UpdateListener += new ListenerEventHandler(Update);
 			ldg_Listeners.RemoveListener += new ListenerEventHandler(Remove);
 
-			ts_Tools.ImportEntries += new EventHandler(Import);
-			ts_Tools.SendEmails += new EventHandler(SendEmails);
-
 			_original = dbListeners.GetListeners();
 		}
 
@@ -40,7 +37,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			ldg_Listeners.Listeners = dbListeners.GetListeners();
+			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
 			UseWaitCursor = false;
 		}
@@ -76,7 +73,8 @@ namespace M3App
 			UseWaitCursor = false;
 		}
 
-		private void Import(object sender, EventArgs e)
+		/// <inheritdoc/>
+		protected override void Import(object sender, EventArgs e)
 		{
 			using SPPBC.M3Tools.Dialogs.ImportListenersDialog @import = new();
 
@@ -145,7 +143,8 @@ namespace M3App
 			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
 		}
 
-		private void SendEmails(object sender, EventArgs e)
+		/// <inheritdoc />
+		protected override void SendEmails(object sender, EventArgs e)
 		{
 			using SendEmailsDialog emails = new();
 			UseWaitCursor = true;

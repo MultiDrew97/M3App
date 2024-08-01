@@ -79,7 +79,8 @@ namespace SPPBC.M3Tools
 		/// Whether the add entries button is visable
 		/// </summary>
 		[DefaultValue(true)]
-		public bool AddVisible {
+		public bool AddVisible
+		{
 			get => tsb_Add.Visible;
 			set => tsb_Add.Visible = value;
 		}
@@ -96,25 +97,13 @@ namespace SPPBC.M3Tools
 		[DefaultValue(true)]
 		public bool SendVisible { get => tsb_Send.Visible; set => tsb_Send.Visible = value; }
 
-		private void Import(object sender, EventArgs e)
-		{
-			ImportEntries?.Invoke(sender, e);
-		}
+		private void Import(object sender, EventArgs e) => ImportEntries?.Invoke(sender, e);
 
-		private void Add(object sender, EventArgs e)
-		{
-			AddEntry?.Invoke(sender, e);
-		}
+		private void Add(object sender, EventArgs e) => AddEntry?.Invoke(sender, e);
 
-		private void Emails(object sender, EventArgs e)
-		{
-			SendEmails?.Invoke(sender, e);
-		}
+		private void Emails(object sender, EventArgs e) => SendEmails?.Invoke(sender, e);
 
-		private void Filtered(object sender, EventArgs e)
-		{
-			FilterChanged?.Invoke(sender, Filter);
-		}
+		private void Filtered(object sender, EventArgs e) => FilterChanged?.Invoke(sender, Filter);
 
 		private void UpdateLabelText(object sender, EventArgs e)
 		{
@@ -166,7 +155,7 @@ namespace SPPBC.M3Tools
 		/// <param name="buttons">The array of buttons to toggle visibility on</param>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="ArgumentException"></exception>
-		public void ToggleButton(ToolButtons[] buttons)
+		public void ToggleButton(params ToolButtons[] buttons)
 		{
 			foreach (ToolButtons button in buttons)
 			{
