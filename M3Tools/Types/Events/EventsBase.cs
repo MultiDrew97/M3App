@@ -2,31 +2,12 @@
 
 namespace SPPBC.M3Tools.Events
 {
-	//public delegate void RemoveEventHandler(object sender, BulkActionEventArgs e);
-	//public delegate void AddEventHandler(object sender, BulkActionEventArgs e);
-	//public delegate void EditEventHandler(object sender, BulkActionEventArgs e);
-
 	/// <summary>
 	/// The base event handler for data events
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	public delegate void DataEventHandler<T>(object sender, DataEventArgs<T> e);
-
-	/// <summary>
-	/// When a remove rows event occurs
-	/// </summary>
-	// public delegate void RemoveRowsEventHandler();
-
-	/// <summary>
-	/// When a send email event occurs
-	/// </summary>
-	// public delegate void SendEmailsEventHandler();
-
-	/// <summary>
-	/// When a edit selected rows event occurs
-	/// </summary>
-	// public delegate void EditSelectedEventHandler();
 
 	/// <summary>
 	/// When a manage button is clicked
@@ -68,12 +49,12 @@ namespace SPPBC.M3Tools.Events
 		/// <param name="value">The value being modified</param>
 		/// <param name="type">The type of modificaiton occuring</param>
 		/// <returns></returns>
-		public static DataEventArgs<T> Parse(T value, EventType type)
-		{
-			return new(value, type);
-		}
+		public static DataEventArgs<T> Parse(T value, EventType type) => new(value, type);
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class ManageEventArgs : EventArgs
 	{
 		/// <summary>
@@ -81,10 +62,11 @@ namespace SPPBC.M3Tools.Events
 		/// </summary>
 		public ManageType Manage { get; protected set; }
 
-		public ManageEventArgs(ManageType manage) : base()
-		{
-			Manage = manage;
-		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manage"></param>
+		public ManageEventArgs(ManageType manage) : base() => Manage = manage;
 	}
 
 	/// <summary>
@@ -97,18 +79,6 @@ namespace SPPBC.M3Tools.Events
 		/// </summary>
 		public EventType EventType { get; protected set; }
 	}
-
-	//public class BulkActionEventArgs : BaseArgs
-	//{
-
-	//    public IList List { get; set; }
-
-	//    public BulkActionEventArgs(IList list, EventType eventType = EventType.None)
-	//    {
-	//        List = list;
-	//        EventType = eventType;
-	//    }
-	//}
 
 	/// <summary>
 	/// The types of events that can occur for data entries

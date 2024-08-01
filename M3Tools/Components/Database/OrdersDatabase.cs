@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 using SPPBC.M3Tools.M3API;
 using SPPBC.M3Tools.Types;
 
@@ -12,24 +14,7 @@ namespace SPPBC.M3Tools.Database
 		/// Retrieve the complete list of orders from the database
 		/// </summary>
 		/// <returns></returns>
-		public OrderCollection GetOrders()
-		{
-			return ExecuteWithResult<OrderCollection>(Method.Get, $"{path}").Result;
-		}
-
-		/// <summary>
-		/// Get the complete list of completed orders from the database
-		/// </summary>
-		/// <returns></returns>
-		/// <exception cref="NotImplementedException"></exception>
-		public OrderCollection GetCompletedOrders()
-		{
-			// TODO: Test this to make sure it works properly
-			throw new NotImplementedException("GetCompletedOrders");
-			// Return CType(GetOrders().Where(Function(order As Order) As Boolean
-			// Return order.CompletedDate.Year > 2000
-			// End Function), DBEntryCollection(Of Order))
-		}
+		public OrderCollection GetOrders() => ExecuteWithResult<OrderCollection>(Method.Get, $"{path}").Result;
 
 		/// <summary>
 		/// Add a new order to the database
@@ -62,42 +47,13 @@ namespace SPPBC.M3Tools.Database
 		/// 
 		/// </summary>
 		/// <param name="order"></param>
-		public void AddOrder(Order order)
-		{
-			Execute(Method.Post, $"{path}", JSON.ConvertToJSON(order));
-		}
-
-		/// <summary>
-		/// Update the order details for a specified order
-		/// </summary>
-		/// <param name="orderID"></param>
-		/// <param name="customerID"></param>
-		/// <param name="itemID"></param>
-		/// <param name="quantity"></param>
-		/// <exception cref="ArgumentException"></exception>
-		public void UpdateOrder(int orderID, int customerID, int itemID, int quantity)
-		{
-			if (!Utils.ValidID(orderID) || !Utils.ValidID(itemID))
-			{
-				throw new ArgumentException($"Invalid OrderID provided");
-			}
-
-			if (quantity < 1)
-			{
-				throw new ArgumentException($"Quantity values must be greater than or equal to 1");
-			}
-
-			UpdateOrder(new Order(orderID, customerID, itemID, quantity));
-		}
+		public void AddOrder(Order order) => Execute(Method.Post, $"{path}", JSON.ConvertToJSON(order));
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="order"></param>
-		public void UpdateOrder(Order order)
-		{
-			Execute(Method.Put, $"{path}/{order.Id}", JSON.ConvertToJSON(order));
-		}
+		public void UpdateOrder(Order order) => Execute(Method.Put, $"{path}/{order.Id}", JSON.ConvertToJSON(order));
 
 		/// <summary>
 		/// Cancel an order based on the provided order ID
@@ -129,19 +85,8 @@ namespace SPPBC.M3Tools.Database
 			RemoveOrder(orderID, true);
 		}
 
-		private void RemoveOrder(int orderID, bool completed)
-		{
-			try
-			{
-
+		private void RemoveOrder(int orderID, bool completed) =>
 				Execute(Method.Delete, $"{path}/{orderID}?{(completed ? "completed" : "")}");
-			}
-			catch (Exception e)
-			{
-				// TODO: Create custom exception for each operation
-				throw new Exceptions.ApiException($"Unable to {(completed ? "complete" : "cancel")} order", e);
-			}
-		}
 
 		/// <summary>
 		/// Retrieve an order by its order ID
@@ -166,15 +111,9 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="NotImplementedException"></exception>
 		public OrderCollection GetOrderByCustomer(int customerID)
 		{
-			if (customerID < 0)
-			{
-				throw new ArgumentException("ID values must be greater than or equal to 0");
-			}
-
-			throw new NotImplementedException("GetOrderByCustomer");
-			// Return CType(GetOrders().Where(Function(order As Order)
-			// Return order.Customer.Id = customerID
-			// End Function), DBEntryCollection(Of Order))
+			return !Utils.ValidID(customerID)
+				? throw new ArgumentException("ID values must be greater than or equal to 0")
+				: OrderCollection.Cast(GetOrders().Where((curr, index) => curr.Customer.Id == customerID).ToList());
 		}
 	}
 }

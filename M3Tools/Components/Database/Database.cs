@@ -2,7 +2,9 @@
 
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+
 using SPPBC.M3Tools.M3API;
 
 // FIXME: Convert Database on here and API to use a non-relational (i.e MongoDB)
@@ -74,10 +76,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="path"></param>
 		/// <param name="payload"></param>
 		/// <returns></returns>
-		protected Task<R> ExecuteWithResult<R>(Method @method, string path, string payload = null)
-		{
-			return ExecuteWithResult<R>(@method, path, !string.IsNullOrWhiteSpace(payload) ? System.Text.Encoding.UTF8.GetBytes(payload) : null);
-		}
+		protected Task<R> ExecuteWithResult<R>(Method @method, string path, string payload = null) => ExecuteWithResult<R>(@method, path, !string.IsNullOrWhiteSpace(payload) ? System.Text.Encoding.UTF8.GetBytes(payload) : null);
 
 		private Task<R> ExecuteWithResult<R>(Method @method, string path, byte[] payload = null)
 		{
@@ -97,7 +96,7 @@ namespace SPPBC.M3Tools.Database
 
 			try
 			{
-				using System.Net.HttpWebResponse res = VerifyResponse((System.Net.HttpWebResponse)req.GetResponseAsync().Result);
+				using HttpWebResponse res = VerifyResponse(req.GetResponseAsync());
 
 				return Task.FromResult(JSON.ConvertFromJSON<R>(new System.IO.StreamReader(res.GetResponseStream()).ReadToEnd()));
 			}
@@ -121,22 +120,32 @@ namespace SPPBC.M3Tools.Database
 				Console.Error.WriteLine(notfound.Message);
 				return Task.FromException<R>(notfound);
 			}
-			catch (AggregateException ex)
+			catch (AggregateException agg)
 			{
-				Console.Error.WriteLine(ex.InnerException.Message);
-				return Task.FromException<R>(ex.InnerException);
+				Console.Error.WriteLine(agg.InnerException.Message);
+				return Task.FromException<R>(agg.InnerException);
+			}
+			catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+				return Task.FromException<R>(ex);
 			}
 		}
 
-		private System.Net.HttpWebResponse VerifyResponse(System.Net.HttpWebResponse res)
+		private HttpWebResponse VerifyResponse(Task<WebResponse> res)
 		{
-			return res.StatusCode switch
+			if (res == null || res.IsFaulted)
+				throw new Exceptions.ApiException();
+
+			HttpWebResponse result = (HttpWebResponse)res.Result;
+
+			return result.StatusCode switch
 			{
-				System.Net.HttpStatusCode.Unauthorized => throw new Exceptions.AuthorizationException(res.StatusDescription),
-				System.Net.HttpStatusCode.NotFound => throw new Exceptions.NotFoundException(res.StatusDescription),
-				System.Net.HttpStatusCode.Forbidden => throw new Exceptions.ApiException(res.StatusDescription),
-				System.Net.HttpStatusCode.InternalServerError => throw new Exceptions.ApiException(res.StatusDescription),
-				_ => res,
+				HttpStatusCode.Unauthorized => throw new Exceptions.AuthorizationException(result.StatusDescription),
+				HttpStatusCode.NotFound => throw new Exceptions.NotFoundException(result.StatusDescription),
+				HttpStatusCode.Forbidden => throw new Exceptions.ApiException(result.StatusDescription),
+				HttpStatusCode.InternalServerError => throw new Exceptions.ApiException(result.StatusDescription),
+				_ => result,
 			};
 		}
 	}

@@ -1,13 +1,13 @@
 ﻿
 using System;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events.Orders;
 
 namespace M3App
 {
-	// TODO: Mimic CustomerManagement
 	/// <summary>
-	/// 
+	/// Form for managing orders
 	/// </summary>
 	public partial class OrderManagement
 	{
@@ -22,6 +22,8 @@ namespace M3App
 			odg_Orders.AddOrder += new OrderEventHandler(Add);
 			odg_Orders.UpdateOrder += new OrderEventHandler(Update);
 			odg_Orders.RemoveOrder += new OrderEventHandler(Remove);
+
+			_original = dbOrders.GetOrders();
 		}
 
 		/// <summary>
@@ -32,7 +34,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			odg_Orders.Orders = dbOrders.GetOrders();
+			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, odg_Orders.Orders.Count);
 			UseWaitCursor = false;
 		}
@@ -147,7 +149,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			odg_Orders.Filter = filter;
+			_original.Filter = filter;
+			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 		}
 	}
 }

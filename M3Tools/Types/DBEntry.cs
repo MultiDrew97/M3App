@@ -25,10 +25,7 @@ namespace SPPBC.M3Tools.Types
 		/// Create a clone of the object
 		/// </summary>
 		/// <returns></returns>
-		public virtual object Clone()
-		{
-			return MemberwiseClone();
-		}
+		public virtual object Clone() => MemberwiseClone();
 
 		/// <inheritdoc/>
 		public virtual int Id { get; set; }
@@ -51,10 +48,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="ls">The left hand side</param>
 		/// <param name="rs">The right hand side</param>
 		/// <returns>True if objects are equal, otherwise false</returns>
-		public static bool operator ==(DbEntry ls, DbEntry rs)
-		{
-			return !(ls is null ^ rs is null) && ls.GetHashCode() == rs.GetHashCode();
-		}
+		public static bool operator ==(DbEntry ls, DbEntry rs) => !(ls is null ^ rs is null) && ls.GetHashCode() == rs.GetHashCode();
 
 		/// <summary>
 		/// Checks if 2 DbEntry objects are not equal to each other
@@ -62,28 +56,19 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="ls">The left hand side</param>
 		/// <param name="rs">The right hand side</param>
 		/// <returns>True if objects are not equal, otherwise false</returns>
-		public static bool operator !=(DbEntry ls, DbEntry rs)
-		{
-			return !(ls == rs);
-		}
+		public static bool operator !=(DbEntry ls, DbEntry rs) => !(ls == rs);
 
 		/// <summary>
 		/// Checks if an object is equal to the current instance
 		/// </summary>
 		/// <param name="obj">The referenced object to compare with</param>
 		/// <returns>True if the object is the same as the current instance, otherwise false</returns>
-		public override bool Equals(object obj)
-		{
-			return !(this is null ^ obj is null) && obj is not System.DBNull && ((this == (DbEntry)obj) || base.Equals(obj));
-		}
+		public override bool Equals(object obj) => !(this is null ^ obj is null) && obj is not System.DBNull && ((this == (DbEntry)obj) || base.Equals(obj));
 
 		/// <summary>
 		/// Gets the Hash code for the current object
 		/// </summary>
 		/// <returns>The hash code for the current instance</returns>
-		public override int GetHashCode()
-		{
-			return !Utils.ValidID(Id) ? base.GetHashCode() : Id;
-		}
+		public override int GetHashCode() => !Utils.ValidID(Id) ? base.GetHashCode() : Id;
 	}
 }

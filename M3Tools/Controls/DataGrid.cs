@@ -8,17 +8,31 @@ namespace SPPBC.M3Tools.Data
 	/// Base class for data grid controls used in the app
 	/// </summary>
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
-	public partial class DataGrid<T> //where T : Types.IDbEntry
+	public partial class DataGrid<T> where T : Types.IDbEntry, new()
 	{
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;
 
-		protected internal DataGridViewCheckBoxColumn dgc_Selection;
-		protected internal DataGridViewTextBoxColumn dgc_ID;
-		protected internal DataGridViewImageButtonEditColumn dgc_Edit;
-		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove;
+		#region Columns
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal DataGridViewCheckBoxColumn dgc_Selection = new();
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal DataGridViewTextBoxColumn dgc_ID = new();
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal DataGridViewImageButtonEditColumn dgc_Edit = new();
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal DataGridViewImageButtonDeleteColumn dgc_Remove = new();
+		#endregion
 
-		// TODO: Maybe Remove this later
+		#region Events
 		/// <summary>
 		/// Event that occurs when adding data
 		/// </summary>
@@ -38,11 +52,25 @@ namespace SPPBC.M3Tools.Data
 		/// Issues a reload event for the data grid
 		/// </summary>
 		public event EventHandler Reload;
+		#endregion
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="e"></param>
+		public DataGrid() : base()
+		{
+			AutoGenerateColumns = false;
+
+			InitializeComponent();
+
+			// Context Menu Strip events
+			cms_Tools.Opened += new EventHandler(ToolsOpened);
+			cms_Tools.EditSelected += new EventHandler(EditSelected);
+			cms_Tools.RemoveSelected += new EventHandler(RemoveSelectedRows);
+			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
+		}
+
+		/// <inheritdoc />
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
@@ -131,6 +159,7 @@ namespace SPPBC.M3Tools.Data
 		/// Whether rows can be selected in the data grid
 		/// </summary>
 		[DefaultValue(true)]
+		[Category("Behavior")]
 		public bool RowsCheckable
 		{
 			get => dgc_Selection.Visible;
@@ -161,33 +190,6 @@ namespace SPPBC.M3Tools.Data
 
 				return base.SelectedRows;
 			}
-		}
-
-		/// <summary>
-		/// Whether to auto generate columns
-		/// </summary>
-		//public new bool AutoGenerateColumns => false;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public DataGrid() : base()
-		{
-			AutoGenerateColumns = false;
-
-			InitializeComponent();
-
-			// Standard columns for data grid
-			dgc_Selection = new DataGridViewCheckBoxColumn();
-			dgc_ID = new DataGridViewTextBoxColumn();
-			dgc_Edit = new DataGridViewImageButtonEditColumn();
-			dgc_Remove = new DataGridViewImageButtonDeleteColumn();
-
-			// Context Menu Strip events
-			cms_Tools.Opened += new EventHandler(ToolsOpened);
-			cms_Tools.EditSelected += new EventHandler(EditSelected);
-			cms_Tools.RemoveSelected += new EventHandler(RemoveSelectedRows);
-			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
 		}
 
 		/// <summary>
@@ -273,10 +275,7 @@ namespace SPPBC.M3Tools.Data
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
+		/// <inheritdoc/>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
 		{
 			DataGridViewDataErrorContexts context = DataGridViewDataErrorContexts.Commit;
@@ -299,22 +298,27 @@ namespace SPPBC.M3Tools.Data
 			_ = CommitEdit(context);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
+		/// <inheritdoc/>
 		protected override void OnUserDeletingRow(DataGridViewRowCancelEventArgs e)
 		{
 			base.OnUserDeletingRow(e);
 			RemoveEntry?.Invoke(this, M3Tools.Events.DataEventArgs<T>.Parse((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Removed));
 		}
 
-		//protected override void OnDataError(bool displayErrorDialogIfNoHandler, DataGridViewDataErrorEventArgs e)
-		//{
-		//	base.OnDataError(false, e);
+		/// <inheritdoc/>
+		protected override void OnUserAddedRow(DataGridViewRowEventArgs e)
+		{
+			base.OnUserAddedRow(e);
 
-		//	if (Rows[e.RowIndex] is not null)
-		//		return;
-		//}
+			AddEntry?.Invoke(this, new((T)e.Row.DataBoundItem, M3Tools.Events.EventType.Added));
+		}
+
+		/// <inheritdoc/>
+		protected override void OnDataError(bool noHandler, DataGridViewDataErrorEventArgs e)
+		{
+			base.OnDataError(false, e);
+
+			_ = MessageBox.Show(e.Exception.Message, "Display Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
 	}
 }

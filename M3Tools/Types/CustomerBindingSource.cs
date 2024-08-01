@@ -1,39 +1,13 @@
-﻿using System.ComponentModel;
-
-namespace SPPBC.M3Tools.Data
+﻿namespace SPPBC.M3Tools.Data
 {
 	/// <summary>
-	/// Binding source made for managing customer info
+	/// Binding source for managing customer info
 	/// </summary>
-    public class CustomerBindingSource : BindingSource<Types.Customer>
-    {
-		private readonly string CustomerFilter = "[Name] LIKE '%{0}%'";
-
+	public class CustomerBindingSource : BindingSource<Types.Customer>
+	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public CustomerBindingSource() : base()
-		{
-			DataSource = new();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		[Browsable(false)]
-		public new object DataSource
-		{
-			get => DesignMode ? typeof(Types.CustomerCollection) : (Types.CustomerCollection)base.DataSource;
-			set => base.DataSource = value;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override string Filter
-		{
-			get => base.Filter;
-			set => base.Filter = string.IsNullOrEmpty(value) ? value : string.Format(CustomerFilter, value);
-		}
+		public CustomerBindingSource() : base() => DataSource = new Types.CustomerCollection();
 	}
 }

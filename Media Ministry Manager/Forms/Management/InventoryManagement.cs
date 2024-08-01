@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events.Inventory;
 
 namespace M3App
 {
 	/// <summary>
-	/// 
+	/// Form for managing inventory
 	/// </summary>
 	public partial class InventoryManagement
 	{
@@ -20,6 +21,8 @@ namespace M3App
 			idg_Inventory.AddProduct += new InventoryEventHandler(Add);
 			idg_Inventory.UpdateProduct += new InventoryEventHandler(Update);
 			idg_Inventory.RemoveProduct += new InventoryEventHandler(Remove);
+
+			_original = dbInventory.GetProducts();
 		}
 
 		/// <summary>
@@ -30,7 +33,7 @@ namespace M3App
 		protected override void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			idg_Inventory.Inventory = dbInventory.GetProducts();
+			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;
 		}
@@ -92,7 +95,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			idg_Inventory.Filter = filter;
+			_original.Filter = filter;
+			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
 		}
 	}
 }

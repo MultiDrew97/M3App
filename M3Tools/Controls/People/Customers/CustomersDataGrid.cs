@@ -8,13 +8,16 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
 	public partial class CustomerDataGrid
 	{
+		#region Columns
 		// The columns used in this datagrid
 		private readonly DataGridViewTextBoxColumn dgc_Name = new();
 		private readonly DataGridViewTextBoxColumn dgc_Address = new();
 		private readonly DataGridViewTextBoxColumn dgc_Phone = new();
 		private readonly DataGridViewTextBoxColumn dgc_Email = new();
 		private readonly DataGridViewTextBoxColumn dgc_Join = new();
+		#endregion
 
+		#region Events
 		/// <summary>
 		/// Event that occurs when a customer is being added to the database
 		/// </summary>
@@ -29,6 +32,7 @@ namespace SPPBC.M3Tools.Data
 		/// Event that occurs when a customer is being updated in the database
 		/// </summary>
 		public event Events.Customers.CustomerEventHandler UpdateCustomer;
+		#endregion
 
 		/// <summary>
 		/// The list of customers currently in the data grid
@@ -46,15 +50,6 @@ namespace SPPBC.M3Tools.Data
 
 				bsCustomers.DataSource = value;
 			}
-		}
-
-		/// <summary>
-		/// The filter to place on the data in the grid
-		/// </summary>
-		public string Filter
-		{
-			get => bsCustomers.Filter;
-			set => bsCustomers.Filter = value;
 		}
 
 		/// <summary>
@@ -77,9 +72,7 @@ namespace SPPBC.M3Tools.Data
 			RemoveEntry += (sender, e) => RemoveCustomer?.Invoke(sender, new(e.Value, e.EventType));
 		}
 
-		/// <summary>
 		/// <inheritdoc/>
-		/// </summary>
 		protected override void LoadColumns()
 		{
 			base.LoadColumns();

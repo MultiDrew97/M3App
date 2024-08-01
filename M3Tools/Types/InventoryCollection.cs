@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Types
@@ -12,37 +13,38 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		/// <param name="collection"></param>
+		/// <param name="source"></param>
 		/// <returns></returns>
-		public static new InventoryCollection Cast(System.Collections.IList collection)
+		public static new InventoryCollection Cast(System.Collections.IEnumerable source)
 		{
-			if (collection == null || collection.Count <= 0)
+			if (source == null)
 			{
-				return new();
+				return [];
 			}
 
 			InventoryCollection result;
-			switch (collection.GetType())
+
+			switch (source.GetType())
 			{
 				case var @rows when @rows == typeof(DataGridViewSelectedRowCollection):
 				case var @selected when @selected == typeof(DataGridViewRowCollection):
-					result = new();
-					foreach (DataGridViewRow row in collection)
+					result = [];
+					foreach (DataGridViewRow row in source)
 					{
 						result.Add((Product)row.DataBoundItem);
 					}
 
 					return result;
 				case var @list when @list == typeof(System.Collections.IList):
-					result = new();
-					foreach (Product item in collection)
-					{
-						result.Add(item);
-					}
+				case var @genList when @genList == typeof(System.Collections.Generic.List<Product>):
+				case var @genIList when @genIList == typeof(System.Collections.Generic.IList<Product>):
+				case var @collection when collection == typeof(System.Collections.ICollection):
+				case var @enum when @enum == typeof(System.Collections.IEnumerable):
+					result = [.. source.Cast<Product>().ToList()];
 
 					return result;
-				case var @dbColl when dbColl == typeof(InventoryCollection):
-					return (InventoryCollection)collection;
+				case var @dbColl when @dbColl == typeof(InventoryCollection):
+					return (InventoryCollection)source;
 				default:
 					throw new Exception("Unable to cast collection to InventoryCollection");
 			}
@@ -54,10 +56,8 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="customer">The current customer to compare with</param>
 		/// <param name="index">The index of the current customer</param>
 		/// <returns>True if current customer matches the search criteria, otherwise False</returns>
-		public override bool ApplyFilter(Product customer, int index)
-		{
+		public override bool ApplyFilter(Product customer, int index) =>
 			// TODO: Do I want to allow for nothing values?
-			return customer is not null && customer.Name.Contains(Filter);
-		}
+			customer is not null && customer.Name.Contains(Filter);
 	}
 }

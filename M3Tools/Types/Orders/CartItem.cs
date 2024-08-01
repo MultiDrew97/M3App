@@ -43,10 +43,7 @@
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator ==(CartItem left, CartItem right)
-		{
-			return !(left is null ^ right is null) && left?.Item == right?.Item;
-		}
+		public static bool operator ==(CartItem left, CartItem right) => !(left is null ^ right is null) && left?.Item == right?.Item;
 
 		/// <summary>
 		/// 
@@ -54,9 +51,12 @@
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator !=(CartItem left, CartItem right)
-		{
-			return !(left == right);
-		}
+		public static bool operator !=(CartItem left, CartItem right) => !(left == right);
+
+		/// <inheritdoc/>
+		public override bool Equals(object obj) => this == (obj as CartItem);
+
+		/// <inheritdoc/>
+		public override int GetHashCode() => base.GetHashCode();
 	}
 }

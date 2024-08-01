@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Events.Customers;
 using SPPBC.M3Tools.Types;
 
@@ -12,14 +12,19 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ManagementForm<T> where T : IDbEntry
+	public partial class ManagementForm<T> where T : IDbEntry, new()
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal DbEntryCollection<T> _original;
+
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-        public ManagementForm()
-        {
-            InitializeComponent();
+		public ManagementForm()
+		{
+			InitializeComponent();
 
 			Init(typeof(T));
 
@@ -30,6 +35,8 @@ namespace M3App
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
 
 			ts_Tools.AddEntry += new EventHandler(Add);
+			ts_Tools.ImportEntries += new EventHandler(Import);
+			ts_Tools.SendEmails += new EventHandler(SendEmails);
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
 
@@ -38,18 +45,18 @@ namespace M3App
 			switch (true)
 			{
 				case var _ when type == typeof(Customer):
-					ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
+					ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT);
 					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
 					break;
 				case var _ when type == typeof(Listener):
 					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.LISTENERS);
 					break;
 				case var _ when type == typeof(Order):
-					ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT });
+					ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT);
 					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.ORDERS);
 					break;
 				case var _ when type == typeof(Product):
-					ts_Tools.ToggleButton(new[] { SPPBC.M3Tools.ToolButtons.EMAIL });
+					ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL);
 					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.INVENTORY);
 					break;
 				default:
@@ -78,7 +85,7 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Reload(object sender, EventArgs e) 
+		protected virtual void Reload(object sender, EventArgs e)
 		{
 		}
 
@@ -87,10 +94,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Add(object sender, EventArgs e) 
+		protected virtual void Add(object sender, EventArgs e)
 		{
 		}
-		
+
 		/// <summary>
 		/// Update an entry in the database
 		/// </summary>
@@ -112,6 +119,20 @@ namespace M3App
 		}
 
 		/// <summary>
+		/// Import data into the database
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void Import(object sender, EventArgs e) { }
+
+		/// <summary>
+		/// Send emails out using current user's email credentials
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void SendEmails(object sender, EventArgs e) { }
+
+		/// <summary>
 		/// Called when the filter is changed in the form
 		/// </summary>
 		/// <param name="sender"></param>
@@ -126,14 +147,11 @@ namespace M3App
 			Utils.LogOff();
 		}
 
-		private void Exit(object sender, EventArgs e)
-		{
-			Utils.CloseApplication();
-		}
+		private void Exit(object sender, EventArgs e) => Utils.CloseApplication();
 
 		private void ViewSettings(object sender, EventArgs e)
 		{
-			using var settings = new SettingsForm();
+			using SettingsForm settings = new();
 			settings.Show();
 		}
 
@@ -157,10 +175,7 @@ namespace M3App
 					return;
 			}
 
-			((Control)sender).Invoke(Close);
-
-			//OnFormClosing(new(CloseReason.None, false));
-			//DisplayClosing(sender, new(CloseReason.None, false));
+			_ = ((SPPBC.M3Tools.MainMenuStrip)sender).Invoke(Close);
 		}
 	}
 }

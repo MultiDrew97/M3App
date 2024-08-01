@@ -8,6 +8,7 @@ namespace SPPBC.M3Tools.Data
 	/// </summary>
 	public partial class OrderDataGrid
 	{
+		#region Columns
 		// Columns for the data grid
 		private readonly DataGridViewTextBoxColumn dgc_CustomerName = new();
 		private readonly DataGridViewTextBoxColumn dgc_ItemName = new();
@@ -15,7 +16,9 @@ namespace SPPBC.M3Tools.Data
 		private readonly DataGridViewTextBoxColumn dgc_Quantity = new();
 		private readonly DataGridViewTextBoxColumn dgc_OrderDate = new();
 		private readonly DataGridViewTextBoxColumn dgc_CompletedDate = new();
+		#endregion
 
+		#region Events
 		/// <summary>
 		/// Event that occurs when a order is being added to the database
 		/// </summary>
@@ -30,6 +33,7 @@ namespace SPPBC.M3Tools.Data
 		/// Event that occurs when a order is being updated in the database
 		/// </summary>
 		public event Events.Orders.OrderEventHandler UpdateOrder;
+		#endregion
 
 		/// <summary>
 		/// The list of orders currently in the data grid
@@ -47,15 +51,6 @@ namespace SPPBC.M3Tools.Data
 
 				bsOrders.DataSource = value;
 			}
-		}
-
-		/// <summary>
-		/// The filter to place on the data in the grid
-		/// </summary>
-		public string Filter
-		{
-			get => bsOrders.Filter;
-			set => bsOrders.Filter = value;
 		}
 
 		/// <summary>
@@ -78,9 +73,7 @@ namespace SPPBC.M3Tools.Data
 			RemoveEntry += (sender, e) => RemoveOrder?.Invoke(sender, new(e.Value, e.EventType));
 		}
 
-		/// <summary>
 		/// <inheritdoc/>
-		/// </summary>
 		protected override void LoadColumns()
 		{
 			base.LoadColumns();

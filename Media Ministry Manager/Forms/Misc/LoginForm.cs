@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Exceptions;
 
@@ -101,9 +102,7 @@ namespace M3App
 			using CreateAccountDialog create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
-			{
 				return;
-			}
 
 			Reset();
 		}
@@ -148,7 +147,7 @@ namespace M3App
 			}
 			catch (Exception ex)
 			{
-				lsd_LoadScreen.ShowError(ex.Message);//"Unknown error occurred. Please try again or contact support.");
+				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}");
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
 			}
