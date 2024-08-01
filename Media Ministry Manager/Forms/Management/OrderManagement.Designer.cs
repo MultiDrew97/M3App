@@ -61,7 +61,6 @@ namespace M3App
             this.odg_Orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.odg_Orders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.odg_Orders.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.odg_Orders.Filter = null;
             this.odg_Orders.Location = new System.Drawing.Point(0, 0);
             this.odg_Orders.Name = "odg_Orders";
             this.odg_Orders.ReadOnly = true;

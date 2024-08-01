@@ -59,7 +59,6 @@ namespace M3App
             this.cdg_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cdg_Customers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cdg_Customers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.cdg_Customers.Filter = null;
             this.cdg_Customers.Location = new System.Drawing.Point(0, 0);
             this.cdg_Customers.Name = "cdg_Customers";
             this.cdg_Customers.ReadOnly = true;
