@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace M3App
 {
 	/// <summary>
-	/// 
+	/// Main form for all operations
 	/// </summary>
 	public partial class MainForm
 	{
@@ -44,16 +43,6 @@ namespace M3App
 			base.OnFormClosed(e);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnLoad(EventArgs e)
-		{
-			// Place any custom loading behavior here
-			base.OnLoad(e);
-		}
-
 		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
 		{
 			UseWaitCursor = true;
@@ -72,15 +61,10 @@ namespace M3App
 						Close();
 						break;
 					case SPPBC.M3Tools.Events.ManageType.Orders:
-#if !DEBUG
-						MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						break;
-#else
 						UseWaitCursor = true;
 						Utils.OpenForm(typeof(OrderManagement));
 						Close();
 						break;
-#endif
 					case SPPBC.M3Tools.Events.ManageType.Inventory:
 						UseWaitCursor = true;
 						Utils.OpenForm(typeof(InventoryManagement));
@@ -88,9 +72,9 @@ namespace M3App
 						break;
 				}
 			}
-			catch(ApplicationException ex)
+			catch (ApplicationException ex)
 			{
-				MessageBox.Show(ex.Message, "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				_ = MessageBox.Show(ex.Message, "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Console.Error.WriteLine(ex.Message);
 			}
 			finally
@@ -118,7 +102,7 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			dbCustomer.AddCustomer(e.Value);
-			MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
@@ -126,7 +110,7 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			dbListener.AddListener(e.Value);
-			MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			_ = MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
@@ -134,7 +118,7 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			dbInventory.AddInventory(e.Value);
-			MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
@@ -142,13 +126,13 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			dbOrders.AddOrder(e.Value);
-			MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			_ = MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
 		private void ViewSettings(object sender, EventArgs e)
 		{
-			var settings = new SettingsForm();
+			SettingsForm settings = new();
 			settings.Show();
 		}
 	}
