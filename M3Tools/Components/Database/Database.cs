@@ -45,24 +45,18 @@ namespace SPPBC.M3Tools.Database
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		private string Auth => Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}"));
 
-		internal void Execute(System.Net.Http.HttpMethod method, string path, string payload = null, System.Threading.CancellationToken ct = default)
+		internal bool Execute(System.Net.Http.HttpMethod method, string path, string payload, System.Threading.CancellationToken ct)
 		{
-			Task<object> result = ExecuteWithResult<object>(method, path, (payload, System.Text.Encoding.GetEncoding(payload), "application/json"), ct);
+			Task<object> task = ExecuteWithResult<object>(method, path, payload, ct);
 
-			if (result.IsFaulted)
-			{
-				throw result.Exception;
-			}
+			task.Wait();
 
-			if (result.IsCanceled)
+			return true switch
 			{
-				throw new TaskCanceledException("API Call was canceled");
-			}
-
-			if (!result.IsCompleted)
-			{
-				throw new Exception("API Call not finihsed yet");
-			}
+				var faulted when faulted == task.IsFaulted => throw task.Exception,
+				var canceled when canceled == task.IsCanceled => throw new TaskCanceledException("API Call was canceled"),
+				_ => true
+			};
 		}
 
 		/// <summary>
@@ -74,7 +68,8 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="body"></param>
 		/// <param name="ct"></param>
 		/// <returns></returns>
-		protected internal Task<R> ExecuteWithResult<R>(System.Net.Http.HttpMethod method, string path, (string Content, System.Text.Encoding Encoding, string ContentType) body = default, System.Threading.CancellationToken ct = default) => ExecuteWithResultAsync<R>(@method, path, new System.Net.Http.StringContent(body.Content ?? string.Empty, body.Encoding, body.ContentType), ct);
+		protected internal Task<R> ExecuteWithResult<R>(System.Net.Http.HttpMethod method, string path, string body, System.Threading.CancellationToken ct = default)
+			=> ExecuteWithResultAsync<R>(@method, path, new System.Net.Http.StringContent(body ?? string.Empty, System.Text.Encoding.UTF8, "application/json"), ct);
 
 		private async Task<R> ExecuteWithResultAsync<R>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
 		{
@@ -98,9 +93,6 @@ namespace SPPBC.M3Tools.Database
 					_ => throw new ArgumentException($"{method.Method} is not a valid method type")
 				}).ConfigureAwait(false);
 
-				//task.Wait();
-				//System.Net.Http.HttpResponseMessage res = await task.ConfigureAwait(false);
-
 				string body = await res.Content.ReadAsStringAsync();
 
 				return !res.IsSuccessStatusCode
@@ -119,11 +111,6 @@ namespace SPPBC.M3Tools.Database
 				Console.WriteLine(agg.GetBaseException().GetType());
 				Console.WriteLine(agg.GetBaseException().Message);
 				throw new Exceptions.ApiException(agg.GetBaseException().Message);
-			}
-			catch (System.Net.WebException web)
-			{
-				Console.Error.WriteLine(web.Message);
-				throw new Exceptions.ApiException("API is unavailable");
 			}
 		}
 	}

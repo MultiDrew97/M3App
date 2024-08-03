@@ -1,58 +1,56 @@
-﻿using SPPBC.M3Tools.M3API;
+﻿using System;
+
+using SPPBC.M3Tools.M3API;
 
 namespace SPPBC.M3Tools.Database
 {
+	/// <summary>
+	/// The inventory based API calls
+	/// </summary>
 	public sealed partial class InventoryDatabase
 	{
-		private const string path = "inventory";
+		private const string basePath = "inventory";
 
 		/// <summary>
 		/// Retrieve a product with the specified item ID
 		/// </summary>
 		/// <param name="itemID"></param>
+		/// <param name="ct"></param>
 		/// <returns></returns>
-		public Types.Product GetProduct(int itemID) => ExecuteWithResult<Types.Product>(System.Net.Http.HttpMethod.Get, $"{path}/{itemID}").Result;
+		public Types.Product GetProduct(int itemID, System.Threading.CancellationToken ct = default)
+			=> Utils.ValidID(itemID)
+				? ExecuteWithResult<Types.Product>(System.Net.Http.HttpMethod.Get, $"{basePath}/{itemID}", string.Empty, ct).Result
+				: throw new ArgumentException();
 
 		/// <summary>
 		/// Retrieve the complete list of inventory items
 		/// </summary>
 		/// <returns></returns>
-		public Types.InventoryCollection GetProducts() => ExecuteWithResult<Types.InventoryCollection>(System.Net.Http.HttpMethod.Get, $"{path}").Result;
+		public Types.InventoryCollection GetProducts(System.Threading.CancellationToken ct = default)
+			=> ExecuteWithResult<Types.InventoryCollection>(System.Net.Http.HttpMethod.Get, basePath, string.Empty, ct).Result;
 
 		/// <summary>
 		/// Add a new product to the database
 		/// </summary>
-		/// <param name="itemName"></param>
-		/// <param name="stock"></param>
-		/// <param name="price"></param>
-		public void AddProduct(string itemName, int stock, decimal price) => AddInventory(new Types.Product(-1, itemName, stock, price, true));
+		/// <param name="item"></param>
+		/// <param name="ct"></param>
+		public bool AddInventory(Types.Product item, System.Threading.CancellationToken ct = default)
+			=> Execute(System.Net.Http.HttpMethod.Post, basePath, JSON.ConvertToJSON(item), ct);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="item"></param>
-		public void AddInventory(Types.Product item) => Execute(System.Net.Http.HttpMethod.Post, $"{path}", JSON.ConvertToJSON(item));
-
-		/// <summary>
-		/// Update an inventory item's information
-		/// </summary>
-		/// <param name="itemID"></param>
-		/// <param name="itemName"></param>
-		/// <param name="stock"></param>
-		/// <param name="price"></param>
-		/// <param name="available"></param>
-		public void UpdateProduct(int itemID, string itemName, int stock, decimal price, bool available) => UpdateProduct(new Types.Product(itemID, itemName, stock, price, available));
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="item"></param>
-		public void UpdateProduct(Types.Product item) => Execute(System.Net.Http.HttpMethod.Put, $"{path}/{item.Id}", JSON.ConvertToJSON(item));
+		/// <param name="ct"></param>
+		public bool UpdateProduct(Types.Product item, System.Threading.CancellationToken ct = default)
+			=> Execute(System.Net.Http.HttpMethod.Put, $"{basePath}/{item.Id}", JSON.ConvertToJSON(item), ct);
 
 		/// <summary>
 		/// Remove a product from the database
 		/// </summary>
 		/// <param name="itemID"></param>
-		public void RemoveProduct(int itemID) => Execute(System.Net.Http.HttpMethod.Delete, $"{path}/{itemID}?force");
+		/// <param name="ct"></param>
+		public void RemoveProduct(int itemID, System.Threading.CancellationToken ct = default)
+			=> Execute(System.Net.Http.HttpMethod.Delete, $"{basePath}/{itemID}?force", string.Empty, ct);
 	}
 }
