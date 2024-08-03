@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 using SPPBC.M3Tools.M3API;
 using SPPBC.M3Tools.Types;
@@ -21,22 +22,16 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="username"></param>
 		/// <param name="password"></param>
 		/// <param name="role"></param>
-		public void CreateUser(string fName, string lName, string email, string username, string password, AccountRole role = AccountRole.User)
-		{
-			CreateUser(new User()
-			{
-				FirstName = fName,
-				LastName = lName,
-				Email = email,
-				Login = new Auth(username, password) { Role = role }
-			});
-		}
+		/// <param name="ct"></param>
+		public void CreateUser(string fName, string lName, string email, string username, string password, AccountRole role = AccountRole.User, System.Threading.CancellationToken ct = default)
+			=> CreateUser(new(-1, fName: fName, lName: lName, email: email, username: username, password: password, accountRole: role), ct);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="user"></param>
-		public void CreateUser(User user) => Execute(Method.Post, $"/{path}", JSON.ConvertToJSON(user));
+		/// <param name="ct"></param>
+		public void CreateUser(User user, System.Threading.CancellationToken ct = default) => Execute(System.Net.Http.HttpMethod.Post, $"/{path}", JSON.ConvertToJSON(user), ct);
 
 		/// <summary>
 		/// Change the password of the specified user
@@ -44,43 +39,57 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="username"></param>
 		/// <param name="oldPassword"></param>
 		/// <param name="newPassword"></param>
+		/// <param name="ct"></param>
 		/// <returns></returns>
 		/// <exception cref="NotImplementedException"></exception>
-		public bool ChangePassword(string username, string oldPassword, string newPassword) => throw new NotImplementedException("ChangePassword");
+		public bool ChangePassword(string username, string oldPassword, string newPassword, System.Threading.CancellationToken ct = default)
+			=> throw new NotImplementedException("ChangePassword");
 
 		/// <summary>
 		/// Completly delete the specified user's account
 		/// </summary>
 		/// <param name="userID"></param>
-		public void CloseAccount(int userID) => Execute(Method.Delete, $"/{path}/{userID}");
+		/// <param name="ct"></param>
+		public void CloseAccount(int userID, System.Threading.CancellationToken ct = default) => Execute(System.Net.Http.HttpMethod.Delete, $"/{path}/{userID}", ct: ct);
 
 		/// <summary>
 		/// Login a user using the provided login info
 		/// </summary>
 		/// <param name="username"></param>
 		/// <param name="password"></param>
+		/// <param name="ct"></param>
 		/// <returns></returns>
-		public User Login(string username, string password) => Login(new Auth(username, password));
+		public User Login(string username, string password, System.Threading.CancellationToken ct = default) => Login(new Auth(username, password), ct);
 
 		/// <summary>
 		/// Attempt to login a user provided their username and password
 		/// </summary>
 		/// <param name="auth">The credentials to use for logging in the user</param>
+		/// <param name="ct"></param>
 		/// <returns>The user if successful, otherwise Nothing</returns>
-		public User Login(Auth auth) => Login(JSON.ConvertToJSON(auth));
+		public User Login(Auth auth, System.Threading.CancellationToken ct) => Login(JSON.ConvertToJSON(auth), ct);
 
-		//{
-		//	// TODO: Upon successful login, update the LastLogin field in the database using m3.sp_UpdateLastLogin
-		//	// MAYBE: Look into SQL triggers to see if I can make one that triggers upon login from the table function
-		//	// MAYBE: Put this in the API instead? 
-		//	return Login(JSON.ConvertToJSON(auth));
-		//}
-
-		private User Login(string auth)
+		private User Login(string auth, System.Threading.CancellationToken ct)
 		{
-			System.Threading.Tasks.Task<User> task = ExecuteWithResult<User>(Method.Post, $"{path}/login", auth);
+			try
+			{
+				System.Threading.Tasks.Task<User> task = ExecuteWithResult<User>(System.Net.Http.HttpMethod.Post, $"{path}/login", (auth, System.Text.Encoding.UTF8, "application/json"), ct);
 
-			return task.IsFaulted ? throw task.Exception : task.IsCanceled ? throw new OperationCanceledException() : task.Result;
+				task.Wait();
+
+				return !task.IsCanceled ? task.Result : throw new OperationCanceledException();
+
+			}
+			catch (Exception ex)
+			{
+				Exception baseEx = ex.GetBaseException();
+				throw baseEx.Message switch
+				{
+					var username when Regex.IsMatch(username, @".*username.*", RegexOptions.IgnoreCase) => new Exceptions.UsernameException(),
+					var password when Regex.IsMatch(password, @".*password.*", RegexOptions.IgnoreCase) => new Exceptions.PasswordException(),
+					_ => baseEx
+				};
+			}
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace SPPBC.M3Tools.Database
 		/// Retrieve the complete list of orders from the database
 		/// </summary>
 		/// <returns></returns>
-		public OrderCollection GetOrders() => ExecuteWithResult<OrderCollection>(Method.Get, $"{path}").Result;
+		public OrderCollection GetOrders() => ExecuteWithResult<OrderCollection>(System.Net.Http.HttpMethod.Get, $"{path}").Result;
 
 		/// <summary>
 		/// Add a new order to the database
@@ -47,13 +47,13 @@ namespace SPPBC.M3Tools.Database
 		/// 
 		/// </summary>
 		/// <param name="order"></param>
-		public void AddOrder(Order order) => Execute(Method.Post, $"{path}", JSON.ConvertToJSON(order));
+		public void AddOrder(Order order) => Execute(System.Net.Http.HttpMethod.Post, $"{path}", JSON.ConvertToJSON(order));
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="order"></param>
-		public void UpdateOrder(Order order) => Execute(Method.Put, $"{path}/{order.Id}", JSON.ConvertToJSON(order));
+		public void UpdateOrder(Order order) => Execute(System.Net.Http.HttpMethod.Put, $"{path}/{order.Id}", JSON.ConvertToJSON(order));
 
 		/// <summary>
 		/// Cancel an order based on the provided order ID
@@ -86,7 +86,7 @@ namespace SPPBC.M3Tools.Database
 		}
 
 		private void RemoveOrder(int orderID, bool completed) =>
-				Execute(Method.Delete, $"{path}/{orderID}?{(completed ? "completed" : "")}");
+				Execute(System.Net.Http.HttpMethod.Delete, $"{path}/{orderID}?{(completed ? "completed" : "")}");
 
 		/// <summary>
 		/// Retrieve an order by its order ID
@@ -98,7 +98,7 @@ namespace SPPBC.M3Tools.Database
 		{
 			return !Utils.ValidID(orderID)
 				? throw new ArgumentException("ID values must be greater than or equal to 0")
-				: ExecuteWithResult<Order>(Method.Get, $"{path}/{orderID}").Result;
+				: ExecuteWithResult<Order>(System.Net.Http.HttpMethod.Get, $"{path}/{orderID}").Result;
 		}
 
 		// TODO: Likely create a custom API path to search by customerID instead of orderID

@@ -139,14 +139,9 @@ namespace M3App
 				lsd_LoadScreen.ShowError("Incorrect password provided. Please try again or reset your password");
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
 			}
-			catch (DatabaseException)
-			{
-				lsd_LoadScreen.ShowError("Unknown database error. Please try again or contact support.");
-				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
-				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
-			}
 			catch (Exception ex)
 			{
+				Console.Error.WriteLine(ex.StackTrace);
 				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}");
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);

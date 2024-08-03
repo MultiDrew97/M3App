@@ -47,45 +47,6 @@ namespace SPPBC.M3Tools.M3API
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public static string ConvertToJSON(object obj)
-		{
-			if (obj is null)
-			{
-				return "";
-			}
-
-			return JsonSerializer.Serialize(obj, options);
-		}
-	}
-
-	/// <summary>
-	/// The type of methods associated with RESTful API calls
-	/// </summary>
-	public enum Method
-	{
-		/// <summary>
-		/// A GET API request
-		/// </summary>
-		Get,
-		/// <summary>
-		/// A POST API request
-		/// </summary>
-		Post,
-		/// <summary>
-		/// A PUT API request
-		/// </summary>
-		Put,
-		/// <summary>
-		/// A DELETE API request
-		/// </summary>
-		Delete,
-		/// <summary>
-		/// A PATCH API request
-		/// </summary>
-		Patch,
-		/// <summary>
-		/// A HEAD API request
-		/// </summary>
-		Head
+		public static string ConvertToJSON(object obj) => obj is null ? "" : JsonSerializer.Serialize(obj, options);
 	}
 }

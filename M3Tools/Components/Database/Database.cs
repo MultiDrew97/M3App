@@ -1,14 +1,11 @@
 ﻿using System;
 
 using System.ComponentModel;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 using SPPBC.M3Tools.M3API;
 
 // FIXME: Convert Database on here and API to use a non-relational (i.e MongoDB)
-
 namespace SPPBC.M3Tools.Database
 {
 	/// <summary>
@@ -48,9 +45,9 @@ namespace SPPBC.M3Tools.Database
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		private string Auth => Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{Username}:{Password}"));
 
-		internal void Execute(Method @method, string path, string payload = null)
+		internal void Execute(System.Net.Http.HttpMethod method, string path, string payload = null, System.Threading.CancellationToken ct = default)
 		{
-			Task<object> result = ExecuteWithResult<object>(@method, path, payload);
+			Task<object> result = ExecuteWithResult<object>(method, path, (payload, System.Text.Encoding.GetEncoding(payload), "application/json"), ct);
 
 			if (result.IsFaulted)
 			{
@@ -74,79 +71,60 @@ namespace SPPBC.M3Tools.Database
 		/// <typeparam name="R">Expected return type</typeparam>
 		/// <param name="method"></param>
 		/// <param name="path"></param>
-		/// <param name="payload"></param>
+		/// <param name="body"></param>
+		/// <param name="ct"></param>
 		/// <returns></returns>
-		protected Task<R> ExecuteWithResult<R>(Method @method, string path, string payload = null) => ExecuteWithResult<R>(@method, path, !string.IsNullOrWhiteSpace(payload) ? System.Text.Encoding.UTF8.GetBytes(payload) : null);
+		protected internal Task<R> ExecuteWithResult<R>(System.Net.Http.HttpMethod method, string path, (string Content, System.Text.Encoding Encoding, string ContentType) body = default, System.Threading.CancellationToken ct = default) => ExecuteWithResultAsync<R>(@method, path, new System.Net.Http.StringContent(body.Content ?? string.Empty, body.Encoding, body.ContentType), ct);
 
-		private Task<R> ExecuteWithResult<R>(Method @method, string path, byte[] payload = null)
+		private async Task<R> ExecuteWithResultAsync<R>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
 		{
-			System.Net.HttpWebRequest req;
-
-			req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create($"{BaseUrl}/{path}");
-			req.Method = @method.ToString().ToUpper();
-			req.Accept = "application/json";
-			req.Headers.Add(System.Net.HttpRequestHeader.Authorization, $"Basic {Auth}");
-
-			if (payload is not null)
-			{
-				req.ContentType = "application/json";
-				using System.IO.Stream stream = req.GetRequestStream();
-				stream.Write(payload, 0, payload.Count());
-			}
-
 			try
 			{
-				using HttpWebResponse res = VerifyResponse(req.GetResponseAsync());
+				using System.Net.Http.HttpClient client = new()
+				{
+					BaseAddress = new(BaseUrl),
+					Timeout = TimeSpan.FromSeconds(30),
+				};
 
-				return Task.FromResult(JSON.ConvertFromJSON<R>(new System.IO.StreamReader(res.GetResponseStream()).ReadToEnd()));
-			}
-			catch (System.Text.Json.JsonException json)
-			{
-				Console.Error.WriteLine(json.Message);
-				return Task.FromException<R>(json);
-			}
-			catch (Exceptions.AuthorizationException auth)
-			{
-				Console.Error.WriteLine(auth.Message);
-				return Task.FromException<R>(auth);
-			}
-			catch (Exceptions.ApiException api)
-			{
-				Console.Error.WriteLine(api.Message);
-				return Task.FromException<R>(api);
-			}
-			catch (Exceptions.NotFoundException notfound)
-			{
-				Console.Error.WriteLine(notfound.Message);
-				return Task.FromException<R>(notfound);
+				client.DefaultRequestHeaders.Authorization = new("Basic", Auth);
+				client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+
+				System.Net.Http.HttpResponseMessage res = await (method switch
+				{
+					var get when get == System.Net.Http.HttpMethod.Get => client.GetAsync(path, ct),
+					var post when post == System.Net.Http.HttpMethod.Post => client.PostAsync(path, payload, ct),
+					var put when put == System.Net.Http.HttpMethod.Put => client.PutAsync(path, payload, ct),
+					var delete when delete == System.Net.Http.HttpMethod.Delete => client.DeleteAsync(path, ct),
+					_ => throw new ArgumentException($"{method.Method} is not a valid method type")
+				}).ConfigureAwait(false);
+
+				//task.Wait();
+				//System.Net.Http.HttpResponseMessage res = await task.ConfigureAwait(false);
+
+				string body = await res.Content.ReadAsStringAsync();
+
+				return !res.IsSuccessStatusCode
+					? res.StatusCode switch
+					{
+						System.Net.HttpStatusCode.Unauthorized => throw new Exceptions.AuthorizationException(body),
+						System.Net.HttpStatusCode.NotFound => throw new Exceptions.NotFoundException(body),
+						System.Net.HttpStatusCode.Forbidden => throw new Exceptions.ApiException(body),
+						System.Net.HttpStatusCode.InternalServerError => throw new Exceptions.ApiException(body),
+						_ => throw new Exceptions.ApiException("Unknown API error")
+					}
+					: JSON.ConvertFromJSON<R>(body);
 			}
 			catch (AggregateException agg)
 			{
-				Console.Error.WriteLine(agg.InnerException.Message);
-				return Task.FromException<R>(agg.InnerException);
+				Console.WriteLine(agg.GetBaseException().GetType());
+				Console.WriteLine(agg.GetBaseException().Message);
+				throw new Exceptions.ApiException(agg.GetBaseException().Message);
 			}
-			catch (Exception ex)
+			catch (System.Net.WebException web)
 			{
-				Console.Error.WriteLine(ex.Message);
-				return Task.FromException<R>(ex);
+				Console.Error.WriteLine(web.Message);
+				throw new Exceptions.ApiException("API is unavailable");
 			}
-		}
-
-		private HttpWebResponse VerifyResponse(Task<WebResponse> res)
-		{
-			if (res == null || res.IsFaulted)
-				throw new Exceptions.ApiException();
-
-			HttpWebResponse result = (HttpWebResponse)res.Result;
-
-			return result.StatusCode switch
-			{
-				HttpStatusCode.Unauthorized => throw new Exceptions.AuthorizationException(result.StatusDescription),
-				HttpStatusCode.NotFound => throw new Exceptions.NotFoundException(result.StatusDescription),
-				HttpStatusCode.Forbidden => throw new Exceptions.ApiException(result.StatusDescription),
-				HttpStatusCode.InternalServerError => throw new Exceptions.ApiException(result.StatusDescription),
-				_ => result,
-			};
 		}
 	}
 }

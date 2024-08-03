@@ -203,15 +203,6 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We were unable to start the application. Please reach out to your administrator.\n\nError:\n{0}.
-        /// </summary>
-        internal static string FAILED_TO_OPEN {
-            get {
-                return ResourceManager.GetString("FAILED_TO_OPEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap HidePasswordIcon {
@@ -369,6 +360,15 @@ namespace M3App.Properties {
         internal static string UNDER_CONSTRUCTION_TITLE {
             get {
                 return ResourceManager.GetString("UNDER_CONSTRUCTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We ran into an unhandled error within the application. Please reach out to your administrator.\n\nError:\n{0}.
+        /// </summary>
+        internal static string UNHANDLED_EXCEPTION {
+            get {
+                return ResourceManager.GetString("UNHANDLED_EXCEPTION", resourceCulture);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using SPPBC.M3Tools.M3API;
 
 namespace SPPBC.M3Tools.Database
@@ -14,10 +15,7 @@ namespace SPPBC.M3Tools.Database
 		/// Add a new listener to the database
 		/// </summary>
 		/// <param name="listener"></param>
-		public void AddListener(Types.Listener listener)
-		{
-			Execute(Method.Post, $"{path}", JSON.ConvertToJSON(listener));
-		}
+		public void AddListener(Types.Listener listener) => Execute(System.Net.Http.HttpMethod.Post, $"{path}", JSON.ConvertToJSON(listener));
 
 		/// <summary>
 		/// Remove a listener from the database
@@ -31,7 +29,7 @@ namespace SPPBC.M3Tools.Database
 				throw new ArgumentException($"Invalid ListenerID provided");
 			}
 
-			Execute(Method.Delete, $"{path}/{listenerID}");
+			Execute(System.Net.Http.HttpMethod.Delete, $"{path}/{listenerID}");
 		}
 
 		/// <summary>
@@ -39,19 +37,13 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <param name="listener"></param>
 		/// <exception cref="NotImplementedException"></exception>
-		public void UpdateListener(Types.Listener listener)
-		{
-			Execute(Method.Put, $"{path}/{listener.Id}", JSON.ConvertToJSON(listener));
-		}
+		public void UpdateListener(Types.Listener listener) => Execute(System.Net.Http.HttpMethod.Put, $"{path}/{listener.Id}", JSON.ConvertToJSON(listener));
 
 		/// <summary>
 		/// Retrieves the complete list of listeners
 		/// </summary>
 		/// <returns></returns>
-		public Types.ListenerCollection GetListeners()
-		{
-			return ExecuteWithResult<Types.ListenerCollection>(Method.Get, $"{path}").Result;
-		}
+		public Types.ListenerCollection GetListeners() => ExecuteWithResult<Types.ListenerCollection>(System.Net.Http.HttpMethod.Get, $"{path}").Result;
 
 		/// <summary>
 		/// Retrieves a listener based on the provided listener ID
@@ -63,7 +55,7 @@ namespace SPPBC.M3Tools.Database
 		{
 			return !Utils.ValidID(listenerID)
 				? throw new ArgumentException($"Invalid ListenerID provided")
-				: ExecuteWithResult<Types.Listener>(Method.Get, $"{path}/{listenerID}").Result;
+				: ExecuteWithResult<Types.Listener>(System.Net.Http.HttpMethod.Get, $"{path}/{listenerID}").Result;
 		}
 	}
 }

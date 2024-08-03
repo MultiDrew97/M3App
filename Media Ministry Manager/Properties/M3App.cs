@@ -27,7 +27,7 @@ namespace M3App
 			{
 				Console.Error.WriteLine(ex.Message);
 				Console.Error.WriteLine(ex.StackTrace);
-				_ = MessageBox.Show(string.Format(Properties.Resources.FAILED_TO_OPEN.Replace(@"\n", "\n").Replace(@"\t", "\t"), ex.Message), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				_ = MessageBox.Show(string.Format(Properties.Resources.UNHANDLED_EXCEPTION.Replace(@"\n", "\n").Replace(@"\t", "\t"), ex.Message), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
@@ -41,10 +41,7 @@ namespace M3App
 
 		public override Encoding Encoding => Encoding.UTF8;
 
-		public MultiOutputWriter(params System.IO.TextWriter[] writers)
-		{
-			this.writers = writers;
-		}
+		public MultiOutputWriter(params System.IO.TextWriter[] writers) => this.writers = writers;
 
 		// TODO: Make it so that it automatically outputs with the date and time info of the output as well
 		public override void Write(string value)

@@ -47,11 +47,9 @@ namespace M3App
 			base.OnMainFormClosed(sender, e);
 		}
 
-		protected override void ExitThreadCore()
-		{
+		protected override void ExitThreadCore() =>
 			// Perform any application clean up that may be necessary
 			base.ExitThreadCore();
-		}
 
 		private void LoadApp()
 		{
@@ -78,7 +76,7 @@ namespace M3App
 #if DEBUG
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 			Debug.WriteLine("DEBUG: Changing API settings for debug settings");
-			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api";
+			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api/";
 			Properties.Settings.Default.ApiPassword = "password";
 			Properties.Settings.Default.ApiUsername = "username";
 			Properties.Settings.Default.Save();

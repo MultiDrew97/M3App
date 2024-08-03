@@ -9,7 +9,7 @@
       <Value Profile="(Default)">Microsoft Sans Serif, 15.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="BaseUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://sppbc.herbivore.site/api</Value>
+      <Value Profile="(Default)">https://sppbc.herbivore.site/api/</Value>
     </Setting>
     <Setting Name="ApiPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G</Value>
