@@ -26,6 +26,8 @@ namespace M3App
 			ldg_Listeners.UpdateListener += new ListenerEventHandler(Update);
 			ldg_Listeners.RemoveListener += new ListenerEventHandler(Remove);
 
+			ldg_Listeners.Reload += (sender, e) => _original = dbListeners.GetListeners();
+
 			_original = dbListeners.GetListeners();
 		}
 
@@ -50,7 +52,7 @@ namespace M3App
 		protected override void Remove(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
 		{
 			UseWaitCursor = true;
-			dbListeners.RemoveListener(e.Value.Id);
+			_ = dbListeners.RemoveListener(e.Value.Id);
 			Reload(sender, e);
 		}
 
@@ -96,7 +98,7 @@ namespace M3App
 		{
 			try
 			{
-				dbListeners.AddListener(listener);
+				_ = dbListeners.AddListener(listener);
 				SendWelcome(sender, new ListenerEventArgs(listener, EventType.Added));
 
 			}
@@ -123,7 +125,7 @@ namespace M3App
 					return;
 				}
 
-				dbListeners.UpdateListener(edit.Listener);
+				_ = dbListeners.UpdateListener(edit.Listener);
 				Reload(sender, e);
 			}
 			catch

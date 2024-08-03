@@ -11,15 +11,13 @@ namespace SPPBC.M3Tools.Database
 	/// </summary>
 	public sealed partial class UserDatabase
 	{
-		private const string basePath = "users";
-
 		/// <summary>
-		/// 
+		/// Create a new user for the application
 		/// </summary>
 		/// <param name="user"></param>
 		/// <param name="ct"></param>
 		public void CreateUser(User user, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Post, $"/{basePath}", JSON.ConvertToJSON(user), ct);
+			=> Execute(System.Net.Http.HttpMethod.Post, Paths.Users, JSON.ConvertToJSON(user), ct);
 
 		/// <summary>
 		/// Change the password of the specified user
@@ -39,7 +37,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="userID"></param>
 		/// <param name="ct"></param>
 		public void CloseAccount(int userID, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Delete, $"/{basePath}/{userID}", string.Empty, ct);
+			=> Execute(System.Net.Http.HttpMethod.Delete, string.Join("/", Paths.Users, userID)/*$"{Paths.Users}/{userID}"*/, string.Empty, ct);
 
 		/// <summary>
 		/// Login a user using the provided login info
@@ -61,7 +59,7 @@ namespace SPPBC.M3Tools.Database
 		{
 			try
 			{
-				System.Threading.Tasks.Task<User> task = ExecuteWithResult<User>(System.Net.Http.HttpMethod.Post, $"{basePath}/login", JSON.ConvertToJSON(auth), ct);
+				System.Threading.Tasks.Task<User> task = ExecuteWithResult<User>(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct);
 
 				task.Wait();
 

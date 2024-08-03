@@ -9,8 +9,6 @@ namespace SPPBC.M3Tools.Database
 	/// </summary>
 	public partial class ListenerDatabase
 	{
-		private const string basePath = "listeners";
-
 		/// <summary>
 		/// Retrieves a listener based on the provided listener ID
 		/// </summary>
@@ -20,7 +18,7 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public Types.Listener GetListener(int listenerID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(listenerID)
-				? ExecuteWithResult<Types.Listener>(System.Net.Http.HttpMethod.Get, $"{basePath}/{listenerID}", string.Empty, ct).Result
+				? ExecuteWithResult<Types.Listener>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Seperator, Paths.Listeners, listenerID), string.Empty, ct).Result
 				: throw new ArgumentException($"Invalid ListenerID provided");
 
 		/// <summary>
@@ -28,7 +26,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		public Types.ListenerCollection GetListeners(System.Threading.CancellationToken ct = default)
-			=> ExecuteWithResult<Types.ListenerCollection>(System.Net.Http.HttpMethod.Get, $"{basePath}", string.Empty, ct).Result;
+			=> ExecuteWithResult<Types.ListenerCollection>(System.Net.Http.HttpMethod.Get, Paths.Listeners, string.Empty, ct).Result;
 
 		/// <summary>
 		/// Add a new listener to the database
@@ -36,7 +34,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="listener"></param>
 		/// <param name="ct"></param>
 		public bool AddListener(Types.Listener listener, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Post, $"{basePath}", JSON.ConvertToJSON(listener), ct);
+			=> Execute(System.Net.Http.HttpMethod.Post, Paths.Listeners, JSON.ConvertToJSON(listener), ct);
 
 		/// <summary>
 		/// Remove a listener from the database
@@ -46,7 +44,7 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public bool RemoveListener(int listenerID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(listenerID)
-				? Execute(System.Net.Http.HttpMethod.Delete, $"{basePath}/{listenerID}", string.Empty, ct)
+				? Execute(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Seperator, Paths.Listeners, listenerID), string.Empty, ct)
 				: throw new ArgumentException($"Invalid ListenerID provided");
 
 		/// <summary>
@@ -56,6 +54,6 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="ct"></param>
 		/// <exception cref="NotImplementedException"></exception>
 		public bool UpdateListener(Types.Listener listener, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Put, $"{basePath}/{listener.Id}", JSON.ConvertToJSON(listener), ct);
+			=> Execute(System.Net.Http.HttpMethod.Put, string.Join(Paths.Seperator, Paths.Listeners, listener.Id), JSON.ConvertToJSON(listener), ct);
 	}
 }

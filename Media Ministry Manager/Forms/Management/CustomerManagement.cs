@@ -25,6 +25,8 @@ namespace M3App
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(Update);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(Remove);
 
+			cdg_Customers.Reload += (sender, e) => _original = dbCustomers.GetCustomers();
+
 			_original = dbCustomers.GetCustomers();
 		}
 
@@ -56,7 +58,7 @@ namespace M3App
 				return;
 			}
 
-			dbCustomers.AddCustomer(add.Customer);
+			_ = dbCustomers.AddCustomer(add.Customer);
 			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
@@ -76,7 +78,7 @@ namespace M3App
 				return;
 			}
 
-			dbCustomers.UpdateCustomer(edit.Customer);
+			_ = dbCustomers.UpdateCustomer(edit.Customer);
 			_ = MessageBox.Show($"Successfully updated customer", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
@@ -88,7 +90,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
-			dbCustomers.RemoveCustomer(e.Value.Id);
+			_ = dbCustomers.RemoveCustomer(e.Value.Id);
 			_ = MessageBox.Show($"Successfully removed customer", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}

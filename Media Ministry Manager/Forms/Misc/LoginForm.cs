@@ -49,8 +49,6 @@ namespace M3App
 			BeginLogin += LoginBegin;
 			EndLogin += LoginEnd;
 			FormClosing += LoginClosing;
-			Username = Properties.Settings.Default.Username;
-			KeepLoggedIn = Properties.Settings.Default.KeepLoggedIn;
 		}
 
 		// TODO: Potentially consolidate these function
@@ -58,11 +56,17 @@ namespace M3App
 		private void Showing(object sender, EventArgs e)
 		{
 			// MAYBE: Implement a token system to verify logins instead of crendentials
-			if (!KeepLoggedIn)
+			if (!Properties.Settings.Default.KeepLoggedIn)
 			{
 				Reset();
 				return;
 			}
+
+			Username = Properties.Settings.Default.Username;
+			Password = Properties.Settings.Default.Password;
+#if !DEBUG
+			KeepLoggedIn = Properties.Settings.Default.KeepLoggedIn;
+#endif
 
 			btn_Login.PerformClick();
 		}
@@ -112,7 +116,7 @@ namespace M3App
 			try
 			{
 				BeginLogin?.Invoke();
-				SPPBC.M3Tools.Types.User user = dbUsers.Login(Username ?? Properties.Settings.Default.Username, Password ?? Properties.Settings.Default.Password);
+				SPPBC.M3Tools.Types.User user = dbUsers.Login(Username, Password);
 
 				if (KeepLoggedIn)
 				{

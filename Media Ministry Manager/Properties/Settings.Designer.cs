@@ -47,7 +47,7 @@ namespace M3App.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://sppbc.herbivore.site/api/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://sppbc.herbivore.site")]
         public string BaseUrl {
             get {
                 return ((string)(this["BaseUrl"]));

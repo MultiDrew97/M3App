@@ -9,8 +9,6 @@ namespace SPPBC.M3Tools.Database
 	/// </summary>
 	public sealed partial class InventoryDatabase
 	{
-		private const string basePath = "inventory";
-
 		/// <summary>
 		/// Retrieve a product with the specified item ID
 		/// </summary>
@@ -19,7 +17,7 @@ namespace SPPBC.M3Tools.Database
 		/// <returns></returns>
 		public Types.Product GetProduct(int itemID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(itemID)
-				? ExecuteWithResult<Types.Product>(System.Net.Http.HttpMethod.Get, $"{basePath}/{itemID}", string.Empty, ct).Result
+				? ExecuteWithResult<Types.Product>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Seperator, Paths.Inventory, itemID), string.Empty, ct).Result
 				: throw new ArgumentException();
 
 		/// <summary>
@@ -27,7 +25,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		public Types.InventoryCollection GetProducts(System.Threading.CancellationToken ct = default)
-			=> ExecuteWithResult<Types.InventoryCollection>(System.Net.Http.HttpMethod.Get, basePath, string.Empty, ct).Result;
+			=> ExecuteWithResult<Types.InventoryCollection>(System.Net.Http.HttpMethod.Get, Paths.Inventory, string.Empty, ct).Result;
 
 		/// <summary>
 		/// Add a new product to the database
@@ -35,7 +33,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="item"></param>
 		/// <param name="ct"></param>
 		public bool AddInventory(Types.Product item, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Post, basePath, JSON.ConvertToJSON(item), ct);
+			=> Execute(System.Net.Http.HttpMethod.Post, Paths.Inventory, JSON.ConvertToJSON(item), ct);
 
 		/// <summary>
 		/// 
@@ -43,7 +41,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="item"></param>
 		/// <param name="ct"></param>
 		public bool UpdateProduct(Types.Product item, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Put, $"{basePath}/{item.Id}", JSON.ConvertToJSON(item), ct);
+			=> Execute(System.Net.Http.HttpMethod.Put, string.Join(Paths.Seperator, Paths.Inventory, item.Id), JSON.ConvertToJSON(item), ct);
 
 		/// <summary>
 		/// Remove a product from the database
@@ -51,6 +49,6 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="itemID"></param>
 		/// <param name="ct"></param>
 		public void RemoveProduct(int itemID, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Delete, $"{basePath}/{itemID}?force", string.Empty, ct);
+			=> Execute(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Seperator, $"{itemID}?force"), string.Empty, ct);
 	}
 }

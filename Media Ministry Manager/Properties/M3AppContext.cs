@@ -76,9 +76,15 @@ namespace M3App
 #if DEBUG
 			// FIXME: Use this until I find a better way to do this. Once figured out, revert settings to Application instead of User settings
 			Debug.WriteLine("DEBUG: Changing API settings for debug settings");
-			Properties.Settings.Default.BaseUrl = "http://localhost:3000/api/";
+			Properties.Settings.Default.BaseUrl = "http://localhost:3000";
 			Properties.Settings.Default.ApiPassword = "password";
 			Properties.Settings.Default.ApiUsername = "username";
+
+			Debug.WriteLine("DEBUG: Changing login info for debug settings");
+			Properties.Settings.Default.Username = "username";
+			Properties.Settings.Default.Password = "password";
+			Properties.Settings.Default.KeepLoggedIn = true;
+
 			Properties.Settings.Default.Save();
 #endif
 

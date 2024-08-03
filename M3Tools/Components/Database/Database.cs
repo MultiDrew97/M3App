@@ -9,6 +9,46 @@ using SPPBC.M3Tools.M3API;
 namespace SPPBC.M3Tools.Database
 {
 	/// <summary>
+	/// All the pathing information for the API
+	/// </summary>
+	public struct Paths
+	{
+		private static readonly string Base = "/api";
+
+		/// <summary>
+		/// The character to seperate the path sections
+		/// </summary>
+		public static readonly string Seperator = "/";
+
+		#region Routes
+		/// <summary>
+		/// User based path
+		/// </summary>
+		public static string Users = string.Join(Seperator, Base, "users");
+
+		/// <summary>
+		/// Customer based path
+		/// </summary>
+		public static string Customers = string.Join(Seperator, Base, "customers");
+
+		/// <summary>
+		/// Listener based path
+		/// </summary>
+		public static string Listeners = string.Join(Seperator, Base, "listeners");
+
+		/// <summary>
+		/// Inventory based path
+		/// </summary>
+		public static string Inventory = string.Join(Seperator, Base, "inventory");
+
+		/// <summary>
+		/// Order based path
+		/// </summary>
+		public static string Orders = string.Join(Seperator, Base, "orders");
+		#endregion
+	}
+
+	/// <summary>
 	/// The parent object for managing database connection and integrations
 	/// </summary>
 	public abstract partial class Database
@@ -47,7 +87,7 @@ namespace SPPBC.M3Tools.Database
 
 		internal bool Execute(System.Net.Http.HttpMethod method, string path, string payload, System.Threading.CancellationToken ct)
 		{
-			Task<object> task = ExecuteWithResult<object>(method, path, payload, ct);
+			Task task = ExecuteWithResult<bool>(method, path, payload, ct);
 
 			task.Wait();
 
@@ -95,6 +135,7 @@ namespace SPPBC.M3Tools.Database
 
 				string body = await res.Content.ReadAsStringAsync();
 
+				// TODO: Make this look and feel better
 				return !res.IsSuccessStatusCode
 					? res.StatusCode switch
 					{
@@ -104,7 +145,8 @@ namespace SPPBC.M3Tools.Database
 						System.Net.HttpStatusCode.InternalServerError => throw new Exceptions.ApiException(body),
 						_ => throw new Exceptions.ApiException("Unknown API error")
 					}
-					: JSON.ConvertFromJSON<R>(body);
+					: typeof(R) != typeof(bool)
+					? JSON.ConvertFromJSON<R>(body) : default;
 			}
 			catch (AggregateException agg)
 			{

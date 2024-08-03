@@ -5,8 +5,6 @@ namespace SPPBC.M3Tools.Database
 {
 	public sealed partial class OrdersDatabase
 	{
-		private const string basePath = "orders";
-
 		/// <summary>
 		/// Retrieve an order by its order ID
 		/// </summary>
@@ -16,7 +14,7 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public Types.Order GetOrderById(int orderID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(orderID)
-				? ExecuteWithResult<Types.Order>(System.Net.Http.HttpMethod.Get, $"{basePath}/{orderID}", string.Empty, ct).Result
+				? ExecuteWithResult<Types.Order>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Seperator, Paths.Orders, orderID), string.Empty, ct).Result
 				: throw new ArgumentException("ID values must be greater than or equal to 0");
 
 		// TODO: Likely create a custom API path to search by customerID instead of orderID
@@ -38,7 +36,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		public Types.OrderCollection GetOrders(System.Threading.CancellationToken ct = default)
-			=> ExecuteWithResult<Types.OrderCollection>(System.Net.Http.HttpMethod.Get, $"{basePath}", string.Empty, ct).Result;
+			=> ExecuteWithResult<Types.OrderCollection>(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct).Result;
 
 		/// <summary>
 		/// Add a new order to the database
@@ -63,7 +61,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="order"></param>
 		/// <param name="ct"></param>
 		public bool AddOrder(Types.Order order, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Post, $"{basePath}", M3API.JSON.ConvertToJSON(order), ct);
+			=> Execute(System.Net.Http.HttpMethod.Post, Paths.Orders, M3API.JSON.ConvertToJSON(order), ct);
 
 		/// <summary>
 		/// 
@@ -71,7 +69,7 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="order"></param>
 		/// <param name="ct"></param>
 		public bool UpdateOrder(Types.Order order, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Put, $"{basePath}/{order.Id}", M3API.JSON.ConvertToJSON(order), ct);
+			=> Execute(System.Net.Http.HttpMethod.Put, string.Join(Paths.Seperator, Paths.Orders, order.Id), M3API.JSON.ConvertToJSON(order), ct);
 
 		/// <summary>
 		/// Cancel an order based on the provided order ID
@@ -96,6 +94,6 @@ namespace SPPBC.M3Tools.Database
 				: throw new ArgumentException("ID values must be greater than or equal to 0");
 
 		private bool RemoveOrder(int orderID, bool completed, System.Threading.CancellationToken ct)
-			=> Execute(System.Net.Http.HttpMethod.Delete, $"{basePath}/{orderID}?{(completed ? "completed" : "")}", string.Empty, ct);
+			=> Execute(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Seperator, Paths.Orders, $"{orderID}?{(completed ? "completed" : "")}"), string.Empty, ct);
 	}
 }

@@ -23,6 +23,8 @@ namespace M3App
 			odg_Orders.UpdateOrder += new OrderEventHandler(Update);
 			odg_Orders.RemoveOrder += new OrderEventHandler(Remove);
 
+			odg_Orders.Reload += (sender, e) => _original = dbOrders.GetOrders();
+
 			_original = dbOrders.GetOrders();
 		}
 

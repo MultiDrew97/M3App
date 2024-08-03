@@ -22,6 +22,8 @@ namespace M3App
 			idg_Inventory.UpdateProduct += new InventoryEventHandler(Update);
 			idg_Inventory.RemoveProduct += new InventoryEventHandler(Remove);
 
+			idg_Inventory.Reload += (sender, e) => _original = dbInventory.GetProducts();
+
 			_original = dbInventory.GetProducts();
 		}
 
@@ -52,7 +54,7 @@ namespace M3App
 				return;
 			}
 
-			dbInventory.AddInventory(add.Product);
+			_ = dbInventory.AddInventory(add.Product);
 			_ = MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
@@ -71,7 +73,7 @@ namespace M3App
 				return;
 			}
 
-			dbInventory.UpdateProduct(edit.Product);
+			_ = dbInventory.UpdateProduct(edit.Product);
 			_ = MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}

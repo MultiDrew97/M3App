@@ -69,6 +69,7 @@ namespace SPPBC.M3Tools.Data
 			cms_Tools.EditSelected += new EventHandler(EditSelected);
 			cms_Tools.RemoveSelected += new EventHandler(RemoveSelectedRows);
 			cms_Tools.RefreshView += (sender, e) => Reload?.Invoke(sender, e);
+
 		}
 
 		/// <inheritdoc />
