@@ -22,8 +22,6 @@ namespace M3App
 			idg_Inventory.UpdateProduct += new InventoryEventHandler(Update);
 			idg_Inventory.RemoveProduct += new InventoryEventHandler(Remove);
 
-			idg_Inventory.Reload += (sender, e) => _original = dbInventory.GetProducts();
-
 			_original = dbInventory.GetProducts();
 		}
 
@@ -97,7 +95,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			_original.Filter = filter;
+			base.FilterChanged(sender, filter);
+
 			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
 		}
 	}

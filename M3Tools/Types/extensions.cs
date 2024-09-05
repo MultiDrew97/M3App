@@ -66,19 +66,19 @@ namespace SPPBC.M3Tools.Types.Extensions
 
 	internal static class StringExtensions
 	{
-		public static string FormatPhone(this string value)
-		{
-			return Regex.Replace(value, $@"{Properties.Settings.Default.PhoneRegex}", "($1) $2-$3");
-		}
+		public static string FormatPhone(this string value) => Regex.Replace(value, $@"{Properties.Settings.Default.PhoneRegex}", "($1) $2-$3");
 
-		public static string ToBase64String(this string value)
-		{
-			return string.IsNullOrWhiteSpace(value) ? string.Empty : Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
-		}
+		public static string ToBase64String(this string value) => string.IsNullOrWhiteSpace(value) ? string.Empty : Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
 
-		public static string FromBase64String(this string value)
+		public static string FromBase64String(this string value) => string.IsNullOrWhiteSpace(value) ? string.Empty : Encoding.UTF8.GetString(Convert.FromBase64String(value));
+
+		public static string Hash(this string value, string salt) => Hash(value, new Guid(salt));
+
+		public static string Hash(this string value, Guid salt)
 		{
-			return string.IsNullOrWhiteSpace(value) ? string.Empty : Encoding.UTF8.GetString(Convert.FromBase64String(value));
+			using System.Security.Cryptography.SHA256 hasher = System.Security.Cryptography.SHA256.Create();
+			byte[] bytes = hasher.ComputeHash(Encoding.UTF8.GetBytes(string.Join("", value, salt)));
+			return Convert.ToBase64String(bytes);
 		}
 
 		public static string ToHTML(this string value)
@@ -190,17 +190,11 @@ namespace SPPBC.M3Tools.Types.Extensions
 
 	internal static class DoubleExtensions
 	{
-		public static string FormatPrice(this double value)
-		{
-			return $"{value:C2}";
-		}
+		public static string FormatPrice(this double value) => $"{value:C2}";
 	}
 
 	internal static class DecimalExtensions
 	{
-		public static string FormatPrice(this decimal value)
-		{
-			return $"{value:C2}";
-		}
+		public static string FormatPrice(this decimal value) => $"{value:C2}";
 	}
 }

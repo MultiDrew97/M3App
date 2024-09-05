@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Exceptions;
+using SPPBC.M3Tools.Types.Extensions;
 
 namespace M3App
 {
@@ -90,6 +91,8 @@ namespace M3App
 		private void SaveSettings(object sender, DoWorkEventArgs e)
 		{
 			// TODO: Determine better way to handle this
+			Properties.Settings.Default.Username = Username;
+			Properties.Settings.Default.Password = Password.Hash(Properties.Settings.Default.User.Login.Salt as Guid);
 			Properties.Settings.Default.KeepLoggedIn = KeepLoggedIn;
 			Properties.Settings.Default.Save();
 		}
@@ -118,12 +121,17 @@ namespace M3App
 				BeginLogin?.Invoke();
 				SPPBC.M3Tools.Types.User user = dbUsers.Login(Username, Password);
 
-				if (KeepLoggedIn)
+				if (user.Login.Role != SPPBC.M3Tools.Types.AccountRole.Admin)
 				{
-					Properties.Settings.Default.User = user;
+					throw new RoleException();
 				}
+				//if (KeepLoggedIn)
+				//{
+				Properties.Settings.Default.User = user;
+				//}
 
-				bw_SaveSettings.RunWorkerAsync();
+				/*bw_SaveSettings.RunWorkerAsync();*/
+				Console.WriteLine(Password, Properties.Settings.Default.User.Login.Salt);
 			}
 			catch (RoleException)
 			{
@@ -146,7 +154,7 @@ namespace M3App
 			catch (Exception ex)
 			{
 				Console.Error.WriteLine(ex.StackTrace);
-				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}");
+				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}\n {Properties.Settings.Default.BaseUrl}");
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
 			}

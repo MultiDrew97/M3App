@@ -26,8 +26,6 @@ namespace M3App
 			ldg_Listeners.UpdateListener += new ListenerEventHandler(Update);
 			ldg_Listeners.RemoveListener += new ListenerEventHandler(Remove);
 
-			ldg_Listeners.Reload += (sender, e) => _original = dbListeners.GetListeners();
-
 			_original = dbListeners.GetListeners();
 		}
 
@@ -141,7 +139,8 @@ namespace M3App
 		/// <inheritdoc/>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			_original.Filter = filter;
+			base.FilterChanged(sender, filter);
+
 			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
 		}
 

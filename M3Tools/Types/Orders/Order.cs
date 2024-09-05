@@ -105,8 +105,8 @@ namespace SPPBC.M3Tools.Types
 			Customer = customer;
 			Item = item;
 			Quantity = quantity;
-			OrderDate = orderDate.Year < 2000 ? DateTime.Now : orderDate;
-			CompletedDate = completedDate.Year < 2000 ? DateTime.MinValue : completedDate;
+			OrderDate = orderDate.Year > 2000 ? orderDate : DateTime.Now;
+			CompletedDate = completedDate.Year > 2000 ? completedDate : default;
 		}
 
 		/// <summary>
@@ -115,10 +115,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator ==(Order left, Order right)
-		{
-			return !(left is null ^ right is null) && left.Id == right.Id && left.Customer == right.Customer && left.Item == right.Item && left.Quantity == right.Quantity && left.OrderDate == right.OrderDate && left.CompletedDate == right.CompletedDate;
-		}
+		public static bool operator ==(Order left, Order right) => !(left is null ^ right is null) && left.Id == right.Id && left.Customer == right.Customer && left.Item == right.Item && left.Quantity == right.Quantity && left.OrderDate == right.OrderDate && left.CompletedDate == right.CompletedDate;
 
 		/// <summary>
 		/// 
@@ -126,18 +123,18 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="left"></param>
 		/// <param name="right"></param>
 		/// <returns></returns>
-		public static bool operator !=(Order left, Order right)
-		{
-			return !(left == right);
-		}
+		public static bool operator !=(Order left, Order right) => !(left == right);
+
+		/// <inheritdoc/>
+		public override bool Equals(object obj) => this == (obj as Order);
+
+		/// <inheritdoc/>
+		public override int GetHashCode() => base.GetHashCode();
 
 		/// <summary>
 		/// Clones a copy of the current Order object
 		/// </summary>
 		/// <returns></returns>
-		public new Order Clone()
-		{
-			return new Order(Id, Customer.Id, Item.Id, Quantity, OrderDate, CompletedDate);
-		}
+		public new Order Clone() => new(Id, Customer.Id, Item.Id, Quantity, OrderDate, CompletedDate);
 	}
 }

@@ -26,7 +26,7 @@ namespace M3App
 		{
 			InitializeComponent();
 
-			Init(typeof(T));
+			Init();
 
 			mms_Main.ExitApplication += new EventHandler(Exit);
 			mms_Main.Logout += new EventHandler(LogOff);
@@ -40,28 +40,35 @@ namespace M3App
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
 
-		private void Init(Type type)
+		private void Init()
 		{
-			switch (true)
+			SPPBC.M3Tools.ToolButtons[] toolButtons;
+
+			SPPBC.M3Tools.MenuItemsCategories menuItem;
+			switch (typeof(T))
 			{
-				case var _ when type == typeof(Customer):
-					ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT);
-					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.CUSTOMERS);
+				case var customer when customer == typeof(Customer):
+					toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
+					menuItem = SPPBC.M3Tools.MenuItemsCategories.Customer;
 					break;
-				case var _ when type == typeof(Listener):
-					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.LISTENERS);
+				case var listener when listener == typeof(Listener):
+					toolButtons = [];
+					menuItem = SPPBC.M3Tools.MenuItemsCategories.Listener;
 					break;
-				case var _ when type == typeof(Order):
-					ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT);
-					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.ORDERS);
+				case var order when order == typeof(Order):
+					toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
+					menuItem = SPPBC.M3Tools.MenuItemsCategories.Order;
 					break;
-				case var _ when type == typeof(Product):
-					ts_Tools.ToggleButton(SPPBC.M3Tools.ToolButtons.EMAIL);
-					mms_Main.ToggleViewItem(SPPBC.M3Tools.MenuItemsCategories.INVENTORY);
+				case var inventory when inventory == typeof(Product):
+					toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL];
+					menuItem = SPPBC.M3Tools.MenuItemsCategories.Inventory;
 					break;
 				default:
-					throw new NotSupportedException($"Type '{type}' not supported by form");
+					throw new NotSupportedException($"Type '{typeof(T)}' not supported by form");
 			}
+
+			ts_Tools.ToggleButton(toolButtons);
+			mms_Main.ToggleViewItem(menuItem);
 		}
 
 		/// <summary>
@@ -137,9 +144,7 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="filter"></param>
-		protected virtual void FilterChanged(object sender, string filter)
-		{
-		}
+		protected virtual void FilterChanged(object sender, string filter) => _original.Filter = filter;
 
 		private void LogOff(object sender, EventArgs e)
 		{

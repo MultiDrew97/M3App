@@ -18,19 +18,19 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Customer based functions
 		/// </summary>
-		CUSTOMERS,
+		Customer,
 		/// <summary>
 		/// Listener based functions
 		/// </summary>
-		LISTENERS,
+		Listener,
 		/// <summary>
 		/// Order based functions
 		/// </summary>
-		ORDERS,
+		Order,
 		/// <summary>
 		/// Inventory based function
 		/// </summary>
-		INVENTORY
+		Inventory
 	}
 
 	// TODO: Open Display forms from here and figure out to discern closing type
@@ -309,47 +309,22 @@ namespace SPPBC.M3Tools
 		/// Toggle hiding an entry in the menu strip based on passed name
 		/// </summary>
 		/// <param name="cat">The category to toggle</param>
-		/// <param name="viewOnly">Whether to only hide the view buttons or all buttons related to category</param>
-		public void ToggleViewItem(MenuItemsCategories cat, bool viewOnly = true)
+		public void ToggleViewItem(MenuItemsCategories cat)
 		{
 			// TODO: Make this more efficient
 			switch (cat)
 			{
-				case MenuItemsCategories.CUSTOMERS:
+				case MenuItemsCategories.Customer:
 					tsmi_ViewCustomers.Available = !tsmi_ViewCustomers.Available;
-
-					if (!viewOnly)
-					{
-						tsmi_NewCustomer.Available = !tsmi_NewCustomer.Available;
-					}
-
 					break;
-				case MenuItemsCategories.LISTENERS:
+				case MenuItemsCategories.Listener:
 					tsmi_ViewListeners.Available = !tsmi_ViewListeners.Available;
-
-					if (!viewOnly)
-					{
-						tsmi_NewListeners.Available = !tsmi_NewListeners.Available;
-					}
-
 					break;
-				case MenuItemsCategories.ORDERS:
+				case MenuItemsCategories.Order:
 					tsmi_ViewOrders.Available = !tsmi_ViewOrders.Available;
-
-					if (!viewOnly)
-					{
-						tsmi_NewOrder.Available = !tsmi_NewOrder.Available;
-					}
-
 					break;
-				case MenuItemsCategories.INVENTORY:
+				case MenuItemsCategories.Inventory:
 					tsmi_ViewInventory.Available = !tsmi_ViewInventory.Available;
-
-					if (!viewOnly)
-					{
-						tsmi_NewProduct.Available = !tsmi_NewProduct.Available;
-					}
-
 					break;
 				default:
 					break;

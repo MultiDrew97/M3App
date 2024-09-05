@@ -25,8 +25,6 @@ namespace M3App
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(Update);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(Remove);
 
-			cdg_Customers.Reload += (sender, e) => _original = dbCustomers.GetCustomers();
-
 			_original = dbCustomers.GetCustomers();
 		}
 
@@ -102,7 +100,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			_original.Filter = filter;
+			base.FilterChanged(sender, filter);
+
 			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original.Items);
 		}
 	}

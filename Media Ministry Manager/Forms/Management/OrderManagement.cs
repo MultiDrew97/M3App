@@ -23,8 +23,6 @@ namespace M3App
 			odg_Orders.UpdateOrder += new OrderEventHandler(Update);
 			odg_Orders.RemoveOrder += new OrderEventHandler(Remove);
 
-			odg_Orders.Reload += (sender, e) => _original = dbOrders.GetOrders();
-
 			_original = dbOrders.GetOrders();
 		}
 
@@ -151,7 +149,8 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected override void FilterChanged(object sender, string filter)
 		{
-			_original.Filter = filter;
+			base.FilterChanged(sender, filter);
+
 			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 		}
 	}
