@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Google.Apis.Drive.v3;
+
 using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools.GTools
@@ -11,83 +13,68 @@ namespace SPPBC.M3Tools.GTools
 	/// <summary>
 	/// The permission to apply to files/folders
 	/// </summary>
-    public struct Roles
-    {
+	public struct Roles
+	{
 		/// <summary>
 		/// Grants READ access permissions
 		/// </summary>
-        public static string Reader = "reader";
-    }
+		public static string Reader = "reader";
+	}
 
 	/// <summary>
 	/// How the file/folders should be shared
 	/// </summary>
-    public struct ShareType
-    {
+	public struct ShareType
+	{
 		/// <summary>
 		/// Anyone can access the files/folders
 		/// </summary>
-        public static string Anyone = "anyone";
-    }
+		public static string Anyone = "anyone";
+	}
 
 	/// <summary>
 	/// The class that handles all Google Drive API calls
 	/// </summary>
-    public partial class GdriveTool : API, IGoogleService<Google.Apis.Drive.v3.Data.User>
-    {
+	public partial class GdriveTool : API, IGoogleService<Google.Apis.Drive.v3.Data.User>
+	{
 
-        private DriveService __service;
+		private DriveService __service;
 
-        private readonly Google.Apis.Drive.v3.Data.Permission __defaultPermissions = new()
-        {
-            Role = Roles.Reader,
-            Type = ShareType.Anyone
-        };
+		private readonly Google.Apis.Drive.v3.Data.Permission __defaultPermissions = new()
+		{
+			Role = Roles.Reader,
+			Type = ShareType.Anyone
+		};
 
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		protected Google.Apis.Drive.v3.Data.User UserAccount
-		{
-			get
-			{
-				return __service.About.Get().Execute().User;
-			}
-		}
+		protected Google.Apis.Drive.v3.Data.User UserAccount => __service.About.Get().Execute().User;
 
 		Google.Apis.Drive.v3.Data.User IGoogleService<Google.Apis.Drive.v3.Data.User>.UserAccount => UserAccount;
 
-
-		private string DriveID
-		{
-			get
-			{
-				return __service.Files.Get("root").Execute().Id;
-			}
-		}
+		private string DriveID => __service.Files.Get("root").Execute().Id;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public GdriveTool() : base("user", new[] { DriveService.Scope.Drive })
-		{
-			InitializeComponent();
-		}
+		public GdriveTool() : base("user", [DriveService.Scope.Drive]) => InitializeComponent();
 
 		/// <summary>
 		/// Authorizes the application to use their account in the API calls
 		/// </summary>
 		/// <param name="ct"></param>
 		public override void Authorize(CancellationToken ct = default)
-        {
-			
-            base.Authorize(ct);
+		{
 
-			if (ct.IsCancellationRequested) return;
+			base.Authorize(ct);
 
-            __service = new DriveService(__init);
+			if (ct.IsCancellationRequested)
+				return;
 
-        }
+			__service = new DriveService(__init);
+
+		}
 
 		/// <summary>
 		/// Upload a new file to the drive
@@ -97,113 +84,113 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="permissions"></param>
 		/// <exception cref="Exceptions.UploadException"></exception>
 		public Task UploadFile(File @file, string uploadName, Google.Apis.Drive.v3.Data.Permission permissions = null)
-        {
-            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-            {
-                Name = uploadName, // If(uploadName, Utils.DefaultFileName(file.Name)),
-                Parents = (IList<string>)@file.Parents
-            };
+		{
+			Google.Apis.Drive.v3.Data.File fileMetadata = new()
+			{
+				Name = uploadName, // If(uploadName, Utils.DefaultFileName(file.Name)),
+				Parents = @file.Parents
+			};
 
-            FilesResource.CreateMediaUpload request;
+			FilesResource.CreateMediaUpload request;
 
-            using (var reader = new System.IO.FileStream(@file.Name, System.IO.FileMode.Open))
-            {
-                request = __service.Files.Create(fileMetadata, reader, MimeKit.MimeTypes.GetMimeType(@file.Name));
-                request.Fields = "id";
-                request.Upload();
-            }
+			using (System.IO.FileStream reader = new(@file.Name, System.IO.FileMode.Open))
+			{
+				request = __service.Files.Create(fileMetadata, reader, MimeKit.MimeTypes.GetMimeType(@file.Name));
+				request.Fields = "id";
+				_ = request.Upload();
+			}
 
-            if (request.ResponseBody is null)
-            {
-                throw new Exceptions.UploadException("Something went wrong uploading the file.");
-            }
+			if (request.ResponseBody is null)
+			{
+				throw new Exceptions.UploadException("Something went wrong uploading the file.");
+			}
 
-            try
-            {
-                SetPermissions(request.ResponseBody.Id, permissions);
-            }
-            catch
-            {
-                throw new Exceptions.UploadException("File Uploaded Successfully. Failed to set permissions on file.");
-            }
+			try
+			{
+				_ = SetPermissions(request.ResponseBody.Id, permissions);
+			}
+			catch
+			{
+				throw new Exceptions.UploadException("File Uploaded Successfully. Failed to set permissions on file.");
+			}
 
-            return default;
-        }
+			return default;
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Create a new folder based on information passed
 		/// </summary>
 		/// <param name="folderName">The name of the new folder</param>
 		/// <param name="parents">The parent folders, if any, for the new folder to be in</param>
-        public Task<object> CreateFolder(string folderName, IList<string> parents = null)
-        {
-            try
-            {
-                if (FolderExists(folderName).Result)
-                {
-                    throw new Exceptions.FolderException("Folder exists.");
-                }
+		public Task<object> CreateFolder(string folderName, IList<string> parents = null)
+		{
+			try
+			{
+				if (FolderExists(folderName).Result)
+				{
+					throw new Exceptions.FolderException("Folder exists.");
+				}
 
-                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-                {
-                    Name = folderName,
-                    MimeType = "application/vnd.google-apps.folder",
-                    Parents = parents
-                };
+				Google.Apis.Drive.v3.Data.File fileMetadata = new()
+				{
+					Name = folderName,
+					MimeType = "application/vnd.google-apps.folder",
+					Parents = parents
+				};
 
-                var request = __service.Files.Create(fileMetadata);
-                request.Fields = "id, parents";
-                var result = request.Execute();
-                Console.WriteLine(result.Parents);
-                // TODO: Verify this is desired functionality
-                return Task.FromResult((object)null);
-            }
-            catch (Exceptions.FolderException ex)
-            {
-                throw new Exceptions.FolderException($"Folder with the name {folderName} already exists.", ex);
-            }
-        }
+				FilesResource.CreateRequest request = __service.Files.Create(fileMetadata);
+				request.Fields = "id, parents";
+				Google.Apis.Drive.v3.Data.File result = request.Execute();
+				Console.WriteLine(result.Parents);
+				// TODO: Verify this is desired functionality
+				return Task.FromResult((object)null);
+			}
+			catch (Exceptions.FolderException ex)
+			{
+				throw new Exceptions.FolderException($"Folder with the name {folderName} already exists.", ex);
+			}
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets the ID of the desired folder
 		/// </summary>
 		/// <param name="name">The name of the folder to find the ID of</param>
 		/// <returns>The id of the desired the folder, if it exists</returns>
 		/// <exception cref="Exceptions.FolderException"></exception>
-        public Task<string> GetFolderID(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new Exceptions.FolderException("Folder name was empty");
-            }
+		public Task<string> GetFolderID(string name)
+		{
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				throw new Exceptions.FolderException("Folder name was empty");
+			}
 
-            string pageToken = null;
-            var request = __service.Files.List();
+			string pageToken = null;
+			FilesResource.ListRequest request = __service.Files.List();
 
-            do
-            {
+			do
+			{
 
-                request.Q = "mimeType='application/vnd.google-apps.folder'";
-                request.Spaces = "drive";
-                request.Fields = "nextPageToken, files(id, name)";
-                request.PageToken = pageToken;
+				request.Q = "mimeType='application/vnd.google-apps.folder'";
+				request.Spaces = "drive";
+				request.Fields = "nextPageToken, files(id, name)";
+				request.PageToken = pageToken;
 
-                var result = request.Execute();
+				Google.Apis.Drive.v3.Data.FileList result = request.Execute();
 
-                foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
-                {
-                    if (folder.Name.Equals(name))
-                    {
-                        return Task.FromResult(folder.Id);
-                    }
-                }
+				foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
+				{
+					if (folder.Name.Equals(name))
+					{
+						return Task.FromResult(folder.Id);
+					}
+				}
 
-                pageToken = result.NextPageToken;
-            }
-            while (pageToken is not null);
+				pageToken = result.NextPageToken;
+			}
+			while (pageToken is not null);
 
-            throw new Exceptions.FolderException("Folder not found");
-        }
+			throw new Exceptions.FolderException("Folder not found");
+		}
 
 		/// <summary>
 		/// Sets the permissions for the specified file</summary>
@@ -211,49 +198,48 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="permissions"></param>
 		/// <returns></returns>
 		private Task SetPermissions(string fileID, Google.Apis.Drive.v3.Data.Permission permissions = null)
-        {
-            // Dim request As PermissionsResource.CreateRequest = __service.Permissions.Create(__permissions, fileID)
-            __service.Permissions.Create(permissions ?? __defaultPermissions, fileID).Execute();
-            return default;
-        }
+		{
+			// Dim request As PermissionsResource.CreateRequest = __service.Permissions.Create(__permissions, fileID)
+			_ = __service.Permissions.Create(permissions ?? __defaultPermissions, fileID).Execute();
+			return default;
+		}
 
-
-        /// <summary>
+		/// <summary>
 		/// Gets the ID of the desired file if it exists
 		/// </summary>
 		/// <param name="fileName">The name of the desired file</param>
 		/// <returns>The ID of the desired file</returns>
 		/// <exception cref="Exceptions.FileException"></exception>
-        public Task<string> GetFileID(string fileName)
-        {
-            var request = __service.Files.List();
-            string pageToken = null;
+		public Task<string> GetFileID(string fileName)
+		{
+			FilesResource.ListRequest request = __service.Files.List();
+			string pageToken = null;
 
-            do
-            {
-                request.Q = "mimeType!='application/vnd.google-apps.folder'";
-                request.Spaces = "drive";
-                request.Fields = "nextPageToken, files(id, name)";
-                request.PageToken = pageToken;
+			do
+			{
+				request.Q = "mimeType!='application/vnd.google-apps.folder'";
+				request.Spaces = "drive";
+				request.Fields = "nextPageToken, files(id, name)";
+				request.PageToken = pageToken;
 
-                var results = request.Execute();
+				Google.Apis.Drive.v3.Data.FileList results = request.Execute();
 
-                foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
-                {
-                    if ((@file.Name ?? "") == (fileName ?? ""))
-                    {
-                        return Task.FromResult(@file.Id);
-                    }
-                }
+				foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
+				{
+					if ((@file.Name ?? "") == (fileName ?? ""))
+					{
+						return Task.FromResult(@file.Id);
+					}
+				}
 
-                pageToken = results.NextPageToken;
-            }
-            while (pageToken is not null);
+				pageToken = results.NextPageToken;
+			}
+			while (pageToken is not null);
 
-            throw new Exceptions.FileException($"File with file name {fileName} could not be found.");
-        }
+			throw new Exceptions.FileException($"File with file name {fileName} could not be found.");
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets the desired file based on the provided information.
 		/// </summary>
 		/// <param name="fileName">The name of the file to get</param>
@@ -261,145 +247,150 @@ namespace SPPBC.M3Tools.GTools
 		/// <returns>All file information for the desired file</returns>
 		/// <exception cref="Exceptions.FolderException"></exception>
 		/// <exception cref="Exceptions.FileException"></exception>
-        public Task<Google.Apis.Drive.v3.Data.File> GetFile(string fileName, string folderName = null)
-        {
-            var request = __service.Files.List();
-            string pageToken = null;
-            string folderID;
+		public Task<Google.Apis.Drive.v3.Data.File> GetFile(string fileName, string folderName = null)
+		{
+			FilesResource.ListRequest request = __service.Files.List();
+			string pageToken = null;
+			string folderID;
 
-            try
-            {
-                folderID = GetFolderID(folderName).Result;
-            }
-            catch 
+			try
 			{
-                folderID = null;
-            }
+				folderID = GetFolderID(folderName).Result;
+			}
+			catch
+			{
+				folderID = null;
+			}
 
-            do
-            {
-                request.Q = "mimeType!='application/vnd.google-apps.folder'";
-                if (folderID is not null)
-                {
-                    request.Q += $" and '{folderID}' in parents";
-                }
+			do
+			{
+				request.Q = "mimeType!='application/vnd.google-apps.folder'";
+				if (folderID is not null)
+				{
+					request.Q += $" and '{folderID}' in parents";
+				}
 
-                request.Spaces = "drive";
-                request.Fields = "nextPageToken, files(id, name, parents)";
-                request.PageToken = pageToken;
+				request.Spaces = "drive";
+				request.Fields = "nextPageToken, files(id, name, parents)";
+				request.PageToken = pageToken;
 
-                var results = request.Execute();
+				Google.Apis.Drive.v3.Data.FileList results = request.Execute();
 
-                foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
-                {
-                    if (@file.Name.Equals(fileName))
-                    {
-                        return Task.FromResult(@file);
-                    }
-                }
+				foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
+				{
+					if (@file.Name.Equals(fileName))
+					{
+						return Task.FromResult(@file);
+					}
+				}
 
-                pageToken = results.NextPageToken;
-            }
-            while (pageToken is not null);
+				pageToken = results.NextPageToken;
+			}
+			while (pageToken is not null);
 
-            throw new Exceptions.FileException($"File with name {fileName} could not be found.");
-        }
+			throw new Exceptions.FileException($"File with name {fileName} could not be found.");
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets all files in a given folder
 		/// </summary>
 		/// <param name="folderName">The name of the folder to pull the files from</param>
 		/// <returns>A collection of all files contained in the given folder</returns>
 		/// <exception cref="Exceptions.FolderException"></exception>
-        public Task<FileCollection> GetFiles(string folderName)
-        {
-            var request = __service.Files.List();
-            string pageToken = null;
-            var files = new FileCollection();
-            string folderID = GetFolderID(folderName).Result;
+		public Task<FileCollection> GetFiles(string folderName)
+		{
+			FilesResource.ListRequest request = __service.Files.List();
+			string pageToken = null;
+			FileCollection files = [];
+			string folderID = GetFolderID(folderName).Result;
 
-            do
-            {
-                request.Q = $"mimeType!='application/vnd.google-apps.folder' and '{folderID}' in parents";
-                request.Spaces = "drive";
-                request.Fields = "nextPageToken, files(id, name, mimeType, parents, fileExtension, fullFileExtension)";
-                request.PageToken = pageToken;
+			do
+			{
+				request.Q = $"mimeType!='application/vnd.google-apps.folder' and '{folderID}' in parents";
+				request.Spaces = "drive";
+				request.Fields = "nextPageToken, files(id, name, mimeType, parents, fileExtension, fullFileExtension)";
+				request.PageToken = pageToken;
 
-                var results = request.Execute();
+				Google.Apis.Drive.v3.Data.FileList results = request.Execute();
 
-                foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
-                {
-                    Console.WriteLine(@file.FileExtension);
-                    Console.WriteLine(@file.FullFileExtension);
-                    files.Add(new File(@file.Id)
-                    {
-                        Name = @file.Name,
-                        FileType = @file.MimeType,
-                        Parents = @file.Parents as string[]
-                    });
-                }
+				foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
+				{
+					Console.WriteLine(@file.FileExtension);
+					Console.WriteLine(@file.FullFileExtension);
+					files.Add(new File(@file.Id)
+					{
+						Name = @file.Name,
+						FileType = @file.MimeType,
+						Parents = @file.Parents as string[]
+					});
+				}
 
-                pageToken = results.NextPageToken;
-            }
-            while (pageToken is not null);
+				pageToken = results.NextPageToken;
+			}
+			while (pageToken is not null);
 
-            return Task.FromResult(files);
-        }
+			return Task.FromResult(files);
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets all folders in the users drive folder
 		/// </summary>
 		/// <returns>A collection of folders</returns>
-        public Task<FileCollection> GetFolders()
-        {
-            var folders = new FileCollection();
-            string pageToken = null;
-            var request = __service.Files.List();
+		public Task<FileCollection> GetFolders()
+		{
+			FileCollection folders = [];
+			string pageToken = null;
+			FilesResource.ListRequest request = __service.Files.List();
 
-            do
-            {
-                request.Q = "mimeType='application/vnd.google-apps.folder'";
-                request.Spaces = "drive";
-                request.Fields = "nextPageToken, files(id, name, parents, mimeType)";
-                request.PageToken = pageToken;
+			do
+			{
+				request.Q = "mimeType='application/vnd.google-apps.folder'";
+				request.Spaces = "drive";
+				request.Fields = "nextPageToken, files(id, name, parents, mimeType)";
+				request.PageToken = pageToken;
 
-                var result = request.Execute();
+				Google.Apis.Drive.v3.Data.FileList result = request.Execute();
 
 				foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
+				{
 					folders.Add(new Folder(folder.Id)
 					{
 						Name = folder.Name,
 						FileType = folder.MimeType,
 						Parents = folder.Parents is not null ? new List<string>(folder.Parents) : null// (string[])folder.Parents ?? null // is null ? null : new System.Collections.ObjectModel.Collection<string>(folder.Parents)
 					});
+				}
 
-                pageToken = result.NextPageToken;
-            }
-            while (pageToken is not null);
+				pageToken = result.NextPageToken;
+			}
+			while (pageToken is not null);
 
-            return Task.FromResult(folders);
-        }
+			return Task.FromResult(folders);
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets all folders and the children folders and files under them
 		/// </summary>
 		/// <returns>A collection of folders that contains their child files and folders</returns>
-        public async Task<FileCollection> GetFoldersWithChildren()
-        {
-            var folders = await GetFolders();
-            foreach (Folder folder in folders.Cast<Folder>())
-                folder.Children.AddRange(await GetChildren(folder.Id));
+		public async Task<FileCollection> GetFoldersWithChildren()
+		{
+			FileCollection folders = await GetFolders();
+			foreach (Folder folder in folders.Cast<Folder>())
+				folder.Children.AddRange(await GetChildren(folder.Id));
 
-            folders.RemoveAll((Folder folder) =>
+			folders.RemoveAll((Folder folder) =>
 			{
-				if (folder.Parents is null || folder.Parents.Count < 1) return false;
+				if (folder.Parents is null || folder.Parents.Count < 1)
+					return false;
 
 				foreach (string parentID in folder.Parents)
 				{
-					if (parentID == this.DriveID) return false;
+					if (parentID == DriveID)
+						return false;
 					Folder parent = (Folder)folders[parentID];
 
-					if (parent is null) continue;
+					if (parent is null)
+						continue;
 					if (parent.Children[folder.Id] is null)
 					{
 						parent.Children.Add(folder);
@@ -413,80 +404,80 @@ namespace SPPBC.M3Tools.GTools
 			});
 
 			return folders;
-        }
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets the children of a certain folder using its ID
 		/// </summary>
 		/// <param name="parentID">The ID of the folder to get the children from</param>
 		/// <returns>A collection of files that are contained in the specified folder</returns>
-        public Task<FileCollection> GetChildren(string parentID)
-        {
-            var request = __service.Files.List();
-            string pageToken = null;
-            var files = new FileCollection();
+		public Task<FileCollection> GetChildren(string parentID)
+		{
+			FilesResource.ListRequest request = __service.Files.List();
+			string pageToken = null;
+			FileCollection files = [];
 
-            do
-            {
-                request.Q = $"'{parentID}' in parents";
-                request.Spaces = "drive";
-                request.Fields = "nextPageToken, files(id, name, mimeType, parents)";
-                request.PageToken = pageToken;
+			do
+			{
+				request.Q = $"'{parentID}' in parents";
+				request.Spaces = "drive";
+				request.Fields = "nextPageToken, files(id, name, mimeType, parents)";
+				request.PageToken = pageToken;
 
-                var results = request.Execute();
+				Google.Apis.Drive.v3.Data.FileList results = request.Execute();
 
-                foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
-                {
-                    switch (@file.MimeType ?? "")
-                    {
-                        case "application/vnd.google-apps.folder":
-                            {
-                                files.Add(new Folder(@file.Id)
-                                {
-                                    Name = @file.Name,
-                                    FileType = @file.MimeType,
-                                    Parents = @file.Parents as string[]
-                                });
-                                break;
-                            }
+				foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
+				{
+					switch (@file.MimeType ?? "")
+					{
+						case "application/vnd.google-apps.folder":
+						{
+							files.Add(new Folder(@file.Id)
+							{
+								Name = @file.Name,
+								FileType = @file.MimeType,
+								Parents = @file.Parents as string[]
+							});
+							break;
+						}
 
-                        default:
-                            {
-                                files.Add(new File(@file.Id)
-                                {
-                                    Name = @file.Name,
-                                    FileType = @file.MimeType,
-                                    Parents = @file.Parents as string[]
-                                });
-                                break;
-                            }
-                    }
+						default:
+						{
+							files.Add(new File(@file.Id)
+							{
+								Name = @file.Name,
+								FileType = @file.MimeType,
+								Parents = @file.Parents as string[]
+							});
+							break;
+						}
+					}
 
-                }
+				}
 
-                pageToken = results.NextPageToken;
-            }
-            while (pageToken is not null);
+				pageToken = results.NextPageToken;
+			}
+			while (pageToken is not null);
 
-            return Task.FromResult(files);
-        }
+			return Task.FromResult(files);
+		}
 
-        /// <summary>
+		/// <summary>
 		/// Gets whether a certain folder exists based on the given name
 		/// </summary>
 		/// <param name="folderName">The name of the folder to find</param>
 		/// <returns>Returns True if the folder exists, otherwise False</returns>
-        private Task<bool> FolderExists(string folderName)
-        {
-            try
-            {
-                GetFolderID(folderName);
-                return Task.FromResult(true);
-            }
-            catch
-            {
-                return Task.FromResult(false);
-            }
-        }
-    }
+		private Task<bool> FolderExists(string folderName)
+		{
+			try
+			{
+				_ = GetFolderID(folderName);
+				return Task.FromResult(true);
+			}
+			catch
+			{
+				return Task.FromResult(false);
+			}
+		}
+	}
 }

@@ -32,6 +32,8 @@ namespace M3App
 			finally
 			{
 				// Perform app cleanup after closure
+				consoleFile.Close();
+				errorFile.Close();
 			}
 		}
 	}

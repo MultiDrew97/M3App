@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -31,32 +32,32 @@ namespace SPPBC.M3Tools.Types.Extensions
 		/// <summary>
 		/// The document tags
 		/// </summary>
-		public static readonly string[] Document = { "<html><body><p>Greetings {0},</p><br/><br/>", "<br/><br/>{1}</body></html>" };
+		public static readonly string[] Document = ["<html><body><p>Greetings {0},</p><br/><br/>", "<br/><br/>{1}</body></html>"];
 
 		/// <summary>
 		/// The bold tags
 		/// </summary>
-		public static readonly string[] Bold = { "<strong>", "</strong>" };
+		public static readonly string[] Bold = ["<strong>", "</strong>"];
 
 		/// <summary>
 		/// The italic tags
 		/// </summary>
-		public static readonly string[] Italic = { "<em>", "</em>" };
+		public static readonly string[] Italic = ["<em>", "</em>"];
 
 		/// <summary>
 		/// The strikethrough tags
 		/// </summary>
-		public static readonly string[] Striketrough = { "<s>", "</s>" };
+		public static readonly string[] Striketrough = ["<s>", "</s>"];
 
 		/// <summary>
 		/// The underline tags
 		/// </summary>
-		public static readonly string[] Underline = { "<u>", "</u>" };
+		public static readonly string[] Underline = ["<u>", "</u>"];
 
 		/// <summary>
 		/// The paragraph tags
 		/// </summary>
-		public static readonly string[] Paragraph = { "<p>", "</p>" };
+		public static readonly string[] Paragraph = ["<p>", "</p>"];
 
 		/// <summary>
 		/// The line break tag
@@ -64,16 +65,47 @@ namespace SPPBC.M3Tools.Types.Extensions
 		public static readonly string LineBreak = "<br />";
 	}
 
-	internal static class StringExtensions
+	/// <summary>
+	/// The extensions used by string values within the application
+	/// </summary>
+	public static class StringExtensions
 	{
-		public static string FormatPhone(this string value) => Regex.Replace(value, $@"{Properties.Settings.Default.PhoneRegex}", "($1) $2-$3");
+		/// <summary>
+		/// Format a string as a phone number
+		/// </summary>
+		/// <param name="value">The value to be formatted</param>
+		/// <param name="format">The format to be used</param>
+		/// <returns></returns>
+		public static string FormatPhone(this string value, string format = "($1) $2-$3") => Regex.Replace(value, $@"{Properties.Settings.Default.PhoneRegex}", format);
 
+		/// <summary>
+		/// Convert the string to a base64 encoded string
+		/// </summary>
+		/// <param name="value">The value to be converted</param>
+		/// <returns></returns>
 		public static string ToBase64String(this string value) => string.IsNullOrWhiteSpace(value) ? string.Empty : Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
 
+		/// <summary>
+		/// Convert a base64 encoded string to a normal string
+		/// </summary>
+		/// <param name="value">The value to be converted</param>
+		/// <returns></returns>
 		public static string FromBase64String(this string value) => string.IsNullOrWhiteSpace(value) ? string.Empty : Encoding.UTF8.GetString(Convert.FromBase64String(value));
 
+		/// <summary>
+		/// Converts the string be hashed for security
+		/// </summary>
+		/// <param name="value">The value to be hashed</param>
+		/// <param name="salt">The salt to use for the hashing</param>
+		/// <returns></returns>
 		public static string Hash(this string value, string salt) => Hash(value, new Guid(salt));
 
+		/// <summary>
+		/// Converts the string to be hashed for security
+		/// </summary>
+		/// <param name="value">The value to hash</param>
+		/// <param name="salt">THe salt to use for the hash</param>
+		/// <returns></returns>
 		public static string Hash(this string value, Guid salt)
 		{
 			using System.Security.Cryptography.SHA256 hasher = System.Security.Cryptography.SHA256.Create();
@@ -81,6 +113,41 @@ namespace SPPBC.M3Tools.Types.Extensions
 			return Convert.ToBase64String(bytes);
 		}
 
+		/// <summary>
+		/// Encrypt a value
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="salt"></param>
+		/// <returns></returns>
+		public static string Encrypt(this string value, Guid salt = default)
+		{
+			byte[] bytes = Encoding.UTF8.GetBytes(value);
+
+			byte[] encrypted = ProtectedData.Protect(bytes, null, DataProtectionScope.CurrentUser);
+
+			return Convert.ToBase64String(encrypted);
+		}
+
+		/// <summary>
+		/// Decrypt a value
+		/// </summary>
+		/// <param name="value"></param>
+		/// <param name="salt"></param>
+		/// <returns></returns>
+		public static string Decrypt(this string value, Guid salt = default)
+		{
+			byte[] bytes = Convert.FromBase64String(value);
+
+			byte[] decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);
+
+			return Encoding.UTF8.GetString(decrypted);
+		}
+
+		/// <summary>
+		/// Converts a string to HTML format
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public static string ToHTML(this string value)
 		{
 			if (string.IsNullOrWhiteSpace(value))
@@ -188,13 +255,29 @@ namespace SPPBC.M3Tools.Types.Extensions
 		}
 	}
 
-	internal static class DoubleExtensions
+	/// <summary>
+	/// Extensions used for variables of type Double
+	/// </summary>
+	public static class DoubleExtensions
 	{
+		/// <summary>
+		/// Convert the value to be formated as a price
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public static string FormatPrice(this double value) => $"{value:C2}";
 	}
 
-	internal static class DecimalExtensions
+	/// <summary>
+	/// Extensions used for variables of type Decimal
+	/// </summary>
+	public static class DecimalExtensions
 	{
+		/// <summary>
+		/// Convert the value to be formated as a price
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		public static string FormatPrice(this decimal value) => $"{value:C2}";
 	}
 }

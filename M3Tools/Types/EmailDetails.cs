@@ -6,13 +6,13 @@ namespace SPPBC.M3Tools.Types.GTools
 	/// <summary>
 	///	
 	/// </summary>
-    public class EmailDetails
-    {
-        /// <summary>
+	public class EmailDetails
+	{
+		/// <summary>
 		///	The contents of the email
 		/// </summary>
 		/// <returns></returns>
-        public EmailContent EmailContents;
+		public EmailContent EmailContents;
 
 		/// <summary>
 		/// The list of any drive links that may have been selected to be sent
@@ -44,10 +44,10 @@ namespace SPPBC.M3Tools.Types.GTools
 		public EmailDetails()
 		{
 			EmailContents = new EmailContent();
-			DriveLinks = new FileCollection();
-			LocalFiles = new Collection<string>();
+			DriveLinks = [];
+			LocalFiles = [];
 			Recipients = new ListenerCollection();
-			SendingLinks = new List<string>();
+			SendingLinks = [];
 		}
 	}
 
@@ -55,28 +55,28 @@ namespace SPPBC.M3Tools.Types.GTools
 	/// The content of the email being sent
 	/// </summary>
 	public class EmailContent
-    {
-        /// <summary>
+	{
+		/// <summary>
 		/// The subject of the email
 		/// </summary>
 		/// <returns></returns>
-        public string Subject { get; set; }
+		public string Subject { get; set; }
 
-        /// <summary>
+		/// <summary>
 		/// The body content of the email
 		/// </summary>
 		/// <returns></returns>
-        public string Body { get; set; }
+		public string Body { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="subject"></param>
 		/// <param name="body"></param>
-        public EmailContent(string subject = "", string body = "")
-        {
-            Subject = subject;
-            Body = body;
-        }
-    }
+		public EmailContent(string subject = "", string body = "")
+		{
+			Subject = subject;
+			Body = body;
+		}
+	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+
 using Microsoft.VisualBasic;
 
 namespace SPPBC.M3Tools.Types
@@ -74,7 +75,7 @@ namespace SPPBC.M3Tools.Types
 		{
 			return !(!string.IsNullOrEmpty(street) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(state) || !string.IsNullOrEmpty(zipCode))
 				? None
-				: Parse(string.Join(Properties.Settings.Default.ObjectDelimiter, new[] { street, city, state, zipCode }));
+				: Parse(string.Join(Properties.Settings.Default.ObjectDelimiter, [street, city, state, zipCode]));
 		}
 
 		private static Address Parse(string addrStr)
@@ -90,39 +91,28 @@ namespace SPPBC.M3Tools.Types
 		/// Gives the address in a string
 		/// </summary>
 		/// <returns></returns>
-		public override string ToString()
-		{
-			return this == None ? string.Empty : string.Join(Properties.Settings.Default.ObjectDelimiter, Street, City, State, ZipCode);
-		}
+		public override string ToString() => this == None ? string.Empty : string.Join(Properties.Settings.Default.ObjectDelimiter, Street, City, State, ZipCode);
 
 		/// <summary>
 		/// Returns the address with formatting
 		/// </summary>
 		/// <returns></returns>
-		public string Display()
-		{
+		public string Display() =>
 			// If there was not an address supplied, it doesn't apply the formating
-			return this == None ? string.Empty : $"{string.Join(Constants.vbCrLf, Street.Split(',').Where((currentString) => !string.IsNullOrWhiteSpace(currentString)))}{Constants.vbCrLf}{City}, {State} {ZipCode}";
-		}
+			this == None ? string.Empty : $"{string.Join(Constants.vbCrLf, Street.Split(',').Where((currentString) => !string.IsNullOrWhiteSpace(currentString)))}{Constants.vbCrLf}{City}, {State} {ZipCode}";
 
 		/// <summary>
 		/// Determines if an address is the same
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public override bool Equals(object obj)
-		{
-			return this == (obj as Address);
-		}
+		public override bool Equals(object obj) => this == (obj as Address);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public override int GetHashCode()
-		{
-			return base.GetHashCode();
-		}
+		public override int GetHashCode() => base.GetHashCode();
 
 		/// <summary>
 		/// Determines if 2 addresses are the same
@@ -145,9 +135,6 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="left">The left hand side address</param>
 		/// <param name="right">The right hand side address</param>
 		/// <returns>True if the addresses are different, otherwise False</returns>
-		public static bool operator !=(Address left, Address right)
-		{
-			return !(left == right);
-		}
+		public static bool operator !=(Address left, Address right) => !(left == right);
 	}
 }

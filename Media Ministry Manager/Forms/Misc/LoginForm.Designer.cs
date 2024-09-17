@@ -37,7 +37,6 @@ namespace M3App
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
-            this.bw_SaveSettings = new System.ComponentModel.BackgroundWorker();
             this.tt_Info = new System.Windows.Forms.ToolTip();
             this.tmr_LoginTimer = new System.Windows.Forms.Timer();
             this.tss_UserFeedback = new System.Windows.Forms.ToolStripStatusLabel();
@@ -50,11 +49,6 @@ namespace M3App
             this.lsd_LoadScreen = new SPPBC.M3Tools.LoadScreenDialog();
             this.ss_Feedback = new System.Windows.Forms.StatusStrip();
             this.SuspendLayout();
-            // 
-            // bw_SaveSettings
-            // 
-            this.bw_SaveSettings.DoWork += new System.ComponentModel.DoWorkEventHandler(this.SaveSettings);
-            this.bw_SaveSettings.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SettingsSaved);
             // 
             // tmr_LoginTimer
             // 
@@ -193,7 +187,7 @@ namespace M3App
             this.PerformLayout();
 
         }
-        internal System.ComponentModel.BackgroundWorker bw_SaveSettings;
+
         internal ToolTip tt_Info;
         internal SPPBC.M3Tools.Database.UserDatabase dbUsers;
         internal Timer tmr_LoginTimer;

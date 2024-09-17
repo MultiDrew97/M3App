@@ -383,4 +383,12 @@
     <value>Under Construction</value>
     <comment>The title of the message box when a feature isn't ready yet</comment>
   </data>
+  <data name="UPDATE_LOCATION" xml:space="preserve">
+    <value>https://sppbc.herbivore.site/manager/test.txt</value>
+    <comment>The location the update files would be stored</comment>
+  </data>
+  <data name="VERSION_FILE" xml:space="preserve">
+    <value>https://sppbc.herbivore.site/manager/version.txt</value>
+    <comment>The location where the application checks for new versions</comment>
+  </data>
 </root>

@@ -371,5 +371,23 @@ namespace M3App.Properties {
                 return ResourceManager.GetString("UNHANDLED_EXCEPTION", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/test.txt.
+        /// </summary>
+        internal static string UPDATE_LOCATION {
+            get {
+                return ResourceManager.GetString("UPDATE_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/version.txt.
+        /// </summary>
+        internal static string VERSION_FILE {
+            get {
+                return ResourceManager.GetString("VERSION_FILE", resourceCulture);
+            }
+        }
     }
 }

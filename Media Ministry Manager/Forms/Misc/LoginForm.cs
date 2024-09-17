@@ -33,7 +33,7 @@ namespace M3App
 			set => lf_Login.Password = value;
 		}
 
-		private bool KeepLoggedIn
+		private bool SaveCredentials
 		{
 			get => chk_KeepLoggedIn.Checked;
 			set => chk_KeepLoggedIn.Checked = value;
@@ -56,18 +56,15 @@ namespace M3App
 		// TODO: Figure out more secure way to store login info
 		private void Showing(object sender, EventArgs e)
 		{
-			// MAYBE: Implement a token system to verify logins instead of crendentials
-			if (!Properties.Settings.Default.KeepLoggedIn)
+			// MAYBE: Implement a token system to verify logins instead of credentials
+			if (string.IsNullOrEmpty(Properties.Settings.Default.Password))
 			{
 				Reset();
 				return;
 			}
 
-			Username = Properties.Settings.Default.Username;
-			Password = Properties.Settings.Default.Password;
-#if !DEBUG
-			KeepLoggedIn = Properties.Settings.Default.KeepLoggedIn;
-#endif
+			Username = Properties.Settings.Default.Username.Decrypt();
+			Password = Properties.Settings.Default.Password.Decrypt();
 
 			btn_Login.PerformClick();
 		}
@@ -81,27 +78,11 @@ namespace M3App
 
 		private void Reset()
 		{
-			KeepLoggedIn = false;
+			SaveCredentials = false;
 			lf_Login.Clear();
 			tss_UserFeedback.Text = "Please enter your log-in information";
 			tss_UserFeedback.ForeColor = Color.Black;
 			_ = lf_Login.Focus();
-		}
-
-		private void SaveSettings(object sender, DoWorkEventArgs e)
-		{
-			// TODO: Determine better way to handle this
-			Properties.Settings.Default.Username = Username;
-			Properties.Settings.Default.Password = Password.Hash(Properties.Settings.Default.User.Login.Salt as Guid);
-			Properties.Settings.Default.KeepLoggedIn = KeepLoggedIn;
-			Properties.Settings.Default.Save();
-		}
-
-		private void SettingsSaved(object sender, RunWorkerCompletedEventArgs e)
-		{
-			UseWaitCursor = false;
-			Utils.OpenForm(typeof(MainForm));
-			Close();
 		}
 
 		private void NewUser(object sender, LinkLabelLinkClickedEventArgs e)
@@ -125,13 +106,17 @@ namespace M3App
 				{
 					throw new RoleException();
 				}
-				//if (KeepLoggedIn)
-				//{
-				Properties.Settings.Default.User = user;
-				//}
 
-				/*bw_SaveSettings.RunWorkerAsync();*/
-				Console.WriteLine(Password, Properties.Settings.Default.User.Login.Salt);
+				if (SaveCredentials)
+				{
+					// MAYBE: Use environment for this instead of settings
+					Properties.Settings.Default.Username = Username.Encrypt();
+					Properties.Settings.Default.Password = Password.Encrypt();
+					Properties.Settings.Default.Save();
+				}
+
+				Utils.OpenForm(typeof(MainForm));
+				Close();
 			}
 			catch (RoleException)
 			{

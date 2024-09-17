@@ -12,7 +12,7 @@ namespace M3App.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -42,42 +42,6 @@ namespace M3App.Properties {
         public global::System.Drawing.Font DefaultFont {
             get {
                 return ((global::System.Drawing.Font)(this["DefaultFont"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://sppbc.herbivore.site")]
-        public string BaseUrl {
-            get {
-                return ((string)(this["BaseUrl"]));
-            }
-            set {
-                this["BaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G")]
-        public string ApiPassword {
-            get {
-                return ((string)(this["ApiPassword"]));
-            }
-            set {
-                this["ApiPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Preachy2034")]
-        public string ApiUsername {
-            get {
-                return ((string)(this["ApiUsername"]));
-            }
-            set {
-                this["ApiUsername"] = value;
             }
         }
         
@@ -129,19 +93,6 @@ namespace M3App.Properties {
             }
             set {
                 this["KeepLoggedIn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool UpgradeRequired {
-            get {
-                return ((bool)(this["UpgradeRequired"]));
-            }
-            set {
-                this["UpgradeRequired"] = value;
             }
         }
     }
