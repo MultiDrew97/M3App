@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
@@ -32,10 +33,7 @@ namespace SPPBC.M3Tools.Types.GTools
 
 		internal BaseClientService.Initializer __init = new() { ApplicationName = "Media Ministry Manager", };
 
-		void IDisposable.Dispose()
-		{
-			Close();
-		}
+		void IDisposable.Dispose() => Close();
 
 		/// <summary>
 		/// Closes the connection to Google Drive
@@ -69,23 +67,23 @@ namespace SPPBC.M3Tools.Types.GTools
 			__scopes = scopes;
 		}
 
-		private System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
+		private async System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
 		{
 			if (ct.IsCancellationRequested)
 			{
-				return (System.Threading.Tasks.Task<UserCredential>)System.Threading.Tasks.Task.FromCanceled(ct);
+				return null;
 			}
 
 			System.IO.MemoryStream stream = new(Properties.Resources.credentials);
 
-			return GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
+			return await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
 		}
 
 		/// <summary>
 		/// Authorize with Google API on behalf of the specified user
 		/// </summary>
 		/// <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
-		public virtual void Authorize(System.Threading.CancellationToken ct = default)
+		public virtual async void Authorize(System.Threading.CancellationToken ct = default)
 		{
 			// Place general authorization logic here
 			if (ct.IsCancellationRequested)
@@ -93,30 +91,19 @@ namespace SPPBC.M3Tools.Types.GTools
 				return;
 			}
 
-			using System.Threading.Tasks.Task<UserCredential> creds = LoadCreds(ct);
+			UserCredential creds = await LoadCreds(ct);
 
 			if (creds == null)
 			{
-				throw new Exception("Creds is null");
+				throw new Exception("No creds were found");
 			}
 
-			creds.Wait(ct);
-			if (creds.IsCanceled)
+			if (creds.Token.IsStale && !await creds.RefreshTokenAsync(ct))
 			{
-				throw new Exception("Canceled");
+				throw new Exception("Credentials are stale");
 			}
 
-			if (creds.IsFaulted)
-			{
-				throw new Exception("Faulted");
-			}
-
-			if (creds.Result.Token.IsStale)
-			{
-				_ = creds.Result.RefreshTokenAsync(ct);
-			}
-
-			__init.HttpClientInitializer = creds.Result;
+			__init.HttpClientInitializer = creds;
 		}
 	}
 }

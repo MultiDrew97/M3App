@@ -63,7 +63,7 @@ namespace M3App
 				return;
 			}
 
-			Username = Properties.Settings.Default.Username.Decrypt();
+			Username = Properties.Settings.Default.Username;
 			Password = Properties.Settings.Default.Password.Decrypt();
 
 			btn_Login.PerformClick();
@@ -110,7 +110,7 @@ namespace M3App
 				if (SaveCredentials)
 				{
 					// MAYBE: Use environment for this instead of settings
-					Properties.Settings.Default.Username = Username.Encrypt();
+					Properties.Settings.Default.Username = Username;
 					Properties.Settings.Default.Password = Password.Encrypt();
 					Properties.Settings.Default.Save();
 				}

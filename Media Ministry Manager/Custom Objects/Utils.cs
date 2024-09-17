@@ -81,8 +81,6 @@ namespace M3App
 		{
 			Properties.Settings.Default.Username = "";
 			Properties.Settings.Default.Password = "";
-			Properties.Settings.Default.User = null;
-			Properties.Settings.Default.KeepLoggedIn = false;
 			Properties.Settings.Default.Save();
 			OpenForm(typeof(LoginForm));
 		}

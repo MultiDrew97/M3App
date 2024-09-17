@@ -151,7 +151,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Reloads the control
 		/// </summary>
-		public void Reload() => FillTable((WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()).Result);
+		public async void Reload() => FillTable(await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()));
 
 		private void NewFolder(object sender, EventArgs e)
 		{

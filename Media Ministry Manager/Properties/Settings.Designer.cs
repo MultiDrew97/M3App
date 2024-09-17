@@ -47,18 +47,6 @@ namespace M3App.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public global::SPPBC.M3Tools.Types.User User {
-            get {
-                return ((global::SPPBC.M3Tools.Types.User)(this["User"]));
-            }
-            set {
-                this["User"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string Username {
@@ -80,19 +68,6 @@ namespace M3App.Properties {
             }
             set {
                 this["Password"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool KeepLoggedIn {
-            get {
-                return ((bool)(this["KeepLoggedIn"]));
-            }
-            set {
-                this["KeepLoggedIn"] = value;
             }
         }
     }

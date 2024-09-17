@@ -357,7 +357,7 @@ namespace SPPBC.M3Tools.GTools
 					{
 						Name = folder.Name,
 						FileType = folder.MimeType,
-						Parents = folder.Parents is not null ? new List<string>(folder.Parents) : null// (string[])folder.Parents ?? null // is null ? null : new System.Collections.ObjectModel.Collection<string>(folder.Parents)
+						Parents = folder.Parents is not null ? new List<string>(folder.Parents) : null
 					});
 				}
 
