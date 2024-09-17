@@ -83,11 +83,11 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="uploadName">The desired name to name the file when uploaded</param>
 		/// <param name="permissions"></param>
 		/// <exception cref="Exceptions.UploadException"></exception>
-		public Task UploadFile(File @file, string uploadName, Google.Apis.Drive.v3.Data.Permission permissions = null)
+		public bool UploadFile(File @file, string uploadName, Google.Apis.Drive.v3.Data.Permission permissions = null)
 		{
 			Google.Apis.Drive.v3.Data.File fileMetadata = new()
 			{
-				Name = uploadName, // If(uploadName, Utils.DefaultFileName(file.Name)),
+				Name = uploadName,
 				Parents = @file.Parents
 			};
 
@@ -97,7 +97,12 @@ namespace SPPBC.M3Tools.GTools
 			{
 				request = __service.Files.Create(fileMetadata, reader, MimeKit.MimeTypes.GetMimeType(@file.Name));
 				request.Fields = "id";
-				_ = request.Upload();
+				Google.Apis.Upload.IUploadProgress status = request.Upload();
+
+				while (status.Status is Google.Apis.Upload.UploadStatus.Uploading or Google.Apis.Upload.UploadStatus.Starting)
+				{
+					Console.WriteLine("Uploading file...", status);
+				}
 			}
 
 			if (request.ResponseBody is null)
@@ -107,14 +112,14 @@ namespace SPPBC.M3Tools.GTools
 
 			try
 			{
-				_ = SetPermissions(request.ResponseBody.Id, permissions);
+				SetPermissions(request.ResponseBody.Id, permissions);
 			}
 			catch
 			{
 				throw new Exceptions.UploadException("File Uploaded Successfully. Failed to set permissions on file.");
 			}
 
-			return default;
+			return true;
 		}
 
 		/// <summary>
@@ -122,11 +127,11 @@ namespace SPPBC.M3Tools.GTools
 		/// </summary>
 		/// <param name="folderName">The name of the new folder</param>
 		/// <param name="parents">The parent folders, if any, for the new folder to be in</param>
-		public Task<object> CreateFolder(string folderName, IList<string> parents = null)
+		public async void CreateFolder(string folderName, IList<string> parents = null)
 		{
 			try
 			{
-				if (FolderExists(folderName).Result)
+				if (await FolderExists(folderName))
 				{
 					throw new Exceptions.FolderException("Folder exists.");
 				}
@@ -138,12 +143,11 @@ namespace SPPBC.M3Tools.GTools
 					Parents = parents
 				};
 
+				// TODO: Verify this is desired functionality
 				FilesResource.CreateRequest request = __service.Files.Create(fileMetadata);
 				request.Fields = "id, parents";
 				Google.Apis.Drive.v3.Data.File result = request.Execute();
 				Console.WriteLine(result.Parents);
-				// TODO: Verify this is desired functionality
-				return Task.FromResult((object)null);
 			}
 			catch (Exceptions.FolderException ex)
 			{
@@ -197,12 +201,9 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="fileID">The ID of the file to set permissions for</param>
 		/// <param name="permissions"></param>
 		/// <returns></returns>
-		private Task SetPermissions(string fileID, Google.Apis.Drive.v3.Data.Permission permissions = null)
-		{
+		private void SetPermissions(string fileID, Google.Apis.Drive.v3.Data.Permission permissions = null) =>
 			// Dim request As PermissionsResource.CreateRequest = __service.Permissions.Create(__permissions, fileID)
 			_ = __service.Permissions.Create(permissions ?? __defaultPermissions, fileID).Execute();
-			return default;
-		}
 
 		/// <summary>
 		/// Gets the ID of the desired file if it exists
@@ -210,7 +211,7 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="fileName">The name of the desired file</param>
 		/// <returns>The ID of the desired file</returns>
 		/// <exception cref="Exceptions.FileException"></exception>
-		public Task<string> GetFileID(string fileName)
+		public string GetFileID(string fileName)
 		{
 			FilesResource.ListRequest request = __service.Files.List();
 			string pageToken = null;
@@ -228,7 +229,7 @@ namespace SPPBC.M3Tools.GTools
 				{
 					if ((@file.Name ?? "") == (fileName ?? ""))
 					{
-						return Task.FromResult(@file.Id);
+						return @file.Id;
 					}
 				}
 
@@ -247,7 +248,7 @@ namespace SPPBC.M3Tools.GTools
 		/// <returns>All file information for the desired file</returns>
 		/// <exception cref="Exceptions.FolderException"></exception>
 		/// <exception cref="Exceptions.FileException"></exception>
-		public Task<Google.Apis.Drive.v3.Data.File> GetFile(string fileName, string folderName = null)
+		public Google.Apis.Drive.v3.Data.File GetFile(string fileName, string folderName = null)
 		{
 			FilesResource.ListRequest request = __service.Files.List();
 			string pageToken = null;
@@ -280,7 +281,7 @@ namespace SPPBC.M3Tools.GTools
 				{
 					if (@file.Name.Equals(fileName))
 					{
-						return Task.FromResult(@file);
+						return @file;
 					}
 				}
 
@@ -297,12 +298,12 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="folderName">The name of the folder to pull the files from</param>
 		/// <returns>A collection of all files contained in the given folder</returns>
 		/// <exception cref="Exceptions.FolderException"></exception>
-		public Task<FileCollection> GetFiles(string folderName)
+		public async Task<FileCollection> GetFiles(string folderName)
 		{
 			FilesResource.ListRequest request = __service.Files.List();
 			string pageToken = null;
 			FileCollection files = [];
-			string folderID = GetFolderID(folderName).Result;
+			string folderID = await GetFolderID(folderName);
 
 			do
 			{
@@ -329,14 +330,14 @@ namespace SPPBC.M3Tools.GTools
 			}
 			while (pageToken is not null);
 
-			return Task.FromResult(files);
+			return files;
 		}
 
 		/// <summary>
 		/// Gets all folders in the users drive folder
 		/// </summary>
 		/// <returns>A collection of folders</returns>
-		public Task<FileCollection> GetFolders()
+		public FileCollection GetFolders()
 		{
 			FileCollection folders = [];
 			string pageToken = null;
@@ -365,18 +366,18 @@ namespace SPPBC.M3Tools.GTools
 			}
 			while (pageToken is not null);
 
-			return Task.FromResult(folders);
+			return folders;
 		}
 
 		/// <summary>
 		/// Gets all folders and the children folders and files under them
 		/// </summary>
 		/// <returns>A collection of folders that contains their child files and folders</returns>
-		public async Task<FileCollection> GetFoldersWithChildren()
+		public FileCollection GetFoldersWithChildren()
 		{
-			FileCollection folders = await GetFolders();
+			FileCollection folders = GetFolders();
 			foreach (Folder folder in folders.Cast<Folder>())
-				folder.Children.AddRange(await GetChildren(folder.Id));
+				folder.Children.AddRange(GetChildren(folder.Id));
 
 			folders.RemoveAll((Folder folder) =>
 			{
@@ -411,7 +412,7 @@ namespace SPPBC.M3Tools.GTools
 		/// </summary>
 		/// <param name="parentID">The ID of the folder to get the children from</param>
 		/// <returns>A collection of files that are contained in the specified folder</returns>
-		public Task<FileCollection> GetChildren(string parentID)
+		public FileCollection GetChildren(string parentID)
 		{
 			FilesResource.ListRequest request = __service.Files.List();
 			string pageToken = null;
@@ -459,7 +460,7 @@ namespace SPPBC.M3Tools.GTools
 			}
 			while (pageToken is not null);
 
-			return Task.FromResult(files);
+			return files;
 		}
 
 		/// <summary>
@@ -467,16 +468,16 @@ namespace SPPBC.M3Tools.GTools
 		/// </summary>
 		/// <param name="folderName">The name of the folder to find</param>
 		/// <returns>Returns True if the folder exists, otherwise False</returns>
-		private Task<bool> FolderExists(string folderName)
+		private async Task<bool> FolderExists(string folderName)
 		{
 			try
 			{
-				_ = GetFolderID(folderName);
-				return Task.FromResult(true);
+				_ = await GetFolderID(folderName);
+				return true;
 			}
 			catch
 			{
-				return Task.FromResult(false);
+				return false;
 			}
 		}
 	}
