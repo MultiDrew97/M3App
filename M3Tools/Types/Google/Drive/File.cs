@@ -124,18 +124,20 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <summary>
 		/// Gets an item based on its ID
 		/// </summary>
-		/// <param name="fileID"></param>
+		/// <param name="id"></param>
 		/// <returns></returns>
-		public File this[string fileID]
+		public File this[string id]
 		{
 			get
 			{
 				foreach (File @file in Items)
 				{
-					if (@file.Id == fileID)
+					if (@file.Id != id)
 					{
-						return @file;
+						continue;
 					}
+
+					return @file;
 				}
 
 				return null;
@@ -152,10 +154,12 @@ namespace SPPBC.M3Tools.Types.GTools
 		{
 			foreach (File @file in Items)
 			{
-				if ((@file.Id ?? "") == (id ?? ""))
+				if (@file.Id != id)
 				{
-					return true;
+					continue;
 				}
+
+				return true;
 			}
 
 			return false;
@@ -170,10 +174,12 @@ namespace SPPBC.M3Tools.Types.GTools
 		{
 			foreach (File @file in Items)
 			{
-				if (@file == fileSearch)
+				if (@file != fileSearch)
 				{
-					return true;
+					continue;
 				}
+
+				return true;
 			}
 
 			return false;
@@ -190,7 +196,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		}
 
 		/// <summary>
-		/// Removes files based on the provided predecate
+		/// Removes files based on the provided predicate
 		/// </summary>
 		/// <param name="pred"></param>
 		public void RemoveAll(Predicate<File> pred)
@@ -212,7 +218,6 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <param name="pred"></param>
 		public void RemoveAll(Predicate<Folder> pred)
 		{
-			// FIXME: Figure out why the entries are being removed erroniously
 			for (int i = Count - 1; i >= 0; i--)
 			{
 				if (!pred((Folder)Items[i]))

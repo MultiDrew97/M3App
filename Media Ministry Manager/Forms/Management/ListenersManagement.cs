@@ -147,9 +147,9 @@ namespace M3App
 		/// <inheritdoc />
 		protected override void SendEmails(object sender, EventArgs e)
 		{
-			using SendEmailsDialog emails = new();
 			UseWaitCursor = true;
-			_ = emails.ShowDialog();
+			using SendEmailsDialog emails = new();
+			_ = emails.ShowDialog(this);
 			UseWaitCursor = false;
 		}
 

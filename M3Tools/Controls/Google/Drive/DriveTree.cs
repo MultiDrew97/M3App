@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Types.GTools;
@@ -65,22 +66,20 @@ namespace SPPBC.M3Tools
 		/// Fills the table with the provided files
 		/// </summary>
 		/// <param name="treeNodes"></param>
-		public void FillTable(FileCollection treeNodes)
+		public async void FillTable(FileCollection treeNodes)
 		{
 			// TODO: Figure out best way to utilize background worker for filling table instead of doing it all on main thread
-			UseWaitCursor = true;
 			tv_DriveFiles.Nodes[0].Nodes.Clear();
-			tv_DriveFiles.Nodes[0].Nodes.AddRange(ParseTree(treeNodes));
+			tv_DriveFiles.Nodes[0].Nodes.AddRange(await ParseTree(treeNodes));
 			tv_DriveFiles.Nodes[0].Expand();
-			UseWaitCursor = false;
 		}
 
 		/// <summary>
 		/// 	Parses the File Collection into a TreeNode array with proper child node nesting.
 		///	</summary>
-		/// <param name="folders">The collections of files that hold the file heirarchy information.</param>
-		/// <returns>An array of tree nodes, based on the file heirarchy in the file collection.</returns>
-		private TreeNode[] ParseTree(FileCollection folders)
+		/// <param name="folders">The collections of files that hold the file hierarchy information.</param>
+		/// <returns>An array of tree nodes, based on the file hierarchy in the file collection.</returns>
+		private async Task<TreeNode[]> ParseTree(FileCollection folders)
 		{
 			Collection<TreeNode> nodes = [];
 
@@ -92,7 +91,7 @@ namespace SPPBC.M3Tools
 					continue;
 				}
 
-				nodes.Add(new TreeNode(curr.Name, ParseTree(((Folder)curr).Children)) { Name = curr.Id });
+				nodes.Add(new TreeNode(curr.Name, await ParseTree(((Folder)curr).Children)) { Name = curr.Id });
 			}
 
 			return [.. nodes];
@@ -100,25 +99,26 @@ namespace SPPBC.M3Tools
 
 		private TreeNode GetSelectedNode(TreeNodeCollection nodes)
 		{
-			if (nodes.Count > 0)
+			TreeNode selectedNode = null;
+
+			foreach (TreeNode node in nodes)
 			{
-				foreach (TreeNode node in nodes)
+				if (node.IsSelected || node.Checked)
 				{
-					if (node.IsSelected || node.Checked)
-					{
-						return node;
-					}
-
-					TreeNode recNode = GetSelectedNode(node.Nodes);
-
-					if (recNode is not null)
-					{
-						return recNode;
-					}
+					return node;
 				}
+
+				selectedNode = GetSelectedNode(node.Nodes);
+
+				if (selectedNode is null)
+				{
+					continue;
+				}
+
+				break;
 			}
 
-			return null;
+			return selectedNode;
 		}
 
 		/// <summary>
@@ -151,7 +151,12 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Reloads the control
 		/// </summary>
-		public async void Reload() => FillTable(await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()));
+		public async void Reload()
+		{
+			UseWaitCursor = true;
+			FillTable(await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()));
+			UseWaitCursor = false;
+		}
 
 		private void NewFolder(object sender, EventArgs e)
 		{

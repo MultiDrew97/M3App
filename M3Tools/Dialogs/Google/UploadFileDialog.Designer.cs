@@ -54,7 +54,7 @@ namespace SPPBC.M3Tools
             bw_UploadFiles = new System.ComponentModel.BackgroundWorker();
             bw_UploadFiles.DoWork += new System.ComponentModel.DoWorkEventHandler(UploadFiles);
             bw_UploadFiles.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(UploadCompleted);
-            gdt_GDrive = new GTools.GdriveTool(components);
+            gdt_GDrive = new GTools.GDrive(components);
             TableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SplitContainer1).BeginInit();
             SplitContainer1.Panel1.SuspendLayout();
@@ -208,7 +208,7 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.Button Cancel_Button;
         internal DriveTree dt_DriveHeirarchy;
         internal System.Windows.Forms.SplitContainer SplitContainer1;
-        internal GTools.GdriveTool gdt_GDrive;
+        internal GTools.GDrive gdt_GDrive;
         internal System.ComponentModel.BackgroundWorker bw_LoadDialog;
         internal FileUpload fu_FileUpload;
         internal System.Windows.Forms.Panel Panel1;

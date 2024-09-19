@@ -2,11 +2,11 @@
 
 namespace SPPBC.M3Tools.GTools
 {
-    public partial class GmailTool : Types.GTools.API
+    public partial class Gmail : Types.GTools.API
     {
 
         [DebuggerNonUserCode()]
-        public GmailTool(System.ComponentModel.IContainer container) : this()
+        public Gmail(System.ComponentModel.IContainer container) : this()
         {
 
             // Required for Windows.Forms Class Composition Designer support

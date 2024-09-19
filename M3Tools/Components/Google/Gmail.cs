@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Google.Apis.Gmail.v1;
 
@@ -12,7 +13,7 @@ namespace SPPBC.M3Tools.GTools
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class GmailTool : API, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
+	public partial class Gmail : API, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
 	{
 
 		private GmailService __service;
@@ -29,7 +30,7 @@ namespace SPPBC.M3Tools.GTools
 		/// <summary>
 		/// 
 		/// </summary>
-		public GmailTool() : base("me", [GmailService.Scope.GmailCompose]) => InitializeComponent();
+		public Gmail() : base("me", [GmailService.Scope.GmailCompose]) => InitializeComponent();
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -90,7 +91,7 @@ namespace SPPBC.M3Tools.GTools
 		}
 
 		/// <summary>
-		/// Create an email to be sent that contains attachement(s)
+		/// Create an email to be sent that contains attachment(s)
 		/// </summary>
 		/// <param name="to"></param>
 		/// <param name="subject"></param>
@@ -122,7 +123,7 @@ namespace SPPBC.M3Tools.GTools
 		public MimeMessage CreateWithAttachment(Types.Listener to, EmailContent content, IList<string> files, MailboxAddress @from = null) => CreateWithAttachment(new MailboxAddress(to.Name, to.Email), content, files, from);
 
 		/// <summary>
-		/// Create an email that contains attachements to be sent to a email box
+		/// Create an email that contains attachments to be sent to a email box
 		/// </summary>
 		/// <param name="to">The MailBox Address to send to</param>
 		/// <param name="content">The content of the email to be sent</param>
@@ -137,7 +138,6 @@ namespace SPPBC.M3Tools.GTools
 
 			AttachmentCollection attachments = [];
 
-			// TODO: Clean this up later to not have to loop twice
 			foreach (string @file in files)
 				_ = attachments.Add(@file);
 
@@ -159,16 +159,15 @@ namespace SPPBC.M3Tools.GTools
 			using System.IO.MemoryStream buffer = new();
 			emailContent.WriteTo(buffer);
 			string encodedEmail = Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Encode(buffer.ToArray());
-			Google.Apis.Gmail.v1.Data.Message message = new() { Raw = encodedEmail };
-
-			return message;
+			return new() { Raw = encodedEmail };
 		}
 
 		/// <summary>
 		///		Send an email using the provided email message
 		/// </summary>
 		/// <param name="emailContent">The email to be sent</param>
+		/// <param name="ct"></param>
 		/// <returns>The message itself after being sent</returns>
-		public Google.Apis.Gmail.v1.Data.Message Send(MimeMessage emailContent) => __service.Users.Messages.Send(CreateWithEmail(emailContent), emailContent.Sender.Address).Execute();
+		public async Task<Google.Apis.Gmail.v1.Data.Message> Send(MimeMessage emailContent, CancellationToken ct = default) => await __service.Users.Messages.Send(CreateWithEmail(emailContent), emailContent.Sender.Address).ExecuteAsync(ct);
 	}
 }

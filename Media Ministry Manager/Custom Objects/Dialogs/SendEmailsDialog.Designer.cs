@@ -55,7 +55,7 @@ namespace M3App
             this.tsp_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.gdt_Files = new SPPBC.M3Tools.DriveTree();
             this.fu_Receipts = new SPPBC.M3Tools.FileUpload();
-            this.gmt_Gmail = new SPPBC.M3Tools.GTools.GmailTool(this.components);
+            this.gmt_Gmail = new SPPBC.M3Tools.GTools.Gmail(this.components);
             this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
             this.TableLayoutPanel1.SuspendLayout();
             this.tc_EmailTypes.SuspendLayout();
@@ -146,8 +146,8 @@ namespace M3App
             // 
             // bw_GatherReceipients
             // 
-            this.bw_GatherReceipients.DoWork += new System.ComponentModel.DoWorkEventHandler(this.GatherReceipients);
-            this.bw_GatherReceipients.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ReceipientsGathered);
+            this.bw_GatherReceipients.DoWork += new System.ComponentModel.DoWorkEventHandler(this.GatherRecipients);
+            this.bw_GatherReceipients.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.RecipientsGathered);
             // 
             // bw_SendEmails
             // 
@@ -264,7 +264,7 @@ namespace M3App
         internal TableLayoutPanel TableLayoutPanel1;
         internal Button btn_Send;
         internal Button btn_Cancel;
-        internal SPPBC.M3Tools.GTools.GmailTool gmt_Gmail;
+        internal SPPBC.M3Tools.GTools.Gmail gmt_Gmail;
         internal DriveTree gdt_Files;
         internal TabControl tc_EmailTypes;
         internal TabPage tp_GDrive;

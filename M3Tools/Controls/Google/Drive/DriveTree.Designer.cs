@@ -36,7 +36,7 @@ namespace SPPBC.M3Tools
             components = new System.ComponentModel.Container();
             var TreeNode1 = new System.Windows.Forms.TreeNode("My Drive Folder");
             tv_DriveFiles = new System.Windows.Forms.TreeView();
-            gdt_GDrive = new GTools.GdriveTool(components);
+            gdt_GDrive = new GTools.GDrive(components);
             ts_Tools = new System.Windows.Forms.ToolStrip();
             tss_NewItem = new System.Windows.Forms.ToolStripSplitButton();
             tsmi_NewFolder = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,7 +143,7 @@ namespace SPPBC.M3Tools
         }
 
         internal System.Windows.Forms.TreeView tv_DriveFiles;
-        internal GTools.GdriveTool gdt_GDrive;
+        internal GTools.GDrive gdt_GDrive;
         internal System.Windows.Forms.ToolStrip ts_Tools;
         internal System.Windows.Forms.ToolStripSplitButton tss_NewItem;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_NewFolder;

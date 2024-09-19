@@ -9,16 +9,15 @@ using SPPBC.M3Tools.Types.GTools;
 
 namespace M3App
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class SendEmailsDialog
 	{
 		internal event EventHandler EmailsSent;
 		internal event EventHandler EmailsCancelled;
 
 		private readonly EmailDetails details = new();
-
-		// TODO: Make email sending more straight forward
-		// Const DriveLinkHtml = "<a href=""{0}"" class=""drive-link"">{1}</a>"
 
 		private int FileCount => fu_Receipts.Files.Count + gdt_Files.GetSelectedNodes().Count;
 
@@ -108,7 +107,7 @@ namespace M3App
 			bw_SendEmails.RunWorkerAsync();
 		}
 
-		private void GatherReceipients(object sender, DoWorkEventArgs e)
+		private void GatherRecipients(object sender, DoWorkEventArgs e)
 		{
 			using SPPBC.M3Tools.ListenerSelectionDialog recipients = new(dbListeners.GetListeners());
 
@@ -121,7 +120,7 @@ namespace M3App
 			details.Recipients = recipients.Selection;
 		}
 
-		private void ReceipientsGathered(object sender, RunWorkerCompletedEventArgs e)
+		private void RecipientsGathered(object sender, RunWorkerCompletedEventArgs e)
 		{
 			if (e.Cancelled)
 			{
@@ -129,8 +128,8 @@ namespace M3App
 				return;
 			}
 
-			// TODO: Figure out how to make this simplier
-			using EmailBodySelection body = new([new("Sermon", Properties.Resources.SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Reciept", Properties.Resources.RECEIPT_EMAIL, "Bless you")]);
+			// TODO: Make a class or provider of some sort to store and pull the template data for the user
+			using EmailBodySelection body = new([new("Sermon", Properties.Resources.SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", Properties.Resources.RECEIPT_EMAIL, "Bless you")]);
 
 			if (body.ShowDialog() != DialogResult.OK)
 			{
@@ -182,12 +181,14 @@ namespace M3App
 		{
 			btn_Send.Enabled = true;
 			_ = MessageBox.Show("Emails have been sent", "Send Emails", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			tsp_Progress.Value = 0;
 		}
 
 		private void Cancelled(object sender, EventArgs e)
 		{
 			btn_Send.Enabled = true;
 			_ = MessageBox.Show("Unsent emails have been cancelled", "Send Emails", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			tsp_Progress.Value = 0;
 		}
 	}
 }

@@ -39,9 +39,9 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.gt_Email = new SPPBC.M3Tools.GTools.GmailTool(this.components);
+            this.gt_Email = new SPPBC.M3Tools.GTools.Gmail(this.components);
             this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
-            this.gd_Drive = new SPPBC.M3Tools.GTools.GdriveTool(this.components);
+            this.gd_Drive = new SPPBC.M3Tools.GTools.GDrive(this.components);
             this.ldg_Listeners = new SPPBC.M3Tools.Data.ListenersDataGrid();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -105,9 +105,9 @@ namespace M3App
 
         }
 
-        private SPPBC.M3Tools.GTools.GmailTool gt_Email;
+        private SPPBC.M3Tools.GTools.Gmail gt_Email;
         private SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
-        private SPPBC.M3Tools.GTools.GdriveTool gd_Drive;
+        private SPPBC.M3Tools.GTools.GDrive gd_Drive;
 		private SPPBC.M3Tools.Data.ListenersDataGrid ldg_Listeners;
 	}
 }

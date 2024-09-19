@@ -40,7 +40,7 @@ namespace SPPBC.M3Tools
             btn_Cancel = new System.Windows.Forms.Button();
             btn_Cancel.Click += new EventHandler(Cancel);
             dt_DriveHeirarchy = new DriveTree();
-            gdt_GDrive = new GTools.GdriveTool(components);
+            gdt_GDrive = new GTools.GDrive(components);
             ip_FolderName = new GenericInputPair();
             ip_FolderName.TextChanged += new EventHandler(FolderNameTextChanged);
             bw_GatherInfo = new System.ComponentModel.BackgroundWorker();
@@ -138,7 +138,7 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.Button btn_Create;
         internal System.Windows.Forms.Button btn_Cancel;
         internal DriveTree dt_DriveHeirarchy;
-        internal GTools.GdriveTool gdt_GDrive;
+        internal GTools.GDrive gdt_GDrive;
         internal GenericInputPair ip_FolderName;
         internal System.ComponentModel.BackgroundWorker bw_GatherInfo;
     }

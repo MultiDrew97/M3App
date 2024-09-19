@@ -2,11 +2,11 @@
 
 namespace SPPBC.M3Tools.GTools
 {
-    public partial class GdriveTool : Types.GTools.API
+    public partial class GDrive : Types.GTools.API
     {
 
         [DebuggerNonUserCode()]
-        public GdriveTool(System.ComponentModel.IContainer container) : this()
+        public GDrive(System.ComponentModel.IContainer container) : this()
         {
 
             // Required for Windows.Forms Class Composition Designer support

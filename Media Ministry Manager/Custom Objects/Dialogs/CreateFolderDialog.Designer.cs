@@ -42,7 +42,7 @@ namespace M3App
             btn_Cancel = new Button();
             btn_Cancel.Click += new EventHandler(Cancel);
             dt_DriveHeirarchy = new SPPBC.M3Tools.DriveTree();
-            gdt_GDrive = new SPPBC.M3Tools.GTools.GdriveTool(components);
+            gdt_GDrive = new SPPBC.M3Tools.GTools.GDrive(components);
             ip_FolderName = new SPPBC.M3Tools.GenericInputPair();
             ip_FolderName.TextChanged += FolderNameTextChanged;
             bw_GatherInfo = new System.ComponentModel.BackgroundWorker();
@@ -137,7 +137,7 @@ namespace M3App
         internal Button btn_Create;
         internal Button btn_Cancel;
         internal SPPBC.M3Tools.DriveTree dt_DriveHeirarchy;
-        internal SPPBC.M3Tools.GTools.GdriveTool gdt_GDrive;
+        internal SPPBC.M3Tools.GTools.GDrive gdt_GDrive;
         internal SPPBC.M3Tools.GenericInputPair ip_FolderName;
         internal System.ComponentModel.BackgroundWorker bw_GatherInfo;
     }
