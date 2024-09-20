@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -66,10 +68,53 @@ namespace SPPBC.M3Tools.Types.Extensions
 	}
 
 	/// <summary>
+	/// 
+	/// </summary>
+	public static class SecureStringExtensions
+	{
+		/// <summary>
+		/// Converts a secure string to an unsecure string
+		/// </summary>
+		/// <returns></returns>
+		public static string ToUnsecureString(this SecureString value)
+		{
+			IntPtr returnValue = IntPtr.Zero;
+			try
+			{
+				returnValue = Marshal.SecureStringToGlobalAllocUnicode(value);
+				return Marshal.PtrToStringUni(returnValue);
+			}
+			catch
+			{
+				Marshal.ZeroFreeGlobalAllocUnicode(returnValue);
+				return $"Error: {value.Length}";
+			}
+		}
+	}
+
+	/// <summary>
 	/// The extensions used by string values within the application
 	/// </summary>
 	public static class StringExtensions
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public static SecureString ToSecureString(this string value)
+		{
+			SecureString secureString = new();
+
+			foreach (char ch in value)
+			{
+				secureString.AppendChar(ch);
+			}
+
+			secureString.MakeReadOnly();
+
+			return secureString;
+		}
+
 		/// <summary>
 		/// Format a string as a phone number
 		/// </summary>

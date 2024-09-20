@@ -138,6 +138,7 @@ namespace SPPBC.M3Tools.GTools
 			request.Fields = "id";
 			Google.Apis.Upload.IUploadProgress status = await request.UploadAsync(ct);
 
+			// TODO: Does this even do anything since it's async?
 			while (status.Status is Google.Apis.Upload.UploadStatus.Uploading or Google.Apis.Upload.UploadStatus.Starting)
 			{
 				Console.WriteLine("Uploading file...", status);

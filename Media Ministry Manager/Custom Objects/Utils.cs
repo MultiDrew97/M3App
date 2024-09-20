@@ -1,14 +1,43 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// FIXME: Figure out how to combine the Utils of both projects
+//			- Combine in one file?
+//			- Merge somehow like extending the class?
 namespace M3App
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Utils
+	public readonly partial struct Utils
 	{
+
+		/// <summary>
+		/// Waits for a certain amount of time. Typically used with Async functions to wait for tasks to complete
+		/// </summary>
+		/// <param name="seconds">The amount of seconds to wait for</param>
+		public static void Wait(int seconds) => SPPBC.M3Tools.Utils.Wait(seconds);
+
+		/// <summary>
+		/// Determines if ID value is valid
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public static bool ValidID(int id) => SPPBC.M3Tools.Utils.ValidID(id);
+
+		/// <summary>
+		/// Whether an update is available for the application
+		/// </summary>
+		public static bool UpdateAvailable => SPPBC.M3Tools.Utils.UpdateAvailable;
+
+		/// <summary>
+		/// Update the application
+		/// </summary>
+		/// <returns></returns>
+		public static async Task<bool> Update(string location, string saveLocation) => await SPPBC.M3Tools.Utils.Update(location, saveLocation);
+
 		/// <summary>
 		/// Opens forms of the application, automatically attaching that when the last form is
 		/// closed, the application will be exited completely
@@ -34,22 +63,6 @@ namespace M3App
 		}
 
 		/// <summary>
-		/// Waits for a certain amount of time. Typically used with Async functions to wait for tasks to complete
-		/// </summary>
-		/// <param name="seconds">The amount of seconds to wait for</param>
-		public static void Wait(int seconds)
-		{
-			// found this here https://stackoverflow.com/questions/15857893/wait-5-seconds-before-continuing-code-vb-net/15861154
-
-			for (int i = 0, loopTo = seconds * 100; i <= loopTo; i++)
-			{
-				System.Threading.Thread.Sleep(10);
-				// Allows the application thread to continue while waiting
-				Application.DoEvents();
-			}
-		}
-
-		/// <summary>
 		/// Attempts to close all open forms gracefully. Allowing them to close and handle any straggling tasks
 		/// and finish executions if needed.
 		/// </summary>
@@ -66,7 +79,7 @@ namespace M3App
 				}
 				catch (InvalidOperationException ex)
 				{
-					Console.WriteLine("Form of name {0} falied to close", Application.OpenForms[0].Name);
+					Console.WriteLine("Form of name {0} failed to close", Application.OpenForms[0].Name);
 					_ = MessageBox.Show(ex.Message, "Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					attempts += 1;
 				}
@@ -84,12 +97,5 @@ namespace M3App
 			Properties.Settings.Default.Save();
 			OpenForm(typeof(LoginForm));
 		}
-
-		/// <summary>
-		/// Determines if ID value is valid
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public static bool ValidID(int id) => id > -1;
 	}
 }

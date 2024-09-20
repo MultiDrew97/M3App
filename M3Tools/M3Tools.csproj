@@ -520,12 +520,6 @@
     <Compile Include="Types\Orders\CartItem.cs" />
     <Compile Include="Types\CartItemCollection.cs" />
     <Compile Include="Types\DBEntryCollection.cs" />
-    <Compile Include="UpdateService.Designer.cs">
-      <DependentUpon>UpdateService.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateService.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Types\Google\Drive\File.cs" />
     <Compile Include="Types\Products\Product.cs" />
     <Compile Include="Types\Orders\Order.cs" />
@@ -734,9 +728,6 @@
     <EmbeddedResource Include="Types\CustomerBindingSource.resx">
       <DependentUpon>CustomerBindingSource.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateService.resx">
-      <DependentUpon>UpdateService.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -814,7 +805,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
+      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

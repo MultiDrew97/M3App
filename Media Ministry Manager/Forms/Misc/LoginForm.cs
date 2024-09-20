@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
+using SPPBC.M3Tools;
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Exceptions;
 using SPPBC.M3Tools.Types.Extensions;

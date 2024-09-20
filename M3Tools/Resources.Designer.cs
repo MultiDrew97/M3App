@@ -61,7 +61,7 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.hopto.org/manager/setup.exe.
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/M3AppSetup.exe.
         /// </summary>
         internal static string AppUpdateUri {
             get {
@@ -283,7 +283,7 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.hopto.org/manager/version.
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/version.txt.
         /// </summary>
         internal static string LatestAppVersionUri {
             get {

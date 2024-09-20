@@ -373,7 +373,7 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/test.txt.
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/M3AppSetup.exe.
         /// </summary>
         internal static string UPDATE_LOCATION {
             get {

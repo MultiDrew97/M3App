@@ -92,11 +92,11 @@ namespace M3App
 			Environment.SetEnvironmentVariable("api_password", "password");
 
 			// TODO: Allow this to be done with a service instead
-			if (Properties.Settings.Default.UpdateOnStart && UpdateAvailable)
+			if (Properties.Settings.Default.UpdateOnStart && Utils.UpdateAvailable)
 			{
 				try
 				{
-					return !await UpdateApplication();
+					return !await Utils.Update(Properties.Resources.UPDATE_LOCATION, UpdateSaveLocation);
 				}
 				catch (Exception ex)
 				{
@@ -117,7 +117,7 @@ namespace M3App
 			return true;
 		}
 
-		private async Task<bool> UpdateApplication()
+		/*private async Task<bool> UpdateApplication()
 		{
 			// Perform update procedures here
 			HttpClient httpClient = new();
@@ -138,7 +138,7 @@ namespace M3App
 			Application.Exit();
 
 			return true;
-		}
+		}*/
 	}
 
 }

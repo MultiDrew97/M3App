@@ -232,7 +232,7 @@
     <value>resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LatestAppVersionUri" xml:space="preserve">
-    <value>https://sppbc.hopto.org/manager/version</value>
+    <value>https://sppbc.herbivore.site/manager/version.txt</value>
     <comment>The uri containing the latest version of the application</comment>
   </data>
   <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -272,13 +272,13 @@
     <value>Resources\Images\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Import_Listeners_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\import listeners template.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>resources\import listeners template.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AppUpdateUri" xml:space="preserve">
-    <value>https://sppbc.hopto.org/manager/setup.exe</value>
+    <value>https://sppbc.herbivore.site/manager/M3AppSetup.exe</value>
     <comment>The uri where the latest version of the application can be downloaded</comment>
   </data>
   <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">

@@ -384,7 +384,7 @@
     <comment>The title of the message box when a feature isn't ready yet</comment>
   </data>
   <data name="UPDATE_LOCATION" xml:space="preserve">
-    <value>https://sppbc.herbivore.site/manager/test.txt</value>
+    <value>https://sppbc.herbivore.site/manager/M3AppSetup.exe</value>
     <comment>The location the update files would be stored</comment>
   </data>
   <data name="VERSION_FILE" xml:space="preserve">

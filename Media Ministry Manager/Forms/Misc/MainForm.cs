@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using SPPBC.M3Tools;
+
 namespace M3App
 {
 	/// <summary>
@@ -102,7 +104,7 @@ namespace M3App
 		private void AddCustomer(object sender, SPPBC.M3Tools.Events.Customers.CustomerEventArgs e)
 		{
 			UseWaitCursor = true;
-			dbCustomer.AddCustomer(e.Value);
+			_ = dbCustomer.AddCustomer(e.Value);
 			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
@@ -110,7 +112,7 @@ namespace M3App
 		private void AddListener(object sender, SPPBC.M3Tools.Events.Listeners.ListenerEventArgs e)
 		{
 			UseWaitCursor = true;
-			dbListener.AddListener(e.Value);
+			_ = dbListener.AddListener(e.Value);
 			_ = MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
@@ -118,7 +120,7 @@ namespace M3App
 		private void AddInventory(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
 		{
 			UseWaitCursor = true;
-			dbInventory.AddInventory(e.Value);
+			_ = dbInventory.AddInventory(e.Value);
 			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
@@ -126,7 +128,7 @@ namespace M3App
 		private void AddOrder(object sender, SPPBC.M3Tools.Events.Orders.OrderEventArgs e)
 		{
 			UseWaitCursor = true;
-			dbOrders.AddOrder(e.Value);
+			_ = dbOrders.AddOrder(e.Value);
 			_ = MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}

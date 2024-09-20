@@ -1,17 +1,70 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Security;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace SPPBC.M3Tools
 {
+	// FIXME: Figure out how to combine the Utils of both projects
+	//			- Combine in one file?
+	//			- Merge somehow like extending the class?
 	/// <summary>
 	/// General utils struct for general application function.
 	/// Was made partial to encourage extending the struct for other potential uses
 	/// </summary>
 	public readonly partial struct Utils
 	{
+		/// <summary>
+		/// Whether an update is available for the application
+		/// </summary>
+		public static bool UpdateAvailable
+		{
+			get
+			{
+				using HttpClient httpClient = new();
+
+				string text = httpClient.GetStringAsync(Properties.Resources.LatestAppVersionUri).Result;
+				string newText = text.Trim().Replace("\r", "").Split('\n')[1];
+				Debug.WriteLine($"Received version text: {newText}", "Updating");
+
+				Debug.WriteLine("Checking if update available...", "Updating");
+				Version current = new(Application.ProductVersion);
+				Version latest = new(newText);
+
+				return current < latest;
+			}
+		}
+
+		/// <summary>
+		/// Update the application
+		/// </summary>
+		/// <returns></returns>
+		public static async Task<bool> Update(string location, string saveLocation)
+		{
+			// Perform update procedures here
+			HttpClient httpClient = new();
+
+			using HttpResponseMessage response = await httpClient.GetAsync(location);
+
+			Debug.WriteLine("File has been retrieved. Starting to download...");
+			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
+			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+			// Save file to disk
+			System.IO.File.WriteAllBytes(saveLocation, fileBytes);
+
+			Console.WriteLine($"File downloaded successfully to {saveLocation}");
+
+			Console.WriteLine("Starting update client...");
+			_ = Process.Start(saveLocation, "/qn");
+			Application.Exit();
+
+			return true;
+		}
+
 		/// <summary>
 		/// Dictionary of states to sift through for state code conversions
 		/// </summary>
@@ -105,11 +158,11 @@ namespace SPPBC.M3Tools
 },
 				{ "VT", "Vermont"
 },
-				{ "VA", "Virgina"
+				{ "VA", "Virginia"
 },
 				{ "WA", "Washington"
 },
-				{ "WV", "West Virgina"
+				{ "WV", "West Virginia"
 },
 				{ "WI", "Wisconsin"
 },
@@ -119,33 +172,11 @@ namespace SPPBC.M3Tools
 			};
 
 		/// <summary>
-		/// Converts a normal unsecure string to a secure string
-		/// </summary>
-		/// <param name="password"></param>
-		/// <returns></returns>
-		public static SecureString ToSecureString(string password)
-		{
-			SecureString secureString = new();
-
-			foreach (char ch in password)
-			{
-				secureString.AppendChar(ch);
-			}
-
-			secureString.MakeReadOnly();
-
-			return secureString;
-		}
-
-		/// <summary>
 		/// Parses for a file's default upload name
 		/// </summary>
 		/// <param name="fileName"></param>
 		/// <returns></returns>
-		public static string DefaultFileName(string fileName)
-		{
-			return fileName.Split(@"\\".ToCharArray())[fileName.Split(@"\\".ToCharArray()).Length - 1].Split(".".ToCharArray())[0] + " " + System.DateTime.UtcNow.ToString("MM/dd/yyyy");
-		}
+		public static string DefaultFileName(string fileName) => fileName.Split(@"\\".ToCharArray())[fileName.Split(@"\\".ToCharArray()).Length - 1].Split(".".ToCharArray())[0] + " " + System.DateTime.UtcNow.ToString("MM/dd/yyyy");
 
 		/// <summary>
 		/// Waits for executions for a given amount of seconds
@@ -159,26 +190,6 @@ namespace SPPBC.M3Tools
 			{
 				System.Threading.Thread.Sleep(10);
 				Application.DoEvents();
-			}
-		}
-
-		/// <summary>
-		/// Converts a secure strin to an unsecure string
-		/// </summary>
-		/// <param name="password"></param>
-		/// <returns></returns>
-		public static string ToUnsecureString(SecureString password)
-		{
-			System.IntPtr returnValue = System.IntPtr.Zero;
-			try
-			{
-				returnValue = Marshal.SecureStringToGlobalAllocUnicode(password);
-				return Marshal.PtrToStringUni(returnValue);
-			}
-			catch
-			{
-				Marshal.ZeroFreeGlobalAllocUnicode(returnValue);
-				return $"Error: {password.Length}";
 			}
 		}
 
@@ -241,10 +252,7 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		public static bool ValidID(int id)
-		{
-			return id >= 1;
-		}
+		public static bool ValidID(int id) => id >= 1;
 
 		/// <summary>
 		/// Tries to cast the provided value as an instance of a DateTime object

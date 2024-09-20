@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.ServiceProcess;
 
-namespace SPPBC.M3Tools
+namespace M3App
 {
 
     [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
