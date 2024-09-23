@@ -10,8 +10,8 @@ namespace M3App
 		[STAThread]
 		private static void Main(string[] args)
 		{
-			using System.IO.StreamWriter consoleFile = new(System.IO.Path.Combine(Application.StartupPath, Properties.Resources.CONSOLE_OUTPUT_FILE), true, Encoding.UTF8);
-			using System.IO.StreamWriter errorFile = new(System.IO.Path.Combine(Application.StartupPath, Properties.Resources.CONSOLE_ERROR_FILE), true, Encoding.UTF8);
+			using System.IO.StreamWriter consoleFile = new(System.IO.Path.Combine(Application.StartupPath, Properties.Resources.CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
+			using System.IO.StreamWriter errorFile = new(System.IO.Path.Combine(Application.StartupPath, Properties.Resources.CONSOLE_ERROR_FILE), false, Encoding.UTF8);
 
 			Console.SetOut(new MultiOutputWriter(Console.Out, consoleFile));
 			Console.SetError(new MultiOutputWriter(Console.Error, errorFile));

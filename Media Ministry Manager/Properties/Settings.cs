@@ -2,8 +2,12 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
+
+using SPPBC.M3Tools.Types.Extensions;
 
 namespace M3App.Properties
 {
@@ -15,19 +19,17 @@ namespace M3App.Properties
 		{
 			get
 			{
-				Console.WriteLine("App Name: {0}", ApplicationName);
-				string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ApplicationName);
-
-				if (!Directory.Exists(dir))
+				Debug.WriteLine(ApplicationName);
+				if (!Directory.Exists(Utils.UserLocation))
 				{
-					_ = Directory.CreateDirectory(dir);
+					_ = Directory.CreateDirectory(Utils.UserLocation);
 				}
 
-				return Path.Combine(dir, SettingsFileName);
+				return Path.Combine(Utils.UserLocation, SettingsFileName);
 			}
 		}
 
-		public override string ApplicationName { get; set; } = "M3App";
+		public override string ApplicationName { get; set; } = Application.ProductName;
 
 		public override void Initialize(string name, NameValueCollection config)
 		{
@@ -72,7 +74,7 @@ namespace M3App.Properties
 			Console.WriteLine("Saving Settings Values...");
 			XmlDocument xml = new();
 
-			if (!File.Exists(SettingsFilePath))
+			if (File.Exists(SettingsFilePath))
 			{
 				xml.Load(SettingsFilePath);
 			}
@@ -131,31 +133,16 @@ namespace M3App.Properties
 		public bool UpdateOnStart { get; set; } = true;
 
 		[ApplicationScopedSetting]
-		[DefaultSettingValue("https://sppbc.herbivore.site")]
-		public string BaseUrl => Environment.GetEnvironmentVariable("api_base_url");
-		/*#if DEBUG
-						"http://localhost:3000";
-		#else
-					"https://sppbc.herbivore.site";
-		#endif*/
+		[DefaultSettingValue("http://localhost:3000")]
+		public string BaseUrl => Environment.GetEnvironmentVariable("api_base_url").Decrypt();
 
 		[ApplicationScopedSetting]
-		[DefaultSettingValue("Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G")]
-		public string ApiPassword => Environment.GetEnvironmentVariable("api_password");
-		/*#if DEBUG
-						"password";
-		#else
-					"Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G";
-		#endif*/
+		[DefaultSettingValue("password")]
+		public string ApiPassword => Environment.GetEnvironmentVariable("api_password").Decrypt();
 
 		[ApplicationScopedSetting]
-		[DefaultSettingValue("Preachy2034")]
-		public string ApiUsername => Environment.GetEnvironmentVariable("api_username");
-		/*#if DEBUG
-						"username";
-		#else
-					"Preachy2034";
-		#endif*/
+		[DefaultSettingValue("username")]
+		public string ApiUsername => Environment.GetEnvironmentVariable("api_username").Decrypt();
 
 		public Settings() => Console.WriteLine("Initializing Settings..");
 
@@ -186,6 +173,32 @@ namespace M3App.Properties
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected override void OnSettingsLoaded(object sender, SettingsLoadedEventArgs e) => base.OnSettingsLoaded(sender, e);
+
+		internal static void EncryptAppConfig()
+		{
+			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+			AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
+			if (!appSettings.SectionInformation.IsProtected)
+			{
+				appSettings.SectionInformation.ProtectSection("RsaProtectedConfigurationProvider");
+				config.Save(ConfigurationSaveMode.Full);
+				Console.WriteLine("appSettings section has been encrypted.");
+			}
+		}
+
+		internal static void DecryptAppConfig()
+		{
+			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+			AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
+			if (appSettings.SectionInformation.IsProtected)
+			{
+				appSettings.SectionInformation.UnprotectSection();
+				config.Save(ConfigurationSaveMode.Full);
+				Console.WriteLine("appSettings section has been decrypted.");
+			}
+		}
 
 		/*[UserScopedSetting]
 		[DefaultSettingValue("Microsoft Sans Serif, 15.75pt, style=Bold")]

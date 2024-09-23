@@ -34,6 +34,11 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
+		public Types.Order Order => throw new NotImplementedException("Order");
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public Types.Customer Customer => ccb_Customers.SelectedItem;
 
 		private Types.Product Item => pcb_Items.SelectedItem;
@@ -48,7 +53,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
-		public PlaceOrderDialog(Types.CustomerCollection customers, Types.InventoryCollection inventory)
+		public PlaceOrderDialog(Types.CustomerCollection customers = default, Types.InventoryCollection inventory = default)
 		{
 			InitializeComponent();
 

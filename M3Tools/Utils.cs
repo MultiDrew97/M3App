@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,48 +19,54 @@ namespace SPPBC.M3Tools
 	public readonly partial struct Utils
 	{
 		/// <summary>
+		/// 
+		/// </summary>
+		public static string UpdateSaveLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", $"{Application.ProductName}.exe");
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string UserLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+
+		/// <summary>
 		/// Whether an update is available for the application
 		/// </summary>
-		public static bool UpdateAvailable
+		public static async Task<bool> UpdateAvailable()
 		{
-			get
-			{
-				using HttpClient httpClient = new();
+			string text = await new HttpClient().GetStringAsync(Properties.Resources.VERSION_URI);
+			Debug.WriteLine($"Received version text: {text.Trim()}", "Updating");
 
-				string text = httpClient.GetStringAsync(Properties.Resources.LatestAppVersionUri).Result;
-				string newText = text.Trim().Replace("\r", "").Split('\n')[1];
-				Debug.WriteLine($"Received version text: {newText}", "Updating");
+			Debug.WriteLine("Checking if update available...", "Updating");
+			Version current = new(Application.ProductVersion);
+			Version latest = new(text.Trim());
 
-				Debug.WriteLine("Checking if update available...", "Updating");
-				Version current = new(Application.ProductVersion);
-				Version latest = new(newText);
-
-				return current < latest;
-			}
+			Debug.WriteLine($"Current Version: {current}", "Updating");
+			Debug.WriteLine($"Latest Version: {latest}", "Updating");
+			return current < latest;
 		}
 
 		/// <summary>
 		/// Update the application
 		/// </summary>
 		/// <returns></returns>
-		public static async Task<bool> Update(string location, string saveLocation)
+		public static async Task<bool> Update()
 		{
 			// Perform update procedures here
 			HttpClient httpClient = new();
 
-			using HttpResponseMessage response = await httpClient.GetAsync(location);
+			using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UDPATE_LOCATION);
 
 			Debug.WriteLine("File has been retrieved. Starting to download...");
 			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
 			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
 
 			// Save file to disk
-			System.IO.File.WriteAllBytes(saveLocation, fileBytes);
+			System.IO.File.WriteAllBytes(UpdateSaveLocation, fileBytes);
 
-			Console.WriteLine($"File downloaded successfully to {saveLocation}");
+			Console.WriteLine($"File downloaded successfully to {UpdateSaveLocation}");
 
 			Console.WriteLine("Starting update client...");
-			_ = Process.Start(saveLocation, "/qn");
+			_ = Process.Start(UpdateSaveLocation, "/qn");
 			Application.Exit();
 
 			return true;

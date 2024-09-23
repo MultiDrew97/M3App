@@ -9,7 +9,7 @@
 	public delegate void OrderEventHandler(object sender, OrderEventArgs e);
 
 	/// <inheritdoc/>
-	sealed public class OrderEventArgs : DataEventArgs<Types.Order>
+	public sealed class OrderEventArgs : DataEventArgs<Types.Order>
 	{
 		/// <inheritdoc/>
 		public override Types.Order Value { get; protected set; }

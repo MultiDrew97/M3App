@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 
 // Review the values of the assembly attributes
 
-[assembly: AssemblyTitle("Media Ministry Manager")]
+[assembly: AssemblyTitle("M3App")]
 [assembly: AssemblyDescription("This is a program that will be used to keep track of people signing up and requesting media ministry products")]
 [assembly: AssemblyCompany("SPPBC")]
-[assembly: AssemblyProduct("Media Ministry Manager")]
+[assembly: AssemblyProduct("M3App")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 
@@ -32,6 +32,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly: AssemblyVersion("5.1.0.0")]
-[assembly: AssemblyFileVersion("5.1.0.0")]
+[assembly: AssemblyVersion("2024.9.23.7")]
+[assembly: AssemblyFileVersion("5.1.62.0")]
 [assembly: NeutralResourcesLanguage("en-US")]
+[assembly: AssemblyInformationalVersion("5.1.62.0")]

@@ -61,15 +61,6 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/M3AppSetup.exe.
-        /// </summary>
-        internal static string AppUpdateUri {
-            get {
-                return ResourceManager.GetString("AppUpdateUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap BannerImage {
@@ -283,15 +274,6 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/version.txt.
-        /// </summary>
-        internal static string LatestAppVersionUri {
-            get {
-                return ResourceManager.GetString("LatestAppVersionUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Loading_Loop {
@@ -380,6 +362,15 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/M3AppSetup.exe.
+        /// </summary>
+        internal static string UDPATE_LOCATION {
+            get {
+                return ResourceManager.GetString("UDPATE_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This feature is currently under construction. Please contact administrator for more information..
         /// </summary>
         internal static string UNDER_CONSTRUCTION_MESSAGE {
@@ -404,6 +395,15 @@ namespace SPPBC.M3Tools.Properties {
             get {
                 object obj = ResourceManager.GetObject("UnderlineOption", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/version.
+        /// </summary>
+        internal static string VERSION_URI {
+            get {
+                return ResourceManager.GetString("VERSION_URI", resourceCulture);
             }
         }
     }

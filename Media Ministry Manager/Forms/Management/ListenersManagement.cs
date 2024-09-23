@@ -18,8 +18,8 @@ namespace M3App
 		{
 			InitializeComponent();
 
-			gt_Email.Authorize();
-			gd_Drive.Authorize();
+			gt_Email.Authorize(tokenSource.Token);
+			gd_Drive.Authorize(tokenSource.Token);
 
 			ldg_Listeners.Reload += new EventHandler(Reload);
 			ldg_Listeners.AddListener += new ListenerEventHandler(Add);

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
+using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Events;
 
 namespace SPPBC.M3Tools
@@ -100,6 +102,11 @@ namespace SPPBC.M3Tools
 
 		private void CreateCustomer(object sender, EventArgs e)
 		{
+#if !DEBUG
+			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+#endif
+			throw new NotImplementedException("CreateCustomer");
 			// TODO: Determine better process to decouple this functionality from M3Tools API
 			using Dialogs.AddCustomerDialog create = new();
 
@@ -113,22 +120,30 @@ namespace SPPBC.M3Tools
 
 		private void CreateProduct(object sender, EventArgs e)
 		{
-			//using (var create = new Dialogs.AddProductDialog())
-			//{
-			//	var res = create.ShowDialog();
+#if !DEBUG
+			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+#endif
+			throw new NotImplementedException("CreateProduct");
+			/*using var create = new Dialogs.AddProductDialog();
+			var res = create.ShowDialog();
 
-			//	if (!(res == DialogResult.OK))
-			//	{
-			//		return;
-			//	}
+			if (!(res == DialogResult.OK))
+			{
+				return;
+			}
 
-			//	AddProduct?.Invoke(this, new Events.Inventory.InventoryEventArgs(create.Product, EventType.Added));
-			//}
+			AddInventory?.Invoke(this, new Events.Inventory.InventoryEventArgs(create.Product, EventType.Added));*/
 		}
 
 		private void CreateListener(object sender, EventArgs e)
 		{
-			using Dialogs.AddListenerDialog create = new();
+#if !DEBUG
+			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+#endif
+			throw new NotImplementedException("CreateListener");
+			using AddListenerDialog create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
 			{
@@ -140,31 +155,44 @@ namespace SPPBC.M3Tools
 
 		private void CreateOrder(object sender, EventArgs e)
 		{
-			/*using var @create = new NewOrderDialog();
+#if !DEBUG
+			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return;
+#endif
+			throw new NotImplementedException("CreateOrder");
+			using PlaceOrderDialog @create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
 			{
 				return;
 			}
 
-			AddOrder?.Invoke(this, new Events.Orders.OrderEventArgs(create.Order, EventType.Added));*/
+			AddOrder?.Invoke(this, new Events.Orders.OrderEventArgs(create.Order, EventType.Added));
 		}
 
 		private async void UpdateApp(object sender, EventArgs e)
 		{
-			if (!Utils.UpdateAvailable)
+			if (!await Utils.UpdateAvailable())
+			{
+				_ = MessageBox.Show("No updates available.", "Updates", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
+			DialogResult res = MessageBox.Show("An update is available. Would you like to update now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+			if (res != DialogResult.Yes)
 			{
 				return;
 			}
 
-			_ = await Utils.Update(Properties.Resources.AppUpdateUri, DownloadLocation);
+			_ = await Utils.Update();
 		}
 
 		private void ChangeView(object sender, EventArgs e)
 		{
-			ToolStripMenuItem obj = (ToolStripMenuItem)sender;
+			ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
-			switch (obj.AccessibleName.ToLower())
+			switch (item.AccessibleName.ToLower())
 			{
 				case "customers":
 					Manage?.Invoke(this, new(ManageType.Customers));
@@ -179,7 +207,7 @@ namespace SPPBC.M3Tools
 					Manage?.Invoke(this, new(ManageType.Inventory));
 					break;
 				default:
-					Console.WriteLine(obj.AccessibleName.ToLower());
+					Debug.WriteLine(item.AccessibleName.ToLower());
 					throw new ArgumentException("Sender not known");
 			}
 		}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -35,3 +35,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.410.2201")]
 [assembly: AssemblyFileVersion("1.0.410.2201")]
 [assembly: NeutralResourcesLanguage("en-US")]
+
+[assembly: AssemblyInformationalVersion("0.0.0.0")]

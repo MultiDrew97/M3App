@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 
-using SPPBC.M3Tools;
-
 namespace M3App
 {
 	// TODO: Make sure to update timer to be an actual amount of time instead of every second
@@ -40,7 +38,7 @@ namespace M3App
 		private async void OnTick(object sender, EventArgs e)
 		{
 			// Perform update procedures here
-			if (!Utils.UpdateAvailable)
+			if (!await Utils.UpdateAvailable())
 			{
 				return;
 			}

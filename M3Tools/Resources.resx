@@ -231,8 +231,8 @@
   <data name="Loading_Loop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\loading-loop-3.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LatestAppVersionUri" xml:space="preserve">
-    <value>https://sppbc.herbivore.site/manager/version.txt</value>
+  <data name="VERSION_URI" xml:space="preserve">
+    <value>https://sppbc.herbivore.site/manager/version</value>
     <comment>The uri containing the latest version of the application</comment>
   </data>
   <data name="Loading_Loop" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -277,7 +277,7 @@
   <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Images\import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AppUpdateUri" xml:space="preserve">
+  <data name="UDPATE_LOCATION" xml:space="preserve">
     <value>https://sppbc.herbivore.site/manager/M3AppSetup.exe</value>
     <comment>The uri where the latest version of the application can be downloaded</comment>
   </data>

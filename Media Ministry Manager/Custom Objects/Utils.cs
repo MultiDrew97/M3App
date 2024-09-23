@@ -13,12 +13,16 @@ namespace M3App
 	/// </summary>
 	public readonly partial struct Utils
 	{
-
 		/// <summary>
 		/// Waits for a certain amount of time. Typically used with Async functions to wait for tasks to complete
 		/// </summary>
 		/// <param name="seconds">The amount of seconds to wait for</param>
 		public static void Wait(int seconds) => SPPBC.M3Tools.Utils.Wait(seconds);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string UserLocation => SPPBC.M3Tools.Utils.UserLocation;
 
 		/// <summary>
 		/// Determines if ID value is valid
@@ -28,15 +32,20 @@ namespace M3App
 		public static bool ValidID(int id) => SPPBC.M3Tools.Utils.ValidID(id);
 
 		/// <summary>
+		/// 
+		/// </summary>
+		public static string UpdateSaveLocation => SPPBC.M3Tools.Utils.UpdateSaveLocation;
+
+		/// <summary>
 		/// Whether an update is available for the application
 		/// </summary>
-		public static bool UpdateAvailable => SPPBC.M3Tools.Utils.UpdateAvailable;
+		public static Task<bool> UpdateAvailable() => SPPBC.M3Tools.Utils.UpdateAvailable();
 
 		/// <summary>
 		/// Update the application
 		/// </summary>
 		/// <returns></returns>
-		public static async Task<bool> Update(string location, string saveLocation) => await SPPBC.M3Tools.Utils.Update(location, saveLocation);
+		public static async Task<bool> Update() => await SPPBC.M3Tools.Utils.Update();
 
 		/// <summary>
 		/// Opens forms of the application, automatically attaching that when the last form is

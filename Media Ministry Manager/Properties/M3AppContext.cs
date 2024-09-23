@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using SPPBC.M3Tools.Types.Extensions;
 
 namespace M3App
 {
@@ -16,26 +17,23 @@ namespace M3App
 	internal partial class M3AppContext : ApplicationContext
 	{
 		private readonly MediaMinistrySplash splash = new();
-		private readonly Timer timer = new() { Interval = int.Parse(Properties.Resources.SPLASH_TIMER) * 1000 };
-
-		private string UpdateSaveLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", "M3AppSetup.exe");
+		private readonly Timer timer = new() { Interval = int.Parse(Properties.Resources.SPLASH_TIMER) * 10 };
 
 		public M3AppContext()
 		{
-#if DEBUG
-			ShowApplication(this, EventArgs.Empty);
-#else
+#if !DEBUG
 			splash.Show();
-			timer.Start();
-			timer.Tick += ShowApplication;
 #endif
+			timer.Tick += ShowApplication;
+			timer.Start();
 		}
 
-		private void ShowApplication(object sender, EventArgs e)
+		private async void ShowApplication(object sender, EventArgs e)
 		{
+			timer.Stop();
 			try
 			{
-				if (!LoadApp().Result)
+				if (!await LoadApp())
 					return;
 
 				MainForm = new LoginForm();
@@ -43,27 +41,8 @@ namespace M3App
 			}
 			finally
 			{
-				timer.Stop();
 				splash.Close();
 				splash.Dispose();
-			}
-		}
-
-		private bool UpdateAvailable
-		{
-			get
-			{
-				using HttpClient httpClient = new();
-
-				string text = httpClient.GetStringAsync(Properties.Resources.VERSION_FILE).Result;
-				string newText = text.Trim().Replace("\r", "").Split('\n')[1];
-				Debug.WriteLine($"Received version text: {newText}", "Updating");
-
-				Debug.WriteLine("Checking if update available...");
-				Version current = new(Application.ProductVersion);
-				Version latest = new(newText);
-
-				return current < latest;
 			}
 		}
 
@@ -86,17 +65,24 @@ namespace M3App
 		{
 			Debug.WriteLine("Application preamble has begun...");
 			splash.UpdateProgress(0);
+
 			// TODO: Perform any startup/loading logic here
-			Environment.SetEnvironmentVariable("api_base_url", "http://localhost:3000");
-			Environment.SetEnvironmentVariable("api_username", "username");
-			Environment.SetEnvironmentVariable("api_password", "password");
+#if DEBUG
+			Environment.SetEnvironmentVariable("api_base_url", "http://localhost:3000".Encrypt());
+			Environment.SetEnvironmentVariable("api_username", "username".Encrypt());
+			Environment.SetEnvironmentVariable("api_password", "password".Encrypt());
+#else
+			Environment.SetEnvironmentVariable("api_base_url", "https://sppbc.herbivore.site".Encrypt());
+			Environment.SetEnvironmentVariable("api_username", "Preachy2034".Encrypt());
+			Environment.SetEnvironmentVariable("api_password", "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G".Encrypt());
+#endif
 
 			// TODO: Allow this to be done with a service instead
-			if (Properties.Settings.Default.UpdateOnStart && Utils.UpdateAvailable)
+			if (Properties.Settings.Default.UpdateOnStart && await Utils.UpdateAvailable())
 			{
 				try
 				{
-					return !await Utils.Update(Properties.Resources.UPDATE_LOCATION, UpdateSaveLocation);
+					return !await Utils.Update();
 				}
 				catch (Exception ex)
 				{
@@ -104,8 +90,8 @@ namespace M3App
 				}
 				finally
 				{
-					if (File.Exists(UpdateSaveLocation))
-						File.Delete(UpdateSaveLocation);
+					if (File.Exists(Utils.UpdateSaveLocation))
+						File.Delete(Utils.UpdateSaveLocation);
 				}
 
 			}
@@ -116,29 +102,5 @@ namespace M3App
 			splash.UpdateProgress(100);
 			return true;
 		}
-
-		/*private async Task<bool> UpdateApplication()
-		{
-			// Perform update procedures here
-			HttpClient httpClient = new();
-
-			using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UPDATE_LOCATION);
-
-			Debug.WriteLine("File has been retrieved. Starting to download...");
-			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
-			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-
-			// Save file to disk
-			File.WriteAllBytes(UpdateSaveLocation, fileBytes);
-
-			Console.WriteLine("File downloaded successfully to " + UpdateSaveLocation);
-
-			Console.WriteLine("Starting update client...");
-			_ = Process.Start(UpdateSaveLocation);
-			Application.Exit();
-
-			return true;
-		}*/
 	}
-
 }

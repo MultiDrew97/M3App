@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
 {
@@ -51,7 +52,6 @@ namespace SPPBC.M3Tools
 			this.tsmi_ViewListeners = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmi_Update = new System.Windows.Forms.ToolStripMenuItem();
-			this.wb_Updater = new System.Windows.Forms.WebBrowser();
 			this.SuspendLayout();
 			// 
 			// tsmi_File
@@ -213,16 +213,6 @@ namespace SPPBC.M3Tools
 			this.tsmi_Update.Text = "Check for Update";
 			this.tsmi_Update.Click += new System.EventHandler(this.UpdateApp);
 			// 
-			// wb_Updater
-			// 
-			this.wb_Updater.Location = new System.Drawing.Point(0, 0);
-			this.wb_Updater.MinimumSize = new System.Drawing.Size(20, 20);
-			this.wb_Updater.Name = "wb_Updater";
-			this.wb_Updater.ScrollBarsEnabled = false;
-			this.wb_Updater.Size = new System.Drawing.Size(250, 250);
-			this.wb_Updater.TabIndex = 0;
-			this.wb_Updater.Visible = false;
-			// 
 			// MainMenuStrip
 			// 
 			this.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -249,7 +239,6 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.ToolStripMenuItem tsmi_ViewListeners;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_Tools;
         internal System.Windows.Forms.ToolStripMenuItem tsmi_Update;
-        internal System.Windows.Forms.WebBrowser wb_Updater;
 		internal System.Windows.Forms.ToolStripMenuItem tsmi_NewOrder;
 	}
 }

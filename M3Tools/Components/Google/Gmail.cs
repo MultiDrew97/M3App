@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,9 +23,7 @@ namespace SPPBC.M3Tools.GTools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		protected Google.Apis.Gmail.v1.Data.Profile UserAccount => __service.Users.GetProfile(__user).Execute();
-
-		Google.Apis.Gmail.v1.Data.Profile IGoogleService<Google.Apis.Gmail.v1.Data.Profile>.UserAccount => UserAccount;
+		Google.Apis.Gmail.v1.Data.Profile IGoogleService<Google.Apis.Gmail.v1.Data.Profile>.UserAccount => __service.Users.GetProfile(__user).Execute();
 
 		private MailboxAddress DefaultSender => new("Elder Bryon Miller", __user);
 
@@ -38,12 +38,18 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="ct"></param>
 		public override void Authorize(CancellationToken ct = default)
 		{
-			base.Authorize(ct);
+			try
+			{
+				base.Authorize(ct);
 
-			if (ct.IsCancellationRequested)
-				return;
+				ct.ThrowIfCancellationRequested();
 
-			__service = new GmailService(__init);
+				__service = new GmailService(__init);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message);
+			}
 		}
 
 		/// <summary>

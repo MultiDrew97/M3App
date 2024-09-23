@@ -80,7 +80,7 @@ namespace SPPBC.M3Tools.GTools
 
 		private DriveService __service;
 
-		private readonly Google.Apis.Drive.v3.Data.Permission __defaultPermissions = new()
+		private Google.Apis.Drive.v3.Data.Permission DEFAULT_PERMISSIONS => new()
 		{
 			Role = Permission.Reader.ToString().ToLower(),
 			Type = ShareScope.Anyone.ToString().ToLower()
@@ -104,14 +104,18 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="ct"></param>
 		public override void Authorize(CancellationToken ct = default)
 		{
+			try
+			{
+				base.Authorize(ct);
 
-			base.Authorize(ct);
+				ct.ThrowIfCancellationRequested();
 
-			if (ct.IsCancellationRequested)
-				return;
+				__service = new DriveService(__init);
+			}
+			catch
+			{
 
-			__service = new DriveService(__init);
-
+			}
 		}
 
 		/// <summary>
@@ -241,7 +245,7 @@ namespace SPPBC.M3Tools.GTools
 		/// <returns></returns>
 		private async void SetPermissions(string fileID, Google.Apis.Drive.v3.Data.Permission permissions = null, CancellationToken ct = default) =>
 			// Dim request As PermissionsResource.CreateRequest = __service.Permissions.Create(__permissions, fileID)
-			_ = await __service.Permissions.Create(permissions ?? __defaultPermissions, fileID).ExecuteAsync(ct);
+			_ = await __service.Permissions.Create(permissions ?? DEFAULT_PERMISSIONS, fileID).ExecuteAsync(ct);
 
 		/// <summary>
 		/// Gets the ID of the desired file if it exists

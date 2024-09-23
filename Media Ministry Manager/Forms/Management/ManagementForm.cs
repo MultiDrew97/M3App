@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
-using SPPBC.M3Tools;
 using SPPBC.M3Tools.Events.Customers;
 using SPPBC.M3Tools.Types;
 
@@ -13,12 +13,14 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class ManagementForm<T> where T : IDbEntry, new()
+	public abstract partial class ManagementForm<T> where T : IDbEntry, new()
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		protected internal DbEntryCollection<T> _original;
+
+		protected CancellationTokenSource tokenSource;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -70,6 +72,8 @@ namespace M3App
 
 			ts_Tools.ToggleButton(toolButtons);
 			mms_Main.ToggleViewItem(menuItem);
+
+			tokenSource = new();
 		}
 
 		/// <summary>
@@ -79,6 +83,8 @@ namespace M3App
 		/// <param name="e"></param>
 		protected void DisplayClosing(object sender, FormClosingEventArgs e)
 		{
+			tokenSource.Cancel();
+
 			// FIXME: Figure out why I can't get this to be sent from the MainStrip
 			if (sender is SPPBC.M3Tools.MainMenuStrip)
 			{

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
@@ -31,7 +34,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// </summary>
 		protected string __user;
 
-		internal BaseClientService.Initializer __init = new() { ApplicationName = "Media Ministry Manager", };
+		internal BaseClientService.Initializer __init = new() { ApplicationName = Application.ProductName, };
 
 		void IDisposable.Dispose() => Close();
 
@@ -44,17 +47,9 @@ namespace SPPBC.M3Tools.Types.GTools
 			GC.SuppressFinalize(this);
 		}
 
-		private FileDataStore SaveLocation
-		{
-			get
-			{
+		private FileDataStore SaveLocation =>
 				// TODO: Figure out best saving folder for tokens
-				string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-				string path = System.IO.Path.Combine(folder, $@"SPPBC\{Username}\Tokens");
-
-				return new FileDataStore(path);
-			}
-		}
+				new(System.IO.Path.Combine(Utils.UserLocation, "Tokens"));
 
 		/// <summary>
 		/// 
@@ -67,16 +62,25 @@ namespace SPPBC.M3Tools.Types.GTools
 			__scopes = scopes;
 		}
 
-		private async System.Threading.Tasks.Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
+		private async Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
 		{
-			if (ct.IsCancellationRequested)
+			try
 			{
+				ct.ThrowIfCancellationRequested();
+
+				System.IO.MemoryStream stream = new(Properties.Resources.credentials);
+
+				UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
+
+				return creds == null
+					? throw new Exception("No creds were found")
+					: creds.Token.IsStale && !await creds.RefreshTokenAsync(ct) ? throw new Exception("Credentials are stale") : creds;
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message);
 				return null;
 			}
-
-			System.IO.MemoryStream stream = new(Properties.Resources.credentials);
-
-			return await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
 		}
 
 		/// <summary>
@@ -86,24 +90,9 @@ namespace SPPBC.M3Tools.Types.GTools
 		public virtual async void Authorize(System.Threading.CancellationToken ct = default)
 		{
 			// Place general authorization logic here
-			if (ct.IsCancellationRequested)
-			{
-				return;
-			}
+			ct.ThrowIfCancellationRequested();
 
-			UserCredential creds = await LoadCreds(ct);
-
-			if (creds == null)
-			{
-				throw new Exception("No creds were found");
-			}
-
-			if (creds.Token.IsStale && !await creds.RefreshTokenAsync(ct))
-			{
-				throw new Exception("Credentials are stale");
-			}
-
-			__init.HttpClientInitializer = creds;
+			__init.HttpClientInitializer = await LoadCreds(ct);
 		}
 	}
 }
