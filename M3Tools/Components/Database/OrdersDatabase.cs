@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SPPBC.M3Tools.Database
 {
@@ -12,9 +13,9 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="ct"></param>
 		/// <returns></returns>
 		/// <exception cref="ArgumentException"></exception>
-		public Types.Order GetOrderById(int orderID, System.Threading.CancellationToken ct = default)
+		public async Task<Types.Order> GetOrderById(int orderID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(orderID)
-				? ExecuteWithResult<Types.Order>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Seperator, Paths.Orders, orderID), string.Empty, ct).Result
+				? await ExecuteWithResultAsync<Types.Order>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Orders, orderID), string.Empty, ct)
 				: throw new ArgumentException("ID values must be greater than or equal to 0");
 
 		// TODO: Likely create a custom API path to search by customerID instead of orderID
@@ -26,17 +27,17 @@ namespace SPPBC.M3Tools.Database
 		/// <returns></returns>
 		/// <exception cref="ArgumentException"></exception>
 		/// <exception cref="NotImplementedException"></exception>
-		public Types.OrderCollection GetOrderByCustomer(int customerID, System.Threading.CancellationToken ct = default)
+		public async Task<Types.OrderCollection> GetOrderByCustomer(int customerID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(customerID)
-				? Types.OrderCollection.Cast(GetOrders().Where((curr, index) => curr.Customer.Id == customerID).ToList())
+				? Types.OrderCollection.Cast((await GetOrders()).Where((curr, index) => curr.Customer.Id == customerID).ToList())
 				: throw new ArgumentException("ID values must be greater than or equal to 0");
 
 		/// <summary>
 		/// Retrieve the complete list of orders from the database
 		/// </summary>
 		/// <returns></returns>
-		public Types.OrderCollection GetOrders(System.Threading.CancellationToken ct = default)
-			=> ExecuteWithResult<Types.OrderCollection>(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct).Result;
+		public async Task<Types.OrderCollection> GetOrders(System.Threading.CancellationToken ct = default)
+			=> await ExecuteWithResultAsync<Types.OrderCollection>(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct);
 
 		/// <summary>
 		/// Add a new order to the database
@@ -46,13 +47,13 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="quantity"></param>
 		/// <param name="ct"></param>
 		/// <exception cref="ArgumentException"></exception>
-		public bool AddOrder(int customerID, int itemID, int quantity, System.Threading.CancellationToken ct = default)
+		public async Task<bool> AddOrder(int customerID, int itemID, int quantity, System.Threading.CancellationToken ct = default)
 			=> true switch
 			{
 				var invalidCustomer when invalidCustomer == !Utils.ValidID(customerID) => throw new ArgumentException($"Invalid customer ID '{customerID}' provided"),
 				var invalidItem when invalidItem == !Utils.ValidID(itemID) => throw new ArgumentException($"Invalid item ID '{itemID}' provided"),
 				var invalidQuantity when invalidQuantity == (quantity < 1) => throw new ArgumentException($"Invalid quantity value '{quantity}' provided"),
-				_ => AddOrder(new(-1, customerID, itemID, quantity), ct),
+				_ => await AddOrder(new(-1, customerID, itemID, quantity), ct),
 			};
 
 		/// <summary>
@@ -60,16 +61,16 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <param name="order"></param>
 		/// <param name="ct"></param>
-		public bool AddOrder(Types.Order order, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Post, Paths.Orders, M3API.JSON.ConvertToJSON(order), ct);
+		public async Task<bool> AddOrder(Types.Order order, System.Threading.CancellationToken ct = default)
+			=> await ExecuteAsync(System.Net.Http.HttpMethod.Post, Paths.Orders, M3API.JSON.ConvertToJSON(order), ct);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="order"></param>
 		/// <param name="ct"></param>
-		public bool UpdateOrder(Types.Order order, System.Threading.CancellationToken ct = default)
-			=> Execute(System.Net.Http.HttpMethod.Put, string.Join(Paths.Seperator, Paths.Orders, order.Id), M3API.JSON.ConvertToJSON(order), ct);
+		public async Task<bool> UpdateOrder(Types.Order order, System.Threading.CancellationToken ct = default)
+			=> await ExecuteAsync(System.Net.Http.HttpMethod.Put, string.Join(Paths.Separator, Paths.Orders, order.Id), M3API.JSON.ConvertToJSON(order), ct);
 
 		/// <summary>
 		/// Cancel an order based on the provided order ID
@@ -77,9 +78,9 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="orderID"></param>
 		/// <param name="ct"></param>
 		/// <exception cref="ArgumentException"></exception>
-		public bool CancelOrder(int orderID, System.Threading.CancellationToken ct = default)
+		public async Task<bool> CancelOrder(int orderID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(orderID)
-				? RemoveOrder(orderID, false, ct)
+				? await RemoveOrder(orderID, false, ct)
 				: throw new ArgumentException($"Invalid OrderID provided");
 
 		/// <summary>
@@ -88,12 +89,12 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="orderID"></param>
 		/// <param name="ct"></param>
 		/// <exception cref="ArgumentException"></exception>
-		public bool CompleteOrder(int orderID, System.Threading.CancellationToken ct = default)
+		public async Task<bool> CompleteOrder(int orderID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(orderID)
-				? RemoveOrder(orderID, true, ct)
+				? await RemoveOrder(orderID, true, ct)
 				: throw new ArgumentException("ID values must be greater than or equal to 0");
 
-		private bool RemoveOrder(int orderID, bool completed, System.Threading.CancellationToken ct)
-			=> Execute(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Seperator, Paths.Orders, $"{orderID}?{(completed ? "completed" : "")}"), string.Empty, ct);
+		private async Task<bool> RemoveOrder(int orderID, bool completed, System.Threading.CancellationToken ct)
+			=> await ExecuteAsync(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Separator, Paths.Orders, $"{orderID}?{(completed ? "completed" : "")}"), string.Empty, ct);
 	}
 }

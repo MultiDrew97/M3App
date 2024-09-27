@@ -25,8 +25,6 @@ namespace M3App
 			ldg_Listeners.AddListener += new ListenerEventHandler(Add);
 			ldg_Listeners.UpdateListener += new ListenerEventHandler(Update);
 			ldg_Listeners.RemoveListener += new ListenerEventHandler(Remove);
-
-			_original = dbListeners.GetListeners();
 		}
 
 		/// <summary>
@@ -34,9 +32,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Reload(object sender, EventArgs e)
+		protected override async void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
+			_original = await dbListeners.GetListeners();
 			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
 			UseWaitCursor = false;

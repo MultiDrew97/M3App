@@ -22,8 +22,6 @@ namespace M3App
 			odg_Orders.AddOrder += new OrderEventHandler(Add);
 			odg_Orders.UpdateOrder += new OrderEventHandler(Update);
 			odg_Orders.RemoveOrder += new OrderEventHandler(Remove);
-
-			_original = dbOrders.GetOrders();
 		}
 
 		/// <summary>
@@ -31,9 +29,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Reload(object sender, EventArgs e)
+		protected override async void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
+			_original = await dbOrders.GetOrders();
 			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, odg_Orders.Orders.Count);
 			UseWaitCursor = false;
@@ -44,13 +43,13 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Add(object sender, EventArgs e)
+		protected override async void Add(object sender, EventArgs e)
 		{
 #if !DEBUG
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #else
-			using SPPBC.M3Tools.Dialogs.PlaceOrderDialog @add = new(dbCustomers.GetCustomers(), dbInventory.GetProducts());
+			using SPPBC.M3Tools.Dialogs.PlaceOrderDialog @add = new(await dbCustomers.GetCustomers(), await dbInventory.GetProducts());
 
 			if (add.ShowDialog() != DialogResult.OK)
 			{
@@ -60,7 +59,7 @@ namespace M3App
 
 			foreach (SPPBC.M3Tools.Types.CartItem item in add.Cart)
 			{
-				dbOrders.AddOrder(new(-1, add.Customer, item.Item, item.Quantity, default, default));
+				await dbOrders.AddOrder(new(-1, add.Customer, item.Item, item.Quantity, default, default));
 			}
 
 			MessageBox.Show($"Order has been placed for {add.Customer.Name}", "Order Placed", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -73,13 +72,13 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Order> e)
+		protected override async void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Order> e)
 		{
 #if !DEBUG
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #else
-			using SPPBC.M3Tools.Dialogs.EditOrderDialog @edit = new(e.Value, dbCustomers.GetCustomers(), dbInventory.GetProducts());
+			using SPPBC.M3Tools.Dialogs.EditOrderDialog @edit = new(e.Value, await dbCustomers.GetCustomers(), await dbInventory.GetProducts());
 
 			if (edit.ShowDialog() != DialogResult.OK)
 			{
@@ -87,7 +86,7 @@ namespace M3App
 				return;
 			}
 
-			dbOrders.UpdateOrder(edit.UpdatedOrder);
+			await dbOrders.UpdateOrder(edit.UpdatedOrder);
 			MessageBox.Show($"Successfully updated order", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 #endif
@@ -98,7 +97,7 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Order> e)
+		protected override async void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Order> e)
 		{
 #if !DEBUG
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -112,12 +111,12 @@ namespace M3App
 				switch (MessageBox.Show("Is this order being canceled?", "Cancel Order", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
 				{
 					case DialogResult.Yes:
-						dbOrders.CancelOrder(e.Value.Id);
+						await dbOrders.CancelOrder(e.Value.Id);
 						text = $"Order for {e.Value.Customer.Name} has been cancelled";
 						caption = "Order Cancelled";
 						break;
 					case DialogResult.No:
-						dbOrders.CompleteOrder(e.Value.Id);
+						await dbOrders.CompleteOrder(e.Value.Id);
 						text = $"Order for {e.Value.Customer.Name} has been completed";
 						caption = "Order Completed";
 						break;

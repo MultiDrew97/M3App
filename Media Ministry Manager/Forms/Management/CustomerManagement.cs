@@ -24,8 +24,6 @@ namespace M3App
 			cdg_Customers.AddCustomer += new CustomerEventHandler(Add);
 			cdg_Customers.UpdateCustomer += new CustomerEventHandler(Update);
 			cdg_Customers.RemoveCustomer += new CustomerEventHandler(Remove);
-
-			_original = dbCustomers.GetCustomers();
 		}
 
 		/// <summary>
@@ -33,9 +31,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Reload(object sender, EventArgs e)
+		protected override async void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
+			_original = await dbCustomers.GetCustomers();
 			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, cdg_Customers.Customers.Count);
 			UseWaitCursor = false;

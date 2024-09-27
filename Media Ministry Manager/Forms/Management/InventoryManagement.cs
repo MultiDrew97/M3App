@@ -21,8 +21,6 @@ namespace M3App
 			idg_Inventory.AddProduct += new InventoryEventHandler(Add);
 			idg_Inventory.UpdateProduct += new InventoryEventHandler(Update);
 			idg_Inventory.RemoveProduct += new InventoryEventHandler(Remove);
-
-			_original = dbInventory.GetProducts();
 		}
 
 		/// <summary>
@@ -30,9 +28,10 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected override void Reload(object sender, EventArgs e)
+		protected override async void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
+			_original = await dbInventory.GetProducts();
 			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, idg_Inventory.Inventory.Count);
 			UseWaitCursor = false;

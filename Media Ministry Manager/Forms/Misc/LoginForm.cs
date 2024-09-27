@@ -95,12 +95,12 @@ namespace M3App
 			Reset();
 		}
 
-		private void PerformLogin(object sender, EventArgs e)
+		private async void PerformLogin(object sender, EventArgs e)
 		{
 			try
 			{
 				BeginLogin?.Invoke();
-				SPPBC.M3Tools.Types.User user = dbUsers.Login(Username, Password);
+				SPPBC.M3Tools.Types.User user = await dbUsers.Login(Username, Password);
 
 				if (user.Login.Role != SPPBC.M3Tools.Types.AccountRole.Admin)
 				{

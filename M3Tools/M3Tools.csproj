@@ -115,9 +115,6 @@
     <Compile Include="Components\Database\CustomerDatabase.Designer.cs">
       <DependentUpon>CustomerDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Database\Database.Designer.cs">
-      <DependentUpon>Database.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DataGrid.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -549,9 +546,6 @@
     <EmbeddedResource Include="Components\Database\CustomerDatabase.resx">
       <DependentUpon>CustomerDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Database\Database.resx">
-      <DependentUpon>Database.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Components\Database\ListenerDatabase.resx">
       <DependentUpon>ListenerDatabase.cs</DependentUpon>
     </EmbeddedResource>
@@ -805,7 +799,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2021/12/13" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2021/12/13" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

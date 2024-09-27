@@ -107,9 +107,9 @@ namespace M3App
 			bw_SendEmails.RunWorkerAsync();
 		}
 
-		private void GatherRecipients(object sender, DoWorkEventArgs e)
+		private async void GatherRecipients(object sender, DoWorkEventArgs e)
 		{
-			using SPPBC.M3Tools.ListenerSelectionDialog recipients = new(dbListeners.GetListeners());
+			using SPPBC.M3Tools.ListenerSelectionDialog recipients = new(await dbListeners.GetListeners());
 
 			if (recipients.ShowDialog() != DialogResult.OK)
 			{
