@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 
 namespace SPPBC.M3Tools.M3API
 {
@@ -35,7 +36,7 @@ namespace SPPBC.M3Tools.M3API
 		{
 			if (string.IsNullOrWhiteSpace(json) || !(json.Contains("{") && json.Contains("}")))
 			{
-				System.Console.WriteLine($"Error: JSON Provided invalid \n\t{json}");
+				Console.WriteLine($"Error: JSON Provided invalid \n\t{json}");
 				return default;
 			}
 
@@ -43,10 +44,11 @@ namespace SPPBC.M3Tools.M3API
 		}
 
 		/// <summary>
-		/// Convert an object to a JSON string using the global serilization options
+		/// Convert an object to a JSON string using the global serialization options
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public static string ConvertToJSON(object obj) => obj is null ? "" : JsonSerializer.Serialize(obj, options);
+		public static string ConvertToJSON(object obj) =>
+			JsonSerializer.Serialize(obj, options);
 	}
 }

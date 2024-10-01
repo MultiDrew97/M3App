@@ -139,7 +139,7 @@ namespace M3App
 			catch (Exception ex)
 			{
 				Console.Error.WriteLine(ex.StackTrace);
-				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}\n {Properties.Settings.Default.BaseUrl}");
+				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}");
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
 			}

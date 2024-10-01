@@ -1,13 +1,12 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace SPPBC.M3Tools.Database
 {
-    public partial class OrdersDatabase : Database
+    public partial class Database : System.ComponentModel.Component
     {
 
         [DebuggerNonUserCode()]
-        public OrdersDatabase(System.ComponentModel.IContainer container) : this()
+        public Database(System.ComponentModel.IContainer container) : this()
         {
 
             // Required for Windows.Forms Class Composition Designer support
@@ -17,8 +16,9 @@ namespace SPPBC.M3Tools.Database
             }
 
         }
+        
 
-        // Component overrides dispose to clean up the component list.
+        // Component Overrides dispose To clean up the component list.
         [DebuggerNonUserCode()]
         protected override void Dispose(bool disposing)
         {

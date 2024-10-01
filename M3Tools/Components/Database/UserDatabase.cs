@@ -10,8 +10,10 @@ namespace SPPBC.M3Tools.Database
 	/// <summary>
 	/// 
 	/// </summary>
-	public sealed partial class UserDatabase
+	public sealed partial class UserDatabase : Database
 	{
+		public UserDatabase() : base() => InitializeComponent();
+
 		/// <summary>
 		/// Create a new user for the application
 		/// </summary>
@@ -60,6 +62,7 @@ namespace SPPBC.M3Tools.Database
 		{
 			try
 			{
+				Console.WriteLine($"Logging in user with username {auth.Username}...");
 				return await ExecuteWithResultAsync<User>(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct);
 			}
 			catch (Exception ex)

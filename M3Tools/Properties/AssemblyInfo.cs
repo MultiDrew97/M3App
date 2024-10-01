@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("SPPBC.M3Tools")]
 [assembly: AssemblyDescription("Custom Tools library for the Media Ministry Manager program")]
-[assembly: AssemblyCompany("St Paul Primitive Baptist Church")]
+[assembly: AssemblyCompany("SPPBC")]
 [assembly: AssemblyProduct("M3Tools")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]

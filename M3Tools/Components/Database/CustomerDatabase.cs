@@ -10,6 +10,9 @@ namespace SPPBC.M3Tools.Database
 	/// </summary>
 	public partial class CustomerDatabase
 	{
+
+		public CustomerDatabase() : base() => InitializeComponent();
+
 		/// <summary>
 		/// Retrieves the specified customer from the database
 		/// </summary>

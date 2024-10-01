@@ -6,6 +6,8 @@ namespace SPPBC.M3Tools.Database
 {
 	public sealed partial class OrdersDatabase
 	{
+		public OrdersDatabase() : base() => InitializeComponent();
+
 		/// <summary>
 		/// Retrieve an order by its order ID
 		/// </summary>

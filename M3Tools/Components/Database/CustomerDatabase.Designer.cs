@@ -18,14 +18,6 @@ namespace SPPBC.M3Tools.Database
 
         }
 
-        [DebuggerNonUserCode()]
-        public CustomerDatabase() : base()
-        {
-
-            // This call is required by the Component Designer.
-            InitializeComponent();
-        }
-
         // Component overrides dispose to clean up the component list.
         [DebuggerNonUserCode()]
         protected override void Dispose(bool disposing)

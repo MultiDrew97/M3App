@@ -10,6 +10,8 @@ namespace SPPBC.M3Tools.Database
 	/// </summary>
 	public partial class ListenerDatabase
 	{
+		public ListenerDatabase() : base() => InitializeComponent();
+
 		/// <summary>
 		/// Retrieves a listener based on the provided listener ID
 		/// </summary>

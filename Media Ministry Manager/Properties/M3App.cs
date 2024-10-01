@@ -7,11 +7,13 @@ namespace M3App
 {
 	internal partial class M3App
 	{
+		private static string LOG_LOCATION => System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+
 		[STAThread]
 		private static void Main(string[] args)
 		{
-			using System.IO.StreamWriter consoleFile = new(System.IO.Path.Combine(Application.StartupPath, Properties.Resources.CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
-			using System.IO.StreamWriter errorFile = new(System.IO.Path.Combine(Application.StartupPath, Properties.Resources.CONSOLE_ERROR_FILE), false, Encoding.UTF8);
+			using System.IO.StreamWriter consoleFile = new(System.IO.Path.Combine(LOG_LOCATION, Properties.Resources.CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
+			using System.IO.StreamWriter errorFile = new(System.IO.Path.Combine(LOG_LOCATION, Properties.Resources.CONSOLE_ERROR_FILE), false, Encoding.UTF8);
 
 			Console.SetOut(new MultiOutputWriter(Console.Out, consoleFile));
 			Console.SetError(new MultiOutputWriter(Console.Error, errorFile));
@@ -28,12 +30,6 @@ namespace M3App
 				Console.Error.WriteLine(ex.Message);
 				Console.Error.WriteLine(ex.StackTrace);
 				_ = MessageBox.Show(string.Format(Properties.Resources.UNHANDLED_EXCEPTION.Replace(@"\n", "\n").Replace(@"\t", "\t"), ex.Message), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			finally
-			{
-				// Perform app cleanup after closure
-				consoleFile.Close();
-				errorFile.Close();
 			}
 		}
 	}
