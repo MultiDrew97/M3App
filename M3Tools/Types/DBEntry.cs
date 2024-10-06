@@ -11,6 +11,7 @@ namespace SPPBC.M3Tools.Types
 		/// The ID of the entry
 		/// </summary>
 		public int Id { get; }
+
 	}
 
 	/// <inheritdoc/>

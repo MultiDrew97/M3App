@@ -1,92 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{43BA25D9-4BA1-0AD1-1E01-41F9BF42AFA5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>M3App.M3App</StartupObject>
-    <RootNamespace>M3App</RootNamespace>
-    <AssemblyName>M3App</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <TargetFrameworkProfile />
-    <DefaultItemExcludes>$(DefaultItemExcludes);$(ProjectDir)**\*.vb</DefaultItemExcludes>
-    <LangVersion>latest</LangVersion>
-    <ShouldCreateLogs>True</ShouldCreateLogs>
-    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
-    <UpdatePackageVersion>False</UpdatePackageVersion>
-    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-    <InheritWinAppVersionFrom>AssemblyFileVersion</InheritWinAppVersionFrom>
-    <AssemblyFileVersionSettings>IncrementOnDemand.IncrementOnDemandWithResetOnIncrease.IncrementWithResetOnIncrease.None</AssemblyFileVersionSettings>
-    <AssemblyVersion>2024.10.6.0</AssemblyVersion>
-    <AssemblyVersionSettings>YearStamp.MonthStamp.DayStamp.IncrementWithResetOnIncrease</AssemblyVersionSettings>
-    <AssemblyInfoFilePath>Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
-    <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
-    <AssemblyInfoVersionSettings>IncrementOnDemand.IncrementOnDemandWithResetOnIncrease.IncrementWithResetOnIncrease.None</AssemblyInfoVersionSettings>
-    <PublishUrl>ftp://miller-sppbc/var/www/sppbc/m3app/</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>true</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://sppbc.herbivore.site/manager/</InstallUrl>
-    <UpdateUrl>https://sppbc.herbivore.site/manager/</UpdateUrl>
-    <TargetCulture>en-US</TargetCulture>
-    <ProductName>Media Ministry Manager</ProductName>
-    <PublisherName>Andrew Randle-Warren</PublisherName>
-    <SuiteName>Media Ministry</SuiteName>
-    <MinimumRequiredVersion>5.0.0.0</MinimumRequiredVersion>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>manager.html</WebPage>
-    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>5.1.174.0</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>bin\Debug\M3App.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <Prefer32Bit>true</Prefer32Bit>
-    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>bin\Release\M3App.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <Prefer32Bit>true</Prefer32Bit>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
-    <DefineConstants>TRACE</DefineConstants>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -177,18 +94,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Custom Objects\UpdateService.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\UpdateService.cs" />
     <Compile Include="Custom Objects\UpdateService.Designer.cs">
       <DependentUpon>UpdateService.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Management\CustomerManagement.designer.cs">
       <DependentUpon>CustomerManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Management\ManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Management\ManagementForm.cs" />
     <Compile Include="Forms\Management\ManagementForm.designer.cs">
       <DependentUpon>ManagementForm.cs</DependentUpon>
     </Compile>
@@ -196,95 +109,63 @@
     <Compile Include="Assets\MediaMinistrySplash.Designer.cs">
       <DependentUpon>MediaMinistrySplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="Assets\MediaMinistrySplash.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Assets\MediaMinistrySplash.cs" />
     <Compile Include="Custom Objects\Controls\FileLocationField.Designer.cs">
       <DependentUpon>FileLocationField.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Controls\FileLocationField.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Controls\FileLocationField.cs" />
     <Compile Include="Custom Objects\Dialogs\CreateFolderDialog.Designer.cs">
       <DependentUpon>CreateFolderDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\CreateFolderDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Dialogs\CreateFolderDialog.cs" />
     <Compile Include="Custom Objects\Dialogs\Emails\ReceiptTypeDialog.Designer.cs">
       <DependentUpon>ReceiptTypeDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Emails\ReceiptTypeDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Dialogs\Emails\ReceiptTypeDialog.cs" />
     <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.Designer.cs">
       <DependentUpon>SendEmailsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Dialogs\SendEmailsDialog.cs" />
     <Compile Include="Custom Objects\Controls\PasswordField.Designer.cs">
       <DependentUpon>PasswordField.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Controls\PasswordField.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Controls\PasswordField.cs" />
     <Compile Include="Custom Objects\Utils.cs" />
     <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.Designer.cs">
       <DependentUpon>AddProductDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Dialogs\Products\AddProductDialog.cs" />
     <Compile Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.Designer.cs">
       <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Dialogs\Misc\ChangePasswordDialog.cs" />
     <Compile Include="Custom Objects\Dialogs\Misc\NewUserDialog.Designer.cs">
       <DependentUpon>NewUserDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Objects\Dialogs\Misc\NewUserDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Management\CustomerManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Custom Objects\Dialogs\Misc\NewUserDialog.cs" />
+    <Compile Include="Forms\Management\CustomerManagement.cs" />
     <Compile Include="Forms\Management\InventoryManagement.Designer.cs">
       <DependentUpon>InventoryManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Management\InventoryManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Management\InventoryManagement.cs" />
     <Compile Include="Forms\Management\ListenersManagement.designer.cs">
       <DependentUpon>ListenersManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Management\ListenersManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Management\ListenersManagement.cs" />
     <Compile Include="Forms\Management\OrderManagement.Designer.cs">
       <DependentUpon>OrderManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Management\OrderManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Management\OrderManagement.cs" />
     <Compile Include="Forms\Misc\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Misc\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Misc\LoginForm.cs" />
     <Compile Include="Forms\Misc\SettingsForm.designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Misc\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Misc\SettingsForm.cs" />
     <Compile Include="Properties\M3App.cs" />
-    <Compile Include="Forms\Misc\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Misc\MainForm.cs" />
     <Compile Include="Forms\Misc\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Form</SubType>

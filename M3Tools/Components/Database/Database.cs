@@ -133,7 +133,7 @@ namespace SPPBC.M3Tools.Database
 				client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 
 				Console.WriteLine($"Making {method.Method} call to API...");
-				System.Net.Http.HttpResponseMessage res = await (method.Method switch
+				System.Net.Http.HttpResponseMessage res = await (method.Method.ToUpper() switch
 				{
 					"GET" => client.GetAsync(path, ct),
 					"POST" => client.PostAsync(path, payload, ct),

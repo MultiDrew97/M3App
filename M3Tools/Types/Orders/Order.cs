@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 
 namespace SPPBC.M3Tools.Types
 {
@@ -13,7 +12,7 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		[JsonPropertyName("orderID")]
+		[Newtonsoft.Json.JsonProperty("orderID")]
 		public override int Id
 		{
 			get => base.Id;
@@ -23,37 +22,37 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// The customer the order was placed for
 		/// </summary>
-		[JsonPropertyName("customer")]
+		[Newtonsoft.Json.JsonProperty("customer")]
 		public Customer Customer { get; set; }
 
 		/// <summary>
 		/// The item the order was placed for
 		/// </summary>
-		[JsonPropertyName("item")]
+		[Newtonsoft.Json.JsonProperty("item")]
 		public Product Item { get; set; }
 
 		/// <summary>
 		/// How many of the item the customer wanted
 		/// </summary>
-		[JsonPropertyName("quantity")]
+		[Newtonsoft.Json.JsonProperty("quantity")]
 		public int Quantity { get; set; }
 
 		/// <summary>
 		/// The subtotal for the order
 		/// </summary>
-		[JsonPropertyName("total")]
+		[Newtonsoft.Json.JsonProperty("total")]
 		public double Total => (double)(Item.Price * Quantity);
 
 		/// <summary>
 		/// The date the order was placed
 		/// </summary>
-		[JsonPropertyName("ordered")]
+		[Newtonsoft.Json.JsonProperty("ordered")]
 		public DateTime OrderDate { get; set; }
 
 		/// <summary>
 		/// The date the order was fulfilled
 		/// </summary>
-		[JsonPropertyName("completed")]
+		[Newtonsoft.Json.JsonProperty("completed")]
 		public DateTime CompletedDate { get; set; }
 
 		/// <summary>

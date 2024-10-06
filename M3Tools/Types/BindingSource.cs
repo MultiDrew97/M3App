@@ -10,7 +10,7 @@ namespace SPPBC.M3Tools.Data
 	/// Binding source made for mangaing M3 App data operations
 	/// </summary>
 	/// <typeparam name="T">Data type for the data being used for binding</typeparam>
-	public partial class BindingSource<T> where T : Types.IDbEntry, new()
+	public partial class BindingSource<T> where T : Types.IDbEntry
 	{
 		/// <summary>
 		/// The binding source supports filtering

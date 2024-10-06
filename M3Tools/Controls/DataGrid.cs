@@ -9,7 +9,7 @@ namespace SPPBC.M3Tools.Data
 	/// Base class for data grid controls used in the app
 	/// </summary>
 	/// <typeparam name="T">The type of data grid this will be</typeparam>
-	public partial class DataGrid<T> where T : Types.IDbEntry, new()
+	public partial class DataGrid<T> where T : Types.IDbEntry
 	{
 		// TODO: Add Pagination to the display grid
 		private bool Moved = false;

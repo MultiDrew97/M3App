@@ -8,7 +8,7 @@ namespace SPPBC.M3Tools.Types
 	/// Base class for database entry collections
 	/// </summary>
 	/// <typeparam name="T">The type of entries in collection</typeparam>
-	public abstract class DbEntryCollection<T> : /*System.Collections.ObjectModel.Collection<T>,*/ BindingList<T>, IBindingListView where T : IDbEntry, new()
+	public abstract class DbEntryCollection<T> : /*System.Collections.ObjectModel.Collection<T>,*/ BindingList<T>, IBindingListView where T : IDbEntry
 	{
 		private string _filter = "";
 
@@ -271,7 +271,7 @@ namespace SPPBC.M3Tools.Types
 #if !DEBUG
 			throw new System.NotImplementedException("AddNew");
 #else
-			new();
+			default;
 #endif
 
 		/// <summary>

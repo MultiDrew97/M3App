@@ -1,14 +1,15 @@
 ﻿namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
-	/// An email listener that recieves the email ministry emails
+	/// An email listener that receives the email ministry emails
 	/// </summary>
+	[Newtonsoft.Json.JsonObject]
 	public class Listener : Person
 	{
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("listenerID")]
+		[Newtonsoft.Json.JsonProperty("listenerID")]
 		public override int Id
 		{
 			get => base.Id;
@@ -34,6 +35,7 @@
 		/// <param name="fName"></param>
 		/// <param name="lName"></param>
 		/// <param name="email"></param>
+		[Newtonsoft.Json.JsonConstructor]
 		public Listener(int listenerID, string fName = "New", string lName = "Listener", string email = default) : this(listenerID, $"{fName} {lName}", email)
 		{
 		}

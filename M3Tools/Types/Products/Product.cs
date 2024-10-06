@@ -5,6 +5,7 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// An inventory item
 	/// </summary>
+	[Newtonsoft.Json.JsonObject]
 	public class Product : DbEntry
 	{
 		/// <summary>
@@ -16,7 +17,7 @@ namespace SPPBC.M3Tools.Types
 		/// <inheritdoc/>
 		/// </summary>
 		[System.ComponentModel.Browsable(false)]
-		[System.Text.Json.Serialization.JsonPropertyName("itemID")]
+		[Newtonsoft.Json.JsonProperty("itemID")]
 		public new int Id
 		{
 			get => base.Id;
@@ -26,25 +27,25 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// The name of the item
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("itemName")]
+		[Newtonsoft.Json.JsonProperty("itemName")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// How many of the item is currently in stock
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("stock")]
+		[Newtonsoft.Json.JsonProperty("stock")]
 		public int Stock { get; set; }
 
 		/// <summary>
 		/// The price per unit of the item
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("price")]
+		[Newtonsoft.Json.JsonProperty("price")]
 		public decimal Price { get; set; }
 
 		/// <summary>
 		/// Whether the item is currently available to purchase
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("available")]
+		[Newtonsoft.Json.JsonProperty("available")]
 		public bool Available { get; set; }
 
 		/// <summary>
@@ -62,6 +63,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="stock"></param>
 		/// <param name="price"></param>
 		/// <param name="available"></param>
+		[Newtonsoft.Json.JsonConstructor]
 		public Product(int productID, string name = "New Product", int stock = 0, decimal price = 0m, bool available = false) : base(productID)
 		{
 			Name = name;

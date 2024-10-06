@@ -9,6 +9,8 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// Class containing customer data
 	/// </summary>
+	[System.ComponentModel.TypeConverter(typeof(Converters.M3AppConvert<Customer>))]
+	[Newtonsoft.Json.JsonObject]
 	public class Customer : Person
 	{
 		// Private Const EmailPattern As String = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
@@ -22,7 +24,7 @@ namespace SPPBC.M3Tools.Types
 		/// <summary>
 		/// 
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("customerID")]
+		[Newtonsoft.Json.JsonProperty("customerID")]
 		public override int Id
 		{
 			get => base.Id;
@@ -33,7 +35,7 @@ namespace SPPBC.M3Tools.Types
 		/// The customers phone number
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
-		[System.Text.Json.Serialization.JsonPropertyName("phoneNumber")]
+		[Newtonsoft.Json.JsonProperty("phoneNumber")]
 		public string Phone
 		{
 			get => __phone;
@@ -45,21 +47,14 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
 		[System.ComponentModel.TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-		[System.Text.Json.Serialization.JsonPropertyName("address")]
+		[Newtonsoft.Json.JsonProperty("address")]
 		public Address Address { get; set; }
 
 		/// <summary>
 		/// The date the user was added to the database
 		/// </summary>
-		[System.Text.Json.Serialization.JsonPropertyName("joined")]
+		[Newtonsoft.Json.JsonProperty("joined")]
 		public DateTime Joined { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Customer() : this(-1)
-		{
-		}
 
 		/// <summary>
 		/// 
@@ -71,7 +66,8 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="email"></param>
 		/// <param name="phoneNumber"></param>
 		/// <param name="joined"></param>
-		public Customer(int customerID, string firstName = "New", string lastName = "Customer", Address address = null, string phoneNumber = "1234567890", string email = "johndoe@domain.ext", string joined = null) : this(customerID, $"{firstName} {lastName}", address, phoneNumber, email, string.IsNullOrWhiteSpace(joined) ? default : DateTime.Parse(joined))
+		[Newtonsoft.Json.JsonConstructor]
+		public Customer(int customerID = -1, string firstName = "New", string lastName = "Customer", Address address = null, string phoneNumber = "1234567890", string email = "johndoe@domain.ext", string joined = null) : this(customerID, $"{firstName} {lastName}", address, phoneNumber, email, string.IsNullOrWhiteSpace(joined) ? default : DateTime.Parse(joined))
 		{
 		}
 

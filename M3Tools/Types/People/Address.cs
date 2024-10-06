@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 
@@ -9,6 +10,8 @@ namespace SPPBC.M3Tools.Types
 	/// <summary>
 	/// An address used for people
 	/// </summary>
+	[TypeConverter(typeof(Converters.M3AppConvert<Address>))]
+	[Newtonsoft.Json.JsonObject]
 	public class Address
 	{
 
@@ -17,28 +20,28 @@ namespace SPPBC.M3Tools.Types
 		/// </summary>
 		[System.ComponentModel.Browsable(true)]
 		[System.ComponentModel.Category("Contact")]
-		[System.Text.Json.Serialization.JsonPropertyName("street")]
+		[Newtonsoft.Json.JsonProperty("street")]
 		public string Street { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
-		[System.Text.Json.Serialization.JsonPropertyName("city")]
+		[Newtonsoft.Json.JsonProperty("city")]
 		public string City { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
-		[System.Text.Json.Serialization.JsonPropertyName("state")]
+		[Newtonsoft.Json.JsonProperty("state")]
 		public string State { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[System.ComponentModel.Category("Contact")]
-		[System.Text.Json.Serialization.JsonPropertyName("zipCode")]
+		[Newtonsoft.Json.JsonProperty("zipCode")]
 		public string ZipCode { get; set; }
 
 		/// <summary>
@@ -53,7 +56,7 @@ namespace SPPBC.M3Tools.Types
 		/// <param name="city"></param>
 		/// <param name="state"></param>
 		/// <param name="zipCode"></param>
-		[System.Text.Json.Serialization.JsonConstructor]
+		[Newtonsoft.Json.JsonConstructor]
 		public Address(string street = null, string city = null, string state = null, string zipCode = null)
 		{
 			Street = street;

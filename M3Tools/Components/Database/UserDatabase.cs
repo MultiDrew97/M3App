@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -62,7 +63,7 @@ namespace SPPBC.M3Tools.Database
 		{
 			try
 			{
-				Console.WriteLine($"Logging in user with username {auth.Username}...");
+				Debug.WriteLine($"Logging in user with username {auth.Username}...");
 				return await ExecuteWithResultAsync<User>(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct);
 			}
 			catch (Exception ex)
