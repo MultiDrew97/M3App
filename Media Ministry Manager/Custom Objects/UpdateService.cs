@@ -43,10 +43,11 @@ namespace M3App
 				return;
 			}
 
-			HttpClient httpClient = new();
+			using HttpClient client = new
+();
 			string UpdateSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", "M3AppSetup.exe");
 
-			using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UPDATE_LOCATION);
+			using HttpResponseMessage response = await client.GetAsync("");// Properties.Resources.UPDATE_LOCATION);
 
 			Debug.WriteLine("File has been retrieved. Starting to download...");
 			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful

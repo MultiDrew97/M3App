@@ -454,6 +454,12 @@
         "Entry"
         {
         "MsmKey" = "8:_62C301EDD2AF5E1E1701B511DD49F49C"
+        "OwnerKey" = "8:_22736A079B6C3B01B60AE87A7F9E3D66"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_62C301EDD2AF5E1E1701B511DD49F49C"
         "OwnerKey" = "8:_DD93769A38B24198A282B53715BB8E7C"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1042,12 +1048,6 @@
         "Entry"
         {
         "MsmKey" = "8:_E7A44F677B6EF6B00A5CB08928CE87CF"
-        "OwnerKey" = "8:_22736A079B6C3B01B60AE87A7F9E3D66"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E7A44F677B6EF6B00A5CB08928CE87CF"
         "OwnerKey" = "8:_DD93769A38B24198A282B53715BB8E7C"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1192,13 +1192,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DD93769A38B24198A282B53715BB8E7C"
+        "OwnerKey" = "8:_22736A079B6C3B01B60AE87A7F9E3D66"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_22736A079B6C3B01B60AE87A7F9E3D66"
+        "OwnerKey" = "8:_DD93769A38B24198A282B53715BB8E7C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2548,7 +2548,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -2649,7 +2649,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SPPBC.M3Tools, Version=1.0.410.2201, Culture=neutral, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:SPPBC.M3Tools, Version=1.0.410.2201, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_22736A079B6C3B01B60AE87A7F9E3D66"
@@ -3261,7 +3261,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -6225,11 +6225,11 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:M3App"
         "ProductCode" = "8:{4AEA40D4-BE44-426E-8B6C-501F6B991556}"
-        "PackageCode" = "8:{E17903E1-3C59-4471-A7E4-E49BF68B007B}"
+        "PackageCode" = "8:{4E0C9F9E-030F-4B39-85D5-66E84BBAAE54}"
         "UpgradeCode" = "8:{4ECB615C-6F9B-44CC-9E00-F2926D0061E8}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"

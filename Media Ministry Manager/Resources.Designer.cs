@@ -108,16 +108,6 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] credentials {
-            get {
-                object obj = ResourceManager.GetObject("credentials", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -369,24 +359,6 @@ namespace M3App.Properties {
         internal static string UNHANDLED_EXCEPTION {
             get {
                 return ResourceManager.GetString("UNHANDLED_EXCEPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/M3AppSetup.exe.
-        /// </summary>
-        internal static string UPDATE_LOCATION {
-            get {
-                return ResourceManager.GetString("UPDATE_LOCATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/version.txt.
-        /// </summary>
-        internal static string VERSION_FILE {
-            get {
-                return ResourceManager.GetString("VERSION_FILE", resourceCulture);
             }
         }
     }

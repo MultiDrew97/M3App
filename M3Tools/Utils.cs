@@ -31,7 +31,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Whether an update is available for the application
 		/// </summary>
-		public static async Task<bool> UpdateAvailable()
+		public static async Task<bool> UpdateAvailable(bool confirm = true)
 		{
 			string text = await new HttpClient().GetStringAsync(Properties.Resources.VERSION_URI);
 			Debug.WriteLine($"Received version text: {text.Trim()}", "Updating");
@@ -42,7 +42,7 @@ namespace SPPBC.M3Tools
 
 			Debug.WriteLine($"Current Version: {current}", "Updating");
 			Debug.WriteLine($"Latest Version: {latest}", "Updating");
-			return current < latest;
+			return current < latest && !(confirm && MessageBox.Show($"An update is available\n\nLatest: {latest}\nCurrent: {current}", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes);
 		}
 
 		/// <summary>

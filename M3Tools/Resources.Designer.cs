@@ -362,7 +362,7 @@ namespace SPPBC.M3Tools.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/M3AppSetup.exe.
+        ///   Looks up a localized string similar to https://sppbc.herbivore.site/manager/setup.exe.
         /// </summary>
         internal static string UDPATE_LOCATION {
             get {

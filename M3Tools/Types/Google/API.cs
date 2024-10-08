@@ -1,12 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+
+using SPPBC.M3Tools.Types.Extensions;
+
+// FIXME: Consolidate this with the database component so that all API calls are handled in one place
 
 namespace SPPBC.M3Tools.Types.GTools
 {
@@ -16,6 +21,9 @@ namespace SPPBC.M3Tools.Types.GTools
 	/// </summary>
 	public class API : Component, IDisposable
 	{
+		private readonly string CREDS_LOCATION = "/api/google/creds";
+		private System.IO.Stream __credsStream;
+
 		/// <summary>
 		/// The username of the current user using the app itself
 		/// </summary>
@@ -51,6 +59,32 @@ namespace SPPBC.M3Tools.Types.GTools
 				// TODO: Figure out best saving folder for tokens
 				new(System.IO.Path.Combine(Utils.UserLocation, "Tokens"));
 
+		private System.IO.Stream Credentials
+		{
+			get
+			{
+				if (__credsStream == null)
+				{
+					using HttpClient client = new()
+					{
+						BaseAddress = new(Environment.GetEnvironmentVariable("api_base_url").Decrypt()),
+						Timeout = TimeSpan.FromSeconds(30)
+					};
+					string username = Environment.GetEnvironmentVariable("api_username").Decrypt();
+					string password = Environment.GetEnvironmentVariable("api_password").Decrypt();
+					string auth = $"{username}:{password}".ToBase64String();
+
+					client.DefaultRequestHeaders.Authorization = new("Basic", auth);
+					HttpResponseMessage res = client.GetAsync(CREDS_LOCATION, HttpCompletionOption.ResponseContentRead).Result;
+
+					__credsStream = res.EnsureSuccessStatusCode().Content.ReadAsStreamAsync().Result;
+				}
+
+				return __credsStream;
+			}
+			set => __credsStream = value;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -68,9 +102,7 @@ namespace SPPBC.M3Tools.Types.GTools
 			{
 				ct.ThrowIfCancellationRequested();
 
-				System.IO.MemoryStream stream = new(Properties.Resources.credentials);
-
-				UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, __scopes, __user, ct, SaveLocation);
+				UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(Credentials).Secrets, __scopes, __user, ct, SaveLocation);
 
 				return creds == null
 					? throw new Exception("No creds were found")

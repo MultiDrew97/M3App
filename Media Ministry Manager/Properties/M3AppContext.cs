@@ -17,15 +17,17 @@ namespace M3App
 	internal partial class M3AppContext : ApplicationContext
 	{
 		private readonly MediaMinistrySplash splash = new();
-		private readonly Timer timer = new() { Interval = int.Parse(Properties.Resources.SPLASH_TIMER) * 10 };
+		private readonly Timer timer = new() { Interval = (int)TimeSpan.FromSeconds(int.Parse(Properties.Resources.SPLASH_TIMER)).TotalMilliseconds };
 
 		public M3AppContext()
 		{
 #if !DEBUG
 			splash.Show();
-#endif
 			timer.Tick += ShowApplication;
 			timer.Start();
+#else
+			ShowApplication(this, EventArgs.Empty);
+#endif
 		}
 
 		private async void ShowApplication(object sender, EventArgs e)

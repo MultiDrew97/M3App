@@ -143,8 +143,8 @@ namespace SPPBC.M3Tools.Database
 				});
 
 				Console.WriteLine("API call complete. Parsing response body...");
-				string body = await res.Content.ReadAsStringAsync();
-				Console.WriteLine(body);
+				string body = await res.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
+				Debug.WriteLine(body, "API");
 
 				// TODO: Make this look and feel better
 				return !res.IsSuccessStatusCode

@@ -12,6 +12,9 @@ namespace M3App
 		[STAThread]
 		private static void Main(string[] args)
 		{
+			if (!System.IO.Directory.Exists(LOG_LOCATION))
+				_ = System.IO.Directory.CreateDirectory(LOG_LOCATION);
+
 			using System.IO.StreamWriter consoleFile = new(System.IO.Path.Combine(LOG_LOCATION, Properties.Resources.CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
 			using System.IO.StreamWriter errorFile = new(System.IO.Path.Combine(LOG_LOCATION, Properties.Resources.CONSOLE_ERROR_FILE), false, Encoding.UTF8);
 
