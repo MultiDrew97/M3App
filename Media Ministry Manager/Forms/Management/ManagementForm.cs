@@ -8,8 +8,6 @@ using SPPBC.M3Tools.Types;
 namespace M3App
 {
 	// TODO: Figure out how to allow to be abstract and still have designer privileges
-	// FIXME: Figure out why some child components aren't initialized properly on inherited objects (i.e toolStripContainer)
-	// FIXME: Fix the filtering problem
 	/// <summary>
 	/// 
 	/// </summary>

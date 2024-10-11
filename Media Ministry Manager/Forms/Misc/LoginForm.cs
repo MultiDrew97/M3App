@@ -111,7 +111,6 @@ namespace M3App
 
 				if (SaveCredentials)
 				{
-					// MAYBE: Use environment for this instead of settings
 					Environment.SetEnvironmentVariable("password", Password.Encrypt());
 				}
 

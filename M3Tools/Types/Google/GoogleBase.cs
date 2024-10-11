@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -7,8 +6,6 @@ using System.Windows.Forms;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
-
-// FIXME: Consolidate this with the database component so that all API calls are handled in one place
 
 namespace SPPBC.M3Tools.API.GTools
 {
@@ -18,15 +15,6 @@ namespace SPPBC.M3Tools.API.GTools
 	/// </summary>
 	public class GoogleBase : ApiBase
 	{
-		/// <summary>
-		/// The username of the current user using the app itself
-		/// </summary>
-		[Category("User")]
-		[SettingsBindable(true)]
-		[Description("The username of the currently logged in user")]
-		// MAYBE: Move this so that the username can be retrieved from the environment variables instead of the settings file?
-		public string CurrentUser => Environment.GetEnvironmentVariable("username");
-
 		/// <summary>
 		/// The scopes to use for the API calls
 		/// </summary>

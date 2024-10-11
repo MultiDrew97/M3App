@@ -36,12 +36,6 @@ namespace SPPBC.M3Tools
 		public TreeNode SelectedNode => tv_DriveFiles.SelectedNode;
 
 		/// <summary>
-		/// The username of the user currently logged into the app
-		/// </summary>
-		[SettingsBindable(true)]
-		public string Username => gdt_GDrive.CurrentUser;
-
-		/// <summary>
 		/// Whether the tree should include the children of the folders
 		/// </summary>
 		[DefaultValue(true)]
@@ -55,7 +49,7 @@ namespace SPPBC.M3Tools
 		{
 			InitializeComponent();
 
-			gdt_GDrive.Authorize();
+			_ = gdt_GDrive.Authorize();
 		}
 
 		/// <summary>
