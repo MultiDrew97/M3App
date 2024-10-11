@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
@@ -17,7 +17,7 @@ namespace M3App
 		internal event EventHandler EmailsSent;
 		internal event EventHandler EmailsCancelled;
 
-		private readonly EmailDetails details = new();
+		//private readonly EmailDetails details = new();
 
 		private int FileCount => fu_Receipts.Files.Count + gdt_Files.GetSelectedNodes().Count;
 
@@ -31,17 +31,18 @@ namespace M3App
 			EmailsCancelled += new EventHandler(Cancelled);
 			EmailsSent += new EventHandler(Sent);
 
-			gmt_Gmail.Authorize();
+			_ = gmt_Gmail.Authorize();
 		}
 
 		private void BeginSending(object sender, EventArgs e)
 		{
 			btn_Send.Enabled = false;
+			EmailDetails details = new();
 
 			if (FileCount > 0)
 			{
 				// gather files to send
-				bw_GatherFiles.RunWorkerAsync();
+				bw_GatherFiles.RunWorkerAsync(details);
 				return;
 			}
 
@@ -52,7 +53,7 @@ namespace M3App
 				return;
 			}
 
-			bw_PrepEmails.RunWorkerAsync();
+			PrepEmails(details);
 		}
 
 		private void Cancel(object sender, EventArgs e)
@@ -70,11 +71,19 @@ namespace M3App
 
 		private void GatherFiles(object sender, DoWorkEventArgs e)
 		{
+			if (e.Argument is not EmailDetails details)
+			{
+				e.Cancel = true;
+				return;
+			}
+
 			foreach (TreeNode node in gdt_Files.GetSelectedNodes())
 				details.DriveLinks.Add(new File(node.Name, node.Text));
 
 			foreach (File @file in fu_Receipts.Files)
 				details.LocalFiles.Add(@file.Name);
+
+			e.Result = details;
 		}
 
 		private void FilesGathered(object sender, RunWorkerCompletedEventArgs e)
@@ -85,98 +94,79 @@ namespace M3App
 				return;
 			}
 
-			bw_GatherReceipients.RunWorkerAsync();
+			PrepEmails(e.Result as EmailDetails);
 		}
 
-		private void PrepEmails(object sender, DoWorkEventArgs e)
+		private async void PrepEmails(EmailDetails details)
 		{
-			foreach (File @file in details.DriveLinks)
-			{
-				details.SendingLinks.Add(string.Format(Properties.Resources.DRIVE_LINK_HTML, string.Format(Properties.Resources.DRIVE_SHARE_LINK_TEMPLATE, @file.Id), @file.Name));
-			}
-		}
-
-		private void EmailsPrepped(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (e.Cancelled || e.Error is not null)
+			if (details is null)
 			{
 				EmailsCancelled?.Invoke(this, EventArgs.Empty);
 				return;
 			}
 
-			bw_SendEmails.RunWorkerAsync();
-		}
-
-		private async void GatherRecipients(object sender, DoWorkEventArgs e)
-		{
 			using SPPBC.M3Tools.ListenerSelectionDialog recipients = new(await dbListeners.GetListeners());
 
-			if (recipients.ShowDialog() != DialogResult.OK)
+			if (recipients.ShowDialog(this) != DialogResult.OK)
 			{
-				e.Cancel = true;
+				EmailsCancelled?.Invoke(this, EventArgs.Empty);
 				return;
 			}
 
 			details.Recipients = recipients.Selection;
-		}
-
-		private void RecipientsGathered(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (e.Cancelled)
-			{
-				EmailsCancelled?.Invoke(this, EventArgs.Empty);
-				return;
-			}
 
 			// TODO: Make a class or provider of some sort to store and pull the template data for the user
-			using EmailBodySelection body = new([new("Sermon", Properties.Resources.SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", Properties.Resources.RECEIPT_EMAIL, "Bless you")]);
+			using EmailBodySelection bodySelection = new([new("Sermon", Properties.Resources.SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", Properties.Resources.RECEIPT_EMAIL, "Bless you")]);
 
-			if (body.ShowDialog() != DialogResult.OK)
+			if (bodySelection.ShowDialog(this) != DialogResult.OK)
 			{
 				EmailsCancelled?.Invoke(this, EventArgs.Empty);
 				return;
 			}
 
-			details.EmailContents = body.Content;
+			details.EmailContents = bodySelection.Content;
 
-			bw_PrepEmails.RunWorkerAsync();
-		}
+			foreach (File @file in details.DriveLinks)
+			{
+				details.SendingLinks.Add(string.Format(Properties.Resources.DRIVE_LINK_HTML, string.Format(Properties.Resources.DRIVE_SHARE_LINK_TEMPLATE, @file.Id), @file.Name));
+			}
 
-		private void SendEmails(object sender, DoWorkEventArgs e)
-		{
-			List<MimeKit.MimeMessage> messages = [];
+			tsp_Progress.Value = 0;
+			tsp_Progress.Maximum = details.Recipients.Count;
+			tsp_Progress.Step = (int)Math.Floor(1d / details.Recipients.Count);
 			foreach (Listener listener in details.Recipients)
 			{
 				string body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br>", details.SendingLinks));
-				messages.Add(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
-			}
-
-			e.Result = messages;
-		}
-
-		private void EmailsDone(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (e.Cancelled || e.Error is not null)
-			{
-				EmailsCancelled?.Invoke(this, EventArgs.Empty);
-				return;
-			}
-
-			List<MimeKit.MimeMessage> messages = (List<MimeKit.MimeMessage>)e.Result;
-
-			tsp_Progress.Value = 0;
-			tsp_Progress.Maximum = messages.Count;
-			tsp_Progress.Step = (int)Math.Floor(1d / messages.Count);
-
-			foreach (MimeKit.MimeMessage message in messages)
-			{
-				_ = gmt_Gmail.Send(message);
-				tsp_Progress.PerformStep();
+				try
+				{
+					_ = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
+				}
+				catch (Google.GoogleApiException ex)
+				{
+					Debug.WriteLine(ex.Message);
+					Debug.WriteLine(ex.StackTrace);
+					Console.WriteLine($"Unable to send email to {listener.Name}");
+				}
+				finally
+				{
+					tsp_Progress.PerformStep();
+				}
 			}
 
 			EmailsSent?.Invoke(this, EventArgs.Empty);
 		}
 
+		private void EmailsPrepped(object sender, RunWorkerCompletedEventArgs e)
+		{
+			if (e.Cancelled || e.Error is not null || e.Result is not EmailDetails details)
+			{
+				EmailsCancelled?.Invoke(this, EventArgs.Empty);
+				return;
+			}
+
+		}
+
+		// TODO: Make it so these can distinguish between a cancel and a failure
 		private void Sent(object sender, EventArgs e)
 		{
 			btn_Send.Enabled = true;

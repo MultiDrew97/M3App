@@ -281,7 +281,7 @@
     <value>https://sppbc.herbivore.site/manager/setup.exe</value>
     <comment>The uri where the latest version of the application can be downloaded</comment>
   </data>
-  <data name="credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\configs\credentials.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="HidePasswordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">

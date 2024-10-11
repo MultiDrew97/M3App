@@ -62,10 +62,6 @@ namespace SPPBC.M3Tools
             tv_DriveFiles.Size = new System.Drawing.Size(625, 475);
             tv_DriveFiles.TabIndex = 2;
             // 
-            // gdt_GDrive
-            // 
-            gdt_GDrive.Username = "";
-            // 
             // ts_Tools
             // 
             ts_Tools.Dock = System.Windows.Forms.DockStyle.None;

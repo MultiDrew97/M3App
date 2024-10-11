@@ -33,7 +33,7 @@ namespace M3App
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
+            this.dbInventory = new SPPBC.M3Tools.API.InventoryDatabase(this.components);
             this.idg_Inventory = new SPPBC.M3Tools.Data.InventoryDataGrid();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -53,9 +53,9 @@ namespace M3App
             // 
             // dbInventory
             // 
-            this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // idg_Inventory
             // 
@@ -88,7 +88,7 @@ namespace M3App
 
         }
 
-        internal SPPBC.M3Tools.Database.InventoryDatabase dbInventory;
+        internal SPPBC.M3Tools.API.InventoryDatabase dbInventory;
 		private SPPBC.M3Tools.Data.InventoryDataGrid idg_Inventory;
 	}
 }

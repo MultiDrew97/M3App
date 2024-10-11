@@ -1,12 +1,12 @@
 using System.Diagnostics;
 
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
-    public partial class Database : System.ComponentModel.Component
+    public partial class ApiBase : System.ComponentModel.Component
     {
 
         [DebuggerNonUserCode()]
-        public Database(System.ComponentModel.IContainer container) : this()
+        public ApiBase(System.ComponentModel.IContainer container) : this()
         {
 
             // Required for Windows.Forms Class Composition Designer support

@@ -166,6 +166,9 @@ namespace SPPBC.M3Tools.Types.Extensions
 		/// <returns></returns>
 		public static string Encrypt(this string value, Guid salt = default)
 		{
+			if (string.IsNullOrWhiteSpace(value))
+				return value;
+
 			byte[] bytes = Encoding.UTF8.GetBytes(value);
 
 			byte[] encrypted = ProtectedData.Protect(bytes, null, DataProtectionScope.CurrentUser);
@@ -181,6 +184,9 @@ namespace SPPBC.M3Tools.Types.Extensions
 		/// <returns></returns>
 		public static string Decrypt(this string value, Guid salt = default)
 		{
+			if (string.IsNullOrEmpty(value))
+				return value;
+
 			byte[] bytes = Convert.FromBase64String(value);
 
 			byte[] decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);

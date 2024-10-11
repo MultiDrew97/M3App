@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
-    public partial class UserDatabase : Database
+    public partial class UserDatabase : ApiBase
     {
 
         [DebuggerNonUserCode()]

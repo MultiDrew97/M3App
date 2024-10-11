@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using SPPBC.M3Tools.Database;
+using SPPBC.M3Tools.API;
 
 namespace M3App
 {
@@ -45,7 +45,7 @@ namespace M3App
             this.chk_KeepLoggedIn = new System.Windows.Forms.CheckBox();
             this.btn_Login = new System.Windows.Forms.Button();
             this.lf_Login = new SPPBC.M3Tools.LoginFields();
-            this.dbUsers = new SPPBC.M3Tools.Database.UserDatabase();
+            this.dbUsers = new SPPBC.M3Tools.API.UserDatabase();
             this.lsd_LoadScreen = new SPPBC.M3Tools.LoadScreenDialog();
             this.ss_Feedback = new System.Windows.Forms.StatusStrip();
             this.SuspendLayout();
@@ -143,9 +143,9 @@ namespace M3App
             // 
             // dbUsers
             // 
-            this.dbUsers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbUsers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbUsers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbUsers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbUsers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbUsers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // lsd_LoadScreen
             // 
@@ -189,7 +189,7 @@ namespace M3App
         }
 
         internal ToolTip tt_Info;
-        internal SPPBC.M3Tools.Database.UserDatabase dbUsers;
+        internal SPPBC.M3Tools.API.UserDatabase dbUsers;
         internal Timer tmr_LoginTimer;
         internal ToolStripStatusLabel tss_UserFeedback;
         internal SPPBC.M3Tools.LoadScreenDialog lsd_LoadScreen;

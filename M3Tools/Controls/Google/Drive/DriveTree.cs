@@ -39,11 +39,7 @@ namespace SPPBC.M3Tools
 		/// The username of the user currently logged into the app
 		/// </summary>
 		[SettingsBindable(true)]
-		public string Username
-		{
-			get => gdt_GDrive.Username;
-			set => gdt_GDrive.Username = value;
-		}
+		public string Username => gdt_GDrive.CurrentUser;
 
 		/// <summary>
 		/// Whether the tree should include the children of the folders

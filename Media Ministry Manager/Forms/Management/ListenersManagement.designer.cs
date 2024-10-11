@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using SPPBC.M3Tools.Database;
+using SPPBC.M3Tools.API;
 using SPPBC.M3Tools.Events.Listeners;
 using SPPBC.M3Tools.Types;
 
@@ -40,7 +40,7 @@ namespace M3App
         {
             this.components = new System.ComponentModel.Container();
             this.gt_Email = new SPPBC.M3Tools.GTools.Gmail(this.components);
-            this.dbListeners = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
+            this.dbListeners = new SPPBC.M3Tools.API.ListenerDatabase(this.components);
             this.gd_Drive = new SPPBC.M3Tools.GTools.GDrive(this.components);
             this.ldg_Listeners = new SPPBC.M3Tools.Data.ListenersDataGrid();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -59,19 +59,11 @@ namespace M3App
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.TopToolStripPanelVisible = true;
             // 
-            // gt_Email
-            // 
-            this.gt_Email.Username = global::M3App.Properties.Settings.Default.Username;
-            // 
             // dbListeners
             // 
-            this.dbListeners.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbListeners.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbListeners.Username = global::M3App.Properties.Settings.Default.ApiUsername;
-            // 
-            // gd_Drive
-            // 
-            this.gd_Drive.Username = global::M3App.Properties.Settings.Default.Username;
+            //this.dbListeners.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbListeners.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbListeners.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // ldg_Listeners
             // 
@@ -106,7 +98,7 @@ namespace M3App
         }
 
         private SPPBC.M3Tools.GTools.Gmail gt_Email;
-        private SPPBC.M3Tools.Database.ListenerDatabase dbListeners;
+        private SPPBC.M3Tools.API.ListenerDatabase dbListeners;
         private SPPBC.M3Tools.GTools.GDrive gd_Drive;
 		private SPPBC.M3Tools.Data.ListenersDataGrid ldg_Listeners;
 	}

@@ -34,9 +34,9 @@ namespace M3App
         {
             this.components = new System.ComponentModel.Container();
             this.odg_Orders = new SPPBC.M3Tools.Data.OrderDataGrid();
-            this.dbOrders = new SPPBC.M3Tools.Database.OrdersDatabase(this.components);
-            this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
-            this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
+            this.dbOrders = new SPPBC.M3Tools.API.OrdersDatabase(this.components);
+            this.dbCustomers = new SPPBC.M3Tools.API.CustomerDatabase(this.components);
+            this.dbInventory = new SPPBC.M3Tools.API.InventoryDatabase(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.odg_Orders)).BeginInit();
@@ -73,21 +73,21 @@ namespace M3App
             // 
             // dbOrders
             // 
-            this.dbOrders.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbOrders.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbOrders.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbOrders.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbOrders.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbOrders.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // dbCustomers
             // 
-            this.dbCustomers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbCustomers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbCustomers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbCustomers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbCustomers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbCustomers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // dbInventory
             // 
-            this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // OrderManagement
             // 
@@ -105,8 +105,8 @@ namespace M3App
         }
 
 		private SPPBC.M3Tools.Data.OrderDataGrid odg_Orders;
-		private SPPBC.M3Tools.Database.OrdersDatabase dbOrders;
-		private SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
-		private SPPBC.M3Tools.Database.InventoryDatabase dbInventory;
+		private SPPBC.M3Tools.API.OrdersDatabase dbOrders;
+		private SPPBC.M3Tools.API.CustomerDatabase dbCustomers;
+		private SPPBC.M3Tools.API.InventoryDatabase dbInventory;
 	}
 }

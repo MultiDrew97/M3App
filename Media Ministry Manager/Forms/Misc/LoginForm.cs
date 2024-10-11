@@ -57,14 +57,14 @@ namespace M3App
 		private void Showing(object sender, EventArgs e)
 		{
 			// MAYBE: Implement a token system to verify logins instead of credentials
-			if (string.IsNullOrEmpty(Properties.Settings.Default.Password))
+			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("password").Decrypt()))
 			{
 				Reset();
 				return;
 			}
 
-			Username = Properties.Settings.Default.Username;
-			Password = Properties.Settings.Default.Password.Decrypt();
+			Username = Environment.GetEnvironmentVariable("username");
+			Password = Environment.GetEnvironmentVariable("password").Decrypt();
 
 			btn_Login.PerformClick();
 		}
@@ -107,12 +107,12 @@ namespace M3App
 					throw new RoleException();
 				}
 
+				Environment.SetEnvironmentVariable("username", Username);
+
 				if (SaveCredentials)
 				{
 					// MAYBE: Use environment for this instead of settings
-					Properties.Settings.Default.Username = Username;
-					Properties.Settings.Default.Password = Password.Encrypt();
-					Properties.Settings.Default.Save();
+					Environment.SetEnvironmentVariable("password", Password.Encrypt());
 				}
 
 				Utils.OpenForm(typeof(MainForm));

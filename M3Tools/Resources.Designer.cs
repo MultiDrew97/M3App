@@ -83,9 +83,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] credentials {
+        internal static byte[] Credentials {
             get {
-                object obj = ResourceManager.GetObject("credentials", resourceCulture);
+                object obj = ResourceManager.GetObject("Credentials", resourceCulture);
                 return ((byte[])(obj));
             }
         }

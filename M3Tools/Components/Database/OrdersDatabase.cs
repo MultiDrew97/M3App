@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
 	public sealed partial class OrdersDatabase
 	{
@@ -17,7 +17,7 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public async Task<Types.Order> GetOrderById(int orderID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(orderID)
-				? await ExecuteWithResultAsync<Types.Order>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Orders, orderID), string.Empty, ct)
+				? (await GetOrders()).Where((curr, index) => curr.Id == orderID).First()
 				: throw new ArgumentException("ID values must be greater than or equal to 0");
 
 		// TODO: Likely create a custom API path to search by customerID instead of orderID
@@ -39,7 +39,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.OrderCollection> GetOrders(System.Threading.CancellationToken ct = default)
-			=> await ExecuteWithResultAsync<Types.OrderCollection>(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct);
+			=> ParseResponse<Types.OrderCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct));
 
 		/// <summary>
 		/// Add a new order to the database

@@ -2,7 +2,7 @@
 
 namespace SPPBC.M3Tools.GTools
 {
-    public partial class Gmail : Types.GTools.API
+    public partial class Gmail : API.GTools.GoogleBase
     {
 
         [DebuggerNonUserCode()]

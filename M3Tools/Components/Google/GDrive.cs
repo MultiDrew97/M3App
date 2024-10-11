@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Google;
 using Google.Apis.Drive.v3;
 
 using SPPBC.M3Tools.Types.GTools;
@@ -75,7 +77,7 @@ namespace SPPBC.M3Tools.GTools
 	/// <summary>
 	/// The class that handles all Google Drive API calls
 	/// </summary>
-	public partial class GDrive : API, IGoogleService<Google.Apis.Drive.v3.Data.User>
+	public partial class GDrive : API.GTools.GoogleBase, IGoogleService<Google.Apis.Drive.v3.Data.User>
 	{
 
 		private DriveService __service;
@@ -102,20 +104,27 @@ namespace SPPBC.M3Tools.GTools
 		/// Authorizes the application to use their account in the API calls
 		/// </summary>
 		/// <param name="ct"></param>
-		public override void Authorize(CancellationToken ct = default)
+		public override async Task<bool> Authorize(CancellationToken ct = default)
 		{
 			try
 			{
-				base.Authorize(ct);
+				_ = await base.Authorize(ct);
 
 				ct.ThrowIfCancellationRequested();
 
 				__service = new DriveService(__init);
-			}
-			catch
-			{
 
+				return true;
 			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(__service);
+				Debug.WriteLine(__init);
+				Console.Error.WriteLine(ex.Message);
+				Console.Error.WriteLine(ex.StackTrace);
+			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -270,7 +279,7 @@ namespace SPPBC.M3Tools.GTools
 
 				foreach (Google.Apis.Drive.v3.Data.File @file in results.Files)
 				{
-					if ((@file.Name ?? "") != (fileName ?? ""))
+					if (@file.Name != fileName)
 					{
 						continue;
 					}
@@ -386,31 +395,42 @@ namespace SPPBC.M3Tools.GTools
 		public async Task<FileCollection> GetFolders(CancellationToken ct = default)
 		{
 			FileCollection folders = [];
-			string pageToken = null;
-			FilesResource.ListRequest request = __service.Files.List();
-
-			do
+			try
 			{
-				request.Q = "mimeType='application/vnd.google-apps.folder'";
-				request.Spaces = "drive";
-				request.Fields = "nextPageToken, files(id, name, parents, mimeType)";
-				request.PageToken = pageToken;
 
-				Google.Apis.Drive.v3.Data.FileList result = await request.ExecuteAsync(ct);
+				string pageToken = null;
+				FilesResource.ListRequest request = __service.Files.List();
 
-				foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
+				do
 				{
-					folders.Add(new Folder(folder.Id)
-					{
-						Name = folder.Name,
-						FileType = folder.MimeType,
-						Parents = folder.Parents is not null ? new List<string>(folder.Parents) : null
-					});
-				}
+					request.Q = "mimeType='application/vnd.google-apps.folder'";
+					request.Spaces = "drive";
+					request.Fields = "nextPageToken, files(id, name, parents, mimeType)";
+					request.PageToken = pageToken;
 
-				pageToken = result.NextPageToken;
+					Google.Apis.Drive.v3.Data.FileList result = await request.ExecuteAsync(ct);
+
+					foreach (Google.Apis.Drive.v3.Data.File folder in result.Files)
+					{
+						folders.Add(new Folder(folder.Id)
+						{
+							Name = folder.Name,
+							FileType = folder.MimeType,
+							Parents = folder.Parents is not null ? new List<string>(folder.Parents) : null
+						});
+					}
+
+					pageToken = result.NextPageToken;
+				}
+				while (pageToken is not null);
+
 			}
-			while (pageToken is not null);
+			catch (GoogleApiException ex)
+			{
+				Debug.WriteLine(ex.Message);
+				Debug.WriteLine(ex.StackTrace);
+				Console.Error.WriteLine("Unable to retrieve files from Google Drive");
+			}
 
 			return folders;
 		}

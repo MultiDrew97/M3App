@@ -4,15 +4,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using SPPBC.M3Tools.M3API;
-using SPPBC.M3Tools.Types;
 
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public sealed partial class UserDatabase : Database
+	public sealed partial class UserDatabase : ApiBase
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public UserDatabase() : base() => InitializeComponent();
 
 		/// <summary>
@@ -20,7 +22,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <param name="user"></param>
 		/// <param name="ct"></param>
-		public async void CreateUser(User user, System.Threading.CancellationToken ct = default)
+		public async void CreateUser(Types.User user, System.Threading.CancellationToken ct = default)
 			=> await ExecuteAsync(System.Net.Http.HttpMethod.Post, Paths.Users, JSON.ConvertToJSON(user), ct);
 
 		/// <summary>
@@ -50,8 +52,8 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="password"></param>
 		/// <param name="ct"></param>
 		/// <returns></returns>
-		public async Task<User> Login(string username, string password, System.Threading.CancellationToken ct = default)
-			=> await Login(new Auth(username, password), ct);
+		public async Task<Types.User> Login(string username, string password, System.Threading.CancellationToken ct = default)
+			=> await Login(new Types.Auth(username, password), ct);
 
 		/// <summary>
 		/// Attempt to login a user provided their username and password
@@ -59,12 +61,12 @@ namespace SPPBC.M3Tools.Database
 		/// <param name="auth">The credentials to use for logging in the user</param>
 		/// <param name="ct"></param>
 		/// <returns>The user if successful, otherwise Nothing</returns>
-		private async Task<User> Login(Auth auth, System.Threading.CancellationToken ct)
+		private async Task<Types.User> Login(Types.Auth auth, System.Threading.CancellationToken ct)
 		{
 			try
 			{
 				Debug.WriteLine($"Logging in user with username {auth.Username}...");
-				return await ExecuteWithResultAsync<User>(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct);
+				return ParseResponse<Types.User>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct));
 			}
 			catch (Exception ex)
 			{

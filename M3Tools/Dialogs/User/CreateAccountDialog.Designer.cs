@@ -48,7 +48,7 @@ namespace SPPBC.M3Tools.Dialogs
             uf_Username = new UsernameField();
             uf_Username.UsernameLostFocus += new EventHandler(Uf_Username_UsernameLostFocus);
             uf_Username.UsernameTextChanged += new EventHandler(Uf_Username_TextChanged);
-            db_Users = new Database.UserDatabase(components);
+            db_Users = new API.UserDatabase(components);
             ep_FieldError = new System.Windows.Forms.ErrorProvider(components);
             TableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ep_FieldError).BeginInit();
@@ -156,7 +156,7 @@ namespace SPPBC.M3Tools.Dialogs
         internal UsernameField uf_Username;
         internal PasswordField pf_Password;
         internal ConfirmPasswordField cpf_Confirm;
-        internal Database.UserDatabase db_Users;
+        internal API.UserDatabase db_Users;
         internal System.Windows.Forms.ErrorProvider ep_FieldError;
     }
 }

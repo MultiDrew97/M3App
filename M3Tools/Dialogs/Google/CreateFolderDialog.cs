@@ -21,19 +21,6 @@ namespace SPPBC.M3Tools
 		public IList<string> Parents => __parents.Count == 0 ? null : __parents;
 
 		/// <summary>
-		/// The username of the current user logged into the app
-		/// </summary>
-		public string Username
-		{
-			get => gdt_GDrive.Username;
-			set
-			{
-				gdt_GDrive.Username = value;
-				dt_DriveHeirarchy.Username = value;
-			}
-		}
-
-		/// <summary>
 		/// 
 		/// </summary>
 		public CreateFolderDialog() => InitializeComponent();

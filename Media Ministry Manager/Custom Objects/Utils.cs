@@ -101,9 +101,8 @@ namespace M3App
 		/// </summary>
 		public static void LogOff()
 		{
-			Properties.Settings.Default.Username = "";
-			Properties.Settings.Default.Password = "";
-			Properties.Settings.Default.Save();
+			Environment.SetEnvironmentVariable("username", string.Empty);
+			Environment.SetEnvironmentVariable("password", string.Empty);
 			OpenForm(typeof(LoginForm));
 		}
 	}

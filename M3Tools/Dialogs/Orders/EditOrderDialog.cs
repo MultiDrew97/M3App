@@ -3,7 +3,9 @@ using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Dialogs
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	public partial class EditOrderDialog
 	{
 
@@ -70,9 +72,6 @@ namespace SPPBC.M3Tools.Dialogs
 
 		}
 
-		private bool ChangesDetected()
-		{
-			return UpdatedOrder != CurrentOrder;
-		}
+		private bool ChangesDetected() => UpdatedOrder != CurrentOrder;
 	}
 }

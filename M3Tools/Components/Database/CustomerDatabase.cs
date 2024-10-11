@@ -3,14 +3,16 @@ using System.Threading.Tasks;
 
 using SPPBC.M3Tools.M3API;
 
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
 	/// <summary>
 	/// The customer based API calls
 	/// </summary>
 	public partial class CustomerDatabase
 	{
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public CustomerDatabase() : base() => InitializeComponent();
 
 		/// <summary>
@@ -22,7 +24,7 @@ namespace SPPBC.M3Tools.Database
 		/// <exception cref="ArgumentException"></exception>
 		public async Task<Types.Customer> GetCustomer(int customerID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(customerID)
-				? await ExecuteWithResultAsync<Types.Customer>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Customers, customerID), string.Empty, ct)
+				? ParseResponse<Types.Customer>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Customers, customerID), string.Empty, ct))
 				: throw new ArgumentException($"Invalid CustomerID provided");
 
 		/// <summary>
@@ -30,7 +32,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.CustomerCollection> GetCustomers(System.Threading.CancellationToken ct = default)
-			=> await ExecuteWithResultAsync<Types.CustomerCollection>(System.Net.Http.HttpMethod.Get, Paths.Customers, string.Empty, ct);
+			=> ParseResponse<Types.CustomerCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Customers, string.Empty, ct));
 
 		/// <summary>
 		/// Add a customer to the database

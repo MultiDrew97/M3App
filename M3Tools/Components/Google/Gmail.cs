@@ -8,6 +8,7 @@ using Google.Apis.Gmail.v1;
 
 using MimeKit;
 
+using SPPBC.M3Tools.Types.Extensions;
 using SPPBC.M3Tools.Types.GTools;
 
 namespace SPPBC.M3Tools.GTools
@@ -15,7 +16,7 @@ namespace SPPBC.M3Tools.GTools
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class Gmail : API, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
+	public partial class Gmail : API.GTools.GoogleBase, IGoogleService<Google.Apis.Gmail.v1.Data.Profile>
 	{
 
 		private GmailService __service;
@@ -36,20 +37,24 @@ namespace SPPBC.M3Tools.GTools
 		/// <inheritdoc/>
 		/// </summary>
 		/// <param name="ct"></param>
-		public override void Authorize(CancellationToken ct = default)
+		public override async Task<bool> Authorize(CancellationToken ct = default)
 		{
 			try
 			{
-				base.Authorize(ct);
+				_ = await base.Authorize(ct);
 
 				ct.ThrowIfCancellationRequested();
 
 				__service = new GmailService(__init);
+
+				return true;
 			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex.Message);
 			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -164,7 +169,7 @@ namespace SPPBC.M3Tools.GTools
 		{
 			using System.IO.MemoryStream buffer = new();
 			emailContent.WriteTo(buffer);
-			string encodedEmail = Microsoft.IdentityModel.Tokens.Base64UrlEncoder.Encode(buffer.ToArray());
+			string encodedEmail = buffer.ToString().ToBase64String();
 			return new() { Raw = encodedEmail };
 		}
 

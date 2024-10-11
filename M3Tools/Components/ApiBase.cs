@@ -8,7 +8,7 @@ using SPPBC.M3Tools.M3API;
 using SPPBC.M3Tools.Types.Extensions;
 
 // FIXME: Convert Database on here and API to use a non-relational (i.e MongoDB)
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
 	/// <summary>
 	/// All the pathing information for the API
@@ -49,16 +49,19 @@ namespace SPPBC.M3Tools.Database
 		/// Order based path
 		/// </summary>
 		public static string Orders = string.Join(Separator, Base, "orders");
+
+		/// <summary>
+		/// Google based path
+		/// </summary>
+		public static string Google = string.Join(Separator, Base, "google");
 		#endregion
 	}
 
 	/// <summary>
 	/// The parent object for managing database connection and integrations
 	/// </summary>
-	public abstract partial class Database
+	public abstract partial class ApiBase
 	{
-		private readonly System.Net.Http.HttpClient client;
-
 		/// <summary>
 		/// The username to use for the API calls
 		/// </summary>
@@ -66,7 +69,7 @@ namespace SPPBC.M3Tools.Database
 		[DefaultValue("username")]
 		[Description("The username to use with the API calls")]
 		[Category("Connection")]
-		public string Username { private get; set; }
+		public string Username => Environment.GetEnvironmentVariable("api_username").Decrypt();
 
 		/// <summary>
 		/// The password to use for the API calls
@@ -76,7 +79,7 @@ namespace SPPBC.M3Tools.Database
 		[DefaultValue("password")]
 		[Description("The password to use with the API calls")]
 		[Category("Connection")]
-		public string Password { private get; set; }
+		public string Password => Environment.GetEnvironmentVariable("api_password").Decrypt();
 
 		/// <summary>
 		/// The URL to use for the API calls
@@ -85,7 +88,7 @@ namespace SPPBC.M3Tools.Database
 		[DefaultValue("http://localhost:3000")]
 		[Description("The URL value to use for API calls")]
 		[Category("Connection")]
-		public string BaseUrl { private get; set; }
+		public string BaseUrl => Environment.GetEnvironmentVariable("api_base_url").Decrypt();
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -95,27 +98,36 @@ namespace SPPBC.M3Tools.Database
 		/// <summary>
 		/// 
 		/// </summary>
-		protected Database() => InitializeComponent();
+		protected ApiBase() => InitializeComponent();
+
+		/// <summary>
+		/// Parse the response from the API call
+		/// </summary>
+		/// <returns></returns>
+		protected virtual R ParseResponse<R>(string value) => JSON.ConvertFromJSON<R>(value);
 
 		internal async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, string payload, System.Threading.CancellationToken cancellationToken = default)
 			=> await ExecuteAsync(method, path, new System.Net.Http.StringContent(payload), cancellationToken);
 
 		private async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
-			=> await ExecuteWithResultAsync<bool>(method, path, payload, ct);
+		{
+			_ = await ExecuteWithResultAsync(method, path, payload, ct);
+
+			return true;
+		}
 
 		/// <summary>
 		/// Calls the API, using the async/await functionality
 		/// </summary>
-		/// <typeparam name="R"></typeparam>
 		/// <param name="method"></param>
 		/// <param name="path"></param>
 		/// <param name="body"></param>
 		/// <param name="ct"></param>
 		/// <returns></returns>
-		protected async Task<R> ExecuteWithResultAsync<R>(System.Net.Http.HttpMethod method, string path, string body, System.Threading.CancellationToken ct)
-			=> await ExecuteWithResultAsync<R>(method, path, new System.Net.Http.StringContent(body ?? string.Empty, System.Text.Encoding.UTF8, "application/json"), ct);
+		protected async Task<string> ExecuteWithResultAsync(System.Net.Http.HttpMethod method, string path, string body = default, System.Threading.CancellationToken ct = default)
+			=> await ExecuteWithResultAsync(method, path, new System.Net.Http.StringContent(body ?? string.Empty, System.Text.Encoding.UTF8, "application/json"), ct);
 
-		private async Task<R> ExecuteWithResultAsync<R>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
+		private async Task<string> ExecuteWithResultAsync(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
 		{
 			Console.WriteLine("Starting API call...");
 			Debug.WriteLine($"Base URL: {BaseUrl}", "API");
@@ -147,24 +159,24 @@ namespace SPPBC.M3Tools.Database
 				Debug.WriteLine(body, "API");
 
 				// TODO: Make this look and feel better
-				return !res.IsSuccessStatusCode
-					? throw res.StatusCode switch
+				return res.IsSuccessStatusCode
+					? body : throw res.StatusCode switch
 					{
 						System.Net.HttpStatusCode.Unauthorized => new Exceptions.AuthorizationException(body),
 						System.Net.HttpStatusCode.NotFound => new Exceptions.NotFoundException(body),
 						System.Net.HttpStatusCode.Forbidden => new Exceptions.ApiException(body),
 						System.Net.HttpStatusCode.InternalServerError => new Exceptions.ApiException(body),
 						_ => new Exceptions.ApiException("Unknown API error")
-					}
-					: typeof(R) != typeof(bool) ? JSON.ConvertFromJSON<R>(body) : default;
+					};
 			}
 			catch (AggregateException agg)
 			{
+				Exception baseEx = agg.GetBaseException();
 				Console.Error.WriteLine("Error occurred in database API call...");
 				Console.Error.WriteLine(agg.StackTrace);
-				Debug.WriteLine($"Base Exception Type: {agg.GetBaseException().GetType()}", "API");
-				Debug.WriteLine($"Base Exception Message: {agg.GetBaseException().Message}", "API");
-				throw new Exceptions.ApiException(agg.GetBaseException().Message);
+				Debug.WriteLine($"Base Exception Type: {baseEx.GetType()}", "API Error");
+				Debug.WriteLine($"Base Exception Message: {baseEx.Message}", "API Error");
+				throw new Exceptions.ApiException(baseEx.Message);
 			}
 		}
 	}

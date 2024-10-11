@@ -2,7 +2,7 @@
 
 namespace SPPBC.M3Tools.GTools
 {
-    public partial class GDrive : Types.GTools.API
+    public partial class GDrive : API.GTools.GoogleBase
     {
 
         [DebuggerNonUserCode()]

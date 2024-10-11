@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using SPPBC.M3Tools.Database;
+using SPPBC.M3Tools.API;
 
 namespace M3App
 {
@@ -47,10 +47,10 @@ namespace M3App
             this.btn_ListenerManagement = new System.Windows.Forms.Button();
             this.pnl_Controls = new System.Windows.Forms.Panel();
             this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
-            this.dbCustomer = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
-            this.dbListener = new SPPBC.M3Tools.Database.ListenerDatabase(this.components);
-            this.dbInventory = new SPPBC.M3Tools.Database.InventoryDatabase(this.components);
-            this.dbOrders = new SPPBC.M3Tools.Database.OrdersDatabase(this.components);
+            this.dbCustomer = new SPPBC.M3Tools.API.CustomerDatabase(this.components);
+            this.dbListener = new SPPBC.M3Tools.API.ListenerDatabase(this.components);
+            this.dbInventory = new SPPBC.M3Tools.API.InventoryDatabase(this.components);
+            this.dbOrders = new SPPBC.M3Tools.API.OrdersDatabase(this.components);
             this.ss_Queries.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,27 +130,27 @@ namespace M3App
             // 
             // dbCustomer
             // 
-            this.dbCustomer.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbCustomer.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbCustomer.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbCustomer.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbCustomer.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbCustomer.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // dbListener
             // 
-            this.dbListener.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbListener.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbListener.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbListener.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbListener.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbListener.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // dbInventory
             // 
-            this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbInventory.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbInventory.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbInventory.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // dbOrders
             // 
-            this.dbOrders.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbOrders.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbOrders.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbOrders.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbOrders.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbOrders.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // MainForm
             // 

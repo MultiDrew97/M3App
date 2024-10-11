@@ -41,7 +41,7 @@ namespace SPPBC.M3Tools
             TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             pf_Password = new PasswordField();
             ConfirmPasswordField1 = new ConfirmPasswordField();
-            db_Users = new Database.UserDatabase(components);
+            db_Users = new API.UserDatabase(components);
             TableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -124,7 +124,7 @@ namespace SPPBC.M3Tools
             PerformLayout();
 
         }
-        internal Database.UserDatabase db_Users;
+        internal API.UserDatabase db_Users;
         internal System.Windows.Forms.Button btn_Cancel;
         internal System.Windows.Forms.Button btn_Reset;
         internal System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;

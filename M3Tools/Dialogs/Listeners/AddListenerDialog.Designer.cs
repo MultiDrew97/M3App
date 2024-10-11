@@ -41,7 +41,7 @@ namespace SPPBC.M3Tools.Dialogs
             btn_Cancel.Click += new EventHandler(Cancel);
             gi_Name = new GenericInputPair();
             gi_Email = new GenericInputPair();
-            dbListeners = new Database.ListenerDatabase(components);
+            dbListeners = new API.ListenerDatabase(components);
             TableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -133,6 +133,6 @@ namespace SPPBC.M3Tools.Dialogs
         internal System.Windows.Forms.Button btn_Cancel;
         internal GenericInputPair gi_Name;
         internal GenericInputPair gi_Email;
-        internal Database.ListenerDatabase dbListeners;
+        internal API.ListenerDatabase dbListeners;
     }
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using SPPBC.M3Tools.M3API;
 
-namespace SPPBC.M3Tools.Database
+namespace SPPBC.M3Tools.API
 {
 	/// <summary>
 	/// The inventory based API calls
@@ -18,7 +18,7 @@ namespace SPPBC.M3Tools.Database
 		/// <returns></returns>
 		public async Task<Types.Product> GetProduct(int itemID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(itemID)
-				? await ExecuteWithResultAsync<Types.Product>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Inventory, itemID), string.Empty, ct)
+				? ParseResponse<Types.Product>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Inventory, itemID), string.Empty, ct))
 				: throw new ArgumentException();
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace SPPBC.M3Tools.Database
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.InventoryCollection> GetProducts(System.Threading.CancellationToken ct = default)
-			=> await ExecuteWithResultAsync<Types.InventoryCollection>(System.Net.Http.HttpMethod.Get, Paths.Inventory, string.Empty, ct);
+			=> ParseResponse<Types.InventoryCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Inventory, string.Empty, ct));
 
 		/// <summary>
 		/// Add a new product to the database

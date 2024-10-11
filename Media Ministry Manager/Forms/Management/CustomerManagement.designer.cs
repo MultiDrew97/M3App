@@ -34,7 +34,7 @@ namespace M3App
         {
             this.components = new System.ComponentModel.Container();
             this.cdg_Customers = new SPPBC.M3Tools.Data.CustomerDataGrid();
-            this.dbCustomers = new SPPBC.M3Tools.Database.CustomerDatabase(this.components);
+            this.dbCustomers = new SPPBC.M3Tools.API.CustomerDatabase(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cdg_Customers)).BeginInit();
@@ -69,9 +69,9 @@ namespace M3App
             // 
             // dbCustomers
             // 
-            this.dbCustomers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
-            this.dbCustomers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
-            this.dbCustomers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
+            //this.dbCustomers.BaseUrl = global::M3App.Properties.Settings.Default.BaseUrl;
+            //this.dbCustomers.Password = global::M3App.Properties.Settings.Default.ApiPassword;
+            //this.dbCustomers.Username = global::M3App.Properties.Settings.Default.ApiUsername;
             // 
             // CustomerManagement
             // 
@@ -90,6 +90,6 @@ namespace M3App
 
         }
         private SPPBC.M3Tools.Data.CustomerDataGrid cdg_Customers;
-		private SPPBC.M3Tools.Database.CustomerDatabase dbCustomers;
+		private SPPBC.M3Tools.API.CustomerDatabase dbCustomers;
 	}
 }

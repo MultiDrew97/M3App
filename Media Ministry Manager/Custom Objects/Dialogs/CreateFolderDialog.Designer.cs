@@ -92,7 +92,6 @@ namespace M3App
             dt_DriveHeirarchy.Name = "dt_DriveHeirarchy";
             dt_DriveHeirarchy.Size = new Size(303, 266);
             dt_DriveHeirarchy.TabIndex = 2;
-            dt_DriveHeirarchy.Username = global::M3App.Properties.Settings.Default.Username;
             dt_DriveHeirarchy.WithChildren = false;
             // 
             // ip_FolderName

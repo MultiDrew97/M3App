@@ -89,12 +89,7 @@ namespace SPPBC.M3Tools
             dt_DriveHeirarchy.Name = "dt_DriveHeirarchy";
             dt_DriveHeirarchy.Size = new System.Drawing.Size(303, 266);
             dt_DriveHeirarchy.TabIndex = 2;
-            dt_DriveHeirarchy.Username = "";
             dt_DriveHeirarchy.WithChildren = false;
-            // 
-            // gdt_GDrive
-            // 
-            gdt_GDrive.Username = null;
             // 
             // ip_FolderName
             // 

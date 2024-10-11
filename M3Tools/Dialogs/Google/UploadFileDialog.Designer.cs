@@ -172,10 +172,6 @@ namespace SPPBC.M3Tools
             // bw_UploadFiles
             // 
             // 
-            // gdt_GDrive
-            // 
-            gdt_GDrive.Username = null;
-            // 
             // UploadFileDialog
             // 
             AcceptButton = btn_Upload;
