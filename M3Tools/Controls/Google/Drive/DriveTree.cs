@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Types.GTools;
@@ -49,19 +49,10 @@ namespace SPPBC.M3Tools
 		{
 			InitializeComponent();
 
-			_ = gdt_GDrive.Authorize();
-		}
+			bw_FillTable.DoWork += FillTable;
+			bw_FillTable.RunWorkerCompleted += TableFilled;
 
-		/// <summary>
-		/// Fills the table with the provided files
-		/// </summary>
-		/// <param name="treeNodes"></param>
-		public async void FillTable(FileCollection treeNodes)
-		{
-			// TODO: Figure out best way to utilize background worker for filling table instead of doing it all on main thread
-			tv_DriveFiles.Nodes[0].Nodes.Clear();
-			tv_DriveFiles.Nodes[0].Nodes.AddRange(await ParseTree(treeNodes));
-			tv_DriveFiles.Nodes[0].Expand();
+			_ = gdt_GDrive.Authorize();
 		}
 
 		/// <summary>
@@ -69,7 +60,7 @@ namespace SPPBC.M3Tools
 		///	</summary>
 		/// <param name="folders">The collections of files that hold the file hierarchy information.</param>
 		/// <returns>An array of tree nodes, based on the file hierarchy in the file collection.</returns>
-		private async Task<TreeNode[]> ParseTree(FileCollection folders)
+		private TreeNode[] ParseTree(FileCollection folders)
 		{
 			Collection<TreeNode> nodes = [];
 
@@ -81,7 +72,7 @@ namespace SPPBC.M3Tools
 					continue;
 				}
 
-				nodes.Add(new TreeNode(curr.Name, await ParseTree(((Folder)curr).Children)) { Name = curr.Id });
+				nodes.Add(new TreeNode(curr.Name, ParseTree(((Folder)curr).Children)) { Name = curr.Id });
 			}
 
 			return [.. nodes];
@@ -141,10 +132,41 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Reloads the control
 		/// </summary>
-		public async void Reload()
+		public void Reload()
 		{
 			UseWaitCursor = true;
-			FillTable(await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders()));
+			bw_FillTable.RunWorkerAsync(CancellationToken.None);
+		}
+
+		private async void FillTable(object sender, DoWorkEventArgs e)
+		{
+			try
+			{
+				CancellationToken ct = (CancellationToken)e.Argument;
+
+				ct.ThrowIfCancellationRequested();
+
+				// TODO: Figure out best way to utilize background worker for filling table instead of doing it all on main thread
+				FileCollection folders = await (WithChildren ? gdt_GDrive.GetFoldersWithChildren(ct) : gdt_GDrive.GetFolders(ct));
+				e.Result = ParseTree(folders);
+			}
+			catch (OperationCanceledException)
+			{
+				e.Cancel = true;
+			}
+		}
+
+		private void TableFilled(object sender, RunWorkerCompletedEventArgs e)
+		{
+			if (e.Cancelled || e.Error != null)
+			{
+				return;
+			}
+
+			tv_DriveFiles.Nodes["tn_Root"].Nodes.Clear();
+			tv_DriveFiles.Nodes["tn_Root"].Nodes.AddRange(e.Result as TreeNode[]);
+			tv_DriveFiles.Nodes["tn_Root"].Expand();
+
 			UseWaitCursor = false;
 		}
 

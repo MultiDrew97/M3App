@@ -65,7 +65,9 @@ namespace M3App
 		private void Reload(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
+			tsl_Status.Text = "Refreshing drive list...";
 			gdt_Files.Reload();
+			tsl_Status.Text = "Test";
 			UseWaitCursor = false;
 		}
 

@@ -33,108 +33,118 @@ namespace SPPBC.M3Tools
         [DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            var TreeNode1 = new System.Windows.Forms.TreeNode("My Drive Folder");
-            tv_DriveFiles = new System.Windows.Forms.TreeView();
-            gdt_GDrive = new GTools.GDrive(components);
-            ts_Tools = new System.Windows.Forms.ToolStrip();
-            tss_NewItem = new System.Windows.Forms.ToolStripSplitButton();
-            tsmi_NewFolder = new System.Windows.Forms.ToolStripMenuItem();
-            tsmi_NewFolder.Click += new EventHandler(NewFolder);
-            tsmi_NewUpload = new System.Windows.Forms.ToolStripMenuItem();
-            ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            cms_Tools = new ToolsContextMenu();
-            ts_Tools.SuspendLayout();
-            ToolStripContainer1.ContentPanel.SuspendLayout();
-            ToolStripContainer1.TopToolStripPanel.SuspendLayout();
-            ToolStripContainer1.SuspendLayout();
-            SuspendLayout();
-            // 
-            // tv_DriveFiles
-            // 
-            tv_DriveFiles.CheckBoxes = true;
-            tv_DriveFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            tv_DriveFiles.Location = new System.Drawing.Point(0, 0);
-            tv_DriveFiles.Name = "tv_DriveFiles";
-            TreeNode1.Name = "main";
-            TreeNode1.Text = "My Drive Folder";
-            tv_DriveFiles.Nodes.AddRange(new System.Windows.Forms.TreeNode[] { TreeNode1 });
-            tv_DriveFiles.Size = new System.Drawing.Size(625, 475);
-            tv_DriveFiles.TabIndex = 2;
-            // 
-            // ts_Tools
-            // 
-            ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
-            ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            ts_Tools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tss_NewItem });
-            ts_Tools.Location = new System.Drawing.Point(0, 0);
-            ts_Tools.Name = "ts_Tools";
-            ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            ts_Tools.Size = new System.Drawing.Size(625, 25);
-            ts_Tools.Stretch = true;
-            ts_Tools.TabIndex = 3;
-            // 
-            // tss_NewItem
-            // 
-            tss_NewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tss_NewItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmi_NewFolder, tsmi_NewUpload });
-            tss_NewItem.Image = Properties.Resources.NewDocumentOption;
-            tss_NewItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tss_NewItem.Name = "tss_NewItem";
-            tss_NewItem.Size = new System.Drawing.Size(32, 22);
-            tss_NewItem.Text = "New";
-            // 
-            // tsmi_NewFolder
-            // 
-            tsmi_NewFolder.Name = "tsmi_NewFolder";
-            tsmi_NewFolder.Size = new System.Drawing.Size(139, 22);
-            tsmi_NewFolder.Text = "New Folder";
-            // 
-            // tsmi_NewUpload
-            // 
-            tsmi_NewUpload.Name = "tsmi_NewUpload";
-            tsmi_NewUpload.Size = new System.Drawing.Size(139, 22);
-            tsmi_NewUpload.Text = "New Upload";
-            // 
-            // ToolStripContainer1
-            // 
-            // 
-            // ToolStripContainer1.ContentPanel
-            // 
-            ToolStripContainer1.ContentPanel.Controls.Add(tv_DriveFiles);
-            ToolStripContainer1.ContentPanel.Size = new System.Drawing.Size(625, 475);
-            ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ToolStripContainer1.Location = new System.Drawing.Point(0, 0);
-            ToolStripContainer1.Name = "ToolStripContainer1";
-            ToolStripContainer1.Size = new System.Drawing.Size(625, 500);
-            ToolStripContainer1.TabIndex = 4;
-            ToolStripContainer1.Text = "ToolStripContainer1";
-            // 
-            // ToolStripContainer1.TopToolStripPanel
-            // 
-            ToolStripContainer1.TopToolStripPanel.Controls.Add(ts_Tools);
-            // 
-            // cms_Tools
-            // 
-            cms_Tools.Name = "cms_Tools";
-            cms_Tools.Size = new System.Drawing.Size(133, 70);
-            // 
-            // DriveTree
-            // 
-            AutoScaleDimensions = new System.Drawing.SizeF(6.0f, 13.0f);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ContextMenuStrip = cms_Tools;
-            Controls.Add(ToolStripContainer1);
-            Name = "DriveTree";
-            Size = new System.Drawing.Size(625, 500);
-            ts_Tools.ResumeLayout(false);
-            ts_Tools.PerformLayout();
-            ToolStripContainer1.ContentPanel.ResumeLayout(false);
-            ToolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-            ToolStripContainer1.TopToolStripPanel.PerformLayout();
-            ToolStripContainer1.ResumeLayout(false);
-            ToolStripContainer1.PerformLayout();
-            ResumeLayout(false);
+			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("My Drive");
+			this.tv_DriveFiles = new System.Windows.Forms.TreeView();
+			this.gdt_GDrive = new SPPBC.M3Tools.GTools.GDrive(this.components);
+			this.ts_Tools = new System.Windows.Forms.ToolStrip();
+			this.tss_NewItem = new System.Windows.Forms.ToolStripSplitButton();
+			this.tsmi_NewFolder = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmi_NewUpload = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+			this.cms_Tools = new SPPBC.M3Tools.ToolsContextMenu();
+			this.bw_FillTable = new System.ComponentModel.BackgroundWorker();
+			this.ts_Tools.SuspendLayout();
+			this.ToolStripContainer1.ContentPanel.SuspendLayout();
+			this.ToolStripContainer1.TopToolStripPanel.SuspendLayout();
+			this.ToolStripContainer1.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// tv_DriveFiles
+			// 
+			this.tv_DriveFiles.CheckBoxes = true;
+			this.tv_DriveFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tv_DriveFiles.Location = new System.Drawing.Point(0, 0);
+			this.tv_DriveFiles.Name = "tv_DriveFiles";
+			treeNode1.Name = "tn_Root";
+			treeNode1.Text = "My Drive";
+			this.tv_DriveFiles.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+			this.tv_DriveFiles.ShowLines = false;
+			this.tv_DriveFiles.Size = new System.Drawing.Size(625, 475);
+			this.tv_DriveFiles.TabIndex = 2;
+			// 
+			// ts_Tools
+			// 
+			this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
+			this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.ts_Tools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tss_NewItem});
+			this.ts_Tools.Location = new System.Drawing.Point(0, 0);
+			this.ts_Tools.Name = "ts_Tools";
+			this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			this.ts_Tools.Size = new System.Drawing.Size(625, 25);
+			this.ts_Tools.Stretch = true;
+			this.ts_Tools.TabIndex = 3;
+			// 
+			// tss_NewItem
+			// 
+			this.tss_NewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.tss_NewItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmi_NewFolder,
+            this.tsmi_NewUpload});
+			this.tss_NewItem.Image = global::SPPBC.M3Tools.Properties.Resources.NewDocumentOption;
+			this.tss_NewItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tss_NewItem.Name = "tss_NewItem";
+			this.tss_NewItem.Size = new System.Drawing.Size(32, 22);
+			this.tss_NewItem.Text = "New";
+			// 
+			// tsmi_NewFolder
+			// 
+			this.tsmi_NewFolder.Name = "tsmi_NewFolder";
+			this.tsmi_NewFolder.Size = new System.Drawing.Size(139, 22);
+			this.tsmi_NewFolder.Text = "New Folder";
+			this.tsmi_NewFolder.Click += new System.EventHandler(this.NewFolder);
+			// 
+			// tsmi_NewUpload
+			// 
+			this.tsmi_NewUpload.Name = "tsmi_NewUpload";
+			this.tsmi_NewUpload.Size = new System.Drawing.Size(139, 22);
+			this.tsmi_NewUpload.Text = "New Upload";
+			// 
+			// ToolStripContainer1
+			// 
+			// 
+			// ToolStripContainer1.ContentPanel
+			// 
+			this.ToolStripContainer1.ContentPanel.Controls.Add(this.tv_DriveFiles);
+			this.ToolStripContainer1.ContentPanel.Size = new System.Drawing.Size(625, 475);
+			this.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ToolStripContainer1.Location = new System.Drawing.Point(0, 0);
+			this.ToolStripContainer1.Name = "ToolStripContainer1";
+			this.ToolStripContainer1.Size = new System.Drawing.Size(625, 500);
+			this.ToolStripContainer1.TabIndex = 4;
+			this.ToolStripContainer1.Text = "ToolStripContainer1";
+			// 
+			// ToolStripContainer1.TopToolStripPanel
+			// 
+			this.ToolStripContainer1.TopToolStripPanel.Controls.Add(this.ts_Tools);
+			// 
+			// cms_Tools
+			// 
+			this.cms_Tools.Name = "cms_Tools";
+			this.cms_Tools.Size = new System.Drawing.Size(133, 70);
+			// 
+			// bw_FillTable
+			// 
+			this.bw_FillTable.WorkerSupportsCancellation = true;
+			// 
+			// DriveTree
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ContextMenuStrip = this.cms_Tools;
+			this.Controls.Add(this.ToolStripContainer1);
+			this.Name = "DriveTree";
+			this.Size = new System.Drawing.Size(625, 500);
+			this.ts_Tools.ResumeLayout(false);
+			this.ts_Tools.PerformLayout();
+			this.ToolStripContainer1.ContentPanel.ResumeLayout(false);
+			this.ToolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+			this.ToolStripContainer1.TopToolStripPanel.PerformLayout();
+			this.ToolStripContainer1.ResumeLayout(false);
+			this.ToolStripContainer1.PerformLayout();
+			this.ResumeLayout(false);
 
         }
 
@@ -146,5 +156,6 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.ToolStripMenuItem tsmi_NewUpload;
         internal System.Windows.Forms.ToolStripContainer ToolStripContainer1;
         internal ToolsContextMenu cms_Tools;
-    }
+		private System.ComponentModel.BackgroundWorker bw_FillTable;
+	}
 }

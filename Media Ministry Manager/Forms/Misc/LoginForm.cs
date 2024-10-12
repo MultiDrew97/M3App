@@ -56,6 +56,12 @@ namespace M3App
 		// TODO: Figure out more secure way to store login info
 		private void Showing(object sender, EventArgs e)
 		{
+#if DEBUG
+			Username = "username";
+			Password = "password";
+			btn_Login.PerformClick();
+			return;
+#else
 			// MAYBE: Implement a token system to verify logins instead of credentials
 			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("password").Decrypt()))
 			{
@@ -67,6 +73,7 @@ namespace M3App
 			Password = Environment.GetEnvironmentVariable("password").Decrypt();
 
 			btn_Login.PerformClick();
+#endif
 		}
 
 		private void TimerTicking(object sender, EventArgs e)
