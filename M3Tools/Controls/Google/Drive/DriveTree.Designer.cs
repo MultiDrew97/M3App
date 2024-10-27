@@ -43,7 +43,6 @@ namespace SPPBC.M3Tools
 			this.tsmi_NewUpload = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
 			this.cms_Tools = new SPPBC.M3Tools.ToolsContextMenu();
-			this.bw_FillTable = new System.ComponentModel.BackgroundWorker();
 			this.ts_Tools.SuspendLayout();
 			this.ToolStripContainer1.ContentPanel.SuspendLayout();
 			this.ToolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -125,10 +124,6 @@ namespace SPPBC.M3Tools
 			this.cms_Tools.Name = "cms_Tools";
 			this.cms_Tools.Size = new System.Drawing.Size(133, 70);
 			// 
-			// bw_FillTable
-			// 
-			this.bw_FillTable.WorkerSupportsCancellation = true;
-			// 
 			// DriveTree
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +151,5 @@ namespace SPPBC.M3Tools
         internal System.Windows.Forms.ToolStripMenuItem tsmi_NewUpload;
         internal System.Windows.Forms.ToolStripContainer ToolStripContainer1;
         internal ToolsContextMenu cms_Tools;
-		private System.ComponentModel.BackgroundWorker bw_FillTable;
 	}
 }

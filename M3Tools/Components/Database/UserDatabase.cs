@@ -66,7 +66,7 @@ namespace SPPBC.M3Tools.API
 			try
 			{
 				Debug.WriteLine($"Logging in user with username {auth.Username}...");
-				return ParseResponse<Types.User>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct));
+				return await ExecuteWithResultAsync<Types.User>(System.Net.Http.HttpMethod.Post, $"{Paths.Users}/login", JSON.ConvertToJSON(auth), ct);
 			}
 			catch (Exception ex)
 			{

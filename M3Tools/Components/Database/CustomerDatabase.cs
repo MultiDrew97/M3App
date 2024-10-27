@@ -24,7 +24,7 @@ namespace SPPBC.M3Tools.API
 		/// <exception cref="ArgumentException"></exception>
 		public async Task<Types.Customer> GetCustomer(int customerID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(customerID)
-				? ParseResponse<Types.Customer>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Customers, customerID), string.Empty, ct))
+				? await ExecuteWithResultAsync<Types.Customer>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Customers, customerID), string.Empty, ct)
 				: throw new ArgumentException($"Invalid CustomerID provided");
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace SPPBC.M3Tools.API
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.CustomerCollection> GetCustomers(System.Threading.CancellationToken ct = default)
-			=> ParseResponse<Types.CustomerCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Customers, string.Empty, ct));
+			=> await ExecuteWithResultAsync<Types.CustomerCollection>(System.Net.Http.HttpMethod.Get, Paths.Customers, string.Empty, ct);
 
 		/// <summary>
 		/// Add a customer to the database

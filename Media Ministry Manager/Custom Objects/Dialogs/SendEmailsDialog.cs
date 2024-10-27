@@ -30,13 +30,12 @@ namespace M3App
 
 			EmailsCancelled += new EventHandler(Cancelled);
 			EmailsSent += new EventHandler(Sent);
-
-			_ = gmt_Gmail.Authorize();
 		}
 
 		private void BeginSending(object sender, EventArgs e)
 		{
 			btn_Send.Enabled = false;
+
 			EmailDetails details = new();
 
 			if (FileCount > 0)
@@ -66,8 +65,7 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			tsl_Status.Text = "Refreshing drive list...";
-			gdt_Files.Reload();
-			tsl_Status.Text = "Test";
+			gdt_Files.Reload(this, e);
 			UseWaitCursor = false;
 		}
 
@@ -141,12 +139,13 @@ namespace M3App
 				string body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br>", details.SendingLinks));
 				try
 				{
-					_ = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
+					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
+
+					Console.WriteLine($"Message {message.Id} has been sent");
 				}
 				catch (Google.GoogleApiException ex)
 				{
 					Debug.WriteLine(ex.Message);
-					Debug.WriteLine(ex.StackTrace);
 					Console.WriteLine($"Unable to send email to {listener.Name}");
 				}
 				finally

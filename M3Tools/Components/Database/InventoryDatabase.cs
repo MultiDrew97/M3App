@@ -18,7 +18,7 @@ namespace SPPBC.M3Tools.API
 		/// <returns></returns>
 		public async Task<Types.Product> GetProduct(int itemID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(itemID)
-				? ParseResponse<Types.Product>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Inventory, itemID), string.Empty, ct))
+				? await ExecuteWithResultAsync<Types.Product>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Inventory, itemID), string.Empty, ct)
 				: throw new ArgumentException();
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace SPPBC.M3Tools.API
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.InventoryCollection> GetProducts(System.Threading.CancellationToken ct = default)
-			=> ParseResponse<Types.InventoryCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Inventory, string.Empty, ct));
+			=> await ExecuteWithResultAsync<Types.InventoryCollection>(System.Net.Http.HttpMethod.Get, Paths.Inventory, string.Empty, ct);
 
 		/// <summary>
 		/// Add a new product to the database

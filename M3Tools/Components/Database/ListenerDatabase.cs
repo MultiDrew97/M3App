@@ -21,7 +21,7 @@ namespace SPPBC.M3Tools.API
 		/// <exception cref="ArgumentException"></exception>
 		public async Task<Types.Listener> GetListener(int listenerID, System.Threading.CancellationToken ct = default)
 			=> Utils.ValidID(listenerID)
-				? ParseResponse<Types.Listener>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Listeners, listenerID), string.Empty, ct))
+				? await ExecuteWithResultAsync<Types.Listener>(System.Net.Http.HttpMethod.Get, string.Join(Paths.Separator, Paths.Listeners, listenerID), string.Empty, ct)
 				: throw new ArgumentException($"Invalid ListenerID provided");
 
 		/// <summary>
@@ -29,7 +29,7 @@ namespace SPPBC.M3Tools.API
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.ListenerCollection> GetListeners(System.Threading.CancellationToken ct = default)
-			=> ParseResponse<Types.ListenerCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Listeners, string.Empty, ct));
+			=> await ExecuteWithResultAsync<Types.ListenerCollection>(System.Net.Http.HttpMethod.Get, Paths.Listeners, string.Empty, ct);
 
 		/// <summary>
 		/// Add a new listener to the database

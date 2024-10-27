@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Threading;
+using System.Linq;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Types.GTools;
@@ -13,6 +13,8 @@ namespace SPPBC.M3Tools
 	/// </summary>
 	public partial class DriveTree
 	{
+		private readonly string _rootName = "tn_root";
+
 		// TODO: Make sure that when a file is checked, as long as not all values are selected, the folder will have the intermediate check
 
 		/// <summary>
@@ -33,6 +35,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// The currently selected node
 		/// </summary>
+		[Browsable(false)]
 		public TreeNode SelectedNode => tv_DriveFiles.SelectedNode;
 
 		/// <summary>
@@ -49,20 +52,26 @@ namespace SPPBC.M3Tools
 		{
 			InitializeComponent();
 
-			bw_FillTable.DoWork += FillTable;
-			bw_FillTable.RunWorkerCompleted += TableFilled;
-
-			_ = gdt_GDrive.Authorize();
+			cms_Tools.RefreshView += new EventHandler(Reload);
 		}
 
 		/// <summary>
-		/// 	Parses the File Collection into a TreeNode array with proper child node nesting.
+		/// Parses the File Collection into a TreeNode array with proper child node nesting.
 		///	</summary>
 		/// <param name="folders">The collections of files that hold the file hierarchy information.</param>
 		/// <returns>An array of tree nodes, based on the file hierarchy in the file collection.</returns>
 		private TreeNode[] ParseTree(FileCollection folders)
 		{
-			Collection<TreeNode> nodes = [];
+			// FIXME: Figure out how to not need recursion for this problem
+			return folders.Select<File, TreeNode>(f =>
+			{
+				return true switch
+				{
+					var _ when f.GetType() == typeof(Folder) => new(f.Name, ParseTree(((Folder)f).Children)),
+					_ => new(f.Name, [])
+				};
+			}).ToArray();
+			/*Collection<TreeNode> nodes = [];
 
 			foreach (File curr in folders)
 			{
@@ -72,10 +81,10 @@ namespace SPPBC.M3Tools
 					continue;
 				}
 
-				nodes.Add(new TreeNode(curr.Name, ParseTree(((Folder)curr).Children)) { Name = curr.Id });
+				nodes.Add(new TreeNode(curr.Name, children: ParseTree(((Folder)curr).Children).ToArray()) { Name = curr.Id });
 			}
 
-			return [.. nodes];
+			return nodes.ToArray();*/
 		}
 
 		private TreeNode GetSelectedNode(TreeNodeCollection nodes)
@@ -109,65 +118,44 @@ namespace SPPBC.M3Tools
 		/// <returns></returns>
 		public Collection<TreeNode> GetSelectedNodes(TreeNodeCollection nodes = null)
 		{
-			Collection<TreeNode> treeNodes = [];
+			Collection<TreeNode> selected = [];
 
 			foreach (TreeNode node in nodes ?? tv_DriveFiles.Nodes)
 			{
 				if (node.Checked)
 				{
-					treeNodes.Add(node);
+					selected.Add(node);
 				}
 
-				if (node.Nodes.Count > 0)
-				{
-					Collection<TreeNode> innerNodes = GetSelectedNodes(node.Nodes);
-					foreach (TreeNode innerNode in innerNodes)
-						treeNodes.Add(innerNode);
-				}
+				if (node.Nodes.Count <= 0)
+					continue;
+
+				foreach (TreeNode child in GetSelectedNodes(node.Nodes))
+					selected.Add(child);
 			}
 
-			return treeNodes;
+			return selected;
 		}
 
 		/// <summary>
 		/// Reloads the control
 		/// </summary>
-		public void Reload()
-		{
-			UseWaitCursor = true;
-			bw_FillTable.RunWorkerAsync(CancellationToken.None);
-		}
-
-		private async void FillTable(object sender, DoWorkEventArgs e)
+		public async void Reload(object sender, EventArgs e)
 		{
 			try
 			{
-				CancellationToken ct = (CancellationToken)e.Argument;
+				UseWaitCursor = true;
 
-				ct.ThrowIfCancellationRequested();
+				FileCollection folders = await (WithChildren ? gdt_GDrive.GetFoldersWithChildren() : gdt_GDrive.GetFolders());
 
-				// TODO: Figure out best way to utilize background worker for filling table instead of doing it all on main thread
-				FileCollection folders = await (WithChildren ? gdt_GDrive.GetFoldersWithChildren(ct) : gdt_GDrive.GetFolders(ct));
-				e.Result = ParseTree(folders);
+				tv_DriveFiles.Nodes[_rootName].Nodes.Clear();
+				tv_DriveFiles.Nodes[_rootName].Nodes.AddRange(ParseTree(folders));
+				tv_DriveFiles.Nodes[_rootName].Expand();
 			}
-			catch (OperationCanceledException)
+			finally
 			{
-				e.Cancel = true;
+				UseWaitCursor = false;
 			}
-		}
-
-		private void TableFilled(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (e.Cancelled || e.Error != null)
-			{
-				return;
-			}
-
-			tv_DriveFiles.Nodes["tn_Root"].Nodes.Clear();
-			tv_DriveFiles.Nodes["tn_Root"].Nodes.AddRange(e.Result as TreeNode[]);
-			tv_DriveFiles.Nodes["tn_Root"].Expand();
-
-			UseWaitCursor = false;
 		}
 
 		private void NewFolder(object sender, EventArgs e)
@@ -177,7 +165,7 @@ namespace SPPBC.M3Tools
 			if (newFolder.ShowDialog() != DialogResult.OK)
 				return;
 
-			Reload();
+			Reload(sender, e);
 		}
 	}
 }

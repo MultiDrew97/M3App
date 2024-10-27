@@ -33,7 +33,7 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void Loading(object sender, EventArgs e) => dt_DriveHeirarchy.Reload();
+		public void Loading(object sender, EventArgs e) => dt_DriveHeirarchy.Reload(this, e);
 
 		private void Upload(object sender, EventArgs e)
 		{
@@ -75,7 +75,7 @@ namespace SPPBC.M3Tools
 
 		}
 
-		private void DialogLoadFinished(object sender, RunWorkerCompletedEventArgs e) => dt_DriveHeirarchy.Reload();
+		private void DialogLoadFinished(object sender, RunWorkerCompletedEventArgs e) => dt_DriveHeirarchy.Reload(this, e);
 
 		private void Finish()
 		{

@@ -2,6 +2,7 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 
 using SPPBC.M3Tools.M3API;
@@ -62,6 +63,8 @@ namespace SPPBC.M3Tools.API
 	/// </summary>
 	public abstract partial class ApiBase
 	{
+		private readonly CancellationTokenSource _tokenSource = new();
+
 		/// <summary>
 		/// The username to use for the API calls
 		/// </summary>
@@ -98,20 +101,33 @@ namespace SPPBC.M3Tools.API
 		/// <summary>
 		/// 
 		/// </summary>
-		protected ApiBase() => InitializeComponent();
+		protected ApiBase()
+		{
+			InitializeComponent();
+
+			Disposed += new EventHandler(Cleanup);
+
+		}
+
+		/// <summary>
+		/// Performs cleanup functions of the API base
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void Cleanup(object sender, EventArgs e) => _tokenSource.Cancel();
 
 		/// <summary>
 		/// Parse the response from the API call
 		/// </summary>
 		/// <returns></returns>
-		protected virtual R ParseResponse<R>(string value) => JSON.ConvertFromJSON<R>(value);
+		//protected virtual R ParseResponse<R>(string value) => JSON.ConvertFromJSON<R>(value);
 
 		internal async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, string payload, System.Threading.CancellationToken cancellationToken = default)
 			=> await ExecuteAsync(method, path, new System.Net.Http.StringContent(payload), cancellationToken);
 
 		private async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
 		{
-			_ = await ExecuteWithResultAsync(method, path, payload, ct);
+			_ = await ExecuteWithResultAsync<bool>(method, path, payload, ct);
 
 			return true;
 		}
@@ -124,10 +140,10 @@ namespace SPPBC.M3Tools.API
 		/// <param name="body"></param>
 		/// <param name="ct"></param>
 		/// <returns></returns>
-		protected async Task<string> ExecuteWithResultAsync(System.Net.Http.HttpMethod method, string path, string body = default, System.Threading.CancellationToken ct = default)
-			=> await ExecuteWithResultAsync(method, path, new System.Net.Http.StringContent(body ?? string.Empty, System.Text.Encoding.UTF8, "application/json"), ct);
+		protected async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, string body = default, System.Threading.CancellationToken ct = default)
+			=> await ExecuteWithResultAsync<T>(method, path, new System.Net.Http.StringContent(body ?? string.Empty, System.Text.Encoding.UTF8, "application/json"), ct);
 
-		private async Task<string> ExecuteWithResultAsync(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
+		private async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
 		{
 			Console.WriteLine("Starting API call...");
 			Debug.WriteLine($"Base URL: {BaseUrl}", "API");
@@ -144,8 +160,8 @@ namespace SPPBC.M3Tools.API
 				client.DefaultRequestHeaders.Authorization = new("Basic", Auth);
 				client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 
-				Console.WriteLine($"Making {method.Method} call to API...");
-				System.Net.Http.HttpResponseMessage res = await (method.Method.ToUpper() switch
+				Console.WriteLine($"Making {method.Method} call to API at path {path}...");
+				System.Net.Http.HttpResponseMessage res = await (method.Method switch
 				{
 					"GET" => client.GetAsync(path, ct),
 					"POST" => client.PostAsync(path, payload, ct),
@@ -160,7 +176,7 @@ namespace SPPBC.M3Tools.API
 
 				// TODO: Make this look and feel better
 				return res.IsSuccessStatusCode
-					? body : throw res.StatusCode switch
+					? JSON.ConvertFromJSON<T>(body) : throw res.StatusCode switch
 					{
 						System.Net.HttpStatusCode.Unauthorized => new Exceptions.AuthorizationException(body),
 						System.Net.HttpStatusCode.NotFound => new Exceptions.NotFoundException(body),

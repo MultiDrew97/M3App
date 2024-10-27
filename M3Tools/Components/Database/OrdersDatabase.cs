@@ -39,7 +39,7 @@ namespace SPPBC.M3Tools.API
 		/// </summary>
 		/// <returns></returns>
 		public async Task<Types.OrderCollection> GetOrders(System.Threading.CancellationToken ct = default)
-			=> ParseResponse<Types.OrderCollection>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct));
+			=> await ExecuteWithResultAsync<Types.OrderCollection>(System.Net.Http.HttpMethod.Get, Paths.Orders, string.Empty, ct);
 
 		/// <summary>
 		/// Add a new order to the database

@@ -1,19 +1,36 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 
 namespace SPPBC.M3Tools.API.GTools
 {
+	/// <summary>
+	/// How the user should be referenced in the GoogleAPI
+	/// </summary>
+	public readonly struct GoogleUserType
+	{
+		/// <summary>
+		/// Value used for Google Drive
+		/// </summary>
+		public static readonly string DRIVE = "user";
+
+		/// <summary>
+		/// Value used for GMail
+		/// </summary>
+		public static readonly string MAIL = "me";
+	}
 
 	/// <summary>
 	/// Class used to store data about the Google API connection
 	/// </summary>
-	public class GoogleBase : ApiBase
+	public abstract class GoogleBase : ApiBase
 	{
 		/// <summary>
 		/// The scopes to use for the API calls
@@ -25,42 +42,22 @@ namespace SPPBC.M3Tools.API.GTools
 		/// </summary>
 		protected string __user;
 
-		internal BaseClientService.Initializer __init = new() { ApplicationName = Application.ProductName, };
+		internal BaseClientService.Initializer __init = new() { ApplicationName = Application.ProductName };
 
-		private FileDataStore SaveLocation =>
-				// TODO: Figure out best saving folder for tokens
-				new(System.IO.Path.Combine(Utils.UserLocation, "Tokens"));/*
-
-		private System.IO.Stream Credentials
-		{
-			get
-			{
-				if (__credsStream == null)
-				{
-					*//*using HttpClient client = new()
-					{
-						BaseAddress = new(Environment.GetEnvironmentVariable("api_base_url").Decrypt()),
-						Timeout = TimeSpan.FromSeconds(30)
-					};
-					string username = Environment.GetEnvironmentVariable("api_username").Decrypt();
-					string password = Environment.GetEnvironmentVariable("api_password").Decrypt();
-					string auth = $"{username}:{password}".ToBase64String();
-
-					client.DefaultRequestHeaders.Authorization = new("Basic", auth);*//*
-
-					_ = base.
-					HttpResponseMessage res = client.GetAsync(CREDS_LOCATION, HttpCompletionOption.ResponseContentRead).Result;
-
-					__credsStream = res.EnsureSuccessStatusCode().Content.ReadAsStreamAsync().Result;
-				}
-
-				return __credsStream;
-			}
-			set => __credsStream = value;
-		}*/
+		/// <summary>
+		/// The location the token is stored
+		/// </summary>
+		protected string SaveLocation =>
+				// TODO: Figure out best saving location for user's tokens
+				System.IO.Path.Combine(Utils.UserLocation, "Tokens");
 
 		/// <summary>
 		/// 
+		/// </summary>
+		protected UserCredential Credentials;
+
+		/// <summary>
+		/// Contains the core logic for everything that has to do with the GoogleAPI
 		/// </summary>
 		/// <param name="user"></param>
 		/// <param name="scopes"></param>
@@ -70,13 +67,16 @@ namespace SPPBC.M3Tools.API.GTools
 			__scopes = scopes;
 		}
 
-		private async Task<UserCredential> LoadCreds(System.Threading.CancellationToken ct)
+		private async Task<UserCredential> LoadCreds(CancellationToken ct = default)
 		{
 			ct.ThrowIfCancellationRequested();
+			Debug.WriteLine("Loading credentials...");
 
-			GoogleClientSecrets res = ParseResponse<GoogleClientSecrets>(await ExecuteWithResultAsync(System.Net.Http.HttpMethod.Get, $"{Paths.Google}/creds"));
+			Debug.WriteLine("Getting google secrets...");
+			GoogleClientSecrets credRes = await ExecuteWithResultAsync<GoogleClientSecrets>(System.Net.Http.HttpMethod.Get, $"{Paths.Google}/creds", ct: ct);
 
-			UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(res.Secrets, __scopes, __user, ct, SaveLocation);
+			Debug.WriteLine($"Checking credentials: {__user}");
+			UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(credRes.Secrets, __scopes, __user, ct, new FileDataStore(SaveLocation, true));
 
 			Debug.WriteLine($"{__user} Creds Stale? {creds.Token.IsStale}");
 
@@ -87,25 +87,30 @@ namespace SPPBC.M3Tools.API.GTools
 		/// Authorize with Google API on behalf of the specified user
 		/// </summary>
 		/// <param name="ct">The cancellation token in case the authorization needs to be canceled</param>
-		public virtual async Task<bool> Authorize(System.Threading.CancellationToken ct = default)
+		protected virtual async Task Authorize(CancellationToken ct = default)
 		{
 			// Place general authorization logic here
 			try
 			{
 				ct.ThrowIfCancellationRequested();
 
-				__init.HttpClientInitializer = await LoadCreds(ct);
+				Credentials ??= await LoadCreds(ct);
 
-				return true;
+				if (Credentials.Token.IsStale && !await Credentials.RefreshTokenAsync(ct))
+					throw new Exceptions.AuthorizationException("Token is stale");
+
+				__init.HttpClientInitializer = Credentials;
+			}
+			catch (OperationCanceledException)
+			{ }
+			catch (TokenResponseException ex)
+			{
+				Console.WriteLine(ex.Message);
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex.Message);
-				Console.Error.WriteLine(ex.Message);
-				Console.Error.WriteLine(ex.StackTrace);
+				throw ex;
 			}
-
-			return false;
 		}
 	}
 }

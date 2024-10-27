@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SPPBC.M3Tools.Types.GTools
 {
@@ -130,6 +131,15 @@ namespace SPPBC.M3Tools.Types.GTools
 		{
 			get
 			{
+				try
+				{
+					return Items.Single(f => f.Id == id);
+				}
+				catch (InvalidOperationException)
+				{
+					return null;
+				}
+
 				foreach (File @file in Items)
 				{
 					if (@file.Id != id)
