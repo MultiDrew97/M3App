@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using SPPBC.M3Tools.Types;
 using SPPBC.M3Tools.Types.Extensions;
 
 namespace M3App
@@ -74,13 +74,14 @@ namespace M3App
 			Environment.SetEnvironmentVariable("api_username", "username".Encrypt());
 			Environment.SetEnvironmentVariable("api_password", "password".Encrypt());
 #else
-			Environment.SetEnvironmentVariable("api_base_url", "https://sppbc.herbivore.site".Encrypt());
-			Environment.SetEnvironmentVariable("api_username", "Preachy2034".Encrypt());
-			Environment.SetEnvironmentVariable("api_password", "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G".Encrypt());
+			Environment.SetEnvironmentVariable("api_base_url", "https://sppbc.herbivore.site".Encrypt(), EnvironmentVariableTarget.Process);
+			Environment.SetEnvironmentVariable("api_username", "Preachy2034".Encrypt(), EnvironmentVariableTarget.Process);
+			Environment.SetEnvironmentVariable("api_password", "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G".Encrypt(), EnvironmentVariableTarget.Process);
 #endif
+			bool updateAvailable = Environment.GetEnvironmentVariable("update-available", EnvironmentVariableTarget.Process) == UpdateStatus.Available;
 
 			// TODO: Allow this to be done with a service instead
-			if (Properties.Settings.Default.UpdateOnStart && await Utils.UpdateAvailable())
+			if (Properties.Settings.Default.UpdateOnStart && updateAvailable)
 			{
 				try
 				{
@@ -90,12 +91,6 @@ namespace M3App
 				{
 					Console.WriteLine("Error downloading file: " + ex.Message);
 				}
-				finally
-				{
-					if (File.Exists(Utils.UpdateSaveLocation))
-						File.Delete(Utils.UpdateSaveLocation);
-				}
-
 			}
 
 			splash.UpdateProgress(50);

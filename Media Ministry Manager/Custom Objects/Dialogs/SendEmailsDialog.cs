@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
@@ -20,6 +21,8 @@ namespace M3App
 		//private readonly EmailDetails details = new();
 
 		private int FileCount => fu_Receipts.Files.Count + gdt_Files.GetSelectedNodes().Count;
+
+		private readonly CancellationTokenSource _tokenSource = new();
 
 		/// <summary>
 		/// 
@@ -141,12 +144,14 @@ namespace M3App
 				{
 					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
 
-					Console.WriteLine($"Message {message.Id} has been sent");
+					Console.WriteLine($"Message to {listener.Name} ({message.Id}) has been sent");
 				}
 				catch (Google.GoogleApiException ex)
 				{
 					Debug.WriteLine(ex.Message);
-					Console.WriteLine($"Unable to send email to {listener.Name}");
+					Console.Error.WriteLine($"Unable to send email to {listener.Name}");
+					Console.Error.WriteLine(ex.Message);
+					Console.Error.WriteLine(ex.StackTrace);
 				}
 				finally
 				{

@@ -19,19 +19,22 @@ namespace SPPBC.M3Tools
 	public readonly partial struct Utils
 	{
 		/// <summary>
-		/// 
+		/// The location where the file to update the app is downloaded to
 		/// </summary>
 		public static string UpdateSaveLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", $"{Application.ProductName}.exe");
 
 		/// <summary>
-		/// 
+		/// The location where the current user's settings are stored
 		/// </summary>
 		public static string UserLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
 
+		private static ProcessStartInfo UpdateProcess => new(UpdateSaveLocation, "/qn") { CreateNoWindow = true, WindowStyle = ProcessWindowStyle.Hidden/*, UseShellExecute = true*/ };
+
+		// TODO: Move this logic to a service instead so that the app can update itself autonomously
 		/// <summary>
 		/// Whether an update is available for the application
 		/// </summary>
-		public static async Task<bool> UpdateAvailable(bool confirm = true)
+		public static async Task<bool> UpdateAvailable()
 		{
 			string text = await new HttpClient().GetStringAsync(Properties.Resources.VERSION_URI);
 			Debug.WriteLine($"Received version text: {text.Trim()}", "Updating");
@@ -42,15 +45,25 @@ namespace SPPBC.M3Tools
 
 			Debug.WriteLine($"Current Version: {current}", "Updating");
 			Debug.WriteLine($"Latest Version: {latest}", "Updating");
-			return current < latest && !(confirm && MessageBox.Show($"An update is available\n\nLatest: {latest}\nCurrent: {current}", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes);
+			return current < latest;
 		}
 
 		/// <summary>
 		/// Update the application
 		/// </summary>
 		/// <returns></returns>
-		public static async Task<bool> Update()
+		public static async Task<bool> Update(bool confirm = true)
 		{
+			if (confirm)
+			{
+				DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+				if (confirmed != DialogResult.Yes)
+				{
+					throw new OperationCanceledException();
+				}
+			}
+
 			// Perform update procedures here
 			HttpClient httpClient = new();
 
@@ -61,15 +74,26 @@ namespace SPPBC.M3Tools
 			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
 
 			// Save file to disk
-			System.IO.File.WriteAllBytes(UpdateSaveLocation, fileBytes);
+			File.WriteAllBytes(UpdateSaveLocation, fileBytes);
 
 			Console.WriteLine($"File downloaded successfully to {UpdateSaveLocation}");
 
 			Console.WriteLine("Starting update client...");
-			_ = Process.Start(UpdateSaveLocation, "/qn");
+
 			Application.Exit();
 
-			return true;
+			Process updateProc = Process.Start(UpdateProcess);
+
+			updateProc.WaitForExit();
+
+			if (File.Exists(UpdateSaveLocation))
+				File.Delete(UpdateSaveLocation);
+
+			return updateProc.ExitCode switch
+			{
+				_ => true
+			};
+
 		}
 
 		/// <summary>

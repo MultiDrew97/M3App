@@ -72,7 +72,7 @@ namespace SPPBC.M3Tools.API
 		[DefaultValue("username")]
 		[Description("The username to use with the API calls")]
 		[Category("Connection")]
-		public string Username => Environment.GetEnvironmentVariable("api_username").Decrypt();
+		public string Username => Environment.GetEnvironmentVariable("api_username", EnvironmentVariableTarget.Process).Decrypt();
 
 		/// <summary>
 		/// The password to use for the API calls
@@ -82,7 +82,7 @@ namespace SPPBC.M3Tools.API
 		[DefaultValue("password")]
 		[Description("The password to use with the API calls")]
 		[Category("Connection")]
-		public string Password => Environment.GetEnvironmentVariable("api_password").Decrypt();
+		public string Password => Environment.GetEnvironmentVariable("api_password", EnvironmentVariableTarget.Process).Decrypt();
 
 		/// <summary>
 		/// The URL to use for the API calls
@@ -91,7 +91,7 @@ namespace SPPBC.M3Tools.API
 		[DefaultValue("http://localhost:3000")]
 		[Description("The URL value to use for API calls")]
 		[Category("Connection")]
-		public string BaseUrl => Environment.GetEnvironmentVariable("api_base_url").Decrypt();
+		public string BaseUrl => Environment.GetEnvironmentVariable("api_base_url", EnvironmentVariableTarget.Process).Decrypt();
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]

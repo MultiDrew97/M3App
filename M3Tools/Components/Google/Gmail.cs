@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
 
 using MimeKit;
 
@@ -67,9 +70,9 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="body"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress @from = null) => Create(new MailboxAddress(to.Name, to.Email), subject, body, from);
+		public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress @from = null) => Create(to, new EmailContent(subject, body), from);
 
-		/// <summary>
+		/*/// <summary>
 		/// Creates an email using the provided information
 		/// </summary>
 		///<param name="to">The address to whom the email is being sent to</param>
@@ -77,7 +80,7 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="body">The body of the email to be sent</param>
 		/// <param name="from">Who the email is being sent from</param>
 		/// <returns></returns>
-		public MimeMessage Create(MailboxAddress to, string subject, string body, MailboxAddress from = null) => Create(to, new EmailContent(subject, body), from);
+		public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress from = null) => Create(to, new EmailContent(subject, body), from);*/
 
 		/// <summary>
 		/// 
@@ -102,17 +105,6 @@ namespace SPPBC.M3Tools.GTools
 
 			return email;
 		}
-
-		/// <summary>
-		/// Create an email to be sent that contains attachment(s)
-		/// </summary>
-		/// <param name="to"></param>
-		/// <param name="subject"></param>
-		/// <param name="body"></param>
-		/// <param name="files"></param>
-		/// <param name="from"></param>
-		/// <returns></returns>
-		public MimeMessage CreateWithAttachment(MailboxAddress to, string subject, string body, IList<string> files, MailboxAddress @from = null) => CreateWithAttachment(to, new EmailContent(subject, body), files, from);
 
 		/// <summary>
 		/// 
@@ -145,42 +137,11 @@ namespace SPPBC.M3Tools.GTools
 		/// <returns>Returns an Email to be sent</returns>
 		private MimeMessage CreateWithAttachment(MailboxAddress to, EmailContent content, IList<string> files, MailboxAddress @from = null)
 		{
-#if DEBUG
 			MimeMessage email = Create(to, content, from);
-			Multipart multipart = [email.Body, .. files.Cast<MimeEntity>()];
+			Multipart multipart = [email.Body,
+				..files.Select<string, MimeEntity>(file => new MimePart(MediaTypeNames.Application.Octet) { Content = new MimeContent(new MemoryStream(System.IO.File.ReadAllBytes(file))), FileName = Path.GetFileName(file), IsAttachment = true, ContentTransferEncoding = ContentEncoding.Base64 })];
 			email.Body = multipart;
 			return email;
-#else
-			MimeMessage email = Create(to, content, from);
-
-			Multipart multipart = [email.Body];
-
-			AttachmentCollection attachments = [];
-
-			foreach (string @file in files)
-				_ = attachments.Add(@file);
-
-			foreach (MimeEntity attachment in attachments)
-				multipart.Add(attachment);
-
-			email.Body = multipart;
-
-			return email;
-#endif
-		}
-
-		/// <summary>
-		/// Create an Email using a premade message
-		/// </summary>
-		/// <param name="emailContent">The email to be created</param>
-		/// <param name="ct"></param>
-		/// <returns>Returns a message to be sent</returns>
-		private Google.Apis.Gmail.v1.Data.Message CreateWithEmail(MimeMessage emailContent, CancellationToken ct)
-		{
-			using System.IO.MemoryStream buffer = new();
-			emailContent.WriteTo(buffer, ct);
-			string encodedEmail = buffer.ToString().ToBase64String();
-			return new() { Raw = encodedEmail };
 		}
 
 		/// <summary>
@@ -189,11 +150,15 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="emailContent">The email to be sent</param>
 		/// <param name="ct"></param>
 		/// <returns>The message itself after being sent</returns>
-		public async Task<Google.Apis.Gmail.v1.Data.Message> Send(MimeMessage emailContent, CancellationToken ct = default)
+		public async Task<Message> Send(MimeMessage emailContent, CancellationToken ct = default)
 		{
 			await Authorize(ct);
 
-			return await __service.Users.Messages.Send(CreateWithEmail(emailContent, ct), emailContent.Sender.Address).ExecuteAsync(ct);
+			ct.ThrowIfCancellationRequested();
+
+			Message body = new() { Raw = emailContent.ToString().ToBase64String() };
+
+			return await __service.Users.Messages.Send(body, emailContent.Sender.Address).ExecuteAsync(ct);
 		}
 	}
 }

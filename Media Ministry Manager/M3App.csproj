@@ -27,7 +27,7 @@
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>AssemblyFileVersion</InheritWinAppVersionFrom>
     <AssemblyFileVersionSettings>IncrementOnDemand.IncrementOnDemandWithResetOnIncrease.IncrementWithResetOnIncrease.None</AssemblyFileVersionSettings>
-    <AssemblyVersion>2024.10.27.16</AssemblyVersion>
+    <AssemblyVersion>2024.10.29.6</AssemblyVersion>
     <AssemblyVersionSettings>YearStamp.MonthStamp.DayStamp.IncrementWithResetOnIncrease</AssemblyVersionSettings>
     <AssemblyInfoFilePath>Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
@@ -53,7 +53,7 @@
     <WebPage>manager.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>5.1.330.0</ApplicationVersion>
+    <ApplicationVersion>5.1.345.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

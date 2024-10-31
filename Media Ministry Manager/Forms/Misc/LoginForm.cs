@@ -61,19 +61,18 @@ namespace M3App
 			Password = "password";
 			btn_Login.PerformClick();
 			return;
-#else
+#endif
 			// MAYBE: Implement a token system to verify logins instead of credentials
-			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("password").Decrypt()))
+			if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("password", EnvironmentVariableTarget.User).Decrypt()))
 			{
 				Reset();
 				return;
 			}
 
-			Username = Environment.GetEnvironmentVariable("username");
-			Password = Environment.GetEnvironmentVariable("password").Decrypt();
+			Username = Environment.GetEnvironmentVariable("username", EnvironmentVariableTarget.User);
+			Password = Environment.GetEnvironmentVariable("password", EnvironmentVariableTarget.User).Decrypt();
 
 			btn_Login.PerformClick();
-#endif
 		}
 
 		private void TimerTicking(object sender, EventArgs e)
@@ -114,11 +113,11 @@ namespace M3App
 					throw new RoleException();
 				}
 
-				Environment.SetEnvironmentVariable("username", Username);
+				Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
 
 				if (SaveCredentials)
 				{
-					Environment.SetEnvironmentVariable("password", Password.Encrypt());
+					Environment.SetEnvironmentVariable("password", Password.Encrypt(), EnvironmentVariableTarget.User);
 				}
 
 				Utils.OpenForm(typeof(MainForm));

@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
+using System.ServiceProcess;
 
-namespace M3App
+using SPPBC.M3Tools;
+using SPPBC.M3Tools.Types;
+
+namespace M3AppServices
 {
-	// TODO: Make sure to update timer to be an actual amount of time instead of every second
-	public partial class UpdateService
+	public partial class UpdateService : ServiceBase
 	{
 		/// <summary>
 		/// 

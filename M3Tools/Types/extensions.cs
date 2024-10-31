@@ -185,7 +185,7 @@ namespace SPPBC.M3Tools.Types.Extensions
 		public static string Decrypt(this string value, Guid salt = default)
 		{
 			if (string.IsNullOrEmpty(value))
-				return value;
+				return string.Empty;
 
 			byte[] bytes = Convert.FromBase64String(value);
 
