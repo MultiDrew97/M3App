@@ -33,7 +33,7 @@
 			// 
 			// UpdateService
 			// 
-			this.ServiceName = "Service1";
+			this.ServiceName = "M3App Updates";
 
 		}
 
