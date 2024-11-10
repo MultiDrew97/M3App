@@ -12,7 +12,11 @@ namespace SPPBC.M3Tools.Types.GTools
 		///	The contents of the email
 		/// </summary>
 		/// <returns></returns>
-		public EmailContent EmailContents;
+		//public EmailContent EmailContents;
+
+		public string Subject;
+
+		public string Body;
 
 		/// <summary>
 		/// The list of any drive links that may have been selected to be sent
@@ -43,7 +47,9 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// </summary>
 		public EmailDetails()
 		{
-			EmailContents = new EmailContent();
+			//EmailContents = new EmailContent();
+			Subject = string.Empty;
+			Body = string.Empty;
 			DriveLinks = [];
 			LocalFiles = [];
 			Recipients = new ListenerCollection();

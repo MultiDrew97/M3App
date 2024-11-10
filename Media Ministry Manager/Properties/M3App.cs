@@ -1,28 +1,43 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static System.IO.Path;
+using static M3App.Properties.Resources;
 
 namespace M3App
 {
 	internal partial class M3App
 	{
-		private static string LOG_LOCATION => System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+		private static StreamWriter _log;
+		private static StreamWriter _error;
+
+		private static StreamWriter Log
+		{
+			get
+			{
+				_log ??= new StreamWriter(Combine(Utils.LOG_LOCATION, CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
+				return _log;
+			}
+		}
+
+		private static StreamWriter Error
+		{
+			get
+			{
+				_error ??= new StreamWriter(Combine(Utils.LOG_LOCATION, CONSOLE_ERROR_FILE), false, Encoding.UTF8);
+				return _error;
+			}
+		}
 
 		[STAThread]
 		private static void Main(string[] args)
 		{
-			if (!System.IO.Directory.Exists(LOG_LOCATION))
-				_ = System.IO.Directory.CreateDirectory(LOG_LOCATION);
-
-			using System.IO.StreamWriter consoleFile = new(System.IO.Path.Combine(LOG_LOCATION, Properties.Resources.CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
-			using System.IO.StreamWriter errorFile = new(System.IO.Path.Combine(LOG_LOCATION, Properties.Resources.CONSOLE_ERROR_FILE), false, Encoding.UTF8);
-
-			Console.SetOut(new MultiOutputWriter(Console.Out, consoleFile));
-			Console.SetError(new MultiOutputWriter(Console.Error, errorFile));
-
 			try
 			{
+				PrepLogs();
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 
@@ -32,23 +47,40 @@ namespace M3App
 			{
 				Console.Error.WriteLine(ex.Message);
 				Console.Error.WriteLine(ex.StackTrace);
-				_ = MessageBox.Show(string.Format(Properties.Resources.UNHANDLED_EXCEPTION.Replace(@"\n", "\n").Replace(@"\t", "\t"), ex.Message), "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				_ = Utils.ShowErrorMessage("Application Error", string.Format(UNHANDLED_EXCEPTION.Replace(@"\n", "\n").Replace(@"\t", "\t"), ex.Message));
 			}
+			finally
+			{
+				Cleanup();
+			}
+		}
+
+		private static void PrepLogs()
+		{
+			if (!Directory.Exists(Utils.LOG_LOCATION))
+				_ = Directory.CreateDirectory(Utils.LOG_LOCATION);
+
+			Utils.CycleLogs();
+
+			Console.SetOut(new MultiOutputWriter(Console.Out, Log));
+			Console.SetError(new MultiOutputWriter(Console.Error, Error));
+		}
+
+		private static void Cleanup()
+		{
+			Log.Close();
+			Error.Close();
 		}
 	}
 
-	internal class MultiOutputWriter : System.IO.TextWriter
+	internal class MultiOutputWriter(params TextWriter[] writers) : TextWriter
 	{
-		private readonly System.IO.TextWriter[] writers;
-
 		public override Encoding Encoding => Encoding.UTF8;
-
-		public MultiOutputWriter(params System.IO.TextWriter[] writers) => this.writers = writers;
 
 		// TODO: Make it so that it automatically outputs with the date and time info of the output as well
 		public override void Write(string value)
 		{
-			foreach (System.IO.TextWriter writer in writers)
+			foreach (TextWriter writer in writers)
 			{
 				writer.Write(value);
 			}
@@ -56,32 +88,26 @@ namespace M3App
 
 		public override void WriteLine(string value)
 		{
-			foreach (System.IO.TextWriter writer in writers)
+			foreach (TextWriter writer in writers)
 			{
 				writer.WriteLine(value);
 			}
 		}
 
-		public override Task WriteAsync(string value)
+		public override async Task WriteAsync(string value)
 		{
-			return Task.Run(() =>
+			foreach (TextWriter writer in writers)
 			{
-				foreach (System.IO.TextWriter writer in writers)
-				{
-					_ = writer.WriteAsync(value);
-				}
-			});
+				await writer.WriteAsync(value);
+			}
 		}
 
-		public override Task WriteLineAsync(string value)
+		public override async Task WriteLineAsync(string value)
 		{
-			return Task.Run(() =>
+			foreach (TextWriter writer in writers)
 			{
-				foreach (System.IO.TextWriter writer in writers)
-				{
-					_ = writer.WriteLineAsync(value);
-				}
-			});
+				await writer.WriteLineAsync(value);
+			}
 		}
 	}
 }

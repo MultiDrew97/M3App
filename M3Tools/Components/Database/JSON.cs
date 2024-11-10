@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -46,7 +47,16 @@ namespace SPPBC.M3Tools.M3API
 			}
 		}
 
-		private static void JsonConversionError(object sender, ErrorEventArgs e) => Console.WriteLine(e.ErrorContext.Path);
+		private static void JsonConversionError(object sender, ErrorEventArgs e)
+		{
+			Console.Error.WriteLine(e.ErrorContext.Path);
+			Console.Error.WriteLine(e.ErrorContext.Member);
+			Console.Error.WriteLine(e.ErrorContext.Error.Message);
+			Console.Error.WriteLine(e.ErrorContext.Error.StackTrace);
+			Console.Error.WriteLine(e.CurrentObject);
+			Console.Error.WriteLine(e.ErrorContext.OriginalObject);
+			_ = Utils.ShowErrorMessage("JSON Parse Error", "Unable to parse the JSON object");
+		}
 
 		/// <summary>
 		/// Converts a JSON string to the respective object type given the type parameter
@@ -54,7 +64,7 @@ namespace SPPBC.M3Tools.M3API
 		/// <typeparam name="T">The type to convert to</typeparam>
 		/// <param name="json">The JSON string</param>
 		/// <returns></returns>
-		public static T ConvertFromJSON<T>(string json)
+		public static async Task<T> ConvertFromJSON<T>(string json)
 		{
 			if (string.IsNullOrWhiteSpace(json) || !(json.Contains("{") && json.Contains("}")))
 			{
@@ -62,7 +72,7 @@ namespace SPPBC.M3Tools.M3API
 				return default;
 			}
 
-			return JsonConvert.DeserializeObject<T>(json, options);
+			return await Task.FromResult(JsonConvert.DeserializeObject<T>(json, options));
 		}
 
 		/// <summary>

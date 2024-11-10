@@ -81,6 +81,40 @@ namespace M3App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        /// &lt;head&gt;
+        /// &lt;style&gt;
+        ///  p {
+        ///   font: normal larger &quot;Times New Roman&quot;, sans-serif;
+        ///  }
+        ///
+        ///  #logo {
+        ///   height: 40%;
+        ///   width: 40%;
+        ///  }
+        ///
+        ///  .center {
+        ///   text-align: center;
+        ///  }
+        ///
+        ///  .center-image img {
+        ///   margin: 1% 0 0 35%;
+        ///  }
+        /// &lt;/style&gt;
+        /// &lt;/head&gt;
+        /// &lt;body&gt;
+        ///  {0}
+        /// &lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string BASE_EMAIL_TEMPLATE {
+            get {
+                return ResourceManager.GetString("BASE_EMAIL_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M3App-error.log.
         /// </summary>
         internal static string CONSOLE_ERROR_FILE {
@@ -108,59 +142,20 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///&lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///
-        ///&lt;p&gt;Hello {0},&lt;/p&gt;&lt;br&gt;
+        ///   Looks up a localized string similar to &lt;p&gt;Hello {0},&lt;/p&gt;&lt;br&gt;
         ///
         ///{1}
         ///&lt;hr&gt;
         ///
         ///&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-        ///		St. Paul Primitive Baptist Church&lt;br&gt;
-        ///		Email Listening Ministry&lt;br&gt;
-        ///		2209 East 14th Street&lt;br&gt;
-        ///		Austin, TX. 78702&lt;/p&gt;
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;.
+        ///  St. Paul Primitive Baptist Church&lt;br&gt;
+        ///  Email Listening Ministry&lt;br&gt;
+        ///  2209 East 14th Street&lt;br&gt;
+        ///  Austin, TX. 78702&lt;/p&gt;.
         /// </summary>
         internal static string CUSTOM_EMAIL_TEMPLATE {
             get {
                 return ResourceManager.GetString("CUSTOM_EMAIL_TEMPLATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///&lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///
-        ///&lt;p&gt;Hello {0},&lt;/p&gt;&lt;br&gt;
-        ///
-        ///{1}&lt;br&gt;
-        ///
-        ///&lt;a href=&quot;{2}&quot;&gt;Drive File&lt;/a&gt;
-        ///
-        ///&lt;hr&gt;
-        ///
-        ///&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-        ///		St. Paul Primitive Baptist Church&lt;br&gt;
-        ///		Email Listening Ministry&lt;br&gt;
-        ///		2209 East 14th Street&lt;br&gt;
-        ///		Austin, TX. 78702&lt;/p&gt;
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;.
-        /// </summary>
-        internal static string CUSTOM_EMAIL_W_ATTACH_TEMPLATE {
-            get {
-                return ResourceManager.GetString("CUSTOM_EMAIL_W_ATTACH_TEMPLATE", resourceCulture);
             }
         }
         
@@ -233,6 +228,15 @@ namespace M3App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 30.
+        /// </summary>
+        internal static string LOGIN_TIMEOUT {
+            get {
+                return ResourceManager.GetString("LOGIN_TIMEOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Logout {
@@ -243,15 +247,11 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!Doctype html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
-        ///        &lt;p&gt;Blessings To You {0},&lt;/p&gt;
+        ///   Looks up a localized string similar to &lt;p&gt;Blessings To You {0},&lt;/p&gt;
         ///
-        ///		&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday&apos;s Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Mes [rest of string was truncated]&quot;;.
+        ///&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday&apos;s Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Message within 24-72hrs. following every Sunday Morning Service.&lt;/p&gt;
+        ///
+        ///&lt;p&gt;We are now now &quot;Live Streaming&quot; through Facebook Live. An Email Option to choose from is Ava [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string NEW_LISTENER_EMAIL_TEMPLATE {
             get {
@@ -269,27 +269,26 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!Doctype html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/manager/css/emails.css&quot;&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
+        ///   Looks up a localized string similar to &lt;p&gt;Greetings {0},&lt;/p&gt;
         ///
-        ///	&lt;p&gt;Greetings {0},&lt;/p&gt;
+        ///&lt;p&gt;Thank you for your blessing of {1:C} for {2}.&lt;/p&gt;
         ///
-        ///        &lt;p&gt;Thank you for your blessing of {1:C} for {2}.&lt;/p&gt;
+        ///&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
         ///
-        ///		&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
+        ///&lt;p&gt;Be Blessed.&lt;/p&gt;
         ///
-        ///		&lt;p&gt;Be Blessed.&lt;/p&gt;
+        ///&lt;p class=&quot;center&quot;&gt;&lt;strong&gt;WE LOVE YOU AND AIN&apos;T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
         ///
-        ///		&lt;p class=&quot;center&quot;&gt;&lt;strong&gt;WE LOVE YOU AND AIN&apos;T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+        ///&lt;hr&gt;
         ///
-        ///		&lt;hr&gt;
-        ///		
-        ///		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-        ///		St. Paul Primitive Baptist Church [rest of string was truncated]&quot;;.
+        ///&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
+        ///St. Paul Primitive Baptist Church&lt;br&gt;
+        ///Email Listening Ministry&lt;br&gt;
+        ///2209 East 14th Street&lt;br&gt;
+        ///Austin, TX. 78702&lt;/p&gt;
+        ///
+        ///&lt;div class=&quot;center-image&quot;&gt;
+        /// &lt;img class=&quot;center&quot; id=&quot;logo&quot; alt=&quot;St. Paul Primitive Baptist  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string RECEIPT_EMAIL {
             get {
@@ -298,17 +297,11 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.herbivore.site/css/emails.css&quot; /&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
-        ///        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
+        ///   Looks up a localized string similar to &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
         ///
-        ///        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
-        ///        &lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
-        ///        &lt;p&gt;You m [rest of string was truncated]&quot;;.
+        ///&lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
+        ///&lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
+        ///&lt;p&gt;You may give an offering to any of the ministries of St. Paul Primitive Baptist Church &lt;em&gt;(ie...Email Ministry General Fund-Tithes/Offering, Building Fund-Restoration Project, Love Off [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SERMON_EMAIL_TEMPLATE {
             get {

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
@@ -20,6 +20,8 @@ namespace M3App
 		private event EndLoginEventHandler EndLogin;
 
 		private delegate void EndLoginEventHandler();
+
+		private CancellationTokenSource _tokenSource;
 
 		private string Username
 		{
@@ -49,7 +51,6 @@ namespace M3App
 			Shown += Showing;
 			BeginLogin += LoginBegin;
 			EndLogin += LoginEnd;
-			FormClosing += LoginClosing;
 		}
 
 		// TODO: Potentially consolidate these function
@@ -75,15 +76,10 @@ namespace M3App
 			btn_Login.PerformClick();
 		}
 
-		private void TimerTicking(object sender, EventArgs e)
-		{
-			lsd_LoadScreen.LoadText = "Failed to connect to server in time. Please try again or contact system support.";
-			lsd_LoadScreen.Closable = true;
-			lf_Login.Clear(SPPBC.M3Tools.Field.Password);
-		}
-
 		private void Reset()
 		{
+			_tokenSource?.Cancel();
+
 			SaveCredentials = false;
 			lf_Login.Clear();
 			tss_UserFeedback.Text = "Please enter your log-in information";
@@ -106,7 +102,10 @@ namespace M3App
 			try
 			{
 				BeginLogin?.Invoke();
-				SPPBC.M3Tools.Types.User user = await dbUsers.Login(Username, Password);
+				_tokenSource = new();
+
+				_tokenSource.CancelAfter(TimeSpan.FromSeconds(int.Parse(Properties.Resources.LOGIN_TIMEOUT)));
+				SPPBC.M3Tools.Types.User user = await dbUsers.Login(Username, Password, _tokenSource.Token);
 
 				if (user.Login.Role != SPPBC.M3Tools.Types.AccountRole.Admin)
 				{
@@ -125,26 +124,31 @@ namespace M3App
 			}
 			catch (RoleException)
 			{
-				lsd_LoadScreen.ShowError("Only admins can use this application. If this is an error, please contact support");
+				_ = Utils.ShowErrorMessage("Login Error", "Only admins can use this application. If this is an error, please contact support");
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
 			}
 			catch (UsernameException)
 			{
-				lsd_LoadScreen.ShowError("We couldn't find an account with that username. Please try again or contact support.");
+				_ = Utils.ShowErrorMessage("Login Error", "We couldn't find an account with that username. Please try again or contact support.");
 				lf_Login.Clear();
 				_ = lf_Login.Focus();
 			}
 			catch (PasswordException)
 			{
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
-				lsd_LoadScreen.ShowError("Incorrect password provided. Please try again or reset your password");
+				_ = Utils.ShowErrorMessage("Login Error", "Incorrect password provided. Please try again or reset your password");
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
+			}
+			catch (OperationCanceledException)
+			{
+				Console.WriteLine("Login attempt was cancelled");
 			}
 			catch (Exception ex)
 			{
+				_ = Utils.ShowErrorMessage("Login Error", $"General Login Error Occurred:\n {ex.Message}");
+				Console.Error.WriteLine(ex.Message);
 				Console.Error.WriteLine(ex.StackTrace);
-				lsd_LoadScreen.ShowError($"Login Error Occurred:\n {ex.Message}");
 				lf_Login.Clear(SPPBC.M3Tools.Field.Password);
 				_ = lf_Login.Focus(SPPBC.M3Tools.Field.Password);
 			}
@@ -178,29 +182,20 @@ namespace M3App
 			Reset();
 		}
 
-		private void LoginClosing(object sender, CancelEventArgs e)
-		{
-			Console.WriteLine("Closing Login form");
-			lsd_LoadScreen.Dispose();
-		}
-
 		private void LoginBegin()
 		{
-			lsd_LoadScreen.LoadText = "Attempting to login...";
-			_ = lsd_LoadScreen.ShowDialog();
-			UseWaitCursor = true;
-			Enabled = false;
+			UseWaitCursor = pnl_Loading.Visible = true;
+			btn_Login.Enabled = false;
 			Opacity = 50d;
-			tmr_LoginTimer.Start();
 		}
 
 		private void LoginEnd()
 		{
-			tmr_LoginTimer.Stop();
 			Opacity = 100d;
-			Enabled = true;
-			UseWaitCursor = false;
-			lsd_LoadScreen.Closable = true;
+			btn_Login.Enabled = true;
+			pnl_Loading.Visible = UseWaitCursor = false;
 		}
+
+		private void CancelLogin(object sender, EventArgs e) => _tokenSource?.Cancel();
 	}
 }

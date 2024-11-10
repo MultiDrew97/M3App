@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using SPPBC.M3Tools.Exceptions;
 using SPPBC.M3Tools.Types;
 using SPPBC.M3Tools.Types.Extensions;
 
@@ -81,15 +82,29 @@ namespace M3App
 			bool updateAvailable = Environment.GetEnvironmentVariable("update-available", EnvironmentVariableTarget.Process) == UpdateStatus.Available;
 
 			// TODO: Allow this to be done with a service instead
-			if (Properties.Settings.Default.UpdateOnStart && updateAvailable)
+			if (Properties.Settings.Default.UpdateOnStart && await Utils.UpdateAvailable())
 			{
+				Console.WriteLine("Update available");
 				try
 				{
-					return !await Utils.Update();
+					await Utils.Update();
+
+					// FIXME: Figure out how to properly start the app back up once installed.
+					//			Figure out how to open after install in installer?
+					Process.Start(new ProcessStartInfo(Application.ProductName)
+					{
+						WorkingDirectory = Application.StartupPath
+					});
+				}
+				catch (UpdateException ex)
+				{
+					MessageBox.Show("Failed to update application. Please try again or notify your administrator.");
+					Console.Error.WriteLine(ex.InnerException.Message);
+					Console.Error.WriteLine(ex.InnerException.StackTrace);
 				}
 				catch (Exception ex)
 				{
-					Console.WriteLine("Error downloading file: " + ex.Message);
+					throw new ApplicationException("Error Occurred in LoadApp (M3AppContext)", ex);
 				}
 			}
 

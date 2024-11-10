@@ -63,10 +63,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 
 		/// </summary>
-		public LoadingScreen()
-		{
-			InitializeComponent();
-		}
+		public LoadingScreen() => InitializeComponent();
 
 		private void LoadingScreen_ClosableChanged(object sender, EventArgs e)
 		{

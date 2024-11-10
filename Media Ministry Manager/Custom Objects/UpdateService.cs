@@ -54,7 +54,7 @@ namespace M3App
 			}
 
 			// TODO: Verify this is accessible in the M3AppContext area from the service
-			Environment.SetEnvironmentVariable("update-available", await Utils.UpdateAvailable() ? UpdateStatus.Available : UpdateStatus.NotAvailable, EnvironmentVariableTarget.Process);
+			//Environment.SetEnvironmentVariable("update-available", await Utils.UpdateAvailable() ? UpdateStatus.Available : UpdateStatus.NotAvailable, EnvironmentVariableTarget.Process);
 		}
 	}
 }

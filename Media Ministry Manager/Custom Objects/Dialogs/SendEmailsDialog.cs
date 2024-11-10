@@ -119,7 +119,7 @@ namespace M3App
 			details.Recipients = recipients.Selection;
 
 			// TODO: Make a class or provider of some sort to store and pull the template data for the user
-			using EmailBodySelection bodySelection = new([new("Sermon", Properties.Resources.SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", Properties.Resources.RECEIPT_EMAIL, "Bless you")]);
+			using EmailBodySelection bodySelection = new(Utils.Templates);
 
 			if (bodySelection.ShowDialog(this) != DialogResult.OK)
 			{
@@ -127,7 +127,9 @@ namespace M3App
 				return;
 			}
 
-			details.EmailContents = bodySelection.Content;
+			details.Subject = bodySelection.Content.Subject;
+			// FIXME: Doesn't like the style input being in the base template. Might have to make a separate setting for now to get it to work
+			details.Body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, bodySelection.Content.Body);
 
 			foreach (File @file in details.DriveLinks)
 			{
@@ -139,10 +141,10 @@ namespace M3App
 			tsp_Progress.Step = (int)Math.Floor(1d / details.Recipients.Count);
 			foreach (Listener listener in details.Recipients)
 			{
-				string body = string.Format(details.EmailContents.Body, listener.Name, string.Join("<br>", details.SendingLinks));
+				string body = string.Format(details.Body, listener.Name, string.Join("<br>", details.SendingLinks));
 				try
 				{
-					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.EmailContents.Subject, body, details.LocalFiles));
+					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.Subject, body, details.LocalFiles));
 
 					Console.WriteLine($"Message to {listener.Name} ({message.Id}) has been sent");
 				}

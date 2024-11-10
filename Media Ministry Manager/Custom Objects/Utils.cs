@@ -1,7 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using SPPBC.M3Tools.Types;
+
+using static M3App.Properties.Resources;
 
 // FIXME: Figure out how to combine the Utils of both projects
 //			- Combine in one file?
@@ -32,11 +37,6 @@ namespace M3App
 		public static bool ValidID(int id) => SPPBC.M3Tools.Utils.ValidID(id);
 
 		/// <summary>
-		/// 
-		/// </summary>
-		public static string UpdateSaveLocation => SPPBC.M3Tools.Utils.UpdateSaveLocation;
-
-		/// <summary>
 		/// Whether an update is available for the application
 		/// </summary>
 		public static Task<bool> UpdateAvailable() => SPPBC.M3Tools.Utils.UpdateAvailable();
@@ -46,6 +46,16 @@ namespace M3App
 		/// </summary>
 		/// <returns></returns>
 		public static async Task<bool> Update() => await SPPBC.M3Tools.Utils.Update();
+
+		/// <summary>
+		/// The list of templates that are part of the application
+		/// </summary>
+		public static TemplateList Templates => [new("Sermon", SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", RECEIPT_EMAIL, "Bless you")];
+
+		/// <summary>
+		/// The location where log files are stored
+		/// </summary>
+		public static string LOG_LOCATION => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
 
 		/// <summary>
 		/// Opens forms of the application, automatically attaching that when the last form is
@@ -70,6 +80,15 @@ namespace M3App
 				throw new ApplicationException($"Failed to open form of type {form.Name}.\n\nError:\n{ex.Message}");
 			}
 		}
+
+		/// <summary>
+		/// Show an error dialog. Can be set to ask for genuine input if needing to retry action
+		/// </summary>
+		/// <param name="subject"></param>
+		/// <param name="message"></param>
+		/// <param name="retriable"></param>
+		/// <returns></returns>
+		public static DialogResult ShowErrorMessage(string subject, string message, bool retriable = false) => SPPBC.M3Tools.Utils.ShowErrorMessage(subject, message, retriable);
 
 		/// <summary>
 		/// Attempts to close all open forms gracefully. Allowing them to close and handle any straggling tasks
@@ -99,11 +118,21 @@ namespace M3App
 		/// <summary>
 		/// Logs the current user out of the application
 		/// </summary>
-		public static void LogOff()
+		public static void LogOff(Control sender) => SPPBC.M3Tools.Utils.LogOff(sender);
+
+		/// <summary>
+		/// Goes through the number of files necessary to keep logs from previous runs
+		/// </summary>
+		public static void CycleLogs()
 		{
-			Environment.SetEnvironmentVariable("username", string.Empty);
-			Environment.SetEnvironmentVariable("password", string.Empty);
-			OpenForm(typeof(LoginForm));
+			// MAYBE: Figure out a better ext to add to logs files from previous runs
+			string cycleTag = ".old";
+
+			if (File.Exists(Path.Combine(LOG_LOCATION, CONSOLE_OUTPUT_FILE)))
+				File.Copy(Path.Combine(LOG_LOCATION, CONSOLE_OUTPUT_FILE), Path.Combine(LOG_LOCATION, $"{CONSOLE_OUTPUT_FILE}{cycleTag}"), true);
+
+			if (File.Exists(Path.Combine(LOG_LOCATION, CONSOLE_ERROR_FILE)))
+				File.Copy(Path.Combine(LOG_LOCATION, CONSOLE_ERROR_FILE), Path.Combine(LOG_LOCATION, $"{CONSOLE_ERROR_FILE}{cycleTag}"), true);
 		}
 	}
 }

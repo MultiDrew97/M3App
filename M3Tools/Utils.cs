@@ -7,6 +7,8 @@ using System.Windows.Forms;
 
 using Microsoft.VisualBasic.CompilerServices;
 
+using SPPBC.M3Tools.Exceptions;
+
 namespace SPPBC.M3Tools
 {
 	// FIXME: Figure out how to combine the Utils of both projects
@@ -21,14 +23,36 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// The location where the file to update the app is downloaded to
 		/// </summary>
-		public static string UpdateSaveLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", $"{Application.ProductName}.exe");
+		private static readonly string _updateSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", $"{Application.ProductName}.exe");
 
 		/// <summary>
 		/// The location where the current user's settings are stored
 		/// </summary>
 		public static string UserLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
 
-		private static ProcessStartInfo UpdateProcess => new(UpdateSaveLocation, "/qn") { CreateNoWindow = true, WindowStyle = ProcessWindowStyle.Hidden/*, UseShellExecute = true*/ };
+		/// <summary>
+		/// Show an error dialog. Can be set to ask for genuine input if needing to retry action
+		/// </summary>
+		/// <param name="subject"></param>
+		/// <param name="message"></param>
+		/// <param name="retriable"></param>
+		public static DialogResult ShowErrorMessage(string subject, string message, bool retriable = false) => MessageBox.Show(message, subject, retriable ? MessageBoxButtons.YesNo : MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+		/// <summary>
+		/// Logs the current user
+		/// </summary>
+		public static Task LogOff(Control sender)
+		{
+			// TODO: Find a way to speed up the logout process
+			//			The Environment variables are taking a long time to actually complete
+			sender.UseWaitCursor = true;
+
+			return Task.Run(() =>
+			{
+				Environment.SetEnvironmentVariable("username", string.Empty, EnvironmentVariableTarget.User);
+				Environment.SetEnvironmentVariable("password", string.Empty, EnvironmentVariableTarget.User);
+			});
+		}
 
 		// TODO: Move this logic to a service instead so that the app can update itself autonomously
 		/// <summary>
@@ -54,45 +78,58 @@ namespace SPPBC.M3Tools
 		/// <returns></returns>
 		public static async Task<bool> Update(bool confirm = true)
 		{
-			if (confirm)
+			try
 			{
-				DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-				if (confirmed != DialogResult.Yes)
+				if (confirm)
 				{
-					throw new OperationCanceledException();
+					DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+					if (confirmed != DialogResult.Yes)
+					{
+						throw new OperationCanceledException();
+					}
 				}
+
+				// Perform update procedures here
+				HttpClient httpClient = new();
+
+				using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UDPATE_LOCATION);
+
+				Debug.WriteLine("File has been retrieved. Starting to download...");
+				_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
+				byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+				// Save file to disk
+				File.WriteAllBytes(_updateSaveLocation, fileBytes);
+
+				Console.WriteLine($"File downloaded successfully to {_updateSaveLocation}");
+
+				Console.WriteLine("Starting update client...");
+
+				Application.Exit();
+
+				Process updateProc = Process.Start(new ProcessStartInfo(_updateSaveLocation)
+				{
+					CreateNoWindow = true,
+					WindowStyle = ProcessWindowStyle.Hidden,
+					UseShellExecute = true
+				});
+
+				updateProc.WaitForExit();
+
+				if (File.Exists(_updateSaveLocation))
+					File.Delete(_updateSaveLocation);
+
+				return updateProc.ExitCode switch
+				{
+					0 => true,
+					_ => false
+				};
 			}
-
-			// Perform update procedures here
-			HttpClient httpClient = new();
-
-			using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UDPATE_LOCATION);
-
-			Debug.WriteLine("File has been retrieved. Starting to download...");
-			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
-			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-
-			// Save file to disk
-			File.WriteAllBytes(UpdateSaveLocation, fileBytes);
-
-			Console.WriteLine($"File downloaded successfully to {UpdateSaveLocation}");
-
-			Console.WriteLine("Starting update client...");
-
-			Application.Exit();
-
-			Process updateProc = Process.Start(UpdateProcess);
-
-			updateProc.WaitForExit();
-
-			if (File.Exists(UpdateSaveLocation))
-				File.Delete(UpdateSaveLocation);
-
-			return updateProc.ExitCode switch
+			catch (Exception ex)
 			{
-				_ => true
-			};
+				throw new UpdateException(ex.Message, ex);
+			}
 
 		}
 

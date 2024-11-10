@@ -154,10 +154,12 @@ namespace SPPBC.M3Tools.API
 				{
 					BaseAddress = new(BaseUrl),
 					Timeout = TimeSpan.FromSeconds(30),
+					DefaultRequestHeaders = {
+						Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Auth),
+					}
 				};
 
 				Console.WriteLine("Setting up client headers...");
-				client.DefaultRequestHeaders.Authorization = new("Basic", Auth);
 				client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 
 				Console.WriteLine($"Making {method.Method} call to API at path {path}...");
@@ -171,12 +173,13 @@ namespace SPPBC.M3Tools.API
 				});
 
 				Console.WriteLine("API call complete. Parsing response body...");
-				string body = await res.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
+				string body = await res.Content.ReadAsStringAsync();
+				Console.WriteLine(body);
 				Debug.WriteLine(body, "API");
 
-				// TODO: Make this look and feel better
 				return res.IsSuccessStatusCode
-					? JSON.ConvertFromJSON<T>(body) : throw res.StatusCode switch
+					? await JSON.ConvertFromJSON<T>(body)
+					: throw res.StatusCode switch
 					{
 						System.Net.HttpStatusCode.Unauthorized => new Exceptions.AuthorizationException(body),
 						System.Net.HttpStatusCode.NotFound => new Exceptions.NotFoundException(body),

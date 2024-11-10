@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
@@ -87,16 +86,15 @@ namespace SPPBC.M3Tools
 		// TODO: Create the Orders based events here as well
 
 		/// <summary>
-		/// The location to save the installer for the application when updating
-		/// </summary>
-		private string DownloadLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp", "M3AppSetup.exe");
-
-		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
 		public MainMenuStrip() => InitializeComponent();
 
-		private void LogoutApplication(object sender, EventArgs e) => Logout?.Invoke(sender, e);
+		private async void LogoutApplication(object sender, EventArgs e)
+		{
+			await Utils.LogOff(Parent);
+			Logout?.Invoke(sender, e);
+		}
 
 		private void Exit(object sender, EventArgs e) => ExitApplication?.Invoke(sender, e);
 

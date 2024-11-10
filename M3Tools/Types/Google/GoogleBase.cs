@@ -51,6 +51,8 @@ namespace SPPBC.M3Tools.API.GTools
 				// TODO: Figure out best saving location for user's tokens
 				System.IO.Path.Combine(Utils.UserLocation, "Tokens");
 
+		protected GoogleClientSecrets _secrets;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -73,10 +75,10 @@ namespace SPPBC.M3Tools.API.GTools
 			Debug.WriteLine("Loading credentials...");
 
 			Debug.WriteLine("Getting google secrets...");
-			GoogleClientSecrets credRes = await ExecuteWithResultAsync<GoogleClientSecrets>(System.Net.Http.HttpMethod.Get, $"{Paths.Google}/creds", ct: ct);
-
+			_secrets ??= await ExecuteWithResultAsync<GoogleClientSecrets>(System.Net.Http.HttpMethod.Get, $"{Paths.Google}/creds", ct: ct);
 			Debug.WriteLine($"Checking credentials: {__user}");
-			UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(credRes.Secrets, __scopes, __user, ct, new FileDataStore(SaveLocation, true));
+
+			UserCredential creds = await GoogleWebAuthorizationBroker.AuthorizeAsync(_secrets.Secrets, __scopes, __user, ct, new FileDataStore(SaveLocation, true));
 
 			Debug.WriteLine($"{__user} Creds Stale? {creds.Token.IsStale}");
 
@@ -105,11 +107,7 @@ namespace SPPBC.M3Tools.API.GTools
 			{ }
 			catch (TokenResponseException ex)
 			{
-				Console.WriteLine(ex.Message);
-			}
-			catch (Exception ex)
-			{
-				throw ex;
+				Console.Error.WriteLine(ex.Message);
 			}
 		}
 	}

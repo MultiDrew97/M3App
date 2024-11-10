@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using SPPBC.M3Tools;
-
 namespace M3App
 {
 	/// <summary>
@@ -89,7 +87,7 @@ namespace M3App
 		private void Logout(object sender, EventArgs e)
 		{
 			UseWaitCursor = true;
-			Utils.LogOff();
+			Utils.OpenForm(typeof(LoginForm));
 			Close();
 		}
 

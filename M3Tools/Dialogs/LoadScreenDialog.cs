@@ -73,28 +73,21 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 
 		/// </summary>
-		public LoadScreenDialog()
-		{
-			InitializeComponent();
-		}
+		public LoadScreenDialog() => InitializeComponent();
 
 		/// <summary>
 		/// Show the loading screen
 		/// </summary>
 		/// <returns></returns>
-		public DialogResult ShowDialog()
-		{
-			LoadingScreen.Show();
-			return default;
-		}
+		public DialogResult ShowDialog(IWin32Window owner = null) => LoadingScreen.ShowDialog(owner);
 
 		private void DialogDisposed(object sender, EventArgs e)
 		{
-			if (LoadingScreen is not null)
-			{
-				LoadingScreen.Close();
-				LoadingScreen.Dispose();
-			}
+			if (LoadingScreen is null)
+				return;
+
+			LoadingScreen.Close();
+			LoadingScreen.Dispose();
 		}
 
 		/// <summary>

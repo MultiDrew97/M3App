@@ -153,8 +153,8 @@ namespace M3App
 
 		private void LogOff(object sender, EventArgs e)
 		{
+			Utils.OpenForm(typeof(LoginForm));
 			Close();
-			Utils.LogOff();
 		}
 
 		private void Exit(object sender, EventArgs e) => Utils.CloseApplication();

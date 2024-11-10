@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 
+// TODO: Make it so these come from files in a directory that can be changed by the user
+//			This prevents from having to push a new version, just because there was a template change. Will also help in keeping more templates
 namespace SPPBC.M3Tools.Types
 {
 	/// <summary>
-	/// A class containing the informaion for email templates
+	/// A class containing the information for email templates
 	/// </summary>
 	public class Template
 	{

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 
@@ -6,6 +7,9 @@ namespace M3AppServices
 {
 	internal static class Program
 	{
+		private static readonly ServiceInstaller _installer = new ServiceInstaller() { a };
+		private static readonly System.Collections.IDictionary _serviceState;
+
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -36,8 +40,9 @@ namespace M3AppServices
 		{
 #if DEBUG
 			Console.WriteLine("Services have been installed");
-			ServiceInstaller temp = new ServiceInstaller();
 
+			ServiceInstaller temp = new ServiceInstaller();
+			temp.Install(_serviceState);
 #else
 			ServiceBase[] ServicesToRun;
 			ServicesToRun = new ServiceBase[]
@@ -50,7 +55,13 @@ namespace M3AppServices
 
 		private static void UninstallServices()
 		{
-
+			ServiceInstaller temp = new ServiceInstaller();
+			temp.Uninstall(_serviceState);
+			_ = Process.Start(new ProcessStartInfo()
+			{
+				CreateNoWindow = true,
+				UseShellExecute = true
+			});
 		}
 	}
 }
