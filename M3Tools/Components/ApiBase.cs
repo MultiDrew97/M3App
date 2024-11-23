@@ -117,15 +117,14 @@ namespace SPPBC.M3Tools.API
 		protected virtual void Cleanup(object sender, EventArgs e) => _tokenSource.Cancel();
 
 		/// <summary>
-		/// Parse the response from the API call
+		/// Make a call to the API without using 
 		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="path"></param>
+		/// <param name="payload"></param>
+		/// <param name="ct"></param>
 		/// <returns></returns>
-		//protected virtual R ParseResponse<R>(string value) => JSON.ConvertFromJSON<R>(value);
-
-		internal async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, string payload, System.Threading.CancellationToken cancellationToken = default)
-			=> await ExecuteAsync(method, path, new System.Net.Http.StringContent(payload), cancellationToken);
-
-		private async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
+		protected internal async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, string payload, CancellationToken ct = default)
 		{
 			_ = await ExecuteWithResultAsync<bool>(method, path, payload, ct);
 
@@ -140,10 +139,10 @@ namespace SPPBC.M3Tools.API
 		/// <param name="body"></param>
 		/// <param name="ct"></param>
 		/// <returns></returns>
-		protected async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, string body = default, System.Threading.CancellationToken ct = default)
+		protected internal async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, string body = default, CancellationToken ct = default)
 			=> await ExecuteWithResultAsync<T>(method, path, new System.Net.Http.StringContent(body ?? string.Empty, System.Text.Encoding.UTF8, "application/json"), ct);
 
-		private async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, System.Threading.CancellationToken ct)
+		private async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, CancellationToken ct)
 		{
 			Console.WriteLine("Starting API call...");
 			Debug.WriteLine($"Base URL: {BaseUrl}", "API");

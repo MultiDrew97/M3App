@@ -127,9 +127,9 @@ namespace M3App
 				return;
 			}
 
-			details.Subject = bodySelection.Content.Subject;
+			string subject = bodySelection.Content.Subject;
 			// FIXME: Doesn't like the style input being in the base template. Might have to make a separate setting for now to get it to work
-			details.Body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, bodySelection.Content.Body);
+			//string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, bodySelection.Content.Body);
 
 			foreach (File @file in details.DriveLinks)
 			{
@@ -139,12 +139,13 @@ namespace M3App
 			tsp_Progress.Value = 0;
 			tsp_Progress.Maximum = details.Recipients.Count;
 			tsp_Progress.Step = (int)Math.Floor(1d / details.Recipients.Count);
+
 			foreach (Listener listener in details.Recipients)
 			{
-				string body = string.Format(details.Body, listener.Name, string.Join("<br>", details.SendingLinks));
 				try
 				{
-					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(gmt_Gmail.CreateWithAttachment(listener, details.Subject, body, details.LocalFiles));
+					MimeKit.MimeMessage email = gmt_Gmail.CreateWithAttachment(listener, subject, GetEmailBody(listener, bodySelection.Content.Body, details.SendingLinks), details.LocalFiles);
+					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(email);
 
 					Console.WriteLine($"Message to {listener.Name} ({message.Id}) has been sent");
 				}
@@ -164,6 +165,12 @@ namespace M3App
 			EmailsSent?.Invoke(this, EventArgs.Empty);
 		}
 
+		private string GetEmailBody(Listener listener, string body, System.Collections.Generic.List<string> links)
+		{
+			string temp = string.Format(body, listener.Name, string.Join("<br>", links));
+			return string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, temp);
+		}
+
 		private void EmailsPrepped(object sender, RunWorkerCompletedEventArgs e)
 		{
 			if (e.Cancelled || e.Error is not null || e.Result is not EmailDetails details)
@@ -171,7 +178,6 @@ namespace M3App
 				EmailsCancelled?.Invoke(this, EventArgs.Empty);
 				return;
 			}
-
 		}
 
 		// TODO: Make it so these can distinguish between a cancel and a failure

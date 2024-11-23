@@ -81,11 +81,7 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        /// &lt;head&gt;
-        /// &lt;style&gt;
-        ///  p {
+        ///   Looks up a localized string similar to p {
         ///   font: normal larger &quot;Times New Roman&quot;, sans-serif;
         ///  }
         ///
@@ -100,11 +96,24 @@ namespace M3App.Properties {
         ///
         ///  .center-image img {
         ///   margin: 1% 0 0 35%;
-        ///  }
+        ///  }.
+        /// </summary>
+        internal static string BASE_EMAIL_STYLE {
+            get {
+                return ResourceManager.GetString("BASE_EMAIL_STYLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        /// &lt;head&gt;
+        /// &lt;style&gt;
+        ///{0}
         /// &lt;/style&gt;
         /// &lt;/head&gt;
         /// &lt;body&gt;
-        ///  {0}
+        ///  {1}
         /// &lt;/body&gt;
         ///&lt;/html&gt;.
         /// </summary>
@@ -145,6 +154,7 @@ namespace M3App.Properties {
         ///   Looks up a localized string similar to &lt;p&gt;Hello {0},&lt;/p&gt;&lt;br&gt;
         ///
         ///{1}
+        ///
         ///&lt;hr&gt;
         ///
         ///&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;

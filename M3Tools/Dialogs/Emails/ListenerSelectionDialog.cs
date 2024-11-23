@@ -2,11 +2,14 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
+using SPPBC.M3Tools.Types;
+
 namespace SPPBC.M3Tools
 {
 
 	public partial class ListenerSelectionDialog
 	{
+		private readonly ListenerCollection _original;
 
 		/// <summary>
 		/// The current selection of recipients
@@ -21,7 +24,8 @@ namespace SPPBC.M3Tools
 		{
 			InitializeComponent();
 
-			bsListeners.DataSource = listeners;
+			_original = listeners;
+			ldg_Listeners.Listeners = ListenerCollection.Cast(_original.Items);
 		}
 
 		private void ConfirmSelection(object sender, EventArgs e)
@@ -42,6 +46,10 @@ namespace SPPBC.M3Tools
 			Close();
 		}
 
-		private void FilterChanged(object sender, string filter) => bsListeners.Filter = filter;
+		private void FilterChanged(object sender, string filter)
+		{
+			_original.Filter = filter;
+			ldg_Listeners.Listeners = ListenerCollection.Cast(_original.Items);
+		}
 	}
 }

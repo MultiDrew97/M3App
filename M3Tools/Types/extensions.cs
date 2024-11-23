@@ -140,10 +140,17 @@ namespace SPPBC.M3Tools.Types.Extensions
 		/// <summary>
 		/// Converts the string be hashed for security
 		/// </summary>
-		/// <param name="value">The value to be hashed</param>
+		/// <param name="value"></param>
 		/// <param name="salt">The salt to use for the hashing</param>
 		/// <returns></returns>
 		public static string Hash(this string value, string salt) => Hash(value, new Guid(salt));
+
+		/// <summary>
+		/// Converts the string to a byte array
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public static byte[] ToByteArray(this string value) => Encoding.UTF8.GetBytes(value);
 
 		/// <summary>
 		/// Converts the string to be hashed for security
@@ -153,7 +160,7 @@ namespace SPPBC.M3Tools.Types.Extensions
 		/// <returns></returns>
 		public static string Hash(this string value, Guid salt)
 		{
-			using System.Security.Cryptography.SHA256 hasher = System.Security.Cryptography.SHA256.Create();
+			using SHA256 hasher = SHA256.Create();
 			byte[] bytes = hasher.ComputeHash(Encoding.UTF8.GetBytes(string.Join("", value, salt)));
 			return Convert.ToBase64String(bytes);
 		}

@@ -125,6 +125,7 @@
     <value>&lt;p&gt;Hello {0},&lt;/p&gt;&lt;br&gt;
 
 {1}
+
 &lt;hr&gt;
 
 &lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
@@ -186,6 +187,8 @@ Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
 
 &lt;p class="center"&gt;&lt;strong&gt;WE LOVE YOU AND AIN'T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
 
+{1}
+
 &lt;hr&gt;
 
 &lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
@@ -193,8 +196,6 @@ St. Paul Primitive Baptist Church&lt;br&gt;
 Email Listening Ministry&lt;br&gt;
 2209 East 14th Street&lt;br&gt;
 Austin, TX. 78702&lt;/p&gt;
-
-{1}
 
 &lt;div class="center-image"&gt;
  &lt;img class="center" id="logo" alt="St. Paul Primitive Baptist Church" src="https://sppbc.herbivore.site/res/imgs/Media%20Ministry%20Logo.png" /&gt;
@@ -223,7 +224,7 @@ St. Paul Primitive Baptist Church&lt;br&gt;
 
 &lt;p class="center"&gt;&lt;strong&gt;***SECURITY NOTE***&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;(A Personal Email Message of Donation Received will be delivered upon receipt. If you have any questions, Please Contact Elder Bryon Miller personally by:&lt;br&gt;
-Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
+Email: &lt;a href="mailto:pastormiller2209@att.net"&gt;pastormiller2209@att.net&lt;/a&gt; or&lt;br&gt;
 Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
 -Identifying yourself as an Email Subscriber by Last Name &amp; Email Address. Once Verified you will Receive a Call back from Elder Miller. These Processes are in place to Protect your Privacy, Personal Information, the Integrity and Trust of this Ministry &amp; Staff, and the Well-Being of St. Paul PBC)&lt;/em&gt;&lt;/p&gt;
 
@@ -232,7 +233,7 @@ Text: &lt;a href="sms:+15122964246"&gt;(512) 296-4246&lt;/a&gt;&lt;br&gt;
 &lt;p class="center"&gt;&lt;em&gt;bryon436@gmail.com&lt;br&gt;
 pastormiller2209@att.net&lt;/em&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Please Add these Email Addresses to your Contacts.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Please Add these Email Addresses to your Contacts.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;If you ever have trouble locating your Messages from this Ministry, always check your Spam Folder before notifying our Technical Services Team by Replying to this Welcome Email Message. Sometimes your Email Provider may not recognize this as safe, especially if you have not added me to your Contacts.&lt;/em&gt;&lt;/p&gt;
 
@@ -330,7 +331,17 @@ Austin, TX. 78702&lt;/p&gt;
 &lt;html&gt;
  &lt;head&gt;
  &lt;style&gt;
-  p {
+{0}
+ &lt;/style&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  {1}
+ &lt;/body&gt;
+&lt;/html&gt;</value>
+    <comment>The wrapper template for all email templates</comment>
+  </data>
+  <data name="BASE_EMAIL_STYLE" xml:space="preserve">
+    <value>p {
    font: normal larger "Times New Roman", sans-serif;
   }
 
@@ -345,13 +356,7 @@ Austin, TX. 78702&lt;/p&gt;
 
   .center-image img {
    margin: 1% 0 0 35%;
-  }
- &lt;/style&gt;
- &lt;/head&gt;
- &lt;body&gt;
-  {0}
- &lt;/body&gt;
-&lt;/html&gt;</value>
-    <comment>The wrapper template for all email templates</comment>
+  }</value>
+    <comment>The base styling used for the email templates</comment>
   </data>
 </root>

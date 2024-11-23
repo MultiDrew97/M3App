@@ -109,15 +109,15 @@ namespace SPPBC.M3Tools
 			txt_Input.ForeColor = !string.IsNullOrEmpty(Text) ? System.Drawing.SystemColors.WindowText : System.Drawing.SystemColors.ControlDark;
 		}
 
-		private void InputTextChanged(object sender, EventArgs e)
-		{
+		private void InputTextChanged(object sender, EventArgs e) =>
 			// TODO: Potentially move placeholder/color logic here?
 
 			TextChanged?.Invoke(this, e);
-		}
 
 		private void InputGotFocus(object sender, EventArgs e)
 		{
+			// FIXME: Resolve bug with focus/unfocus for this component
+			//			When focused, color doesn't change properly
 			if (txt_Input.Text != Placeholder)
 			{
 				txt_Input.Select(txt_Input.Text.Length, 0);

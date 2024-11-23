@@ -94,7 +94,6 @@ namespace M3App
 			{
 				_ = dbListeners.AddListener(listener);
 				SendWelcome(sender, new ListenerEventArgs(listener, EventType.Added));
-
 			}
 			catch (Exception ex)
 			{
@@ -153,9 +152,9 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 
-#if !DEBUG
+#if DEBUG
 			string subject = "Welcome to the Ministry";
-			string body = string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim());
+			string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim()));
 			MimeKit.MimeMessage message = gt_Email.Create(e.Value, subject, body);
 			gt_Email.Send(message);
 #else
