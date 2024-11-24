@@ -139,18 +139,6 @@ namespace SPPBC.M3Tools.Types.GTools
 				{
 					return null;
 				}
-
-				foreach (File @file in Items)
-				{
-					if (@file.Id != id)
-					{
-						continue;
-					}
-
-					return @file;
-				}
-
-				return null;
 			}
 		}
 
@@ -162,17 +150,14 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <returns></returns>
 		public bool Contains(string id)
 		{
-			foreach (File @file in Items)
+			try
 			{
-				if (@file.Id != id)
-				{
-					continue;
-				}
-
-				return true;
+				return Items.Any(f => f.Id == id);
 			}
-
-			return false;
+			catch
+			{
+				return false;
+			}
 		}
 
 		/// <summary>
@@ -182,17 +167,14 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// <returns></returns>
 		public new bool Contains(File fileSearch)
 		{
-			foreach (File @file in Items)
+			try
 			{
-				if (@file != fileSearch)
-				{
-					continue;
-				}
-
-				return true;
+				return Items.Any(f => f == fileSearch);
 			}
-
-			return false;
+			catch
+			{
+				return false;
+			}
 		}
 
 		/// <summary>

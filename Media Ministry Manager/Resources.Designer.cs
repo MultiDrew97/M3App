@@ -61,21 +61,11 @@ namespace M3App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon App_Icon {
-            get {
-                object obj = ResourceManager.GetObject("App_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BannerImage {
+        internal static System.Drawing.Bitmap Banner {
             get {
-                object obj = ResourceManager.GetObject("BannerImage", resourceCulture);
+                object obj = ResourceManager.GetObject("Banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -190,9 +180,9 @@ namespace M3App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ErrorImage {
+        internal static System.Drawing.Bitmap Error {
             get {
-                object obj = ResourceManager.GetObject("ErrorImage", resourceCulture);
+                object obj = ResourceManager.GetObject("Error", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -200,10 +190,20 @@ namespace M3App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HidePasswordIcon {
+        internal static System.Drawing.Bitmap Hide_Password {
             get {
-                object obj = ResourceManager.GetObject("HidePasswordIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("Hide_Password", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -263,18 +263,18 @@ namespace M3App.Properties {
         ///
         ///&lt;p&gt;We are now now &quot;Live Streaming&quot; through Facebook Live. An Email Option to choose from is Ava [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string NEW_LISTENER_EMAIL_TEMPLATE {
+        internal static string NEW_LISTENER_TEMPLATE {
             get {
-                return ResourceManager.GetString("NEW_LISTENER_EMAIL_TEMPLATE", resourceCulture);
+                return ResourceManager.GetString("NEW_LISTENER_TEMPLATE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$.
         /// </summary>
-        internal static string PHONE_REGEX {
+        internal static string PHONE_FORMAT {
             get {
-                return ResourceManager.GetString("PHONE_REGEX", resourceCulture);
+                return ResourceManager.GetString("PHONE_FORMAT", resourceCulture);
             }
         }
         
@@ -300,9 +300,9 @@ namespace M3App.Properties {
         ///&lt;div class=&quot;center-image&quot;&gt;
         /// &lt;img class=&quot;center&quot; id=&quot;logo&quot; alt=&quot;St. Paul Primitive Baptist  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RECEIPT_EMAIL {
+        internal static string RECEIPT_EMAIL_TEMPLATE {
             get {
-                return ResourceManager.GetString("RECEIPT_EMAIL", resourceCulture);
+                return ResourceManager.GetString("RECEIPT_EMAIL_TEMPLATE", resourceCulture);
             }
         }
         
@@ -322,9 +322,9 @@ namespace M3App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShowPasswordIcon {
+        internal static System.Drawing.Bitmap Show_Password {
             get {
-                object obj = ResourceManager.GetObject("ShowPasswordIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("Show_Password", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -7,8 +7,6 @@ namespace SPPBC.M3Tools.Types
 	/// </summary>
 	public abstract class Person : DbEntry
 	{
-		private readonly MimeKit.MailboxAddress __email;
-
 		/// <summary>
 		/// The person's first name
 		/// </summary>

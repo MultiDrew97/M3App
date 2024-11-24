@@ -4,10 +4,6 @@ namespace SPPBC.M3Tools
 {
 	public partial class OrderTotalCtrl
 	{
-		private event TotalChangedEventHandler TotalChanged;
-
-		private delegate void TotalChangedEventHandler();
-
 		/// <summary>
 		/// The total cost of the order
 		/// </summary>
@@ -20,9 +16,6 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 
 		/// </summary>
-		public OrderTotalCtrl()
-		{
-			InitializeComponent();
-		}
+		public OrderTotalCtrl() => InitializeComponent();
 	}
 }

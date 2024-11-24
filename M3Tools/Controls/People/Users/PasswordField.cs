@@ -45,26 +45,20 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 
 		/// </summary>
-		public PasswordField()
-		{
-			InitializeComponent();
-		}
+		public PasswordField() => InitializeComponent();
 
 		private void Btn_Show_Click(object sender, EventArgs e)
 		{
 			// Invert the use system password char property
 			txt_Password.UseSystemPasswordChar = !txt_Password.UseSystemPasswordChar;
 			// Switch between password icon image for the button
-			btn_Show.Image = txt_Password.UseSystemPasswordChar ? Properties.Resources.ShowPasswordIcon : Properties.Resources.HidePasswordIcon;
+			btn_Show.Image = txt_Password.UseSystemPasswordChar ? Properties.Resources.Show_Password : Properties.Resources.Hide_Password;
 		}
 
 		/// <summary>
 		/// 	''' Clears all text from the text box control.
 		/// 	''' </summary>
-		public void Clear()
-		{
-			txt_Password.Clear();
-		}
+		public void Clear() => txt_Password.Clear();
 
 		/// <summary>
 		/// 	''' Selects a range of text in the text box.
@@ -72,42 +66,25 @@ namespace SPPBC.M3Tools
 		/// 	''' <param name="start"></param>
 		/// 	''' <param name="length"></param>
 		/// 	''' <exception cref="ArgumentOutOfRangeException"></exception>
-		public void Select(int start, int length)
-		{
-			txt_Password.Select(start, length);
-		}
+		public void Select(int start, int length) => txt_Password.Select(start, length);
 
 		/// <summary>
 		/// 	''' Selects all text in the text box.
 		/// 	''' </summary>
-		public void SelectAll()
-		{
+		public void SelectAll() =>
 			// txt_Password.SelectAll()
 			Select(0, TextLength);
-		}
 
 		/// <summary>
 		/// Focuses to the textbox of the control
 		/// </summary>
 		/// <returns></returns>
-		public new bool Focus()
-		{
-			return txt_Password.Focus();
-		}
+		public new bool Focus() => txt_Password.Focus();
 
-		private void LostPasswordFocus(object sender, EventArgs e)
-		{
-			PasswordLostFocus?.Invoke(this, e);
-		}
+		private void LostPasswordFocus(object sender, EventArgs e) => PasswordLostFocus?.Invoke(this, e);
 
-		private void PasswordChanged(object sender, EventArgs e)
-		{
-			PasswordTextChanged?.Invoke(this, e);
-		}
+		private void PasswordChanged(object sender, EventArgs e) => PasswordTextChanged?.Invoke(this, e);
 
-		private void PasswordFocused(object sender, EventArgs e)
-		{
-			PasswordGotFocus?.Invoke(this, new EventArgs());
-		}
+		private void PasswordFocused(object sender, EventArgs e) => PasswordGotFocus?.Invoke(this, new EventArgs());
 	}
 }

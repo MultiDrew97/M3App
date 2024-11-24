@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Types;
 
 // TODO: Cleanup this dialog box
@@ -61,8 +61,7 @@ namespace SPPBC.M3Tools.Dialogs
 		{
 			get
 			{
-				// TODO: Verify/Simplify this
-				if (string.IsNullOrWhiteSpace(Email) || !Regex.IsMatch(Email, Properties.Resources.EmailRegex2))
+				if (!Utils.ValidEmail(Email))
 				{
 					ep_InputError.SetError(gi_EmailAddress, "No valid email address provided");
 					return false;
@@ -77,10 +76,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
-		public AddCustomerDialog()
-		{
-			InitializeComponent();
-		}
+		public AddCustomerDialog() => InitializeComponent();
 
 		private void PreviousStep(object sender, EventArgs e)
 		{

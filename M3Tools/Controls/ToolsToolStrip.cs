@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
@@ -96,6 +97,34 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		[DefaultValue(true)]
 		public bool SendVisible { get => tsb_Send.Visible; set => tsb_Send.Visible = value; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public ToolsToolStrip()
+		{
+			InitializeComponent();
+
+			LayoutCompleted += UpdateLabelText;
+
+			switch (true)
+			{
+				case var _ when Regex.IsMatch(Parent.Name, "Customer", RegexOptions.IgnoreCase):
+					ToggleButton([ToolButtons.EMAIL, ToolButtons.IMPORT]);
+					break;
+				case var _ when Regex.IsMatch(Parent.Name, "Inventory", RegexOptions.IgnoreCase):
+					ToggleButton([ToolButtons.EMAIL]);
+					break;
+				case var _ when Regex.IsMatch(Parent.Name, "Listener", RegexOptions.IgnoreCase):
+					ToggleButton([]);
+					break;
+				case var _ when Regex.IsMatch(Parent.Name, "Order", RegexOptions.IgnoreCase):
+					ToggleButton([ToolButtons.EMAIL, ToolButtons.IMPORT]);
+					break;
+				default:
+					break;
+			}
+		}
 
 		private void Import(object sender, EventArgs e) => ImportEntries?.Invoke(sender, e);
 

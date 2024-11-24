@@ -148,15 +148,15 @@ namespace M3App
 			UseWaitCursor = false;
 		}
 
-		private void SendWelcome(object sender, ListenerEventArgs e)
+		private async void SendWelcome(object sender, ListenerEventArgs e)
 		{
 			UseWaitCursor = true;
 
 #if DEBUG
 			string subject = "Welcome to the Ministry";
-			string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, string.Format(Properties.Resources.NEW_LISTENER_EMAIL_TEMPLATE, e.Value.Name.Trim()));
+			string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, string.Format(Properties.Resources.NEW_LISTENER_TEMPLATE, e.Value.Name.Trim()));
 			MimeKit.MimeMessage message = gt_Email.Create(e.Value, subject, body);
-			gt_Email.Send(message);
+			await gt_Email.Send(message);
 #else
 			MessageBox.Show($"Listener {e.Value.Name} has been added to the database", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif

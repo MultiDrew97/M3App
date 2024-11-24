@@ -91,7 +91,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public DataGridViewImageButtonEditCell() : base(Properties.Resources.edit)
+		public DataGridViewImageButtonEditCell() : base(Properties.Resources.Edit)
 		{
 		}
 	}
@@ -105,7 +105,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public DataGridViewImageButtonDeleteCell() : base(Properties.Resources.delete)
+		public DataGridViewImageButtonDeleteCell() : base(Properties.Resources.Delete)
 		{
 		}
 	}

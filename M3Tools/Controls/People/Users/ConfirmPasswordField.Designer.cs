@@ -75,7 +75,7 @@ namespace SPPBC.M3Tools
             // 
             btn_Show.BackColor = System.Drawing.Color.Transparent;
             btn_Show.Dock = DockStyle.Fill;
-            btn_Show.Image = Properties.Resources.ShowPasswordIcon;
+            btn_Show.Image = Properties.Resources.Show_Password;
             btn_Show.Location = new System.Drawing.Point(0, 0);
             btn_Show.Name = "btn_Show";
             btn_Show.Size = new System.Drawing.Size(41, 20);

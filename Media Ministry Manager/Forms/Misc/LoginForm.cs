@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -53,6 +54,11 @@ namespace M3App
 			EndLogin += LoginEnd;
 		}
 
+		private void LogInFinished(object sender, RunWorkerCompletedEventArgs e)
+		{
+
+		}
+
 		// TODO: Potentially consolidate these function
 		// TODO: Figure out more secure way to store login info
 		private void Showing(object sender, EventArgs e)
@@ -97,6 +103,16 @@ namespace M3App
 			Reset();
 		}
 
+		private void UserLoggedIn(object sender, DoWorkEventArgs e)
+		{
+			Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
+
+			if (SaveCredentials)
+			{
+				Environment.SetEnvironmentVariable("password", Password.Encrypt(), EnvironmentVariableTarget.User);
+			}
+		}
+
 		private async void PerformLogin(object sender, EventArgs e)
 		{
 			try
@@ -109,17 +125,14 @@ namespace M3App
 
 				if (user.Login.Role != SPPBC.M3Tools.Types.AccountRole.Admin)
 				{
-					throw new RoleException();
+					throw new RoleException("User not an admin");
 				}
 
-				Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
+				//backgroundWorker1.RunWorkerAsync(user);
 
-				if (SaveCredentials)
-				{
-					Environment.SetEnvironmentVariable("password", Password.Encrypt(), EnvironmentVariableTarget.User);
-				}
+				new MainForm().Show(this);
 
-				Utils.OpenForm(typeof(MainForm));
+				//Utils.OpenForm(typeof(MainForm));
 				Close();
 			}
 			catch (RoleException)

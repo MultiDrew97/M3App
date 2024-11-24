@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools.Dialogs
@@ -35,10 +34,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
-		public AddListenerDialog()
-		{
-			InitializeComponent();
-		}
+		public AddListenerDialog() => InitializeComponent();
 
 		private void AddListener(object sender, EventArgs e)
 		{
@@ -66,12 +62,8 @@ namespace SPPBC.M3Tools.Dialogs
 
 		private bool ValidInputs()
 		{
-			if (string.IsNullOrWhiteSpace(ListenerName))
-			{
-				return false;
-			}
-
-			return !string.IsNullOrWhiteSpace(ListenerEmail) && Regex.IsMatch(ListenerEmail, Properties.Resources.EmailRegex2);
+			return !string.IsNullOrWhiteSpace(ListenerName)
+&& !string.IsNullOrWhiteSpace(ListenerEmail) && Utils.ValidEmail(ListenerEmail);
 		}
 	}
 }

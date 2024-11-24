@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
 using SPPBC.M3Tools.Exceptions;
 
 namespace SPPBC.M3Tools.Dialogs
@@ -8,7 +9,7 @@ namespace SPPBC.M3Tools.Dialogs
 	public partial class CreateAccountDialog
 	{
 
-		private readonly Regex __passwordPattern = new(Properties.Resources.PasswordRegex);
+		private readonly Regex __passwordPattern = new(Properties.Resources.PASSWORD_REQUIREMENTS);
 		private readonly string __usernameEmptyError = "A username is required";
 		private readonly string __passwordPatternError = @"Password must contain:\n At least 1 capital letter\n At least 1 lowercase letter\n At least 1 number\n at least 1 special character";
 		private readonly string __passwordMisMatchError = "Passwords must match to proceed";
@@ -16,10 +17,7 @@ namespace SPPBC.M3Tools.Dialogs
 		/// <summary>
 		/// 
 		/// </summary>
-		public CreateAccountDialog()
-		{
-			InitializeComponent();
-		}
+		public CreateAccountDialog() => InitializeComponent();
 
 		private void OK_Button_Click(object sender, EventArgs e)
 		{
@@ -59,10 +57,7 @@ namespace SPPBC.M3Tools.Dialogs
 			}
 		}
 
-		private bool ValidUsername()
-		{
-			return !string.IsNullOrWhiteSpace(uf_Username.Username);
-		}
+		private bool ValidUsername() => !string.IsNullOrWhiteSpace(uf_Username.Username);
 
 		private bool ValidPassword()
 		{

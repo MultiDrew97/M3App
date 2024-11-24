@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
@@ -54,16 +55,6 @@ namespace SPPBC.M3Tools
 		public event EventHandler ViewSettings;
 
 		/// <summary>
-		/// Occurs when the Exit menu item is clicked
-		/// </summary>
-		public event EventHandler ExitApplication;
-
-		/// <summary>
-		/// Occurs when the Update menu item is clicked, and an update is available
-		/// </summary>
-		public event EventHandler UpdateAvailable;
-
-		/// <summary>
 		/// Occurs when a customer is successfully added
 		/// </summary>
 		public event Events.Customers.CustomerEventHandler AddCustomer;
@@ -88,7 +79,33 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public MainMenuStrip() => InitializeComponent();
+		public MainMenuStrip()
+		{
+			InitializeComponent();
+			/*
+				FIXME:
+					Parent is null in this case, so this doesn't work at least not yet
+					
+					Have to find some way to determine this dynamically without having to call it from components (make it "smart")
+			 */
+			switch (true)
+			{
+				case var _ when Regex.IsMatch(Parent.Name, "Customer", RegexOptions.IgnoreCase):
+					ToggleViewItem(MenuItemsCategories.Customer);
+					break;
+				case var _ when Regex.IsMatch(Parent.Name, "Inventory", RegexOptions.IgnoreCase):
+					ToggleViewItem(MenuItemsCategories.Inventory);
+					break;
+				case var _ when Regex.IsMatch(Parent.Name, "Listener", RegexOptions.IgnoreCase):
+					ToggleViewItem(MenuItemsCategories.Listener);
+					break;
+				case var _ when Regex.IsMatch(Parent.Name, "Order", RegexOptions.IgnoreCase):
+					ToggleViewItem(MenuItemsCategories.Order);
+					break;
+				default:
+					break;
+			}
+		}
 
 		private async void LogoutApplication(object sender, EventArgs e)
 		{
@@ -96,7 +113,7 @@ namespace SPPBC.M3Tools
 			Logout?.Invoke(sender, e);
 		}
 
-		private void Exit(object sender, EventArgs e) => ExitApplication?.Invoke(sender, e);
+		private void Exit(object sender, EventArgs e) => Application.Exit();//ExitApplication?.Invoke(sender, e);
 
 		private void CreateCustomer(object sender, EventArgs e)
 		{
@@ -104,9 +121,8 @@ namespace SPPBC.M3Tools
 			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
-			throw new NotImplementedException("CreateCustomer");
 			// TODO: Determine better process to decouple this functionality from M3Tools API
-			using Dialogs.AddCustomerDialog create = new();
+			using AddCustomerDialog create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
 			{
@@ -122,16 +138,15 @@ namespace SPPBC.M3Tools
 			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
-			throw new NotImplementedException("CreateProduct");
-			/*using var create = new Dialogs.AddProductDialog();
-			var res = create.ShowDialog();
+			using AddProductDialog create = new();
+			DialogResult res = create.ShowDialog();
 
 			if (!(res == DialogResult.OK))
 			{
 				return;
 			}
 
-			AddInventory?.Invoke(this, new Events.Inventory.InventoryEventArgs(create.Product, EventType.Added));*/
+			AddInventory?.Invoke(this, new Events.Inventory.InventoryEventArgs(create.Product, EventType.Added));
 		}
 
 		private void CreateListener(object sender, EventArgs e)
@@ -140,7 +155,6 @@ namespace SPPBC.M3Tools
 			MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
-			throw new NotImplementedException("CreateListener");
 			using AddListenerDialog create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)
@@ -157,7 +171,6 @@ namespace SPPBC.M3Tools
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
-			throw new NotImplementedException("CreateOrder");
 			using PlaceOrderDialog @create = new();
 
 			if (create.ShowDialog() != DialogResult.OK)

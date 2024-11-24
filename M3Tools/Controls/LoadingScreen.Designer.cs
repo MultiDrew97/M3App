@@ -71,7 +71,7 @@ namespace SPPBC.M3Tools
 			// 
 			// pic_Load
 			// 
-			this.pic_Load.ErrorImage = global::SPPBC.M3Tools.Properties.Resources.ErrorImage;
+			this.pic_Load.ErrorImage = global::SPPBC.M3Tools.Properties.Resources.Error;
 			this.pic_Load.Image = global::SPPBC.M3Tools.Properties.Resources.Loading_Loop_3;
 			this.pic_Load.InitialImage = global::SPPBC.M3Tools.Properties.Resources.Loading_Loop_3;
 			this.pic_Load.Location = new System.Drawing.Point(74, 9);

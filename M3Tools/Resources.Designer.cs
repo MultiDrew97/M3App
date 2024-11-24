@@ -63,9 +63,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BannerImage {
+        internal static System.Drawing.Bitmap Banner {
             get {
-                object obj = ResourceManager.GetObject("BannerImage", resourceCulture);
+                object obj = ResourceManager.GetObject("Banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,123 +73,29 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BoldOption {
+        internal static System.Drawing.Bitmap Bold {
             get {
-                object obj = ResourceManager.GetObject("BoldOption", resourceCulture);
+                object obj = ResourceManager.GetObject("Bold", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Credentials {
-            get {
-                object obj = ResourceManager.GetObject("Credentials", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!Doctype html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot;&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
-        ///        &lt;p&gt;Blessings To You {0},&lt;/p&gt;
-        ///
-        ///		&lt;p&gt;Welcome to the St. Paul Primitive Baptist Church Email Listening Ministry. Thank you for becoming a Subscriber. You will receive Sunday&apos;s Messages from the St. Paul Primitive Baptist Church, Austin, TX. Morning Service each week; where Elder Bryon K. Miller is the Pastor. You will Receive your Sunday Morning Message within 2 [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string DefaultNewListenerEmail {
-            get {
-                return ResourceManager.GetString("DefaultNewListenerEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot; /&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
-        ///
-        ///	&lt;p&gt;Greetings {0},&lt;/p&gt;
-        ///
-        ///        &lt;p&gt;Thank you for your blessing of {1:C} for {2}.&lt;/p&gt;
-        ///
-        ///		&lt;p&gt;Thank You For Your Support.&lt;/p&gt;
-        ///
-        ///		&lt;p&gt;Be Blessed.&lt;/p&gt;
-        ///
-        ///		&lt;p class=&quot;center&quot;&gt;&lt;strong&gt;WE LOVE YOU AND AIN&apos;T NOTHING YOU CAN DO ABOUT IT!&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
-        ///
-        ///		&lt;hr&gt;
-        ///		
-        ///		&lt;p&gt;&lt;strong&gt;Elder Bryon K Miller, Pastor&lt;/strong&gt;&lt;br&gt;
-        ///		St. Paul Primitive Baptist Church&lt;br&gt;
-        ///		Ema [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string DefaultReceiptEmail {
-            get {
-                return ResourceManager.GetString("DefaultReceiptEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///    &lt;head&gt;
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://sppbc.hopto.org/css/emails.css&quot; /&gt;
-        ///    &lt;/head&gt;
-        ///    &lt;body&gt;
-        ///        &lt;p&gt;Good Afternoon {0},&lt;/p&gt;
-        ///
-        ///        &lt;p&gt;&lt;em&gt;Watch all our sermons on &lt;a href=&quot;https://www.youtube.com/channel/UCJ2c3QAAYu2KneiTvjRJEKg/videos&quot;&gt;YouTube&lt;/a&gt; and subscribe for easier access.&lt;/em&gt;&lt;/p&gt;
-        ///        &lt;p&gt;Also, give us a follow on &lt;a href=&quot;https://facebook.com/bryon.miller436&quot;&gt;Facebook&lt;/a&gt;, where we host our weekly live streams&lt;/p&gt;
-        ///        &lt;p&gt;You may gi [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string DefaultSermonEmail {
-            get {
-                return ResourceManager.GetString("DefaultSermonEmail", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap delete {
+        internal static System.Drawing.Bitmap Delete {
             get {
-                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                object obj = ResourceManager.GetObject("Delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;&lt;a href=&quot;{1}&quot;&gt;{0}&lt;/a&gt;&lt;/p&gt;.
-        /// </summary>
-        internal static string DriveLinkAttachment {
-            get {
-                return ResourceManager.GetString("DriveLinkAttachment", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://drive.google.com/file/d/{0}/view?usp=sharing.
-        /// </summary>
-        internal static string DriveShareLink {
-            get {
-                return ResourceManager.GetString("DriveShareLink", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap edit {
+        internal static System.Drawing.Bitmap Edit {
             get {
-                object obj = ResourceManager.GetObject("edit", resourceCulture);
+                object obj = ResourceManager.GetObject("Edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -197,27 +103,27 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$.
         /// </summary>
-        internal static string EmailRegex {
+        internal static string EMAIL_REGEX {
             get {
-                return ResourceManager.GetString("EmailRegex", resourceCulture);
+                return ResourceManager.GetString("EMAIL_REGEX", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ^[a-zA-Z0-9_!#$%&amp;’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$.
         /// </summary>
-        internal static string EmailRegex2 {
+        internal static string EMAIL_REGEX_2 {
             get {
-                return ResourceManager.GetString("EmailRegex2", resourceCulture);
+                return ResourceManager.GetString("EMAIL_REGEX_2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ErrorImage {
+        internal static System.Drawing.Bitmap Error {
             get {
-                object obj = ResourceManager.GetObject("ErrorImage", resourceCulture);
+                object obj = ResourceManager.GetObject("Error", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -225,9 +131,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FontOption {
+        internal static System.Drawing.Bitmap Font {
             get {
-                object obj = ResourceManager.GetObject("FontOption", resourceCulture);
+                object obj = ResourceManager.GetObject("Font", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -235,9 +141,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HidePasswordIcon {
+        internal static System.Drawing.Bitmap Hide_Password {
             get {
-                object obj = ResourceManager.GetObject("HidePasswordIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("Hide_Password", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -245,9 +151,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap import {
+        internal static System.Drawing.Bitmap Import {
             get {
-                object obj = ResourceManager.GetObject("import", resourceCulture);
+                object obj = ResourceManager.GetObject("Import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,9 +172,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ItalicOption {
+        internal static System.Drawing.Bitmap Italics {
             get {
-                object obj = ResourceManager.GetObject("ItalicOption", resourceCulture);
+                object obj = ResourceManager.GetObject("Italics", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -306,9 +212,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NewDocumentOption {
+        internal static System.Drawing.Bitmap New_Entry {
             get {
-                object obj = ResourceManager.GetObject("NewDocumentOption", resourceCulture);
+                object obj = ResourceManager.GetObject("New_Entry", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -316,27 +222,27 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,}$.
         /// </summary>
-        internal static string PasswordRegex {
+        internal static string PASSWORD_REQUIREMENTS {
             get {
-                return ResourceManager.GetString("PasswordRegex", resourceCulture);
+                return ResourceManager.GetString("PASSWORD_REQUIREMENTS", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$.
         /// </summary>
-        internal static string PhoneRegex {
+        internal static string PHONE_FORMAT {
             get {
-                return ResourceManager.GetString("PhoneRegex", resourceCulture);
+                return ResourceManager.GetString("PHONE_FORMAT", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap send_email {
+        internal static System.Drawing.Bitmap SEND_EMAIL {
             get {
-                object obj = ResourceManager.GetObject("send-email", resourceCulture);
+                object obj = ResourceManager.GetObject("SEND_EMAIL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -344,9 +250,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShowPasswordIcon {
+        internal static System.Drawing.Bitmap Show_Password {
             get {
-                object obj = ResourceManager.GetObject("ShowPasswordIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("Show_Password", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -354,9 +260,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap StrikeThruOption {
+        internal static System.Drawing.Bitmap Strike_Thru {
             get {
-                object obj = ResourceManager.GetObject("StrikeThruOption", resourceCulture);
+                object obj = ResourceManager.GetObject("Strike_Thru", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -391,9 +297,9 @@ namespace SPPBC.M3Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap UnderlineOption {
+        internal static System.Drawing.Bitmap Underline {
             get {
-                object obj = ResourceManager.GetObject("UnderlineOption", resourceCulture);
+                object obj = ResourceManager.GetObject("Underline", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

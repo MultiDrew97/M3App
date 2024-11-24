@@ -52,7 +52,7 @@ namespace M3App
             // 
             // spsh_SplashScreen
             // 
-            this.spsh_SplashScreen.BackgroundImage = global::M3App.Properties.Resources.BannerImage;
+            this.spsh_SplashScreen.BackgroundImage = global::M3App.Properties.Resources.Banner;
             this.spsh_SplashScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.spsh_SplashScreen.ColumnCount = 2;
             this.spsh_SplashScreen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));

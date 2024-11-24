@@ -50,6 +50,7 @@ namespace M3App
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lf_Login = new SPPBC.M3Tools.LoginFields();
 			this.dbUsers = new SPPBC.M3Tools.API.UserDatabase(this.components);
+			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			this.pnl_Loading.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
@@ -160,7 +161,7 @@ namespace M3App
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.ErrorImage = global::M3App.Properties.Resources.ErrorImage;
+			this.pictureBox1.ErrorImage = global::M3App.Properties.Resources.Error;
 			this.pictureBox1.Image = global::M3App.Properties.Resources.Loading_Loop_3;
 			this.pictureBox1.InitialImage = global::M3App.Properties.Resources.Loading_Loop_3;
 			this.pictureBox1.Location = new System.Drawing.Point(73, 37);
@@ -227,5 +228,6 @@ namespace M3App
 		private Panel pnl_Loading;
 		private PictureBox pictureBox1;
 		private Button button1;
+		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 	}
 }

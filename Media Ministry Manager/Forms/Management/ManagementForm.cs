@@ -13,12 +13,12 @@ namespace M3App
 	/// </summary>
 	public abstract partial class ManagementForm<T> where T : IDbEntry
 	{
+		private CancellationTokenSource _tokenSource;
+
 		/// <summary>
 		/// 
 		/// </summary>
 		protected internal DbEntryCollection<T> _original;
-
-		protected CancellationTokenSource tokenSource;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -29,7 +29,6 @@ namespace M3App
 
 			Init();
 
-			mms_Main.ExitApplication += new EventHandler(Exit);
 			mms_Main.Logout += new EventHandler(LogOff);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
 			mms_Main.AddCustomer += new CustomerEventHandler(Add);
@@ -41,38 +40,36 @@ namespace M3App
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
 
-		private void Init()
-		{
-			SPPBC.M3Tools.ToolButtons[] toolButtons;
+		private void Init() =>
+			//SPPBC.M3Tools.ToolButtons[] toolButtons;
 
-			SPPBC.M3Tools.MenuItemsCategories menuItem;
-			switch (typeof(T))
-			{
-				case var customer when customer == typeof(Customer):
-					toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
-					menuItem = SPPBC.M3Tools.MenuItemsCategories.Customer;
-					break;
-				case var listener when listener == typeof(Listener):
-					toolButtons = [];
-					menuItem = SPPBC.M3Tools.MenuItemsCategories.Listener;
-					break;
-				case var order when order == typeof(Order):
-					toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
-					menuItem = SPPBC.M3Tools.MenuItemsCategories.Order;
-					break;
-				case var inventory when inventory == typeof(Product):
-					toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL];
-					menuItem = SPPBC.M3Tools.MenuItemsCategories.Inventory;
-					break;
-				default:
-					throw new NotSupportedException($"Type '{typeof(T)}' not supported by form");
-			}
+			//SPPBC.M3Tools.MenuItemsCategories menuItem;
+			//switch (typeof(T))
+			//{
+			//	case var customer when customer == typeof(Customer):
+			//		toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
+			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Customer;
+			//		break;
+			//	case var listener when listener == typeof(Listener):
+			//		toolButtons = [];
+			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Listener;
+			//		break;
+			//	case var order when order == typeof(Order):
+			//		toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
+			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Order;
+			//		break;
+			//	case var inventory when inventory == typeof(Product):
+			//		toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL];
+			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Inventory;
+			//		break;
+			//	default:
+			//		throw new NotSupportedException($"Type '{typeof(T)}' not supported by form");
+			//}
 
-			ts_Tools.ToggleButton(toolButtons);
-			mms_Main.ToggleViewItem(menuItem);
+			//ts_Tools.ToggleButton(toolButtons);
+			//mms_Main.ToggleViewItem(menuItem);
 
-			tokenSource = new();
-		}
+			_tokenSource = new();
 
 		/// <summary>
 		/// 
@@ -81,7 +78,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected void DisplayClosing(object sender, FormClosingEventArgs e)
 		{
-			tokenSource.Cancel();
+			_tokenSource.Cancel();
 
 			// FIXME: Figure out why I can't get this to be sent from the MainStrip
 			if (sender is SPPBC.M3Tools.MainMenuStrip)
@@ -157,7 +154,7 @@ namespace M3App
 			Close();
 		}
 
-		private void Exit(object sender, EventArgs e) => Utils.CloseApplication();
+		private void Exit(object sender, EventArgs e) => Utils.Exit();
 
 		private void ViewSettings(object sender, EventArgs e)
 		{

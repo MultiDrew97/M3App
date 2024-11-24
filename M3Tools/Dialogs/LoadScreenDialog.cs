@@ -96,7 +96,7 @@ namespace SPPBC.M3Tools
 		/// <param name="message"></param>
 		public void ShowError(string message)
 		{
-			Image = Properties.Resources.ErrorImage;
+			Image = Properties.Resources.Error;
 			LoadText = message;
 		}
 	}

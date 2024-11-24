@@ -144,7 +144,7 @@ namespace SPPBC.M3Tools
             this.btn_Bold.BackColor = System.Drawing.Color.Transparent;
             this.btn_Bold.CheckOnClick = true;
             this.btn_Bold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Bold.Image = global::SPPBC.M3Tools.Properties.Resources.BoldOption;
+            this.btn_Bold.Image = global::SPPBC.M3Tools.Properties.Resources.Bold;
             this.btn_Bold.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_Bold.Name = "btn_Bold";
             this.btn_Bold.Size = new System.Drawing.Size(23, 22);
@@ -155,7 +155,7 @@ namespace SPPBC.M3Tools
             // 
             this.btn_Underline.CheckOnClick = true;
             this.btn_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Underline.Image = global::SPPBC.M3Tools.Properties.Resources.UnderlineOption;
+            this.btn_Underline.Image = global::SPPBC.M3Tools.Properties.Resources.Underline;
             this.btn_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_Underline.Name = "btn_Underline";
             this.btn_Underline.Size = new System.Drawing.Size(23, 22);
@@ -166,7 +166,7 @@ namespace SPPBC.M3Tools
             // 
             this.btn_Italics.CheckOnClick = true;
             this.btn_Italics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btn_Italics.Image = global::SPPBC.M3Tools.Properties.Resources.ItalicOption;
+            this.btn_Italics.Image = global::SPPBC.M3Tools.Properties.Resources.Italics;
             this.btn_Italics.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_Italics.Name = "btn_Italics";
             this.btn_Italics.Size = new System.Drawing.Size(23, 22);

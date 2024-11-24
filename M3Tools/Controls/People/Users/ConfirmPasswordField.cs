@@ -38,15 +38,12 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 
 		/// </summary>
-		public ConfirmPasswordField()
-		{
-			InitializeComponent();
-		}
+		public ConfirmPasswordField() => InitializeComponent();
 
 		private void Btn_Show_Click(object sender, EventArgs e)
 		{
 			// Switch between password icon image for the button
-			btn_Show.Image = txt_ConfirmPassword.UseSystemPasswordChar ? Properties.Resources.HidePasswordIcon : Properties.Resources.ShowPasswordIcon;
+			btn_Show.Image = txt_ConfirmPassword.UseSystemPasswordChar ? Properties.Resources.Hide_Password : Properties.Resources.Show_Password;
 
 			// Invert the use system password char property
 			txt_ConfirmPassword.UseSystemPasswordChar = !txt_ConfirmPassword.UseSystemPasswordChar;
@@ -55,10 +52,7 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 	''' Clears all text from the text box control.
 		/// 	''' </summary>
-		public void Clear()
-		{
-			txt_ConfirmPassword.Clear();
-		}
+		public void Clear() => txt_ConfirmPassword.Clear();
 
 		/// <summary>
 		/// 	''' Selects a range of text in the text box.
@@ -66,37 +60,21 @@ namespace SPPBC.M3Tools
 		/// 	''' <param name="start"></param>
 		/// 	''' <param name="length"></param>
 		/// 	''' <exception cref="ArgumentOutOfRangeException"></exception>
-		public void Select(int start, int length)
-		{
-			txt_ConfirmPassword.Select(start, length);
-		}
+		public void Select(int start, int length) => txt_ConfirmPassword.Select(start, length);
 
 		/// <summary>
 		/// 	''' Selects all text in the text box.
 		/// 	''' </summary>
-		public void SelectAll()
-		{
-			txt_ConfirmPassword.SelectAll();
-			// txtPassword.Select(0, TextLength)
-		}
+		public void SelectAll() => txt_ConfirmPassword.SelectAll();// txtPassword.Select(0, TextLength)
 
 		/// <summary>
 		/// Focus on the confirm field
 		/// </summary>
 		/// <returns></returns>
-		public new bool Focus()
-		{
-			return txt_ConfirmPassword.Focus();
-		}
+		public new bool Focus() => txt_ConfirmPassword.Focus();
 
-		private void Txt_ConfirmPassword_LostFocus(object sender, EventArgs e)
-		{
-			ConfirmLostFocus?.Invoke(this, e);
-		}
+		private void Txt_ConfirmPassword_LostFocus(object sender, EventArgs e) => ConfirmLostFocus?.Invoke(this, e);
 
-		private void Txt_ConfirmPassword_TextChanged(object sender, EventArgs e)
-		{
-			ConfirmTextChanged?.Invoke(this, e);
-		}
+		private void Txt_ConfirmPassword_TextChanged(object sender, EventArgs e) => ConfirmTextChanged?.Invoke(this, e);
 	}
 }

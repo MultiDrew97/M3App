@@ -307,7 +307,7 @@ namespace SPPBC.M3Tools
 		{
 			try
 			{
-				return System.Text.RegularExpressions.Regex.IsMatch(email, Properties.Resources.EmailRegex2);
+				return !string.IsNullOrEmpty(email) && System.Text.RegularExpressions.Regex.IsMatch(email, Properties.Resources.EMAIL_REGEX_2);
 			}
 			catch
 			{

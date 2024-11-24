@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace M3App
 		/// <summary>
 		/// The list of templates that are part of the application
 		/// </summary>
-		public static TemplateList Templates => [new("Sermon", SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", RECEIPT_EMAIL, "Bless you")];
+		public static TemplateList Templates => [new("Sermon", SERMON_EMAIL_TEMPLATE, "New Sermon"), new("Receipt", RECEIPT_EMAIL_TEMPLATE, "Bless you")];
 
 		/// <summary>
 		/// The location where log files are stored
@@ -72,7 +73,7 @@ namespace M3App
 				System.Reflection.ConstructorInfo constructor = form.GetConstructor(args.Select(arg => arg.GetType()).ToArray());
 
 				Form tmp = (Form)constructor.Invoke(args);
-				tmp.FormClosed += (sender, e) => { if (Application.OpenForms.Count > 0) { return; } Application.Exit(); };
+				//tmp.FormClosed += (sender, e) => { if (Application.OpenForms.Count > 0) { return; } Application.Exit(); };
 				tmp.Show();
 			}
 			catch (Exception ex)
@@ -91,29 +92,10 @@ namespace M3App
 		public static DialogResult ShowErrorMessage(string subject, string message, bool retriable = false) => SPPBC.M3Tools.Utils.ShowErrorMessage(subject, message, retriable);
 
 		/// <summary>
-		/// Attempts to close all open forms gracefully. Allowing them to close and handle any straggling tasks
+		/// Attempts to exit the application gracefully. Allowing them to close and handle any straggling tasks
 		/// and finish executions if needed.
 		/// </summary>
-		public static void CloseApplication()
-		{
-			int attempts = 0;
-			const int MAX_ATTEMPTS = 3;
-			do
-			{
-				try
-				{
-					Application.OpenForms[0].Close();
-					attempts = 0;
-				}
-				catch (InvalidOperationException ex)
-				{
-					Console.WriteLine("Form of name {0} failed to close", Application.OpenForms[0].Name);
-					_ = MessageBox.Show(ex.Message, "Closing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					attempts += 1;
-				}
-			}
-			while (Application.OpenForms.Count > 0 & attempts < MAX_ATTEMPTS);
-		}
+		public static void Exit(CancelEventArgs e = default) => Application.Exit(e ?? (CancelEventArgs)EventArgs.Empty);
 
 		/// <summary>
 		/// Logs the current user out of the application
