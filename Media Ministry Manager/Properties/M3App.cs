@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,6 +56,12 @@ namespace M3App
 			}
 		}
 
+		private static void Cleanup()
+		{
+			Log.Close();
+			Error.Close();
+		}
+
 		private static void PrepLogs()
 		{
 			if (!Directory.Exists(Utils.LOG_LOCATION))
@@ -64,50 +71,39 @@ namespace M3App
 
 			Console.SetOut(new MultiOutputWriter(Console.Out, Log));
 			Console.SetError(new MultiOutputWriter(Console.Error, Error));
-		}
 
-		private static void Cleanup()
-		{
-			Log.Close();
-			Error.Close();
+			Console.WriteLine("Logs have been created");
 		}
 	}
 
 	internal class MultiOutputWriter(params TextWriter[] writers) : TextWriter
 	{
+		private readonly string LOG_FORMAT = $"{{0}}";
+
+		// Ensures the encoding is UTF8
 		public override Encoding Encoding => Encoding.UTF8;
 
 		// TODO: Make it so that it automatically outputs with the date and time info of the output as well
-		public override void Write(string value)
-		{
-			foreach (TextWriter writer in writers)
+		public override void Write(string value) =>
+			writers.Select(writer =>
 			{
-				writer.Write(value);
-			}
-		}
+				writer.Write(string.Format(LOG_FORMAT, value));
+				return true;
+			});
 
-		public override void WriteLine(string value)
-		{
-			foreach (TextWriter writer in writers)
+		public override void WriteLine(string value) =>
+			writers.Select(writer =>
 			{
-				writer.WriteLine(value);
-			}
-		}
+				writer.WriteLine(string.Format(LOG_FORMAT, value));
+				return true;
+			});
 
-		public override async Task WriteAsync(string value)
-		{
-			foreach (TextWriter writer in writers)
-			{
-				await writer.WriteAsync(value);
-			}
-		}
+		public override async Task WriteAsync(string value) =>
+			await Task.WhenAll(writers.Select(writer =>
+			writer.WriteAsync(string.Format(LOG_FORMAT, value))));
 
-		public override async Task WriteLineAsync(string value)
-		{
-			foreach (TextWriter writer in writers)
-			{
-				await writer.WriteLineAsync(value);
-			}
-		}
+		public override async Task WriteLineAsync(string value) =>
+			await Task.WhenAll(writers.Select(writer =>
+			writer.WriteLineAsync(string.Format(LOG_FORMAT, value))));
 	}
 }
