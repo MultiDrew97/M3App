@@ -103,16 +103,6 @@ namespace M3App
 			Reset();
 		}
 
-		private void UserLoggedIn(object sender, DoWorkEventArgs e)
-		{
-			Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
-
-			if (SaveCredentials)
-			{
-				Environment.SetEnvironmentVariable("password", Password.Encrypt(), EnvironmentVariableTarget.User);
-			}
-		}
-
 		private async void PerformLogin(object sender, EventArgs e)
 		{
 			try
@@ -128,11 +118,17 @@ namespace M3App
 					throw new RoleException("User not an admin");
 				}
 
-				backgroundWorker1.RunWorkerAsync(user);
+				// FIXME: Find a better and faster way to store login credentials
+				// This way freezes excessively and isn't very secure
+				/*Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
+
+				if (SaveCredentials)
+				{
+					Environment.SetEnvironmentVariable("password", Password.Encrypt(), EnvironmentVariableTarget.User);
+				}*/
 
 				new MainForm().Show();
 
-				//Utils.OpenForm(typeof(MainForm));
 				Close();
 			}
 			catch (RoleException)

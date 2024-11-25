@@ -27,7 +27,7 @@
     <InheritWinAppVersionFrom>AssemblyFileVersion</InheritWinAppVersionFrom>
     <AssemblyFileVersionSettings>
     </AssemblyFileVersionSettings>
-    <AssemblyVersion>5.1.455.0</AssemblyVersion>
+    <AssemblyVersion>5.1.456.0</AssemblyVersion>
     <AssemblyVersionSettings>
     </AssemblyVersionSettings>
     <AssemblyInfoFilePath>Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
@@ -55,7 +55,7 @@
     <WebPage>manager.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>5.1.454.0</ApplicationVersion>
+    <ApplicationVersion>5.1.455.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -134,31 +134,20 @@ namespace M3App
 
 		private void Exit(object sender, EventArgs e) => Utils.Exit();
 
-		private void ViewSettings(object sender, EventArgs e)
-		{
-			using SettingsForm settings = new();
-			settings.Show();
-		}
+		private void ViewSettings(object sender, EventArgs e) => new SettingsForm().Show();
 
 		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
 		{
-			switch (e.Manage)
+			Form manage = e.Manage switch
 			{
-				case SPPBC.M3Tools.Events.ManageType.Listeners:
-					new ListenerManagement().Show();
-					break;
-				case SPPBC.M3Tools.Events.ManageType.Inventory:
-					new InventoryManagement().Show();
-					break;
-				case SPPBC.M3Tools.Events.ManageType.Orders:
-					new OrderManagement().Show();
-					break;
-				case SPPBC.M3Tools.Events.ManageType.Customers:
-					new CustomerManagement().Show();
-					break;
-				default:
-					return;
-			}
+				SPPBC.M3Tools.Events.ManageType.Listeners => new ListenerManagement(),
+				SPPBC.M3Tools.Events.ManageType.Inventory => new InventoryManagement(),
+				SPPBC.M3Tools.Events.ManageType.Orders => new OrderManagement(),
+				SPPBC.M3Tools.Events.ManageType.Customers => new CustomerManagement(),
+				_ => throw new ArgumentException($"Unknown management type {e.Manage}")
+			};
+
+			manage.Show();
 
 			_ = ((SPPBC.M3Tools.MainMenuStrip)sender).Invoke(Close);
 		}

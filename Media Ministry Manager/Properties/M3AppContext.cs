@@ -61,6 +61,7 @@ namespace M3App
 
 			foreach (Form form in Application.OpenForms)
 			{
+				// Ensures no duplication until I find a better way to handle application exiting
 				form.FormClosed -= OnMainFormClosed;
 				form.FormClosed += OnMainFormClosed;
 			}
