@@ -78,6 +78,7 @@ namespace M3App
 
 	internal class MultiOutputWriter(params TextWriter[] writers) : TextWriter
 	{
+		// TODO: Update this to print the date and time when writing to console for tracking
 		private readonly string LOG_FORMAT = $"{{0}}";
 
 		// Ensures the encoding is UTF8

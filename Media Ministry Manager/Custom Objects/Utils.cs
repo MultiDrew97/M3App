@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -59,33 +58,6 @@ namespace M3App
 		public static string LOG_LOCATION => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
 
 		/// <summary>
-		/// Opens forms of the application, automatically attaching that when the last form is
-		/// closed, the application will be exited completely
-		/// </summary>
-		/// <param name="form"></param>
-		/// <param name="args"></param>
-		/// <returns></returns>
-		public static void OpenForm(Type form, params object[] args)
-		{
-			// TODO: Find if there is a better way to handle this
-			try
-			{
-				System.Reflection.ConstructorInfo constructor = form.GetConstructor(args.Select(arg => arg.GetType()).ToArray());
-
-				Form tmp = (Form)constructor.Invoke(args);
-				//tmp.FormClosed += (sender, e) => { if (Application.OpenForms.Count > 0) { return; } Application.Exit(); };
-				tmp.Show();
-			}
-			catch (Exception ex)
-			{
-				Console.Error.WriteLine(ex.Message);
-				Console.Error.WriteLine(ex.StackTrace);
-				_ = MessageBox.Show($"Failed to open form of type {form.Name}.\n\nError:\n{ex.Message}", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-			}
-		}
-
-		/// <summary>
 		/// Show an error dialog. Can be set to ask for genuine input if needing to retry action
 		/// </summary>
 		/// <param name="subject"></param>
@@ -106,7 +78,7 @@ namespace M3App
 		public static void Logout(Control sender)
 		{
 			SPPBC.M3Tools.Utils.Logout(sender);
-			OpenForm(typeof(LoginForm));
+			new LoginForm().Show();
 		}
 
 		/// <summary>

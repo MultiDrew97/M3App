@@ -128,7 +128,7 @@ namespace M3App
 					throw new RoleException("User not an admin");
 				}
 
-				//backgroundWorker1.RunWorkerAsync(user);
+				backgroundWorker1.RunWorkerAsync(user);
 
 				new MainForm().Show();
 

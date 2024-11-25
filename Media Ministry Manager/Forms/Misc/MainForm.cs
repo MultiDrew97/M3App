@@ -51,17 +51,19 @@ namespace M3App
 
 		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
 		{
-			UseWaitCursor = true;
 			try
 			{
-				Utils.OpenForm(e.Manage switch
+				UseWaitCursor = true;
+				Form manage = e.Manage switch
 				{
-					SPPBC.M3Tools.Events.ManageType.Customers => typeof(CustomerManagement),
-					SPPBC.M3Tools.Events.ManageType.Listeners => typeof(ListenerManagement),
-					SPPBC.M3Tools.Events.ManageType.Orders => typeof(OrderManagement),
-					SPPBC.M3Tools.Events.ManageType.Inventory => typeof(InventoryManagement),
+					SPPBC.M3Tools.Events.ManageType.Customers => new CustomerManagement(),
+					SPPBC.M3Tools.Events.ManageType.Listeners => new ListenerManagement(),
+					SPPBC.M3Tools.Events.ManageType.Orders => new OrderManagement(),
+					SPPBC.M3Tools.Events.ManageType.Inventory => new InventoryManagement(),
 					_ => throw new ArgumentException($"Unknown manage type {e.Manage}")
-				});
+				};
+
+				manage.Show();
 				Close();
 			}
 			finally
