@@ -46,7 +46,7 @@ namespace M3App
             this.bw_ChangedSizes = new System.ComponentModel.BackgroundWorker();
             this.btn_ListenerManagement = new System.Windows.Forms.Button();
             this.pnl_Controls = new System.Windows.Forms.Panel();
-            this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
+            this.mms_Main = new SPPBC.M3Tools.MainMenuStrip() { Parent = this };
             this.ss_Queries.SuspendLayout();
             this.SuspendLayout();
             // 

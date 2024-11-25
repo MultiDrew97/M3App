@@ -39,8 +39,14 @@ namespace M3App
 		{
 			// Place any custom closing behavior here
 			UseWaitCursor = false;
-
 			base.OnFormClosed(e);
+
+			//if (Application.OpenForms.Count > 0)
+			//{
+			//	return;
+			//}
+
+			//Utils.Exit();
 		}
 
 		private void Manage(object sender, SPPBC.M3Tools.Events.ManageEventArgs e)
@@ -48,34 +54,15 @@ namespace M3App
 			UseWaitCursor = true;
 			try
 			{
-				switch (e.Manage)
+				Utils.OpenForm(e.Manage switch
 				{
-					case SPPBC.M3Tools.Events.ManageType.Customers:
-						UseWaitCursor = true;
-						Utils.OpenForm(typeof(CustomerManagement));
-						Close();
-						break;
-					case SPPBC.M3Tools.Events.ManageType.Listeners:
-						UseWaitCursor = true;
-						Utils.OpenForm(typeof(ListenerManagement));
-						Close();
-						break;
-					case SPPBC.M3Tools.Events.ManageType.Orders:
-						UseWaitCursor = true;
-						Utils.OpenForm(typeof(OrderManagement));
-						Close();
-						break;
-					case SPPBC.M3Tools.Events.ManageType.Inventory:
-						UseWaitCursor = true;
-						Utils.OpenForm(typeof(InventoryManagement));
-						Close();
-						break;
-				}
-			}
-			catch (ApplicationException ex)
-			{
-				_ = MessageBox.Show(ex.Message, "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Console.Error.WriteLine(ex.Message);
+					SPPBC.M3Tools.Events.ManageType.Customers => typeof(CustomerManagement),
+					SPPBC.M3Tools.Events.ManageType.Listeners => typeof(ListenerManagement),
+					SPPBC.M3Tools.Events.ManageType.Orders => typeof(OrderManagement),
+					SPPBC.M3Tools.Events.ManageType.Inventory => typeof(InventoryManagement),
+					_ => throw new ArgumentException($"Unknown manage type {e.Manage}")
+				});
+				Close();
 			}
 			finally
 			{
@@ -85,8 +72,7 @@ namespace M3App
 
 		private void Logout(object sender, EventArgs e)
 		{
-			UseWaitCursor = true;
-			Utils.OpenForm(typeof(LoginForm));
+			Utils.Logout(this);
 			Close();
 		}
 
@@ -94,32 +80,32 @@ namespace M3App
 		private void AddCustomer(object sender, SPPBC.M3Tools.Events.Customers.CustomerEventArgs e)
 		{
 			UseWaitCursor = true;
-			_ = dbCustomer.AddCustomer(e.Value);
-			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//_ = dbCustomer.AddCustomer(e.Value);
+			//_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
 		private void AddListener(object sender, SPPBC.M3Tools.Events.Listeners.ListenerEventArgs e)
 		{
 			UseWaitCursor = true;
-			_ = dbListener.AddListener(e.Value);
-			_ = MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//_ = dbListener.AddListener(e.Value);
+			//_ = MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
 		private void AddInventory(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
 		{
 			UseWaitCursor = true;
-			_ = dbInventory.AddInventory(e.Value);
-			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//_ = dbInventory.AddInventory(e.Value);
+			//_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
 		private void AddOrder(object sender, SPPBC.M3Tools.Events.Orders.OrderEventArgs e)
 		{
 			UseWaitCursor = true;
-			_ = dbOrders.AddOrder(e.Value);
-			_ = MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//_ = dbOrders.AddOrder(e.Value);
+			//_ = MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 

@@ -41,17 +41,15 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Logs the current user
 		/// </summary>
-		public static Task LogOff(Control sender)
+		public static void Logout(Control sender)
 		{
 			// TODO: Find a way to speed up the logout process
 			//			The Environment variables are taking a long time to actually complete
 			sender.UseWaitCursor = true;
 
-			return Task.Run(() =>
-			{
-				Environment.SetEnvironmentVariable("username", string.Empty, EnvironmentVariableTarget.User);
-				Environment.SetEnvironmentVariable("password", string.Empty, EnvironmentVariableTarget.User);
-			});
+			Environment.SetEnvironmentVariable("username", string.Empty, EnvironmentVariableTarget.User);
+			Environment.SetEnvironmentVariable("password", string.Empty, EnvironmentVariableTarget.User);
+
 		}
 
 		// TODO: Move this logic to a service instead so that the app can update itself autonomously

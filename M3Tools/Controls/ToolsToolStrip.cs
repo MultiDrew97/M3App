@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SPPBC.M3Tools
@@ -106,24 +105,6 @@ namespace SPPBC.M3Tools
 			InitializeComponent();
 
 			LayoutCompleted += UpdateLabelText;
-
-			switch (true)
-			{
-				case var _ when Regex.IsMatch(Parent.Name, "Customer", RegexOptions.IgnoreCase):
-					ToggleButton([ToolButtons.EMAIL, ToolButtons.IMPORT]);
-					break;
-				case var _ when Regex.IsMatch(Parent.Name, "Inventory", RegexOptions.IgnoreCase):
-					ToggleButton([ToolButtons.EMAIL]);
-					break;
-				case var _ when Regex.IsMatch(Parent.Name, "Listener", RegexOptions.IgnoreCase):
-					ToggleButton([]);
-					break;
-				case var _ when Regex.IsMatch(Parent.Name, "Order", RegexOptions.IgnoreCase):
-					ToggleButton([ToolButtons.EMAIL, ToolButtons.IMPORT]);
-					break;
-				default:
-					break;
-			}
 		}
 
 		private void Import(object sender, EventArgs e) => ImportEntries?.Invoke(sender, e);
@@ -152,7 +133,7 @@ namespace SPPBC.M3Tools
 		/// <param name="button">The button to toggle visibility on</param>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="ArgumentException"></exception>
-		public void ToggleButton(ToolButtons button)
+		private void ToggleButton(ToolButtons button)
 		{
 			switch (button)
 			{
@@ -167,11 +148,11 @@ namespace SPPBC.M3Tools
 					break;
 				case ToolButtons.FILTER:
 					tst_Filter.Available = !tst_Filter.Available;
-					// TODO: Also hide last seperator when hiding this one;
+					// TODO: Also hide last separator when hiding this one;
 					break;
 				case ToolButtons.COUNT:
 					tsl_Count.Available = !tsl_Count.Available;
-					// TODO: Also hide last seperator when hiding this one;
+					// TODO: Also hide last separator when hiding this one;
 					break;
 				default:
 					throw new ArgumentException($"Name '${button}' not known");

@@ -11,9 +11,9 @@ namespace M3App
 	/// <summary>
 	/// 
 	/// </summary>
-	public abstract partial class ManagementForm<T> where T : IDbEntry
+	public partial class ManagementForm<T> where T : IDbEntry
 	{
-		private CancellationTokenSource _tokenSource;
+		private readonly CancellationTokenSource _tokenSource;
 
 		/// <summary>
 		/// 
@@ -23,13 +23,22 @@ namespace M3App
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public ManagementForm()
+		protected ManagementForm()
 		{
 			InitializeComponent();
 
-			Init();
+			ts_Tools.ToggleButton(typeof(T) switch
+			{
+				var c when c == typeof(Customer) => [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT],
+				var l when l == typeof(Listener) => [],
+				var o when o == typeof(Order) => [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT],
+				var p when p == typeof(Product) => [SPPBC.M3Tools.ToolButtons.EMAIL],
+				_ => []
+			});
 
-			mms_Main.Logout += new EventHandler(LogOff);
+			_tokenSource = new();
+
+			mms_Main.Logout += new EventHandler(Logout);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
 			mms_Main.AddCustomer += new CustomerEventHandler(Add);
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
@@ -39,37 +48,6 @@ namespace M3App
 			ts_Tools.SendEmails += new EventHandler(SendEmails);
 			ts_Tools.FilterChanged += new EventHandler<string>(FilterChanged);
 		}
-
-		private void Init() =>
-			//SPPBC.M3Tools.ToolButtons[] toolButtons;
-
-			//SPPBC.M3Tools.MenuItemsCategories menuItem;
-			//switch (typeof(T))
-			//{
-			//	case var customer when customer == typeof(Customer):
-			//		toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
-			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Customer;
-			//		break;
-			//	case var listener when listener == typeof(Listener):
-			//		toolButtons = [];
-			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Listener;
-			//		break;
-			//	case var order when order == typeof(Order):
-			//		toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL, SPPBC.M3Tools.ToolButtons.IMPORT];
-			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Order;
-			//		break;
-			//	case var inventory when inventory == typeof(Product):
-			//		toolButtons = [SPPBC.M3Tools.ToolButtons.EMAIL];
-			//		menuItem = SPPBC.M3Tools.MenuItemsCategories.Inventory;
-			//		break;
-			//	default:
-			//		throw new NotSupportedException($"Type '{typeof(T)}' not supported by form");
-			//}
-
-			//ts_Tools.ToggleButton(toolButtons);
-			//mms_Main.ToggleViewItem(menuItem);
-
-			_tokenSource = new();
 
 		/// <summary>
 		/// 
@@ -86,7 +64,7 @@ namespace M3App
 				return;
 			}
 
-			Utils.OpenForm(typeof(MainForm));
+			new MainForm().Show();
 		}
 
 		/// <summary>
@@ -148,9 +126,9 @@ namespace M3App
 		/// <param name="filter"></param>
 		protected virtual void FilterChanged(object sender, string filter) => _original.Filter = filter;
 
-		private void LogOff(object sender, EventArgs e)
+		private void Logout(object sender, EventArgs e)
 		{
-			Utils.OpenForm(typeof(LoginForm));
+			Utils.Logout(this);
 			Close();
 		}
 

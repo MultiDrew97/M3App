@@ -14,7 +14,7 @@ namespace M3App
 		/// <summary>
 		/// 
 		/// </summary>
-		public ListenerManagement()
+		public ListenerManagement() : base()
 		{
 			InitializeComponent();
 

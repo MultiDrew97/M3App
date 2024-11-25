@@ -51,13 +51,17 @@ namespace M3App
 
 		protected override void OnMainFormClosed(object sender, EventArgs e)
 		{
-			if (Application.OpenForms.Count > 0)
+			if (Application.OpenForms.Count < 1)
 			{
 				// TODO: Figure out how to no longer need this
+				base.OnMainFormClosed(sender, e);
 				return;
 			}
 
-			base.OnMainFormClosed(sender, e);
+			foreach (Form form in Application.OpenForms)
+			{
+				form.FormClosed += OnMainFormClosed;
+			}
 		}
 
 		protected override void ExitThreadCore() =>

@@ -78,7 +78,10 @@ namespace M3App
 			}
 			catch (Exception ex)
 			{
-				throw new ApplicationException($"Failed to open form of type {form.Name}.\n\nError:\n{ex.Message}");
+				Console.Error.WriteLine(ex.Message);
+				Console.Error.WriteLine(ex.StackTrace);
+				_ = MessageBox.Show($"Failed to open form of type {form.Name}.\n\nError:\n{ex.Message}", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 			}
 		}
 
@@ -95,12 +98,16 @@ namespace M3App
 		/// Attempts to exit the application gracefully. Allowing them to close and handle any straggling tasks
 		/// and finish executions if needed.
 		/// </summary>
-		public static void Exit(CancelEventArgs e = default) => Application.Exit(e ?? (CancelEventArgs)EventArgs.Empty);
+		public static void Exit(CancelEventArgs e = default) => Application.Exit(e);
 
 		/// <summary>
 		/// Logs the current user out of the application
 		/// </summary>
-		public static void LogOff(Control sender) => SPPBC.M3Tools.Utils.LogOff(sender);
+		public static void Logout(Control sender)
+		{
+			SPPBC.M3Tools.Utils.Logout(sender);
+			OpenForm(typeof(LoginForm));
+		}
 
 		/// <summary>
 		/// Goes through the number of files necessary to keep logs from previous runs

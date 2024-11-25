@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -28,7 +27,11 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Inventory based function
 		/// </summary>
-		Inventory
+		Inventory,
+		/// <summary>
+		/// No functions
+		/// </summary>
+		None
 	}
 
 	// TODO: Open Display forms from here and figure out to discern closing type
@@ -82,36 +85,25 @@ namespace SPPBC.M3Tools
 		public MainMenuStrip()
 		{
 			InitializeComponent();
-			/*
-				FIXME:
-					Parent is null in this case, so this doesn't work at least not yet
-					
-					Have to find some way to determine this dynamically without having to call it from components (make it "smart")
-			 */
-			switch (true)
-			{
-				case var _ when Regex.IsMatch(Parent.Name, "Customer", RegexOptions.IgnoreCase):
-					ToggleViewItem(MenuItemsCategories.Customer);
-					break;
-				case var _ when Regex.IsMatch(Parent.Name, "Inventory", RegexOptions.IgnoreCase):
-					ToggleViewItem(MenuItemsCategories.Inventory);
-					break;
-				case var _ when Regex.IsMatch(Parent.Name, "Listener", RegexOptions.IgnoreCase):
-					ToggleViewItem(MenuItemsCategories.Listener);
-					break;
-				case var _ when Regex.IsMatch(Parent.Name, "Order", RegexOptions.IgnoreCase):
-					ToggleViewItem(MenuItemsCategories.Order);
-					break;
-				default:
-					break;
-			}
+
+			ParentChanged += new EventHandler(UpdateView);
 		}
 
-		private async void LogoutApplication(object sender, EventArgs e)
+		private void UpdateView(object sender, EventArgs e)
 		{
-			await Utils.LogOff(Parent);
-			Logout?.Invoke(sender, e);
+			string parent = Parent.GetType().ToString();
+
+			ToggleViewItem(true switch
+			{
+				var _ when Regex.IsMatch(parent, "Customer", RegexOptions.IgnoreCase) => MenuItemsCategories.Customer,
+				var _ when Regex.IsMatch(parent, "Inventory", RegexOptions.IgnoreCase) => MenuItemsCategories.Inventory,
+				var _ when Regex.IsMatch(parent, "Listener", RegexOptions.IgnoreCase) => MenuItemsCategories.Listener,
+				var _ when Regex.IsMatch(parent, "Order", RegexOptions.IgnoreCase) => MenuItemsCategories.Order,
+				_ => MenuItemsCategories.None,
+			});
 		}
+
+		private void LogoutApplication(object sender, EventArgs e) => Logout?.Invoke(sender, e);
 
 		private void Exit(object sender, EventArgs e) => Application.Exit();//ExitApplication?.Invoke(sender, e);
 
@@ -129,7 +121,8 @@ namespace SPPBC.M3Tools
 				return;
 			}
 
-			AddCustomer?.Invoke(this, new Events.Customers.CustomerEventArgs(create.Customer, EventType.Added));
+			MessageBox.Show($"{create.Customer.Name} has been added to the customers list", "Customer Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//AddCustomer?.Invoke(this, new Events.Customers.CustomerEventArgs(create.Customer, EventType.Added));
 		}
 
 		private void CreateProduct(object sender, EventArgs e)
@@ -146,7 +139,8 @@ namespace SPPBC.M3Tools
 				return;
 			}
 
-			AddInventory?.Invoke(this, new Events.Inventory.InventoryEventArgs(create.Product, EventType.Added));
+			MessageBox.Show($"{create.Product.Name} has been added to the inventory list", "Addition Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//AddInventory?.Invoke(this, new Events.Inventory.InventoryEventArgs(create.Product, EventType.Added));
 		}
 
 		private void CreateListener(object sender, EventArgs e)
@@ -162,7 +156,8 @@ namespace SPPBC.M3Tools
 				return;
 			}
 
-			AddListener?.Invoke(this, new Events.Listeners.ListenerEventArgs(create.Listener, EventType.Added));
+			MessageBox.Show($"{create.Listener.Name} has been added to the email listeners list", "Addition Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//AddListener?.Invoke(this, new Events.Listeners.ListenerEventArgs(create.Listener, EventType.Added));
 		}
 
 		private void CreateOrder(object sender, EventArgs e)
@@ -178,7 +173,8 @@ namespace SPPBC.M3Tools
 				return;
 			}
 
-			AddOrder?.Invoke(this, new Events.Orders.OrderEventArgs(create.Order, EventType.Added));
+			MessageBox.Show($"Order #{create.Order.Id} has been created", "Order Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			//AddOrder?.Invoke(this, new Events.Orders.OrderEventArgs(create.Order, EventType.Added));
 		}
 
 		private async void UpdateApp(object sender, EventArgs e)
@@ -202,25 +198,14 @@ namespace SPPBC.M3Tools
 		private void ChangeView(object sender, EventArgs e)
 		{
 			ToolStripMenuItem item = (ToolStripMenuItem)sender;
-
-			switch (item.AccessibleName.ToLower())
+			Manage?.Invoke(this, new(item.AccessibleName.ToLower() switch
 			{
-				case "customers":
-					Manage?.Invoke(this, new(ManageType.Customers));
-					break;
-				case "listeners":
-					Manage?.Invoke(this, new(ManageType.Listeners));
-					break;
-				case "orders":
-					Manage?.Invoke(this, new(ManageType.Orders));
-					break;
-				case "inventory":
-					Manage?.Invoke(this, new(ManageType.Inventory));
-					break;
-				default:
-					Debug.WriteLine(item.AccessibleName.ToLower());
-					throw new ArgumentException("Sender not known");
-			}
+				"customers" => ManageType.Customers,
+				"listeners" => ManageType.Listeners,
+				"orders" => ManageType.Orders,
+				"inventory" => ManageType.Inventory,
+				_ => throw new ArgumentException("Sender not known")
+			}));
 		}
 
 		private void ShowSettings(object sender, EventArgs e) =>

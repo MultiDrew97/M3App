@@ -130,7 +130,7 @@ namespace M3App
 
 				//backgroundWorker1.RunWorkerAsync(user);
 
-				new MainForm().Show(this);
+				new MainForm().Show();
 
 				//Utils.OpenForm(typeof(MainForm));
 				Close();
