@@ -28,7 +28,6 @@ namespace M3App
 			timer.Tick += ShowApplication;
 			timer.Start();
 #else
-			Utils.Update(true);
 			ShowApplication(this, EventArgs.Empty);
 #endif
 		}

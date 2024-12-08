@@ -7,8 +7,6 @@ using System.Windows.Forms;
 
 using Microsoft.VisualBasic.CompilerServices;
 
-using SPPBC.M3Tools.Exceptions;
-
 namespace SPPBC.M3Tools
 {
 	// FIXME: Figure out how to combine the Utils of both projects
@@ -82,56 +80,49 @@ namespace SPPBC.M3Tools
 		/// <returns></returns>
 		public static async Task<bool> Update(bool force = false)
 		{
-			try
+			if (!force)
 			{
-				if (!force)
-				{
-					DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-					if (confirmed != DialogResult.Yes)
-					{
-						throw new OperationCanceledException();
-					}
+				if (confirmed != DialogResult.Yes)
+				{
+					throw new OperationCanceledException();
 				}
-
-				// Perform update procedures here
-				HttpClient httpClient = new();
-
-				using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UDPATE_LOCATION);
-
-				Debug.WriteLine("File has been retrieved. Starting to download...");
-				_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
-				byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-
-				// Save file to disk
-				File.WriteAllBytes(_updateSaveLocation, fileBytes);
-
-				Console.WriteLine($"File downloaded successfully to {_updateSaveLocation}");
-
-				Console.WriteLine("Starting update client...");
-
-				Exit();
-
-				Process updateProc = Process.Start(new ProcessStartInfo(_updateSaveLocation)
-				{
-					CreateNoWindow = true,
-					WindowStyle = ProcessWindowStyle.Hidden,
-					Verb = "runas",
-					UseShellExecute = true,
-					RedirectStandardOutput = false,
-					RedirectStandardError = false,
-				});
-
-				return updateProc.ExitCode switch
-				{
-					0 => true,
-					_ => false
-				};
 			}
-			catch (Exception ex)
+
+			// Perform update procedures here
+			HttpClient httpClient = new();
+
+			using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UDPATE_LOCATION);
+
+			Debug.WriteLine("File has been retrieved. Starting to download...");
+			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
+			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+			// Save file to disk
+			File.WriteAllBytes(_updateSaveLocation, fileBytes);
+
+			Console.WriteLine($"File downloaded successfully to {_updateSaveLocation}");
+
+			Console.WriteLine("Starting update client...");
+
+			Exit();
+
+			Process updateProc = Process.Start(new ProcessStartInfo(_updateSaveLocation)
 			{
-				throw new UpdateException(ex.Message, ex);
-			}
+				CreateNoWindow = true,
+				WindowStyle = ProcessWindowStyle.Hidden,
+				Verb = "runas",
+				UseShellExecute = true,
+				RedirectStandardOutput = false,
+				RedirectStandardError = false,
+			});
+
+			return updateProc.ExitCode switch
+			{
+				0 => true,
+				_ => false
+			};
 
 		}
 

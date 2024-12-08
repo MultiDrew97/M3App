@@ -90,6 +90,7 @@ namespace M3App
 			// MAYBE: Figure out a better ext to add to logs files from previous runs
 			string cycleTag = ".old";
 
+			Console.WriteLine("Cycling through custom log files...");
 			if (File.Exists(Path.Combine(LOG_LOCATION, CONSOLE_OUTPUT_FILE)))
 				File.Copy(Path.Combine(LOG_LOCATION, CONSOLE_OUTPUT_FILE), Path.Combine(LOG_LOCATION, $"{CONSOLE_OUTPUT_FILE}{cycleTag}"), true);
 

@@ -16,26 +16,8 @@ namespace M3App
 {
 	internal partial class M3App
 	{
-		private static StreamWriter _log;
-		private static StreamWriter _error;
-
-		private static StreamWriter Log
-		{
-			get
-			{
-				_log ??= new StreamWriter(Combine(Utils.LOG_LOCATION, CONSOLE_OUTPUT_FILE), false, Encoding.UTF8);
-				return _log;
-			}
-		}
-
-		private static StreamWriter Error
-		{
-			get
-			{
-				_error ??= new StreamWriter(Combine(Utils.LOG_LOCATION, CONSOLE_ERROR_FILE), false, Encoding.UTF8);
-				return _error;
-			}
-		}
+		private static readonly MultiOutputWriter _log = new(Console.Out);
+		private static readonly MultiOutputWriter _err = new(Console.Error);
 
 		[STAThread]
 		private static void Main(string[] args)
@@ -43,9 +25,12 @@ namespace M3App
 #if DEBUG
 			//PrepDebugValues();
 #endif
+			Console.SetOut(_log);
+			Console.SetError(_err);
 			try
 			{
-				PrepLogs();
+				PrepCustomOutputs();
+
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 
@@ -65,21 +50,25 @@ namespace M3App
 
 		private static void Cleanup()
 		{
-			Log.Close();
-			Error.Close();
+			Console.WriteLine("Closing outputs...");
+			Console.Out.Close();
+			Console.Error.Close();
 		}
 
-		private static void PrepLogs()
+		private static void PrepCustomOutputs()
 		{
-			if (!Directory.Exists(Utils.LOG_LOCATION))
-				_ = Directory.CreateDirectory(Utils.LOG_LOCATION);
+			Console.WriteLine("Verifying custom location is valid...");
+			if (!Directory.Exists(Utils.LOG_LOCATION) && !Directory.CreateDirectory(Utils.LOG_LOCATION).Exists)
+			{
+				Console.Error.WriteLine($"Unable to find/create log location: {Utils.LOG_LOCATION}. Skipping custom log creation...");
+				return;
+			}
+
+			_log.AddWriter(new StreamWriter(Combine(Utils.LOG_LOCATION, CONSOLE_OUTPUT_FILE), false, Encoding.UTF8) { AutoFlush = true });
+			_err.AddWriter(new StreamWriter(Combine(Utils.LOG_LOCATION, CONSOLE_ERROR_FILE), false, Encoding.UTF8) { AutoFlush = true });
 
 			Utils.CycleLogs();
-
-			Console.SetOut(new MultiOutputWriter(Console.Out, Log));
-			Console.SetError(new MultiOutputWriter(Console.Error, Error));
-
-			Console.WriteLine("Logs have been created");
+			Console.WriteLine("Custom log creation complete");
 		}
 
 		private static void PrepDebugValues()
@@ -101,32 +90,47 @@ namespace M3App
 	internal class MultiOutputWriter(params TextWriter[] writers) : TextWriter
 	{
 		// TODO: Update this to print the date and time when writing to console for tracking
-		private readonly string LOG_FORMAT = $"{{0}}";
+		private readonly string LOG_FORMAT = "{0}";
 
 		// Ensures the encoding is UTF8
 		public override Encoding Encoding => Encoding.UTF8;
 
+		public void AddWriter(TextWriter w) => writers = [.. writers, w];
+
+		public void AddWriters(params TextWriter[] ws) => writers = [.. writers, .. ws];
+
+		public void RemoveWriter(TextWriter writer) => writers = writers.Where(w => w != writer).ToArray();
+
 		// TODO: Make it so that it automatically outputs with the date and time info of the output as well
-		public override void Write(string value) =>
-			writers.Select(writer =>
-			{
+		public override void Write(string value)
+		{
+			foreach (TextWriter writer in writers)
 				writer.Write(string.Format(LOG_FORMAT, value));
-				return true;
-			});
+		}
 
-		public override void WriteLine(string value) =>
-			writers.Select(writer =>
-			{
+		public override void WriteLine(string value)
+		{
+			foreach (TextWriter writer in writers)
 				writer.WriteLine(string.Format(LOG_FORMAT, value));
-				return true;
-			});
+		}
 
-		public override async Task WriteAsync(string value) =>
+		public override async Task WriteAsync(string value)
+		{
 			await Task.WhenAll(writers.Select(writer =>
 			writer.WriteAsync(string.Format(LOG_FORMAT, value))));
+		}
 
-		public override async Task WriteLineAsync(string value) =>
+		public override async Task WriteLineAsync(string value)
+		{
 			await Task.WhenAll(writers.Select(writer =>
 			writer.WriteLineAsync(string.Format(LOG_FORMAT, value))));
+		}
+
+		public override void Close()
+		{
+			base.Close();
+			foreach (TextWriter writer in writers)
+				writer.Close();
+		}
 	}
 }

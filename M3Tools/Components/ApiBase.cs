@@ -146,7 +146,7 @@ namespace SPPBC.M3Tools.API
 		private async Task<T> ExecuteWithResultAsync<T>(System.Net.Http.HttpMethod method, string path, System.Net.Http.HttpContent payload, CancellationToken ct)
 		{
 			Console.WriteLine("Starting API call...");
-			Debug.WriteLine($"Base URL: {BaseUrl}", "API");
+			Debug.WriteLine($"Base URL - {BaseUrl}", "API");
 			try
 			{
 				Console.WriteLine("Configuring HTTP client");
