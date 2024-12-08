@@ -116,7 +116,8 @@ namespace SPPBC.M3Tools
 				{
 					CreateNoWindow = true,
 					WindowStyle = ProcessWindowStyle.Hidden,
-					UseShellExecute = false,
+					Verb = "runas",
+					UseShellExecute = true,
 					RedirectStandardOutput = false,
 					RedirectStandardError = false,
 				});

@@ -19,10 +19,6 @@ namespace M3App
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
 			mms_Main.Logout += new EventHandler(Logout);
-			mms_Main.AddCustomer += new SPPBC.M3Tools.Events.Customers.CustomerEventHandler(AddCustomer);
-			mms_Main.AddListener += new SPPBC.M3Tools.Events.Listeners.ListenerEventHandler(AddListener);
-			mms_Main.AddOrder += new SPPBC.M3Tools.Events.Orders.OrderEventHandler(AddOrder);
-			mms_Main.AddInventory += new SPPBC.M3Tools.Events.Inventory.InventoryEventHandler(AddInventory);
 
 			// Management Buttons
 			btn_ProductManagement.Click += (sender, e) => Manage(sender, new(SPPBC.M3Tools.Events.ManageType.Inventory));
@@ -76,39 +72,6 @@ namespace M3App
 		{
 			Utils.Logout(this);
 			Close();
-		}
-
-		// TODO: Try to remove the need to have each DB object in the main form
-		private void AddCustomer(object sender, SPPBC.M3Tools.Events.Customers.CustomerEventArgs e)
-		{
-			UseWaitCursor = true;
-			//_ = dbCustomer.AddCustomer(e.Value);
-			//_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			UseWaitCursor = false;
-		}
-
-		private void AddListener(object sender, SPPBC.M3Tools.Events.Listeners.ListenerEventArgs e)
-		{
-			UseWaitCursor = true;
-			//_ = dbListener.AddListener(e.Value);
-			//_ = MessageBox.Show($"Successfully created listener", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			UseWaitCursor = false;
-		}
-
-		private void AddInventory(object sender, SPPBC.M3Tools.Events.Inventory.InventoryEventArgs e)
-		{
-			UseWaitCursor = true;
-			//_ = dbInventory.AddInventory(e.Value);
-			//_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			UseWaitCursor = false;
-		}
-
-		private void AddOrder(object sender, SPPBC.M3Tools.Events.Orders.OrderEventArgs e)
-		{
-			UseWaitCursor = true;
-			//_ = dbOrders.AddOrder(e.Value);
-			//_ = MessageBox.Show($"Successfully created order", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			UseWaitCursor = false;
 		}
 
 		private void ViewSettings(object sender, EventArgs e)

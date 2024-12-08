@@ -57,29 +57,6 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		public event EventHandler ViewSettings;
 
-		// FIXME: Eventually decouple all these so it's handled in one event instead of 4
-		/// <summary>
-		/// Occurs when a customer is successfully added
-		/// </summary>
-		public event Events.Customers.CustomerEventHandler AddCustomer;
-
-		/// <summary>
-		/// Occurs when a listener is successfully added
-		/// </summary>
-		public event Events.Listeners.ListenerEventHandler AddListener;
-
-		/// <summary>
-		/// Occurs when a product is successfully added
-		/// </summary>
-		public event Events.Inventory.InventoryEventHandler AddInventory;
-
-		/// <summary>
-		/// Occurs when an order is successfully added
-		/// </summary>
-		public event Events.Orders.OrderEventHandler AddOrder;
-
-		// TODO: Create the Orders based events here as well
-
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
