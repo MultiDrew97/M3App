@@ -39,6 +39,12 @@ namespace SPPBC.M3Tools
 		public static DialogResult ShowErrorMessage(string subject, string message, bool retriable = false) => MessageBox.Show(message, subject, retriable ? MessageBoxButtons.YesNo : MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 		/// <summary>
+		/// Attempts to exit the application gracefully. Allowing them to close and handle any straggling tasks
+		/// and finish executions if needed.
+		/// </summary>
+		public static void Exit() => Application.Exit();
+
+		/// <summary>
 		/// Logs the current user
 		/// </summary>
 		public static void Logout(Control sender)
@@ -74,11 +80,11 @@ namespace SPPBC.M3Tools
 		/// Update the application
 		/// </summary>
 		/// <returns></returns>
-		public static async Task<bool> Update(bool confirm = true)
+		public static async Task<bool> Update(bool force = false)
 		{
 			try
 			{
-				if (confirm)
+				if (!force)
 				{
 					DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
@@ -104,19 +110,16 @@ namespace SPPBC.M3Tools
 
 				Console.WriteLine("Starting update client...");
 
-				Application.Exit();
+				Exit();
 
 				Process updateProc = Process.Start(new ProcessStartInfo(_updateSaveLocation)
 				{
 					CreateNoWindow = true,
 					WindowStyle = ProcessWindowStyle.Hidden,
-					UseShellExecute = true
+					UseShellExecute = false,
+					RedirectStandardOutput = false,
+					RedirectStandardError = false,
 				});
-
-				updateProc.WaitForExit();
-
-				if (File.Exists(_updateSaveLocation))
-					File.Delete(_updateSaveLocation);
 
 				return updateProc.ExitCode switch
 				{

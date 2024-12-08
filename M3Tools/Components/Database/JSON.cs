@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -18,44 +17,40 @@ namespace SPPBC.M3Tools.M3API
 		/// <summary>
 		/// The options used when serializing a object to JSON string
 		/// </summary>
-		private static JsonSerializerSettings options
+		private static readonly JsonSerializerSettings options = new()
 		{
-			get
+			Formatting = Formatting.Indented,
+			Error = new EventHandler<ErrorEventArgs>(JsonConversionError),
+			ContractResolver = new DefaultContractResolver
 			{
-				JsonSerializerSettings settings = new()
-				{
-					Formatting = Formatting.Indented,
-					Error = new EventHandler<ErrorEventArgs>(JsonConversionError),
-					ContractResolver = new DefaultContractResolver
-					{
-						NamingStrategy = new CamelCaseNamingStrategy()
-					},
-					/*PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-					PropertyNameCaseInsensitive = true,
-					WriteIndented = true,
-					ReadCommentHandling = JsonCommentHandling.Skip,
-					DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-					AllowTrailingCommas = true,
-					DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-					NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
-					UnmappedMemberHandling = System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip,
-					UnknownTypeHandling = System.Text.Json.Serialization.JsonUnknownTypeHandling.JsonElement,
-					PreferredObjectCreationHandling = System.Text.Json.Serialization.JsonObjectCreationHandling.Populate*/
-				};
-
-				return settings;
-			}
-		}
+				NamingStrategy = new CamelCaseNamingStrategy()
+			},
+			/*PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+			PropertyNameCaseInsensitive = true,
+			WriteIndented = true,
+			ReadCommentHandling = JsonCommentHandling.Skip,
+			DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+			AllowTrailingCommas = true,
+			DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+			NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
+			UnmappedMemberHandling = System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip,
+			UnknownTypeHandling = System.Text.Json.Serialization.JsonUnknownTypeHandling.JsonElement,
+			PreferredObjectCreationHandling = System.Text.Json.Serialization.JsonObjectCreationHandling.Populate*/
+		};
 
 		private static void JsonConversionError(object sender, ErrorEventArgs e)
 		{
+			string message = e.ErrorContext.Error.Message;
+			if (message.Contains("IDbEntry") && message.ToLower().Contains("abstract"))
+				return;
+
 			Console.Error.WriteLine(e.ErrorContext.Path);
 			Console.Error.WriteLine(e.ErrorContext.Member);
-			Console.Error.WriteLine(e.ErrorContext.Error.Message);
+			Console.Error.WriteLine(message);
 			Console.Error.WriteLine(e.ErrorContext.Error.StackTrace);
 			Console.Error.WriteLine(e.CurrentObject);
 			Console.Error.WriteLine(e.ErrorContext.OriginalObject);
-			_ = Utils.ShowErrorMessage("JSON Parse Error", "Unable to parse the JSON object");
+			_ = Utils.ShowErrorMessage("JSON Parse Error", message);
 		}
 
 		/// <summary>
@@ -64,7 +59,7 @@ namespace SPPBC.M3Tools.M3API
 		/// <typeparam name="T">The type to convert to</typeparam>
 		/// <param name="json">The JSON string</param>
 		/// <returns></returns>
-		public static async Task<T> ConvertFromJSON<T>(string json)
+		public static T ConvertFromJSON<T>(string json)
 		{
 			if (string.IsNullOrWhiteSpace(json) || !(json.Contains("{") && json.Contains("}")))
 			{
@@ -72,7 +67,7 @@ namespace SPPBC.M3Tools.M3API
 				return default;
 			}
 
-			return await Task.FromResult(JsonConvert.DeserializeObject<T>(json, options));
+			return JsonConvert.DeserializeObject<T>(json, options);
 		}
 
 		/// <summary>

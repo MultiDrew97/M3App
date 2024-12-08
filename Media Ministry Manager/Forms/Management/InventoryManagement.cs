@@ -52,7 +52,7 @@ namespace M3App
 			}
 
 			_ = dbInventory.AddInventory(add.Product);
-			_ = MessageBox.Show($"Successfully created product", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Add(sender, e);
 			Reload(sender, e);
 		}
 
@@ -71,7 +71,7 @@ namespace M3App
 			}
 
 			_ = dbInventory.UpdateProduct(edit.Product);
-			_ = MessageBox.Show($"Successfully updated product", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Update(sender, e);
 			Reload(sender, e);
 		}
 
@@ -82,8 +82,8 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
 		{
-			dbInventory.RemoveProduct(e.Value.Id);
-			_ = MessageBox.Show($"Successfully removed product", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			_ = dbInventory.RemoveProduct(e.Value.Id);
+			base.Remove(sender, e);
 			Reload(sender, e);
 		}
 

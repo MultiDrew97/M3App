@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Windows.Forms;
 
-using SPPBC.M3Tools.Events.Customers;
 using SPPBC.M3Tools.Types;
 
 namespace M3App
@@ -40,7 +39,9 @@ namespace M3App
 
 			mms_Main.Logout += new EventHandler(Logout);
 			mms_Main.ViewSettings += new EventHandler(ViewSettings);
-			mms_Main.AddCustomer += new CustomerEventHandler(Add);
+			// TODO: Determine how this will be needed so that all additions can be handled
+			//			in one  call instead of separate ones
+			// mms_Main.Add += new EventHandler(Add);
 			mms_Main.Manage += new SPPBC.M3Tools.Events.ManageEventHandler(Manage);
 
 			ts_Tools.AddEntry += new EventHandler(Add);
@@ -81,9 +82,7 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Add(object sender, EventArgs e)
-		{
-		}
+		protected virtual void Add(object sender, EventArgs e) => _ = MessageBox.Show($"Successfully added entry", "Successful Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 		/// <summary>
 		/// Update an entry in the database
@@ -91,9 +90,7 @@ namespace M3App
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		/// <exception cref="NotImplementedException"></exception>
-		protected virtual void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e)
-		{
-		}
+		protected virtual void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e) => _ = MessageBox.Show($"Successfully updated entry", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 		/// <summary>
 		/// Remove an entry from the database
@@ -101,9 +98,7 @@ namespace M3App
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		/// <exception cref="NotImplementedException"></exception>
-		protected virtual void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e)
-		{
-		}
+		protected virtual void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e) => _ = MessageBox.Show($"Successfully removed entry", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 		/// <summary>
 		/// Import data into the database

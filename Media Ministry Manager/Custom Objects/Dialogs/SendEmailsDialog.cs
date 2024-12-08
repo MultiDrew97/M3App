@@ -144,7 +144,7 @@ namespace M3App
 			{
 				try
 				{
-					MimeKit.MimeMessage email = gmt_Gmail.CreateWithAttachment(listener, subject, GetEmailBody(listener, bodySelection.Content.Body, details.SendingLinks), details.LocalFiles);
+					MimeKit.MimeMessage email = gmt_Gmail.CreateWithAttachment(listener, bodySelection.Content.Subject, string.Format(bodySelection.Content.Body, listener.Name, string.Join("<br>", details.SendingLinks)), details.LocalFiles);
 					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(email);
 
 					Console.WriteLine($"Message to {listener.Name} ({message.Id}) has been sent");

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using SPPBC.M3Tools.M3API;
+using SPPBC.M3Tools.Types;
 using SPPBC.M3Tools.Types.Extensions;
 
 // FIXME: Convert Database on here and API to use a non-relational (i.e MongoDB)
@@ -126,7 +127,7 @@ namespace SPPBC.M3Tools.API
 		/// <returns></returns>
 		protected internal async Task<bool> ExecuteAsync(System.Net.Http.HttpMethod method, string path, string payload, CancellationToken ct = default)
 		{
-			_ = await ExecuteWithResultAsync<bool>(method, path, payload, ct);
+			_ = await ExecuteWithResultAsync<IDbEntry>(method, path, payload, ct);
 
 			return true;
 		}
@@ -177,7 +178,7 @@ namespace SPPBC.M3Tools.API
 				Debug.WriteLine(body, "API");
 
 				return res.IsSuccessStatusCode
-					? await JSON.ConvertFromJSON<T>(body)
+					? JSON.ConvertFromJSON<T>(body)
 					: throw res.StatusCode switch
 					{
 						System.Net.HttpStatusCode.Unauthorized => new Exceptions.AuthorizationException(body),

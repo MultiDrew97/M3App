@@ -49,7 +49,7 @@ namespace SPPBC.M3Tools.API
 		/// </summary>
 		/// <param name="itemID"></param>
 		/// <param name="ct"></param>
-		public async void RemoveProduct(int itemID, System.Threading.CancellationToken ct = default)
-			=> await ExecuteAsync(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Separator, $"{itemID}?force"), string.Empty, ct);
+		public async Task<bool> RemoveProduct(int itemID, System.Threading.CancellationToken ct = default)
+			=> await ExecuteAsync(System.Net.Http.HttpMethod.Delete, string.Join(Paths.Separator, Paths.Inventory, $"{itemID}?force"), string.Empty, ct);
 	}
 }

@@ -82,13 +82,13 @@ namespace M3App
 
 			// TODO: Perform any startup/loading logic here
 #if DEBUG
-			Environment.SetEnvironmentVariable("api_base_url", "http://localhost:3000".Encrypt());
-			Environment.SetEnvironmentVariable("api_username", "username".Encrypt());
-			Environment.SetEnvironmentVariable("api_password", "password".Encrypt());
+			Environment.SetEnvironmentVariable(API_BASE_URL, "http://localhost:3000".Encrypt(), Utils.API_VAR_TARGET);
+			Environment.SetEnvironmentVariable(API_USERNAME, "username".Encrypt(), Utils.API_VAR_TARGET);
+			Environment.SetEnvironmentVariable(API_PASSWORD, "password".Encrypt(), Utils.API_VAR_TARGET);
 #else
-			Environment.SetEnvironmentVariable("api_base_url", "https://sppbc.herbivore.site".Encrypt(), EnvironmentVariableTarget.Process);
-			Environment.SetEnvironmentVariable("api_username", "Preachy2034".Encrypt(), EnvironmentVariableTarget.Process);
-			Environment.SetEnvironmentVariable("api_password", "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G".Encrypt(), EnvironmentVariableTarget.Process);
+			Environment.SetEnvironmentVariable(API_BASE_URL, "https://sppbc.herbivore.site".Encrypt(), Utils.API_VAR_TARGET);
+			Environment.SetEnvironmentVariable(API_USERNAME, "Preachy2034".Encrypt(), Utils.API_VAR_TARGET);
+			Environment.SetEnvironmentVariable(API_PASSWORD, "Wz^8Ne3f3jnkX#456BTd^$#mJqBE!G".Encrypt(), Utils.API_VAR_TARGET);
 #endif
 
 			// TODO: Allow this to be done with a service instead
@@ -105,6 +105,10 @@ namespace M3App
 					{
 						WorkingDirectory = Application.StartupPath
 					});
+				}
+				catch (OperationCanceledException)
+				{
+					Console.WriteLine($"Update cancelled by user. Starting current version - {Application.ProductVersion}");
 				}
 				catch (UpdateException ex)
 				{

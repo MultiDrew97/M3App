@@ -12,7 +12,7 @@ namespace SPPBC.M3Tools.Data
 	public partial class DataGrid<T> where T : Types.IDbEntry
 	{
 		// TODO: Add Pagination to the display grid
-		private bool Moved = false;
+		//private bool Moved = false;
 
 		#region Columns
 		/// <summary>
@@ -77,14 +77,16 @@ namespace SPPBC.M3Tools.Data
 		{
 			base.OnPaint(e);
 
-			if (!(ColumnHeadersVisible && RowsCheckable) && Moved)
-			{
+			if (!(ColumnHeadersVisible && RowsCheckable))
 				return;
-			}
 
 			System.Drawing.Rectangle rect = GetCellDisplayRectangle(dgc_Selection.DisplayIndex, -1, true);
-			chk_SelectAll.Location = new System.Drawing.Point(rect.Location.X + (rect.Width / 2) - (chk_SelectAll.Width / 2), rect.Location.Y + (rect.Height / 2) - (chk_SelectAll.Height / 2));
-			Moved = true;
+			System.Drawing.Point location = new(rect.Location.X + (rect.Width / 2) - (chk_SelectAll.Width / 2), rect.Location.Y + (rect.Height / 2) - (chk_SelectAll.Height / 2));
+
+			if (chk_SelectAll.Location == location)
+				return;
+
+			chk_SelectAll.Location = location;
 		}
 
 		private void RemoveSelectedRows(object sender, EventArgs e)
@@ -280,12 +282,11 @@ namespace SPPBC.M3Tools.Data
 		/// <inheritdoc/>
 		protected override void OnCellContentClick(DataGridViewCellEventArgs e)
 		{
-			DataGridViewDataErrorContexts context = DataGridViewDataErrorContexts.Commit;
 			base.OnCellContentClick(e);
 
 			switch (e.ColumnIndex)
 			{
-				case var @select when select == dgc_Selection.DisplayIndex:
+				case var @select when @select == dgc_Selection.DisplayIndex:
 					Rows[e.RowIndex].Cells[dgc_Selection.DisplayIndex].Value = !(bool)Rows[e.RowIndex].Cells[dgc_Selection.DisplayIndex].FormattedValue;
 					chk_SelectAll.Checked = SelectedRows.Count == Rows.Count;
 					break;
@@ -296,8 +297,6 @@ namespace SPPBC.M3Tools.Data
 					OnUserDeletingRow(new(Rows[e.RowIndex]));
 					break;
 			}
-
-			_ = CommitEdit(context);
 		}
 
 		/// <inheritdoc/>

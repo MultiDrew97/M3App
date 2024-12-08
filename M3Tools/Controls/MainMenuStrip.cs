@@ -57,6 +57,7 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		public event EventHandler ViewSettings;
 
+		// FIXME: Eventually decouple all these so it's handled in one event instead of 4
 		/// <summary>
 		/// Occurs when a customer is successfully added
 		/// </summary>
@@ -105,7 +106,7 @@ namespace SPPBC.M3Tools
 
 		private void LogoutApplication(object sender, EventArgs e) => Logout?.Invoke(sender, e);
 
-		private void Exit(object sender, EventArgs e) => Application.Exit();//ExitApplication?.Invoke(sender, e);
+		private void Exit(object sender, EventArgs e) => Utils.Exit();
 
 		private void CreateCustomer(object sender, EventArgs e)
 		{
@@ -122,7 +123,7 @@ namespace SPPBC.M3Tools
 			}
 
 			MessageBox.Show($"{create.Customer.Name} has been added to the customers list", "Customer Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			//AddCustomer?.Invoke(this, new Events.Customers.CustomerEventArgs(create.Customer, EventType.Added));
+			//CreateEntries(this, new Events.DataEventArgs<IDbEntry>(create.Customer, EventType.Added));
 		}
 
 		private void CreateProduct(object sender, EventArgs e)

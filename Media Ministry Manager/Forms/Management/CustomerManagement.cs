@@ -56,7 +56,7 @@ namespace M3App
 			}
 
 			_ = dbCustomers.AddCustomer(add.Customer);
-			_ = MessageBox.Show($"Successfully created customer", "Successful Creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Add(sender, e);
 			Reload(sender, e);
 		}
 
@@ -76,7 +76,7 @@ namespace M3App
 			}
 
 			_ = dbCustomers.UpdateCustomer(edit.Customer);
-			_ = MessageBox.Show($"Successfully updated customer", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Update(sender, e);
 			Reload(sender, e);
 		}
 
@@ -88,7 +88,7 @@ namespace M3App
 		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
 			_ = dbCustomers.RemoveCustomer(e.Value.Id);
-			_ = MessageBox.Show($"Successfully removed customer", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Remove(sender, e);
 			Reload(sender, e);
 		}
 

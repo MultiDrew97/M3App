@@ -18,6 +18,7 @@ namespace M3App
 	/// </summary>
 	public readonly partial struct Utils
 	{
+		internal static readonly EnvironmentVariableTarget API_VAR_TARGET = EnvironmentVariableTarget.Process;
 		/// <summary>
 		/// Waits for a certain amount of time. Typically used with Async functions to wait for tasks to complete
 		/// </summary>
@@ -45,7 +46,7 @@ namespace M3App
 		/// Update the application
 		/// </summary>
 		/// <returns></returns>
-		public static async Task<bool> Update() => await SPPBC.M3Tools.Utils.Update();
+		public static async Task<bool> Update(bool force = false) => await SPPBC.M3Tools.Utils.Update(force);
 
 		/// <summary>
 		/// The list of templates that are part of the application
@@ -70,7 +71,7 @@ namespace M3App
 		/// Attempts to exit the application gracefully. Allowing them to close and handle any straggling tasks
 		/// and finish executions if needed.
 		/// </summary>
-		public static void Exit(CancelEventArgs e = default) => Application.Exit(e);
+		public static void Exit(CancelEventArgs e = default) => Utils.Exit();
 
 		/// <summary>
 		/// Logs the current user out of the application

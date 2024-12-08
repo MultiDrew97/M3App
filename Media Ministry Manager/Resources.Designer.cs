@@ -61,6 +61,33 @@ namespace M3App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to api_base_url.
+        /// </summary>
+        internal static string API_BASE_URL {
+            get {
+                return ResourceManager.GetString("API_BASE_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api_password.
+        /// </summary>
+        internal static string API_PASSWORD {
+            get {
+                return ResourceManager.GetString("API_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api_username.
+        /// </summary>
+        internal static string API_USERNAME {
+            get {
+                return ResourceManager.GetString("API_USERNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Banner {

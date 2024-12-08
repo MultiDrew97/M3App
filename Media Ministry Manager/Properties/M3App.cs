@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using SPPBC.M3Tools.Attributes;
 
 using static System.IO.Path;
 using static M3App.Properties.Resources;
@@ -36,6 +40,9 @@ namespace M3App
 		[STAThread]
 		private static void Main(string[] args)
 		{
+#if DEBUG
+			//PrepDebugValues();
+#endif
 			try
 			{
 				PrepLogs();
@@ -73,6 +80,21 @@ namespace M3App
 			Console.SetError(new MultiOutputWriter(Console.Error, Error));
 
 			Console.WriteLine("Logs have been created");
+		}
+
+		private static void PrepDebugValues()
+		{
+			foreach (Type @class in Assembly.GetExecutingAssembly().GetTypes())
+			{
+				foreach (PropertyInfo prop in @class.GetProperties())
+				{
+					DebugCustomValueAttribute attr = prop.GetCustomAttribute<DebugCustomValueAttribute>();
+					if (attr is null)
+						continue;
+
+					Debug.WriteLine($"Class: {@class.Name}, Prop: {prop.Name}, Custom Value: {attr.Value}", "M3App");
+				}
+			}
 		}
 	}
 

@@ -359,4 +359,16 @@ Austin, TX. 78702&lt;/p&gt;
     <value>30</value>
     <comment>The amount of time in seconds to allow for the API call to be ran before automatically cancelling the request</comment>
   </data>
+  <data name="API_BASE_URL" xml:space="preserve">
+    <value>api_base_url</value>
+    <comment>The name of the environment variable that houses the BaseURL for the API calls</comment>
+  </data>
+  <data name="API_PASSWORD" xml:space="preserve">
+    <value>api_password</value>
+    <comment>The hame of the environment variable that houses the password for the API auth process</comment>
+  </data>
+  <data name="API_USERNAME" xml:space="preserve">
+    <value>api_username</value>
+    <comment>The name of the environment variable that houses the username for the API auth process</comment>
+  </data>
 </root>

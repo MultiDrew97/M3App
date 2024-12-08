@@ -46,42 +46,26 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// 
 		/// </summary>
-        public ToolsContextMenu()
-        {
-            InitializeComponent();
-        }
+		public ToolsContextMenu() => InitializeComponent();
 
-        private void RemoveRowByToolStrip(object sender, EventArgs e)
-        {
-            var res = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+		private void RemoveRowByToolStrip(object sender, EventArgs e)
+		{
+			DialogResult res = MessageBox.Show("Are you sure you want to delete this entry?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (!(res == DialogResult.Yes))
-            {
-                return;
-            }
+			if (!(res == DialogResult.Yes))
+			{
+				return;
+			}
 
-            RemoveSelected?.Invoke(sender, e);
-        }
+			RemoveSelected?.Invoke(sender, e);
+		}
 
-        private void Reload(object sender, EventArgs e)
-        {
-            RefreshView?.Invoke(Parent, e);
-        }
+		private void Reload(object sender, EventArgs e) => RefreshView?.Invoke(Parent, e);
 
-        private void MenuClosed(object sender, EventArgs e)
-        {
-            ts_Remove.Enabled = false;
-        }
+		private void MenuClosed(object sender, EventArgs e) => ts_Remove.Enabled = false;
 
+		private void EmailFunctions(object sender, EventArgs e) => SendEmails?.Invoke(sender, e);
 
-        private void EmailFunctions(object sender, EventArgs e)
-        {
-            SendEmails?.Invoke(sender, e);
-        }
-
-        private void EditClicked(object sender, EventArgs e)
-        {
-            EditSelected?.Invoke(sender, e);
-        }
-    }
+		private void EditClicked(object sender, EventArgs e) => EditSelected?.Invoke(sender, e);
+	}
 }

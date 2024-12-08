@@ -120,12 +120,12 @@ namespace M3App
 
 				// FIXME: Find a better and faster way to store login credentials
 				// This way freezes excessively and isn't very secure
-				/*Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
+				Environment.SetEnvironmentVariable("username", Username, EnvironmentVariableTarget.User);
 
 				if (SaveCredentials)
 				{
 					Environment.SetEnvironmentVariable("password", Password.Encrypt(), EnvironmentVariableTarget.User);
-				}*/
+				}
 
 				new MainForm().Show();
 

@@ -47,6 +47,7 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 			_ = dbListeners.RemoveListener(e.Value.Id);
+			base.Remove(sender, e);
 			Reload(sender, e);
 		}
 
@@ -66,6 +67,7 @@ namespace M3App
 
 			UseWaitCursor = true;
 			AddToDB(sender, add.Listener);
+			base.Add(sender, e);
 			UseWaitCursor = false;
 		}
 
@@ -119,6 +121,7 @@ namespace M3App
 				}
 
 				_ = dbListeners.UpdateListener(edit.Listener);
+				base.Update(sender, e);
 				Reload(sender, e);
 			}
 			catch

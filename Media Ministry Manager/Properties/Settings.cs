@@ -11,6 +11,90 @@ using SPPBC.M3Tools.Types.Extensions;
 
 namespace M3App.Properties
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	//  This class allows you to handle specific events on the settings class:
+	//  The SettingChanging event is raised before a setting's value is changed.
+	//  The PropertyChanged event is raised after a setting's value is changed.
+	//  The SettingsLoaded event is raised after the setting values are loaded.
+	//  The SettingsSaving event is raised before the setting values are saved.
+	[SettingsProvider(typeof(M3AppSettingsProvider))]
+	internal sealed partial class Settings : ApplicationSettingsBase
+	{
+		[ApplicationScopedSetting]
+		[DefaultSettingValue("true")]
+		public bool UpdateOnStart { get; set; } = true;
+
+		[ApplicationScopedSetting]
+		[DefaultSettingValue("http://localhost:3000")]
+		public string BaseUrl => Environment.GetEnvironmentVariable(Resources.API_BASE_URL, Utils.API_VAR_TARGET).Decrypt();
+
+		[ApplicationScopedSetting]
+		[DefaultSettingValue("password")]
+		public string ApiPassword => Environment.GetEnvironmentVariable(Resources.API_PASSWORD, Utils.API_VAR_TARGET).Decrypt();
+
+		[ApplicationScopedSetting]
+		[DefaultSettingValue("username")]
+		public string ApiUsername => Environment.GetEnvironmentVariable(Resources.API_USERNAME, Utils.API_VAR_TARGET).Decrypt();
+
+		public Settings() => Console.WriteLine("Initializing Settings..");
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnSettingsSaving(object sender, CancelEventArgs e) => base.OnSettingsSaving(sender, e);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnSettingChanging(object sender, SettingChangingEventArgs e) => base.OnSettingChanging(sender, e);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => base.OnPropertyChanged(sender, e);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void OnSettingsLoaded(object sender, SettingsLoadedEventArgs e) => base.OnSettingsLoaded(sender, e);
+
+		internal static void EncryptAppConfig()
+		{
+			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+			AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
+			if (!appSettings.SectionInformation.IsProtected)
+			{
+				appSettings.SectionInformation.ProtectSection("RsaProtectedConfigurationProvider");
+				config.Save(ConfigurationSaveMode.Full);
+				Console.WriteLine("appSettings section has been encrypted.");
+			}
+		}
+
+		internal static void DecryptAppConfig()
+		{
+			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+			AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
+			if (appSettings.SectionInformation.IsProtected)
+			{
+				appSettings.SectionInformation.UnprotectSection();
+				config.Save(ConfigurationSaveMode.Full);
+				Console.WriteLine("appSettings section has been decrypted.");
+			}
+		}
+	}
+
 	internal sealed class M3AppSettingsProvider : SettingsProvider, IApplicationSettingsProvider
 	{
 		private const string SettingsFileName = "M3App.settings";
@@ -115,146 +199,5 @@ namespace M3App.Properties
 		SettingsPropertyValue IApplicationSettingsProvider.GetPreviousVersion(SettingsContext context, SettingsProperty property) => throw new NotImplementedException();
 		void IApplicationSettingsProvider.Reset(SettingsContext context) => throw new NotImplementedException();
 		void IApplicationSettingsProvider.Upgrade(SettingsContext context, SettingsPropertyCollection properties) => throw new NotImplementedException();
-	}
-
-	/// <summary>
-	/// 
-	/// </summary>
-	//  This class allows you to handle specific events on the settings class:
-	//  The SettingChanging event is raised before a setting's value is changed.
-	//  The PropertyChanged event is raised after a setting's value is changed.
-	//  The SettingsLoaded event is raised after the setting values are loaded.
-	//  The SettingsSaving event is raised before the setting values are saved.
-	[SettingsProvider(typeof(M3AppSettingsProvider))]
-	internal sealed partial class Settings : ApplicationSettingsBase
-	{
-		[ApplicationScopedSetting]
-		[DefaultSettingValue("true")]
-		public bool UpdateOnStart { get; set; } = true;
-
-		[ApplicationScopedSetting]
-		[DefaultSettingValue("http://localhost:3000")]
-		public string BaseUrl => Environment.GetEnvironmentVariable("api_base_url").Decrypt();
-
-		[ApplicationScopedSetting]
-		[DefaultSettingValue("password")]
-		public string ApiPassword => Environment.GetEnvironmentVariable("api_password").Decrypt();
-
-		[ApplicationScopedSetting]
-		[DefaultSettingValue("username")]
-		public string ApiUsername => Environment.GetEnvironmentVariable("api_username").Decrypt();
-
-		public Settings() => Console.WriteLine("Initializing Settings..");
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		protected override void OnSettingsSaving(object sender, CancelEventArgs e) => base.OnSettingsSaving(sender, e);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		protected override void OnSettingChanging(object sender, SettingChangingEventArgs e) => base.OnSettingChanging(sender, e);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => base.OnPropertyChanged(sender, e);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		protected override void OnSettingsLoaded(object sender, SettingsLoadedEventArgs e) => base.OnSettingsLoaded(sender, e);
-
-		internal static void EncryptAppConfig()
-		{
-			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-			AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
-			if (!appSettings.SectionInformation.IsProtected)
-			{
-				appSettings.SectionInformation.ProtectSection("RsaProtectedConfigurationProvider");
-				config.Save(ConfigurationSaveMode.Full);
-				Console.WriteLine("appSettings section has been encrypted.");
-			}
-		}
-
-		internal static void DecryptAppConfig()
-		{
-			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-			AppSettingsSection appSettings = (AppSettingsSection)config.GetSection("appSettings");
-			if (appSettings.SectionInformation.IsProtected)
-			{
-				appSettings.SectionInformation.UnprotectSection();
-				config.Save(ConfigurationSaveMode.Full);
-				Console.WriteLine("appSettings section has been decrypted.");
-			}
-		}
-
-		/*[UserScopedSetting]
-		[DefaultSettingValue("Microsoft Sans Serif, 15.75pt, style=Bold")]
-		[SettingsManageability(SettingsManageability.Roaming)]
-		public System.Drawing.Font CurrentFont
-		{
-			get => (System.Drawing.Font)this["CurrentFont"];
-			set => this["CurrentFont"] = value;
-		}
-
-		[ApplicationScopedSetting]
-		[DefaultSettingValue("Microsoft Sans Serif, 15.75pt, style=Bold")]
-		public System.Drawing.Font DefaultFont => (System.Drawing.Font)this["DefaultFont"];
-
-		[UserScopedSetting]
-		[SettingsManageability(SettingsManageability.Roaming)]
-		public SPPBC.M3Tools.Types.User User
-		{
-			get => (SPPBC.M3Tools.Types.User)this["User"];
-			set => this["User"] = value;
-		}
-
-		[UserScopedSetting]
-		[DefaultSettingValue("")]
-		[SettingsManageability(SettingsManageability.Roaming)]
-		public string Username
-		{
-			get => (string)this["Username"];
-			set => this["Username"] = value;
-		}
-
-		[UserScopedSetting]
-		[DefaultSettingValue("")]
-		[SettingsManageability(SettingsManageability.Roaming)]
-		public string Password
-		{
-			get => (string)this["Password"];
-			set => this["Password"] = value;
-		}
-
-		[UserScopedSetting]
-		[DefaultSettingValue("False")]
-		[SettingsManageability(SettingsManageability.Roaming)]
-		public bool KeepLoggedIn
-		{
-			get => (bool)this["KeepLoggedIn"];
-			set => this["KeepLoggedIn"] = value;
-		}
-
-		[UserScopedSetting]
-		[DefaultSettingValue("True")]
-		[SettingsManageability(SettingsManageability.Roaming)]
-		public bool UpgradeRequired
-		{
-			get => (bool)this["UpradeRequired"];
-			set => this["UpgradeRequired"] = value;
-		}*/
 	}
 }

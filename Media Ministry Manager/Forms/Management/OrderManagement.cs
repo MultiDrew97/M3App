@@ -62,7 +62,7 @@ namespace M3App
 				await dbOrders.AddOrder(new(-1, add.Customer, item.Item, item.Quantity, default, default));
 			}
 
-			MessageBox.Show($"Order has been placed for {add.Customer.Name}", "Order Placed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Add(sender, e);
 			Reload(sender, e);
 #endif
 		}
@@ -87,7 +87,7 @@ namespace M3App
 			}
 
 			await dbOrders.UpdateOrder(edit.UpdatedOrder);
-			MessageBox.Show($"Successfully updated order", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			base.Update(sender, e);
 			Reload(sender, e);
 #endif
 		}
