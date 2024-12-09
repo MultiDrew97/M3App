@@ -1,5 +1,5 @@
 # Side-Projects
-This repository holds all of the projects related to the Media Ministry Manager ***(M3App)*** project that I have taken up as a Software Developer since graduation in 2018.
+This repository holds all of the projects related to the Media Ministry Manager ***(M3App)*** project that I have taken up as a Software Engineer since graduation in 2018.
 I wanted to upload these to GitHub so that it can become a part of my portfolio. Most of
 this is an ongoing work in progress that has been deployed to and is in use by the people that requested them, currentlly being used to manage around 300 users.
 
