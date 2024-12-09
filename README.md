@@ -1,11 +1,3 @@
-# DISCLAIMER
-If you are using any of this code and running the programs, I ask that you change the database and API information.
-The information within these projects are being used by the people that they were made for. Not changing this
-information will cause their applications to have unknown and unforeseen issues.
-
-Thank you.
-
-
 # Side-Projects
 This repository holds all of the projects related to the Media Ministry Manager ***(M3App)*** project that I have taken up as a Software Developer since graduation in 2018.
 I wanted to upload these to GitHub so that it can become a part of my portfolio. Most of
