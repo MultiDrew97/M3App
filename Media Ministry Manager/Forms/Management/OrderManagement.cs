@@ -48,10 +48,10 @@ namespace M3App
 #if !DEBUG
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
-#else
+#endif
 			using SPPBC.M3Tools.Dialogs.PlaceOrderDialog @add = new(await dbCustomers.GetCustomers(), await dbInventory.GetProducts());
 
-			if (add.ShowDialog() != DialogResult.OK)
+			if (add.ShowDialog(this) != DialogResult.OK)
 			{
 				UseWaitCursor = false;
 				return;
@@ -64,7 +64,6 @@ namespace M3App
 
 			base.Add(sender, e);
 			Reload(sender, e);
-#endif
 		}
 
 		/// <summary>
@@ -77,10 +76,10 @@ namespace M3App
 #if !DEBUG
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
-#else
+#endif
 			using SPPBC.M3Tools.Dialogs.EditOrderDialog @edit = new(e.Value, await dbCustomers.GetCustomers(), await dbInventory.GetProducts());
 
-			if (edit.ShowDialog() != DialogResult.OK)
+			if (edit.ShowDialog(this) != DialogResult.OK)
 			{
 				UseWaitCursor = false;
 				return;
@@ -89,7 +88,6 @@ namespace M3App
 			await dbOrders.UpdateOrder(edit.UpdatedOrder);
 			base.Update(sender, e);
 			Reload(sender, e);
-#endif
 		}
 
 		/// <summary>
@@ -102,7 +100,7 @@ namespace M3App
 #if !DEBUG
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
-#else
+#endif
 			string text;
 			string caption;
 			try
@@ -138,7 +136,6 @@ namespace M3App
 			{
 				UseWaitCursor = false;
 			}
-#endif
 		}
 
 		/// <summary>

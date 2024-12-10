@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace SPPBC.M3Tools.Types.GTools
 {
@@ -9,13 +8,13 @@ namespace SPPBC.M3Tools.Types.GTools
 	public class EmailDetails
 	{
 		/// <summary>
-		///	The contents of the email
+		/// The subject of the email
 		/// </summary>
-		/// <returns></returns>
-		//public EmailContent EmailContents;
-
 		public string Subject;
 
+		/// <summary>
+		/// The body of the email
+		/// </summary>
 		public string Body;
 
 		/// <summary>
@@ -31,7 +30,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		public Collection<string> LocalFiles;
 
 		/// <summary>
-		/// The list of reciepients of the email
+		/// The list of recipients of the email
 		/// </summary>
 		/// <returns></returns>
 		public DbEntryCollection<Listener> Recipients;
@@ -40,7 +39,7 @@ namespace SPPBC.M3Tools.Types.GTools
 		/// The list of links to be added to the email body
 		/// </summary>
 		/// <returns></returns>
-		public List<string> SendingLinks;
+		public Collection<string> SendingLinks;
 
 		/// <summary>
 		/// 
@@ -60,29 +59,23 @@ namespace SPPBC.M3Tools.Types.GTools
 	/// <summary>
 	/// The content of the email being sent
 	/// </summary>
-	public class EmailContent
+	/// <remarks>
+	/// 
+	/// </remarks>
+	/// <param name="subject"></param>
+	/// <param name="body"></param>
+	public class EmailContent(string subject = "", string body = "")
 	{
 		/// <summary>
 		/// The subject of the email
 		/// </summary>
 		/// <returns></returns>
-		public string Subject { get; set; }
+		public string Subject = subject;
 
 		/// <summary>
 		/// The body content of the email
 		/// </summary>
 		/// <returns></returns>
-		public string Body { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="subject"></param>
-		/// <param name="body"></param>
-		public EmailContent(string subject = "", string body = "")
-		{
-			Subject = subject;
-			Body = body;
-		}
+		public string Body = body;
 	}
 }

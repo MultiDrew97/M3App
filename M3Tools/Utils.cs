@@ -62,15 +62,16 @@ namespace SPPBC.M3Tools
 		/// </summary>
 		public static async Task<bool> UpdateAvailable()
 		{
+			Debug.WriteLine("Checking if update available...", "Updating");
+
 			string text = await new HttpClient().GetStringAsync(Properties.Resources.VERSION_URI);
 			Debug.WriteLine($"Received version text: {text.Trim()}", "Updating");
 
-			Debug.WriteLine("Checking if update available...", "Updating");
 			Version current = new(Application.ProductVersion);
 			Version latest = new(text.Trim());
 
-			Debug.WriteLine($"Current Version: {current}", "Updating");
-			Debug.WriteLine($"Latest Version: {latest}", "Updating");
+			Console.WriteLine($"Current Version: {current}");
+			Console.WriteLine($"Latest Version: {latest}");
 			return current < latest;
 		}
 
@@ -283,8 +284,9 @@ namespace SPPBC.M3Tools
 			foreach (System.Collections.Generic.KeyValuePair<string, string> statePair in States)
 			{
 				if (StringComparer.OrdinalIgnoreCase.Compare(state, statePair.Value) != 0)
-				{ continue; }
+					continue;
 
+				Debug.WriteLine($"Found State? {state == statePair.Value}", "Utils");
 				return statePair.Key;
 			}
 

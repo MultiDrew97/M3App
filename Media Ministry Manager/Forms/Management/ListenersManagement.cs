@@ -60,7 +60,7 @@ namespace M3App
 		{
 			using SPPBC.M3Tools.Dialogs.AddListenerDialog @add = new();
 
-			if (add.ShowDialog() != DialogResult.OK)
+			if (add.ShowDialog(this) != DialogResult.OK)
 			{
 				return;
 			}
@@ -76,7 +76,7 @@ namespace M3App
 		{
 			using SPPBC.M3Tools.Dialogs.ImportListenersDialog @import = new();
 
-			if (import.ShowDialog() != DialogResult.OK)
+			if (import.ShowDialog(this) != DialogResult.OK)
 			{
 				return;
 			}
@@ -115,7 +115,7 @@ namespace M3App
 				UseWaitCursor = true;
 				using SPPBC.M3Tools.Dialogs.EditListenerDialog @edit = new(e.Value);
 
-				if (edit.ShowDialog() != DialogResult.OK)
+				if (edit.ShowDialog(this) != DialogResult.OK)
 				{
 					return;
 				}
@@ -155,13 +155,14 @@ namespace M3App
 		{
 			UseWaitCursor = true;
 
-#if DEBUG
+#if !DEBUG
 			string subject = "Welcome to the Ministry";
-			string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, string.Format(Properties.Resources.NEW_LISTENER_TEMPLATE, e.Value.Name.Trim()));
+			string body = string.Format(Properties.Resources.NEW_LISTENER_TEMPLATE, e.Value.Name.Trim());
 			MimeKit.MimeMessage message = gt_Email.Create(e.Value, subject, body);
 			await gt_Email.Send(message);
+			MessageBox.Show($"Listener {e.Value.Name} has been added to the ministry. Their welcome email should be sent shortly.", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #else
-			MessageBox.Show($"Listener {e.Value.Name} has been added to the database", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show($"Listener {e.Value.Name} has been added to the ministry. Their welcome email should be sent shortly.", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
 
 			Reload(sender, e);

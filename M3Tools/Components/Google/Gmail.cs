@@ -38,7 +38,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <summary>
 		/// 
 		/// </summary>
-		public Gmail() : base(GoogleUserType.MAIL, [GmailService.Scope.GmailCompose]) => InitializeComponent();
+		public Gmail() : base(GoogleUserType.MAIL, [GmailService.Scope.GmailCompose])
+			=> InitializeComponent();
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -70,17 +71,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="body"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress @from = null) => Create(to, new EmailContent(subject, body), from);
-
-		/*/// <summary>
-		/// Creates an email using the provided information
-		/// </summary>
-		///<param name="to">The address to whom the email is being sent to</param>
-		/// <param name="subject">The subject of the email to be sent</param>
-		/// <param name="body">The body of the email to be sent</param>
-		/// <param name="from">Who the email is being sent from</param>
-		/// <returns></returns>
-		public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress from = null) => Create(to, new EmailContent(subject, body), from);*/
+		public MimeMessage Create(Types.Listener to, string subject, string body, MailboxAddress @from = null)
+			=> Create(to, new EmailContent(subject, body), from);
 
 		/// <summary>
 		/// 
@@ -89,7 +81,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="content"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage Create(Types.Listener to, EmailContent content, MailboxAddress from = null) => Create(new MailboxAddress(to.Name, to.Email), content, from);
+		public MimeMessage Create(Types.Listener to, EmailContent content, MailboxAddress from = null)
+			=> Create(new MailboxAddress(to.Name, to.Email), content, from);
 
 		private MimeMessage Create(MailboxAddress to, EmailContent content, MailboxAddress from)
 		{
@@ -115,7 +108,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="files"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage CreateWithAttachment(Types.Listener to, string subject, string body, IList<string> files, MailboxAddress @from = null) => CreateWithAttachment(to, new EmailContent(subject, body), files, from);
+		public MimeMessage CreateWithAttachment(Types.Listener to, string subject, string body, IList<string> files, MailboxAddress @from = null)
+			=> CreateWithAttachment(to, new EmailContent(subject, body), files, from);
 
 		/// <summary>
 		/// 
@@ -125,7 +119,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="files"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage CreateWithAttachment(Types.Listener to, EmailContent content, IList<string> files, MailboxAddress @from = null) => CreateWithAttachment(new MailboxAddress(to.Name, to.Email), content, files, from);
+		public MimeMessage CreateWithAttachment(Types.Listener to, EmailContent content, IList<string> files, MailboxAddress @from = null)
+			=> CreateWithAttachment(new MailboxAddress(to.Name, to.Email), content, files, from);
 
 		/// <summary>
 		/// Create an email that contains attachments to be sent to a email box
@@ -138,9 +133,11 @@ namespace SPPBC.M3Tools.GTools
 		private MimeMessage CreateWithAttachment(MailboxAddress to, EmailContent content, IList<string> files, MailboxAddress @from = null)
 		{
 			MimeMessage email = Create(to, content, from);
-			Multipart multipart = [email.Body,
-				..files.Select<string, MimeEntity>(file => new MimePart(MediaTypeNames.Application.Octet) { Content = new MimeContent(new MemoryStream(System.IO.File.ReadAllBytes(file))), FileName = Path.GetFileName(file), IsAttachment = true, ContentTransferEncoding = ContentEncoding.Base64 })];
+
+			Multipart multipart = [email.Body, .. files.Select(ConvertFile)];
+
 			email.Body = multipart;
+
 			return email;
 		}
 
@@ -156,9 +153,19 @@ namespace SPPBC.M3Tools.GTools
 
 			ct.ThrowIfCancellationRequested();
 
-			Message body = new() { Raw = emailContent.ToString().ToBase64String() };
+			Message email = new() { Raw = emailContent.ToString().ToBase64String() };
 
-			return await __service.Users.Messages.Send(body, emailContent.Sender.Address).ExecuteAsync(ct);
+			return await __service.Users.Messages.Send(email, emailContent.Sender.Address).ExecuteAsync(ct);
 		}
+
+		private MimeEntity ConvertFile(string file)
+			=> new MimePart(MediaTypeNames.Application.Octet)
+			{
+				Content = new MimeContent(new MemoryStream(System.IO.File.ReadAllBytes(file))),
+				FileName = Path.GetFileName(file),
+				IsAttachment = true,
+				ContentTransferEncoding = ContentEncoding.Base64
+			};
+
 	}
 }

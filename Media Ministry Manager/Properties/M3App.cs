@@ -27,6 +27,7 @@ namespace M3App
 #endif
 			Console.SetOut(_log);
 			Console.SetError(_err);
+
 			try
 			{
 				PrepCustomOutputs();
@@ -44,6 +45,7 @@ namespace M3App
 			}
 			finally
 			{
+				Console.WriteLine("Performing cleanup...");
 				Cleanup();
 			}
 		}

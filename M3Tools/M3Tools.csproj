@@ -38,7 +38,7 @@
     <UpdatePackageVersion>False</UpdatePackageVersion>
     <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
     <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-    <AssemblyVersion>1.0.495.2201</AssemblyVersion>
+    <AssemblyVersion>1.0.535.2201</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -816,13 +816,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Apis.Drive.v3">
-      <Version>1.68.0.3574</Version>
+      <Version>1.68.0.3608</Version>
     </PackageReference>
     <PackageReference Include="Google.Apis.Gmail.v1">
       <Version>1.68.0.3427</Version>
     </PackageReference>
     <PackageReference Include="MimeKit">
-      <Version>4.8.0</Version>
+      <Version>4.9.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
