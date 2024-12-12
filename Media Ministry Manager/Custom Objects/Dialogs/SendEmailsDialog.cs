@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Dialogs;
 using SPPBC.M3Tools.Types;
+using SPPBC.M3Tools.Types.Extensions;
 using SPPBC.M3Tools.Types.GTools;
 
 namespace M3App
@@ -100,83 +101,87 @@ namespace M3App
 			PrepEmails(e.Result as EmailDetails);
 		}
 
-		private async void PrepEmails(EmailDetails details)
+		private async Task<ListenerCollection> GatherRecipientsAsync()
 		{
-			if (details is null)
-			{
-				EmailsCancelled?.Invoke(this, EventArgs.Empty);
-				return;
-			}
-
 			using SPPBC.M3Tools.ListenerSelectionDialog recipients = new(await dbListeners.GetListeners());
 
 			if (recipients.ShowDialog(this) != DialogResult.OK)
 			{
 				EmailsCancelled?.Invoke(this, EventArgs.Empty);
-				return;
+				return null;
 			}
 
-			details.Recipients = recipients.Selection;
+			return recipients.Listeners;
+		}
 
-			// TODO: Make a class or provider of some sort to store and pull the template data for the user
+		private (string Subject, string Body) PrepBody()
+		{
 			using EmailBodySelection bodySelection = new(Utils.Templates);
 
-			if (bodySelection.ShowDialog(this) != DialogResult.OK)
-			{
-				EmailsCancelled?.Invoke(this, EventArgs.Empty);
-				return;
-			}
-
-			string subject = bodySelection.Content.Subject;
-			// FIXME: Doesn't like the style input being in the base template. Might have to make a separate setting for now to get it to work
-			//string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, bodySelection.Content.Body);
-
-			foreach (File @file in details.DriveLinks)
-			{
-				details.SendingLinks.Add(string.Format(Properties.Resources.DRIVE_LINK_HTML, string.Format(Properties.Resources.DRIVE_SHARE_LINK_TEMPLATE, @file.Id), @file.Name));
-			}
-
-			tsp_Progress.Value = 0;
-			tsp_Progress.Maximum = details.Recipients.Count;
-			tsp_Progress.Step = (int)Math.Floor(1d / details.Recipients.Count);
-
-			foreach (Listener listener in details.Recipients)
-			{
-				try
+			DialogResult res = bodySelection.ShowDialog(this);
+			return res != DialogResult.OK
+				? throw res switch
 				{
-					MimeKit.MimeMessage email = gmt_Gmail.CreateWithAttachment(listener, bodySelection.Content.Subject, string.Format(bodySelection.Content.Body, listener.Name, string.Join("<br>", details.SendingLinks)), details.LocalFiles);
-					Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(email);
-
-					Console.WriteLine($"Message to {listener.Name} ({message.Id}) has been sent");
+					DialogResult.Cancel => new OperationCanceledException(),
+					_ => new Exception()
 				}
-				catch (Google.GoogleApiException ex)
-				{
-					Debug.WriteLine(ex.Message);
-					Console.Error.WriteLine($"Unable to send email to {listener.Name}");
-					Console.Error.WriteLine(ex.Message);
-					Console.Error.WriteLine(ex.StackTrace);
-				}
-				finally
-				{
-					tsp_Progress.PerformStep();
-				}
-			}
-
-			EmailsSent?.Invoke(this, EventArgs.Empty);
+				: (bodySelection.Content.Subject, bodySelection.Content.Body);
 		}
 
-		private string GetEmailBody(Listener listener, string body, System.Collections.Generic.List<string> links)
+		private async void PrepEmails(EmailDetails details)
 		{
-			string temp = string.Format(body, listener.Name, string.Join("<br>", links));
-			return string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, temp);
-		}
-
-		private void EmailsPrepped(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (e.Cancelled || e.Error is not null || e.Result is not EmailDetails details)
+			try
 			{
+				if (details is null)
+				{
+					EmailsCancelled?.Invoke(this, EventArgs.Empty);
+					return;
+				}
+
+				details.Recipients = await GatherRecipientsAsync();
+				// TODO: Make a class or provider of some sort to store and pull the template data for the user
+				(string subject, string body) = PrepBody();
+				// FIXME: Doesn't like the style input being in the base template. Might have to make a separate setting for now to get it to work
+				//string body = string.Format(Properties.Resources.BASE_EMAIL_TEMPLATE, Properties.Resources.BASE_EMAIL_STYLE, bodySelection.Content.Body);
+
+				foreach (File @file in details.DriveLinks)
+				{
+					details.SendingLinks.Add(string.Format(Properties.Resources.DRIVE_LINK_HTML, string.Format(Properties.Resources.DRIVE_SHARE_LINK_TEMPLATE, @file.Id), @file.Name));
+				}
+
+				tsp_Progress.Value = 0;
+				tsp_Progress.Maximum = details.Recipients.Count;
+				tsp_Progress.Step = (int)Math.Floor(1d / details.Recipients.Count);
+
+				foreach (Listener listener in details.Recipients)
+				{
+					try
+					{
+						MimeKit.MimeMessage email = await gmt_Gmail.CreateWithAttachment(listener, subject, string.Format(body, listener.Name, string.Join(HTMLTags.LineBreak, details.SendingLinks)), details.LocalFiles);
+						Google.Apis.Gmail.v1.Data.Message message = await gmt_Gmail.Send(email);
+
+						Console.WriteLine($"Message to {listener.Name} ({message.Id}) has been sent");
+					}
+					catch (OperationCanceledException) { }
+					catch (Google.GoogleApiException ex)
+					{
+						Console.Error.WriteLine($"Unable to send email to {listener.Name}");
+						Console.Error.WriteLine(ex.Message);
+						Console.Error.WriteLine(ex.StackTrace);
+					}
+					finally
+					{
+						tsp_Progress.PerformStep();
+					}
+				}
+
+				EmailsSent?.Invoke(this, EventArgs.Empty);
+			}
+			catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+				Console.Error.WriteLine(ex.StackTrace);
 				EmailsCancelled?.Invoke(this, EventArgs.Empty);
-				return;
 			}
 		}
 

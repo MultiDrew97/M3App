@@ -28,42 +28,42 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.chk_SelectAll = new System.Windows.Forms.CheckBox();
-            this.cms_Tools = new SPPBC.M3Tools.ToolsContextMenu();
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // chk_SelectAll
-            // 
-            this.chk_SelectAll.AutoSize = true;
-            this.chk_SelectAll.Location = new System.Drawing.Point(46, 3);
-            this.chk_SelectAll.Name = "chk_SelectAll";
-            this.chk_SelectAll.Size = new System.Drawing.Size(15, 14);
-            this.chk_SelectAll.TabIndex = 3;
-            this.chk_SelectAll.TabStop = false;
-            this.chk_SelectAll.UseVisualStyleBackColor = true;
-            this.chk_SelectAll.Click += new System.EventHandler(this.SelectAll);
-            // 
-            // cms_Tools
-            // 
-            this.cms_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.cms_Tools.Name = "cms_Tools";
-            this.cms_Tools.Size = new System.Drawing.Size(133, 70);
-            // 
-            // DataGrid
-            // 
-            this.AllowUserToAddRows = false;
-            this.AllowUserToOrderColumns = true;
-            this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ContextMenuStrip = this.cms_Tools;
-            this.Controls.Add(this.chk_SelectAll);
-            this.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.ReadOnly = true;
-            this.RowTemplate.Height = 28;
-            this.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.chk_SelectAll = new System.Windows.Forms.CheckBox();
+			this.cms_Tools = new SPPBC.M3Tools.ToolsContextMenu();
+			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// chk_SelectAll
+			// 
+			this.chk_SelectAll.AutoSize = true;
+			this.chk_SelectAll.Location = new System.Drawing.Point(46, 3);
+			this.chk_SelectAll.Name = "chk_SelectAll";
+			this.chk_SelectAll.Size = new System.Drawing.Size(15, 14);
+			this.chk_SelectAll.TabIndex = 3;
+			this.chk_SelectAll.TabStop = false;
+			this.chk_SelectAll.UseVisualStyleBackColor = true;
+			this.chk_SelectAll.Click += new System.EventHandler(this.SelectAll);
+			// 
+			// cms_Tools
+			// 
+			this.cms_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
+			this.cms_Tools.Name = "cms_Tools";
+			this.cms_Tools.Size = new System.Drawing.Size(133, 70);
+			// 
+			// DataGrid
+			// 
+			this.AllowUserToAddRows = false;
+			this.AllowUserToOrderColumns = true;
+			this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.ContextMenuStrip = this.cms_Tools;
+			this.Controls.Add(this.chk_SelectAll);
+			this.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+			this.ReadOnly = true;
+			this.RowTemplate.Height = 28;
+			this.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 

@@ -30,7 +30,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override async void Reload(object sender, EventArgs e)
 		{
-			UseWaitCursor = true;
+			base.Reload(sender, e);
 			_original = await dbInventory.GetProducts();
 			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, idg_Inventory.Inventory.Count);
@@ -44,6 +44,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Add(object sender, EventArgs e)
 		{
+			base.Add(sender, e);
 			using AddProductDialog @add = new();
 
 			if (add.ShowDialog() != DialogResult.OK)
@@ -52,7 +53,7 @@ namespace M3App
 			}
 
 			_ = dbInventory.AddInventory(add.Product);
-			base.Add(sender, e);
+			_ = MessageBox.Show($"Successfully added {add.Product.Name}", "Successful Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -63,6 +64,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
 		{
+			base.Update(sender, e);
 			using SPPBC.M3Tools.Dialogs.EditProductDialog @edit = new(e.Value);
 
 			if (edit.ShowDialog() != DialogResult.OK)
@@ -71,7 +73,7 @@ namespace M3App
 			}
 
 			_ = dbInventory.UpdateProduct(edit.Product);
-			base.Update(sender, e);
+			_ = MessageBox.Show($"Successfully updated {e.Value.Name}", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -82,8 +84,9 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Product> e)
 		{
-			_ = dbInventory.RemoveProduct(e.Value.Id);
 			base.Remove(sender, e);
+			_ = dbInventory.RemoveProduct(e.Value.Id);
+			_ = MessageBox.Show($"Successfully removed {e.Value.Name}", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -97,6 +100,8 @@ namespace M3App
 			base.FilterChanged(sender, filter);
 
 			idg_Inventory.Inventory = SPPBC.M3Tools.Types.InventoryCollection.Cast(_original.Items);
+
+			AssessLabel();
 		}
 	}
 }

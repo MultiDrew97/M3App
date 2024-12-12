@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using SPPBC.M3Tools.Exceptions;
 using SPPBC.M3Tools.Types.Extensions;
 
 using static M3App.Properties.Resources;
@@ -25,20 +24,19 @@ namespace M3App
 		{
 #if !DEBUG
 			splash.Show();
-			timer.Tick += ShowApplication;
+			timer.Tick += StartApp;
 			timer.Start();
 #else
-			ShowApplication(this, EventArgs.Empty);
+			StartApp(this, EventArgs.Empty);
 #endif
 		}
 
-		private async void ShowApplication(object sender, EventArgs e)
+		private async void StartApp(object sender, EventArgs e)
 		{
 			timer.Stop();
 			try
 			{
-				if (!await LoadApp())
-					return;
+				await LoadApp();
 
 				MainForm = new LoginForm();
 				MainForm.Show();
@@ -52,9 +50,9 @@ namespace M3App
 
 		protected override void OnMainFormClosed(object sender, EventArgs e)
 		{
+			// TODO: Figure out how to no longer need this function so that it can be handled more elegantly
 			if (Application.OpenForms.Count < 1)
 			{
-				// TODO: Figure out how to no longer need this
 				base.OnMainFormClosed(sender, e);
 				return;
 			}
@@ -75,7 +73,7 @@ namespace M3App
 			splash.Dispose();
 		}
 
-		private async Task<bool> LoadApp()
+		private async Task LoadApp()
 		{
 			Debug.WriteLine("Application preamble has begun...");
 			splash.UpdateProgress(0);
@@ -92,41 +90,13 @@ namespace M3App
 #endif
 
 			// TODO: Allow this to be done with a service instead
-			if (Properties.Settings.Default.UpdateOnStart && await Utils.UpdateAvailable())
-			{
-				Console.WriteLine("Update available");
-				try
-				{
-					await Utils.Update();
-
-					// FIXME: Figure out how to properly start the app back up once installed.
-					//			Figure out how to open after install in installer?
-					Process.Start(new ProcessStartInfo(Application.ProductName)
-					{
-						WorkingDirectory = Application.StartupPath
-					});
-				}
-				catch (OperationCanceledException)
-				{
-					Console.WriteLine($"Update cancelled by user. Starting current version - {Application.ProductVersion}");
-				}
-				catch (UpdateException ex)
-				{
-					MessageBox.Show("Failed to update application. Please try again or notify your administrator.");
-					Console.Error.WriteLine(ex.InnerException.Message);
-					Console.Error.WriteLine(ex.InnerException.StackTrace);
-				}
-				catch (Exception ex)
-				{
-					throw new ApplicationException("Error Occurred in LoadApp (M3AppContext)", ex);
-				}
-			}
+			if (Properties.Settings.Default.UpdateOnStart)
+				await SPPBC.M3Tools.Utils.Update(true, false);
 
 			splash.UpdateProgress(50);
 
 			Debug.WriteLine("Application preamble has finished. Starting application...");
 			splash.UpdateProgress(100);
-			return true;
 		}
 	}
 }

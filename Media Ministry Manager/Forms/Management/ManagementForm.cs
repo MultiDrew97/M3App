@@ -12,12 +12,17 @@ namespace M3App
 	/// </summary>
 	public partial class ManagementForm<T> where T : IDbEntry
 	{
+		/// <summary>
+		/// Raised when the list is modified in some way
+		/// </summary>
+		protected event EventHandler ListChanged;
+
 		private readonly CancellationTokenSource _tokenSource;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected internal DbEntryCollection<T> _original;
+		protected DbEntryCollection<T> _original;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -73,53 +78,54 @@ namespace M3App
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Reload(object sender, EventArgs e)
-		{
-		}
+		protected virtual void Reload(object sender, EventArgs e) => UseWaitCursor = true;
 
 		/// <summary>
 		/// Add a new entry to the database 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Add(object sender, EventArgs e) => _ = MessageBox.Show($"Successfully added entry", "Successful Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		protected virtual void Add(object sender, EventArgs e) => UseWaitCursor = true;
 
 		/// <summary>
 		/// Update an entry in the database
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		/// <exception cref="NotImplementedException"></exception>
-		protected virtual void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e) => _ = MessageBox.Show($"Successfully updated entry", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		protected virtual void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e) => UseWaitCursor = true;
 
 		/// <summary>
 		/// Remove an entry from the database
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		/// <exception cref="NotImplementedException"></exception>
-		protected virtual void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e) => _ = MessageBox.Show($"Successfully removed entry", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		protected virtual void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<T> e) => UseWaitCursor = true;
 
 		/// <summary>
 		/// Import data into the database
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Import(object sender, EventArgs e) { }
+		protected virtual void Import(object sender, EventArgs e) => UseWaitCursor = true;
 
 		/// <summary>
 		/// Send emails out using current user's email credentials
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void SendEmails(object sender, EventArgs e) { }
+		protected virtual void SendEmails(object sender, EventArgs e) => UseWaitCursor = true;
 
 		/// <summary>
 		/// Called when the filter is changed in the form
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="filter"></param>
-		protected virtual void FilterChanged(object sender, string filter) => _original.Filter = filter;
+		protected virtual void FilterChanged(object sender, string filter)
+		{
+			_original.Filter = filter;
+
+			ListChanged?.Invoke(this, EventArgs.Empty);
+		}
 
 		private void Logout(object sender, EventArgs e)
 		{
@@ -145,6 +151,17 @@ namespace M3App
 			manage.Show();
 
 			_ = ((SPPBC.M3Tools.MainMenuStrip)sender).Invoke(Close);
+		}
+
+		/// <summary>
+		/// Determine if list is empty. If so, display label message, otherwise, hide it
+		/// </summary>
+		protected void AssessLabel()
+		{
+			if (_original is null || _original.Count <= 0)
+				lbl_Empty.Show();
+			else
+				lbl_Empty.Hide();
 		}
 	}
 }

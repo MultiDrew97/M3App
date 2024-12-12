@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using SPPBC.M3Tools.Types;
@@ -36,17 +35,6 @@ namespace M3App
 		/// <param name="id"></param>
 		/// <returns></returns>
 		public static bool ValidID(int id) => SPPBC.M3Tools.Utils.ValidID(id);
-
-		/// <summary>
-		/// Whether an update is available for the application
-		/// </summary>
-		public static Task<bool> UpdateAvailable() => SPPBC.M3Tools.Utils.UpdateAvailable();
-
-		/// <summary>
-		/// Update the application
-		/// </summary>
-		/// <returns></returns>
-		public static async Task<bool> Update(bool force = false) => await SPPBC.M3Tools.Utils.Update(force);
 
 		/// <summary>
 		/// The list of templates that are part of the application

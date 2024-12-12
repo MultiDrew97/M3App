@@ -30,10 +30,7 @@ namespace M3App
 
 			try
 			{
-				PrepCustomOutputs();
-
-				Application.EnableVisualStyles();
-				Application.SetCompatibleTextRenderingDefault(false);
+				Startup();
 
 				Application.Run(new M3AppContext());
 			}
@@ -48,6 +45,14 @@ namespace M3App
 				Console.WriteLine("Performing cleanup...");
 				Cleanup();
 			}
+		}
+
+		public static void Startup()
+		{
+			PrepCustomOutputs();
+
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
 		}
 
 		private static void Cleanup()

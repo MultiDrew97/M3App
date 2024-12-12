@@ -31,7 +31,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override async void Reload(object sender, EventArgs e)
 		{
-			UseWaitCursor = true;
+			base.Reload(sender, e);
 			_original = await dbOrders.GetOrders();
 			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, odg_Orders.Orders.Count);
@@ -49,6 +49,7 @@ namespace M3App
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
+			base.Add(sender, e);
 			using SPPBC.M3Tools.Dialogs.PlaceOrderDialog @add = new(await dbCustomers.GetCustomers(), await dbInventory.GetProducts());
 
 			if (add.ShowDialog(this) != DialogResult.OK)
@@ -62,7 +63,8 @@ namespace M3App
 				await dbOrders.AddOrder(new(-1, add.Customer, item.Item, item.Quantity, default, default));
 			}
 
-			base.Add(sender, e);
+			_ = MessageBox.Show($"Successfully created {add.Customer.Name}'s order", "Successful Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 			Reload(sender, e);
 		}
 
@@ -77,6 +79,7 @@ namespace M3App
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
+			base.Update(sender, e);
 			using SPPBC.M3Tools.Dialogs.EditOrderDialog @edit = new(e.Value, await dbCustomers.GetCustomers(), await dbInventory.GetProducts());
 
 			if (edit.ShowDialog(this) != DialogResult.OK)
@@ -86,7 +89,7 @@ namespace M3App
 			}
 
 			await dbOrders.UpdateOrder(edit.UpdatedOrder);
-			base.Update(sender, e);
+			_ = MessageBox.Show($"Successfully updated {e.Value.Customer.Name}'s order", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -101,11 +104,11 @@ namespace M3App
 			_ = MessageBox.Show(Properties.Resources.UNDER_CONSTRUCTION_MESSAGE, Properties.Resources.UNDER_CONSTRUCTION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			return;
 #endif
-			string text;
-			string caption;
 			try
 			{
-				UseWaitCursor = true;
+				string text;
+				string caption;
+				base.Remove(sender, e);
 				switch (MessageBox.Show("Is this order being canceled?", "Cancel Order", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
 				{
 					case DialogResult.Yes:
@@ -148,6 +151,8 @@ namespace M3App
 			base.FilterChanged(sender, filter);
 
 			odg_Orders.Orders = SPPBC.M3Tools.Types.OrderCollection.Cast(_original.Items);
+
+			AssessLabel();
 		}
 	}
 }

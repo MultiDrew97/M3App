@@ -25,6 +25,7 @@ namespace SPPBC.M3Tools.GTools
 	{
 
 		private GmailService __service;
+		private BodyBuilder _builder;
 
 		/// <summary>
 		/// <inheritdoc/>
@@ -86,12 +87,17 @@ namespace SPPBC.M3Tools.GTools
 
 		private MimeMessage Create(MailboxAddress to, EmailContent content, MailboxAddress from)
 		{
+			_builder = new BodyBuilder()
+			{
+				HtmlBody = content.Body,
+			};
+
 			// FIXME: Add CSS into templates natively to boost load time in emails
 			MimeMessage email = new()
 			{
 				Sender = from ?? DefaultSender,
 				Subject = content.Subject,
-				Body = new TextPart("html") { Text = content.Body }
+				Body = _builder.ToMessageBody(),
 			};
 
 			email.To.Add(to);
@@ -108,8 +114,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="files"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage CreateWithAttachment(Types.Listener to, string subject, string body, IList<string> files, MailboxAddress @from = null)
-			=> CreateWithAttachment(to, new EmailContent(subject, body), files, from);
+		public async Task<MimeMessage> CreateWithAttachment(Types.Listener to, string subject, string body, IList<string> files, MailboxAddress @from = null)
+			=> await CreateWithAttachment(to, new EmailContent(subject, body), files, from);
 
 		/// <summary>
 		/// 
@@ -119,8 +125,8 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="files"></param>
 		/// <param name="from"></param>
 		/// <returns></returns>
-		public MimeMessage CreateWithAttachment(Types.Listener to, EmailContent content, IList<string> files, MailboxAddress @from = null)
-			=> CreateWithAttachment(new MailboxAddress(to.Name, to.Email), content, files, from);
+		public async Task<MimeMessage> CreateWithAttachment(Types.Listener to, EmailContent content, IList<string> files, MailboxAddress @from = null)
+			=> await CreateWithAttachment(new MailboxAddress(to.Name, to.Email), content, files, from);
 
 		/// <summary>
 		/// Create an email that contains attachments to be sent to a email box
@@ -130,8 +136,15 @@ namespace SPPBC.M3Tools.GTools
 		/// <param name="files">The files to attach to the email</param>
 		/// <param name="from">The email address to send from</param>
 		/// <returns>Returns an Email to be sent</returns>
-		private MimeMessage CreateWithAttachment(MailboxAddress to, EmailContent content, IList<string> files, MailboxAddress @from = null)
+		private async Task<MimeMessage> CreateWithAttachment(MailboxAddress to, EmailContent content, IList<string> files, MailboxAddress @from = null)
 		{
+			_builder = new BodyBuilder()
+			{
+				HtmlBody = content.Body,
+			};
+
+			foreach (string file in files)
+				_ = await _builder.Attachments.AddAsync(file);
 			MimeMessage email = Create(to, content, from);
 
 			Multipart multipart = [email.Body, .. files.Select(ConvertFile)];

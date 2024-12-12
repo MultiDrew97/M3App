@@ -31,7 +31,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override async void Reload(object sender, EventArgs e)
 		{
-			UseWaitCursor = true;
+			base.Reload(sender, e);
 			_original = await dbListeners.GetListeners();
 			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, ldg_Listeners.Listeners.Count);
@@ -45,9 +45,9 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Remove(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
 		{
-			UseWaitCursor = true;
-			_ = dbListeners.RemoveListener(e.Value.Id);
 			base.Remove(sender, e);
+			_ = dbListeners.RemoveListener(e.Value.Id);
+			_ = MessageBox.Show($"Successfully removed {e.Value.Name}", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -58,6 +58,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Add(object sender, EventArgs e)
 		{
+			base.Add(sender, e);
 			using SPPBC.M3Tools.Dialogs.AddListenerDialog @add = new();
 
 			if (add.ShowDialog(this) != DialogResult.OK)
@@ -67,13 +68,14 @@ namespace M3App
 
 			UseWaitCursor = true;
 			AddToDB(sender, add.Listener);
-			base.Add(sender, e);
+			_ = MessageBox.Show($"Successfully added {add.Listener.Name}", "Successful Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			UseWaitCursor = false;
 		}
 
 		/// <inheritdoc/>
 		protected override void Import(object sender, EventArgs e)
 		{
+			base.Import(sender, e);
 			using SPPBC.M3Tools.Dialogs.ImportListenersDialog @import = new();
 
 			if (import.ShowDialog(this) != DialogResult.OK)
@@ -81,7 +83,6 @@ namespace M3App
 				return;
 			}
 
-			UseWaitCursor = true;
 			foreach (SPPBC.M3Tools.Types.Listener listener in import.Listeners)
 			{
 				AddToDB(sender, listener);
@@ -110,28 +111,17 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Update(object sender, DataEventArgs<SPPBC.M3Tools.Types.Listener> e)
 		{
-			try
-			{
-				UseWaitCursor = true;
-				using SPPBC.M3Tools.Dialogs.EditListenerDialog @edit = new(e.Value);
+			base.Update(sender, e);
+			using SPPBC.M3Tools.Dialogs.EditListenerDialog @edit = new(e.Value);
 
-				if (edit.ShowDialog(this) != DialogResult.OK)
-				{
-					return;
-				}
+			if (edit.ShowDialog(this) != DialogResult.OK)
+			{
+				return;
+			}
 
-				_ = dbListeners.UpdateListener(edit.Listener);
-				base.Update(sender, e);
-				Reload(sender, e);
-			}
-			catch
-			{
-				_ = MessageBox.Show($"We were unable to update the info for {e.Value.Name}");
-			}
-			finally
-			{
-				UseWaitCursor = false;
-			}
+			_ = dbListeners.UpdateListener(edit.Listener);
+			_ = MessageBox.Show($"Successfully updated {e.Value.Name}", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			Reload(sender, e);
 		}
 
 		/// <inheritdoc/>
@@ -140,30 +130,31 @@ namespace M3App
 			base.FilterChanged(sender, filter);
 
 			ldg_Listeners.Listeners = SPPBC.M3Tools.Types.ListenerCollection.Cast(_original.Items);
+
+			AssessLabel();
 		}
 
 		/// <inheritdoc />
 		protected override void SendEmails(object sender, EventArgs e)
 		{
-			UseWaitCursor = true;
+			base.SendEmails(sender, e);
 			using SendEmailsDialog emails = new();
 			_ = emails.ShowDialog(this);
 			UseWaitCursor = false;
 		}
 
-		private async void SendWelcome(object sender, ListenerEventArgs e)
+		private void SendWelcome(object sender, ListenerEventArgs e)
 		{
 			UseWaitCursor = true;
 
-#if !DEBUG
 			string subject = "Welcome to the Ministry";
 			string body = string.Format(Properties.Resources.NEW_LISTENER_TEMPLATE, e.Value.Name.Trim());
 			MimeKit.MimeMessage message = gt_Email.Create(e.Value, subject, body);
+#if !DEBUG
 			await gt_Email.Send(message);
-			MessageBox.Show($"Listener {e.Value.Name} has been added to the ministry. Their welcome email should be sent shortly.", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
-#else
-			MessageBox.Show($"Listener {e.Value.Name} has been added to the ministry. Their welcome email should be sent shortly.", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
+
+			MessageBox.Show($"Listener {e.Value.Name} has been added to the ministry. Their welcome email should be sent shortly.", "Listener Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 			Reload(sender, e);
 		}

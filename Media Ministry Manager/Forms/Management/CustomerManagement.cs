@@ -33,7 +33,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override async void Reload(object sender, EventArgs e)
 		{
-			UseWaitCursor = true;
+			base.Reload(sender, e);
 			_original = await dbCustomers.GetCustomers();
 			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original.Items);
 			ts_Tools.Count = string.Format(Properties.Resources.COUNT_TEMPLATE, cdg_Customers.Customers.Count);
@@ -47,6 +47,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Add(object sender, EventArgs e)
 		{
+			base.Add(sender, e);
 			using SPPBC.M3Tools.Dialogs.AddCustomerDialog @add = new();
 
 			if (add.ShowDialog() != DialogResult.OK)
@@ -56,7 +57,7 @@ namespace M3App
 			}
 
 			_ = dbCustomers.AddCustomer(add.Customer);
-			base.Add(sender, e);
+			_ = MessageBox.Show($"Successfully added {add.Customer.Name}", "Successful Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -67,6 +68,7 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Update(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
+			base.Update(sender, e);
 			using SPPBC.M3Tools.Dialogs.EditCustomerDialog @edit = new(e.Value);
 
 			if (edit.ShowDialog() != DialogResult.OK)
@@ -76,7 +78,7 @@ namespace M3App
 			}
 
 			_ = dbCustomers.UpdateCustomer(edit.Customer);
-			base.Update(sender, e);
+			_ = MessageBox.Show($"Successfully updated {e.Value.Name}", "Successful Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -87,8 +89,9 @@ namespace M3App
 		/// <param name="e"></param>
 		protected override void Remove(object sender, SPPBC.M3Tools.Events.DataEventArgs<SPPBC.M3Tools.Types.Customer> e)
 		{
-			_ = dbCustomers.RemoveCustomer(e.Value.Id);
 			base.Remove(sender, e);
+			_ = dbCustomers.RemoveCustomer(e.Value.Id);
+			_ = MessageBox.Show($"Successfully removed {e.Value.Name}", "Successful Removal", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			Reload(sender, e);
 		}
 
@@ -102,6 +105,8 @@ namespace M3App
 			base.FilterChanged(sender, filter);
 
 			cdg_Customers.Customers = SPPBC.M3Tools.Types.CustomerCollection.Cast(_original.Items);
+
+			AssessLabel();
 		}
 	}
 }

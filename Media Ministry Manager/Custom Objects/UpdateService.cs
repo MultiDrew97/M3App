@@ -44,14 +44,14 @@ namespace M3App
 			base.OnContinue();
 		}
 
-		private async void OnTick(object sender, EventArgs e)
+		private void OnTick(object sender, EventArgs e)
 		{
 			// Check if update available
-			if (!await Utils.UpdateAvailable())
+			/*if (!await Utils.UpdateAvailable())
 			{
 				Environment.SetEnvironmentVariable("update-available", string.Empty, EnvironmentVariableTarget.Process);
 				return;
-			}
+			}*/
 
 			// TODO: Verify this is accessible in the M3AppContext area from the service
 			//Environment.SetEnvironmentVariable("update-available", await Utils.UpdateAvailable() ? UpdateStatus.Available : UpdateStatus.NotAvailable, EnvironmentVariableTarget.Process);

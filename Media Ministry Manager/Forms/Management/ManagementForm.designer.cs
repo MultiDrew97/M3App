@@ -45,8 +45,10 @@ namespace M3App
 			this.mms_Main = new SPPBC.M3Tools.MainMenuStrip();
 			this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
 			this.ts_Tools = new SPPBC.M3Tools.ToolsToolStrip(this.components);
+			this.lbl_Empty = new System.Windows.Forms.Label();
 			this.ss_StatusView.SuspendLayout();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
+			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.SuspendLayout();
 			this.SuspendLayout();
@@ -62,7 +64,7 @@ namespace M3App
             this.tsp_Progress});
 			this.ss_StatusView.Location = new System.Drawing.Point(0, 0);
 			this.ss_StatusView.Name = "ss_StatusView";
-			this.ss_StatusView.Size = new System.Drawing.Size(784, 42);
+			this.ss_StatusView.Size = new System.Drawing.Size(784, 36);
 			this.ss_StatusView.SizingGrip = false;
 			this.ss_StatusView.TabIndex = 0;
 			// 
@@ -70,7 +72,7 @@ namespace M3App
 			// 
 			this.tss_Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tss_Status.Name = "tss_Status";
-			this.tss_Status.Size = new System.Drawing.Size(665, 32);
+			this.tss_Status.Size = new System.Drawing.Size(667, 31);
 			this.tss_Status.Spring = true;
 			this.tss_Status.Text = "What would you like to do?";
 			this.tss_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -85,12 +87,11 @@ namespace M3App
 			// 
 			// mms_Main
 			// 
-			this.mms_Main.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
 			this.mms_Main.ImageScalingSize = new System.Drawing.Size(32, 32);
 			this.mms_Main.Location = new System.Drawing.Point(0, 0);
 			this.mms_Main.Name = "mms_Main";
 			this.mms_Main.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-			this.mms_Main.Size = new System.Drawing.Size(784, 48);
+			this.mms_Main.Size = new System.Drawing.Size(784, 24);
 			this.mms_Main.TabIndex = 0;
 			this.mms_Main.Text = "Menu";
 			// 
@@ -104,13 +105,14 @@ namespace M3App
 			// toolStripContainer1.ContentPanel
 			// 
 			this.toolStripContainer1.ContentPanel.AutoScroll = true;
-			this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 321);
+			this.toolStripContainer1.ContentPanel.Controls.Add(this.lbl_Empty);
+			this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(784, 362);
 			this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.toolStripContainer1.LeftToolStripPanelVisible = false;
-			this.toolStripContainer1.Location = new System.Drawing.Point(0, 48);
+			this.toolStripContainer1.Location = new System.Drawing.Point(0, 24);
 			this.toolStripContainer1.Name = "toolStripContainer1";
 			this.toolStripContainer1.RightToolStripPanelVisible = false;
-			this.toolStripContainer1.Size = new System.Drawing.Size(784, 413);
+			this.toolStripContainer1.Size = new System.Drawing.Size(784, 437);
 			this.toolStripContainer1.TabIndex = 1;
 			this.toolStripContainer1.Text = "ToolStripContainer1";
 			// 
@@ -127,10 +129,20 @@ namespace M3App
 			this.ts_Tools.Location = new System.Drawing.Point(0, 0);
 			this.ts_Tools.Name = "ts_Tools";
 			this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.ts_Tools.Size = new System.Drawing.Size(784, 50);
+			this.ts_Tools.Size = new System.Drawing.Size(784, 39);
 			this.ts_Tools.Stretch = true;
 			this.ts_Tools.TabIndex = 0;
 			this.ts_Tools.Text = "ToolsToolStrip1";
+			// 
+			// lbl_Empty
+			// 
+			this.lbl_Empty.AutoSize = true;
+			this.lbl_Empty.Location = new System.Drawing.Point(336, 159);
+			this.lbl_Empty.Name = "lbl_Empty";
+			this.lbl_Empty.Size = new System.Drawing.Size(103, 13);
+			this.lbl_Empty.TabIndex = 2;
+			this.lbl_Empty.Text = "No Entries to display";
+			this.lbl_Empty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// ManagementForm
 			// 
@@ -156,6 +168,8 @@ namespace M3App
 			this.ss_StatusView.PerformLayout();
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
+			this.toolStripContainer1.ContentPanel.ResumeLayout(false);
+			this.toolStripContainer1.ContentPanel.PerformLayout();
 			this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
 			this.toolStripContainer1.TopToolStripPanel.PerformLayout();
 			this.toolStripContainer1.ResumeLayout(false);
@@ -171,5 +185,6 @@ namespace M3App
 		protected internal ToolStripContainer toolStripContainer1;
 		protected internal SPPBC.M3Tools.MainMenuStrip mms_Main;
 		protected internal ToolStripProgressBar tsp_Progress;
+		private Label lbl_Empty;
 	}
 }

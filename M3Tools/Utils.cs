@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -56,7 +57,6 @@ namespace SPPBC.M3Tools
 
 		}
 
-		// TODO: Move this logic to a service instead so that the app can update itself autonomously
 		/// <summary>
 		/// Whether an update is available for the application
 		/// </summary>
@@ -78,52 +78,87 @@ namespace SPPBC.M3Tools
 		/// <summary>
 		/// Update the application
 		/// </summary>
-		/// <returns></returns>
-		public static async Task<bool> Update(bool force = false)
+		public static async Task Update(bool silent = false, bool confirm = true, CancellationToken ct = default)
 		{
-			if (!force)
+			try
 			{
-				DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				ct.ThrowIfCancellationRequested();
 
-				if (confirmed != DialogResult.Yes)
+				if (!await UpdateAvailable())
 				{
-					throw new OperationCanceledException();
+					//_ = MessageBox.Show("No updates available", "M3App Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					throw new OperationCanceledException("No updates available");
 				}
+
+				if (confirm)
+				{
+					DialogResult confirmed = MessageBox.Show($"Would you like to update the application right now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+
+					if (confirmed != DialogResult.Yes)
+						throw new OperationCanceledException();
+				}
+
+				// Download update client
+				// TODO: See if I can make it complete when the headers are read to speed this up a bit if needed
+				using HttpResponseMessage response = await new HttpClient().GetAsync(Properties.Resources.UDPATE_LOCATION, HttpCompletionOption.ResponseContentRead, ct);
+
+				// Ensure the request was successful then Save file to disk
+				Console.WriteLine("File has been retrieved. Starting to download...");
+				File.WriteAllBytes(_updateSaveLocation, await response.EnsureSuccessStatusCode().Content.ReadAsByteArrayAsync());
+				Console.WriteLine($"File downloaded successfully to {_updateSaveLocation}");
+
+				Console.WriteLine("Starting update client...");
+				Exit();
+
+				Process.Start(new ProcessStartInfo(_updateSaveLocation)
+				{
+					CreateNoWindow = true,
+					WindowStyle = ProcessWindowStyle.Hidden,
+					Verb = "runas",
+					UseShellExecute = true,
+					RedirectStandardOutput = false,
+					RedirectStandardError = false,
+					// FIXME: Verify this doesn't mess up updating
+					ErrorDialog = true,
+				}).Exited += new((_, _) =>
+				// FIXME: Figure out how to properly start the app back up once installed.
+				//			Figure out how to open after install in installer?
+				Process.Start(new ProcessStartInfo(Application.ProductName)
+				{
+					WorkingDirectory = Application.StartupPath
+				}));
+
+				//updateProc.Exited += new((_, _) =>
+				//// FIXME: Figure out how to properly start the app back up once installed.
+				////			Figure out how to open after install in installer?
+				//Process.Start(new ProcessStartInfo(Application.ProductName)
+				//{
+				//	WorkingDirectory = Application.StartupPath
+				//}));
 			}
-
-			// Perform update procedures here
-			HttpClient httpClient = new();
-
-			using HttpResponseMessage response = await httpClient.GetAsync(Properties.Resources.UDPATE_LOCATION);
-
-			Debug.WriteLine("File has been retrieved. Starting to download...");
-			_ = response.EnsureSuccessStatusCode(); // Ensure the request was successful
-			byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-
-			// Save file to disk
-			File.WriteAllBytes(_updateSaveLocation, fileBytes);
-
-			Console.WriteLine($"File downloaded successfully to {_updateSaveLocation}");
-
-			Console.WriteLine("Starting update client...");
-
-			Exit();
-
-			Process updateProc = Process.Start(new ProcessStartInfo(_updateSaveLocation)
+			catch (OperationCanceledException ex)
 			{
-				CreateNoWindow = true,
-				WindowStyle = ProcessWindowStyle.Hidden,
-				Verb = "runas",
-				UseShellExecute = true,
-				RedirectStandardOutput = false,
-				RedirectStandardError = false,
-			});
-
-			return updateProc.ExitCode switch
+				Console.Error.WriteLine($"Update cancelled. Starting current version - {Application.ProductVersion}...");
+				if (silent)
+					return;
+				_ = MessageBox.Show(ex.Message ?? "Update has been cancelled", "M3App Updates", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exceptions.UpdateException ex)
 			{
-				0 => true,
-				_ => false
-			};
+				Console.Error.WriteLine(ex.InnerException.Message);
+				Console.Error.WriteLine(ex.InnerException.StackTrace);
+				if (silent)
+					return;
+				_ = MessageBox.Show("Failed to update application. Please try again or notify your administrator.", "Updates");
+			}
+			catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+				Console.Error.WriteLine(ex.StackTrace);
+				if (silent)
+					return;
+				_ = MessageBox.Show($"We were unable to update the application\n\nError:\n{ex.Message}", "M3App", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 
 		}
 

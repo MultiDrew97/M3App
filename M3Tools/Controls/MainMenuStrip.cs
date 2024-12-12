@@ -73,10 +73,10 @@ namespace SPPBC.M3Tools
 
 			ToggleViewItem(true switch
 			{
-				var _ when Regex.IsMatch(parent, "Customer", RegexOptions.IgnoreCase) => MenuItemsCategories.Customer,
-				var _ when Regex.IsMatch(parent, "Inventory", RegexOptions.IgnoreCase) => MenuItemsCategories.Inventory,
-				var _ when Regex.IsMatch(parent, "Listener", RegexOptions.IgnoreCase) => MenuItemsCategories.Listener,
-				var _ when Regex.IsMatch(parent, "Order", RegexOptions.IgnoreCase) => MenuItemsCategories.Order,
+				var _ when Regex.IsMatch(parent, "customer", RegexOptions.IgnoreCase) => MenuItemsCategories.Customer,
+				var _ when Regex.IsMatch(parent, "inventory", RegexOptions.IgnoreCase) => MenuItemsCategories.Inventory,
+				var _ when Regex.IsMatch(parent, "listener", RegexOptions.IgnoreCase) => MenuItemsCategories.Listener,
+				var _ when Regex.IsMatch(parent, "order", RegexOptions.IgnoreCase) => MenuItemsCategories.Order,
 				_ => MenuItemsCategories.None,
 			});
 		}
@@ -155,27 +155,13 @@ namespace SPPBC.M3Tools
 			//AddOrder?.Invoke(this, new Events.Orders.OrderEventArgs(create.Order, EventType.Added));
 		}
 
-		private async void UpdateApp(object sender, EventArgs e)
-		{
-			if (!await Utils.UpdateAvailable())
-			{
-				_ = MessageBox.Show("No updates available.", "Updates", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return;
-			}
-
-			DialogResult res = MessageBox.Show("An update is available. Would you like to update now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-			if (res != DialogResult.Yes)
-			{
-				return;
-			}
-
-			_ = await Utils.Update();
-		}
+		private async void UpdateApp(object sender, EventArgs e) => await Utils.Update(silent: false, confirm: true);
 
 		private void ChangeView(object sender, EventArgs e)
 		{
-			ToolStripMenuItem item = (ToolStripMenuItem)sender;
+			if (sender is not ToolStripMenuItem item)
+				return;
+
 			Manage?.Invoke(this, new(item.AccessibleName.ToLower() switch
 			{
 				"customers" => ManageType.Customers,

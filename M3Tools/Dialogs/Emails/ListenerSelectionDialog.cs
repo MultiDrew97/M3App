@@ -15,7 +15,7 @@ namespace SPPBC.M3Tools
 		/// The current selection of recipients
 		/// </summary>
 		[Browsable(false)]
-		public Types.ListenerCollection Selection => ldg_Listeners.SelectedListeners;
+		public Types.ListenerCollection Listeners => ldg_Listeners.SelectedListeners;
 
 		/// <summary>
 		/// 
@@ -30,7 +30,7 @@ namespace SPPBC.M3Tools
 
 		private void ConfirmSelection(object sender, EventArgs e)
 		{
-			if (Selection.Count < 1)
+			if (Listeners.Count < 1)
 			{
 				_ = MessageBox.Show("You didn't select a listener. If you wish to cancel, please click the cancel button", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
